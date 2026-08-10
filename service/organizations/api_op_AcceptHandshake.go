@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts a handshake by sending an ACCEPTED response to the sender. You can view
@@ -31,10 +30,10 @@ import (
 // When a handshake is accepted, Organizations logs membership events in
 // CloudTrail, available only in the management account's event history. If the
 // account was standalone and joined a new organization, an
-// AccountJoinedOrganization event is logged with joinedMethod:Invited and
+// AccountJoinedOrganization event is logged with joinedMethod:INVITED and
 // joinedTime fields. If the account departed one organization and joined another,
-// both an AccountDepartedOrganization event with departedMethod:Left and
-// departedTime and an AccountJoinedOrganization event with joinedMethod:Invited
+// both an AccountDepartedOrganization event with departureMethod:LEFT and
+// departureTime and an AccountJoinedOrganization event with joinedMethod:INVITED
 // and joinedTime are logged in their respective management accounts.
 //
 // [Enabling all features]: https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite
@@ -91,9 +90,6 @@ func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -106,19 +102,10 @@ func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack,
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptHandshakeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "AcceptHandshake"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

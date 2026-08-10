@@ -8772,9 +8772,19 @@ func awsRestjson1_serializeDocumentActor(v *types.Actor, value smithyjson.Value)
 		ok.String(*v.Description)
 	}
 
+	if v.EnableEmailMfa != nil {
+		ok := object.Key("enableEmailMfa")
+		ok.Boolean(*v.EnableEmailMfa)
+	}
+
 	if v.Identifier != nil {
 		ok := object.Key("identifier")
 		ok.String(*v.Identifier)
+	}
+
+	if v.MfaForwardingAddress != nil {
+		ok := object.Key("mfaForwardingAddress")
+		ok.String(*v.MfaForwardingAddress)
 	}
 
 	if v.Uris != nil {

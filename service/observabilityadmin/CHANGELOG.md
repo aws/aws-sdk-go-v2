@@ -1,3 +1,16 @@
+# v1.22.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2026-08-03)
+
+* **Feature**: Launch CMK support for Telemetry Enablement Organization and Account Rules.
+
+# v1.21.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.21.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

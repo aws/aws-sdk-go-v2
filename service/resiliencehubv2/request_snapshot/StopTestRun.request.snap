@@ -1,0 +1,5 @@
+POST /v2/stop-test-run
+
+Content-Type: application/json
+
+{"serviceArn":"__ServiceArn__","testRunId":"__TestRunId__"}

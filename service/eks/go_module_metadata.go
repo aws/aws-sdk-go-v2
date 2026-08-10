@@ -3,4 +3,4 @@
 package eks
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.90.2"
+const goModuleVersion = "1.90.4"

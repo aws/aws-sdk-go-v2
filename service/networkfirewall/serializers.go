@@ -4957,6 +4957,67 @@ func (m *awsAwsjson10_serializeOpUpdateProxyRulePriorities) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateProxySettings struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateProxySettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateProxySettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateProxySettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("NetworkFirewall_20201112.UpdateProxySettings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateProxySettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateRuleGroup struct {
 }
 
@@ -5691,6 +5752,19 @@ func awsAwsjson10_serializeDocumentIPSets(v map[string]types.IPSet, value smithy
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentListenerProperties(v []types.ListenerProperty, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListenerProperty(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentListenerPropertiesRequest(v []types.ListenerPropertyRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5701,6 +5775,23 @@ func awsAwsjson10_serializeDocumentListenerPropertiesRequest(v []types.ListenerP
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListenerProperty(v *types.ListenerProperty, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -5829,6 +5920,31 @@ func awsAwsjson10_serializeDocumentMatchAttributes(v *types.MatchAttributes, val
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNatGatewayMapping(v *types.NatGatewayMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NatGatewayId != nil {
+		ok := object.Key("NatGatewayId")
+		ok.String(*v.NatGatewayId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNatGatewayMappingsList(v []types.NatGatewayMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentNatGatewayMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -6149,6 +6265,20 @@ func awsAwsjson10_serializeDocumentProxyRulesByRequestPhase(v *types.ProxyRulesB
 	if v.PreREQUEST != nil {
 		ok := object.Key("PreREQUEST")
 		if err := awsAwsjson10_serializeDocumentProxyRuleList(v.PreREQUEST, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProxySettings(v *types.ProxySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ListenerProperties != nil {
+		ok := object.Key("ListenerProperties")
+		if err := awsAwsjson10_serializeDocumentListenerProperties(v.ListenerProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -6956,6 +7086,25 @@ func awsAwsjson10_serializeDocumentVariableDefinitionList(v []string, value smit
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentVpcEndpoint(v *types.VpcEndpoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubnetMappings != nil {
+		ok := object.Key("SubnetMappings")
+		if err := awsAwsjson10_serializeDocumentSubnetMappings(v.SubnetMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentVpcIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7184,6 +7333,25 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 		ok.Boolean(v.FirewallPolicyChangeProtection)
 	}
 
+	if v.NatGatewayMappings != nil {
+		ok := object.Key("NatGatewayMappings")
+		if err := awsAwsjson10_serializeDocumentNatGatewayMappingsList(v.NatGatewayMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NoSourcePreservation {
+		ok := object.Key("NoSourcePreservation")
+		ok.Boolean(v.NoSourcePreservation)
+	}
+
+	if v.ProxySettings != nil {
+		ok := object.Key("ProxySettings")
+		if err := awsAwsjson10_serializeDocumentProxySettings(v.ProxySettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SubnetChangeProtection {
 		ok := object.Key("SubnetChangeProtection")
 		ok.Boolean(v.SubnetChangeProtection)
@@ -7206,6 +7374,13 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 	if v.TransitGatewayId != nil {
 		ok := object.Key("TransitGatewayId")
 		ok.String(*v.TransitGatewayId)
+	}
+
+	if v.VpcEndpoint != nil {
+		ok := object.Key("VpcEndpoint")
+		if err := awsAwsjson10_serializeDocumentVpcEndpoint(v.VpcEndpoint, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VpcId != nil {
@@ -9138,6 +9313,35 @@ func awsAwsjson10_serializeOpDocumentUpdateProxyRulePrioritiesInput(v *UpdatePro
 	if v.Rules != nil {
 		ok := object.Key("Rules")
 		if err := awsAwsjson10_serializeDocumentProxyRulePriorityList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UpdateToken != nil {
+		ok := object.Key("UpdateToken")
+		ok.String(*v.UpdateToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateProxySettingsInput(v *UpdateProxySettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirewallArn != nil {
+		ok := object.Key("FirewallArn")
+		ok.String(*v.FirewallArn)
+	}
+
+	if v.FirewallName != nil {
+		ok := object.Key("FirewallName")
+		ok.String(*v.FirewallName)
+	}
+
+	if v.ProxySettings != nil {
+		ok := object.Key("ProxySettings")
+		if err := awsAwsjson10_serializeDocumentProxySettings(v.ProxySettings, ok); err != nil {
 			return err
 		}
 	}

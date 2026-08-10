@@ -7,15 +7,15 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a pre-signed Amazon S3 URL in response for uploading your content.
 //
-// You may only use this API to upload attachments to an [Connect Customer Case] or [Connect Customer Email].
+// You may only use this API to upload attachments to a [Connect Customer Case], [Connect Customer Email], or [Connect Customer Task].
 //
 // [Connect Customer Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 // [Connect Customer Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+// [Connect Customer Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttachedFileUploadInput, optFns ...func(*Options)) (*StartAttachedFileUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachedFileUploadInput{}
@@ -34,10 +34,11 @@ func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttac
 type StartAttachedFileUploadInput struct {
 
 	// The resource to which the attached file is (being) uploaded to. The supported
-	// resources are [Cases]and [Email].
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
@@ -126,9 +127,6 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -141,12 +139,6 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -154,9 +146,6 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpStartAttachedFileUploadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartAttachedFileUpload"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

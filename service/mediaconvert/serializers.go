@@ -9481,6 +9481,11 @@ func awsRestjson1_serializeDocumentMovSettings(v *types.MovSettings, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioDuration) > 0 {
+		ok := object.Key("audioDuration")
+		ok.String(string(v.AudioDuration))
+	}
+
 	if len(v.ClapAtom) > 0 {
 		ok := object.Key("clapAtom")
 		ok.String(string(v.ClapAtom))

@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a template from an existing Amazon Quick Sight analysis or another
@@ -58,7 +57,9 @@ type UpdateTemplateInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to
 	// list the replacement datasets for the placeholders listed in the original. The
-	// schema in each dataset must match its placeholder.
+	// schema in each dataset must match its placeholder. Use the TopicReferences
+	// entity to list the replacement topics for the topic placeholders listed in the
+	// original. The schema in each topic must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
 	// The option to relax the validation needed to update a template with definition
@@ -111,9 +112,6 @@ func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -126,19 +124,10 @@ func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateTemplate"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

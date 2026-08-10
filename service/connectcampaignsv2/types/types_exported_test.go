@@ -169,6 +169,24 @@ func ExampleOpenHours_outputUsage() {
 
 var _ map[string][]types.TimeRange
 
+func ExamplePacingStrategy_outputUsage() {
+	var union types.PacingStrategy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PacingStrategyMemberAbandonmentRate:
+		_ = v.Value // Value is types.AbandonmentRatePacingConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AbandonmentRatePacingConfig
+
 func ExampleRestrictedPeriods_outputUsage() {
 	var union types.RestrictedPeriods
 	// type switches can be used to check the union value

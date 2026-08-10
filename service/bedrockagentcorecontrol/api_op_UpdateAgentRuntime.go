@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,11 +38,6 @@ type UpdateAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeId *string
 
-	// The updated network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The updated IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -51,6 +45,9 @@ type UpdateAgentRuntimeInput struct {
 
 	// The updated authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
+
+	// The updated capacity provider configuration for the AgentCore Runtime.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
@@ -70,6 +67,9 @@ type UpdateAgentRuntimeInput struct {
 	// The updated configuration for microVM Metadata Service (MMDS) settings for the
 	// AgentCore Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
+	// The updated network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
@@ -133,9 +133,6 @@ func (c *Client) addOperationUpdateAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -148,12 +145,6 @@ func (c *Client) addOperationUpdateAgentRuntimeMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -161,9 +152,6 @@ func (c *Client) addOperationUpdateAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpUpdateAgentRuntimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateAgentRuntime"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

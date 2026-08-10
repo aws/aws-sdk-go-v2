@@ -107,6 +107,69 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_CreateDbBackup(t *testing.T) {
+	want := &CreateDbBackupOutput{
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+		Arn:            ptr.String("__Arn__"),
+		Status:         types.DbBackupStatus("IN_PROGRESS"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpiresAfter:   ptr.String("__ExpiresAfter__"),
+		DbResourceId:   ptr.String("__DbResourceId__"),
+		Type:           types.DbBackupType("HOURLY"),
+		EngineType:     types.EngineType("INFLUXDB_V2"),
+		DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		ClusterConfiguration: &types.ClusterConfiguration{
+			IngestQueryInstances: ptr.Int32(1),
+			QueryOnlyInstances:   ptr.Int32(1),
+			DedicatedCompactor:   ptr.Bool(true),
+		},
+		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
+		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
+		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				Enabled:    ptr.Bool(true),
+			},
+		},
+		FailoverMode:     types.FailoverMode("AUTOMATIC"),
+		DbStorageType:    types.DbStorageType("InfluxIOIncludedT1"),
+		AllocatedStorage: ptr.Int32(1),
+		VpcSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PubliclyAccessible:            ptr.Bool(true),
+		Port:                          ptr.Int32(1),
+		NetworkType:                   types.NetworkType("IPV4"),
+		InfluxAuthParametersSecretArn: ptr.String("__InfluxAuthParametersSecretArn__"),
+		MaintenanceSchedule: &types.MaintenanceSchedule{
+			Timezone:                   ptr.String("__Timezone__"),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDbBackup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDbBackup.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDbCluster(t *testing.T) {
 	want := &CreateDbClusterOutput{
 		DbClusterId:     ptr.String("__DbClusterId__"),
@@ -173,6 +236,23 @@ func TestCheckResponseSnapshot_CreateDbInstance(t *testing.T) {
 		},
 		LastMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NextMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDbInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -277,6 +357,69 @@ func TestCheckResponseSnapshot_CreateDbParameterGroup(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteDbBackup(t *testing.T) {
+	want := &DeleteDbBackupOutput{
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+		Arn:            ptr.String("__Arn__"),
+		Status:         types.DbBackupStatus("IN_PROGRESS"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpiresAfter:   ptr.String("__ExpiresAfter__"),
+		DbResourceId:   ptr.String("__DbResourceId__"),
+		Type:           types.DbBackupType("HOURLY"),
+		EngineType:     types.EngineType("INFLUXDB_V2"),
+		DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		ClusterConfiguration: &types.ClusterConfiguration{
+			IngestQueryInstances: ptr.Int32(1),
+			QueryOnlyInstances:   ptr.Int32(1),
+			DedicatedCompactor:   ptr.Bool(true),
+		},
+		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
+		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
+		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				Enabled:    ptr.Bool(true),
+			},
+		},
+		FailoverMode:     types.FailoverMode("AUTOMATIC"),
+		DbStorageType:    types.DbStorageType("InfluxIOIncludedT1"),
+		AllocatedStorage: ptr.Int32(1),
+		VpcSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PubliclyAccessible:            ptr.Bool(true),
+		Port:                          ptr.Int32(1),
+		NetworkType:                   types.NetworkType("IPV4"),
+		InfluxAuthParametersSecretArn: ptr.String("__InfluxAuthParametersSecretArn__"),
+		MaintenanceSchedule: &types.MaintenanceSchedule{
+			Timezone:                   ptr.String("__Timezone__"),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDbBackup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDbBackup(context.Background(), &DeleteDbBackupInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDbBackup.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteDbCluster(t *testing.T) {
 	want := &DeleteDbClusterOutput{
 		DbClusterStatus: types.ClusterStatus("CREATING"),
@@ -342,6 +485,23 @@ func TestCheckResponseSnapshot_DeleteDbInstance(t *testing.T) {
 		},
 		LastMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NextMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDbInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -357,6 +517,69 @@ func TestCheckResponseSnapshot_DeleteDbInstance(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDbInstance.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDbBackup(t *testing.T) {
+	want := &GetDbBackupOutput{
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+		Arn:            ptr.String("__Arn__"),
+		Status:         types.DbBackupStatus("IN_PROGRESS"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpiresAfter:   ptr.String("__ExpiresAfter__"),
+		DbResourceId:   ptr.String("__DbResourceId__"),
+		Type:           types.DbBackupType("HOURLY"),
+		EngineType:     types.EngineType("INFLUXDB_V2"),
+		DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		ClusterConfiguration: &types.ClusterConfiguration{
+			IngestQueryInstances: ptr.Int32(1),
+			QueryOnlyInstances:   ptr.Int32(1),
+			DedicatedCompactor:   ptr.Bool(true),
+		},
+		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
+		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
+		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				Enabled:    ptr.Bool(true),
+			},
+		},
+		FailoverMode:     types.FailoverMode("AUTOMATIC"),
+		DbStorageType:    types.DbStorageType("InfluxIOIncludedT1"),
+		AllocatedStorage: ptr.Int32(1),
+		VpcSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PubliclyAccessible:            ptr.Bool(true),
+		Port:                          ptr.Int32(1),
+		NetworkType:                   types.NetworkType("IPV4"),
+		InfluxAuthParametersSecretArn: ptr.String("__InfluxAuthParametersSecretArn__"),
+		MaintenanceSchedule: &types.MaintenanceSchedule{
+			Timezone:                   ptr.String("__Timezone__"),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDbBackup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDbBackup(context.Background(), &GetDbBackupInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDbBackup.response", err)
 	}
 }
 
@@ -404,6 +627,23 @@ func TestCheckResponseSnapshot_GetDbCluster(t *testing.T) {
 			QueryOnlyInstances:   ptr.Int32(1),
 			DedicatedCompactor:   ptr.Bool(true),
 		},
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDbCluster.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -466,6 +706,23 @@ func TestCheckResponseSnapshot_GetDbInstance(t *testing.T) {
 		},
 		LastMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NextMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDbInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -567,6 +824,55 @@ func TestCheckResponseSnapshot_GetDbParameterGroup(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetDbParameterGroup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDbBackups(t *testing.T) {
+	want := &ListDbBackupsOutput{
+		Items: []types.DbBackupSummary{
+			{
+				Id:             ptr.String("__Id__"),
+				Name:           ptr.String("__Name__"),
+				Arn:            ptr.String("__Arn__"),
+				Status:         types.DbBackupStatus("IN_PROGRESS"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAfter:   ptr.String("__ExpiresAfter__"),
+				DbResourceId:   ptr.String("__DbResourceId__"),
+				Type:           types.DbBackupType("HOURLY"),
+				EngineType:     types.EngineType("INFLUXDB_V2"),
+				DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+			},
+			{
+				Id:             ptr.String("__Id__"),
+				Name:           ptr.String("__Name__"),
+				Arn:            ptr.String("__Arn__"),
+				Status:         types.DbBackupStatus("IN_PROGRESS"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAfter:   ptr.String("__ExpiresAfter__"),
+				DbResourceId:   ptr.String("__DbResourceId__"),
+				Type:           types.DbBackupType("HOURLY"),
+				EngineType:     types.EngineType("INFLUXDB_V2"),
+				DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDbBackups.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDbBackups(context.Background(), &ListDbBackupsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDbBackups.response", err)
 	}
 }
 
@@ -854,6 +1160,23 @@ func TestCheckResponseSnapshot_RebootDbInstance(t *testing.T) {
 		},
 		LastMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NextMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RebootDbInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -869,6 +1192,31 @@ func TestCheckResponseSnapshot_RebootDbInstance(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RebootDbInstance.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RestoreFromDbBackup(t *testing.T) {
+	want := &RestoreFromDbBackupOutput{
+		RestoredDbResourceId: ptr.String("__RestoredDbResourceId__"),
+		RestoreStatus:        types.RestoreStatus("RESTORING"),
+		ResourceType:         types.ResourceType("DB_INSTANCE"),
+		EngineType:           types.EngineType("INFLUXDB_V2"),
+		DeploymentType:       types.ResourceDeploymentType("SINGLE_AZ"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RestoreFromDbBackup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RestoreFromDbBackup(context.Background(), &RestoreFromDbBackupInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RestoreFromDbBackup.response", err)
 	}
 }
 
@@ -975,6 +1323,23 @@ func TestCheckResponseSnapshot_UpdateDbInstance(t *testing.T) {
 		},
 		LastMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		NextMaintenanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                    types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:           ptr.Int32(1),
+				Enabled:                 ptr.Bool(true),
+				CustomSchedule:          ptr.String("__CustomSchedule__"),
+				NextAutomatedBackupTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateDbInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1005,7 +1370,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1032,7 +1397,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1057,7 +1422,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1084,7 +1449,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1109,7 +1474,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1135,7 +1500,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1161,7 +1526,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDbCluster(context.Background(), &CreateDbClusterInput{})
+	_, opErr := svc.CreateDbBackup(context.Background(), &CreateDbBackupInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

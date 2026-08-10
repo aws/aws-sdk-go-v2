@@ -75,6 +75,7 @@ type AWSServiceName string
 const (
 	AWSServiceNameAws         AWSServiceName = "AWS"
 	AWSServiceNameEc2         AWSServiceName = "EC2"
+	AWSServiceNameEks         AWSServiceName = "EKS"
 	AWSServiceNameElasticache AWSServiceName = "ELASTICACHE"
 	AWSServiceNameElb         AWSServiceName = "ELB"
 	AWSServiceNameRds         AWSServiceName = "RDS"
@@ -89,6 +90,7 @@ func (AWSServiceName) Values() []AWSServiceName {
 	return []AWSServiceName{
 		"AWS",
 		"EC2",
+		"EKS",
 		"ELASTICACHE",
 		"ELB",
 		"RDS",

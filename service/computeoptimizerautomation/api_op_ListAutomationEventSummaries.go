@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a summary of automation events based on specified filters. Only events
@@ -122,9 +121,6 @@ func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -137,12 +133,6 @@ func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *midd
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -150,9 +140,6 @@ func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpListAutomationEventSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListAutomationEventSummaries"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

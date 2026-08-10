@@ -1,3 +1,16 @@
+# v1.185.0 (2026-08-07)
+
+* **Feature**: Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.
+
+# v1.184.4 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.184.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.184.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

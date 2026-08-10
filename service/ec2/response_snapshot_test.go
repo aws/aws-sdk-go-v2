@@ -496,6 +496,8 @@ func TestCheckResponseSnapshot_AdvertiseByoipCidr(t *testing.T) {
 			State:              types.ByoipCidrState("advertised"),
 			NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 			AdvertisementType:  ptr.String("__AdvertisementType__"),
+			PoolId:             ptr.String("__PoolId__"),
+			IpamPoolId:         ptr.String("__IpamPoolId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AdvertiseByoipCidr.response")
@@ -761,6 +763,52 @@ func TestCheckResponseSnapshot_AssociateAddress(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AssociateAddress.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	want := &AssociateApplicationStatusCheckOutput{
+		SuccessfulResults: []types.SuccessfulAssociationResponseObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+			},
+		},
+		UnsuccessfulResults: []types.UnsuccessfulAssociationResponseObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+				Reason:                   ptr.String("__Reason__"),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+				Reason:                   ptr.String("__Reason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateApplicationStatusCheck.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateApplicationStatusCheck(context.Background(), &AssociateApplicationStatusCheckInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateApplicationStatusCheck.response", err)
 	}
 }
 
@@ -1776,6 +1824,32 @@ func TestCheckResponseSnapshot_AuthorizeSecurityGroupIngress(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchModifyIpamRoutingPolicyRegistrations(t *testing.T) {
+	want := &BatchModifyIpamRoutingPolicyRegistrationsOutput{
+		IpamRoutingPolicyRegistrationDelta: &types.IpamRoutingPolicyRegistrationDelta{
+			DeltaId:      ptr.String("__DeltaId__"),
+			DeltaJson:    ptr.String("__DeltaJson__"),
+			State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+			StateMessage: ptr.String("__StateMessage__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchModifyIpamRoutingPolicyRegistrations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchModifyIpamRoutingPolicyRegistrations(context.Background(), &BatchModifyIpamRoutingPolicyRegistrationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchModifyIpamRoutingPolicyRegistrations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BundleInstance(t *testing.T) {
 	want := &BundleInstanceOutput{
 		BundleTask: &types.BundleTask{
@@ -2448,6 +2522,100 @@ func TestCheckResponseSnapshot_CopyVolumes(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CopyVolumes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	want := &CreateApplicationStatusCheckOutput{
+		ApplicationStatusCheck: &types.ApplicationStatusCheckResponseObject{
+			ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+			Aggregation:              types.AggregationStatusEnum("included"),
+			HealthCheckPaths: []types.HealthCheckPathResponseObject{
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+			},
+			Protocol:                         types.NetworkProtocolEnum("http"),
+			Port:                             ptr.Int32(1),
+			Path:                             ptr.String("__Path__"),
+			DeviceIndex:                      ptr.Int32(1),
+			IpVersion:                        types.IpVersionEnum("ipv4"),
+			IpScope:                          types.IpScopeEnum("private"),
+			Interval:                         ptr.Int32(1),
+			Timeout:                          ptr.Int32(1),
+			FailureThreshold:                 ptr.Int32(1),
+			SuccessThreshold:                 ptr.Int32(1),
+			StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+			InitializationGracePeriodSeconds: ptr.Int32(1),
+			LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TargetTagAssociations: []types.CustomTagKeyValueResponsePair{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ModifyTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateApplicationStatusCheck.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateApplicationStatusCheck(context.Background(), &CreateApplicationStatusCheckInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateApplicationStatusCheck.response", err)
 	}
 }
 
@@ -4522,6 +4690,48 @@ func TestCheckResponseSnapshot_CreateIpamExternalResourceVerificationToken(t *te
 	}
 }
 
+func TestCheckResponseSnapshot_CreateIpamInternetRegistryAssociation(t *testing.T) {
+	want := &CreateIpamInternetRegistryAssociationOutput{
+		IpamInternetRegistryAssociation: &types.IpamInternetRegistryAssociation{
+			OwnerId:                            ptr.String("__OwnerId__"),
+			IpamInternetRegistryAssociationId:  ptr.String("__IpamInternetRegistryAssociationId__"),
+			IpamInternetRegistryAssociationArn: ptr.String("__IpamInternetRegistryAssociationArn__"),
+			IpamId:                             ptr.String("__IpamId__"),
+			IpamRegion:                         ptr.String("__IpamRegion__"),
+			Rir:                                types.Rir("ripe"),
+			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
+			Description:                        ptr.String("__Description__"),
+			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateIpamInternetRegistryAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateIpamInternetRegistryAssociation(context.Background(), &CreateIpamInternetRegistryAssociationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateIpamInternetRegistryAssociation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateIpamPolicy(t *testing.T) {
 	want := &CreateIpamPolicyOutput{
 		IpamPolicy: &types.IpamPolicy{
@@ -4767,6 +4977,32 @@ func TestCheckResponseSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateIpamResourceDiscovery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateIpamRoutingPolicyRegistration(t *testing.T) {
+	want := &CreateIpamRoutingPolicyRegistrationOutput{
+		IpamRoutingPolicyRegistrationDelta: &types.IpamRoutingPolicyRegistrationDelta{
+			DeltaId:      ptr.String("__DeltaId__"),
+			DeltaJson:    ptr.String("__DeltaJson__"),
+			State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+			StateMessage: ptr.String("__StateMessage__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateIpamRoutingPolicyRegistration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateIpamRoutingPolicyRegistration(context.Background(), &CreateIpamRoutingPolicyRegistrationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateIpamRoutingPolicyRegistration.response", err)
 	}
 }
 
@@ -9858,6 +10094,100 @@ func TestCheckResponseSnapshot_CreateVpnGateway(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	want := &DeleteApplicationStatusCheckOutput{
+		ApplicationStatusCheck: &types.ApplicationStatusCheckResponseObject{
+			ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+			Aggregation:              types.AggregationStatusEnum("included"),
+			HealthCheckPaths: []types.HealthCheckPathResponseObject{
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+			},
+			Protocol:                         types.NetworkProtocolEnum("http"),
+			Port:                             ptr.Int32(1),
+			Path:                             ptr.String("__Path__"),
+			DeviceIndex:                      ptr.Int32(1),
+			IpVersion:                        types.IpVersionEnum("ipv4"),
+			IpScope:                          types.IpScopeEnum("private"),
+			Interval:                         ptr.Int32(1),
+			Timeout:                          ptr.Int32(1),
+			FailureThreshold:                 ptr.Int32(1),
+			SuccessThreshold:                 ptr.Int32(1),
+			StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+			InitializationGracePeriodSeconds: ptr.Int32(1),
+			LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TargetTagAssociations: []types.CustomTagKeyValueResponsePair{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ModifyTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteApplicationStatusCheck.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteApplicationStatusCheck(context.Background(), &DeleteApplicationStatusCheckInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteApplicationStatusCheck.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
 	want := &DeleteCapacityManagerDataExportOutput{
 		CapacityManagerDataExportId: ptr.String("__CapacityManagerDataExportId__"),
@@ -10417,6 +10747,48 @@ func TestCheckResponseSnapshot_DeleteIpamExternalResourceVerificationToken(t *te
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.T) {
+	want := &DeleteIpamInternetRegistryAssociationOutput{
+		IpamInternetRegistryAssociation: &types.IpamInternetRegistryAssociation{
+			OwnerId:                            ptr.String("__OwnerId__"),
+			IpamInternetRegistryAssociationId:  ptr.String("__IpamInternetRegistryAssociationId__"),
+			IpamInternetRegistryAssociationArn: ptr.String("__IpamInternetRegistryAssociationArn__"),
+			IpamId:                             ptr.String("__IpamId__"),
+			IpamRegion:                         ptr.String("__IpamRegion__"),
+			Rir:                                types.Rir("ripe"),
+			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
+			Description:                        ptr.String("__Description__"),
+			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteIpamInternetRegistryAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteIpamInternetRegistryAssociation(context.Background(), &DeleteIpamInternetRegistryAssociationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteIpamInternetRegistryAssociation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteIpamPolicy(t *testing.T) {
 	want := &DeleteIpamPolicyOutput{
 		IpamPolicy: &types.IpamPolicy{
@@ -10662,6 +11034,32 @@ func TestCheckResponseSnapshot_DeleteIpamResourceDiscovery(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteIpamResourceDiscovery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteIpamRoutingPolicyRegistration(t *testing.T) {
+	want := &DeleteIpamRoutingPolicyRegistrationOutput{
+		IpamRoutingPolicyRegistrationDelta: &types.IpamRoutingPolicyRegistrationDelta{
+			DeltaId:      ptr.String("__DeltaId__"),
+			DeltaJson:    ptr.String("__DeltaJson__"),
+			State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+			StateMessage: ptr.String("__StateMessage__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteIpamRoutingPolicyRegistration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteIpamRoutingPolicyRegistration(context.Background(), &DeleteIpamRoutingPolicyRegistrationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteIpamRoutingPolicyRegistration.response", err)
 	}
 }
 
@@ -13182,6 +13580,8 @@ func TestCheckResponseSnapshot_DeprovisionByoipCidr(t *testing.T) {
 			State:              types.ByoipCidrState("advertised"),
 			NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 			AdvertisementType:  ptr.String("__AdvertisementType__"),
+			PoolId:             ptr.String("__PoolId__"),
+			IpamPoolId:         ptr.String("__IpamPoolId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeprovisionByoipCidr.response")
@@ -13667,6 +14067,345 @@ func TestCheckResponseSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeApplicationStatus(t *testing.T) {
+	want := &DescribeApplicationStatusOutput{
+		ApplicationStatuses: &types.ApplicationStatusesResponseType{
+			Instances: []types.InstanceApplicationStatus{
+				{
+					InstanceId:         ptr.String("__InstanceId__"),
+					AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					ApplicationStatus: &types.ApplicationStatus{
+						Status:          types.ApplicationStatusEnum("ok"),
+						StatusTimeStamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						StatusSince:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ResumeAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Details: []types.ApplicationStatusDetail{
+							{
+								ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+								CheckUpdateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Aggregation:              types.AggregationStatusEnum("included"),
+								Status:                   types.ApplicationStatusCheckEnum("passed"),
+								StatusTimeStamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								StatusSince:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Reason: &types.ApplicationStatusReason{
+									Code:       ptr.String("__Code__"),
+									StatusCode: ptr.Int32(1),
+									Protocol:   ptr.String("__Protocol__"),
+								},
+							},
+							{
+								ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+								CheckUpdateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Aggregation:              types.AggregationStatusEnum("included"),
+								Status:                   types.ApplicationStatusCheckEnum("passed"),
+								StatusTimeStamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								StatusSince:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Reason: &types.ApplicationStatusReason{
+									Code:       ptr.String("__Code__"),
+									StatusCode: ptr.Int32(1),
+									Protocol:   ptr.String("__Protocol__"),
+								},
+							},
+						},
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					InstanceId:         ptr.String("__InstanceId__"),
+					AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					ApplicationStatus: &types.ApplicationStatus{
+						Status:          types.ApplicationStatusEnum("ok"),
+						StatusTimeStamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						StatusSince:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ResumeAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Details: []types.ApplicationStatusDetail{
+							{
+								ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+								CheckUpdateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Aggregation:              types.AggregationStatusEnum("included"),
+								Status:                   types.ApplicationStatusCheckEnum("passed"),
+								StatusTimeStamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								StatusSince:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Reason: &types.ApplicationStatusReason{
+									Code:       ptr.String("__Code__"),
+									StatusCode: ptr.Int32(1),
+									Protocol:   ptr.String("__Protocol__"),
+								},
+							},
+							{
+								ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+								CheckUpdateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Aggregation:              types.AggregationStatusEnum("included"),
+								Status:                   types.ApplicationStatusCheckEnum("passed"),
+								StatusTimeStamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								StatusSince:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Reason: &types.ApplicationStatusReason{
+									Code:       ptr.String("__Code__"),
+									StatusCode: ptr.Int32(1),
+									Protocol:   ptr.String("__Protocol__"),
+								},
+							},
+						},
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApplicationStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApplicationStatus(context.Background(), &DescribeApplicationStatusInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApplicationStatus.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	want := &DescribeApplicationStatusCheckAssociationsOutput{
+		Associations: []types.ApplicationStatusCheckAssociationObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          types.AssociationTypeEnum("tag"),
+				Key:                      ptr.String("__Key__"),
+				Value:                    ptr.String("__Value__"),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          types.AssociationTypeEnum("tag"),
+				Key:                      ptr.String("__Key__"),
+				Value:                    ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApplicationStatusCheckAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), &DescribeApplicationStatusCheckAssociationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApplicationStatusCheckAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	want := &DescribeApplicationStatusChecksOutput{
+		ApplicationStatusChecks: []types.ApplicationStatusCheckResponseObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				Aggregation:              types.AggregationStatusEnum("included"),
+				HealthCheckPaths: []types.HealthCheckPathResponseObject{
+					{
+						Source: &types.HealthCheckPathSourceResponseObject{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						Destinations: []types.HealthCheckPathDestinationResponseObject{
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+						},
+					},
+					{
+						Source: &types.HealthCheckPathSourceResponseObject{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						Destinations: []types.HealthCheckPathDestinationResponseObject{
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+						},
+					},
+				},
+				Protocol:                         types.NetworkProtocolEnum("http"),
+				Port:                             ptr.Int32(1),
+				Path:                             ptr.String("__Path__"),
+				DeviceIndex:                      ptr.Int32(1),
+				IpVersion:                        types.IpVersionEnum("ipv4"),
+				IpScope:                          types.IpScopeEnum("private"),
+				Interval:                         ptr.Int32(1),
+				Timeout:                          ptr.Int32(1),
+				FailureThreshold:                 ptr.Int32(1),
+				SuccessThreshold:                 ptr.Int32(1),
+				StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+				InitializationGracePeriodSeconds: ptr.Int32(1),
+				LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TargetTagAssociations: []types.CustomTagKeyValueResponsePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifyTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				Aggregation:              types.AggregationStatusEnum("included"),
+				HealthCheckPaths: []types.HealthCheckPathResponseObject{
+					{
+						Source: &types.HealthCheckPathSourceResponseObject{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						Destinations: []types.HealthCheckPathDestinationResponseObject{
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+						},
+					},
+					{
+						Source: &types.HealthCheckPathSourceResponseObject{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						Destinations: []types.HealthCheckPathDestinationResponseObject{
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+							{
+								SubnetId:        ptr.String("__SubnetId__"),
+								SecurityGroupId: ptr.String("__SecurityGroupId__"),
+							},
+						},
+					},
+				},
+				Protocol:                         types.NetworkProtocolEnum("http"),
+				Port:                             ptr.Int32(1),
+				Path:                             ptr.String("__Path__"),
+				DeviceIndex:                      ptr.Int32(1),
+				IpVersion:                        types.IpVersionEnum("ipv4"),
+				IpScope:                          types.IpScopeEnum("private"),
+				Interval:                         ptr.Int32(1),
+				Timeout:                          ptr.Int32(1),
+				FailureThreshold:                 ptr.Int32(1),
+				SuccessThreshold:                 ptr.Int32(1),
+				StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+				InitializationGracePeriodSeconds: ptr.Int32(1),
+				LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TargetTagAssociations: []types.CustomTagKeyValueResponsePair{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifyTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApplicationStatusChecks.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApplicationStatusChecks(context.Background(), &DescribeApplicationStatusChecksInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApplicationStatusChecks.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeAvailabilityZones(t *testing.T) {
 	want := &DescribeAvailabilityZonesOutput{
 		AvailabilityZones: []types.AvailabilityZone{
@@ -13888,6 +14627,8 @@ func TestCheckResponseSnapshot_DescribeByoipCidrs(t *testing.T) {
 				State:              types.ByoipCidrState("advertised"),
 				NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 				AdvertisementType:  ptr.String("__AdvertisementType__"),
+				PoolId:             ptr.String("__PoolId__"),
+				IpamPoolId:         ptr.String("__IpamPoolId__"),
 			},
 			{
 				Cidr:        ptr.String("__Cidr__"),
@@ -13910,6 +14651,8 @@ func TestCheckResponseSnapshot_DescribeByoipCidrs(t *testing.T) {
 				State:              types.ByoipCidrState("advertised"),
 				NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 				AdvertisementType:  ptr.String("__AdvertisementType__"),
+				PoolId:             ptr.String("__PoolId__"),
+				IpamPoolId:         ptr.String("__IpamPoolId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -21024,6 +21767,10 @@ func TestCheckResponseSnapshot_DescribeInstanceStatus(t *testing.T) {
 					},
 					Status: types.SummaryStatus("ok"),
 				},
+				ApplicationStatus: &types.ApplicationStatusSummary{
+					Status:        types.SummaryStatus("ok"),
+					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 			},
 			{
 				AvailabilityZone:   ptr.String("__AvailabilityZone__"),
@@ -21101,6 +21848,10 @@ func TestCheckResponseSnapshot_DescribeInstanceStatus(t *testing.T) {
 						},
 					},
 					Status: types.SummaryStatus("ok"),
+				},
+				ApplicationStatus: &types.ApplicationStatusSummary{
+					Status:        types.SummaryStatus("ok"),
+					ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
 		},
@@ -23989,6 +24740,73 @@ func TestCheckResponseSnapshot_DescribeIpamExternalResourceVerificationTokens(t 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeIpamExternalResourceVerificationTokens.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeIpamInternetRegistryAssociations(t *testing.T) {
+	want := &DescribeIpamInternetRegistryAssociationsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		IpamInternetRegistryAssociations: []types.IpamInternetRegistryAssociation{
+			{
+				OwnerId:                            ptr.String("__OwnerId__"),
+				IpamInternetRegistryAssociationId:  ptr.String("__IpamInternetRegistryAssociationId__"),
+				IpamInternetRegistryAssociationArn: ptr.String("__IpamInternetRegistryAssociationArn__"),
+				IpamId:                             ptr.String("__IpamId__"),
+				IpamRegion:                         ptr.String("__IpamRegion__"),
+				Rir:                                types.Rir("ripe"),
+				OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
+				Description:                        ptr.String("__Description__"),
+				State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+				ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				OwnerId:                            ptr.String("__OwnerId__"),
+				IpamInternetRegistryAssociationId:  ptr.String("__IpamInternetRegistryAssociationId__"),
+				IpamInternetRegistryAssociationArn: ptr.String("__IpamInternetRegistryAssociationArn__"),
+				IpamId:                             ptr.String("__IpamId__"),
+				IpamRegion:                         ptr.String("__IpamRegion__"),
+				Rir:                                types.Rir("ripe"),
+				OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
+				Description:                        ptr.String("__Description__"),
+				State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+				ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeIpamInternetRegistryAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeIpamInternetRegistryAssociations(context.Background(), &DescribeIpamInternetRegistryAssociationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeIpamInternetRegistryAssociations.response", err)
 	}
 }
 
@@ -48642,6 +49460,52 @@ func TestCheckResponseSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	want := &DisableApplicationStatusCheckSuppressionOutput{
+		SuccessfulResults: []types.SuccessfulSuppressionResponseObject{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		UnsuccessfulResults: []types.UnsuccessfulSuppressionResponseObject{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Reason:     ptr.String("__Reason__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Reason:     ptr.String("__Reason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisableApplicationStatusCheckSuppression.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), &DisableApplicationStatusCheckSuppressionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisableApplicationStatusCheckSuppression.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	want := &DisableAwsNetworkPerformanceMetricSubscriptionOutput{
 		Output: ptr.Bool(true),
@@ -49191,6 +50055,52 @@ func TestCheckResponseSnapshot_DisassociateAddress(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateAddress.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	want := &DisassociateApplicationStatusCheckOutput{
+		SuccessfulResults: []types.SuccessfulAssociationResponseObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+			},
+		},
+		UnsuccessfulResults: []types.UnsuccessfulAssociationResponseObject{
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+				Reason:                   ptr.String("__Reason__"),
+			},
+			{
+				ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+				AssociationType:          ptr.String("__AssociationType__"),
+				AssociationValue:         ptr.String("__AssociationValue__"),
+				Reason:                   ptr.String("__Reason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateApplicationStatusCheck.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateApplicationStatusCheck(context.Background(), &DisassociateApplicationStatusCheckInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateApplicationStatusCheck.response", err)
 	}
 }
 
@@ -49775,6 +50685,52 @@ func TestCheckResponseSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	want := &EnableApplicationStatusCheckSuppressionOutput{
+		SuccessfulResults: []types.SuccessfulSuppressionResponseObject{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		UnsuccessfulResults: []types.UnsuccessfulSuppressionResponseObject{
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Reason:     ptr.String("__Reason__"),
+			},
+			{
+				InstanceId: ptr.String("__InstanceId__"),
+				SuppressAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResumeAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Reason:     ptr.String("__Reason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("EnableApplicationStatusCheckSuppression.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), &EnableApplicationStatusCheckSuppressionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "EnableApplicationStatusCheckSuppression.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	want := &EnableAwsNetworkPerformanceMetricSubscriptionOutput{
 		Output: ptr.Bool(true),
@@ -50107,6 +51063,48 @@ func TestCheckResponseSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "EnableInstanceSqlHaStandbyDetections.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_EnableIpamInternetRegistryAssociation(t *testing.T) {
+	want := &EnableIpamInternetRegistryAssociationOutput{
+		IpamInternetRegistryAssociation: &types.IpamInternetRegistryAssociation{
+			OwnerId:                            ptr.String("__OwnerId__"),
+			IpamInternetRegistryAssociationId:  ptr.String("__IpamInternetRegistryAssociationId__"),
+			IpamInternetRegistryAssociationArn: ptr.String("__IpamInternetRegistryAssociationArn__"),
+			IpamId:                             ptr.String("__IpamId__"),
+			IpamRegion:                         ptr.String("__IpamRegion__"),
+			Rir:                                types.Rir("ripe"),
+			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
+			Description:                        ptr.String("__Description__"),
+			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("EnableIpamInternetRegistryAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.EnableIpamInternetRegistryAssociation(context.Background(), &EnableIpamInternetRegistryAssociationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "EnableIpamInternetRegistryAssociation.response", err)
 	}
 }
 
@@ -51855,6 +52853,117 @@ func TestCheckResponseSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetIpamDiscoveredRoutes(t *testing.T) {
+	want := &GetIpamDiscoveredRoutesOutput{
+		IpamDiscoveredRoutes: []types.IpamDiscoveredRoute{
+			{
+				IpamResourceDiscoveryId: ptr.String("__IpamResourceDiscoveryId__"),
+				ResourceRegion:          ptr.String("__ResourceRegion__"),
+				ResourceOwnerId:         ptr.String("__ResourceOwnerId__"),
+				Cidr:                    ptr.String("__Cidr__"),
+				Asn:                     ptr.String("__Asn__"),
+				State:                   types.IpamByoipCidrState("advertised"),
+				AdvertisementType:       types.IpamByoipAdvertisementType("regional"),
+				NetworkBorderGroup:      ptr.String("__NetworkBorderGroup__"),
+				PoolId:                  ptr.String("__PoolId__"),
+				IpamPoolId:              ptr.String("__IpamPoolId__"),
+				SampleTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				IpamResourceDiscoveryId: ptr.String("__IpamResourceDiscoveryId__"),
+				ResourceRegion:          ptr.String("__ResourceRegion__"),
+				ResourceOwnerId:         ptr.String("__ResourceOwnerId__"),
+				Cidr:                    ptr.String("__Cidr__"),
+				Asn:                     ptr.String("__Asn__"),
+				State:                   types.IpamByoipCidrState("advertised"),
+				AdvertisementType:       types.IpamByoipAdvertisementType("regional"),
+				NetworkBorderGroup:      ptr.String("__NetworkBorderGroup__"),
+				PoolId:                  ptr.String("__PoolId__"),
+				IpamPoolId:              ptr.String("__IpamPoolId__"),
+				SampleTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamDiscoveredRoutes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamDiscoveredRoutes(context.Background(), &GetIpamDiscoveredRoutesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamDiscoveredRoutes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamInternetRegistryAssociationAsns(t *testing.T) {
+	want := &GetIpamInternetRegistryAssociationAsnsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		IpamInternetRegistryAssociationAsns: []types.IpamInternetRegistryAssociationAsn{
+			{
+				Asn:            ptr.String("__Asn__"),
+				LastObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Asn:            ptr.String("__Asn__"),
+				LastObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamInternetRegistryAssociationAsns.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamInternetRegistryAssociationAsns(context.Background(), &GetIpamInternetRegistryAssociationAsnsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamInternetRegistryAssociationAsns.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamInternetRegistryAssociationCidrs(t *testing.T) {
+	want := &GetIpamInternetRegistryAssociationCidrsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		IpamInternetRegistryAssociationCidrs: []types.IpamInternetRegistryAssociationCidr{
+			{
+				Cidr:           ptr.String("__Cidr__"),
+				LastObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Cidr:           ptr.String("__Cidr__"),
+				LastObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamInternetRegistryAssociationCidrs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamInternetRegistryAssociationCidrs(context.Background(), &GetIpamInternetRegistryAssociationCidrsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamInternetRegistryAssociationCidrs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
 	want := &GetIpamPolicyAllocationRulesOutput{
 		IpamPolicyDocuments: []types.IpamPolicyDocument{
@@ -52256,6 +53365,231 @@ func TestCheckResponseSnapshot_GetIpamResourceCidrs(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamResourceCidrs.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamRouteOriginAuthorizations(t *testing.T) {
+	want := &GetIpamRouteOriginAuthorizationsOutput{
+		IpamRouteOriginAuthorizations: []types.IpamRouteOriginAuthorizationInfo{
+			{
+				Cidr:      ptr.String("__Cidr__"),
+				Asn:       ptr.String("__Asn__"),
+				MaxLength: ptr.Int32(1),
+			},
+			{
+				Cidr:      ptr.String("__Cidr__"),
+				Asn:       ptr.String("__Asn__"),
+				MaxLength: ptr.Int32(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamRouteOriginAuthorizations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamRouteOriginAuthorizations(context.Background(), &GetIpamRouteOriginAuthorizationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamRouteOriginAuthorizations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamRouteProtectionFindings(t *testing.T) {
+	want := &GetIpamRouteProtectionFindingsOutput{
+		IpamId: ptr.String("__IpamId__"),
+		RouteProtectionFindings: []types.IpamRouteProtectionFinding{
+			{
+				ResourceOwnerId:    ptr.String("__ResourceOwnerId__"),
+				ResourceRegion:     ptr.String("__ResourceRegion__"),
+				IpamPoolId:         ptr.String("__IpamPoolId__"),
+				Cidr:               ptr.String("__Cidr__"),
+				State:              types.IpamByoipCidrState("advertised"),
+				AdvertisementType:  types.IpamByoipAdvertisementType("regional"),
+				NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
+				PoolId:             ptr.String("__PoolId__"),
+				Asn:                ptr.String("__Asn__"),
+				RpkiStatus:         types.IpamRpkiStatus("valid"),
+				RpkiStrength:       types.IpamRpkiStrength("strict"),
+				Roas: []types.IpamRouteOriginAuthorization{
+					{
+						Asn:        ptr.String("__Asn__"),
+						Prefix:     ptr.String("__Prefix__"),
+						MaxLength:  ptr.Int32(1),
+						Match:      ptr.Bool(true),
+						Expiration: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Asn:        ptr.String("__Asn__"),
+						Prefix:     ptr.String("__Prefix__"),
+						MaxLength:  ptr.Int32(1),
+						Match:      ptr.Bool(true),
+						Expiration: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				RouteOverlaps: []types.IpamRouteOverlap{
+					{
+						Prefix:     ptr.String("__Prefix__"),
+						Asn:        ptr.String("__Asn__"),
+						DetectedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Prefix:     ptr.String("__Prefix__"),
+						Asn:        ptr.String("__Asn__"),
+						DetectedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SampleTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RoaSampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResourceOwnerId:    ptr.String("__ResourceOwnerId__"),
+				ResourceRegion:     ptr.String("__ResourceRegion__"),
+				IpamPoolId:         ptr.String("__IpamPoolId__"),
+				Cidr:               ptr.String("__Cidr__"),
+				State:              types.IpamByoipCidrState("advertised"),
+				AdvertisementType:  types.IpamByoipAdvertisementType("regional"),
+				NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
+				PoolId:             ptr.String("__PoolId__"),
+				Asn:                ptr.String("__Asn__"),
+				RpkiStatus:         types.IpamRpkiStatus("valid"),
+				RpkiStrength:       types.IpamRpkiStrength("strict"),
+				Roas: []types.IpamRouteOriginAuthorization{
+					{
+						Asn:        ptr.String("__Asn__"),
+						Prefix:     ptr.String("__Prefix__"),
+						MaxLength:  ptr.Int32(1),
+						Match:      ptr.Bool(true),
+						Expiration: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Asn:        ptr.String("__Asn__"),
+						Prefix:     ptr.String("__Prefix__"),
+						MaxLength:  ptr.Int32(1),
+						Match:      ptr.Bool(true),
+						Expiration: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				RouteOverlaps: []types.IpamRouteOverlap{
+					{
+						Prefix:     ptr.String("__Prefix__"),
+						Asn:        ptr.String("__Asn__"),
+						DetectedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Prefix:     ptr.String("__Prefix__"),
+						Asn:        ptr.String("__Asn__"),
+						DetectedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SampleTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RoaSampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamRouteProtectionFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamRouteProtectionFindings(context.Background(), &GetIpamRouteProtectionFindingsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamRouteProtectionFindings.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamRoutingPolicyRegistrationDeltas(t *testing.T) {
+	want := &GetIpamRoutingPolicyRegistrationDeltasOutput{
+		IpamRoutingPolicyRegistrationDeltas: []types.IpamRoutingPolicyRegistrationDelta{
+			{
+				DeltaId:      ptr.String("__DeltaId__"),
+				DeltaJson:    ptr.String("__DeltaJson__"),
+				State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+				StateMessage: ptr.String("__StateMessage__"),
+			},
+			{
+				DeltaId:      ptr.String("__DeltaId__"),
+				DeltaJson:    ptr.String("__DeltaJson__"),
+				State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+				StateMessage: ptr.String("__StateMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamRoutingPolicyRegistrationDeltas.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamRoutingPolicyRegistrationDeltas(context.Background(), &GetIpamRoutingPolicyRegistrationDeltasInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamRoutingPolicyRegistrationDeltas.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIpamRoutingPolicyRegistrations(t *testing.T) {
+	want := &GetIpamRoutingPolicyRegistrationsOutput{
+		IpamRoutingPolicyRegistrations: []types.IpamRoutingPolicyRegistration{
+			{
+				Cidr: ptr.String("__Cidr__"),
+				Asns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PermitMoreSpecificAnnouncements: ptr.Bool(true),
+				MaxLength:                       ptr.Int32(1),
+				Description:                     ptr.String("__Description__"),
+				LatestDeltaId:                   ptr.String("__LatestDeltaId__"),
+				State:                           types.IpamRoutingPolicyRegistrationState("pending-activate"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+				Asns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PermitMoreSpecificAnnouncements: ptr.Bool(true),
+				MaxLength:                       ptr.Int32(1),
+				Description:                     ptr.String("__Description__"),
+				LatestDeltaId:                   ptr.String("__LatestDeltaId__"),
+				State:                           types.IpamRoutingPolicyRegistrationState("pending-activate"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIpamRoutingPolicyRegistrations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIpamRoutingPolicyRegistrations(context.Background(), &GetIpamRoutingPolicyRegistrationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIpamRoutingPolicyRegistrations.response", err)
 	}
 }
 
@@ -59240,6 +60574,100 @@ func TestCheckResponseSnapshot_ModifyAddressAttribute(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	want := &ModifyApplicationStatusCheckOutput{
+		ApplicationStatusCheck: &types.ApplicationStatusCheckResponseObject{
+			ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+			Aggregation:              types.AggregationStatusEnum("included"),
+			HealthCheckPaths: []types.HealthCheckPathResponseObject{
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+				{
+					Source: &types.HealthCheckPathSourceResponseObject{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					Destinations: []types.HealthCheckPathDestinationResponseObject{
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+						{
+							SubnetId:        ptr.String("__SubnetId__"),
+							SecurityGroupId: ptr.String("__SecurityGroupId__"),
+						},
+					},
+				},
+			},
+			Protocol:                         types.NetworkProtocolEnum("http"),
+			Port:                             ptr.Int32(1),
+			Path:                             ptr.String("__Path__"),
+			DeviceIndex:                      ptr.Int32(1),
+			IpVersion:                        types.IpVersionEnum("ipv4"),
+			IpScope:                          types.IpScopeEnum("private"),
+			Interval:                         ptr.Int32(1),
+			Timeout:                          ptr.Int32(1),
+			FailureThreshold:                 ptr.Int32(1),
+			SuccessThreshold:                 ptr.Int32(1),
+			StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+			InitializationGracePeriodSeconds: ptr.Int32(1),
+			LastUpdatedAt:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TargetTagAssociations: []types.CustomTagKeyValueResponsePair{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ModifyTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyApplicationStatusCheck.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyApplicationStatusCheck(context.Background(), &ModifyApplicationStatusCheckInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyApplicationStatusCheck.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ModifyAvailabilityZoneGroup(t *testing.T) {
 	want := &ModifyAvailabilityZoneGroupOutput{
 		Return: ptr.Bool(true),
@@ -60256,6 +61684,32 @@ func TestCheckResponseSnapshot_ModifyIpamResourceDiscovery(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyIpamResourceDiscovery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ModifyIpamRoutingPolicyRegistration(t *testing.T) {
+	want := &ModifyIpamRoutingPolicyRegistrationOutput{
+		IpamRoutingPolicyRegistrationDelta: &types.IpamRoutingPolicyRegistrationDelta{
+			DeltaId:      ptr.String("__DeltaId__"),
+			DeltaJson:    ptr.String("__DeltaJson__"),
+			State:        types.IpamRoutingPolicyRegistrationDeltaState("pending"),
+			StateMessage: ptr.String("__StateMessage__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyIpamRoutingPolicyRegistration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyIpamRoutingPolicyRegistration(context.Background(), &ModifyIpamRoutingPolicyRegistrationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyIpamRoutingPolicyRegistration.response", err)
 	}
 }
 
@@ -63034,6 +64488,8 @@ func TestCheckResponseSnapshot_MoveByoipCidrToIpam(t *testing.T) {
 			State:              types.ByoipCidrState("advertised"),
 			NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 			AdvertisementType:  ptr.String("__AdvertisementType__"),
+			PoolId:             ptr.String("__PoolId__"),
+			IpamPoolId:         ptr.String("__IpamPoolId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("MoveByoipCidrToIpam.response")
@@ -63263,6 +64719,8 @@ func TestCheckResponseSnapshot_ProvisionByoipCidr(t *testing.T) {
 			State:              types.ByoipCidrState("advertised"),
 			NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 			AdvertisementType:  ptr.String("__AdvertisementType__"),
+			PoolId:             ptr.String("__PoolId__"),
+			IpamPoolId:         ptr.String("__IpamPoolId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ProvisionByoipCidr.response")
@@ -72382,6 +73840,8 @@ func TestCheckResponseSnapshot_WithdrawByoipCidr(t *testing.T) {
 			State:              types.ByoipCidrState("advertised"),
 			NetworkBorderGroup: ptr.String("__NetworkBorderGroup__"),
 			AdvertisementType:  ptr.String("__AdvertisementType__"),
+			PoolId:             ptr.String("__PoolId__"),
+			IpamPoolId:         ptr.String("__IpamPoolId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("WithdrawByoipCidr.response")

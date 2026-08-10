@@ -963,6 +963,28 @@ type ListingSummaryAssociatedEntity struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a net payment term that sets how many days after the invoice date the
+// payment is due.
+type NetPaymentTerm struct {
+
+	// The unique identifier of the term.
+	//
+	// This member is required.
+	Id *string
+
+	// The duration after invoice date by which payment is due.
+	//
+	// This member is required.
+	PaymentDuePeriod *string
+
+	// The category of the term.
+	//
+	// This member is required.
+	Type TermType
+
+	noSmithyDocumentSerde
+}
+
 // A product and optional offer set associated with an offer.
 type OfferAssociatedEntity struct {
 
@@ -1040,6 +1062,7 @@ type OfferSetInformation struct {
 //	OfferTermMemberFixedUpfrontPricingTerm
 //	OfferTermMemberFreeTrialPricingTerm
 //	OfferTermMemberLegalTerm
+//	OfferTermMemberNetPaymentTerm
 //	OfferTermMemberPaymentScheduleTerm
 //	OfferTermMemberRecurringPaymentTerm
 //	OfferTermMemberRenewalTerm
@@ -1100,6 +1123,15 @@ type OfferTermMemberLegalTerm struct {
 }
 
 func (*OfferTermMemberLegalTerm) isOfferTerm() {}
+
+// A net payment term.
+type OfferTermMemberNetPaymentTerm struct {
+	Value NetPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*OfferTermMemberNetPaymentTerm) isOfferTerm() {}
 
 // Defines a payment schedule term with installment payments at specified dates.
 type OfferTermMemberPaymentScheduleTerm struct {

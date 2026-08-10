@@ -740,6 +740,7 @@ func TestCheckResponseSnapshot_DescribeInstance(t *testing.T) {
 			EncryptionStatus:       types.KmsKeyStatus("UPDATING"),
 			EncryptionStatusReason: ptr.String("__EncryptionStatusReason__"),
 		},
+		PermissionSetsEnabled: ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {

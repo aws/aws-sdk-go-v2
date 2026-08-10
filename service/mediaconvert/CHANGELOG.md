@@ -1,3 +1,16 @@
+# v1.97.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.97.0 (2026-08-03)
+
+* **Feature**: Updates Kantar server URL validation to accept Fifty5Blue domain. Adds support for output to S3 Glacier Instant Retrieval.
+
+# v1.96.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.96.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

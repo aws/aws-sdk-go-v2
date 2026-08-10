@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"booleanList":[true,true],"enumList":["Foo","Foo"],"intEnumList":[1,1],"integerList":[1,1],"nestedStringList":[["__Member__","__Member__"],["__Member__","__Member__"]],"stringList":["__Member__","__Member__"],"stringSet":["__Member__","__Member__"],"myStructureList":[{"value":"__A__","other":"__B__"},{"value":"__A__","other":"__B__"}],"timestampList":[946684800,946684800]}

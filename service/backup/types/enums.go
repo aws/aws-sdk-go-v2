@@ -2,6 +2,35 @@
 
 package types
 
+type AccessPointStatus string
+
+// Enum values for AccessPointStatus
+const (
+	AccessPointStatusAvailable      AccessPointStatus = "AVAILABLE"
+	AccessPointStatusCreating       AccessPointStatus = "CREATING"
+	AccessPointStatusDeleting       AccessPointStatus = "DELETING"
+	AccessPointStatusDisassociated  AccessPointStatus = "DISASSOCIATED"
+	AccessPointStatusDisassociating AccessPointStatus = "DISASSOCIATING"
+	AccessPointStatusExpired        AccessPointStatus = "EXPIRED"
+	AccessPointStatusFailed         AccessPointStatus = "FAILED"
+)
+
+// Values returns all known values for AccessPointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessPointStatus) Values() []AccessPointStatus {
+	return []AccessPointStatus{
+		"AVAILABLE",
+		"CREATING",
+		"DELETING",
+		"DISASSOCIATED",
+		"DISASSOCIATING",
+		"EXPIRED",
+		"FAILED",
+	}
+}
+
 type AggregationPeriod string
 
 // Enum values for AggregationPeriod
@@ -121,6 +150,12 @@ const (
 	BackupVaultEventEksRestoreObjectFailed      BackupVaultEvent = "EKS_RESTORE_OBJECT_FAILED"
 	BackupVaultEventEksRestoreObjectSkipped     BackupVaultEvent = "EKS_RESTORE_OBJECT_SKIPPED"
 	BackupVaultEventEksBackupObjectFailed       BackupVaultEvent = "EKS_BACKUP_OBJECT_FAILED"
+	BackupVaultEventAccessPointAvailable        BackupVaultEvent = "ACCESS_POINT_AVAILABLE"
+	BackupVaultEventAccessPointCreationFailed   BackupVaultEvent = "ACCESS_POINT_CREATION_FAILED"
+	BackupVaultEventAccessPointDeleted          BackupVaultEvent = "ACCESS_POINT_DELETED"
+	BackupVaultEventAccessPointDeletionFailed   BackupVaultEvent = "ACCESS_POINT_DELETION_FAILED"
+	BackupVaultEventAccessPointExpired          BackupVaultEvent = "ACCESS_POINT_EXPIRED"
+	BackupVaultEventAccessPointDisassociated    BackupVaultEvent = "ACCESS_POINT_DISASSOCIATED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
@@ -153,6 +188,12 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"EKS_RESTORE_OBJECT_FAILED",
 		"EKS_RESTORE_OBJECT_SKIPPED",
 		"EKS_BACKUP_OBJECT_FAILED",
+		"ACCESS_POINT_AVAILABLE",
+		"ACCESS_POINT_CREATION_FAILED",
+		"ACCESS_POINT_DELETED",
+		"ACCESS_POINT_DELETION_FAILED",
+		"ACCESS_POINT_EXPIRED",
+		"ACCESS_POINT_DISASSOCIATED",
 	}
 }
 

@@ -4229,6 +4229,16 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -4252,6 +4262,16 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -4338,6 +4358,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -4347,6 +4368,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4354,6 +4376,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4367,6 +4390,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4393,6 +4417,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4456,6 +4481,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -4465,6 +4491,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4472,6 +4499,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4486,6 +4514,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4512,6 +4541,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4721,6 +4751,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -4730,6 +4761,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4737,6 +4769,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4750,6 +4783,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4776,6 +4810,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4839,6 +4874,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -4848,6 +4884,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4855,6 +4892,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -4869,6 +4907,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -4895,6 +4934,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5113,6 +5153,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5120,6 +5161,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5133,6 +5175,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5159,6 +5202,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5227,6 +5271,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5234,6 +5279,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5248,6 +5294,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5274,6 +5321,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5449,6 +5497,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5456,6 +5505,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5547,6 +5597,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5554,6 +5605,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5567,6 +5619,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5593,6 +5646,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5661,6 +5715,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5668,6 +5723,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5682,6 +5738,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5708,6 +5765,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -5883,6 +5941,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -5890,6 +5949,7 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -6200,243 +6260,285 @@ func TestCheckRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 		AwsAccountId:          ptr.String("__AwsAccountId__"),
 		CustomPermissionsName: ptr.String("__CustomPermissionsName__"),
 		Capabilities: &types.Capabilities{
-			ExportToCsv:                               types.CapabilityState("DENY"),
-			ExportToExcel:                             types.CapabilityState("DENY"),
-			ExportToPdf:                               types.CapabilityState("DENY"),
-			PrintReports:                              types.CapabilityState("DENY"),
-			CreateAndUpdateThemes:                     types.CapabilityState("DENY"),
-			AddOrRunAnomalyDetectionForAnalyses:       types.CapabilityState("DENY"),
-			ShareAnalyses:                             types.CapabilityState("DENY"),
-			CreateAndUpdateDatasets:                   types.CapabilityState("DENY"),
-			ShareDatasets:                             types.CapabilityState("DENY"),
-			SubscribeDashboardEmailReports:            types.CapabilityState("DENY"),
-			CreateAndUpdateDashboardEmailReports:      types.CapabilityState("DENY"),
-			ShareDashboards:                           types.CapabilityState("DENY"),
-			CreateAndUpdateThresholdAlerts:            types.CapabilityState("DENY"),
-			RenameSharedFolders:                       types.CapabilityState("DENY"),
-			CreateSharedFolders:                       types.CapabilityState("DENY"),
-			CreateAndUpdateDataSources:                types.CapabilityState("DENY"),
-			ShareDataSources:                          types.CapabilityState("DENY"),
-			ViewAccountSPICECapacity:                  types.CapabilityState("DENY"),
-			CreateSPICEDataset:                        types.CapabilityState("DENY"),
-			ExportToPdfInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToCsvInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToExcelInScheduledReports:           types.CapabilityState("DENY"),
-			IncludeContentInScheduledReportsEmail:     types.CapabilityState("DENY"),
-			Dashboard:                                 types.CapabilityState("DENY"),
-			Analysis:                                  types.CapabilityState("DENY"),
-			Automate:                                  types.CapabilityState("DENY"),
-			Flow:                                      types.CapabilityState("DENY"),
-			Apps:                                      types.CapabilityState("DENY"),
-			CreateAndUpdateApps:                       types.CapabilityState("DENY"),
-			ShareApps:                                 types.CapabilityState("DENY"),
-			InvokeAppsAIInference:                     types.CapabilityState("DENY"),
-			AccessAppsNativeDataStore:                 types.CapabilityState("DENY"),
-			PublishWithoutApproval:                    types.CapabilityState("DENY"),
-			UseBedrockModels:                          types.CapabilityState("DENY"),
-			PerformFlowUiTask:                         types.CapabilityState("DENY"),
-			ApproveFlowShareRequests:                  types.CapabilityState("DENY"),
-			UseAgentWebSearch:                         types.CapabilityState("DENY"),
-			KnowledgeBase:                             types.CapabilityState("DENY"),
-			Action:                                    types.CapabilityState("DENY"),
-			GenericHTTPAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateGenericHTTPAction:          types.CapabilityState("DENY"),
-			ShareGenericHTTPAction:                    types.CapabilityState("DENY"),
-			UseGenericHTTPAction:                      types.CapabilityState("DENY"),
-			AsanaAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateAsanaAction:                types.CapabilityState("DENY"),
-			ShareAsanaAction:                          types.CapabilityState("DENY"),
-			UseAsanaAction:                            types.CapabilityState("DENY"),
-			SlackAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateSlackAction:                types.CapabilityState("DENY"),
-			ShareSlackAction:                          types.CapabilityState("DENY"),
-			UseSlackAction:                            types.CapabilityState("DENY"),
-			ServiceNowAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateServiceNowAction:           types.CapabilityState("DENY"),
-			ShareServiceNowAction:                     types.CapabilityState("DENY"),
-			UseServiceNowAction:                       types.CapabilityState("DENY"),
-			SalesforceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSalesforceAction:           types.CapabilityState("DENY"),
-			ShareSalesforceAction:                     types.CapabilityState("DENY"),
-			UseSalesforceAction:                       types.CapabilityState("DENY"),
-			MSExchangeAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateMSExchangeAction:           types.CapabilityState("DENY"),
-			ShareMSExchangeAction:                     types.CapabilityState("DENY"),
-			UseMSExchangeAction:                       types.CapabilityState("DENY"),
-			PagerDutyAction:                           types.CapabilityState("DENY"),
-			CreateAndUpdatePagerDutyAction:            types.CapabilityState("DENY"),
-			SharePagerDutyAction:                      types.CapabilityState("DENY"),
-			UsePagerDutyAction:                        types.CapabilityState("DENY"),
-			JiraAction:                                types.CapabilityState("DENY"),
-			CreateAndUpdateJiraAction:                 types.CapabilityState("DENY"),
-			ShareJiraAction:                           types.CapabilityState("DENY"),
-			UseJiraAction:                             types.CapabilityState("DENY"),
-			ConfluenceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateConfluenceAction:           types.CapabilityState("DENY"),
-			ShareConfluenceAction:                     types.CapabilityState("DENY"),
-			UseConfluenceAction:                       types.CapabilityState("DENY"),
-			OneDriveAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateOneDriveAction:             types.CapabilityState("DENY"),
-			ShareOneDriveAction:                       types.CapabilityState("DENY"),
-			UseOneDriveAction:                         types.CapabilityState("DENY"),
-			SharePointAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSharePointAction:           types.CapabilityState("DENY"),
-			ShareSharePointAction:                     types.CapabilityState("DENY"),
-			UseSharePointAction:                       types.CapabilityState("DENY"),
-			MSTeamsAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateMSTeamsAction:              types.CapabilityState("DENY"),
-			ShareMSTeamsAction:                        types.CapabilityState("DENY"),
-			UseMSTeamsAction:                          types.CapabilityState("DENY"),
-			GoogleCalendarAction:                      types.CapabilityState("DENY"),
-			CreateAndUpdateGoogleCalendarAction:       types.CapabilityState("DENY"),
-			ShareGoogleCalendarAction:                 types.CapabilityState("DENY"),
-			UseGoogleCalendarAction:                   types.CapabilityState("DENY"),
-			ZendeskAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateZendeskAction:              types.CapabilityState("DENY"),
-			ShareZendeskAction:                        types.CapabilityState("DENY"),
-			UseZendeskAction:                          types.CapabilityState("DENY"),
-			SmartsheetAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSmartsheetAction:           types.CapabilityState("DENY"),
-			ShareSmartsheetAction:                     types.CapabilityState("DENY"),
-			UseSmartsheetAction:                       types.CapabilityState("DENY"),
-			SAPBusinessPartnerAction:                  types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBusinessPartnerAction:   types.CapabilityState("DENY"),
-			ShareSAPBusinessPartnerAction:             types.CapabilityState("DENY"),
-			UseSAPBusinessPartnerAction:               types.CapabilityState("DENY"),
-			SAPProductMasterDataAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPProductMasterDataAction: types.CapabilityState("DENY"),
-			ShareSAPProductMasterDataAction:           types.CapabilityState("DENY"),
-			UseSAPProductMasterDataAction:             types.CapabilityState("DENY"),
-			SAPPhysicalInventoryAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPPhysicalInventoryAction: types.CapabilityState("DENY"),
-			ShareSAPPhysicalInventoryAction:           types.CapabilityState("DENY"),
-			UseSAPPhysicalInventoryAction:             types.CapabilityState("DENY"),
-			SAPBillOfMaterialAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBillOfMaterialAction:    types.CapabilityState("DENY"),
-			ShareSAPBillOfMaterialAction:              types.CapabilityState("DENY"),
-			UseSAPBillOfMaterialAction:                types.CapabilityState("DENY"),
-			SAPMaterialStockAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateSAPMaterialStockAction:     types.CapabilityState("DENY"),
-			ShareSAPMaterialStockAction:               types.CapabilityState("DENY"),
-			UseSAPMaterialStockAction:                 types.CapabilityState("DENY"),
-			FactSetAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateFactSetAction:              types.CapabilityState("DENY"),
-			ShareFactSetAction:                        types.CapabilityState("DENY"),
-			UseFactSetAction:                          types.CapabilityState("DENY"),
-			AmazonSThreeAction:                        types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonSThreeAction:         types.CapabilityState("DENY"),
-			ShareAmazonSThreeAction:                   types.CapabilityState("DENY"),
-			UseAmazonSThreeAction:                     types.CapabilityState("DENY"),
-			TextractAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateTextractAction:             types.CapabilityState("DENY"),
-			ShareTextractAction:                       types.CapabilityState("DENY"),
-			UseTextractAction:                         types.CapabilityState("DENY"),
-			ComprehendAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendAction:           types.CapabilityState("DENY"),
-			ShareComprehendAction:                     types.CapabilityState("DENY"),
-			UseComprehendAction:                       types.CapabilityState("DENY"),
-			ComprehendMedicalAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendMedicalAction:    types.CapabilityState("DENY"),
-			ShareComprehendMedicalAction:              types.CapabilityState("DENY"),
-			UseComprehendMedicalAction:                types.CapabilityState("DENY"),
-			AmazonBedrockARSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockARSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockARSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockARSAction:                 types.CapabilityState("DENY"),
-			AmazonBedrockFSAction:                     types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockFSAction:      types.CapabilityState("DENY"),
-			ShareAmazonBedrockFSAction:                types.CapabilityState("DENY"),
-			UseAmazonBedrockFSAction:                  types.CapabilityState("DENY"),
-			AmazonBedrockKRSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockKRSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockKRSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockKRSAction:                 types.CapabilityState("DENY"),
-			MCPAction:                                 types.CapabilityState("DENY"),
-			CreateAndUpdateMCPAction:                  types.CapabilityState("DENY"),
-			ShareMCPAction:                            types.CapabilityState("DENY"),
-			UseMCPAction:                              types.CapabilityState("DENY"),
-			OpenAPIAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateOpenAPIAction:              types.CapabilityState("DENY"),
-			ShareOpenAPIAction:                        types.CapabilityState("DENY"),
-			UseOpenAPIAction:                          types.CapabilityState("DENY"),
-			SandPGMIAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGMIAction:             types.CapabilityState("DENY"),
-			ShareSandPGMIAction:                       types.CapabilityState("DENY"),
-			UseSandPGMIAction:                         types.CapabilityState("DENY"),
-			SandPGlobalEnergyAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGlobalEnergyAction:    types.CapabilityState("DENY"),
-			ShareSandPGlobalEnergyAction:              types.CapabilityState("DENY"),
-			UseSandPGlobalEnergyAction:                types.CapabilityState("DENY"),
-			BambooHRAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBambooHRAction:             types.CapabilityState("DENY"),
-			ShareBambooHRAction:                       types.CapabilityState("DENY"),
-			UseBambooHRAction:                         types.CapabilityState("DENY"),
-			BoxAgentAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBoxAgentAction:             types.CapabilityState("DENY"),
-			ShareBoxAgentAction:                       types.CapabilityState("DENY"),
-			UseBoxAgentAction:                         types.CapabilityState("DENY"),
-			CanvaAgentAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateCanvaAgentAction:           types.CapabilityState("DENY"),
-			ShareCanvaAgentAction:                     types.CapabilityState("DENY"),
-			UseCanvaAgentAction:                       types.CapabilityState("DENY"),
-			GithubAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateGithubAction:               types.CapabilityState("DENY"),
-			ShareGithubAction:                         types.CapabilityState("DENY"),
-			UseGithubAction:                           types.CapabilityState("DENY"),
-			NotionAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateNotionAction:               types.CapabilityState("DENY"),
-			ShareNotionAction:                         types.CapabilityState("DENY"),
-			UseNotionAction:                           types.CapabilityState("DENY"),
-			LinearAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateLinearAction:               types.CapabilityState("DENY"),
-			ShareLinearAction:                         types.CapabilityState("DENY"),
-			UseLinearAction:                           types.CapabilityState("DENY"),
-			HuggingFaceAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateHuggingFaceAction:          types.CapabilityState("DENY"),
-			ShareHuggingFaceAction:                    types.CapabilityState("DENY"),
-			UseHuggingFaceAction:                      types.CapabilityState("DENY"),
-			MondayAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateMondayAction:               types.CapabilityState("DENY"),
-			ShareMondayAction:                         types.CapabilityState("DENY"),
-			UseMondayAction:                           types.CapabilityState("DENY"),
-			HubspotAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateHubspotAction:              types.CapabilityState("DENY"),
-			ShareHubspotAction:                        types.CapabilityState("DENY"),
-			UseHubspotAction:                          types.CapabilityState("DENY"),
-			IntercomAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateIntercomAction:             types.CapabilityState("DENY"),
-			ShareIntercomAction:                       types.CapabilityState("DENY"),
-			UseIntercomAction:                         types.CapabilityState("DENY"),
-			NewRelicAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateNewRelicAction:             types.CapabilityState("DENY"),
-			ShareNewRelicAction:                       types.CapabilityState("DENY"),
-			UseNewRelicAction:                         types.CapabilityState("DENY"),
-			Topic:                                     types.CapabilityState("DENY"),
-			EditVisualWithQ:                           types.CapabilityState("DENY"),
-			BuildCalculatedFieldWithQ:                 types.CapabilityState("DENY"),
-			CreateDashboardExecutiveSummaryWithQ:      types.CapabilityState("DENY"),
-			Space:                                     types.CapabilityState("DENY"),
-			CreateSpaces:                              types.CapabilityState("DENY"),
-			ShareSpaces:                               types.CapabilityState("DENY"),
-			ChatAgent:                                 types.CapabilityState("DENY"),
-			CreateChatAgents:                          types.CapabilityState("DENY"),
-			ShareChatAgents:                           types.CapabilityState("DENY"),
-			Research:                                  types.CapabilityState("DENY"),
-			SelfUpgradeUserRole:                       types.CapabilityState("DENY"),
-			Extension:                                 types.CapabilityState("DENY"),
-			UseBrowserExtension:                       types.CapabilityState("DENY"),
-			UseWordAddInExtension:                     types.CapabilityState("DENY"),
-			UseOutlookAddInExtension:                  types.CapabilityState("DENY"),
-			UseExcelAddInExtension:                    types.CapabilityState("DENY"),
-			UsePowerpointAddInExtension:               types.CapabilityState("DENY"),
-			ManageSharedFolders:                       types.CapabilityState("DENY"),
-			GenerateAnalyses:                          types.CapabilityState("DENY"),
-			Story:                                     types.CapabilityState("DENY"),
-			Scenario:                                  types.CapabilityState("DENY"),
-			Trigger:                                   types.CapabilityState("DENY"),
-			ScheduleTrigger:                           types.CapabilityState("DENY"),
-			InboundEmailTrigger:                       types.CapabilityState("DENY"),
-			QuickEventTrigger:                         types.CapabilityState("DENY"),
+			ExportToCsv:                                types.CapabilityState("DENY"),
+			ExportToExcel:                              types.CapabilityState("DENY"),
+			ExportToPdf:                                types.CapabilityState("DENY"),
+			PrintReports:                               types.CapabilityState("DENY"),
+			CreateAndUpdateThemes:                      types.CapabilityState("DENY"),
+			AddOrRunAnomalyDetectionForAnalyses:        types.CapabilityState("DENY"),
+			ShareAnalyses:                              types.CapabilityState("DENY"),
+			CreateAndUpdateDatasets:                    types.CapabilityState("DENY"),
+			ShareDatasets:                              types.CapabilityState("DENY"),
+			SubscribeDashboardEmailReports:             types.CapabilityState("DENY"),
+			CreateAndUpdateDashboardEmailReports:       types.CapabilityState("DENY"),
+			ShareDashboards:                            types.CapabilityState("DENY"),
+			CreateAndUpdateThresholdAlerts:             types.CapabilityState("DENY"),
+			RenameSharedFolders:                        types.CapabilityState("DENY"),
+			CreateSharedFolders:                        types.CapabilityState("DENY"),
+			CreateAndUpdateDataSources:                 types.CapabilityState("DENY"),
+			ShareDataSources:                           types.CapabilityState("DENY"),
+			ViewAccountSPICECapacity:                   types.CapabilityState("DENY"),
+			CreateSPICEDataset:                         types.CapabilityState("DENY"),
+			ExportToPdfInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToCsvInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToExcelInScheduledReports:            types.CapabilityState("DENY"),
+			IncludeContentInScheduledReportsEmail:      types.CapabilityState("DENY"),
+			Dashboard:                                  types.CapabilityState("DENY"),
+			Analysis:                                   types.CapabilityState("DENY"),
+			Automate:                                   types.CapabilityState("DENY"),
+			Flow:                                       types.CapabilityState("DENY"),
+			Apps:                                       types.CapabilityState("DENY"),
+			CreateAndUpdateApps:                        types.CapabilityState("DENY"),
+			ShareApps:                                  types.CapabilityState("DENY"),
+			InvokeAppsAIInference:                      types.CapabilityState("DENY"),
+			AccessAppsNativeDataStore:                  types.CapabilityState("DENY"),
+			PublishWithoutApproval:                     types.CapabilityState("DENY"),
+			UseBedrockModels:                           types.CapabilityState("DENY"),
+			PerformFlowUiTask:                          types.CapabilityState("DENY"),
+			ApproveFlowShareRequests:                   types.CapabilityState("DENY"),
+			UseAgentWebSearch:                          types.CapabilityState("DENY"),
+			KnowledgeBase:                              types.CapabilityState("DENY"),
+			CreateAndUpdateKnowledgeBases:              types.CapabilityState("DENY"),
+			ShareKnowledgeBases:                        types.CapabilityState("DENY"),
+			SharePointKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareSharePointKnowledgeBase:               types.CapabilityState("DENY"),
+			UseSharePointKnowledgeBase:                 types.CapabilityState("DENY"),
+			GoogleDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleDriveKnowledgeBase:    types.CapabilityState("DENY"),
+			ShareGoogleDriveKnowledgeBase:              types.CapabilityState("DENY"),
+			UseGoogleDriveKnowledgeBase:                types.CapabilityState("DENY"),
+			WebCrawlerKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateWebCrawlerKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareWebCrawlerKnowledgeBase:               types.CapabilityState("DENY"),
+			UseWebCrawlerKnowledgeBase:                 types.CapabilityState("DENY"),
+			S3KnowledgeBase:                            types.CapabilityState("DENY"),
+			CreateAndUpdateS3KnowledgeBase:             types.CapabilityState("DENY"),
+			ShareS3KnowledgeBase:                       types.CapabilityState("DENY"),
+			UseS3KnowledgeBase:                         types.CapabilityState("DENY"),
+			ConfluenceKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareConfluenceKnowledgeBase:               types.CapabilityState("DENY"),
+			UseConfluenceKnowledgeBase:                 types.CapabilityState("DENY"),
+			OneDriveKnowledgeBase:                      types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveKnowledgeBase:       types.CapabilityState("DENY"),
+			ShareOneDriveKnowledgeBase:                 types.CapabilityState("DENY"),
+			UseOneDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			QBusinessKnowledgeBase:                     types.CapabilityState("DENY"),
+			CreateAndUpdateQBusinessKnowledgeBase:      types.CapabilityState("DENY"),
+			ShareQBusinessKnowledgeBase:                types.CapabilityState("DENY"),
+			UseQBusinessKnowledgeBase:                  types.CapabilityState("DENY"),
+			BedrockManagedKnowledgeBase:                types.CapabilityState("DENY"),
+			CreateAndUpdateBedrockManagedKnowledgeBase: types.CapabilityState("DENY"),
+			ShareBedrockManagedKnowledgeBase:           types.CapabilityState("DENY"),
+			UseBedrockManagedKnowledgeBase:             types.CapabilityState("DENY"),
+			BoxKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateBoxKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareBoxKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseBoxKnowledgeBase:                        types.CapabilityState("DENY"),
+			IDCKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateIDCKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareIDCKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseIDCKnowledgeBase:                        types.CapabilityState("DENY"),
+			Action:                                     types.CapabilityState("DENY"),
+			GenericHTTPAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateGenericHTTPAction:           types.CapabilityState("DENY"),
+			ShareGenericHTTPAction:                     types.CapabilityState("DENY"),
+			UseGenericHTTPAction:                       types.CapabilityState("DENY"),
+			AsanaAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateAsanaAction:                 types.CapabilityState("DENY"),
+			ShareAsanaAction:                           types.CapabilityState("DENY"),
+			UseAsanaAction:                             types.CapabilityState("DENY"),
+			SlackAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateSlackAction:                 types.CapabilityState("DENY"),
+			ShareSlackAction:                           types.CapabilityState("DENY"),
+			UseSlackAction:                             types.CapabilityState("DENY"),
+			ServiceNowAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateServiceNowAction:            types.CapabilityState("DENY"),
+			ShareServiceNowAction:                      types.CapabilityState("DENY"),
+			UseServiceNowAction:                        types.CapabilityState("DENY"),
+			SalesforceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSalesforceAction:            types.CapabilityState("DENY"),
+			ShareSalesforceAction:                      types.CapabilityState("DENY"),
+			UseSalesforceAction:                        types.CapabilityState("DENY"),
+			MSExchangeAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateMSExchangeAction:            types.CapabilityState("DENY"),
+			ShareMSExchangeAction:                      types.CapabilityState("DENY"),
+			UseMSExchangeAction:                        types.CapabilityState("DENY"),
+			PagerDutyAction:                            types.CapabilityState("DENY"),
+			CreateAndUpdatePagerDutyAction:             types.CapabilityState("DENY"),
+			SharePagerDutyAction:                       types.CapabilityState("DENY"),
+			UsePagerDutyAction:                         types.CapabilityState("DENY"),
+			JiraAction:                                 types.CapabilityState("DENY"),
+			CreateAndUpdateJiraAction:                  types.CapabilityState("DENY"),
+			ShareJiraAction:                            types.CapabilityState("DENY"),
+			UseJiraAction:                              types.CapabilityState("DENY"),
+			ConfluenceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceAction:            types.CapabilityState("DENY"),
+			ShareConfluenceAction:                      types.CapabilityState("DENY"),
+			UseConfluenceAction:                        types.CapabilityState("DENY"),
+			OneDriveAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveAction:              types.CapabilityState("DENY"),
+			ShareOneDriveAction:                        types.CapabilityState("DENY"),
+			UseOneDriveAction:                          types.CapabilityState("DENY"),
+			SharePointAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointAction:            types.CapabilityState("DENY"),
+			ShareSharePointAction:                      types.CapabilityState("DENY"),
+			UseSharePointAction:                        types.CapabilityState("DENY"),
+			MSTeamsAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateMSTeamsAction:               types.CapabilityState("DENY"),
+			ShareMSTeamsAction:                         types.CapabilityState("DENY"),
+			UseMSTeamsAction:                           types.CapabilityState("DENY"),
+			GoogleCalendarAction:                       types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleCalendarAction:        types.CapabilityState("DENY"),
+			ShareGoogleCalendarAction:                  types.CapabilityState("DENY"),
+			UseGoogleCalendarAction:                    types.CapabilityState("DENY"),
+			ZendeskAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateZendeskAction:               types.CapabilityState("DENY"),
+			ShareZendeskAction:                         types.CapabilityState("DENY"),
+			UseZendeskAction:                           types.CapabilityState("DENY"),
+			SmartsheetAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSmartsheetAction:            types.CapabilityState("DENY"),
+			ShareSmartsheetAction:                      types.CapabilityState("DENY"),
+			UseSmartsheetAction:                        types.CapabilityState("DENY"),
+			SAPBusinessPartnerAction:                   types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBusinessPartnerAction:    types.CapabilityState("DENY"),
+			ShareSAPBusinessPartnerAction:              types.CapabilityState("DENY"),
+			UseSAPBusinessPartnerAction:                types.CapabilityState("DENY"),
+			SAPProductMasterDataAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPProductMasterDataAction:  types.CapabilityState("DENY"),
+			ShareSAPProductMasterDataAction:            types.CapabilityState("DENY"),
+			UseSAPProductMasterDataAction:              types.CapabilityState("DENY"),
+			SAPPhysicalInventoryAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPPhysicalInventoryAction:  types.CapabilityState("DENY"),
+			ShareSAPPhysicalInventoryAction:            types.CapabilityState("DENY"),
+			UseSAPPhysicalInventoryAction:              types.CapabilityState("DENY"),
+			SAPBillOfMaterialAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBillOfMaterialAction:     types.CapabilityState("DENY"),
+			ShareSAPBillOfMaterialAction:               types.CapabilityState("DENY"),
+			UseSAPBillOfMaterialAction:                 types.CapabilityState("DENY"),
+			SAPMaterialStockAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateSAPMaterialStockAction:      types.CapabilityState("DENY"),
+			ShareSAPMaterialStockAction:                types.CapabilityState("DENY"),
+			UseSAPMaterialStockAction:                  types.CapabilityState("DENY"),
+			FactSetAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateFactSetAction:               types.CapabilityState("DENY"),
+			ShareFactSetAction:                         types.CapabilityState("DENY"),
+			UseFactSetAction:                           types.CapabilityState("DENY"),
+			AmazonSThreeAction:                         types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonSThreeAction:          types.CapabilityState("DENY"),
+			ShareAmazonSThreeAction:                    types.CapabilityState("DENY"),
+			UseAmazonSThreeAction:                      types.CapabilityState("DENY"),
+			TextractAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateTextractAction:              types.CapabilityState("DENY"),
+			ShareTextractAction:                        types.CapabilityState("DENY"),
+			UseTextractAction:                          types.CapabilityState("DENY"),
+			ComprehendAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendAction:            types.CapabilityState("DENY"),
+			ShareComprehendAction:                      types.CapabilityState("DENY"),
+			UseComprehendAction:                        types.CapabilityState("DENY"),
+			ComprehendMedicalAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendMedicalAction:     types.CapabilityState("DENY"),
+			ShareComprehendMedicalAction:               types.CapabilityState("DENY"),
+			UseComprehendMedicalAction:                 types.CapabilityState("DENY"),
+			AmazonBedrockARSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockARSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockARSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockARSAction:                  types.CapabilityState("DENY"),
+			AmazonBedrockFSAction:                      types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockFSAction:       types.CapabilityState("DENY"),
+			ShareAmazonBedrockFSAction:                 types.CapabilityState("DENY"),
+			UseAmazonBedrockFSAction:                   types.CapabilityState("DENY"),
+			AmazonBedrockKRSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockKRSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockKRSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockKRSAction:                  types.CapabilityState("DENY"),
+			MCPAction:                                  types.CapabilityState("DENY"),
+			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
+			ShareMCPAction:                             types.CapabilityState("DENY"),
+			UseMCPAction:                               types.CapabilityState("DENY"),
+			OpenAPIAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
+			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
+			UseOpenAPIAction:                           types.CapabilityState("DENY"),
+			SandPGMIAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGMIAction:              types.CapabilityState("DENY"),
+			ShareSandPGMIAction:                        types.CapabilityState("DENY"),
+			UseSandPGMIAction:                          types.CapabilityState("DENY"),
+			SandPGlobalEnergyAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGlobalEnergyAction:     types.CapabilityState("DENY"),
+			ShareSandPGlobalEnergyAction:               types.CapabilityState("DENY"),
+			UseSandPGlobalEnergyAction:                 types.CapabilityState("DENY"),
+			BambooHRAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBambooHRAction:              types.CapabilityState("DENY"),
+			ShareBambooHRAction:                        types.CapabilityState("DENY"),
+			UseBambooHRAction:                          types.CapabilityState("DENY"),
+			BoxAgentAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBoxAgentAction:              types.CapabilityState("DENY"),
+			ShareBoxAgentAction:                        types.CapabilityState("DENY"),
+			UseBoxAgentAction:                          types.CapabilityState("DENY"),
+			CanvaAgentAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateCanvaAgentAction:            types.CapabilityState("DENY"),
+			ShareCanvaAgentAction:                      types.CapabilityState("DENY"),
+			UseCanvaAgentAction:                        types.CapabilityState("DENY"),
+			GithubAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateGithubAction:                types.CapabilityState("DENY"),
+			ShareGithubAction:                          types.CapabilityState("DENY"),
+			UseGithubAction:                            types.CapabilityState("DENY"),
+			NotionAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateNotionAction:                types.CapabilityState("DENY"),
+			ShareNotionAction:                          types.CapabilityState("DENY"),
+			UseNotionAction:                            types.CapabilityState("DENY"),
+			LinearAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateLinearAction:                types.CapabilityState("DENY"),
+			ShareLinearAction:                          types.CapabilityState("DENY"),
+			UseLinearAction:                            types.CapabilityState("DENY"),
+			HuggingFaceAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateHuggingFaceAction:           types.CapabilityState("DENY"),
+			ShareHuggingFaceAction:                     types.CapabilityState("DENY"),
+			UseHuggingFaceAction:                       types.CapabilityState("DENY"),
+			MondayAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateMondayAction:                types.CapabilityState("DENY"),
+			ShareMondayAction:                          types.CapabilityState("DENY"),
+			UseMondayAction:                            types.CapabilityState("DENY"),
+			HubspotAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateHubspotAction:               types.CapabilityState("DENY"),
+			ShareHubspotAction:                         types.CapabilityState("DENY"),
+			UseHubspotAction:                           types.CapabilityState("DENY"),
+			IntercomAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateIntercomAction:              types.CapabilityState("DENY"),
+			ShareIntercomAction:                        types.CapabilityState("DENY"),
+			UseIntercomAction:                          types.CapabilityState("DENY"),
+			NewRelicAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateNewRelicAction:              types.CapabilityState("DENY"),
+			ShareNewRelicAction:                        types.CapabilityState("DENY"),
+			UseNewRelicAction:                          types.CapabilityState("DENY"),
+			Topic:                                      types.CapabilityState("DENY"),
+			EditVisualWithQ:                            types.CapabilityState("DENY"),
+			BuildCalculatedFieldWithQ:                  types.CapabilityState("DENY"),
+			CreateDashboardExecutiveSummaryWithQ:       types.CapabilityState("DENY"),
+			Space:                                      types.CapabilityState("DENY"),
+			CreateSpaces:                               types.CapabilityState("DENY"),
+			ShareSpaces:                                types.CapabilityState("DENY"),
+			ChatAgent:                                  types.CapabilityState("DENY"),
+			CreateChatAgents:                           types.CapabilityState("DENY"),
+			ShareChatAgents:                            types.CapabilityState("DENY"),
+			Research:                                   types.CapabilityState("DENY"),
+			SelfUpgradeUserRole:                        types.CapabilityState("DENY"),
+			Extension:                                  types.CapabilityState("DENY"),
+			UseBrowserExtension:                        types.CapabilityState("DENY"),
+			UseWordAddInExtension:                      types.CapabilityState("DENY"),
+			UseOutlookAddInExtension:                   types.CapabilityState("DENY"),
+			UseExcelAddInExtension:                     types.CapabilityState("DENY"),
+			UsePowerpointAddInExtension:                types.CapabilityState("DENY"),
+			ManageSharedFolders:                        types.CapabilityState("DENY"),
+			GenerateAnalyses:                           types.CapabilityState("DENY"),
+			Story:                                      types.CapabilityState("DENY"),
+			Scenario:                                   types.CapabilityState("DENY"),
+			Trigger:                                    types.CapabilityState("DENY"),
+			ScheduleTrigger:                            types.CapabilityState("DENY"),
+			InboundEmailTrigger:                        types.CapabilityState("DENY"),
+			QuickEventTrigger:                          types.CapabilityState("DENY"),
 		},
 		Governance: &types.Governance{
 			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
@@ -6576,6 +6678,16 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -6649,6 +6761,16 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -6735,6 +6857,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -6744,6 +6867,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -6751,6 +6875,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -6764,6 +6889,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -6790,6 +6916,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -6853,6 +6980,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -6862,6 +6990,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -6869,6 +6998,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -6883,6 +7013,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -6909,6 +7040,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7118,6 +7250,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -7127,6 +7260,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7134,6 +7268,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7147,6 +7282,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7173,6 +7309,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7236,6 +7373,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -7245,6 +7383,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7252,6 +7391,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7266,6 +7406,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7292,6 +7433,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7510,6 +7652,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7517,6 +7660,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7530,6 +7674,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7556,6 +7701,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7624,6 +7770,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7631,6 +7778,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7645,6 +7793,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7671,6 +7820,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7846,6 +7996,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7853,6 +8004,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7944,6 +8096,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7951,6 +8104,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -7964,6 +8118,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -7990,6 +8145,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -8058,6 +8214,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -8065,6 +8222,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -8079,6 +8237,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -8105,6 +8264,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -8280,6 +8440,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -8287,6 +8448,7 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10162,6 +10324,16 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 			},
 			SourceTemplate: &types.TemplateSourceTemplate{
 				Arn: ptr.String("__Arn__"),
@@ -10180,6 +10352,90 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 		VersionDescription: ptr.String("__VersionDescription__"),
 		Definition: &types.TemplateVersionDefinition{
 			DataSetConfigurations: []types.DataSetConfiguration{
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			TopicConfigurations: []types.TopicConfiguration{
 				{
 					Placeholder: ptr.String("__Placeholder__"),
 					DataSetSchema: &types.DataSetSchema{
@@ -10347,6 +10603,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -10356,6 +10613,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10363,6 +10621,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10376,6 +10635,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10402,6 +10662,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10465,6 +10726,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -10474,6 +10736,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10481,6 +10744,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10495,6 +10759,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10521,6 +10786,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10730,6 +10996,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -10739,6 +11006,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10746,6 +11014,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10759,6 +11028,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10785,6 +11055,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10848,6 +11119,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -10857,6 +11129,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10864,6 +11137,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -10878,6 +11152,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -10904,6 +11179,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11122,6 +11398,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11129,6 +11406,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11142,6 +11420,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11168,6 +11447,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11236,6 +11516,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11243,6 +11524,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11257,6 +11539,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11283,6 +11566,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11458,6 +11742,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11465,6 +11750,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11556,6 +11842,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11563,6 +11850,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11576,6 +11864,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11602,6 +11891,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11670,6 +11960,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11677,6 +11968,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11691,6 +11983,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11717,6 +12010,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -11892,6 +12186,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -11899,6 +12194,7 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -12407,7 +12703,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -12415,6 +12712,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -12426,6 +12725,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -12436,6 +12737,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -12444,6 +12746,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -12477,7 +12780,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -12485,6 +12789,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -12496,6 +12802,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -12506,6 +12814,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -12514,6 +12823,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -12896,6 +13206,9 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -12908,8 +13221,23 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -12937,6 +13265,9 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -12949,8 +13280,23 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -12986,7 +13332,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -12994,6 +13341,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -13005,6 +13354,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -13015,6 +13366,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -13023,6 +13375,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -13056,7 +13409,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -13064,6 +13418,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -13075,6 +13431,8 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -13085,6 +13443,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -13093,6 +13452,7 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -13475,6 +13835,9 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -13487,8 +13850,23 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -13516,6 +13894,9 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -13528,8 +13909,23 @@ func TestCheckRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -13613,6 +14009,99 @@ func TestCheckRequestSnapshot_CreateTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateTopicV2(t *testing.T) {
+	input := &CreateTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		Topic: &types.TopicV2Details{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataSets: []types.TopicV2DataSetReference{
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+			},
+			DataSetRelations: []types.TopicV2DataSetRelation{
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FolderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CustomInstructions: &types.CustomInstructions{
+			CustomInstructionsString: ptr.String("__CustomInstructionsString__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14632,6 +15121,34 @@ func TestCheckRequestSnapshot_DeleteTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteTopicV2(t *testing.T) {
+	input := &DeleteTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16458,6 +16975,34 @@ func TestCheckRequestSnapshot_DescribeTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTopicPermissionsV2(t *testing.T) {
+	input := &DescribeTopicPermissionsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicPermissionsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicPermissionsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeTopicRefresh(t *testing.T) {
 	input := &DescribeTopicRefreshInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -16512,6 +17057,34 @@ func TestCheckRequestSnapshot_DescribeTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTopicV2(t *testing.T) {
+	input := &DescribeTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18186,6 +18759,35 @@ func TestCheckRequestSnapshot_ListTopics(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTopicsV2(t *testing.T) {
+	input := &ListTopicsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTopicsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTopicsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListUserGroups(t *testing.T) {
 	input := &ListUserGroupsInput{
 		UserName:     ptr.String("__UserName__"),
@@ -18965,6 +19567,47 @@ func TestCheckRequestSnapshot_SearchTopics(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchTopics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SearchTopicsV2(t *testing.T) {
+	input := &SearchTopicsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Filters: []types.TopicSearchFilter{
+			{
+				Operator: types.TopicFilterOperator("StringEquals"),
+				Name:     types.TopicFilterAttribute("QUICKSIGHT_USER"),
+				Value:    ptr.String("__Value__"),
+			},
+			{
+				Operator: types.TopicFilterOperator("StringEquals"),
+				Name:     types.TopicFilterAttribute("QUICKSIGHT_USER"),
+				Value:    ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchTopicsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchTopicsV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -20597,6 +21240,16 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -20610,6 +21263,16 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -20696,6 +21359,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -20705,6 +21369,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -20712,6 +21377,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -20725,6 +21391,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -20751,6 +21418,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -20814,6 +21482,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -20823,6 +21492,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -20830,6 +21500,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -20844,6 +21515,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -20870,6 +21542,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21079,6 +21752,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -21088,6 +21762,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21095,6 +21770,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21108,6 +21784,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21134,6 +21811,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21197,6 +21875,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -21206,6 +21885,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21213,6 +21893,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21227,6 +21908,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21253,6 +21935,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21471,6 +22154,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21478,6 +22162,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21491,6 +22176,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21517,6 +22203,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21585,6 +22272,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21592,6 +22280,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21606,6 +22295,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21632,6 +22322,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21807,6 +22498,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21814,6 +22506,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21905,6 +22598,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21912,6 +22606,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -21925,6 +22620,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -21951,6 +22647,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -22019,6 +22716,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -22026,6 +22724,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -22040,6 +22739,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -22066,6 +22766,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -22241,6 +22942,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -22248,6 +22950,7 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -22689,243 +23392,285 @@ func TestCheckRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 		AwsAccountId:          ptr.String("__AwsAccountId__"),
 		CustomPermissionsName: ptr.String("__CustomPermissionsName__"),
 		Capabilities: &types.Capabilities{
-			ExportToCsv:                               types.CapabilityState("DENY"),
-			ExportToExcel:                             types.CapabilityState("DENY"),
-			ExportToPdf:                               types.CapabilityState("DENY"),
-			PrintReports:                              types.CapabilityState("DENY"),
-			CreateAndUpdateThemes:                     types.CapabilityState("DENY"),
-			AddOrRunAnomalyDetectionForAnalyses:       types.CapabilityState("DENY"),
-			ShareAnalyses:                             types.CapabilityState("DENY"),
-			CreateAndUpdateDatasets:                   types.CapabilityState("DENY"),
-			ShareDatasets:                             types.CapabilityState("DENY"),
-			SubscribeDashboardEmailReports:            types.CapabilityState("DENY"),
-			CreateAndUpdateDashboardEmailReports:      types.CapabilityState("DENY"),
-			ShareDashboards:                           types.CapabilityState("DENY"),
-			CreateAndUpdateThresholdAlerts:            types.CapabilityState("DENY"),
-			RenameSharedFolders:                       types.CapabilityState("DENY"),
-			CreateSharedFolders:                       types.CapabilityState("DENY"),
-			CreateAndUpdateDataSources:                types.CapabilityState("DENY"),
-			ShareDataSources:                          types.CapabilityState("DENY"),
-			ViewAccountSPICECapacity:                  types.CapabilityState("DENY"),
-			CreateSPICEDataset:                        types.CapabilityState("DENY"),
-			ExportToPdfInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToCsvInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToExcelInScheduledReports:           types.CapabilityState("DENY"),
-			IncludeContentInScheduledReportsEmail:     types.CapabilityState("DENY"),
-			Dashboard:                                 types.CapabilityState("DENY"),
-			Analysis:                                  types.CapabilityState("DENY"),
-			Automate:                                  types.CapabilityState("DENY"),
-			Flow:                                      types.CapabilityState("DENY"),
-			Apps:                                      types.CapabilityState("DENY"),
-			CreateAndUpdateApps:                       types.CapabilityState("DENY"),
-			ShareApps:                                 types.CapabilityState("DENY"),
-			InvokeAppsAIInference:                     types.CapabilityState("DENY"),
-			AccessAppsNativeDataStore:                 types.CapabilityState("DENY"),
-			PublishWithoutApproval:                    types.CapabilityState("DENY"),
-			UseBedrockModels:                          types.CapabilityState("DENY"),
-			PerformFlowUiTask:                         types.CapabilityState("DENY"),
-			ApproveFlowShareRequests:                  types.CapabilityState("DENY"),
-			UseAgentWebSearch:                         types.CapabilityState("DENY"),
-			KnowledgeBase:                             types.CapabilityState("DENY"),
-			Action:                                    types.CapabilityState("DENY"),
-			GenericHTTPAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateGenericHTTPAction:          types.CapabilityState("DENY"),
-			ShareGenericHTTPAction:                    types.CapabilityState("DENY"),
-			UseGenericHTTPAction:                      types.CapabilityState("DENY"),
-			AsanaAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateAsanaAction:                types.CapabilityState("DENY"),
-			ShareAsanaAction:                          types.CapabilityState("DENY"),
-			UseAsanaAction:                            types.CapabilityState("DENY"),
-			SlackAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateSlackAction:                types.CapabilityState("DENY"),
-			ShareSlackAction:                          types.CapabilityState("DENY"),
-			UseSlackAction:                            types.CapabilityState("DENY"),
-			ServiceNowAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateServiceNowAction:           types.CapabilityState("DENY"),
-			ShareServiceNowAction:                     types.CapabilityState("DENY"),
-			UseServiceNowAction:                       types.CapabilityState("DENY"),
-			SalesforceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSalesforceAction:           types.CapabilityState("DENY"),
-			ShareSalesforceAction:                     types.CapabilityState("DENY"),
-			UseSalesforceAction:                       types.CapabilityState("DENY"),
-			MSExchangeAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateMSExchangeAction:           types.CapabilityState("DENY"),
-			ShareMSExchangeAction:                     types.CapabilityState("DENY"),
-			UseMSExchangeAction:                       types.CapabilityState("DENY"),
-			PagerDutyAction:                           types.CapabilityState("DENY"),
-			CreateAndUpdatePagerDutyAction:            types.CapabilityState("DENY"),
-			SharePagerDutyAction:                      types.CapabilityState("DENY"),
-			UsePagerDutyAction:                        types.CapabilityState("DENY"),
-			JiraAction:                                types.CapabilityState("DENY"),
-			CreateAndUpdateJiraAction:                 types.CapabilityState("DENY"),
-			ShareJiraAction:                           types.CapabilityState("DENY"),
-			UseJiraAction:                             types.CapabilityState("DENY"),
-			ConfluenceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateConfluenceAction:           types.CapabilityState("DENY"),
-			ShareConfluenceAction:                     types.CapabilityState("DENY"),
-			UseConfluenceAction:                       types.CapabilityState("DENY"),
-			OneDriveAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateOneDriveAction:             types.CapabilityState("DENY"),
-			ShareOneDriveAction:                       types.CapabilityState("DENY"),
-			UseOneDriveAction:                         types.CapabilityState("DENY"),
-			SharePointAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSharePointAction:           types.CapabilityState("DENY"),
-			ShareSharePointAction:                     types.CapabilityState("DENY"),
-			UseSharePointAction:                       types.CapabilityState("DENY"),
-			MSTeamsAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateMSTeamsAction:              types.CapabilityState("DENY"),
-			ShareMSTeamsAction:                        types.CapabilityState("DENY"),
-			UseMSTeamsAction:                          types.CapabilityState("DENY"),
-			GoogleCalendarAction:                      types.CapabilityState("DENY"),
-			CreateAndUpdateGoogleCalendarAction:       types.CapabilityState("DENY"),
-			ShareGoogleCalendarAction:                 types.CapabilityState("DENY"),
-			UseGoogleCalendarAction:                   types.CapabilityState("DENY"),
-			ZendeskAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateZendeskAction:              types.CapabilityState("DENY"),
-			ShareZendeskAction:                        types.CapabilityState("DENY"),
-			UseZendeskAction:                          types.CapabilityState("DENY"),
-			SmartsheetAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSmartsheetAction:           types.CapabilityState("DENY"),
-			ShareSmartsheetAction:                     types.CapabilityState("DENY"),
-			UseSmartsheetAction:                       types.CapabilityState("DENY"),
-			SAPBusinessPartnerAction:                  types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBusinessPartnerAction:   types.CapabilityState("DENY"),
-			ShareSAPBusinessPartnerAction:             types.CapabilityState("DENY"),
-			UseSAPBusinessPartnerAction:               types.CapabilityState("DENY"),
-			SAPProductMasterDataAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPProductMasterDataAction: types.CapabilityState("DENY"),
-			ShareSAPProductMasterDataAction:           types.CapabilityState("DENY"),
-			UseSAPProductMasterDataAction:             types.CapabilityState("DENY"),
-			SAPPhysicalInventoryAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPPhysicalInventoryAction: types.CapabilityState("DENY"),
-			ShareSAPPhysicalInventoryAction:           types.CapabilityState("DENY"),
-			UseSAPPhysicalInventoryAction:             types.CapabilityState("DENY"),
-			SAPBillOfMaterialAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBillOfMaterialAction:    types.CapabilityState("DENY"),
-			ShareSAPBillOfMaterialAction:              types.CapabilityState("DENY"),
-			UseSAPBillOfMaterialAction:                types.CapabilityState("DENY"),
-			SAPMaterialStockAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateSAPMaterialStockAction:     types.CapabilityState("DENY"),
-			ShareSAPMaterialStockAction:               types.CapabilityState("DENY"),
-			UseSAPMaterialStockAction:                 types.CapabilityState("DENY"),
-			FactSetAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateFactSetAction:              types.CapabilityState("DENY"),
-			ShareFactSetAction:                        types.CapabilityState("DENY"),
-			UseFactSetAction:                          types.CapabilityState("DENY"),
-			AmazonSThreeAction:                        types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonSThreeAction:         types.CapabilityState("DENY"),
-			ShareAmazonSThreeAction:                   types.CapabilityState("DENY"),
-			UseAmazonSThreeAction:                     types.CapabilityState("DENY"),
-			TextractAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateTextractAction:             types.CapabilityState("DENY"),
-			ShareTextractAction:                       types.CapabilityState("DENY"),
-			UseTextractAction:                         types.CapabilityState("DENY"),
-			ComprehendAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendAction:           types.CapabilityState("DENY"),
-			ShareComprehendAction:                     types.CapabilityState("DENY"),
-			UseComprehendAction:                       types.CapabilityState("DENY"),
-			ComprehendMedicalAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendMedicalAction:    types.CapabilityState("DENY"),
-			ShareComprehendMedicalAction:              types.CapabilityState("DENY"),
-			UseComprehendMedicalAction:                types.CapabilityState("DENY"),
-			AmazonBedrockARSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockARSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockARSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockARSAction:                 types.CapabilityState("DENY"),
-			AmazonBedrockFSAction:                     types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockFSAction:      types.CapabilityState("DENY"),
-			ShareAmazonBedrockFSAction:                types.CapabilityState("DENY"),
-			UseAmazonBedrockFSAction:                  types.CapabilityState("DENY"),
-			AmazonBedrockKRSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockKRSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockKRSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockKRSAction:                 types.CapabilityState("DENY"),
-			MCPAction:                                 types.CapabilityState("DENY"),
-			CreateAndUpdateMCPAction:                  types.CapabilityState("DENY"),
-			ShareMCPAction:                            types.CapabilityState("DENY"),
-			UseMCPAction:                              types.CapabilityState("DENY"),
-			OpenAPIAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateOpenAPIAction:              types.CapabilityState("DENY"),
-			ShareOpenAPIAction:                        types.CapabilityState("DENY"),
-			UseOpenAPIAction:                          types.CapabilityState("DENY"),
-			SandPGMIAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGMIAction:             types.CapabilityState("DENY"),
-			ShareSandPGMIAction:                       types.CapabilityState("DENY"),
-			UseSandPGMIAction:                         types.CapabilityState("DENY"),
-			SandPGlobalEnergyAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGlobalEnergyAction:    types.CapabilityState("DENY"),
-			ShareSandPGlobalEnergyAction:              types.CapabilityState("DENY"),
-			UseSandPGlobalEnergyAction:                types.CapabilityState("DENY"),
-			BambooHRAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBambooHRAction:             types.CapabilityState("DENY"),
-			ShareBambooHRAction:                       types.CapabilityState("DENY"),
-			UseBambooHRAction:                         types.CapabilityState("DENY"),
-			BoxAgentAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBoxAgentAction:             types.CapabilityState("DENY"),
-			ShareBoxAgentAction:                       types.CapabilityState("DENY"),
-			UseBoxAgentAction:                         types.CapabilityState("DENY"),
-			CanvaAgentAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateCanvaAgentAction:           types.CapabilityState("DENY"),
-			ShareCanvaAgentAction:                     types.CapabilityState("DENY"),
-			UseCanvaAgentAction:                       types.CapabilityState("DENY"),
-			GithubAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateGithubAction:               types.CapabilityState("DENY"),
-			ShareGithubAction:                         types.CapabilityState("DENY"),
-			UseGithubAction:                           types.CapabilityState("DENY"),
-			NotionAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateNotionAction:               types.CapabilityState("DENY"),
-			ShareNotionAction:                         types.CapabilityState("DENY"),
-			UseNotionAction:                           types.CapabilityState("DENY"),
-			LinearAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateLinearAction:               types.CapabilityState("DENY"),
-			ShareLinearAction:                         types.CapabilityState("DENY"),
-			UseLinearAction:                           types.CapabilityState("DENY"),
-			HuggingFaceAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateHuggingFaceAction:          types.CapabilityState("DENY"),
-			ShareHuggingFaceAction:                    types.CapabilityState("DENY"),
-			UseHuggingFaceAction:                      types.CapabilityState("DENY"),
-			MondayAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateMondayAction:               types.CapabilityState("DENY"),
-			ShareMondayAction:                         types.CapabilityState("DENY"),
-			UseMondayAction:                           types.CapabilityState("DENY"),
-			HubspotAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateHubspotAction:              types.CapabilityState("DENY"),
-			ShareHubspotAction:                        types.CapabilityState("DENY"),
-			UseHubspotAction:                          types.CapabilityState("DENY"),
-			IntercomAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateIntercomAction:             types.CapabilityState("DENY"),
-			ShareIntercomAction:                       types.CapabilityState("DENY"),
-			UseIntercomAction:                         types.CapabilityState("DENY"),
-			NewRelicAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateNewRelicAction:             types.CapabilityState("DENY"),
-			ShareNewRelicAction:                       types.CapabilityState("DENY"),
-			UseNewRelicAction:                         types.CapabilityState("DENY"),
-			Topic:                                     types.CapabilityState("DENY"),
-			EditVisualWithQ:                           types.CapabilityState("DENY"),
-			BuildCalculatedFieldWithQ:                 types.CapabilityState("DENY"),
-			CreateDashboardExecutiveSummaryWithQ:      types.CapabilityState("DENY"),
-			Space:                                     types.CapabilityState("DENY"),
-			CreateSpaces:                              types.CapabilityState("DENY"),
-			ShareSpaces:                               types.CapabilityState("DENY"),
-			ChatAgent:                                 types.CapabilityState("DENY"),
-			CreateChatAgents:                          types.CapabilityState("DENY"),
-			ShareChatAgents:                           types.CapabilityState("DENY"),
-			Research:                                  types.CapabilityState("DENY"),
-			SelfUpgradeUserRole:                       types.CapabilityState("DENY"),
-			Extension:                                 types.CapabilityState("DENY"),
-			UseBrowserExtension:                       types.CapabilityState("DENY"),
-			UseWordAddInExtension:                     types.CapabilityState("DENY"),
-			UseOutlookAddInExtension:                  types.CapabilityState("DENY"),
-			UseExcelAddInExtension:                    types.CapabilityState("DENY"),
-			UsePowerpointAddInExtension:               types.CapabilityState("DENY"),
-			ManageSharedFolders:                       types.CapabilityState("DENY"),
-			GenerateAnalyses:                          types.CapabilityState("DENY"),
-			Story:                                     types.CapabilityState("DENY"),
-			Scenario:                                  types.CapabilityState("DENY"),
-			Trigger:                                   types.CapabilityState("DENY"),
-			ScheduleTrigger:                           types.CapabilityState("DENY"),
-			InboundEmailTrigger:                       types.CapabilityState("DENY"),
-			QuickEventTrigger:                         types.CapabilityState("DENY"),
+			ExportToCsv:                                types.CapabilityState("DENY"),
+			ExportToExcel:                              types.CapabilityState("DENY"),
+			ExportToPdf:                                types.CapabilityState("DENY"),
+			PrintReports:                               types.CapabilityState("DENY"),
+			CreateAndUpdateThemes:                      types.CapabilityState("DENY"),
+			AddOrRunAnomalyDetectionForAnalyses:        types.CapabilityState("DENY"),
+			ShareAnalyses:                              types.CapabilityState("DENY"),
+			CreateAndUpdateDatasets:                    types.CapabilityState("DENY"),
+			ShareDatasets:                              types.CapabilityState("DENY"),
+			SubscribeDashboardEmailReports:             types.CapabilityState("DENY"),
+			CreateAndUpdateDashboardEmailReports:       types.CapabilityState("DENY"),
+			ShareDashboards:                            types.CapabilityState("DENY"),
+			CreateAndUpdateThresholdAlerts:             types.CapabilityState("DENY"),
+			RenameSharedFolders:                        types.CapabilityState("DENY"),
+			CreateSharedFolders:                        types.CapabilityState("DENY"),
+			CreateAndUpdateDataSources:                 types.CapabilityState("DENY"),
+			ShareDataSources:                           types.CapabilityState("DENY"),
+			ViewAccountSPICECapacity:                   types.CapabilityState("DENY"),
+			CreateSPICEDataset:                         types.CapabilityState("DENY"),
+			ExportToPdfInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToCsvInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToExcelInScheduledReports:            types.CapabilityState("DENY"),
+			IncludeContentInScheduledReportsEmail:      types.CapabilityState("DENY"),
+			Dashboard:                                  types.CapabilityState("DENY"),
+			Analysis:                                   types.CapabilityState("DENY"),
+			Automate:                                   types.CapabilityState("DENY"),
+			Flow:                                       types.CapabilityState("DENY"),
+			Apps:                                       types.CapabilityState("DENY"),
+			CreateAndUpdateApps:                        types.CapabilityState("DENY"),
+			ShareApps:                                  types.CapabilityState("DENY"),
+			InvokeAppsAIInference:                      types.CapabilityState("DENY"),
+			AccessAppsNativeDataStore:                  types.CapabilityState("DENY"),
+			PublishWithoutApproval:                     types.CapabilityState("DENY"),
+			UseBedrockModels:                           types.CapabilityState("DENY"),
+			PerformFlowUiTask:                          types.CapabilityState("DENY"),
+			ApproveFlowShareRequests:                   types.CapabilityState("DENY"),
+			UseAgentWebSearch:                          types.CapabilityState("DENY"),
+			KnowledgeBase:                              types.CapabilityState("DENY"),
+			CreateAndUpdateKnowledgeBases:              types.CapabilityState("DENY"),
+			ShareKnowledgeBases:                        types.CapabilityState("DENY"),
+			SharePointKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareSharePointKnowledgeBase:               types.CapabilityState("DENY"),
+			UseSharePointKnowledgeBase:                 types.CapabilityState("DENY"),
+			GoogleDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleDriveKnowledgeBase:    types.CapabilityState("DENY"),
+			ShareGoogleDriveKnowledgeBase:              types.CapabilityState("DENY"),
+			UseGoogleDriveKnowledgeBase:                types.CapabilityState("DENY"),
+			WebCrawlerKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateWebCrawlerKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareWebCrawlerKnowledgeBase:               types.CapabilityState("DENY"),
+			UseWebCrawlerKnowledgeBase:                 types.CapabilityState("DENY"),
+			S3KnowledgeBase:                            types.CapabilityState("DENY"),
+			CreateAndUpdateS3KnowledgeBase:             types.CapabilityState("DENY"),
+			ShareS3KnowledgeBase:                       types.CapabilityState("DENY"),
+			UseS3KnowledgeBase:                         types.CapabilityState("DENY"),
+			ConfluenceKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareConfluenceKnowledgeBase:               types.CapabilityState("DENY"),
+			UseConfluenceKnowledgeBase:                 types.CapabilityState("DENY"),
+			OneDriveKnowledgeBase:                      types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveKnowledgeBase:       types.CapabilityState("DENY"),
+			ShareOneDriveKnowledgeBase:                 types.CapabilityState("DENY"),
+			UseOneDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			QBusinessKnowledgeBase:                     types.CapabilityState("DENY"),
+			CreateAndUpdateQBusinessKnowledgeBase:      types.CapabilityState("DENY"),
+			ShareQBusinessKnowledgeBase:                types.CapabilityState("DENY"),
+			UseQBusinessKnowledgeBase:                  types.CapabilityState("DENY"),
+			BedrockManagedKnowledgeBase:                types.CapabilityState("DENY"),
+			CreateAndUpdateBedrockManagedKnowledgeBase: types.CapabilityState("DENY"),
+			ShareBedrockManagedKnowledgeBase:           types.CapabilityState("DENY"),
+			UseBedrockManagedKnowledgeBase:             types.CapabilityState("DENY"),
+			BoxKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateBoxKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareBoxKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseBoxKnowledgeBase:                        types.CapabilityState("DENY"),
+			IDCKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateIDCKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareIDCKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseIDCKnowledgeBase:                        types.CapabilityState("DENY"),
+			Action:                                     types.CapabilityState("DENY"),
+			GenericHTTPAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateGenericHTTPAction:           types.CapabilityState("DENY"),
+			ShareGenericHTTPAction:                     types.CapabilityState("DENY"),
+			UseGenericHTTPAction:                       types.CapabilityState("DENY"),
+			AsanaAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateAsanaAction:                 types.CapabilityState("DENY"),
+			ShareAsanaAction:                           types.CapabilityState("DENY"),
+			UseAsanaAction:                             types.CapabilityState("DENY"),
+			SlackAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateSlackAction:                 types.CapabilityState("DENY"),
+			ShareSlackAction:                           types.CapabilityState("DENY"),
+			UseSlackAction:                             types.CapabilityState("DENY"),
+			ServiceNowAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateServiceNowAction:            types.CapabilityState("DENY"),
+			ShareServiceNowAction:                      types.CapabilityState("DENY"),
+			UseServiceNowAction:                        types.CapabilityState("DENY"),
+			SalesforceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSalesforceAction:            types.CapabilityState("DENY"),
+			ShareSalesforceAction:                      types.CapabilityState("DENY"),
+			UseSalesforceAction:                        types.CapabilityState("DENY"),
+			MSExchangeAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateMSExchangeAction:            types.CapabilityState("DENY"),
+			ShareMSExchangeAction:                      types.CapabilityState("DENY"),
+			UseMSExchangeAction:                        types.CapabilityState("DENY"),
+			PagerDutyAction:                            types.CapabilityState("DENY"),
+			CreateAndUpdatePagerDutyAction:             types.CapabilityState("DENY"),
+			SharePagerDutyAction:                       types.CapabilityState("DENY"),
+			UsePagerDutyAction:                         types.CapabilityState("DENY"),
+			JiraAction:                                 types.CapabilityState("DENY"),
+			CreateAndUpdateJiraAction:                  types.CapabilityState("DENY"),
+			ShareJiraAction:                            types.CapabilityState("DENY"),
+			UseJiraAction:                              types.CapabilityState("DENY"),
+			ConfluenceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceAction:            types.CapabilityState("DENY"),
+			ShareConfluenceAction:                      types.CapabilityState("DENY"),
+			UseConfluenceAction:                        types.CapabilityState("DENY"),
+			OneDriveAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveAction:              types.CapabilityState("DENY"),
+			ShareOneDriveAction:                        types.CapabilityState("DENY"),
+			UseOneDriveAction:                          types.CapabilityState("DENY"),
+			SharePointAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointAction:            types.CapabilityState("DENY"),
+			ShareSharePointAction:                      types.CapabilityState("DENY"),
+			UseSharePointAction:                        types.CapabilityState("DENY"),
+			MSTeamsAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateMSTeamsAction:               types.CapabilityState("DENY"),
+			ShareMSTeamsAction:                         types.CapabilityState("DENY"),
+			UseMSTeamsAction:                           types.CapabilityState("DENY"),
+			GoogleCalendarAction:                       types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleCalendarAction:        types.CapabilityState("DENY"),
+			ShareGoogleCalendarAction:                  types.CapabilityState("DENY"),
+			UseGoogleCalendarAction:                    types.CapabilityState("DENY"),
+			ZendeskAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateZendeskAction:               types.CapabilityState("DENY"),
+			ShareZendeskAction:                         types.CapabilityState("DENY"),
+			UseZendeskAction:                           types.CapabilityState("DENY"),
+			SmartsheetAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSmartsheetAction:            types.CapabilityState("DENY"),
+			ShareSmartsheetAction:                      types.CapabilityState("DENY"),
+			UseSmartsheetAction:                        types.CapabilityState("DENY"),
+			SAPBusinessPartnerAction:                   types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBusinessPartnerAction:    types.CapabilityState("DENY"),
+			ShareSAPBusinessPartnerAction:              types.CapabilityState("DENY"),
+			UseSAPBusinessPartnerAction:                types.CapabilityState("DENY"),
+			SAPProductMasterDataAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPProductMasterDataAction:  types.CapabilityState("DENY"),
+			ShareSAPProductMasterDataAction:            types.CapabilityState("DENY"),
+			UseSAPProductMasterDataAction:              types.CapabilityState("DENY"),
+			SAPPhysicalInventoryAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPPhysicalInventoryAction:  types.CapabilityState("DENY"),
+			ShareSAPPhysicalInventoryAction:            types.CapabilityState("DENY"),
+			UseSAPPhysicalInventoryAction:              types.CapabilityState("DENY"),
+			SAPBillOfMaterialAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBillOfMaterialAction:     types.CapabilityState("DENY"),
+			ShareSAPBillOfMaterialAction:               types.CapabilityState("DENY"),
+			UseSAPBillOfMaterialAction:                 types.CapabilityState("DENY"),
+			SAPMaterialStockAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateSAPMaterialStockAction:      types.CapabilityState("DENY"),
+			ShareSAPMaterialStockAction:                types.CapabilityState("DENY"),
+			UseSAPMaterialStockAction:                  types.CapabilityState("DENY"),
+			FactSetAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateFactSetAction:               types.CapabilityState("DENY"),
+			ShareFactSetAction:                         types.CapabilityState("DENY"),
+			UseFactSetAction:                           types.CapabilityState("DENY"),
+			AmazonSThreeAction:                         types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonSThreeAction:          types.CapabilityState("DENY"),
+			ShareAmazonSThreeAction:                    types.CapabilityState("DENY"),
+			UseAmazonSThreeAction:                      types.CapabilityState("DENY"),
+			TextractAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateTextractAction:              types.CapabilityState("DENY"),
+			ShareTextractAction:                        types.CapabilityState("DENY"),
+			UseTextractAction:                          types.CapabilityState("DENY"),
+			ComprehendAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendAction:            types.CapabilityState("DENY"),
+			ShareComprehendAction:                      types.CapabilityState("DENY"),
+			UseComprehendAction:                        types.CapabilityState("DENY"),
+			ComprehendMedicalAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendMedicalAction:     types.CapabilityState("DENY"),
+			ShareComprehendMedicalAction:               types.CapabilityState("DENY"),
+			UseComprehendMedicalAction:                 types.CapabilityState("DENY"),
+			AmazonBedrockARSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockARSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockARSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockARSAction:                  types.CapabilityState("DENY"),
+			AmazonBedrockFSAction:                      types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockFSAction:       types.CapabilityState("DENY"),
+			ShareAmazonBedrockFSAction:                 types.CapabilityState("DENY"),
+			UseAmazonBedrockFSAction:                   types.CapabilityState("DENY"),
+			AmazonBedrockKRSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockKRSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockKRSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockKRSAction:                  types.CapabilityState("DENY"),
+			MCPAction:                                  types.CapabilityState("DENY"),
+			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
+			ShareMCPAction:                             types.CapabilityState("DENY"),
+			UseMCPAction:                               types.CapabilityState("DENY"),
+			OpenAPIAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
+			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
+			UseOpenAPIAction:                           types.CapabilityState("DENY"),
+			SandPGMIAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGMIAction:              types.CapabilityState("DENY"),
+			ShareSandPGMIAction:                        types.CapabilityState("DENY"),
+			UseSandPGMIAction:                          types.CapabilityState("DENY"),
+			SandPGlobalEnergyAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGlobalEnergyAction:     types.CapabilityState("DENY"),
+			ShareSandPGlobalEnergyAction:               types.CapabilityState("DENY"),
+			UseSandPGlobalEnergyAction:                 types.CapabilityState("DENY"),
+			BambooHRAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBambooHRAction:              types.CapabilityState("DENY"),
+			ShareBambooHRAction:                        types.CapabilityState("DENY"),
+			UseBambooHRAction:                          types.CapabilityState("DENY"),
+			BoxAgentAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBoxAgentAction:              types.CapabilityState("DENY"),
+			ShareBoxAgentAction:                        types.CapabilityState("DENY"),
+			UseBoxAgentAction:                          types.CapabilityState("DENY"),
+			CanvaAgentAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateCanvaAgentAction:            types.CapabilityState("DENY"),
+			ShareCanvaAgentAction:                      types.CapabilityState("DENY"),
+			UseCanvaAgentAction:                        types.CapabilityState("DENY"),
+			GithubAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateGithubAction:                types.CapabilityState("DENY"),
+			ShareGithubAction:                          types.CapabilityState("DENY"),
+			UseGithubAction:                            types.CapabilityState("DENY"),
+			NotionAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateNotionAction:                types.CapabilityState("DENY"),
+			ShareNotionAction:                          types.CapabilityState("DENY"),
+			UseNotionAction:                            types.CapabilityState("DENY"),
+			LinearAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateLinearAction:                types.CapabilityState("DENY"),
+			ShareLinearAction:                          types.CapabilityState("DENY"),
+			UseLinearAction:                            types.CapabilityState("DENY"),
+			HuggingFaceAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateHuggingFaceAction:           types.CapabilityState("DENY"),
+			ShareHuggingFaceAction:                     types.CapabilityState("DENY"),
+			UseHuggingFaceAction:                       types.CapabilityState("DENY"),
+			MondayAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateMondayAction:                types.CapabilityState("DENY"),
+			ShareMondayAction:                          types.CapabilityState("DENY"),
+			UseMondayAction:                            types.CapabilityState("DENY"),
+			HubspotAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateHubspotAction:               types.CapabilityState("DENY"),
+			ShareHubspotAction:                         types.CapabilityState("DENY"),
+			UseHubspotAction:                           types.CapabilityState("DENY"),
+			IntercomAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateIntercomAction:              types.CapabilityState("DENY"),
+			ShareIntercomAction:                        types.CapabilityState("DENY"),
+			UseIntercomAction:                          types.CapabilityState("DENY"),
+			NewRelicAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateNewRelicAction:              types.CapabilityState("DENY"),
+			ShareNewRelicAction:                        types.CapabilityState("DENY"),
+			UseNewRelicAction:                          types.CapabilityState("DENY"),
+			Topic:                                      types.CapabilityState("DENY"),
+			EditVisualWithQ:                            types.CapabilityState("DENY"),
+			BuildCalculatedFieldWithQ:                  types.CapabilityState("DENY"),
+			CreateDashboardExecutiveSummaryWithQ:       types.CapabilityState("DENY"),
+			Space:                                      types.CapabilityState("DENY"),
+			CreateSpaces:                               types.CapabilityState("DENY"),
+			ShareSpaces:                                types.CapabilityState("DENY"),
+			ChatAgent:                                  types.CapabilityState("DENY"),
+			CreateChatAgents:                           types.CapabilityState("DENY"),
+			ShareChatAgents:                            types.CapabilityState("DENY"),
+			Research:                                   types.CapabilityState("DENY"),
+			SelfUpgradeUserRole:                        types.CapabilityState("DENY"),
+			Extension:                                  types.CapabilityState("DENY"),
+			UseBrowserExtension:                        types.CapabilityState("DENY"),
+			UseWordAddInExtension:                      types.CapabilityState("DENY"),
+			UseOutlookAddInExtension:                   types.CapabilityState("DENY"),
+			UseExcelAddInExtension:                     types.CapabilityState("DENY"),
+			UsePowerpointAddInExtension:                types.CapabilityState("DENY"),
+			ManageSharedFolders:                        types.CapabilityState("DENY"),
+			GenerateAnalyses:                           types.CapabilityState("DENY"),
+			Story:                                      types.CapabilityState("DENY"),
+			Scenario:                                   types.CapabilityState("DENY"),
+			Trigger:                                    types.CapabilityState("DENY"),
+			ScheduleTrigger:                            types.CapabilityState("DENY"),
+			InboundEmailTrigger:                        types.CapabilityState("DENY"),
+			QuickEventTrigger:                          types.CapabilityState("DENY"),
 		},
 		Governance: &types.Governance{
 			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
@@ -22971,6 +23716,16 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 					{
 						DataSetPlaceholder: ptr.String("__DataSetPlaceholder__"),
 						DataSetArn:         ptr.String("__DataSetArn__"),
+					},
+				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
 					},
 				},
 				Arn: ptr.String("__Arn__"),
@@ -23104,6 +23859,16 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 					DataSetArn: ptr.String("__DataSetArn__"),
 				},
 			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+			},
 			Sheets: []types.SheetDefinition{
 				{
 					SheetId:     ptr.String("__SheetId__"),
@@ -23188,6 +23953,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -23197,6 +23963,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23204,6 +23971,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23217,6 +23985,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23243,6 +24012,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23306,6 +24076,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -23315,6 +24086,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23322,6 +24094,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23336,6 +24109,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23362,6 +24136,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23571,6 +24346,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -23580,6 +24356,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23587,6 +24364,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23600,6 +24378,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23626,6 +24405,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23689,6 +24469,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -23698,6 +24479,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23705,6 +24487,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23719,6 +24502,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23745,6 +24529,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -23963,6 +24748,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23970,6 +24756,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -23983,6 +24770,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24009,6 +24797,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24077,6 +24866,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24084,6 +24874,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24098,6 +24889,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24124,6 +24916,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24299,6 +25092,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24306,6 +25100,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24397,6 +25192,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24404,6 +25200,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24417,6 +25214,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24443,6 +25241,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24511,6 +25310,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24518,6 +25318,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24532,6 +25333,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24558,6 +25360,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -24733,6 +25536,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -24740,6 +25544,7 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27219,6 +28024,16 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 			},
 			SourceTemplate: &types.TemplateSourceTemplate{
 				Arn: ptr.String("__Arn__"),
@@ -27228,6 +28043,90 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 		Name:               ptr.String("__Name__"),
 		Definition: &types.TemplateVersionDefinition{
 			DataSetConfigurations: []types.DataSetConfiguration{
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			TopicConfigurations: []types.TopicConfiguration{
 				{
 					Placeholder: ptr.String("__Placeholder__"),
 					DataSetSchema: &types.DataSetSchema{
@@ -27395,6 +28294,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -27404,6 +28304,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27411,6 +28312,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27424,6 +28326,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27450,6 +28353,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27513,6 +28417,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -27522,6 +28427,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27529,6 +28435,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27543,6 +28450,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27569,6 +28477,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27778,6 +28687,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -27787,6 +28697,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27794,6 +28705,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27807,6 +28719,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27833,6 +28746,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27896,6 +28810,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -27905,6 +28820,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27912,6 +28828,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -27926,6 +28843,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -27952,6 +28870,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28170,6 +29089,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28177,6 +29097,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28190,6 +29111,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28216,6 +29138,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28284,6 +29207,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28291,6 +29215,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28305,6 +29230,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28331,6 +29257,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28506,6 +29433,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28513,6 +29441,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28604,6 +29533,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28611,6 +29541,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28624,6 +29555,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28650,6 +29582,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28718,6 +29651,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28725,6 +29659,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28739,6 +29674,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28765,6 +29701,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -28940,6 +29877,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -28947,6 +29885,7 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -29549,7 +30488,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -29557,6 +30497,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -29568,6 +30510,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -29578,6 +30522,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -29586,6 +30531,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -29619,7 +30565,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -29627,6 +30574,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -29638,6 +30587,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -29648,6 +30599,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -29656,6 +30608,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -30038,6 +30991,9 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -30050,8 +31006,23 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -30079,6 +31050,9 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -30091,8 +31065,23 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -30128,7 +31117,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -30136,6 +31126,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -30147,6 +31139,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -30157,6 +31151,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -30165,6 +31160,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -30198,7 +31194,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -30206,6 +31203,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -30217,6 +31216,8 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -30227,6 +31228,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -30235,6 +31237,7 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -30617,6 +31620,9 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -30629,8 +31635,23 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -30658,6 +31679,9 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -30670,8 +31694,23 @@ func TestCheckRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -30767,6 +31806,66 @@ func TestCheckRequestSnapshot_UpdateTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateTopicPermissionsV2(t *testing.T) {
+	input := &UpdateTopicPermissionsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		GrantPermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RevokePermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTopicPermissionsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicPermissionsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 	input := &UpdateTopicRefreshScheduleInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -30800,6 +31899,86 @@ func TestCheckRequestSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateTopicV2(t *testing.T) {
+	input := &UpdateTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		Topic: &types.TopicV2Details{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataSets: []types.TopicV2DataSetReference{
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+			},
+			DataSetRelations: []types.TopicV2DataSetRelation{
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		CustomInstructions: &types.CustomInstructions{
+			CustomInstructionsString: ptr.String("__CustomInstructionsString__"),
+		},
+		PublishOption: types.TopicV2PublishOption("DRAFT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34957,6 +36136,16 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -34980,6 +36169,16 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -35066,6 +36265,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -35075,6 +36275,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35082,6 +36283,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35095,6 +36297,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35121,6 +36324,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35184,6 +36388,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -35193,6 +36398,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35200,6 +36406,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35214,6 +36421,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35240,6 +36448,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35449,6 +36658,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -35458,6 +36668,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35465,6 +36676,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35478,6 +36690,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35504,6 +36717,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35567,6 +36781,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -35576,6 +36791,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35583,6 +36799,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35597,6 +36814,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35623,6 +36841,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35841,6 +37060,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35848,6 +37068,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35861,6 +37082,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35887,6 +37109,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -35955,6 +37178,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35962,6 +37186,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -35976,6 +37201,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36002,6 +37228,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36177,6 +37404,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36184,6 +37412,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36275,6 +37504,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36282,6 +37512,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36295,6 +37526,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36321,6 +37553,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36389,6 +37622,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36396,6 +37630,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36410,6 +37645,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36436,6 +37672,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -36611,6 +37848,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36618,6 +37856,7 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -36928,243 +38167,285 @@ func TestUpdateRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 		AwsAccountId:          ptr.String("__AwsAccountId__"),
 		CustomPermissionsName: ptr.String("__CustomPermissionsName__"),
 		Capabilities: &types.Capabilities{
-			ExportToCsv:                               types.CapabilityState("DENY"),
-			ExportToExcel:                             types.CapabilityState("DENY"),
-			ExportToPdf:                               types.CapabilityState("DENY"),
-			PrintReports:                              types.CapabilityState("DENY"),
-			CreateAndUpdateThemes:                     types.CapabilityState("DENY"),
-			AddOrRunAnomalyDetectionForAnalyses:       types.CapabilityState("DENY"),
-			ShareAnalyses:                             types.CapabilityState("DENY"),
-			CreateAndUpdateDatasets:                   types.CapabilityState("DENY"),
-			ShareDatasets:                             types.CapabilityState("DENY"),
-			SubscribeDashboardEmailReports:            types.CapabilityState("DENY"),
-			CreateAndUpdateDashboardEmailReports:      types.CapabilityState("DENY"),
-			ShareDashboards:                           types.CapabilityState("DENY"),
-			CreateAndUpdateThresholdAlerts:            types.CapabilityState("DENY"),
-			RenameSharedFolders:                       types.CapabilityState("DENY"),
-			CreateSharedFolders:                       types.CapabilityState("DENY"),
-			CreateAndUpdateDataSources:                types.CapabilityState("DENY"),
-			ShareDataSources:                          types.CapabilityState("DENY"),
-			ViewAccountSPICECapacity:                  types.CapabilityState("DENY"),
-			CreateSPICEDataset:                        types.CapabilityState("DENY"),
-			ExportToPdfInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToCsvInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToExcelInScheduledReports:           types.CapabilityState("DENY"),
-			IncludeContentInScheduledReportsEmail:     types.CapabilityState("DENY"),
-			Dashboard:                                 types.CapabilityState("DENY"),
-			Analysis:                                  types.CapabilityState("DENY"),
-			Automate:                                  types.CapabilityState("DENY"),
-			Flow:                                      types.CapabilityState("DENY"),
-			Apps:                                      types.CapabilityState("DENY"),
-			CreateAndUpdateApps:                       types.CapabilityState("DENY"),
-			ShareApps:                                 types.CapabilityState("DENY"),
-			InvokeAppsAIInference:                     types.CapabilityState("DENY"),
-			AccessAppsNativeDataStore:                 types.CapabilityState("DENY"),
-			PublishWithoutApproval:                    types.CapabilityState("DENY"),
-			UseBedrockModels:                          types.CapabilityState("DENY"),
-			PerformFlowUiTask:                         types.CapabilityState("DENY"),
-			ApproveFlowShareRequests:                  types.CapabilityState("DENY"),
-			UseAgentWebSearch:                         types.CapabilityState("DENY"),
-			KnowledgeBase:                             types.CapabilityState("DENY"),
-			Action:                                    types.CapabilityState("DENY"),
-			GenericHTTPAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateGenericHTTPAction:          types.CapabilityState("DENY"),
-			ShareGenericHTTPAction:                    types.CapabilityState("DENY"),
-			UseGenericHTTPAction:                      types.CapabilityState("DENY"),
-			AsanaAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateAsanaAction:                types.CapabilityState("DENY"),
-			ShareAsanaAction:                          types.CapabilityState("DENY"),
-			UseAsanaAction:                            types.CapabilityState("DENY"),
-			SlackAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateSlackAction:                types.CapabilityState("DENY"),
-			ShareSlackAction:                          types.CapabilityState("DENY"),
-			UseSlackAction:                            types.CapabilityState("DENY"),
-			ServiceNowAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateServiceNowAction:           types.CapabilityState("DENY"),
-			ShareServiceNowAction:                     types.CapabilityState("DENY"),
-			UseServiceNowAction:                       types.CapabilityState("DENY"),
-			SalesforceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSalesforceAction:           types.CapabilityState("DENY"),
-			ShareSalesforceAction:                     types.CapabilityState("DENY"),
-			UseSalesforceAction:                       types.CapabilityState("DENY"),
-			MSExchangeAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateMSExchangeAction:           types.CapabilityState("DENY"),
-			ShareMSExchangeAction:                     types.CapabilityState("DENY"),
-			UseMSExchangeAction:                       types.CapabilityState("DENY"),
-			PagerDutyAction:                           types.CapabilityState("DENY"),
-			CreateAndUpdatePagerDutyAction:            types.CapabilityState("DENY"),
-			SharePagerDutyAction:                      types.CapabilityState("DENY"),
-			UsePagerDutyAction:                        types.CapabilityState("DENY"),
-			JiraAction:                                types.CapabilityState("DENY"),
-			CreateAndUpdateJiraAction:                 types.CapabilityState("DENY"),
-			ShareJiraAction:                           types.CapabilityState("DENY"),
-			UseJiraAction:                             types.CapabilityState("DENY"),
-			ConfluenceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateConfluenceAction:           types.CapabilityState("DENY"),
-			ShareConfluenceAction:                     types.CapabilityState("DENY"),
-			UseConfluenceAction:                       types.CapabilityState("DENY"),
-			OneDriveAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateOneDriveAction:             types.CapabilityState("DENY"),
-			ShareOneDriveAction:                       types.CapabilityState("DENY"),
-			UseOneDriveAction:                         types.CapabilityState("DENY"),
-			SharePointAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSharePointAction:           types.CapabilityState("DENY"),
-			ShareSharePointAction:                     types.CapabilityState("DENY"),
-			UseSharePointAction:                       types.CapabilityState("DENY"),
-			MSTeamsAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateMSTeamsAction:              types.CapabilityState("DENY"),
-			ShareMSTeamsAction:                        types.CapabilityState("DENY"),
-			UseMSTeamsAction:                          types.CapabilityState("DENY"),
-			GoogleCalendarAction:                      types.CapabilityState("DENY"),
-			CreateAndUpdateGoogleCalendarAction:       types.CapabilityState("DENY"),
-			ShareGoogleCalendarAction:                 types.CapabilityState("DENY"),
-			UseGoogleCalendarAction:                   types.CapabilityState("DENY"),
-			ZendeskAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateZendeskAction:              types.CapabilityState("DENY"),
-			ShareZendeskAction:                        types.CapabilityState("DENY"),
-			UseZendeskAction:                          types.CapabilityState("DENY"),
-			SmartsheetAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSmartsheetAction:           types.CapabilityState("DENY"),
-			ShareSmartsheetAction:                     types.CapabilityState("DENY"),
-			UseSmartsheetAction:                       types.CapabilityState("DENY"),
-			SAPBusinessPartnerAction:                  types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBusinessPartnerAction:   types.CapabilityState("DENY"),
-			ShareSAPBusinessPartnerAction:             types.CapabilityState("DENY"),
-			UseSAPBusinessPartnerAction:               types.CapabilityState("DENY"),
-			SAPProductMasterDataAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPProductMasterDataAction: types.CapabilityState("DENY"),
-			ShareSAPProductMasterDataAction:           types.CapabilityState("DENY"),
-			UseSAPProductMasterDataAction:             types.CapabilityState("DENY"),
-			SAPPhysicalInventoryAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPPhysicalInventoryAction: types.CapabilityState("DENY"),
-			ShareSAPPhysicalInventoryAction:           types.CapabilityState("DENY"),
-			UseSAPPhysicalInventoryAction:             types.CapabilityState("DENY"),
-			SAPBillOfMaterialAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBillOfMaterialAction:    types.CapabilityState("DENY"),
-			ShareSAPBillOfMaterialAction:              types.CapabilityState("DENY"),
-			UseSAPBillOfMaterialAction:                types.CapabilityState("DENY"),
-			SAPMaterialStockAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateSAPMaterialStockAction:     types.CapabilityState("DENY"),
-			ShareSAPMaterialStockAction:               types.CapabilityState("DENY"),
-			UseSAPMaterialStockAction:                 types.CapabilityState("DENY"),
-			FactSetAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateFactSetAction:              types.CapabilityState("DENY"),
-			ShareFactSetAction:                        types.CapabilityState("DENY"),
-			UseFactSetAction:                          types.CapabilityState("DENY"),
-			AmazonSThreeAction:                        types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonSThreeAction:         types.CapabilityState("DENY"),
-			ShareAmazonSThreeAction:                   types.CapabilityState("DENY"),
-			UseAmazonSThreeAction:                     types.CapabilityState("DENY"),
-			TextractAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateTextractAction:             types.CapabilityState("DENY"),
-			ShareTextractAction:                       types.CapabilityState("DENY"),
-			UseTextractAction:                         types.CapabilityState("DENY"),
-			ComprehendAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendAction:           types.CapabilityState("DENY"),
-			ShareComprehendAction:                     types.CapabilityState("DENY"),
-			UseComprehendAction:                       types.CapabilityState("DENY"),
-			ComprehendMedicalAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendMedicalAction:    types.CapabilityState("DENY"),
-			ShareComprehendMedicalAction:              types.CapabilityState("DENY"),
-			UseComprehendMedicalAction:                types.CapabilityState("DENY"),
-			AmazonBedrockARSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockARSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockARSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockARSAction:                 types.CapabilityState("DENY"),
-			AmazonBedrockFSAction:                     types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockFSAction:      types.CapabilityState("DENY"),
-			ShareAmazonBedrockFSAction:                types.CapabilityState("DENY"),
-			UseAmazonBedrockFSAction:                  types.CapabilityState("DENY"),
-			AmazonBedrockKRSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockKRSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockKRSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockKRSAction:                 types.CapabilityState("DENY"),
-			MCPAction:                                 types.CapabilityState("DENY"),
-			CreateAndUpdateMCPAction:                  types.CapabilityState("DENY"),
-			ShareMCPAction:                            types.CapabilityState("DENY"),
-			UseMCPAction:                              types.CapabilityState("DENY"),
-			OpenAPIAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateOpenAPIAction:              types.CapabilityState("DENY"),
-			ShareOpenAPIAction:                        types.CapabilityState("DENY"),
-			UseOpenAPIAction:                          types.CapabilityState("DENY"),
-			SandPGMIAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGMIAction:             types.CapabilityState("DENY"),
-			ShareSandPGMIAction:                       types.CapabilityState("DENY"),
-			UseSandPGMIAction:                         types.CapabilityState("DENY"),
-			SandPGlobalEnergyAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGlobalEnergyAction:    types.CapabilityState("DENY"),
-			ShareSandPGlobalEnergyAction:              types.CapabilityState("DENY"),
-			UseSandPGlobalEnergyAction:                types.CapabilityState("DENY"),
-			BambooHRAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBambooHRAction:             types.CapabilityState("DENY"),
-			ShareBambooHRAction:                       types.CapabilityState("DENY"),
-			UseBambooHRAction:                         types.CapabilityState("DENY"),
-			BoxAgentAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBoxAgentAction:             types.CapabilityState("DENY"),
-			ShareBoxAgentAction:                       types.CapabilityState("DENY"),
-			UseBoxAgentAction:                         types.CapabilityState("DENY"),
-			CanvaAgentAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateCanvaAgentAction:           types.CapabilityState("DENY"),
-			ShareCanvaAgentAction:                     types.CapabilityState("DENY"),
-			UseCanvaAgentAction:                       types.CapabilityState("DENY"),
-			GithubAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateGithubAction:               types.CapabilityState("DENY"),
-			ShareGithubAction:                         types.CapabilityState("DENY"),
-			UseGithubAction:                           types.CapabilityState("DENY"),
-			NotionAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateNotionAction:               types.CapabilityState("DENY"),
-			ShareNotionAction:                         types.CapabilityState("DENY"),
-			UseNotionAction:                           types.CapabilityState("DENY"),
-			LinearAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateLinearAction:               types.CapabilityState("DENY"),
-			ShareLinearAction:                         types.CapabilityState("DENY"),
-			UseLinearAction:                           types.CapabilityState("DENY"),
-			HuggingFaceAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateHuggingFaceAction:          types.CapabilityState("DENY"),
-			ShareHuggingFaceAction:                    types.CapabilityState("DENY"),
-			UseHuggingFaceAction:                      types.CapabilityState("DENY"),
-			MondayAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateMondayAction:               types.CapabilityState("DENY"),
-			ShareMondayAction:                         types.CapabilityState("DENY"),
-			UseMondayAction:                           types.CapabilityState("DENY"),
-			HubspotAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateHubspotAction:              types.CapabilityState("DENY"),
-			ShareHubspotAction:                        types.CapabilityState("DENY"),
-			UseHubspotAction:                          types.CapabilityState("DENY"),
-			IntercomAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateIntercomAction:             types.CapabilityState("DENY"),
-			ShareIntercomAction:                       types.CapabilityState("DENY"),
-			UseIntercomAction:                         types.CapabilityState("DENY"),
-			NewRelicAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateNewRelicAction:             types.CapabilityState("DENY"),
-			ShareNewRelicAction:                       types.CapabilityState("DENY"),
-			UseNewRelicAction:                         types.CapabilityState("DENY"),
-			Topic:                                     types.CapabilityState("DENY"),
-			EditVisualWithQ:                           types.CapabilityState("DENY"),
-			BuildCalculatedFieldWithQ:                 types.CapabilityState("DENY"),
-			CreateDashboardExecutiveSummaryWithQ:      types.CapabilityState("DENY"),
-			Space:                                     types.CapabilityState("DENY"),
-			CreateSpaces:                              types.CapabilityState("DENY"),
-			ShareSpaces:                               types.CapabilityState("DENY"),
-			ChatAgent:                                 types.CapabilityState("DENY"),
-			CreateChatAgents:                          types.CapabilityState("DENY"),
-			ShareChatAgents:                           types.CapabilityState("DENY"),
-			Research:                                  types.CapabilityState("DENY"),
-			SelfUpgradeUserRole:                       types.CapabilityState("DENY"),
-			Extension:                                 types.CapabilityState("DENY"),
-			UseBrowserExtension:                       types.CapabilityState("DENY"),
-			UseWordAddInExtension:                     types.CapabilityState("DENY"),
-			UseOutlookAddInExtension:                  types.CapabilityState("DENY"),
-			UseExcelAddInExtension:                    types.CapabilityState("DENY"),
-			UsePowerpointAddInExtension:               types.CapabilityState("DENY"),
-			ManageSharedFolders:                       types.CapabilityState("DENY"),
-			GenerateAnalyses:                          types.CapabilityState("DENY"),
-			Story:                                     types.CapabilityState("DENY"),
-			Scenario:                                  types.CapabilityState("DENY"),
-			Trigger:                                   types.CapabilityState("DENY"),
-			ScheduleTrigger:                           types.CapabilityState("DENY"),
-			InboundEmailTrigger:                       types.CapabilityState("DENY"),
-			QuickEventTrigger:                         types.CapabilityState("DENY"),
+			ExportToCsv:                                types.CapabilityState("DENY"),
+			ExportToExcel:                              types.CapabilityState("DENY"),
+			ExportToPdf:                                types.CapabilityState("DENY"),
+			PrintReports:                               types.CapabilityState("DENY"),
+			CreateAndUpdateThemes:                      types.CapabilityState("DENY"),
+			AddOrRunAnomalyDetectionForAnalyses:        types.CapabilityState("DENY"),
+			ShareAnalyses:                              types.CapabilityState("DENY"),
+			CreateAndUpdateDatasets:                    types.CapabilityState("DENY"),
+			ShareDatasets:                              types.CapabilityState("DENY"),
+			SubscribeDashboardEmailReports:             types.CapabilityState("DENY"),
+			CreateAndUpdateDashboardEmailReports:       types.CapabilityState("DENY"),
+			ShareDashboards:                            types.CapabilityState("DENY"),
+			CreateAndUpdateThresholdAlerts:             types.CapabilityState("DENY"),
+			RenameSharedFolders:                        types.CapabilityState("DENY"),
+			CreateSharedFolders:                        types.CapabilityState("DENY"),
+			CreateAndUpdateDataSources:                 types.CapabilityState("DENY"),
+			ShareDataSources:                           types.CapabilityState("DENY"),
+			ViewAccountSPICECapacity:                   types.CapabilityState("DENY"),
+			CreateSPICEDataset:                         types.CapabilityState("DENY"),
+			ExportToPdfInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToCsvInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToExcelInScheduledReports:            types.CapabilityState("DENY"),
+			IncludeContentInScheduledReportsEmail:      types.CapabilityState("DENY"),
+			Dashboard:                                  types.CapabilityState("DENY"),
+			Analysis:                                   types.CapabilityState("DENY"),
+			Automate:                                   types.CapabilityState("DENY"),
+			Flow:                                       types.CapabilityState("DENY"),
+			Apps:                                       types.CapabilityState("DENY"),
+			CreateAndUpdateApps:                        types.CapabilityState("DENY"),
+			ShareApps:                                  types.CapabilityState("DENY"),
+			InvokeAppsAIInference:                      types.CapabilityState("DENY"),
+			AccessAppsNativeDataStore:                  types.CapabilityState("DENY"),
+			PublishWithoutApproval:                     types.CapabilityState("DENY"),
+			UseBedrockModels:                           types.CapabilityState("DENY"),
+			PerformFlowUiTask:                          types.CapabilityState("DENY"),
+			ApproveFlowShareRequests:                   types.CapabilityState("DENY"),
+			UseAgentWebSearch:                          types.CapabilityState("DENY"),
+			KnowledgeBase:                              types.CapabilityState("DENY"),
+			CreateAndUpdateKnowledgeBases:              types.CapabilityState("DENY"),
+			ShareKnowledgeBases:                        types.CapabilityState("DENY"),
+			SharePointKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareSharePointKnowledgeBase:               types.CapabilityState("DENY"),
+			UseSharePointKnowledgeBase:                 types.CapabilityState("DENY"),
+			GoogleDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleDriveKnowledgeBase:    types.CapabilityState("DENY"),
+			ShareGoogleDriveKnowledgeBase:              types.CapabilityState("DENY"),
+			UseGoogleDriveKnowledgeBase:                types.CapabilityState("DENY"),
+			WebCrawlerKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateWebCrawlerKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareWebCrawlerKnowledgeBase:               types.CapabilityState("DENY"),
+			UseWebCrawlerKnowledgeBase:                 types.CapabilityState("DENY"),
+			S3KnowledgeBase:                            types.CapabilityState("DENY"),
+			CreateAndUpdateS3KnowledgeBase:             types.CapabilityState("DENY"),
+			ShareS3KnowledgeBase:                       types.CapabilityState("DENY"),
+			UseS3KnowledgeBase:                         types.CapabilityState("DENY"),
+			ConfluenceKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareConfluenceKnowledgeBase:               types.CapabilityState("DENY"),
+			UseConfluenceKnowledgeBase:                 types.CapabilityState("DENY"),
+			OneDriveKnowledgeBase:                      types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveKnowledgeBase:       types.CapabilityState("DENY"),
+			ShareOneDriveKnowledgeBase:                 types.CapabilityState("DENY"),
+			UseOneDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			QBusinessKnowledgeBase:                     types.CapabilityState("DENY"),
+			CreateAndUpdateQBusinessKnowledgeBase:      types.CapabilityState("DENY"),
+			ShareQBusinessKnowledgeBase:                types.CapabilityState("DENY"),
+			UseQBusinessKnowledgeBase:                  types.CapabilityState("DENY"),
+			BedrockManagedKnowledgeBase:                types.CapabilityState("DENY"),
+			CreateAndUpdateBedrockManagedKnowledgeBase: types.CapabilityState("DENY"),
+			ShareBedrockManagedKnowledgeBase:           types.CapabilityState("DENY"),
+			UseBedrockManagedKnowledgeBase:             types.CapabilityState("DENY"),
+			BoxKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateBoxKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareBoxKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseBoxKnowledgeBase:                        types.CapabilityState("DENY"),
+			IDCKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateIDCKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareIDCKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseIDCKnowledgeBase:                        types.CapabilityState("DENY"),
+			Action:                                     types.CapabilityState("DENY"),
+			GenericHTTPAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateGenericHTTPAction:           types.CapabilityState("DENY"),
+			ShareGenericHTTPAction:                     types.CapabilityState("DENY"),
+			UseGenericHTTPAction:                       types.CapabilityState("DENY"),
+			AsanaAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateAsanaAction:                 types.CapabilityState("DENY"),
+			ShareAsanaAction:                           types.CapabilityState("DENY"),
+			UseAsanaAction:                             types.CapabilityState("DENY"),
+			SlackAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateSlackAction:                 types.CapabilityState("DENY"),
+			ShareSlackAction:                           types.CapabilityState("DENY"),
+			UseSlackAction:                             types.CapabilityState("DENY"),
+			ServiceNowAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateServiceNowAction:            types.CapabilityState("DENY"),
+			ShareServiceNowAction:                      types.CapabilityState("DENY"),
+			UseServiceNowAction:                        types.CapabilityState("DENY"),
+			SalesforceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSalesforceAction:            types.CapabilityState("DENY"),
+			ShareSalesforceAction:                      types.CapabilityState("DENY"),
+			UseSalesforceAction:                        types.CapabilityState("DENY"),
+			MSExchangeAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateMSExchangeAction:            types.CapabilityState("DENY"),
+			ShareMSExchangeAction:                      types.CapabilityState("DENY"),
+			UseMSExchangeAction:                        types.CapabilityState("DENY"),
+			PagerDutyAction:                            types.CapabilityState("DENY"),
+			CreateAndUpdatePagerDutyAction:             types.CapabilityState("DENY"),
+			SharePagerDutyAction:                       types.CapabilityState("DENY"),
+			UsePagerDutyAction:                         types.CapabilityState("DENY"),
+			JiraAction:                                 types.CapabilityState("DENY"),
+			CreateAndUpdateJiraAction:                  types.CapabilityState("DENY"),
+			ShareJiraAction:                            types.CapabilityState("DENY"),
+			UseJiraAction:                              types.CapabilityState("DENY"),
+			ConfluenceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceAction:            types.CapabilityState("DENY"),
+			ShareConfluenceAction:                      types.CapabilityState("DENY"),
+			UseConfluenceAction:                        types.CapabilityState("DENY"),
+			OneDriveAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveAction:              types.CapabilityState("DENY"),
+			ShareOneDriveAction:                        types.CapabilityState("DENY"),
+			UseOneDriveAction:                          types.CapabilityState("DENY"),
+			SharePointAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointAction:            types.CapabilityState("DENY"),
+			ShareSharePointAction:                      types.CapabilityState("DENY"),
+			UseSharePointAction:                        types.CapabilityState("DENY"),
+			MSTeamsAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateMSTeamsAction:               types.CapabilityState("DENY"),
+			ShareMSTeamsAction:                         types.CapabilityState("DENY"),
+			UseMSTeamsAction:                           types.CapabilityState("DENY"),
+			GoogleCalendarAction:                       types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleCalendarAction:        types.CapabilityState("DENY"),
+			ShareGoogleCalendarAction:                  types.CapabilityState("DENY"),
+			UseGoogleCalendarAction:                    types.CapabilityState("DENY"),
+			ZendeskAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateZendeskAction:               types.CapabilityState("DENY"),
+			ShareZendeskAction:                         types.CapabilityState("DENY"),
+			UseZendeskAction:                           types.CapabilityState("DENY"),
+			SmartsheetAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSmartsheetAction:            types.CapabilityState("DENY"),
+			ShareSmartsheetAction:                      types.CapabilityState("DENY"),
+			UseSmartsheetAction:                        types.CapabilityState("DENY"),
+			SAPBusinessPartnerAction:                   types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBusinessPartnerAction:    types.CapabilityState("DENY"),
+			ShareSAPBusinessPartnerAction:              types.CapabilityState("DENY"),
+			UseSAPBusinessPartnerAction:                types.CapabilityState("DENY"),
+			SAPProductMasterDataAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPProductMasterDataAction:  types.CapabilityState("DENY"),
+			ShareSAPProductMasterDataAction:            types.CapabilityState("DENY"),
+			UseSAPProductMasterDataAction:              types.CapabilityState("DENY"),
+			SAPPhysicalInventoryAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPPhysicalInventoryAction:  types.CapabilityState("DENY"),
+			ShareSAPPhysicalInventoryAction:            types.CapabilityState("DENY"),
+			UseSAPPhysicalInventoryAction:              types.CapabilityState("DENY"),
+			SAPBillOfMaterialAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBillOfMaterialAction:     types.CapabilityState("DENY"),
+			ShareSAPBillOfMaterialAction:               types.CapabilityState("DENY"),
+			UseSAPBillOfMaterialAction:                 types.CapabilityState("DENY"),
+			SAPMaterialStockAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateSAPMaterialStockAction:      types.CapabilityState("DENY"),
+			ShareSAPMaterialStockAction:                types.CapabilityState("DENY"),
+			UseSAPMaterialStockAction:                  types.CapabilityState("DENY"),
+			FactSetAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateFactSetAction:               types.CapabilityState("DENY"),
+			ShareFactSetAction:                         types.CapabilityState("DENY"),
+			UseFactSetAction:                           types.CapabilityState("DENY"),
+			AmazonSThreeAction:                         types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonSThreeAction:          types.CapabilityState("DENY"),
+			ShareAmazonSThreeAction:                    types.CapabilityState("DENY"),
+			UseAmazonSThreeAction:                      types.CapabilityState("DENY"),
+			TextractAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateTextractAction:              types.CapabilityState("DENY"),
+			ShareTextractAction:                        types.CapabilityState("DENY"),
+			UseTextractAction:                          types.CapabilityState("DENY"),
+			ComprehendAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendAction:            types.CapabilityState("DENY"),
+			ShareComprehendAction:                      types.CapabilityState("DENY"),
+			UseComprehendAction:                        types.CapabilityState("DENY"),
+			ComprehendMedicalAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendMedicalAction:     types.CapabilityState("DENY"),
+			ShareComprehendMedicalAction:               types.CapabilityState("DENY"),
+			UseComprehendMedicalAction:                 types.CapabilityState("DENY"),
+			AmazonBedrockARSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockARSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockARSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockARSAction:                  types.CapabilityState("DENY"),
+			AmazonBedrockFSAction:                      types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockFSAction:       types.CapabilityState("DENY"),
+			ShareAmazonBedrockFSAction:                 types.CapabilityState("DENY"),
+			UseAmazonBedrockFSAction:                   types.CapabilityState("DENY"),
+			AmazonBedrockKRSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockKRSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockKRSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockKRSAction:                  types.CapabilityState("DENY"),
+			MCPAction:                                  types.CapabilityState("DENY"),
+			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
+			ShareMCPAction:                             types.CapabilityState("DENY"),
+			UseMCPAction:                               types.CapabilityState("DENY"),
+			OpenAPIAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
+			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
+			UseOpenAPIAction:                           types.CapabilityState("DENY"),
+			SandPGMIAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGMIAction:              types.CapabilityState("DENY"),
+			ShareSandPGMIAction:                        types.CapabilityState("DENY"),
+			UseSandPGMIAction:                          types.CapabilityState("DENY"),
+			SandPGlobalEnergyAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGlobalEnergyAction:     types.CapabilityState("DENY"),
+			ShareSandPGlobalEnergyAction:               types.CapabilityState("DENY"),
+			UseSandPGlobalEnergyAction:                 types.CapabilityState("DENY"),
+			BambooHRAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBambooHRAction:              types.CapabilityState("DENY"),
+			ShareBambooHRAction:                        types.CapabilityState("DENY"),
+			UseBambooHRAction:                          types.CapabilityState("DENY"),
+			BoxAgentAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBoxAgentAction:              types.CapabilityState("DENY"),
+			ShareBoxAgentAction:                        types.CapabilityState("DENY"),
+			UseBoxAgentAction:                          types.CapabilityState("DENY"),
+			CanvaAgentAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateCanvaAgentAction:            types.CapabilityState("DENY"),
+			ShareCanvaAgentAction:                      types.CapabilityState("DENY"),
+			UseCanvaAgentAction:                        types.CapabilityState("DENY"),
+			GithubAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateGithubAction:                types.CapabilityState("DENY"),
+			ShareGithubAction:                          types.CapabilityState("DENY"),
+			UseGithubAction:                            types.CapabilityState("DENY"),
+			NotionAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateNotionAction:                types.CapabilityState("DENY"),
+			ShareNotionAction:                          types.CapabilityState("DENY"),
+			UseNotionAction:                            types.CapabilityState("DENY"),
+			LinearAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateLinearAction:                types.CapabilityState("DENY"),
+			ShareLinearAction:                          types.CapabilityState("DENY"),
+			UseLinearAction:                            types.CapabilityState("DENY"),
+			HuggingFaceAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateHuggingFaceAction:           types.CapabilityState("DENY"),
+			ShareHuggingFaceAction:                     types.CapabilityState("DENY"),
+			UseHuggingFaceAction:                       types.CapabilityState("DENY"),
+			MondayAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateMondayAction:                types.CapabilityState("DENY"),
+			ShareMondayAction:                          types.CapabilityState("DENY"),
+			UseMondayAction:                            types.CapabilityState("DENY"),
+			HubspotAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateHubspotAction:               types.CapabilityState("DENY"),
+			ShareHubspotAction:                         types.CapabilityState("DENY"),
+			UseHubspotAction:                           types.CapabilityState("DENY"),
+			IntercomAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateIntercomAction:              types.CapabilityState("DENY"),
+			ShareIntercomAction:                        types.CapabilityState("DENY"),
+			UseIntercomAction:                          types.CapabilityState("DENY"),
+			NewRelicAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateNewRelicAction:              types.CapabilityState("DENY"),
+			ShareNewRelicAction:                        types.CapabilityState("DENY"),
+			UseNewRelicAction:                          types.CapabilityState("DENY"),
+			Topic:                                      types.CapabilityState("DENY"),
+			EditVisualWithQ:                            types.CapabilityState("DENY"),
+			BuildCalculatedFieldWithQ:                  types.CapabilityState("DENY"),
+			CreateDashboardExecutiveSummaryWithQ:       types.CapabilityState("DENY"),
+			Space:                                      types.CapabilityState("DENY"),
+			CreateSpaces:                               types.CapabilityState("DENY"),
+			ShareSpaces:                                types.CapabilityState("DENY"),
+			ChatAgent:                                  types.CapabilityState("DENY"),
+			CreateChatAgents:                           types.CapabilityState("DENY"),
+			ShareChatAgents:                            types.CapabilityState("DENY"),
+			Research:                                   types.CapabilityState("DENY"),
+			SelfUpgradeUserRole:                        types.CapabilityState("DENY"),
+			Extension:                                  types.CapabilityState("DENY"),
+			UseBrowserExtension:                        types.CapabilityState("DENY"),
+			UseWordAddInExtension:                      types.CapabilityState("DENY"),
+			UseOutlookAddInExtension:                   types.CapabilityState("DENY"),
+			UseExcelAddInExtension:                     types.CapabilityState("DENY"),
+			UsePowerpointAddInExtension:                types.CapabilityState("DENY"),
+			ManageSharedFolders:                        types.CapabilityState("DENY"),
+			GenerateAnalyses:                           types.CapabilityState("DENY"),
+			Story:                                      types.CapabilityState("DENY"),
+			Scenario:                                   types.CapabilityState("DENY"),
+			Trigger:                                    types.CapabilityState("DENY"),
+			ScheduleTrigger:                            types.CapabilityState("DENY"),
+			InboundEmailTrigger:                        types.CapabilityState("DENY"),
+			QuickEventTrigger:                          types.CapabilityState("DENY"),
 		},
 		Governance: &types.Governance{
 			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
@@ -37304,6 +38585,16 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -37377,6 +38668,16 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -37463,6 +38764,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -37472,6 +38774,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37479,6 +38782,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37492,6 +38796,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37518,6 +38823,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37581,6 +38887,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -37590,6 +38897,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37597,6 +38905,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37611,6 +38920,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37637,6 +38947,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37846,6 +39157,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -37855,6 +39167,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37862,6 +39175,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37875,6 +39189,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37901,6 +39216,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -37964,6 +39280,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -37973,6 +39290,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37980,6 +39298,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -37994,6 +39313,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38020,6 +39340,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38238,6 +39559,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38245,6 +39567,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38258,6 +39581,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38284,6 +39608,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38352,6 +39677,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38359,6 +39685,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38373,6 +39700,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38399,6 +39727,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38574,6 +39903,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38581,6 +39911,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38672,6 +40003,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38679,6 +40011,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38692,6 +40025,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38718,6 +40052,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38786,6 +40121,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38793,6 +40129,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -38807,6 +40144,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -38833,6 +40171,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -39008,6 +40347,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -39015,6 +40355,7 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -40890,6 +42231,16 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 			},
 			SourceTemplate: &types.TemplateSourceTemplate{
 				Arn: ptr.String("__Arn__"),
@@ -40908,6 +42259,90 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 		VersionDescription: ptr.String("__VersionDescription__"),
 		Definition: &types.TemplateVersionDefinition{
 			DataSetConfigurations: []types.DataSetConfiguration{
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			TopicConfigurations: []types.TopicConfiguration{
 				{
 					Placeholder: ptr.String("__Placeholder__"),
 					DataSetSchema: &types.DataSetSchema{
@@ -41075,6 +42510,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -41084,6 +42520,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41091,6 +42528,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41104,6 +42542,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41130,6 +42569,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41193,6 +42633,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -41202,6 +42643,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41209,6 +42651,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41223,6 +42666,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41249,6 +42693,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41458,6 +42903,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -41467,6 +42913,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41474,6 +42921,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41487,6 +42935,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41513,6 +42962,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41576,6 +43026,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -41585,6 +43036,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41592,6 +43044,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41606,6 +43059,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41632,6 +43086,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41850,6 +43305,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41857,6 +43313,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41870,6 +43327,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41896,6 +43354,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -41964,6 +43423,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41971,6 +43431,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -41985,6 +43446,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42011,6 +43473,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42186,6 +43649,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42193,6 +43657,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42284,6 +43749,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42291,6 +43757,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42304,6 +43771,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42330,6 +43798,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42398,6 +43867,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42405,6 +43875,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42419,6 +43890,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42445,6 +43917,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -42620,6 +44093,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -42627,6 +44101,7 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -43135,7 +44610,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -43143,6 +44619,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -43154,6 +44632,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -43164,6 +44644,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -43172,6 +44653,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -43205,7 +44687,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -43213,6 +44696,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -43224,6 +44709,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -43234,6 +44721,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -43242,6 +44730,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -43624,6 +45113,9 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -43636,8 +45128,23 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -43665,6 +45172,9 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -43677,8 +45187,23 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -43714,7 +45239,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -43722,6 +45248,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -43733,6 +45261,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -43743,6 +45273,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -43751,6 +45282,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -43784,7 +45316,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -43792,6 +45325,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -43803,6 +45338,8 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -43813,6 +45350,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -43821,6 +45359,7 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -44203,6 +45742,9 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -44215,8 +45757,23 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -44244,6 +45801,9 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -44256,8 +45816,23 @@ func TestUpdateRequestSnapshot_CreateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -44341,6 +45916,99 @@ func TestUpdateRequestSnapshot_CreateTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateTopicV2(t *testing.T) {
+	input := &CreateTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		Topic: &types.TopicV2Details{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataSets: []types.TopicV2DataSetReference{
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+			},
+			DataSetRelations: []types.TopicV2DataSetRelation{
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FolderArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CustomInstructions: &types.CustomInstructions{
+			CustomInstructionsString: ptr.String("__CustomInstructionsString__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -45360,6 +47028,34 @@ func TestUpdateRequestSnapshot_DeleteTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteTopicV2(t *testing.T) {
+	input := &DeleteTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -47186,6 +48882,34 @@ func TestUpdateRequestSnapshot_DescribeTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTopicPermissionsV2(t *testing.T) {
+	input := &DescribeTopicPermissionsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicPermissionsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicPermissionsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeTopicRefresh(t *testing.T) {
 	input := &DescribeTopicRefreshInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -47240,6 +48964,34 @@ func TestUpdateRequestSnapshot_DescribeTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTopicV2(t *testing.T) {
+	input := &DescribeTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -48914,6 +50666,35 @@ func TestUpdateRequestSnapshot_ListTopics(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTopicsV2(t *testing.T) {
+	input := &ListTopicsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTopicsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTopicsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListUserGroups(t *testing.T) {
 	input := &ListUserGroupsInput{
 		UserName:     ptr.String("__UserName__"),
@@ -49693,6 +51474,47 @@ func TestUpdateRequestSnapshot_SearchTopics(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchTopics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchTopicsV2(t *testing.T) {
+	input := &SearchTopicsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Filters: []types.TopicSearchFilter{
+			{
+				Operator: types.TopicFilterOperator("StringEquals"),
+				Name:     types.TopicFilterAttribute("QUICKSIGHT_USER"),
+				Value:    ptr.String("__Value__"),
+			},
+			{
+				Operator: types.TopicFilterOperator("StringEquals"),
+				Name:     types.TopicFilterAttribute("QUICKSIGHT_USER"),
+				Value:    ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchTopicsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchTopicsV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -51325,6 +53147,16 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 				Arn: ptr.String("__Arn__"),
 			},
 		},
@@ -51338,6 +53170,16 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 				{
 					Identifier: ptr.String("__Identifier__"),
 					DataSetArn: ptr.String("__DataSetArn__"),
+				},
+			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
 				},
 			},
 			Sheets: []types.SheetDefinition{
@@ -51424,6 +53266,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -51433,6 +53276,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51440,6 +53284,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51453,6 +53298,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51479,6 +53325,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51542,6 +53389,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -51551,6 +53399,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51558,6 +53407,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51572,6 +53422,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51598,6 +53449,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51807,6 +53659,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -51816,6 +53669,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51823,6 +53677,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51836,6 +53691,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51862,6 +53718,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51925,6 +53782,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -51934,6 +53792,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51941,6 +53800,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -51955,6 +53815,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -51981,6 +53842,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52199,6 +54061,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52206,6 +54069,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52219,6 +54083,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52245,6 +54110,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52313,6 +54179,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52320,6 +54187,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52334,6 +54202,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52360,6 +54229,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52535,6 +54405,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52542,6 +54413,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52633,6 +54505,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52640,6 +54513,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52653,6 +54527,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52679,6 +54554,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52747,6 +54623,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52754,6 +54631,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52768,6 +54646,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52794,6 +54673,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -52969,6 +54849,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -52976,6 +54857,7 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -53417,243 +55299,285 @@ func TestUpdateRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 		AwsAccountId:          ptr.String("__AwsAccountId__"),
 		CustomPermissionsName: ptr.String("__CustomPermissionsName__"),
 		Capabilities: &types.Capabilities{
-			ExportToCsv:                               types.CapabilityState("DENY"),
-			ExportToExcel:                             types.CapabilityState("DENY"),
-			ExportToPdf:                               types.CapabilityState("DENY"),
-			PrintReports:                              types.CapabilityState("DENY"),
-			CreateAndUpdateThemes:                     types.CapabilityState("DENY"),
-			AddOrRunAnomalyDetectionForAnalyses:       types.CapabilityState("DENY"),
-			ShareAnalyses:                             types.CapabilityState("DENY"),
-			CreateAndUpdateDatasets:                   types.CapabilityState("DENY"),
-			ShareDatasets:                             types.CapabilityState("DENY"),
-			SubscribeDashboardEmailReports:            types.CapabilityState("DENY"),
-			CreateAndUpdateDashboardEmailReports:      types.CapabilityState("DENY"),
-			ShareDashboards:                           types.CapabilityState("DENY"),
-			CreateAndUpdateThresholdAlerts:            types.CapabilityState("DENY"),
-			RenameSharedFolders:                       types.CapabilityState("DENY"),
-			CreateSharedFolders:                       types.CapabilityState("DENY"),
-			CreateAndUpdateDataSources:                types.CapabilityState("DENY"),
-			ShareDataSources:                          types.CapabilityState("DENY"),
-			ViewAccountSPICECapacity:                  types.CapabilityState("DENY"),
-			CreateSPICEDataset:                        types.CapabilityState("DENY"),
-			ExportToPdfInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToCsvInScheduledReports:             types.CapabilityState("DENY"),
-			ExportToExcelInScheduledReports:           types.CapabilityState("DENY"),
-			IncludeContentInScheduledReportsEmail:     types.CapabilityState("DENY"),
-			Dashboard:                                 types.CapabilityState("DENY"),
-			Analysis:                                  types.CapabilityState("DENY"),
-			Automate:                                  types.CapabilityState("DENY"),
-			Flow:                                      types.CapabilityState("DENY"),
-			Apps:                                      types.CapabilityState("DENY"),
-			CreateAndUpdateApps:                       types.CapabilityState("DENY"),
-			ShareApps:                                 types.CapabilityState("DENY"),
-			InvokeAppsAIInference:                     types.CapabilityState("DENY"),
-			AccessAppsNativeDataStore:                 types.CapabilityState("DENY"),
-			PublishWithoutApproval:                    types.CapabilityState("DENY"),
-			UseBedrockModels:                          types.CapabilityState("DENY"),
-			PerformFlowUiTask:                         types.CapabilityState("DENY"),
-			ApproveFlowShareRequests:                  types.CapabilityState("DENY"),
-			UseAgentWebSearch:                         types.CapabilityState("DENY"),
-			KnowledgeBase:                             types.CapabilityState("DENY"),
-			Action:                                    types.CapabilityState("DENY"),
-			GenericHTTPAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateGenericHTTPAction:          types.CapabilityState("DENY"),
-			ShareGenericHTTPAction:                    types.CapabilityState("DENY"),
-			UseGenericHTTPAction:                      types.CapabilityState("DENY"),
-			AsanaAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateAsanaAction:                types.CapabilityState("DENY"),
-			ShareAsanaAction:                          types.CapabilityState("DENY"),
-			UseAsanaAction:                            types.CapabilityState("DENY"),
-			SlackAction:                               types.CapabilityState("DENY"),
-			CreateAndUpdateSlackAction:                types.CapabilityState("DENY"),
-			ShareSlackAction:                          types.CapabilityState("DENY"),
-			UseSlackAction:                            types.CapabilityState("DENY"),
-			ServiceNowAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateServiceNowAction:           types.CapabilityState("DENY"),
-			ShareServiceNowAction:                     types.CapabilityState("DENY"),
-			UseServiceNowAction:                       types.CapabilityState("DENY"),
-			SalesforceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSalesforceAction:           types.CapabilityState("DENY"),
-			ShareSalesforceAction:                     types.CapabilityState("DENY"),
-			UseSalesforceAction:                       types.CapabilityState("DENY"),
-			MSExchangeAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateMSExchangeAction:           types.CapabilityState("DENY"),
-			ShareMSExchangeAction:                     types.CapabilityState("DENY"),
-			UseMSExchangeAction:                       types.CapabilityState("DENY"),
-			PagerDutyAction:                           types.CapabilityState("DENY"),
-			CreateAndUpdatePagerDutyAction:            types.CapabilityState("DENY"),
-			SharePagerDutyAction:                      types.CapabilityState("DENY"),
-			UsePagerDutyAction:                        types.CapabilityState("DENY"),
-			JiraAction:                                types.CapabilityState("DENY"),
-			CreateAndUpdateJiraAction:                 types.CapabilityState("DENY"),
-			ShareJiraAction:                           types.CapabilityState("DENY"),
-			UseJiraAction:                             types.CapabilityState("DENY"),
-			ConfluenceAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateConfluenceAction:           types.CapabilityState("DENY"),
-			ShareConfluenceAction:                     types.CapabilityState("DENY"),
-			UseConfluenceAction:                       types.CapabilityState("DENY"),
-			OneDriveAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateOneDriveAction:             types.CapabilityState("DENY"),
-			ShareOneDriveAction:                       types.CapabilityState("DENY"),
-			UseOneDriveAction:                         types.CapabilityState("DENY"),
-			SharePointAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSharePointAction:           types.CapabilityState("DENY"),
-			ShareSharePointAction:                     types.CapabilityState("DENY"),
-			UseSharePointAction:                       types.CapabilityState("DENY"),
-			MSTeamsAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateMSTeamsAction:              types.CapabilityState("DENY"),
-			ShareMSTeamsAction:                        types.CapabilityState("DENY"),
-			UseMSTeamsAction:                          types.CapabilityState("DENY"),
-			GoogleCalendarAction:                      types.CapabilityState("DENY"),
-			CreateAndUpdateGoogleCalendarAction:       types.CapabilityState("DENY"),
-			ShareGoogleCalendarAction:                 types.CapabilityState("DENY"),
-			UseGoogleCalendarAction:                   types.CapabilityState("DENY"),
-			ZendeskAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateZendeskAction:              types.CapabilityState("DENY"),
-			ShareZendeskAction:                        types.CapabilityState("DENY"),
-			UseZendeskAction:                          types.CapabilityState("DENY"),
-			SmartsheetAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateSmartsheetAction:           types.CapabilityState("DENY"),
-			ShareSmartsheetAction:                     types.CapabilityState("DENY"),
-			UseSmartsheetAction:                       types.CapabilityState("DENY"),
-			SAPBusinessPartnerAction:                  types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBusinessPartnerAction:   types.CapabilityState("DENY"),
-			ShareSAPBusinessPartnerAction:             types.CapabilityState("DENY"),
-			UseSAPBusinessPartnerAction:               types.CapabilityState("DENY"),
-			SAPProductMasterDataAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPProductMasterDataAction: types.CapabilityState("DENY"),
-			ShareSAPProductMasterDataAction:           types.CapabilityState("DENY"),
-			UseSAPProductMasterDataAction:             types.CapabilityState("DENY"),
-			SAPPhysicalInventoryAction:                types.CapabilityState("DENY"),
-			CreateAndUpdateSAPPhysicalInventoryAction: types.CapabilityState("DENY"),
-			ShareSAPPhysicalInventoryAction:           types.CapabilityState("DENY"),
-			UseSAPPhysicalInventoryAction:             types.CapabilityState("DENY"),
-			SAPBillOfMaterialAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSAPBillOfMaterialAction:    types.CapabilityState("DENY"),
-			ShareSAPBillOfMaterialAction:              types.CapabilityState("DENY"),
-			UseSAPBillOfMaterialAction:                types.CapabilityState("DENY"),
-			SAPMaterialStockAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateSAPMaterialStockAction:     types.CapabilityState("DENY"),
-			ShareSAPMaterialStockAction:               types.CapabilityState("DENY"),
-			UseSAPMaterialStockAction:                 types.CapabilityState("DENY"),
-			FactSetAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateFactSetAction:              types.CapabilityState("DENY"),
-			ShareFactSetAction:                        types.CapabilityState("DENY"),
-			UseFactSetAction:                          types.CapabilityState("DENY"),
-			AmazonSThreeAction:                        types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonSThreeAction:         types.CapabilityState("DENY"),
-			ShareAmazonSThreeAction:                   types.CapabilityState("DENY"),
-			UseAmazonSThreeAction:                     types.CapabilityState("DENY"),
-			TextractAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateTextractAction:             types.CapabilityState("DENY"),
-			ShareTextractAction:                       types.CapabilityState("DENY"),
-			UseTextractAction:                         types.CapabilityState("DENY"),
-			ComprehendAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendAction:           types.CapabilityState("DENY"),
-			ShareComprehendAction:                     types.CapabilityState("DENY"),
-			UseComprehendAction:                       types.CapabilityState("DENY"),
-			ComprehendMedicalAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateComprehendMedicalAction:    types.CapabilityState("DENY"),
-			ShareComprehendMedicalAction:              types.CapabilityState("DENY"),
-			UseComprehendMedicalAction:                types.CapabilityState("DENY"),
-			AmazonBedrockARSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockARSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockARSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockARSAction:                 types.CapabilityState("DENY"),
-			AmazonBedrockFSAction:                     types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockFSAction:      types.CapabilityState("DENY"),
-			ShareAmazonBedrockFSAction:                types.CapabilityState("DENY"),
-			UseAmazonBedrockFSAction:                  types.CapabilityState("DENY"),
-			AmazonBedrockKRSAction:                    types.CapabilityState("DENY"),
-			CreateAndUpdateAmazonBedrockKRSAction:     types.CapabilityState("DENY"),
-			ShareAmazonBedrockKRSAction:               types.CapabilityState("DENY"),
-			UseAmazonBedrockKRSAction:                 types.CapabilityState("DENY"),
-			MCPAction:                                 types.CapabilityState("DENY"),
-			CreateAndUpdateMCPAction:                  types.CapabilityState("DENY"),
-			ShareMCPAction:                            types.CapabilityState("DENY"),
-			UseMCPAction:                              types.CapabilityState("DENY"),
-			OpenAPIAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateOpenAPIAction:              types.CapabilityState("DENY"),
-			ShareOpenAPIAction:                        types.CapabilityState("DENY"),
-			UseOpenAPIAction:                          types.CapabilityState("DENY"),
-			SandPGMIAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGMIAction:             types.CapabilityState("DENY"),
-			ShareSandPGMIAction:                       types.CapabilityState("DENY"),
-			UseSandPGMIAction:                         types.CapabilityState("DENY"),
-			SandPGlobalEnergyAction:                   types.CapabilityState("DENY"),
-			CreateAndUpdateSandPGlobalEnergyAction:    types.CapabilityState("DENY"),
-			ShareSandPGlobalEnergyAction:              types.CapabilityState("DENY"),
-			UseSandPGlobalEnergyAction:                types.CapabilityState("DENY"),
-			BambooHRAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBambooHRAction:             types.CapabilityState("DENY"),
-			ShareBambooHRAction:                       types.CapabilityState("DENY"),
-			UseBambooHRAction:                         types.CapabilityState("DENY"),
-			BoxAgentAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateBoxAgentAction:             types.CapabilityState("DENY"),
-			ShareBoxAgentAction:                       types.CapabilityState("DENY"),
-			UseBoxAgentAction:                         types.CapabilityState("DENY"),
-			CanvaAgentAction:                          types.CapabilityState("DENY"),
-			CreateAndUpdateCanvaAgentAction:           types.CapabilityState("DENY"),
-			ShareCanvaAgentAction:                     types.CapabilityState("DENY"),
-			UseCanvaAgentAction:                       types.CapabilityState("DENY"),
-			GithubAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateGithubAction:               types.CapabilityState("DENY"),
-			ShareGithubAction:                         types.CapabilityState("DENY"),
-			UseGithubAction:                           types.CapabilityState("DENY"),
-			NotionAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateNotionAction:               types.CapabilityState("DENY"),
-			ShareNotionAction:                         types.CapabilityState("DENY"),
-			UseNotionAction:                           types.CapabilityState("DENY"),
-			LinearAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateLinearAction:               types.CapabilityState("DENY"),
-			ShareLinearAction:                         types.CapabilityState("DENY"),
-			UseLinearAction:                           types.CapabilityState("DENY"),
-			HuggingFaceAction:                         types.CapabilityState("DENY"),
-			CreateAndUpdateHuggingFaceAction:          types.CapabilityState("DENY"),
-			ShareHuggingFaceAction:                    types.CapabilityState("DENY"),
-			UseHuggingFaceAction:                      types.CapabilityState("DENY"),
-			MondayAction:                              types.CapabilityState("DENY"),
-			CreateAndUpdateMondayAction:               types.CapabilityState("DENY"),
-			ShareMondayAction:                         types.CapabilityState("DENY"),
-			UseMondayAction:                           types.CapabilityState("DENY"),
-			HubspotAction:                             types.CapabilityState("DENY"),
-			CreateAndUpdateHubspotAction:              types.CapabilityState("DENY"),
-			ShareHubspotAction:                        types.CapabilityState("DENY"),
-			UseHubspotAction:                          types.CapabilityState("DENY"),
-			IntercomAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateIntercomAction:             types.CapabilityState("DENY"),
-			ShareIntercomAction:                       types.CapabilityState("DENY"),
-			UseIntercomAction:                         types.CapabilityState("DENY"),
-			NewRelicAction:                            types.CapabilityState("DENY"),
-			CreateAndUpdateNewRelicAction:             types.CapabilityState("DENY"),
-			ShareNewRelicAction:                       types.CapabilityState("DENY"),
-			UseNewRelicAction:                         types.CapabilityState("DENY"),
-			Topic:                                     types.CapabilityState("DENY"),
-			EditVisualWithQ:                           types.CapabilityState("DENY"),
-			BuildCalculatedFieldWithQ:                 types.CapabilityState("DENY"),
-			CreateDashboardExecutiveSummaryWithQ:      types.CapabilityState("DENY"),
-			Space:                                     types.CapabilityState("DENY"),
-			CreateSpaces:                              types.CapabilityState("DENY"),
-			ShareSpaces:                               types.CapabilityState("DENY"),
-			ChatAgent:                                 types.CapabilityState("DENY"),
-			CreateChatAgents:                          types.CapabilityState("DENY"),
-			ShareChatAgents:                           types.CapabilityState("DENY"),
-			Research:                                  types.CapabilityState("DENY"),
-			SelfUpgradeUserRole:                       types.CapabilityState("DENY"),
-			Extension:                                 types.CapabilityState("DENY"),
-			UseBrowserExtension:                       types.CapabilityState("DENY"),
-			UseWordAddInExtension:                     types.CapabilityState("DENY"),
-			UseOutlookAddInExtension:                  types.CapabilityState("DENY"),
-			UseExcelAddInExtension:                    types.CapabilityState("DENY"),
-			UsePowerpointAddInExtension:               types.CapabilityState("DENY"),
-			ManageSharedFolders:                       types.CapabilityState("DENY"),
-			GenerateAnalyses:                          types.CapabilityState("DENY"),
-			Story:                                     types.CapabilityState("DENY"),
-			Scenario:                                  types.CapabilityState("DENY"),
-			Trigger:                                   types.CapabilityState("DENY"),
-			ScheduleTrigger:                           types.CapabilityState("DENY"),
-			InboundEmailTrigger:                       types.CapabilityState("DENY"),
-			QuickEventTrigger:                         types.CapabilityState("DENY"),
+			ExportToCsv:                                types.CapabilityState("DENY"),
+			ExportToExcel:                              types.CapabilityState("DENY"),
+			ExportToPdf:                                types.CapabilityState("DENY"),
+			PrintReports:                               types.CapabilityState("DENY"),
+			CreateAndUpdateThemes:                      types.CapabilityState("DENY"),
+			AddOrRunAnomalyDetectionForAnalyses:        types.CapabilityState("DENY"),
+			ShareAnalyses:                              types.CapabilityState("DENY"),
+			CreateAndUpdateDatasets:                    types.CapabilityState("DENY"),
+			ShareDatasets:                              types.CapabilityState("DENY"),
+			SubscribeDashboardEmailReports:             types.CapabilityState("DENY"),
+			CreateAndUpdateDashboardEmailReports:       types.CapabilityState("DENY"),
+			ShareDashboards:                            types.CapabilityState("DENY"),
+			CreateAndUpdateThresholdAlerts:             types.CapabilityState("DENY"),
+			RenameSharedFolders:                        types.CapabilityState("DENY"),
+			CreateSharedFolders:                        types.CapabilityState("DENY"),
+			CreateAndUpdateDataSources:                 types.CapabilityState("DENY"),
+			ShareDataSources:                           types.CapabilityState("DENY"),
+			ViewAccountSPICECapacity:                   types.CapabilityState("DENY"),
+			CreateSPICEDataset:                         types.CapabilityState("DENY"),
+			ExportToPdfInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToCsvInScheduledReports:              types.CapabilityState("DENY"),
+			ExportToExcelInScheduledReports:            types.CapabilityState("DENY"),
+			IncludeContentInScheduledReportsEmail:      types.CapabilityState("DENY"),
+			Dashboard:                                  types.CapabilityState("DENY"),
+			Analysis:                                   types.CapabilityState("DENY"),
+			Automate:                                   types.CapabilityState("DENY"),
+			Flow:                                       types.CapabilityState("DENY"),
+			Apps:                                       types.CapabilityState("DENY"),
+			CreateAndUpdateApps:                        types.CapabilityState("DENY"),
+			ShareApps:                                  types.CapabilityState("DENY"),
+			InvokeAppsAIInference:                      types.CapabilityState("DENY"),
+			AccessAppsNativeDataStore:                  types.CapabilityState("DENY"),
+			PublishWithoutApproval:                     types.CapabilityState("DENY"),
+			UseBedrockModels:                           types.CapabilityState("DENY"),
+			PerformFlowUiTask:                          types.CapabilityState("DENY"),
+			ApproveFlowShareRequests:                   types.CapabilityState("DENY"),
+			UseAgentWebSearch:                          types.CapabilityState("DENY"),
+			KnowledgeBase:                              types.CapabilityState("DENY"),
+			CreateAndUpdateKnowledgeBases:              types.CapabilityState("DENY"),
+			ShareKnowledgeBases:                        types.CapabilityState("DENY"),
+			SharePointKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareSharePointKnowledgeBase:               types.CapabilityState("DENY"),
+			UseSharePointKnowledgeBase:                 types.CapabilityState("DENY"),
+			GoogleDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleDriveKnowledgeBase:    types.CapabilityState("DENY"),
+			ShareGoogleDriveKnowledgeBase:              types.CapabilityState("DENY"),
+			UseGoogleDriveKnowledgeBase:                types.CapabilityState("DENY"),
+			WebCrawlerKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateWebCrawlerKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareWebCrawlerKnowledgeBase:               types.CapabilityState("DENY"),
+			UseWebCrawlerKnowledgeBase:                 types.CapabilityState("DENY"),
+			S3KnowledgeBase:                            types.CapabilityState("DENY"),
+			CreateAndUpdateS3KnowledgeBase:             types.CapabilityState("DENY"),
+			ShareS3KnowledgeBase:                       types.CapabilityState("DENY"),
+			UseS3KnowledgeBase:                         types.CapabilityState("DENY"),
+			ConfluenceKnowledgeBase:                    types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceKnowledgeBase:     types.CapabilityState("DENY"),
+			ShareConfluenceKnowledgeBase:               types.CapabilityState("DENY"),
+			UseConfluenceKnowledgeBase:                 types.CapabilityState("DENY"),
+			OneDriveKnowledgeBase:                      types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveKnowledgeBase:       types.CapabilityState("DENY"),
+			ShareOneDriveKnowledgeBase:                 types.CapabilityState("DENY"),
+			UseOneDriveKnowledgeBase:                   types.CapabilityState("DENY"),
+			QBusinessKnowledgeBase:                     types.CapabilityState("DENY"),
+			CreateAndUpdateQBusinessKnowledgeBase:      types.CapabilityState("DENY"),
+			ShareQBusinessKnowledgeBase:                types.CapabilityState("DENY"),
+			UseQBusinessKnowledgeBase:                  types.CapabilityState("DENY"),
+			BedrockManagedKnowledgeBase:                types.CapabilityState("DENY"),
+			CreateAndUpdateBedrockManagedKnowledgeBase: types.CapabilityState("DENY"),
+			ShareBedrockManagedKnowledgeBase:           types.CapabilityState("DENY"),
+			UseBedrockManagedKnowledgeBase:             types.CapabilityState("DENY"),
+			BoxKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateBoxKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareBoxKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseBoxKnowledgeBase:                        types.CapabilityState("DENY"),
+			IDCKnowledgeBase:                           types.CapabilityState("DENY"),
+			CreateAndUpdateIDCKnowledgeBase:            types.CapabilityState("DENY"),
+			ShareIDCKnowledgeBase:                      types.CapabilityState("DENY"),
+			UseIDCKnowledgeBase:                        types.CapabilityState("DENY"),
+			Action:                                     types.CapabilityState("DENY"),
+			GenericHTTPAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateGenericHTTPAction:           types.CapabilityState("DENY"),
+			ShareGenericHTTPAction:                     types.CapabilityState("DENY"),
+			UseGenericHTTPAction:                       types.CapabilityState("DENY"),
+			AsanaAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateAsanaAction:                 types.CapabilityState("DENY"),
+			ShareAsanaAction:                           types.CapabilityState("DENY"),
+			UseAsanaAction:                             types.CapabilityState("DENY"),
+			SlackAction:                                types.CapabilityState("DENY"),
+			CreateAndUpdateSlackAction:                 types.CapabilityState("DENY"),
+			ShareSlackAction:                           types.CapabilityState("DENY"),
+			UseSlackAction:                             types.CapabilityState("DENY"),
+			ServiceNowAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateServiceNowAction:            types.CapabilityState("DENY"),
+			ShareServiceNowAction:                      types.CapabilityState("DENY"),
+			UseServiceNowAction:                        types.CapabilityState("DENY"),
+			SalesforceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSalesforceAction:            types.CapabilityState("DENY"),
+			ShareSalesforceAction:                      types.CapabilityState("DENY"),
+			UseSalesforceAction:                        types.CapabilityState("DENY"),
+			MSExchangeAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateMSExchangeAction:            types.CapabilityState("DENY"),
+			ShareMSExchangeAction:                      types.CapabilityState("DENY"),
+			UseMSExchangeAction:                        types.CapabilityState("DENY"),
+			PagerDutyAction:                            types.CapabilityState("DENY"),
+			CreateAndUpdatePagerDutyAction:             types.CapabilityState("DENY"),
+			SharePagerDutyAction:                       types.CapabilityState("DENY"),
+			UsePagerDutyAction:                         types.CapabilityState("DENY"),
+			JiraAction:                                 types.CapabilityState("DENY"),
+			CreateAndUpdateJiraAction:                  types.CapabilityState("DENY"),
+			ShareJiraAction:                            types.CapabilityState("DENY"),
+			UseJiraAction:                              types.CapabilityState("DENY"),
+			ConfluenceAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateConfluenceAction:            types.CapabilityState("DENY"),
+			ShareConfluenceAction:                      types.CapabilityState("DENY"),
+			UseConfluenceAction:                        types.CapabilityState("DENY"),
+			OneDriveAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateOneDriveAction:              types.CapabilityState("DENY"),
+			ShareOneDriveAction:                        types.CapabilityState("DENY"),
+			UseOneDriveAction:                          types.CapabilityState("DENY"),
+			SharePointAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSharePointAction:            types.CapabilityState("DENY"),
+			ShareSharePointAction:                      types.CapabilityState("DENY"),
+			UseSharePointAction:                        types.CapabilityState("DENY"),
+			MSTeamsAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateMSTeamsAction:               types.CapabilityState("DENY"),
+			ShareMSTeamsAction:                         types.CapabilityState("DENY"),
+			UseMSTeamsAction:                           types.CapabilityState("DENY"),
+			GoogleCalendarAction:                       types.CapabilityState("DENY"),
+			CreateAndUpdateGoogleCalendarAction:        types.CapabilityState("DENY"),
+			ShareGoogleCalendarAction:                  types.CapabilityState("DENY"),
+			UseGoogleCalendarAction:                    types.CapabilityState("DENY"),
+			ZendeskAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateZendeskAction:               types.CapabilityState("DENY"),
+			ShareZendeskAction:                         types.CapabilityState("DENY"),
+			UseZendeskAction:                           types.CapabilityState("DENY"),
+			SmartsheetAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateSmartsheetAction:            types.CapabilityState("DENY"),
+			ShareSmartsheetAction:                      types.CapabilityState("DENY"),
+			UseSmartsheetAction:                        types.CapabilityState("DENY"),
+			SAPBusinessPartnerAction:                   types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBusinessPartnerAction:    types.CapabilityState("DENY"),
+			ShareSAPBusinessPartnerAction:              types.CapabilityState("DENY"),
+			UseSAPBusinessPartnerAction:                types.CapabilityState("DENY"),
+			SAPProductMasterDataAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPProductMasterDataAction:  types.CapabilityState("DENY"),
+			ShareSAPProductMasterDataAction:            types.CapabilityState("DENY"),
+			UseSAPProductMasterDataAction:              types.CapabilityState("DENY"),
+			SAPPhysicalInventoryAction:                 types.CapabilityState("DENY"),
+			CreateAndUpdateSAPPhysicalInventoryAction:  types.CapabilityState("DENY"),
+			ShareSAPPhysicalInventoryAction:            types.CapabilityState("DENY"),
+			UseSAPPhysicalInventoryAction:              types.CapabilityState("DENY"),
+			SAPBillOfMaterialAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSAPBillOfMaterialAction:     types.CapabilityState("DENY"),
+			ShareSAPBillOfMaterialAction:               types.CapabilityState("DENY"),
+			UseSAPBillOfMaterialAction:                 types.CapabilityState("DENY"),
+			SAPMaterialStockAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateSAPMaterialStockAction:      types.CapabilityState("DENY"),
+			ShareSAPMaterialStockAction:                types.CapabilityState("DENY"),
+			UseSAPMaterialStockAction:                  types.CapabilityState("DENY"),
+			FactSetAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateFactSetAction:               types.CapabilityState("DENY"),
+			ShareFactSetAction:                         types.CapabilityState("DENY"),
+			UseFactSetAction:                           types.CapabilityState("DENY"),
+			AmazonSThreeAction:                         types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonSThreeAction:          types.CapabilityState("DENY"),
+			ShareAmazonSThreeAction:                    types.CapabilityState("DENY"),
+			UseAmazonSThreeAction:                      types.CapabilityState("DENY"),
+			TextractAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateTextractAction:              types.CapabilityState("DENY"),
+			ShareTextractAction:                        types.CapabilityState("DENY"),
+			UseTextractAction:                          types.CapabilityState("DENY"),
+			ComprehendAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendAction:            types.CapabilityState("DENY"),
+			ShareComprehendAction:                      types.CapabilityState("DENY"),
+			UseComprehendAction:                        types.CapabilityState("DENY"),
+			ComprehendMedicalAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateComprehendMedicalAction:     types.CapabilityState("DENY"),
+			ShareComprehendMedicalAction:               types.CapabilityState("DENY"),
+			UseComprehendMedicalAction:                 types.CapabilityState("DENY"),
+			AmazonBedrockARSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockARSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockARSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockARSAction:                  types.CapabilityState("DENY"),
+			AmazonBedrockFSAction:                      types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockFSAction:       types.CapabilityState("DENY"),
+			ShareAmazonBedrockFSAction:                 types.CapabilityState("DENY"),
+			UseAmazonBedrockFSAction:                   types.CapabilityState("DENY"),
+			AmazonBedrockKRSAction:                     types.CapabilityState("DENY"),
+			CreateAndUpdateAmazonBedrockKRSAction:      types.CapabilityState("DENY"),
+			ShareAmazonBedrockKRSAction:                types.CapabilityState("DENY"),
+			UseAmazonBedrockKRSAction:                  types.CapabilityState("DENY"),
+			MCPAction:                                  types.CapabilityState("DENY"),
+			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
+			ShareMCPAction:                             types.CapabilityState("DENY"),
+			UseMCPAction:                               types.CapabilityState("DENY"),
+			OpenAPIAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
+			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
+			UseOpenAPIAction:                           types.CapabilityState("DENY"),
+			SandPGMIAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGMIAction:              types.CapabilityState("DENY"),
+			ShareSandPGMIAction:                        types.CapabilityState("DENY"),
+			UseSandPGMIAction:                          types.CapabilityState("DENY"),
+			SandPGlobalEnergyAction:                    types.CapabilityState("DENY"),
+			CreateAndUpdateSandPGlobalEnergyAction:     types.CapabilityState("DENY"),
+			ShareSandPGlobalEnergyAction:               types.CapabilityState("DENY"),
+			UseSandPGlobalEnergyAction:                 types.CapabilityState("DENY"),
+			BambooHRAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBambooHRAction:              types.CapabilityState("DENY"),
+			ShareBambooHRAction:                        types.CapabilityState("DENY"),
+			UseBambooHRAction:                          types.CapabilityState("DENY"),
+			BoxAgentAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateBoxAgentAction:              types.CapabilityState("DENY"),
+			ShareBoxAgentAction:                        types.CapabilityState("DENY"),
+			UseBoxAgentAction:                          types.CapabilityState("DENY"),
+			CanvaAgentAction:                           types.CapabilityState("DENY"),
+			CreateAndUpdateCanvaAgentAction:            types.CapabilityState("DENY"),
+			ShareCanvaAgentAction:                      types.CapabilityState("DENY"),
+			UseCanvaAgentAction:                        types.CapabilityState("DENY"),
+			GithubAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateGithubAction:                types.CapabilityState("DENY"),
+			ShareGithubAction:                          types.CapabilityState("DENY"),
+			UseGithubAction:                            types.CapabilityState("DENY"),
+			NotionAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateNotionAction:                types.CapabilityState("DENY"),
+			ShareNotionAction:                          types.CapabilityState("DENY"),
+			UseNotionAction:                            types.CapabilityState("DENY"),
+			LinearAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateLinearAction:                types.CapabilityState("DENY"),
+			ShareLinearAction:                          types.CapabilityState("DENY"),
+			UseLinearAction:                            types.CapabilityState("DENY"),
+			HuggingFaceAction:                          types.CapabilityState("DENY"),
+			CreateAndUpdateHuggingFaceAction:           types.CapabilityState("DENY"),
+			ShareHuggingFaceAction:                     types.CapabilityState("DENY"),
+			UseHuggingFaceAction:                       types.CapabilityState("DENY"),
+			MondayAction:                               types.CapabilityState("DENY"),
+			CreateAndUpdateMondayAction:                types.CapabilityState("DENY"),
+			ShareMondayAction:                          types.CapabilityState("DENY"),
+			UseMondayAction:                            types.CapabilityState("DENY"),
+			HubspotAction:                              types.CapabilityState("DENY"),
+			CreateAndUpdateHubspotAction:               types.CapabilityState("DENY"),
+			ShareHubspotAction:                         types.CapabilityState("DENY"),
+			UseHubspotAction:                           types.CapabilityState("DENY"),
+			IntercomAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateIntercomAction:              types.CapabilityState("DENY"),
+			ShareIntercomAction:                        types.CapabilityState("DENY"),
+			UseIntercomAction:                          types.CapabilityState("DENY"),
+			NewRelicAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateNewRelicAction:              types.CapabilityState("DENY"),
+			ShareNewRelicAction:                        types.CapabilityState("DENY"),
+			UseNewRelicAction:                          types.CapabilityState("DENY"),
+			Topic:                                      types.CapabilityState("DENY"),
+			EditVisualWithQ:                            types.CapabilityState("DENY"),
+			BuildCalculatedFieldWithQ:                  types.CapabilityState("DENY"),
+			CreateDashboardExecutiveSummaryWithQ:       types.CapabilityState("DENY"),
+			Space:                                      types.CapabilityState("DENY"),
+			CreateSpaces:                               types.CapabilityState("DENY"),
+			ShareSpaces:                                types.CapabilityState("DENY"),
+			ChatAgent:                                  types.CapabilityState("DENY"),
+			CreateChatAgents:                           types.CapabilityState("DENY"),
+			ShareChatAgents:                            types.CapabilityState("DENY"),
+			Research:                                   types.CapabilityState("DENY"),
+			SelfUpgradeUserRole:                        types.CapabilityState("DENY"),
+			Extension:                                  types.CapabilityState("DENY"),
+			UseBrowserExtension:                        types.CapabilityState("DENY"),
+			UseWordAddInExtension:                      types.CapabilityState("DENY"),
+			UseOutlookAddInExtension:                   types.CapabilityState("DENY"),
+			UseExcelAddInExtension:                     types.CapabilityState("DENY"),
+			UsePowerpointAddInExtension:                types.CapabilityState("DENY"),
+			ManageSharedFolders:                        types.CapabilityState("DENY"),
+			GenerateAnalyses:                           types.CapabilityState("DENY"),
+			Story:                                      types.CapabilityState("DENY"),
+			Scenario:                                   types.CapabilityState("DENY"),
+			Trigger:                                    types.CapabilityState("DENY"),
+			ScheduleTrigger:                            types.CapabilityState("DENY"),
+			InboundEmailTrigger:                        types.CapabilityState("DENY"),
+			QuickEventTrigger:                          types.CapabilityState("DENY"),
 		},
 		Governance: &types.Governance{
 			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
@@ -53699,6 +55623,16 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 					{
 						DataSetPlaceholder: ptr.String("__DataSetPlaceholder__"),
 						DataSetArn:         ptr.String("__DataSetArn__"),
+					},
+				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
 					},
 				},
 				Arn: ptr.String("__Arn__"),
@@ -53832,6 +55766,16 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 					DataSetArn: ptr.String("__DataSetArn__"),
 				},
 			},
+			TopicIdentifierDeclarations: []types.TopicIdentifierDeclaration{
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+				{
+					Identifier: ptr.String("__Identifier__"),
+					TopicArn:   ptr.String("__TopicArn__"),
+				},
+			},
 			Sheets: []types.SheetDefinition{
 				{
 					SheetId:     ptr.String("__SheetId__"),
@@ -53916,6 +55860,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -53925,6 +55870,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -53932,6 +55878,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -53945,6 +55892,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -53971,6 +55919,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54034,6 +55983,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -54043,6 +55993,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54050,6 +56001,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54064,6 +56016,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54090,6 +56043,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54299,6 +56253,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -54308,6 +56263,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54315,6 +56271,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54328,6 +56285,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54354,6 +56312,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54417,6 +56376,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -54426,6 +56386,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54433,6 +56394,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54447,6 +56409,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54473,6 +56436,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54691,6 +56655,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54698,6 +56663,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54711,6 +56677,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54737,6 +56704,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54805,6 +56773,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54812,6 +56781,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -54826,6 +56796,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -54852,6 +56823,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -55027,6 +56999,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55034,6 +57007,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55125,6 +57099,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55132,6 +57107,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55145,6 +57121,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -55171,6 +57148,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -55239,6 +57217,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55246,6 +57225,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55260,6 +57240,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -55286,6 +57267,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -55461,6 +57443,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -55468,6 +57451,7 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -57947,6 +59931,16 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 						DataSetArn:         ptr.String("__DataSetArn__"),
 					},
 				},
+				TopicReferences: []types.TopicReference{
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+					{
+						TopicPlaceholder: ptr.String("__TopicPlaceholder__"),
+						TopicArn:         ptr.String("__TopicArn__"),
+					},
+				},
 			},
 			SourceTemplate: &types.TemplateSourceTemplate{
 				Arn: ptr.String("__Arn__"),
@@ -57956,6 +59950,90 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 		Name:               ptr.String("__Name__"),
 		Definition: &types.TemplateVersionDefinition{
 			DataSetConfigurations: []types.DataSetConfiguration{
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Placeholder: ptr.String("__Placeholder__"),
+					DataSetSchema: &types.DataSetSchema{
+						ColumnSchemaList: []types.ColumnSchema{
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+							{
+								Name:           ptr.String("__Name__"),
+								DataType:       ptr.String("__DataType__"),
+								GeographicRole: ptr.String("__GeographicRole__"),
+							},
+						},
+					},
+					ColumnGroupSchemaList: []types.ColumnGroupSchema{
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							ColumnGroupColumnSchemaList: []types.ColumnGroupColumnSchema{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			TopicConfigurations: []types.TopicConfiguration{
 				{
 					Placeholder: ptr.String("__Placeholder__"),
 					DataSetSchema: &types.DataSetSchema{
@@ -58123,6 +60201,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -58132,6 +60211,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58139,6 +60219,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58152,6 +60233,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58178,6 +60260,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58241,6 +60324,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -58250,6 +60334,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58257,6 +60342,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58271,6 +60357,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58297,6 +60384,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58506,6 +60594,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -58515,6 +60604,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58522,6 +60612,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58535,6 +60626,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58561,6 +60653,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58624,6 +60717,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 									LinkToDataSetColumn: &types.ColumnIdentifier{
 										DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+										TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 										ColumnName:        ptr.String("__ColumnName__"),
 									},
 								},
@@ -58633,6 +60727,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58640,6 +60735,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58654,6 +60750,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58680,6 +60777,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58898,6 +60996,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58905,6 +61004,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -58918,6 +61018,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -58944,6 +61045,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59012,6 +61114,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59019,6 +61122,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59033,6 +61137,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59059,6 +61164,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59234,6 +61340,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59241,6 +61348,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59332,6 +61440,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59339,6 +61448,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59352,6 +61462,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59378,6 +61489,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59446,6 +61558,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59453,6 +61566,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59467,6 +61581,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59493,6 +61608,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 										ControlColumnSort: &types.AggregationSortConfiguration{
 											Column: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 											SortDirection: types.SortDirection("ASC"),
@@ -59668,6 +61784,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -59675,6 +61792,7 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											SourceSheetControlId: ptr.String("__SourceSheetControlId__"),
 											ColumnToMatch: &types.ColumnIdentifier{
 												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
 												ColumnName:        ptr.String("__ColumnName__"),
 											},
 										},
@@ -60277,7 +62395,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -60285,6 +62404,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -60296,6 +62417,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -60306,6 +62429,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -60314,6 +62438,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -60347,7 +62472,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -60355,6 +62481,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -60366,6 +62494,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -60376,6 +62506,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -60384,6 +62515,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -60766,6 +62898,9 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -60778,8 +62913,23 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -60807,6 +62957,9 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -60819,8 +62972,23 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -60856,7 +63024,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -60864,6 +63033,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -60875,6 +63046,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -60885,6 +63058,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -60893,6 +63067,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -60926,7 +63101,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										},
 									},
 								},
-								Inverse: true,
+								Inverse:    true,
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NumericEqualityFilter: &types.TopicNumericEqualityFilter{
 								Constant: &types.TopicSingularFilterConstant{
@@ -60934,6 +63110,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							NumericRangeFilter: &types.TopicNumericRangeFilter{
 								Inclusive: true,
@@ -60945,6 +63123,8 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									},
 								},
 								Aggregation: types.NamedFilterAggType("NO_AGGREGATION"),
+								Inverse:     true,
+								NullFilter:  types.NullFilterType("ALL_VALUES"),
 							},
 							DateRangeFilter: &types.TopicDateRangeFilter{
 								Inclusive: true,
@@ -60955,6 +63135,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 										Maximum: ptr.String("__Maximum__"),
 									},
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							RelativeDateFilter: &types.TopicRelativeDateFilter{
 								TimeGranularity:            types.TopicTimeGranularity("SECOND"),
@@ -60963,6 +63144,7 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 									ConstantType:     types.ConstantType("SINGULAR"),
 									SingularConstant: ptr.String("__SingularConstant__"),
 								},
+								NullFilter: types.NullFilterType("ALL_VALUES"),
 							},
 							NullFilter: &types.TopicNullFilter{
 								NullFilterType: types.NullFilterType("ALL_VALUES"),
@@ -61345,6 +63527,9 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -61357,8 +63542,23 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 						{
 							EntityName:        ptr.String("__EntityName__"),
@@ -61386,6 +63586,9 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 								{
 									FieldName:     ptr.String("__FieldName__"),
@@ -61398,8 +63601,23 @@ func TestUpdateRequestSnapshot_UpdateTopic(t *testing.T) {
 											"key0": "__Value__",
 										},
 									},
+									RankOrder:         ptr.Int32(1),
+									PresentationOrder: ptr.Int32(1),
+									IsHidden:          ptr.Bool(true),
 								},
 							},
+							Sort: []types.NamedEntitySort{
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+								{
+									FieldName: ptr.String("__FieldName__"),
+									Direction: types.TopicSortDirection("ASCENDING"),
+								},
+							},
+							RankOrder:         ptr.Int32(1),
+							PresentationOrder: ptr.Int32(1),
 						},
 					},
 				},
@@ -61495,6 +63713,66 @@ func TestUpdateRequestSnapshot_UpdateTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateTopicPermissionsV2(t *testing.T) {
+	input := &UpdateTopicPermissionsV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		GrantPermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RevokePermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTopicPermissionsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicPermissionsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 	input := &UpdateTopicRefreshScheduleInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -61528,6 +63806,86 @@ func TestUpdateRequestSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateTopicV2(t *testing.T) {
+	input := &UpdateTopicV2Input{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		TopicId:      ptr.String("__TopicId__"),
+		Topic: &types.TopicV2Details{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			DataSets: []types.TopicV2DataSetReference{
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+				{
+					DataSetArn:  ptr.String("__DataSetArn__"),
+					DataSetName: ptr.String("__DataSetName__"),
+				},
+			},
+			DataSetRelations: []types.TopicV2DataSetRelation{
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Left: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Right: &types.TopicV2DataSetRelationEndpoint{
+						DataSetArn: ptr.String("__DataSetArn__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		CustomInstructions: &types.CustomInstructions{
+			CustomInstructionsString: ptr.String("__CustomInstructionsString__"),
+		},
+		PublishOption: types.TopicV2PublishOption("DRAFT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTopicV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTopicV2"); err != nil {
 		t.Fatal(err)
 	}
 }

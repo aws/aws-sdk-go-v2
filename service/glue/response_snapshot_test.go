@@ -14311,6 +14311,35 @@ func TestCheckResponseSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	want := &GetDataCatalogExportConfigurationOutput{
+		ExportSetting: types.ExportSetting("ENABLED"),
+		Status:        types.ExportStatus("ENABLING"),
+		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+			SseAlgorithm: ptr.String("__SseAlgorithm__"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		S3TableBucketArn: ptr.String("__S3TableBucketArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDataCatalogExportConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDataCatalogExportConfiguration(context.Background(), &GetDataCatalogExportConfigurationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDataCatalogExportConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDataQualityModel(t *testing.T) {
 	want := &GetDataQualityModelOutput{
 		Status:        types.DataQualityModelStatus("RUNNING"),
@@ -32417,6 +32446,31 @@ func TestCheckResponseSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutDataCatalogEncryptionSettings.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	want := &PutDataCatalogExportConfigurationOutput{
+		ExportSetting: types.ExportSetting("ENABLED"),
+		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+			SseAlgorithm: ptr.String("__SseAlgorithm__"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutDataCatalogExportConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutDataCatalogExportConfiguration(context.Background(), &PutDataCatalogExportConfigurationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutDataCatalogExportConfiguration.response", err)
 	}
 }
 

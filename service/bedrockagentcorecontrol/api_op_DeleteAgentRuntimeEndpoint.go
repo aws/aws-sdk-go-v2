@@ -7,10 +7,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AAgentCore Runtime endpoint.
+// Deletes an AgentCore Runtime endpoint.
 func (c *Client) DeleteAgentRuntimeEndpoint(ctx context.Context, params *DeleteAgentRuntimeEndpointInput, optFns ...func(*Options)) (*DeleteAgentRuntimeEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteAgentRuntimeEndpointInput{}
@@ -73,9 +72,6 @@ func (c *Client) addOperationDeleteAgentRuntimeEndpointMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,12 +84,6 @@ func (c *Client) addOperationDeleteAgentRuntimeEndpointMiddlewares(stack *middle
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -101,9 +91,6 @@ func (c *Client) addOperationDeleteAgentRuntimeEndpointMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpDeleteAgentRuntimeEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteAgentRuntimeEndpoint"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

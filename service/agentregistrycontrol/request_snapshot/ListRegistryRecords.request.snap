@@ -1,0 +1,5 @@
+POST /registries/__RegistryId__/records-list
+
+Content-Type: application/json
+
+{"filters":[{"name":"name","values":["__Member__","__Member__"]},{"name":"name","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an analysis in Amazon Quick Sight
@@ -57,7 +56,7 @@ type UpdateAnalysisInput struct {
 
 	// A source entity to use for the analysis that you're updating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets.
+	// datasets or topics.
 	SourceEntity *types.AnalysisSourceEntity
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
@@ -105,9 +104,6 @@ func (c *Client) addOperationUpdateAnalysisMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -120,19 +116,10 @@ func (c *Client) addOperationUpdateAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateAnalysis"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

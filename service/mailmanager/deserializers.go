@@ -28,12 +28,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonInstance) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -42,6 +36,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonInstance) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -93,12 +95,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonSubscription) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -107,6 +103,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddonSubscription) HandleDeserialize
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -158,12 +162,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressList) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -172,6 +170,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressList) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -223,12 +229,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressListImportJob) HandleDeserial
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -237,6 +237,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateAddressListImportJob) HandleDeserial
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -288,12 +296,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateArchive) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -302,6 +304,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateArchive) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -353,12 +363,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateIngressPoint) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -367,6 +371,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateIngressPoint) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -418,12 +430,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRelay) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -432,6 +438,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRelay) HandleDeserialize(ctx context
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -483,12 +497,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRuleSet) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -497,6 +505,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateRuleSet) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -548,12 +564,6 @@ func (m *smithyRpcv2cbor_deserializeOpCreateTrafficPolicy) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -562,6 +572,14 @@ func (m *smithyRpcv2cbor_deserializeOpCreateTrafficPolicy) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -613,12 +631,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonInstance) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -627,6 +639,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonInstance) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -662,12 +682,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonSubscription) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -676,6 +690,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddonSubscription) HandleDeserialize
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -711,12 +733,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddressList) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -725,6 +741,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAddressList) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -760,12 +784,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteArchive) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -774,6 +792,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteArchive) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -809,12 +835,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteIngressPoint) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -823,6 +843,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteIngressPoint) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -858,12 +886,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRelay) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -872,6 +894,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRelay) HandleDeserialize(ctx context
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -907,12 +937,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRuleSet) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -921,6 +945,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRuleSet) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -956,12 +988,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteTrafficPolicy) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -970,6 +996,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteTrafficPolicy) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1005,12 +1039,6 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterMemberFromAddressList) HandleDes
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1019,6 +1047,14 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterMemberFromAddressList) HandleDes
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1054,12 +1090,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonInstance) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1068,6 +1098,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonInstance) HandleDeserialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1119,12 +1157,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonSubscription) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1133,6 +1165,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddonSubscription) HandleDeserialize(ct
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1184,12 +1224,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressList) HandleDeserialize(ctx cont
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1198,6 +1232,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressList) HandleDeserialize(ctx cont
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1249,12 +1291,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressListImportJob) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1263,6 +1299,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetAddressListImportJob) HandleDeserialize
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1314,12 +1358,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchive) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1328,6 +1366,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchive) HandleDeserialize(ctx context.
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1379,12 +1425,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveExport) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1393,6 +1433,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveExport) HandleDeserialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1444,12 +1492,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessage) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1458,6 +1500,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessage) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1509,12 +1559,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessageContent) HandleDeserializ
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1523,6 +1567,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveMessageContent) HandleDeserializ
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1574,12 +1626,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearch) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1588,6 +1634,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearch) HandleDeserialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1639,12 +1693,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearchResults) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1653,6 +1701,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetArchiveSearchResults) HandleDeserialize
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1704,12 +1760,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetIngressPoint) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1718,6 +1768,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetIngressPoint) HandleDeserialize(ctx con
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1769,12 +1827,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetMemberOfAddressList) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1783,6 +1835,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetMemberOfAddressList) HandleDeserialize(
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1834,12 +1894,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetRelay) HandleDeserialize(ctx context.Co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1848,6 +1902,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetRelay) HandleDeserialize(ctx context.Co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1899,12 +1961,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetRuleSet) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1913,6 +1969,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetRuleSet) HandleDeserialize(ctx context.
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -1964,12 +2028,6 @@ func (m *smithyRpcv2cbor_deserializeOpGetTrafficPolicy) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -1978,6 +2036,14 @@ func (m *smithyRpcv2cbor_deserializeOpGetTrafficPolicy) HandleDeserialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2029,12 +2095,6 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonInstances) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2043,6 +2103,14 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonInstances) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2094,12 +2162,6 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonSubscriptions) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2108,6 +2170,14 @@ func (m *smithyRpcv2cbor_deserializeOpListAddonSubscriptions) HandleDeserialize(
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2159,12 +2229,6 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressListImportJobs) HandleDeseriali
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2173,6 +2237,14 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressListImportJobs) HandleDeseriali
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2224,12 +2296,6 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressLists) HandleDeserialize(ctx co
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2238,6 +2304,14 @@ func (m *smithyRpcv2cbor_deserializeOpListAddressLists) HandleDeserialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2289,12 +2363,6 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveExports) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2303,6 +2371,14 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveExports) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2354,12 +2430,6 @@ func (m *smithyRpcv2cbor_deserializeOpListArchives) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2368,6 +2438,14 @@ func (m *smithyRpcv2cbor_deserializeOpListArchives) HandleDeserialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2419,12 +2497,6 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveSearches) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2433,6 +2505,14 @@ func (m *smithyRpcv2cbor_deserializeOpListArchiveSearches) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2484,12 +2564,6 @@ func (m *smithyRpcv2cbor_deserializeOpListIngressPoints) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2498,6 +2572,14 @@ func (m *smithyRpcv2cbor_deserializeOpListIngressPoints) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2549,12 +2631,6 @@ func (m *smithyRpcv2cbor_deserializeOpListMembersOfAddressList) HandleDeserializ
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2563,6 +2639,14 @@ func (m *smithyRpcv2cbor_deserializeOpListMembersOfAddressList) HandleDeserializ
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2614,12 +2698,6 @@ func (m *smithyRpcv2cbor_deserializeOpListRelays) HandleDeserialize(ctx context.
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2628,6 +2706,14 @@ func (m *smithyRpcv2cbor_deserializeOpListRelays) HandleDeserialize(ctx context.
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2679,12 +2765,6 @@ func (m *smithyRpcv2cbor_deserializeOpListRuleSets) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2693,6 +2773,14 @@ func (m *smithyRpcv2cbor_deserializeOpListRuleSets) HandleDeserialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2744,12 +2832,6 @@ func (m *smithyRpcv2cbor_deserializeOpListTagsForResource) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2758,6 +2840,14 @@ func (m *smithyRpcv2cbor_deserializeOpListTagsForResource) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2809,12 +2899,6 @@ func (m *smithyRpcv2cbor_deserializeOpListTrafficPolicies) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2823,6 +2907,14 @@ func (m *smithyRpcv2cbor_deserializeOpListTrafficPolicies) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2874,12 +2966,6 @@ func (m *smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList) HandleDeseria
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2888,6 +2974,14 @@ func (m *smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList) HandleDeseria
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2923,12 +3017,6 @@ func (m *smithyRpcv2cbor_deserializeOpStartAddressListImportJob) HandleDeseriali
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2937,6 +3025,14 @@ func (m *smithyRpcv2cbor_deserializeOpStartAddressListImportJob) HandleDeseriali
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -2972,12 +3068,6 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveExport) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -2986,6 +3076,14 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveExport) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3037,12 +3135,6 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveSearch) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3051,6 +3143,14 @@ func (m *smithyRpcv2cbor_deserializeOpStartArchiveSearch) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3102,12 +3202,6 @@ func (m *smithyRpcv2cbor_deserializeOpStopAddressListImportJob) HandleDeserializ
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3116,6 +3210,14 @@ func (m *smithyRpcv2cbor_deserializeOpStopAddressListImportJob) HandleDeserializ
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3151,12 +3253,6 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveExport) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3165,6 +3261,14 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveExport) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3200,12 +3304,6 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveSearch) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3214,6 +3312,14 @@ func (m *smithyRpcv2cbor_deserializeOpStopArchiveSearch) HandleDeserialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3249,12 +3355,6 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3263,6 +3363,14 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3298,12 +3406,6 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3312,6 +3414,14 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3347,12 +3457,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateArchive) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3361,6 +3465,14 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateArchive) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3396,12 +3508,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateIngressPoint) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3410,6 +3516,14 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateIngressPoint) HandleDeserialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3445,12 +3559,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRelay) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3459,6 +3567,14 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRelay) HandleDeserialize(ctx context
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3494,12 +3610,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRuleSet) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3508,6 +3618,14 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateRuleSet) HandleDeserialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3543,12 +3661,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateTrafficPolicy) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
-
 	if err != nil {
 		return out, metadata, err
 	}
@@ -3557,6 +3669,14 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateTrafficPolicy) HandleDeserialize(ctx
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
+
+	// Event streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
 		return out, metadata, &smithy.DeserializationError{
@@ -3953,7 +4073,9 @@ func deserializeCBOR_Archive(v smithycbor.Value) (*types.Archive, error) {
 		}
 
 		if key == "ArchiveState" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveState(sv)
 			if err != nil {
 				return nil, err
@@ -3984,7 +4106,9 @@ func deserializeCBOR_ArchiveAction(v smithycbor.Value) (*types.ArchiveAction, er
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4023,7 +4147,9 @@ func deserializeCBOR_ArchiveBooleanExpression(v smithycbor.Value) (*types.Archiv
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4032,7 +4158,9 @@ func deserializeCBOR_ArchiveBooleanExpression(v smithycbor.Value) (*types.Archiv
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -4214,7 +4342,9 @@ func deserializeCBOR_ArchiveStringExpression(v smithycbor.Value) (*types.Archive
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4223,7 +4353,9 @@ func deserializeCBOR_ArchiveStringExpression(v smithycbor.Value) (*types.Archive
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -4282,7 +4414,9 @@ func deserializeCBOR_BounceAction(v smithycbor.Value) (*types.BounceAction, erro
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4390,7 +4524,9 @@ func deserializeCBOR_DeliverToMailboxAction(v smithycbor.Value) (*types.DeliverT
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4432,7 +4568,9 @@ func deserializeCBOR_DeliverToQBusinessAction(v smithycbor.Value) (*types.Delive
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4609,7 +4747,9 @@ func deserializeCBOR_ExportStatus(v smithycbor.Value) (*types.ExportStatus, erro
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ExportState(sv)
 			if err != nil {
 				return nil, err
@@ -4690,7 +4830,9 @@ func deserializeCBOR_ImportDataFormat(v smithycbor.Value) (*types.ImportDataForm
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ImportDataType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImportDataType(sv)
 			if err != nil {
 				return nil, err
@@ -4740,7 +4882,9 @@ func deserializeCBOR_ImportJob(v smithycbor.Value) (*types.ImportJob, error) {
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImportJobStatus(sv)
 			if err != nil {
 				return nil, err
@@ -4942,7 +5086,9 @@ func deserializeCBOR_IngressBooleanExpression(v smithycbor.Value) (*types.Ingres
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4951,7 +5097,9 @@ func deserializeCBOR_IngressBooleanExpression(v smithycbor.Value) (*types.Ingres
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5046,7 +5194,9 @@ func deserializeCBOR_IngressIpv4Expression(v smithycbor.Value) (*types.IngressIp
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressIpToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5055,7 +5205,9 @@ func deserializeCBOR_IngressIpv4Expression(v smithycbor.Value) (*types.IngressIp
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5094,7 +5246,9 @@ func deserializeCBOR_IngressIpv6Expression(v smithycbor.Value) (*types.IngressIp
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressIpv6ToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5103,7 +5257,9 @@ func deserializeCBOR_IngressIpv6Expression(v smithycbor.Value) (*types.IngressIp
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5154,7 +5310,9 @@ func deserializeCBOR_IngressIsInAddressList(v smithycbor.Value) (*types.IngressI
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Attribute" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressAddressListEmailAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -5207,7 +5365,9 @@ func deserializeCBOR_IngressPoint(v smithycbor.Value) (*types.IngressPoint, erro
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressPointStatus(sv)
 			if err != nil {
 				return nil, err
@@ -5216,7 +5376,9 @@ func deserializeCBOR_IngressPoint(v smithycbor.Value) (*types.IngressPoint, erro
 		}
 
 		if key == "Type" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressPointType(sv)
 			if err != nil {
 				return nil, err
@@ -5376,7 +5538,9 @@ func deserializeCBOR_IngressStringExpression(v smithycbor.Value) (*types.Ingress
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5385,7 +5549,9 @@ func deserializeCBOR_IngressStringExpression(v smithycbor.Value) (*types.Ingress
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5471,7 +5637,9 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressTlsProtocolToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5480,7 +5648,9 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressTlsProtocolOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5489,7 +5659,9 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 		}
 
 		if key == "Value" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressTlsProtocolAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -5537,7 +5709,9 @@ func deserializeCBOR_InvokeLambdaAction(v smithycbor.Value) (*types.InvokeLambda
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -5557,7 +5731,9 @@ func deserializeCBOR_InvokeLambdaAction(v smithycbor.Value) (*types.InvokeLambda
 		}
 
 		if key == "InvocationType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_LambdaInvocationType(sv)
 			if err != nil {
 				return nil, err
@@ -5991,7 +6167,9 @@ func deserializeCBOR_PolicyStatement(v smithycbor.Value) (*types.PolicyStatement
 		}
 
 		if key == "Action" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err
@@ -6050,7 +6228,9 @@ func deserializeCBOR_PublicNetworkConfiguration(v smithycbor.Value) (*types.Publ
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "IpType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IpType(sv)
 			if err != nil {
 				return nil, err
@@ -6131,7 +6311,9 @@ func deserializeCBOR_RelayAction(v smithycbor.Value) (*types.RelayAction, error)
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -6151,7 +6333,9 @@ func deserializeCBOR_RelayAction(v smithycbor.Value) (*types.RelayAction, error)
 		}
 
 		if key == "MailFrom" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_MailFrom(sv)
 			if err != nil {
 				return nil, err
@@ -6754,7 +6938,9 @@ func deserializeCBOR_RuleBooleanExpression(v smithycbor.Value) (*types.RuleBoole
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -6763,7 +6949,9 @@ func deserializeCBOR_RuleBooleanExpression(v smithycbor.Value) (*types.RuleBoole
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -6933,7 +7121,9 @@ func deserializeCBOR_RuleDmarcExpression(v smithycbor.Value) (*types.RuleDmarcEx
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleDmarcOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7005,7 +7195,9 @@ func deserializeCBOR_RuleIpExpression(v smithycbor.Value) (*types.RuleIpExpressi
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleIpToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7014,7 +7206,9 @@ func deserializeCBOR_RuleIpExpression(v smithycbor.Value) (*types.RuleIpExpressi
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7090,7 +7284,9 @@ func deserializeCBOR_RuleIsInAddressList(v smithycbor.Value) (*types.RuleIsInAdd
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Attribute" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleAddressListEmailAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -7129,7 +7325,9 @@ func deserializeCBOR_RuleNumberExpression(v smithycbor.Value) (*types.RuleNumber
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleNumberToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7138,7 +7336,9 @@ func deserializeCBOR_RuleNumberExpression(v smithycbor.Value) (*types.RuleNumber
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleNumberOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7283,7 +7483,9 @@ func deserializeCBOR_RuleStringExpression(v smithycbor.Value) (*types.RuleString
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7292,7 +7494,9 @@ func deserializeCBOR_RuleStringExpression(v smithycbor.Value) (*types.RuleString
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7417,7 +7621,9 @@ func deserializeCBOR_RuleVerdictExpression(v smithycbor.Value) (*types.RuleVerdi
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleVerdictToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7426,7 +7632,9 @@ func deserializeCBOR_RuleVerdictExpression(v smithycbor.Value) (*types.RuleVerdi
 		}
 
 		if key == "Operator" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RuleVerdictOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7513,7 +7721,9 @@ func deserializeCBOR_S3Action(v smithycbor.Value) (*types.S3Action, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7679,7 +7889,9 @@ func deserializeCBOR_SearchStatus(v smithycbor.Value) (*types.SearchStatus, erro
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SearchState(sv)
 			if err != nil {
 				return nil, err
@@ -7760,7 +7972,9 @@ func deserializeCBOR_SendAction(v smithycbor.Value) (*types.SendAction, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7813,7 +8027,9 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7844,7 +8060,9 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 		}
 
 		if key == "Encoding" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SnsNotificationEncoding(sv)
 			if err != nil {
 				return nil, err
@@ -7853,7 +8071,9 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 		}
 
 		if key == "PayloadType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SnsNotificationPayloadType(sv)
 			if err != nil {
 				return nil, err
@@ -8047,7 +8267,9 @@ func deserializeCBOR_TrafficPolicy(v smithycbor.Value) (*types.TrafficPolicy, er
 		}
 
 		if key == "DefaultAction" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err
@@ -8508,7 +8730,9 @@ func deserializeCBOR_GetAddressListImportJobOutput(v smithycbor.Value) (*GetAddr
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImportJobStatus(sv)
 			if err != nil {
 				return nil, err
@@ -8748,7 +8972,9 @@ func deserializeCBOR_GetArchiveExportOutput(v smithycbor.Value) (*GetArchiveExpo
 		}
 
 		if key == "ExportDestinationConfiguration" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ExportDestinationConfiguration(sv)
 			if err != nil {
 				return nil, err
@@ -8878,7 +9104,9 @@ func deserializeCBOR_GetArchiveOutput(v smithycbor.Value) (*GetArchiveOutput, er
 		}
 
 		if key == "ArchiveState" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveState(sv)
 			if err != nil {
 				return nil, err
@@ -8887,7 +9115,9 @@ func deserializeCBOR_GetArchiveOutput(v smithycbor.Value) (*GetArchiveOutput, er
 		}
 
 		if key == "Retention" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ArchiveRetention(sv)
 			if err != nil {
 				return nil, err
@@ -9072,7 +9302,9 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressPointStatus(sv)
 			if err != nil {
 				return nil, err
@@ -9081,7 +9313,9 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "Type" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_IngressPointType(sv)
 			if err != nil {
 				return nil, err
@@ -9134,7 +9368,9 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "NetworkConfiguration" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_NetworkConfiguration(sv)
 			if err != nil {
 				return nil, err
@@ -9143,7 +9379,9 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "TlsPolicy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_TlsPolicy(sv)
 			if err != nil {
 				return nil, err
@@ -9273,7 +9511,9 @@ func deserializeCBOR_GetRelayOutput(v smithycbor.Value) (*GetRelayOutput, error)
 		}
 
 		if key == "Authentication" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RelayAuthentication(sv)
 			if err != nil {
 				return nil, err
@@ -9447,7 +9687,9 @@ func deserializeCBOR_GetTrafficPolicyOutput(v smithycbor.Value) (*GetTrafficPoli
 		}
 
 		if key == "DefaultAction" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err

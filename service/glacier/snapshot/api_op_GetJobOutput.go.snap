@@ -1,9 +1,6 @@
 GetJobOutput
 	Initialize stack step
 		Glacier:DefaultAccountID
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		Glacier:APIVersion
@@ -32,7 +29,6 @@ GetJobOutput
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

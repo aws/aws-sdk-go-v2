@@ -390,6 +390,40 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			NatGatewayMappings: []types.NatGatewayMapping{
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+			},
+			ProxySettings: &types.ProxySettings{
+				ListenerProperties: []types.ListenerProperty{
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+				},
+			},
+			NoSourcePreservation: true,
+			VpcEndpoint: &types.VpcEndpoint{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetMappings: []types.SubnetMapping{
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+				},
+			},
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -401,11 +435,26 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 					Config: map[string]types.PerObjectStatus{
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					NatGatewayAttachments: []types.NatGatewayAttachment{
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
+						},
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
 						},
 					},
 				},
@@ -1148,6 +1197,7 @@ func TestCheckResponseSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 				},
 			},
@@ -1245,6 +1295,40 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			NatGatewayMappings: []types.NatGatewayMapping{
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+			},
+			ProxySettings: &types.ProxySettings{
+				ListenerProperties: []types.ListenerProperty{
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+				},
+			},
+			NoSourcePreservation: true,
+			VpcEndpoint: &types.VpcEndpoint{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetMappings: []types.SubnetMapping{
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+				},
+			},
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -1256,11 +1340,26 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 					Config: map[string]types.PerObjectStatus{
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					NatGatewayAttachments: []types.NatGatewayAttachment{
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
+						},
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
 						},
 					},
 				},
@@ -1807,6 +1906,7 @@ func TestCheckResponseSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 				},
 			},
@@ -1948,6 +2048,40 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			NatGatewayMappings: []types.NatGatewayMapping{
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+				{
+					NatGatewayId: ptr.String("__NatGatewayId__"),
+				},
+			},
+			ProxySettings: &types.ProxySettings{
+				ListenerProperties: []types.ListenerProperty{
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+					{
+						Port: ptr.Int32(1),
+						Type: types.ListenerPropertyType("HTTP"),
+					},
+				},
+			},
+			NoSourcePreservation: true,
+			VpcEndpoint: &types.VpcEndpoint{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetMappings: []types.SubnetMapping{
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+					{
+						SubnetId:      ptr.String("__SubnetId__"),
+						IPAddressType: types.IPAddressType("DUALSTACK"),
+					},
+				},
+			},
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -1959,11 +2093,26 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 					Config: map[string]types.PerObjectStatus{
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					NatGatewayAttachments: []types.NatGatewayAttachment{
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
+						},
+						{
+							NatGatewayId:  ptr.String("__NatGatewayId__"),
+							Status:        types.NatGatewayAttachmentStatus("CREATING"),
+							StatusMessage: ptr.String("__StatusMessage__"),
+							DnsName:       ptr.String("__DnsName__"),
 						},
 					},
 				},
@@ -3370,6 +3519,7 @@ func TestCheckResponseSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 						EndpointId:    ptr.String("__EndpointId__"),
 						Status:        types.AttachmentStatus("CREATING"),
 						StatusMessage: ptr.String("__StatusMessage__"),
+						DnsName:       ptr.String("__DnsName__"),
 					},
 				},
 			},
@@ -4694,6 +4844,41 @@ func TestCheckResponseSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxyRulePriorities.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateProxySettings(t *testing.T) {
+	want := &UpdateProxySettingsOutput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateProxySettings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateProxySettings(context.Background(), &UpdateProxySettingsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxySettings.response", err)
 	}
 }
 

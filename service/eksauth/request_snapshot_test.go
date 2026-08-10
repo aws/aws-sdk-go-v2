@@ -185,6 +185,9 @@ func TestCheckRequestSnapshot_AssumeRoleForPodIdentity(t *testing.T) {
 	input := &AssumeRoleForPodIdentityInput{
 		ClusterName: ptr.String("__ClusterName__"),
 		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -212,6 +215,9 @@ func TestUpdateRequestSnapshot_AssumeRoleForPodIdentity(t *testing.T) {
 	input := &AssumeRoleForPodIdentityInput{
 		ClusterName: ptr.String("__ClusterName__"),
 		Token:       ptr.String("__Token__"),
+		EksNodeName: ptr.String("__EksNodeName__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Zone:        ptr.String("__Zone__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

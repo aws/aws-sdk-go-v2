@@ -1,3 +1,16 @@
+# v1.16.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2026-08-03)
+
+* **Feature**: Added eksNodeName, instanceId, and zone optional parameters to the AssumeRoleForPodIdentity API.
+
+# v1.15.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.15.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

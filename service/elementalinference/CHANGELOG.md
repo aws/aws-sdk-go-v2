@@ -1,3 +1,13 @@
+# v1.5.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.5.0 (2026-07-31.2)
+
+* **Feature**: AWS Elemental Inference now supports graphic composition on cropped video outputs, enabling branded graphics and other visual elements to be overlaid as part of the inference workflow.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.4.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -18,8 +18,14 @@ type Actor struct {
 	// A description of the actor.
 	Description *string
 
+	// Whether email-based MFA is enabled for this actor.
+	EnableEmailMfa *bool
+
 	// The unique identifier for the actor.
 	Identifier *string
+
+	// Server-generated email forwarding address for receiving MFA codes.
+	MfaForwardingAddress *string
 
 	// The list of URIs that the actor targets during testing.
 	Uris []string

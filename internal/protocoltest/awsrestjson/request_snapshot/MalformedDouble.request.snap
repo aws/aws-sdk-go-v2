@@ -1,0 +1,6 @@
+POST /MalformedDouble/1?doubleInQuery=1
+
+Content-Type: application/json
+Doubleinheader: 1
+
+{"doubleInBody":1}

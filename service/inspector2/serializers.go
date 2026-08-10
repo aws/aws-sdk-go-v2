@@ -10411,6 +10411,83 @@ func awsRestjson1_serializeDocumentResourceFilterCriteria(v *types.ResourceFilte
 		}
 	}
 
+	if v.CloudContainerImageTags != nil {
+		ok := object.Key("cloudContainerImageTags")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudContainerImageTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudContainerRegistryName != nil {
+		ok := object.Key("cloudContainerRegistryName")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudContainerRegistryName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudContainerRepositoryName != nil {
+		ok := object.Key("cloudContainerRepositoryName")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudContainerRepositoryName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudProvider != nil {
+		ok := object.Key("cloudProvider")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudProviderAccountId != nil {
+		ok := object.Key("cloudProviderAccountId")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudProviderAccountId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudProviderOrgId != nil {
+		ok := object.Key("cloudProviderOrgId")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudProviderOrgId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudProviderRegion != nil {
+		ok := object.Key("cloudProviderRegion")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudProviderRegion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudServerlessFunctionName != nil {
+		ok := object.Key("cloudServerlessFunctionName")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudServerlessFunctionName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudServerlessFunctionRuntime != nil {
+		ok := object.Key("cloudServerlessFunctionRuntime")
+		if err := awsRestjson1_serializeDocumentResourceStringFilterList(v.CloudServerlessFunctionRuntime, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudServerlessFunctionTags != nil {
+		ok := object.Key("cloudServerlessFunctionTags")
+		if err := awsRestjson1_serializeDocumentResourceMapFilterList(v.CloudServerlessFunctionTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudVmInstanceTags != nil {
+		ok := object.Key("cloudVmInstanceTags")
+		if err := awsRestjson1_serializeDocumentResourceMapFilterList(v.CloudVmInstanceTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Ec2InstanceTags != nil {
 		ok := object.Key("ec2InstanceTags")
 		if err := awsRestjson1_serializeDocumentResourceMapFilterList(v.Ec2InstanceTags, ok); err != nil {

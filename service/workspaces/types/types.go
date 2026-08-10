@@ -262,6 +262,12 @@ type CertificateBasedAuthProperties struct {
 // Describes an Amazon WorkSpaces client.
 type ClientProperties struct {
 
+	// The client experience policy that determines which client experience the user
+	// sees. Administrators can set this policy to control the client experience for
+	// users in a directory. Valid values include FORCE_CLASSIC , FORCE_UI_2026 , and
+	// USER_CHOICE .
+	ClientExperiencePolicy *string
+
 	// Specifies whether users can upload diagnostic log files of Amazon WorkSpaces
 	// client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces
 	// client. When enabled, the log files will be sent to WorkSpaces automatically and

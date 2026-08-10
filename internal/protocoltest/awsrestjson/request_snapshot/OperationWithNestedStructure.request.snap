@@ -1,0 +1,5 @@
+POST /OperationWithNestedStructure
+
+Content-Type: application/json
+
+{"topLevel":{"dialog":{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"},"dialogList":[{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"},{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"}],"dialogMap":{"key0":{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"}}}}

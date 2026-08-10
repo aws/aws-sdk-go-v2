@@ -1619,7 +1619,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a lookup table by uploading CSV data. You can use lookup tables to enrich log\n      data in CloudWatch Logs Insights queries with reference data such as user details, application\n      names, or error descriptions.</p>\n         <p>The table name must be unique within your account and Region. The CSV content must include\n      a header row with column names, use UTF-8 encoding, and not exceed 10 MB.</p>"
+                "smithy.api#documentation": "<p>Creates a lookup table by uploading CSV data or from CloudWatch Logs query\n      results. You can use lookup tables to enrich log data in CloudWatch Logs queries with\n      reference data such as user details, application names, or error descriptions.</p>\n         <p>The table name must be unique within your account and Region. You must specify either\n      <code>tableBody</code> or <code>queryId</code>, but not both. If you use\n      <code>tableBody</code>, the CSV content must include a header row with column names, use\n      UTF-8 encoding, and not exceed 10 MB.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLookupTableRequest": {
@@ -1641,8 +1641,13 @@
                 "tableBody": {
                     "target": "com.amazonaws.cloudwatchlogs#TableBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CSV content of the lookup table. The first row must be a header row with column\n      names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The CSV content of the lookup table. The first row must be a header row with column\n      names. The content must use UTF-8 encoding and not exceed 10 MB.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
+                    }
+                },
+                "queryId": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a completed or cancelled CloudWatch Logs query whose results populate\n      the lookup table. A cancelled query populates the table with the partial results that were\n      available when the query was stopped.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -1781,7 +1786,7 @@
                 "destinationConfiguration": {
                     "target": "com.amazonaws.cloudwatchlogs#DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Currently supports Amazon S3 destinations for\n      storing query output.</p>"
+                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Supports Amazon S3 destinations for storing\n      query output and lookup table destinations for automatically refreshing lookup tables with\n      query results. You can configure one or both destination types.</p>"
                     }
                 },
                 "scheduleStartTime": {
@@ -4036,7 +4041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of custom and default field indexes which are discovered in log data. For\n      more information about field index policies, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html\">PutIndexPolicy</a>.</p>"
+                "smithy.api#documentation": "<p>Returns a list of field indexes discovered in log data. By default, the response includes\n      the <code>DEFAULT</code>, <code>CUSTOM</code>, and <code>INACTIVE</code> index categories. To\n      return indexes from other categories, use the <code>indexCategories</code> parameter.</p>\n         <p>For more information about field index policies, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html\">PutIndexPolicy</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeFieldIndexesLogGroupIdentifiers": {
@@ -4059,6 +4064,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array containing the names or ARNs of the log groups that you want to retrieve field\n      indexes for.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "indexCategories": {
+                    "target": "com.amazonaws.cloudwatchlogs#IndexCategories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index categories to return. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code>: Fields that CloudWatch Logs indexes by default. Examples\n          include <code>@logStream</code> and <code>@data_format</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code>: Fields that you added manually to the field index policy.\n            CloudWatch Logs always indexes these fields. These fields count toward the quota of\n          20 fields for each log group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO</code>: Fields that CloudWatch Logs indexes automatically based on your\n          query patterns and usage. These fields do not count toward the field index quota.\n            CloudWatch Logs might update these fields based on changes in your query patterns. To\n          keep a field indexed permanently, add it to an account-level or log-group level field\n          index policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code>: Fields that CloudWatch Logs indexed before but does not\n          index now. This happens if you remove a field from the field index policy or if\n            CloudWatch Logs automatically selects a different field based on your queries.</p>\n            </li>\n         </ul>\n         <p>If you omit this parameter, the response includes the <code>DEFAULT</code>,\n        <code>CUSTOM</code>, and <code>INACTIVE</code> categories.</p>\n         <p>For more information about automatically indexed fields and using the <code>AUTO</code>\n      category, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html\">Automatically indexed fields</a>.</p>"
                     }
                 },
                 "nextToken": {
@@ -5105,8 +5116,13 @@
                 "s3Configuration": {
                     "target": "com.amazonaws.cloudwatchlogs#S3Configuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for delivering query results to Amazon S3.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Configuration for delivering query results to Amazon S3.</p>"
+                    }
+                },
+                "lookupTableConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for delivering query results to a lookup table. The query results\n      automatically populate or refresh the specified lookup table on each scheduled\n      execution.</p>"
                     }
                 }
             },
@@ -5896,6 +5912,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of index. Specify <code>FACET</code> for facet-based indexing or\n        <code>FIELD_INDEX</code> for field-based indexing. This determines how the field is indexed\n      and can be queried.</p>"
                     }
+                },
+                "indexCategory": {
+                    "target": "com.amazonaws.cloudwatchlogs#IndexCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the field index:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code>: Fields that CloudWatch Logs indexes by default. Examples\n          include <code>@logStream</code> and <code>@data_format</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code>: Fields that you added manually to the field index policy.\n            CloudWatch Logs always indexes these fields. These fields count toward the quota of\n          20 fields for each log group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO</code>: Fields that CloudWatch Logs indexes automatically based on your\n          query patterns and usage. These fields do not count toward the field index quota.\n            CloudWatch Logs might update these fields based on changes in your query patterns. To\n          keep a field indexed permanently, add it to an account-level or log-group level field\n          index policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code>: Fields that CloudWatch Logs indexed before but does not\n          index now. This happens if you remove a field from the field index policy or if\n            CloudWatch Logs automatically selects a different field based on your queries.</p>\n            </li>\n         </ul>\n         <p>For more information about automatically indexed fields, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html\">Automatically indexed fields</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6014,7 +6036,7 @@
                 "startTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,\n        1970 00:00:00 UTC</code>. Events with a timestamp before this time are not\n      returned.</p>"
+                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,\n        1970 00:00:00 UTC</code>. Events with a timestamp before this time are not\n      returned.</p>\n         <note>\n            <p>Set <code>startTime</code> explicitly to reduce the chances of empty pages in the\n        response.</p>\n         </note>"
                     }
                 },
                 "endTime": {
@@ -6734,7 +6756,7 @@
                 "startTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,\n        1970 00:00:00 UTC</code>. Events with a timestamp equal to this time or later than this time\n      are included. Events with a timestamp earlier than this time are not included.</p>"
+                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,\n        1970 00:00:00 UTC</code>. Events with a timestamp equal to this time or later than this time\n      are included. Events with a timestamp earlier than this time are not included.</p>\n         <note>\n            <p>Set <code>startTime</code> explicitly to reduce the chances of empty pages in the\n        response.</p>\n         </note>"
                     }
                 },
                 "endTime": {
@@ -7595,7 +7617,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the storage tier policy for your account.</p>"
+                "smithy.api#documentation": "<p>Returns the storage tier policy for the account.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetStorageTierPolicyRequest": {
@@ -7617,7 +7639,7 @@
                 "lastUpdatedTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>"
                     }
                 }
             },
@@ -7952,6 +7974,47 @@
         },
         "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatchlogs#IndexCategories": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#IndexCategory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#IndexCategory": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudwatchlogs#IndexPolicies": {
             "type": "list",
@@ -11531,6 +11594,46 @@
                 "smithy.api#documentation": "<p>Contains metadata about a lookup table returned by <code>DescribeLookupTables</code>.</p>"
             }
         },
+        "com.amazonaws.cloudwatchlogs#LookupTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "tableName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookup table to create or update with query results. The name can\n      contain only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to create or update the lookup table\n      with query results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the lookup table.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key to use to encrypt the lookup table data. If you\n      don't specify a key, the data is encrypted with an Amazon Web Services-owned key.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to associate with the lookup table for resource management and cost\n      allocation. The service applies tags only during initial table creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a lookup table destination. Use it to automatically refresh a lookup\n      table with query results on a schedule.</p>"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#LookupTableDescription": {
             "type": "string",
             "traits": {
@@ -13310,7 +13413,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Memory, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Payments, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For DevOps Agent, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,\n            <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and\n            <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Capability Logs, the valid values are <code>EKS_CAPABILITY_ACK_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_SERVER_LOGS</code>, and\n            <code>EKS_CAPABILITY_KRO_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code>,\n            <code>PCS_JOBCOMP_LOGS</code>, and <code>PCS_SCHEDULER_AUDIT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick, the valid values are <code>AGENT_HOURS_LOGS</code>,\n            <code>CHAT_LOGS</code>, <code>FEEDBACK_LOGS</code>, and\n            <code>INDEX_USAGE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon S3, the valid value is\n            <code>S3_SERVER_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub CSPM, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Application Load Balancer, the valid values are <code>ALB_ACCESS_LOGS</code>,\n            <code>ALB_CONNECTION_LOGS</code>, and <code>ALB_HEALTH_CHECK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Memory, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Payments, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For DevOps Agent, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,\n            <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and\n            <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Capability Logs, the valid values are <code>EKS_CAPABILITY_ACK_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_SERVER_LOGS</code>, and\n            <code>EKS_CAPABILITY_KRO_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code>,\n            <code>PCS_JOBCOMP_LOGS</code>, and <code>PCS_SCHEDULER_AUDIT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick, the valid values are <code>AGENT_HOURS_LOGS</code>,\n            <code>CHAT_LOGS</code>, <code>FEEDBACK_LOGS</code>, and\n            <code>INDEX_USAGE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon S3, the valid value is\n            <code>S3_SERVER_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub CSPM, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14095,7 +14198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the storage tier policy for your account. When you set the storage tier to\n      <code>INTELLIGENT_TIERING</code>, CloudWatch Logs automatically moves your log data between\n      storage tiers based on access patterns to optimize costs.</p>"
+                "smithy.api#documentation": "<p>Sets the storage tier policy for the account. When you set the storage tier to\n      <code>INTELLIGENT_TIERING</code>, the service automatically moves log data to the most\n      cost-effective storage tier based on access frequency.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutStorageTierPolicyRequest": {
@@ -14104,7 +14207,7 @@
                 "storageTier": {
                     "target": "com.amazonaws.cloudwatchlogs#StorageTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier to set for the account. Valid values are <code>STANDARD</code> and\n      <code>INTELLIGENT_TIERING</code>.</p>",
+                        "smithy.api#documentation": "<p>The storage tier to set for the account. Use <code>INTELLIGENT_TIERING</code> to\n      automatically optimize storage costs by moving log data to the appropriate tier based on\n      access frequency.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14119,13 +14222,13 @@
                 "storageTier": {
                     "target": "com.amazonaws.cloudwatchlogs#StorageTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier that was set.</p>"
+                        "smithy.api#documentation": "<p>The storage tier for the account.</p>"
                     }
                 },
                 "lastUpdatedTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>"
                     }
                 }
             },
@@ -14224,7 +14327,7 @@
                 "emitSystemFields": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination.\n      Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide\n      source information for centralized log data in the forwarded payload.</p>"
+                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination.\n      Valid values are <code>@aws.account</code>, <code>@aws.region</code>, and\n      <code>@source.log</code>. These fields provide\n      source information for centralized log data in the forwarded payload.</p>"
                     }
                 }
             },
@@ -15366,6 +15469,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3"
+                    }
+                },
+                "LOOKUP_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOOKUP_TABLE"
                     }
                 }
             }
@@ -17454,7 +17563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing lookup table by replacing all of its CSV content. After the update\n      completes, queries that use this table will use the new data.</p>\n         <p>This is a full replacement operation. All existing content is replaced with the new CSV\n      data.</p>"
+                "smithy.api#documentation": "<p>Updates an existing lookup table by replacing all of its content with new CSV data or\n      CloudWatch Logs query results. After the update completes, queries that use this table\n      use the new data.</p>\n         <p>This is a full replacement operation. All existing content is replaced. You must specify\n      either <code>tableBody</code> or <code>queryId</code>, but not both.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateLookupTableRequest": {
@@ -17476,8 +17585,13 @@
                 "tableBody": {
                     "target": "com.amazonaws.cloudwatchlogs#TableBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new CSV content to replace the existing data. The first row must be a header row\n      with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new CSV content to replace the existing data. The first row must be a header row\n      with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
+                    }
+                },
+                "queryId": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a completed or cancelled CloudWatch Logs query whose results replace\n      the lookup table content. A cancelled query replaces the content with the partial results\n      that were available when the query was stopped.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
                     }
                 },
                 "kmsKeyId": {

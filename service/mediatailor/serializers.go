@@ -3279,6 +3279,13 @@ func awsRestjson1_serializeOpDocumentPutFunctionInput(v *PutFunctionInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConcurrentExecutorConfiguration != nil {
+		ok := object.Key("ConcurrentExecutorConfiguration")
+		if err := awsRestjson1_serializeDocumentConcurrentExecutorConfiguration(v.ConcurrentExecutorConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomOutputConfiguration != nil {
 		ok := object.Key("CustomOutputConfiguration")
 		if err := awsRestjson1_serializeDocumentCustomOutputConfiguration(v.CustomOutputConfiguration, ok); err != nil {
@@ -4644,6 +4651,13 @@ func awsRestjson1_serializeDocumentAdDecisionServerConfiguration(v *types.AdDeci
 		}
 	}
 
+	if v.VastResponse != nil {
+		ok := object.Key("VastResponse")
+		if err := awsRestjson1_serializeDocumentVastResponse(v.VastResponse, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4906,6 +4920,42 @@ func awsRestjson1_serializeDocumentClipRange(v *types.ClipRange, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConcurrentExecutorConfiguration(v *types.ConcurrentExecutorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionList != nil {
+		ok := object.Key("FunctionList")
+		if err := awsRestjson1_serializeDocument__listOfFunctionsRef(v.FunctionList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxConcurrency != nil {
+		ok := object.Key("MaxConcurrency")
+		ok.Integer(*v.MaxConcurrency)
+	}
+
+	if v.Output != nil {
+		ok := object.Key("Output")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Output, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Runtime) > 0 {
+		ok := object.Key("Runtime")
+		ok.String(string(v.Runtime))
+	}
+
+	if v.TimeoutMilliseconds != nil {
+		ok := object.Key("TimeoutMilliseconds")
+		ok.Integer(*v.TimeoutMilliseconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfigurationAliasesRequest(v map[string]map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5011,6 +5061,11 @@ func awsRestjson1_serializeDocumentFunctionMapping(v map[string]string, value sm
 func awsRestjson1_serializeDocumentFunctionRef(v *types.FunctionRef, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
 
 	if v.FunctionId != nil {
 		ok := object.Key("FunctionId")
@@ -5187,6 +5242,13 @@ func awsRestjson1_serializeDocumentLivePreRollConfiguration(v *types.LivePreRoll
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdDecisionServerConfiguration != nil {
+		ok := object.Key("AdDecisionServerConfiguration")
+		if err := awsRestjson1_serializeDocumentPreRollAdDecisionServerConfiguration(v.AdDecisionServerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AdDecisionServerUrl != nil {
 		ok := object.Key("AdDecisionServerUrl")
 		ok.String(*v.AdDecisionServerUrl)
@@ -5308,6 +5370,32 @@ func awsRestjson1_serializeDocumentPrefetchRetrieval(v *types.PrefetchRetrieval,
 	if len(v.TrafficShapingType) > 0 {
 		ok := object.Key("TrafficShapingType")
 		ok.String(string(v.TrafficShapingType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPreRollAdDecisionServerConfiguration(v *types.PreRollAdDecisionServerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VastResponse != nil {
+		ok := object.Key("VastResponse")
+		if err := awsRestjson1_serializeDocumentPreRollVastResponse(v.VastResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPreRollVastResponse(v *types.PreRollVastResponse, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AdSequencingMode) > 0 {
+		ok := object.Key("AdSequencingMode")
+		ok.String(string(v.AdSequencingMode))
 	}
 
 	return nil
@@ -5771,6 +5859,18 @@ func awsRestjson1_serializeDocumentUpdateProgramTransition(v *types.UpdateProgra
 	if v.ScheduledStartTimeMillis != nil {
 		ok := object.Key("ScheduledStartTimeMillis")
 		ok.Long(*v.ScheduledStartTimeMillis)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVastResponse(v *types.VastResponse, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AdSequencingMode) > 0 {
+		ok := object.Key("AdSequencingMode")
+		ok.String(string(v.AdSequencingMode))
 	}
 
 	return nil

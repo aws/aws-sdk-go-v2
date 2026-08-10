@@ -63752,6 +63752,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Updating"
                     }
+                },
+                "PendingMaintenance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingMaintenance"
+                    }
+                },
+                "InMaintenance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InMaintenance"
+                    }
                 }
             }
         },
@@ -67894,6 +67906,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g7e.48xlarge"
+                    }
+                },
+                "ML_G7_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.2xlarge"
+                    }
+                },
+                "ML_G7_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.4xlarge"
+                    }
+                },
+                "ML_G7_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.8xlarge"
+                    }
+                },
+                "ML_G7_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.12xlarge"
+                    }
+                },
+                "ML_G7_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.24xlarge"
+                    }
+                },
+                "ML_G7_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
                 }
             }
@@ -78130,6 +78178,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#SequenceLength": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^\\d+K$"
+            }
+        },
         "com.amazonaws.sagemaker#ServerlessJobBaseModelArn": {
             "type": "string",
             "traits": {
@@ -78186,6 +78244,12 @@
                     "target": "com.amazonaws.sagemaker#EvaluatorArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The evaluator Amazon Resource Name (ARN) used as reward function or reward prompt. </p>"
+                    }
+                },
+                "SequenceLength": {
+                    "target": "com.amazonaws.sagemaker#SequenceLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum sequence length, in tokens, that the customization job supports. SageMaker uses this value to select a training configuration for the base model that you specify. The parameter supports the following values: </p> <ul> <li> <p> <code>1K</code> </p> </li> <li> <p> <code>2K</code> </p> </li> <li> <p> <code>4K</code> </p> </li> <li> <p> <code>8K</code> </p> </li> <li> <p> <code>16K</code> </p> </li> <li> <p> <code>32K</code> </p> </li> <li> <p> <code>64K</code> </p> </li> <li> <p> <code>128K</code> </p> </li> </ul> <p> If you don't specify a value, SageMaker selects a training configuration based on the other values that you specify. The selection is not restricted to a particular sequence length. </p>"
                     }
                 }
             },
@@ -83754,6 +83818,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g7e.48xlarge"
+                    }
+                },
+                "ML_G7_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.2xlarge"
+                    }
+                },
+                "ML_G7_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.4xlarge"
+                    }
+                },
+                "ML_G7_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.8xlarge"
+                    }
+                },
+                "ML_G7_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.12xlarge"
+                    }
+                },
+                "ML_G7_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.24xlarge"
+                    }
+                },
+                "ML_G7_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
                 }
             }

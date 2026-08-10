@@ -36932,6 +36932,11 @@ func awsAwsjson11_serializeDocumentServerlessJobConfig(v *types.ServerlessJobCon
 		ok.String(string(v.Peft))
 	}
 
+	if v.SequenceLength != nil {
+		ok := object.Key("SequenceLength")
+		ok.String(*v.SequenceLength)
+	}
+
 	return nil
 }
 

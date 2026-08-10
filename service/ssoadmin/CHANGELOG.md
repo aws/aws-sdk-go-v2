@@ -1,3 +1,16 @@
+# v1.43.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.0 (2026-08-04)
+
+* **Feature**: AWS IAM Identity Center now lets you create organization-level instances without enabling multi-account permissions. You can enable multi-account permissions during instance creation or later via console or API, which then provisions the necessary service-linked roles.
+
+# v1.42.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.42.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the terms attached to an offer, such as pricing terms (usage-based,
@@ -73,9 +72,6 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,19 +84,10 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOfferTermsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetOfferTerms"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -123,6 +110,10 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 
 // GetOfferTermsPaginatorOptions is the paginator options for GetOfferTerms
 type GetOfferTermsPaginatorOptions struct {
+	// The maximum number of results that are returned per call. You can use nextToken
+	// to get more results.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -144,6 +135,9 @@ func NewGetOfferTermsPaginator(client GetOfferTermsAPIClient, params *GetOfferTe
 	}
 
 	options := GetOfferTermsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -171,6 +165,12 @@ func (p *GetOfferTermsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,

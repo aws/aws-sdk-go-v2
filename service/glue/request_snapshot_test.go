@@ -8216,6 +8216,31 @@ func TestCheckRequestSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	input := &GetDataCatalogExportConfigurationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataCatalogExportConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDataflowGraph(t *testing.T) {
 	input := &GetDataflowGraphInput{
 		PythonScript: ptr.String("__PythonScript__"),
@@ -11603,6 +11628,38 @@ func TestCheckRequestSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataCatalogEncryptionSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	input := &PutDataCatalogExportConfigurationInput{
+		ExportSetting: types.ExportSetting("ENABLED"),
+		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+			SseAlgorithm: ptr.String("__SseAlgorithm__"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataCatalogExportConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -26686,6 +26743,31 @@ func TestUpdateRequestSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	input := &GetDataCatalogExportConfigurationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataCatalogExportConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDataflowGraph(t *testing.T) {
 	input := &GetDataflowGraphInput{
 		PythonScript: ptr.String("__PythonScript__"),
@@ -30073,6 +30155,38 @@ func TestUpdateRequestSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataCatalogEncryptionSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	input := &PutDataCatalogExportConfigurationInput{
+		ExportSetting: types.ExportSetting("ENABLED"),
+		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+			SseAlgorithm: ptr.String("__SseAlgorithm__"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataCatalogExportConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

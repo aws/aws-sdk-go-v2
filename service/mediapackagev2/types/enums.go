@@ -628,6 +628,25 @@ func (ScteInSegments) Values() []ScteInSegments {
 	}
 }
 
+type StreamNameOutputMode string
+
+// Enum values for StreamNameOutputMode
+const (
+	StreamNameOutputModeIndex           StreamNameOutputMode = "INDEX"
+	StreamNameOutputModePassthroughName StreamNameOutputMode = "PASSTHROUGH_NAME"
+)
+
+// Values returns all known values for StreamNameOutputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamNameOutputMode) Values() []StreamNameOutputMode {
+	return []StreamNameOutputMode{
+		"INDEX",
+		"PASSTHROUGH_NAME",
+	}
+}
+
 type TsEncryptionMethod string
 
 // Enum values for TsEncryptionMethod
@@ -793,6 +812,8 @@ const (
 	ValidationExceptionTypeOnlyNonEpochLockedAllowOutputTimestampMode             ValidationExceptionType = "ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE"
 	ValidationExceptionTypeOutputTimestampModeImmutable                           ValidationExceptionType = "OUTPUT_TIMESTAMP_MODE_IMMUTABLE"
 	ValidationExceptionTypeNonEpochLockedWithForceEndpointErrorConfiguration      ValidationExceptionType = "NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION"
+	ValidationExceptionTypeOnlyHlsInputTypeAllowStreamNameOutputMode              ValidationExceptionType = "ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE"
+	ValidationExceptionTypeStreamNameOutputModeImmutable                          ValidationExceptionType = "STREAM_NAME_OUTPUT_MODE_IMMUTABLE"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -905,5 +926,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE",
 		"OUTPUT_TIMESTAMP_MODE_IMMUTABLE",
 		"NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION",
+		"ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE",
+		"STREAM_NAME_OUTPUT_MODE_IMMUTABLE",
 	}
 }

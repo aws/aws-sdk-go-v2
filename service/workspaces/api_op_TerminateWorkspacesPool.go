@@ -5,10 +5,16 @@ package workspaces
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On December 31, 2027, Amazon Web Services will end
+// support for Amazon WorkSpaces Pools. After December 31, 2027, you will no longer
+// be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools
+// resources. For more information, see [Amazon WorkSpaces Pools end of support].
+//
 // Terminates the specified pool.
+//
+// [Amazon WorkSpaces Pools end of support]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
 func (c *Client) TerminateWorkspacesPool(ctx context.Context, params *TerminateWorkspacesPoolInput, optFns ...func(*Options)) (*TerminateWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &TerminateWorkspacesPoolInput{}
@@ -51,9 +57,6 @@ func (c *Client) addOperationTerminateWorkspacesPoolMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -66,19 +69,10 @@ func (c *Client) addOperationTerminateWorkspacesPoolMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTerminateWorkspacesPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "TerminateWorkspacesPool"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

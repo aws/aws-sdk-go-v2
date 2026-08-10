@@ -519,6 +519,56 @@ func TestCheckRequestSnapshot_CreateSystem(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTest(t *testing.T) {
+	input := &CreateTestInput{
+		ServiceArn:      ptr.String("__ServiceArn__"),
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateUserJourney(t *testing.T) {
 	input := &CreateUserJourneyInput{
 		SystemArn:   ptr.String("__SystemArn__"),
@@ -747,6 +797,74 @@ func TestCheckRequestSnapshot_DeleteSystem(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteTest(t *testing.T) {
+	input := &DeleteTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteTestSources(t *testing.T) {
+	input := &DeleteTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteUserJourney(t *testing.T) {
 	input := &DeleteUserJourneyInput{
 		SystemArn:     ptr.String("__SystemArn__"),
@@ -880,6 +998,89 @@ func TestCheckRequestSnapshot_GetSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSystem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTest(t *testing.T) {
+	input := &GetTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTestRun(t *testing.T) {
+	input := &GetTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTestRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTestTemplate(t *testing.T) {
+	input := &GetTestTemplateInput{
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTestTemplate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTestTemplate"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1194,6 +1395,7 @@ func TestCheckRequestSnapshot_ListReports(t *testing.T) {
 	input := &ListReportsInput{
 		ServiceArn: ptr.String("__ServiceArn__"),
 		ReportType: types.ReportType("FAILURE_MODE"),
+		TestRunId:  ptr.String("__TestRunId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	}
@@ -1216,6 +1418,36 @@ func TestCheckRequestSnapshot_ListReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReports"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResolvedTestRunTargetResources(t *testing.T) {
+	input := &ListResolvedTestRunTargetResourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResolvedTestRunTargetResources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResolvedTestRunTargetResources"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1474,6 +1706,184 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTestRunEvents(t *testing.T) {
+	input := &ListTestRunEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		StartedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTestRuns(t *testing.T) {
+	input := &ListTestRunsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestId:     ptr.String("__TestId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRuns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRuns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTestRunSources(t *testing.T) {
+	input := &ListTestRunSourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestRunSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTests(t *testing.T) {
+	input := &ListTestsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTests(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTestSources(t *testing.T) {
+	input := &ListTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTestTemplates(t *testing.T) {
+	input := &ListTestTemplatesInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestTemplates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestTemplates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListUserJourneys(t *testing.T) {
 	input := &ListUserJourneysInput{
 		SystemArn:  ptr.String("__SystemArn__"),
@@ -1503,6 +1913,46 @@ func TestCheckRequestSnapshot_ListUserJourneys(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutTestSources(t *testing.T) {
+	input := &PutTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 	input := &StartFailureModeAssessmentInput{
 		ServiceArn:  ptr.String("__ServiceArn__"),
@@ -1527,6 +1977,62 @@ func TestCheckRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartFailureModeAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartTestRun(t *testing.T) {
+	input := &StartTestRunInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTestRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopTestRun(t *testing.T) {
+	input := &StopTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTestRun"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1862,6 +2368,56 @@ func TestCheckRequestSnapshot_UpdateSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSystem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateTest(t *testing.T) {
+	input := &UpdateTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTest"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2232,6 +2788,56 @@ func TestUpdateRequestSnapshot_CreateSystem(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTest(t *testing.T) {
+	input := &CreateTestInput{
+		ServiceArn:      ptr.String("__ServiceArn__"),
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateUserJourney(t *testing.T) {
 	input := &CreateUserJourneyInput{
 		SystemArn:   ptr.String("__SystemArn__"),
@@ -2460,6 +3066,74 @@ func TestUpdateRequestSnapshot_DeleteSystem(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteTest(t *testing.T) {
+	input := &DeleteTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteTestSources(t *testing.T) {
+	input := &DeleteTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteUserJourney(t *testing.T) {
 	input := &DeleteUserJourneyInput{
 		SystemArn:     ptr.String("__SystemArn__"),
@@ -2593,6 +3267,89 @@ func TestUpdateRequestSnapshot_GetSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSystem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTest(t *testing.T) {
+	input := &GetTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTestRun(t *testing.T) {
+	input := &GetTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTestRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTestTemplate(t *testing.T) {
+	input := &GetTestTemplateInput{
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTestTemplate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTestTemplate"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2907,6 +3664,7 @@ func TestUpdateRequestSnapshot_ListReports(t *testing.T) {
 	input := &ListReportsInput{
 		ServiceArn: ptr.String("__ServiceArn__"),
 		ReportType: types.ReportType("FAILURE_MODE"),
+		TestRunId:  ptr.String("__TestRunId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	}
@@ -2929,6 +3687,36 @@ func TestUpdateRequestSnapshot_ListReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReports"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResolvedTestRunTargetResources(t *testing.T) {
+	input := &ListResolvedTestRunTargetResourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResolvedTestRunTargetResources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResolvedTestRunTargetResources"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3187,6 +3975,184 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTestRunEvents(t *testing.T) {
+	input := &ListTestRunEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		StartedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTestRuns(t *testing.T) {
+	input := &ListTestRunsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestId:     ptr.String("__TestId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRuns(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRuns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTestRunSources(t *testing.T) {
+	input := &ListTestRunSourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestRunSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTests(t *testing.T) {
+	input := &ListTestsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTests(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTestSources(t *testing.T) {
+	input := &ListTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTestTemplates(t *testing.T) {
+	input := &ListTestTemplatesInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestTemplates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestTemplates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListUserJourneys(t *testing.T) {
 	input := &ListUserJourneysInput{
 		SystemArn:  ptr.String("__SystemArn__"),
@@ -3216,6 +4182,46 @@ func TestUpdateRequestSnapshot_ListUserJourneys(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PutTestSources(t *testing.T) {
+	input := &PutTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTestSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTestSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 	input := &StartFailureModeAssessmentInput{
 		ServiceArn:  ptr.String("__ServiceArn__"),
@@ -3240,6 +4246,62 @@ func TestUpdateRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartFailureModeAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartTestRun(t *testing.T) {
+	input := &StartTestRunInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTestRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopTestRun(t *testing.T) {
+	input := &StopTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTestRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTestRun"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3575,6 +4637,56 @@ func TestUpdateRequestSnapshot_UpdateSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSystem"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateTest(t *testing.T) {
+	input := &UpdateTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTest"); err != nil {
 		t.Fatal(err)
 	}
 }

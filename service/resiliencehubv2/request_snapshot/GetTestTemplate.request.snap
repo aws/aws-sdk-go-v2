@@ -1,0 +1,3 @@
+GET /v2/get-test-template?testTemplateArn=__TestTemplateArn__
+
+

@@ -7,11 +7,10 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for the container associations that you have defined.
-// You can optionally page through results.
+// Lists the container associations in your account and Region. Use the NextToken
+// parameter in subsequent requests to retrieve additional results.
 func (c *Client) ListContainerAssociations(ctx context.Context, params *ListContainerAssociationsInput, optFns ...func(*Options)) (*ListContainerAssociationsOutput, error) {
 	if params == nil {
 		params = &ListContainerAssociationsInput{}
@@ -47,7 +46,7 @@ type ListContainerAssociationsInput struct {
 
 type ListContainerAssociationsOutput struct {
 
-	// The container association metadata objects.
+	// The container association metadata objects for the account and Region.
 	ContainerAssociations []types.ContainerAssociationSummary
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -73,9 +72,6 @@ func (c *Client) addOperationListContainerAssociationsMiddlewares(stack *middlew
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -88,16 +84,7 @@ func (c *Client) addOperationListContainerAssociationsMiddlewares(stack *middlew
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListContainerAssociations"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

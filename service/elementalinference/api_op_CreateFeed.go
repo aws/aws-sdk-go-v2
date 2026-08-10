@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a feed. The feed is the target for the live media stream that is being
@@ -46,6 +45,12 @@ type CreateFeedInput struct {
 	//
 	// This member is required.
 	Outputs []types.CreateOutput
+
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. For example, the smart crop feature uses this role
+	// to read graphics-compositing templates from your Amazon S3 bucket. You specify
+	// one access role for each feed.
+	AccessRoleArn *string
 
 	// Optional tags. You can also add tags later, using TagResource.
 	Tags map[string]string
@@ -113,9 +118,6 @@ func (c *Client) addOperationCreateFeedMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -128,19 +130,10 @@ func (c *Client) addOperationCreateFeedMiddlewares(stack *middleware.Stack, opti
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFeed"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

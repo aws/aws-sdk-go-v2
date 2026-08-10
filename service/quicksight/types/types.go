@@ -618,6 +618,9 @@ type Analysis struct {
 	// The ARN of the theme of the analysis.
 	ThemeArn *string
 
+	// The ARNs of the topics associated with the analysis.
+	TopicArns []string
+
 	noSmithyDocumentSerde
 }
 
@@ -685,6 +688,10 @@ type AnalysisDefinition struct {
 	// TooltipSheetDefinition provides detailed information about a tooltip sheet
 	// within this analysis.
 	TooltipSheets []TooltipSheetDefinition
+
+	// An array of topic identifier declarations. This mapping allows the usage of
+	// topic identifiers instead of topic ARNs throughout analysis sub-structures.
+	TopicIdentifierDeclarations []TopicIdentifierDeclaration
 
 	noSmithyDocumentSerde
 }
@@ -781,6 +788,9 @@ type AnalysisSourceTemplate struct {
 	//
 	// This member is required.
 	DataSetReferences []DataSetReference
+
+	// The topic references of the source template of an analysis.
+	TopicReferences []TopicReference
 
 	noSmithyDocumentSerde
 }
@@ -2046,6 +2056,10 @@ type AssetOptions struct {
 	// Determines the timezone for the analysis.
 	Timezone *string
 
+	// The configuration options for the messages that are displayed on visuals in the
+	// analysis.
+	VisualMessages *VisualMessages
+
 	// Determines the week start day for an analysis.
 	WeekStart DayOfTheWeek
 
@@ -3255,11 +3269,6 @@ type CalculatedColumn struct {
 // The calculated field of an analysis.
 type CalculatedField struct {
 
-	// The data set that is used in this calculated field.
-	//
-	// This member is required.
-	DataSetIdentifier *string
-
 	// The expression of the calculated field.
 	//
 	// This member is required.
@@ -3269,6 +3278,12 @@ type CalculatedField struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The data set that is used in this calculated field.
+	DataSetIdentifier *string
+
+	// The topic that is used in this calculated field.
+	TopicIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -3332,8 +3347,32 @@ type Capabilities struct {
 	// The ability to perform actions using BambooHR connectors.
 	BambooHRAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	BedrockManagedKnowledgeBase CapabilityState
+
 	// The ability to perform actions using Box Agent connectors.
 	BoxAgentAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	BoxKnowledgeBase CapabilityState
 
 	// The ability to Build Calculation with AI
 	BuildCalculatedFieldWithQ CapabilityState
@@ -3352,6 +3391,18 @@ type Capabilities struct {
 
 	// The ability to perform actions using Atlassian Confluence Cloud connectors.
 	ConfluenceAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ConfluenceKnowledgeBase CapabilityState
 
 	// The ability to create and update Bedrock Agent actions.
 	CreateAndUpdateAmazonBedrockARSAction CapabilityState
@@ -3374,8 +3425,32 @@ type Capabilities struct {
 	// The ability to create and update BambooHR actions.
 	CreateAndUpdateBambooHRAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateBedrockManagedKnowledgeBase CapabilityState
+
 	// The ability to create and update Box Agent actions.
 	CreateAndUpdateBoxAgentAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateBoxKnowledgeBase CapabilityState
 
 	// The ability to create and update Canva Agent actions.
 	CreateAndUpdateCanvaAgentAction CapabilityState
@@ -3388,6 +3463,18 @@ type Capabilities struct {
 
 	// The ability to create and update Atlassian Confluence Cloud actions.
 	CreateAndUpdateConfluenceAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateConfluenceKnowledgeBase CapabilityState
 
 	// The ability to create and update email reports.
 	CreateAndUpdateDashboardEmailReports CapabilityState
@@ -3410,17 +3497,53 @@ type Capabilities struct {
 	// The ability to create and update Google Calendar actions.
 	CreateAndUpdateGoogleCalendarAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateGoogleDriveKnowledgeBase CapabilityState
+
 	// The ability to create and update Hubspot actions.
 	CreateAndUpdateHubspotAction CapabilityState
 
 	// The ability to create and update HuggingFace actions.
 	CreateAndUpdateHuggingFaceAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateIDCKnowledgeBase CapabilityState
+
 	// The ability to create and update Intercom actions.
 	CreateAndUpdateIntercomAction CapabilityState
 
 	// The ability to create and update Jira actions.
 	CreateAndUpdateJiraAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateKnowledgeBases CapabilityState
 
 	// The ability to create and update Linear actions.
 	CreateAndUpdateLinearAction CapabilityState
@@ -3446,11 +3569,47 @@ type Capabilities struct {
 	// The ability to create and update Microsoft OneDrive actions.
 	CreateAndUpdateOneDriveAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateOneDriveKnowledgeBase CapabilityState
+
 	// The ability to create and update OpenAPI Specification actions.
 	CreateAndUpdateOpenAPIAction CapabilityState
 
 	// The ability to create and update PagerDuty Advance actions.
 	CreateAndUpdatePagerDutyAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateQBusinessKnowledgeBase CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateS3KnowledgeBase CapabilityState
 
 	// The ability to create and update SAP Bill of Materials actions.
 	CreateAndUpdateSAPBillOfMaterialAction CapabilityState
@@ -3482,6 +3641,18 @@ type Capabilities struct {
 	// The ability to create and update Microsoft SharePoint Online actions.
 	CreateAndUpdateSharePointAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateSharePointKnowledgeBase CapabilityState
+
 	// The ability to create and update Slack actions.
 	CreateAndUpdateSlackAction CapabilityState
 
@@ -3496,6 +3667,18 @@ type Capabilities struct {
 
 	// The ability to create and update threshold alerts.
 	CreateAndUpdateThresholdAlerts CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	CreateAndUpdateWebCrawlerKnowledgeBase CapabilityState
 
 	// The ability to create and update Zendesk actions.
 	CreateAndUpdateZendeskAction CapabilityState
@@ -3560,11 +3743,35 @@ type Capabilities struct {
 	// The ability to perform actions using Google Calendar connectors.
 	GoogleCalendarAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	GoogleDriveKnowledgeBase CapabilityState
+
 	// The ability to perform actions using Hubspot connectors.
 	HubspotAction CapabilityState
 
 	// The ability to perform actions using HuggingFace connectors.
 	HuggingFaceAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	IDCKnowledgeBase CapabilityState
 
 	// The ability to create, view, edit, delete, and run inbound email triggers for
 	// flows and automations.
@@ -3618,6 +3825,18 @@ type Capabilities struct {
 	// The ability to perform actions using Microsoft OneDrive connectors.
 	OneDriveAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	OneDriveKnowledgeBase CapabilityState
+
 	// The ability to perform actions using OpenAPI Specification connectors.
 	OpenAPIAction CapabilityState
 
@@ -3633,6 +3852,18 @@ type Capabilities struct {
 	// The ability to enable approvals for flow share.
 	PublishWithoutApproval CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	QBusinessKnowledgeBase CapabilityState
+
 	// The ability to create, view, edit, delete, and run Quick event triggers for
 	// flows and automations.
 	QuickEventTrigger CapabilityState
@@ -3642,6 +3873,18 @@ type Capabilities struct {
 
 	// The ability to perform research-related actions.
 	Research CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	S3KnowledgeBase CapabilityState
 
 	// The ability to perform actions using SAP Bill of Materials connectors.
 	SAPBillOfMaterialAction CapabilityState
@@ -3704,8 +3947,32 @@ type Capabilities struct {
 	// The ability to share BambooHR actions.
 	ShareBambooHRAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareBedrockManagedKnowledgeBase CapabilityState
+
 	// The ability to share Box Agent actions.
 	ShareBoxAgentAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareBoxKnowledgeBase CapabilityState
 
 	// The ability to share Canva Agent actions.
 	ShareCanvaAgentAction CapabilityState
@@ -3721,6 +3988,18 @@ type Capabilities struct {
 
 	// The ability to share Atlassian Confluence Cloud actions.
 	ShareConfluenceAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareConfluenceKnowledgeBase CapabilityState
 
 	// The ability to share dashboards.
 	ShareDashboards CapabilityState
@@ -3743,17 +4022,53 @@ type Capabilities struct {
 	// The ability to share Google Calendar actions.
 	ShareGoogleCalendarAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareGoogleDriveKnowledgeBase CapabilityState
+
 	// The ability to share Hubspot actions.
 	ShareHubspotAction CapabilityState
 
 	// The ability to share HuggingFace actions.
 	ShareHuggingFaceAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareIDCKnowledgeBase CapabilityState
+
 	// The ability to share Intercom actions.
 	ShareIntercomAction CapabilityState
 
 	// The ability to share Jira actions.
 	ShareJiraAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareKnowledgeBases CapabilityState
 
 	// The ability to share Linear actions.
 	ShareLinearAction CapabilityState
@@ -3779,6 +4094,18 @@ type Capabilities struct {
 	// The ability to share Microsoft OneDrive actions.
 	ShareOneDriveAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareOneDriveKnowledgeBase CapabilityState
+
 	// The ability to share OpenAPI Specification actions.
 	ShareOpenAPIAction CapabilityState
 
@@ -3787,6 +4114,42 @@ type Capabilities struct {
 
 	// The ability to perform actions using Microsoft SharePoint Online connectors.
 	SharePointAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	SharePointKnowledgeBase CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareQBusinessKnowledgeBase CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareS3KnowledgeBase CapabilityState
 
 	// The ability to share SAP Bill of Materials actions.
 	ShareSAPBillOfMaterialAction CapabilityState
@@ -3818,6 +4181,18 @@ type Capabilities struct {
 	// The ability to share Microsoft SharePoint Online actions.
 	ShareSharePointAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareSharePointKnowledgeBase CapabilityState
+
 	// The ability to share Slack actions.
 	ShareSlackAction CapabilityState
 
@@ -3829,6 +4204,18 @@ type Capabilities struct {
 
 	// The ability to share Textract actions.
 	ShareTextractAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	ShareWebCrawlerKnowledgeBase CapabilityState
 
 	// The ability to share Zendesk actions.
 	ShareZendeskAction CapabilityState
@@ -3880,11 +4267,35 @@ type Capabilities struct {
 	// The ability to use BambooHR actions.
 	UseBambooHRAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseBedrockManagedKnowledgeBase CapabilityState
+
 	// The ability to use Bedrock models for general knowledge step in flows.
 	UseBedrockModels CapabilityState
 
 	// The ability to use Box Agent actions.
 	UseBoxAgentAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseBoxKnowledgeBase CapabilityState
 
 	// The ability to use Amazon Quick through the browser extension for Chrome,
 	// Firefox, and Edge.
@@ -3902,6 +4313,18 @@ type Capabilities struct {
 	// The ability to use Atlassian Confluence Cloud actions.
 	UseConfluenceAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseConfluenceKnowledgeBase CapabilityState
+
 	// The ability to use Amazon Quick through the Microsoft Excel add-in.
 	UseExcelAddInExtension CapabilityState
 
@@ -3917,11 +4340,35 @@ type Capabilities struct {
 	// The ability to use Google Calendar actions.
 	UseGoogleCalendarAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseGoogleDriveKnowledgeBase CapabilityState
+
 	// The ability to use Hubspot actions.
 	UseHubspotAction CapabilityState
 
 	// The ability to use HuggingFace actions.
 	UseHuggingFaceAction CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseIDCKnowledgeBase CapabilityState
 
 	// The ability to use Intercom actions.
 	UseIntercomAction CapabilityState
@@ -3953,6 +4400,18 @@ type Capabilities struct {
 	// The ability to use Microsoft OneDrive actions.
 	UseOneDriveAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseOneDriveKnowledgeBase CapabilityState
+
 	// The ability to use OpenAPI Specification actions.
 	UseOpenAPIAction CapabilityState
 
@@ -3964,6 +4423,30 @@ type Capabilities struct {
 
 	// The ability to use Amazon Quick through the Microsoft PowerPoint add-in.
 	UsePowerpointAddInExtension CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseQBusinessKnowledgeBase CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseS3KnowledgeBase CapabilityState
 
 	// The ability to use SAP Bill of Materials actions.
 	UseSAPBillOfMaterialAction CapabilityState
@@ -3995,6 +4478,18 @@ type Capabilities struct {
 	// The ability to use Microsoft SharePoint Online actions.
 	UseSharePointAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseSharePointKnowledgeBase CapabilityState
+
 	// The ability to use Slack actions.
 	UseSlackAction CapabilityState
 
@@ -4004,6 +4499,18 @@ type Capabilities struct {
 	// The ability to use Textract actions.
 	UseTextractAction CapabilityState
 
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	UseWebCrawlerKnowledgeBase CapabilityState
+
 	// The ability to use Amazon Quick through the Microsoft Word add-in.
 	UseWordAddInExtension CapabilityState
 
@@ -4012,6 +4519,18 @@ type Capabilities struct {
 
 	// The ability to view account SPICE capacity.
 	ViewAccountSPICECapacity CapabilityState
+
+	// The permission state of a capability in a custom permissions profile. Valid
+	// values:
+	//
+	//   - DENY – Amazon Quick denies this capability for users assigned to the profile.
+	//
+	//   - ALLOW – Amazon Quick grants this capability to users assigned to the
+	//   profile. This value is only relevant when governance is enabled for the
+	//   capability's category. Without governance, the default effect is always ALLOW
+	//   . In a governed category, this value overrides the category-level
+	//   deny-by-default behavior for that capability only.
+	WebCrawlerKnowledgeBase CapabilityState
 
 	// The ability to perform actions using Zendesk connectors.
 	ZendeskAction CapabilityState
@@ -4488,9 +5007,10 @@ type ColumnIdentifier struct {
 	ColumnName *string
 
 	// The data set that the column belongs to.
-	//
-	// This member is required.
 	DataSetIdentifier *string
+
+	// The topic that the column belongs to.
+	TopicIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -5406,12 +5926,6 @@ type CustomContentConfiguration struct {
 // [Using custom visual content]: https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html
 type CustomContentVisual struct {
 
-	// The dataset that is used to create the custom content visual. You can't create
-	// a visual without a dataset.
-	//
-	// This member is required.
-	DataSetIdentifier *string
-
 	// The unique identifier of a visual. This identifier must be unique within the
 	// context of a dashboard, template, or analysis. Two dashboards, analyses, or
 	// templates can have visuals with the same identifiers.
@@ -5425,11 +5939,19 @@ type CustomContentVisual struct {
 	// The configuration of a CustomContentVisual .
 	ChartConfiguration *CustomContentConfiguration
 
+	// The dataset that is used to create the custom content visual. You can't create
+	// a visual without a dataset or a topic.
+	DataSetIdentifier *string
+
 	// The subtitle that is displayed on the visual.
 	Subtitle *VisualSubtitleLabelOptions
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The topic that is used in the custom content visual. You can't create a visual
+	// without a dataset or a topic.
+	TopicIdentifier *string
 
 	// The alt text for the visual.
 	VisualContentAltText *string
@@ -5941,6 +6463,9 @@ type DashboardSourceTemplate struct {
 	// This member is required.
 	DataSetReferences []DataSetReference
 
+	// The topic references for the source template of a dashboard.
+	TopicReferences []TopicReference
+
 	noSmithyDocumentSerde
 }
 
@@ -5980,8 +6505,8 @@ type DashboardVersion struct {
 	// The time that this dashboard version was created.
 	CreatedTime *time.Time
 
-	// The Amazon Resource Numbers (ARNs) for the datasets that are associated with
-	// this version of the dashboard.
+	// The Amazon Resource Names (ARNs) for the datasets that are associated with this
+	// version of the dashboard.
 	DataSetArns []string
 
 	// Description.
@@ -6002,6 +6527,10 @@ type DashboardVersion struct {
 
 	// The ARN of the theme associated with a version of the dashboard.
 	ThemeArn *string
+
+	// The Amazon Resource Names (ARNs) for the topics that are associated with this
+	// version of the dashboard.
+	TopicArns []string
 
 	// Version number for this version of the dashboard.
 	VersionNumber *int64
@@ -6056,6 +6585,11 @@ type DashboardVersionDefinition struct {
 
 	// An array of tooltip sheet definitions for a dashboard.
 	TooltipSheets []TooltipSheetDefinition
+
+	// An array of topic identifier declarations. With this mapping, you can use topic
+	// identifiers instead of topic Amazon Resource Names (ARNs) throughout the
+	// dashboard's sub-structures.
+	TopicIdentifierDeclarations []TopicIdentifierDeclaration
 
 	noSmithyDocumentSerde
 }
@@ -8627,12 +9161,6 @@ type DynamicDefaultValue struct {
 // EmptyVisual until a visual type is selected.
 type EmptyVisual struct {
 
-	// The data set that is used in the empty visual. Every visual requires a dataset
-	// to render.
-	//
-	// This member is required.
-	DataSetIdentifier *string
-
 	// The unique identifier of a visual. This identifier must be unique within the
 	// context of a dashboard, template, or analysis. Two dashboards, analyses, or
 	// templates can have visuals with the same identifiers.
@@ -8642,6 +9170,14 @@ type EmptyVisual struct {
 
 	// The list of custom actions that are configured for a visual.
 	Actions []VisualCustomAction
+
+	// The data set that is used in the empty visual. Every visual requires a dataset
+	// or a topic to render.
+	DataSetIdentifier *string
+
+	// The topic that is used in the empty visual. Every visual requires a dataset or
+	// a topic to render.
+	TopicIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -12167,11 +12703,6 @@ type InsightConfiguration struct {
 // [Working with insights]: https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html
 type InsightVisual struct {
 
-	// The dataset that is used in the insight visual.
-	//
-	// This member is required.
-	DataSetIdentifier *string
-
 	// The unique identifier of a visual. This identifier must be unique within the
 	// context of a dashboard, template, or analysis. Two dashboards, analyses, or
 	// templates can have visuals with the same identifiers.
@@ -12182,6 +12713,9 @@ type InsightVisual struct {
 	// The list of custom actions that are configured for a visual.
 	Actions []VisualCustomAction
 
+	// The dataset that is used in the insight visual.
+	DataSetIdentifier *string
+
 	// The configuration of an insight visual.
 	InsightConfiguration *InsightConfiguration
 
@@ -12190,6 +12724,9 @@ type InsightVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The topic that is used in the insight visual.
+	TopicIdentifier *string
 
 	// The alt text for the visual.
 	VisualContentAltText *string
@@ -12984,12 +13521,6 @@ type LayerCustomActionOperation struct {
 // A layer map visual.
 type LayerMapVisual struct {
 
-	// The dataset that is used to create the layer map visual. You can't create a
-	// visual without a dataset.
-	//
-	// This member is required.
-	DataSetIdentifier *string
-
 	// The ID of the visual.
 	//
 	// This member is required.
@@ -12998,11 +13529,19 @@ type LayerMapVisual struct {
 	// The configuration settings of the visual.
 	ChartConfiguration *GeospatialLayerMapConfiguration
 
+	// The dataset that is used to create the layer map visual. You can't create a
+	// visual without a dataset or a topic.
+	DataSetIdentifier *string
+
 	// The subtitle label options for a visual.
 	Subtitle *VisualSubtitleLabelOptions
 
 	// The title label options for a visual.
 	Title *VisualTitleLabelOptions
+
+	// The topic that is used in the layer map visual. You can't create a visual
+	// without a dataset or a topic.
+	TopicIdentifier *string
 
 	// The alt text for the visual.
 	VisualContentAltText *string
@@ -13771,8 +14310,14 @@ type NamedEntityDefinition struct {
 	// The name of the entity.
 	FieldName *string
 
+	// A Boolean value that indicates whether the named entity definition is hidden.
+	IsHidden *bool
+
 	// The definition of a metric.
 	Metric *NamedEntityDefinitionMetric
+
+	// The presentation order of the named entity definition.
+	PresentationOrder *int32
 
 	// The property name to be used for the named entity.
 	PropertyName *string
@@ -13783,6 +14328,9 @@ type NamedEntityDefinition struct {
 	// The property usage. Valid values for this structure are INHERIT , DIMENSION ,
 	// and MEASURE .
 	PropertyUsage PropertyUsage
+
+	// The rank order of the named entity definition.
+	RankOrder *int32
 
 	noSmithyDocumentSerde
 }
@@ -13806,6 +14354,22 @@ type NamedEntityRef struct {
 
 	// The NamedEntityName for the NamedEntityRef .
 	NamedEntityName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a sort for a named entity.
+type NamedEntitySort struct {
+
+	// The direction of the sort. Valid values are ASCENDING and DESCENDING .
+	//
+	// This member is required.
+	Direction TopicSortDirection
+
+	// The name of the field that is used for the sort.
+	//
+	// This member is required.
+	FieldName *string
 
 	noSmithyDocumentSerde
 }
@@ -20213,6 +20777,10 @@ type TemplateSourceAnalysis struct {
 	// This member is required.
 	DataSetReferences []DataSetReference
 
+	// A structure containing information about the topic references used as
+	// placeholders in the template.
+	TopicReferences []TopicReference
+
 	noSmithyDocumentSerde
 }
 
@@ -20309,6 +20877,11 @@ type TemplateVersion struct {
 	// The ARN of the theme associated with this version of the template.
 	ThemeArn *string
 
+	// Schema of the topic identified by the placeholder. Any dashboard created from
+	// this template should be bound to new topics matching the same schema described
+	// through this API operation.
+	TopicConfigurations []TopicConfiguration
+
 	// The version number of the template version.
 	VersionNumber *int64
 
@@ -20365,6 +20938,10 @@ type TemplateVersionDefinition struct {
 
 	// An array of tooltip sheet definitions for a template.
 	TooltipSheets []TooltipSheetDefinition
+
+	// An array of topic configurations. These configurations define the required
+	// columns for each topic used within a template.
+	TopicConfigurations []TopicConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -21122,6 +21699,9 @@ type TopicCategoryFilter struct {
 	// A Boolean value that indicates if the filter is inverse.
 	Inverse bool
 
+	// The null filter that is applied to the category filter.
+	NullFilter NullFilterType
+
 	noSmithyDocumentSerde
 }
 
@@ -21219,6 +21799,21 @@ type TopicConfigOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of a topic.
+type TopicConfiguration struct {
+
+	// The list of column group schemas in the topic configuration.
+	ColumnGroupSchemaList []ColumnGroupSchema
+
+	// Topic schema.
+	DataSetSchema *DataSetSchema
+
+	// The placeholder for the topic configuration.
+	Placeholder *string
+
+	noSmithyDocumentSerde
+}
+
 // The definition for a TopicConstantValue .
 type TopicConstantValue struct {
 
@@ -21250,6 +21845,9 @@ type TopicDateRangeFilter struct {
 	// boundary values. If set to true, the filter includes the start and end dates. If
 	// set to false, the filter excludes them.
 	Inclusive bool
+
+	// The null filter that is applied to the date range filter.
+	NullFilter NullFilterType
 
 	noSmithyDocumentSerde
 }
@@ -21321,6 +21919,22 @@ type TopicFilter struct {
 
 	// The relative date filter.
 	RelativeDateFilter *TopicRelativeDateFilter
+
+	noSmithyDocumentSerde
+}
+
+// A topic.
+type TopicIdentifierDeclaration struct {
+
+	// The identifier of the topic, typically the topic's name.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The Amazon Resource Name (ARN) of the topic.
+	//
+	// This member is required.
+	TopicArn *string
 
 	noSmithyDocumentSerde
 }
@@ -21516,8 +22130,17 @@ type TopicNamedEntity struct {
 	// The other names or aliases for the named entity.
 	EntitySynonyms []string
 
+	// The presentation order of the named entity.
+	PresentationOrder *int32
+
+	// The rank order of the named entity.
+	RankOrder *int32
+
 	// The type of named entity that a topic represents.
 	SemanticEntityType *SemanticEntityType
+
+	// The sort configuration of the named entity.
+	Sort []NamedEntitySort
 
 	noSmithyDocumentSerde
 }
@@ -21552,6 +22175,12 @@ type TopicNumericEqualityFilter struct {
 	// The constant used in a numeric equality filter.
 	Constant *TopicSingularFilterConstant
 
+	// A Boolean value that indicates if the filter is inverse.
+	Inverse bool
+
+	// The null filter that is applied to the numeric equality filter.
+	NullFilter NullFilterType
+
 	noSmithyDocumentSerde
 }
 
@@ -21575,6 +22204,12 @@ type TopicNumericRangeFilter struct {
 	// excluded from the filter.
 	Inclusive bool
 
+	// A Boolean value that indicates if the filter is inverse.
+	Inverse bool
+
+	// The null filter that is applied to the numeric range filter.
+	NullFilter NullFilterType
+
 	noSmithyDocumentSerde
 }
 
@@ -21589,6 +22224,22 @@ type TopicRangeFilterConstant struct {
 	// The value of the constant that is used to specify the endpoints of a range
 	// filter.
 	RangeConstant *RangeConstant
+
+	noSmithyDocumentSerde
+}
+
+// Topic reference.
+type TopicReference struct {
+
+	// Topic Amazon Resource Name (ARN).
+	//
+	// This member is required.
+	TopicArn *string
+
+	// Topic placeholder.
+	//
+	// This member is required.
+	TopicPlaceholder *string
 
 	noSmithyDocumentSerde
 }
@@ -21663,6 +22314,9 @@ type TopicRelativeDateFilter struct {
 
 	// The constant used in a relative date filter.
 	Constant *TopicSingularFilterConstant
+
+	// The null filter that is applied to the relative date filter.
+	NullFilter NullFilterType
 
 	// The function to be used in a relative date filter to determine the range of
 	// dates to include in the results. Valid values for this structure are BEFORE ,
@@ -21782,6 +22436,88 @@ type TopicTemplate struct {
 
 	// The template type for the TopicTemplate .
 	TemplateType *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a data set reference of a topic.
+type TopicV2DataSetReference struct {
+
+	// The Amazon Resource Name (ARN) of the data set.
+	//
+	// This member is required.
+	DataSetArn *string
+
+	// The name of the data set.
+	DataSetName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents a relation between two data sets of a topic.
+type TopicV2DataSetRelation struct {
+
+	// The left endpoint of the data set relation.
+	//
+	// This member is required.
+	Left *TopicV2DataSetRelationEndpoint
+
+	// The right endpoint of the data set relation.
+	//
+	// This member is required.
+	Right *TopicV2DataSetRelationEndpoint
+
+	noSmithyDocumentSerde
+}
+
+// A structure that represents an endpoint of a data set relation of a topic.
+type TopicV2DataSetRelationEndpoint struct {
+
+	// The names of the columns that are used in the data set relation.
+	//
+	// This member is required.
+	ColumnNames []string
+
+	// The Amazon Resource Name (ARN) of the data set at this endpoint of the relation.
+	//
+	// This member is required.
+	DataSetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of a topic.
+type TopicV2Details struct {
+
+	// The name of the topic.
+	//
+	// This member is required.
+	Name *string
+
+	// The relations between the data sets that the topic is associated with.
+	DataSetRelations []TopicV2DataSetRelation
+
+	// The data sets that the topic is associated with.
+	DataSets []TopicV2DataSetReference
+
+	// The description of the topic.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the topic.
+type TopicV2Summary struct {
+
+	// The Amazon Resource Name (ARN) of the topic.
+	Arn *string
+
+	// The name of the topic.
+	Name *string
+
+	// The ID of the topic. This ID is unique per Amazon Web Services Region for each
+	// Amazon Web Services account.
+	TopicId *string
 
 	noSmithyDocumentSerde
 }
@@ -22984,6 +23720,50 @@ type VisualMenuOption struct {
 
 	// The availaiblity status of a visual's menu options.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a customizable message displayed on a visual. Supports
+// parameter substitution in text fields.
+type VisualMessageConfiguration struct {
+
+	// The description text of the message that is displayed on the visual.
+	Description *string
+
+	// Specifies whether the description of the message is displayed.
+	DescriptionVisibility Visibility
+
+	// Specifies whether the custom message is displayed on the visual. When set to
+	// true , the custom message appears in place of the default message. When set to
+	// false or omitted, the default message is displayed.
+	Enabled bool
+
+	// The display text of the hyperlink that is shown in the message.
+	LinkText *string
+
+	// The destination URL of the hyperlink that is shown in the message. Only valid
+	// http , https , and mailto URLs are supported.
+	LinkUrl *string
+
+	// Specifies whether the hyperlink in the message is displayed.
+	LinkVisibility Visibility
+
+	// The title text of the message that is displayed on the visual.
+	Title *string
+
+	// Specifies whether the title of the message is displayed.
+	TitleVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The messages that are displayed on a visual under specific conditions, such as
+// when the visual returns no data.
+type VisualMessages struct {
+
+	// The message that is displayed on a visual when there is no data to display.
+	NoDataMessage *VisualMessageConfiguration
 
 	noSmithyDocumentSerde
 }

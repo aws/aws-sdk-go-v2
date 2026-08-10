@@ -6,12 +6,12 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified container association. When you delete a container
-// association, Network Firewall stops monitoring the associated container clusters
-// and removes the resolved IP addresses from firewall rules.
+// Deletes a container association. The resource transitions to a DELETING state.
+// Deletion is asynchronous - Network Firewall returns immediately while cleanup
+// proceeds in the background. You can't delete a container association while a
+// rule group references it.
 func (c *Client) DeleteContainerAssociation(ctx context.Context, params *DeleteContainerAssociationInput, optFns ...func(*Options)) (*DeleteContainerAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteContainerAssociationInput{}
@@ -29,12 +29,14 @@ func (c *Client) DeleteContainerAssociation(ctx context.Context, params *DeleteC
 
 type DeleteContainerAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the container association. You must specify
-	// the ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationArn *string
 
-	// The descriptive name of the container association. You must specify the ARN or
-	// the name, and you can specify both.
+	// The descriptive name of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationName *string
 
 	noSmithyDocumentSerde
@@ -48,7 +50,8 @@ type DeleteContainerAssociationOutput struct {
 	// The descriptive name of the container association.
 	ContainerAssociationName *string
 
-	// The current status of the container association.
+	// The current status of the container association. After deletion is initiated,
+	// the status is DELETING .
 	Status types.ContainerAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -67,9 +70,6 @@ func (c *Client) addOperationDeleteContainerAssociationMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -82,16 +82,7 @@ func (c *Client) addOperationDeleteContainerAssociationMiddlewares(stack *middle
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteContainerAssociation"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

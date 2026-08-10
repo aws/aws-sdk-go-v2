@@ -42,6 +42,29 @@ func (AdMarkupType) Values() []AdMarkupType {
 	}
 }
 
+type AdSequencingMode string
+
+// Enum values for AdSequencingMode
+const (
+	AdSequencingModeFollowAdSequence         AdSequencingMode = "FOLLOW_AD_SEQUENCE"
+	AdSequencingModeIgnoreAdSequence         AdSequencingMode = "IGNORE_AD_SEQUENCE"
+	AdSequencingModeFollowAdSequenceOnlyLive AdSequencingMode = "FOLLOW_AD_SEQUENCE_ONLY_LIVE"
+	AdSequencingModeFollowAdSequenceOnlyVod  AdSequencingMode = "FOLLOW_AD_SEQUENCE_ONLY_VOD"
+)
+
+// Values returns all known values for AdSequencingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdSequencingMode) Values() []AdSequencingMode {
+	return []AdSequencingMode{
+		"FOLLOW_AD_SEQUENCE",
+		"IGNORE_AD_SEQUENCE",
+		"FOLLOW_AD_SEQUENCE_ONLY_LIVE",
+		"FOLLOW_AD_SEQUENCE_ONLY_VOD",
+	}
+}
+
 type AdsInteractionExcludeEventType string
 
 // Enum values for AdsInteractionExcludeEventType
@@ -271,6 +294,7 @@ type FunctionType string
 const (
 	FunctionTypeHttpRequest        FunctionType = "HTTP_REQUEST"
 	FunctionTypeCustomOutput       FunctionType = "CUSTOM_OUTPUT"
+	FunctionTypeConcurrentExecutor FunctionType = "CONCURRENT_EXECUTOR"
 	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
 )
 
@@ -282,6 +306,7 @@ func (FunctionType) Values() []FunctionType {
 	return []FunctionType{
 		"HTTP_REQUEST",
 		"CUSTOM_OUTPUT",
+		"CONCURRENT_EXECUTOR",
 		"SEQUENTIAL_EXECUTOR",
 	}
 }
@@ -615,6 +640,25 @@ func (PrefetchScheduleType) Values() []PrefetchScheduleType {
 	return []PrefetchScheduleType{
 		"SINGLE",
 		"RECURRING",
+	}
+}
+
+type PreRollAdSequencingMode string
+
+// Enum values for PreRollAdSequencingMode
+const (
+	PreRollAdSequencingModeFollowAdSequence PreRollAdSequencingMode = "FOLLOW_AD_SEQUENCE"
+	PreRollAdSequencingModeIgnoreAdSequence PreRollAdSequencingMode = "IGNORE_AD_SEQUENCE"
+)
+
+// Values returns all known values for PreRollAdSequencingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreRollAdSequencingMode) Values() []PreRollAdSequencingMode {
+	return []PreRollAdSequencingMode{
+		"FOLLOW_AD_SEQUENCE",
+		"IGNORE_AD_SEQUENCE",
 	}
 }
 

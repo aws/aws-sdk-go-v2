@@ -1,3 +1,16 @@
+# v1.37.0 (2026-08-06)
+
+* **Feature**: Add support for capacity provider sessions in Amazon Bedrock AgentCore. Customers can now delete an active session running on a runtime instance launched through their capacity provider.
+
+# v1.36.4 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.36.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

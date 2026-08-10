@@ -2639,6 +2639,7 @@ const (
 	FilterClassEnforcedValueFilter    FilterClass = "ENFORCED_VALUE_FILTER"
 	FilterClassConditionalValueFilter FilterClass = "CONDITIONAL_VALUE_FILTER"
 	FilterClassNamedValueFilter       FilterClass = "NAMED_VALUE_FILTER"
+	FilterClassDashboardDefaultFilter FilterClass = "DASHBOARD_DEFAULT_FILTER"
 )
 
 // Values returns all known values for FilterClass. Note that this can be expanded
@@ -2650,6 +2651,7 @@ func (FilterClass) Values() []FilterClass {
 		"ENFORCED_VALUE_FILTER",
 		"CONDITIONAL_VALUE_FILTER",
 		"NAMED_VALUE_FILTER",
+		"DASHBOARD_DEFAULT_FILTER",
 	}
 }
 
@@ -6566,6 +6568,25 @@ func (TopicUserExperienceVersion) Values() []TopicUserExperienceVersion {
 	return []TopicUserExperienceVersion{
 		"LEGACY",
 		"NEW_READER_EXPERIENCE",
+	}
+}
+
+type TopicV2PublishOption string
+
+// Enum values for TopicV2PublishOption
+const (
+	TopicV2PublishOptionDraft   TopicV2PublishOption = "DRAFT"
+	TopicV2PublishOptionPublish TopicV2PublishOption = "PUBLISH"
+)
+
+// Values returns all known values for TopicV2PublishOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicV2PublishOption) Values() []TopicV2PublishOption {
+	return []TopicV2PublishOption{
+		"DRAFT",
+		"PUBLISH",
 	}
 }
 

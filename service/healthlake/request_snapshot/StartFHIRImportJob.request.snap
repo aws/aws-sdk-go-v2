@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: HealthLake.StartFHIRImportJob
 
-{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DatastoreId":"__DatastoreId__","DriftDetectionEnabled":true,"InputDataConfig":{"S3Uri":"__InputDataConfigMemberS3Uri__"},"InputFormat":"__InputFormat__","JobName":"__JobName__","JobOutputDataConfig":{"S3Configuration":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}},"ProfileId":"__ProfileId__","ValidationLevel":"strict"}
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DatastoreId":"__DatastoreId__","DriftDetectionEnabled":true,"InputDataConfig":{"S3Uri":"__InputDataConfigMemberS3Uri__"},"InputFormat":"__InputFormat__","JobName":"__JobName__","JobOutputDataConfig":{"S3Configuration":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}},"ProfileId":"__ProfileId__","ProvenanceEnabled":true,"ValidationLevel":"strict"}

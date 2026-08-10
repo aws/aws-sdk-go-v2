@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pricingplanmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Approves a subscription that is in PENDING_APPROVAL status, activating it and
@@ -125,9 +124,6 @@ func (c *Client) addOperationApprovePaidSubscriptionMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -140,12 +136,6 @@ func (c *Client) addOperationApprovePaidSubscriptionMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -153,9 +143,6 @@ func (c *Client) addOperationApprovePaidSubscriptionMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpApprovePaidSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ApprovePaidSubscription"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

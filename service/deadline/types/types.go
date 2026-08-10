@@ -2231,7 +2231,7 @@ type JobDetailsEntity struct {
 	SchemaVersion *string
 
 	// The job attachment settings.
-	JobAttachmentSettings *JobAttachmentSettings
+	JobAttachmentSettings *JobDetailsJobAttachmentSettings
 
 	// The user name and group that the job uses when run.
 	JobRunAsUser *JobRunAsUser
@@ -2276,6 +2276,23 @@ type JobDetailsIdentifiers struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
+}
+
+// The job attachment settings returned to workers for a job. These are the Amazon
+// S3 bucket name and the Amazon S3 prefix.
+type JobDetailsJobAttachmentSettings struct {
+
+	// The root prefix.
+	//
+	// This member is required.
+	RootPrefix *string
+
+	// The Amazon S3 bucket name.
+	//
+	// This member is required.
+	S3BucketName *string
 
 	noSmithyDocumentSerde
 }

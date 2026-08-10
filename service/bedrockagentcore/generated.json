@@ -19,6 +19,7 @@
         "api_op_CreatePaymentSession.go",
         "api_op_DeleteABTest.go",
         "api_op_DeleteBatchEvaluation.go",
+        "api_op_DeleteCapacityProviderSession.go",
         "api_op_DeleteEvent.go",
         "api_op_DeleteMemoryRecord.go",
         "api_op_DeletePaymentInstrument.go",

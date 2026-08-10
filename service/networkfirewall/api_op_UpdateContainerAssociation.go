@@ -6,11 +6,11 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the properties of an existing container association. Use this to modify
-// the container monitoring configurations or description.
+// Updates the monitoring configurations and description of a container
+// association. You can't change the container type after creation. Provide an
+// update token to enable optimistic concurrency control.
 func (c *Client) UpdateContainerAssociation(ctx context.Context, params *UpdateContainerAssociationInput, optFns ...func(*Options)) (*UpdateContainerAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateContainerAssociationInput{}
@@ -28,43 +28,53 @@ func (c *Client) UpdateContainerAssociation(ctx context.Context, params *UpdateC
 
 type UpdateContainerAssociationInput struct {
 
-	// The updated list of container monitoring configurations that define which
-	// clusters and container attributes to monitor.
+	// The updated monitoring configurations for the container association. Each
+	// configuration specifies an Amazon ECS or Amazon EKS cluster to monitor and
+	// optional attribute filters.
 	//
 	// This member is required.
 	ContainerMonitoringConfigurations []types.ContainerMonitoringConfiguration
 
-	// The type of container orchestration platform. This must match the type
-	// specified when the container association was created.
+	// The container type. This value must match the existing type and can't be
+	// changed. Valid values:
+	//
+	//   - ECS - Amazon Elastic Container Service
+	//
+	//   - EKS - Amazon Elastic Kubernetes Service
 	//
 	// This member is required.
 	Type types.ContainerMonitoringType
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the container association. The token marks the state of the
-	// container association resource at the time of the request. To make an update to
-	// the container association, provide the token in your request. Network Firewall
-	// uses the token to ensure that the container association hasn't changed since you
-	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException . If this happens, retrieve the container association
-	// again to get a current copy of it with a new token. Reapply your changes as
-	// needed, then try the operation again using the new token.
+	// container association resource at the time of the request.
+	//
+	// To make changes to the container association, you provide the token in your
+	// request. Network Firewall uses the token to ensure that the container
+	// association hasn't changed since you last retrieved it. If it has changed, the
+	// operation fails with an InvalidTokenException . If this happens, retrieve the
+	// container association again to get a current copy of it with a current token.
+	// Reapply your changes as needed, then try the operation again using the new
+	// token.
 	//
 	// This member is required.
 	UpdateToken *string
 
-	// The Amazon Resource Name (ARN) of the container association. You must specify
-	// the ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationArn *string
 
-	// The descriptive name of the container association. You must specify the ARN or
-	// the name, and you can specify both.
+	// The descriptive name of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationName *string
 
-	// A description of the container association.
+	// A description of the container association. When omitted, the existing
+	// description remains unchanged. To clear the description, pass an empty string.
 	Description *string
 
-	// The key:value pairs associated with the resource.
+	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -78,7 +88,7 @@ type UpdateContainerAssociationOutput struct {
 	// The descriptive name of the container association.
 	ContainerAssociationName *string
 
-	// The container monitoring configurations for this container association.
+	// The monitoring configurations for the container association.
 	ContainerMonitoringConfigurations []types.ContainerMonitoringConfiguration
 
 	// A description of the container association.
@@ -87,15 +97,27 @@ type UpdateContainerAssociationOutput struct {
 	// The current status of the container association.
 	Status types.ContainerAssociationStatus
 
-	// The key:value pairs associated with the resource.
+	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
 
-	// The type of container orchestration platform. Either ECS or EKS .
+	// The container type. Valid values:
+	//
+	//   - ECS - Amazon Elastic Container Service
+	//
+	//   - EKS - Amazon Elastic Kubernetes Service
 	Type types.ContainerMonitoringType
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the container association. The token marks the state of the
 	// container association resource at the time of the request.
+	//
+	// To make changes to the container association, you provide the token in your
+	// request. Network Firewall uses the token to ensure that the container
+	// association hasn't changed since you last retrieved it. If it has changed, the
+	// operation fails with an InvalidTokenException . If this happens, retrieve the
+	// container association again to get a current copy of it with a current token.
+	// Reapply your changes as needed, then try the operation again using the new
+	// token.
 	UpdateToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -114,9 +136,6 @@ func (c *Client) addOperationUpdateContainerAssociationMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -129,19 +148,10 @@ func (c *Client) addOperationUpdateContainerAssociationMiddlewares(stack *middle
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateContainerAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateContainerAssociation"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

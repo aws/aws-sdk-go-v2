@@ -749,6 +749,21 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 				},
 			},
 			LoggingInfo: &types.LoggingInfo{
+				AuthorizerLogs: &types.AuthorizerLogs{
+					CloudWatchLogs: &types.CloudWatchLogs{
+						Enabled:  ptr.Bool(true),
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					Firehose: &types.Firehose{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+						Enabled:        ptr.Bool(true),
+					},
+					S3: &types.S3{
+						Bucket:  ptr.String("__Bucket__"),
+						Enabled: ptr.Bool(true),
+						Prefix:  ptr.String("__Prefix__"),
+					},
+				},
 				BrokerLogs: &types.BrokerLogs{
 					CloudWatchLogs: &types.CloudWatchLogs{
 						Enabled:  ptr.Bool(true),
@@ -865,6 +880,21 @@ func TestCheckResponseSnapshot_DescribeClusterOperation(t *testing.T) {
 				},
 				KafkaVersion: ptr.String("__KafkaVersion__"),
 				LoggingInfo: &types.LoggingInfo{
+					AuthorizerLogs: &types.AuthorizerLogs{
+						CloudWatchLogs: &types.CloudWatchLogs{
+							Enabled:  ptr.Bool(true),
+							LogGroup: ptr.String("__LogGroup__"),
+						},
+						Firehose: &types.Firehose{
+							DeliveryStream: ptr.String("__DeliveryStream__"),
+							Enabled:        ptr.Bool(true),
+						},
+						S3: &types.S3{
+							Bucket:  ptr.String("__Bucket__"),
+							Enabled: ptr.Bool(true),
+							Prefix:  ptr.String("__Prefix__"),
+						},
+					},
 					BrokerLogs: &types.BrokerLogs{
 						CloudWatchLogs: &types.CloudWatchLogs{
 							Enabled:  ptr.Bool(true),
@@ -987,6 +1017,21 @@ func TestCheckResponseSnapshot_DescribeClusterOperation(t *testing.T) {
 				},
 				KafkaVersion: ptr.String("__KafkaVersion__"),
 				LoggingInfo: &types.LoggingInfo{
+					AuthorizerLogs: &types.AuthorizerLogs{
+						CloudWatchLogs: &types.CloudWatchLogs{
+							Enabled:  ptr.Bool(true),
+							LogGroup: ptr.String("__LogGroup__"),
+						},
+						Firehose: &types.Firehose{
+							DeliveryStream: ptr.String("__DeliveryStream__"),
+							Enabled:        ptr.Bool(true),
+						},
+						S3: &types.S3{
+							Bucket:  ptr.String("__Bucket__"),
+							Enabled: ptr.Bool(true),
+							Prefix:  ptr.String("__Prefix__"),
+						},
+					},
 					BrokerLogs: &types.BrokerLogs{
 						CloudWatchLogs: &types.CloudWatchLogs{
 							Enabled:  ptr.Bool(true),
@@ -1166,6 +1211,21 @@ func TestCheckResponseSnapshot_DescribeClusterOperationV2(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -1288,6 +1348,21 @@ func TestCheckResponseSnapshot_DescribeClusterOperationV2(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -1529,6 +1604,21 @@ func TestCheckResponseSnapshot_DescribeClusterV2(t *testing.T) {
 					},
 				},
 				LoggingInfo: &types.LoggingInfo{
+					AuthorizerLogs: &types.AuthorizerLogs{
+						CloudWatchLogs: &types.CloudWatchLogs{
+							Enabled:  ptr.Bool(true),
+							LogGroup: ptr.String("__LogGroup__"),
+						},
+						Firehose: &types.Firehose{
+							DeliveryStream: ptr.String("__DeliveryStream__"),
+							Enabled:        ptr.Bool(true),
+						},
+						S3: &types.S3{
+							Bucket:  ptr.String("__Bucket__"),
+							Enabled: ptr.Bool(true),
+							Prefix:  ptr.String("__Prefix__"),
+						},
+					},
 					BrokerLogs: &types.BrokerLogs{
 						CloudWatchLogs: &types.CloudWatchLogs{
 							Enabled:  ptr.Bool(true),
@@ -2207,6 +2297,21 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -2329,6 +2434,21 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -2487,6 +2607,21 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -2609,6 +2744,21 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 					},
 					KafkaVersion: ptr.String("__KafkaVersion__"),
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -2866,6 +3016,21 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 					},
 				},
 				LoggingInfo: &types.LoggingInfo{
+					AuthorizerLogs: &types.AuthorizerLogs{
+						CloudWatchLogs: &types.CloudWatchLogs{
+							Enabled:  ptr.Bool(true),
+							LogGroup: ptr.String("__LogGroup__"),
+						},
+						Firehose: &types.Firehose{
+							DeliveryStream: ptr.String("__DeliveryStream__"),
+							Enabled:        ptr.Bool(true),
+						},
+						S3: &types.S3{
+							Bucket:  ptr.String("__Bucket__"),
+							Enabled: ptr.Bool(true),
+							Prefix:  ptr.String("__Prefix__"),
+						},
+					},
 					BrokerLogs: &types.BrokerLogs{
 						CloudWatchLogs: &types.CloudWatchLogs{
 							Enabled:  ptr.Bool(true),
@@ -2997,6 +3162,21 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 					},
 				},
 				LoggingInfo: &types.LoggingInfo{
+					AuthorizerLogs: &types.AuthorizerLogs{
+						CloudWatchLogs: &types.CloudWatchLogs{
+							Enabled:  ptr.Bool(true),
+							LogGroup: ptr.String("__LogGroup__"),
+						},
+						Firehose: &types.Firehose{
+							DeliveryStream: ptr.String("__DeliveryStream__"),
+							Enabled:        ptr.Bool(true),
+						},
+						S3: &types.S3{
+							Bucket:  ptr.String("__Bucket__"),
+							Enabled: ptr.Bool(true),
+							Prefix:  ptr.String("__Prefix__"),
+						},
+					},
 					BrokerLogs: &types.BrokerLogs{
 						CloudWatchLogs: &types.CloudWatchLogs{
 							Enabled:  ptr.Bool(true),
@@ -3161,6 +3341,21 @@ func TestCheckResponseSnapshot_ListClustersV2(t *testing.T) {
 						},
 					},
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),
@@ -3329,6 +3524,21 @@ func TestCheckResponseSnapshot_ListClustersV2(t *testing.T) {
 						},
 					},
 					LoggingInfo: &types.LoggingInfo{
+						AuthorizerLogs: &types.AuthorizerLogs{
+							CloudWatchLogs: &types.CloudWatchLogs{
+								Enabled:  ptr.Bool(true),
+								LogGroup: ptr.String("__LogGroup__"),
+							},
+							Firehose: &types.Firehose{
+								DeliveryStream: ptr.String("__DeliveryStream__"),
+								Enabled:        ptr.Bool(true),
+							},
+							S3: &types.S3{
+								Bucket:  ptr.String("__Bucket__"),
+								Enabled: ptr.Bool(true),
+								Prefix:  ptr.String("__Prefix__"),
+							},
+						},
 						BrokerLogs: &types.BrokerLogs{
 							CloudWatchLogs: &types.CloudWatchLogs{
 								Enabled:  ptr.Bool(true),

@@ -2165,6 +2165,26 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+			MaxConcurrency:      ptr.Int32(1),
+		},
 		SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -2174,10 +2194,12 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
@@ -2239,6 +2261,11 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 		LivePreRollConfiguration: &types.LivePreRollConfiguration{
 			AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 			MaxDurationSeconds:  ptr.Int32(1),
+			AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+				VastResponse: &types.PreRollVastResponse{
+					AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+				},
+			},
 		},
 		LogConfiguration: &types.LogConfiguration{
 			PercentEnabled: 1,
@@ -2296,6 +2323,9 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 					"key0": "__Value__",
 				},
 				CompressRequest: types.CompressionMethod("NONE"),
+			},
+			VastResponse: &types.VastResponse{
+				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
 		},
 		FunctionMapping: map[string]string{
@@ -2644,6 +2674,26 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						"key0": "__Value__",
 					},
 				},
+				ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					FunctionList: []types.FunctionRef{
+						{
+							RunCondition: ptr.String("__RunCondition__"),
+							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
+						},
+						{
+							RunCondition: ptr.String("__RunCondition__"),
+							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
+						},
+					},
+					TimeoutMilliseconds: ptr.Int32(1),
+					MaxConcurrency:      ptr.Int32(1),
+				},
 				SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
 					Output: map[string]string{
@@ -2653,10 +2703,12 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						{
 							RunCondition: ptr.String("__RunCondition__"),
 							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
 						},
 						{
 							RunCondition: ptr.String("__RunCondition__"),
 							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
 						},
 					},
 					TimeoutMilliseconds: ptr.Int32(1),
@@ -2689,6 +2741,26 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						"key0": "__Value__",
 					},
 				},
+				ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					FunctionList: []types.FunctionRef{
+						{
+							RunCondition: ptr.String("__RunCondition__"),
+							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
+						},
+						{
+							RunCondition: ptr.String("__RunCondition__"),
+							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
+						},
+					},
+					TimeoutMilliseconds: ptr.Int32(1),
+					MaxConcurrency:      ptr.Int32(1),
+				},
 				SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
 					Output: map[string]string{
@@ -2698,10 +2770,12 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						{
 							RunCondition: ptr.String("__RunCondition__"),
 							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
 						},
 						{
 							RunCondition: ptr.String("__RunCondition__"),
 							FunctionId:   ptr.String("__FunctionId__"),
+							Alias:        ptr.String("__Alias__"),
 						},
 					},
 					TimeoutMilliseconds: ptr.Int32(1),
@@ -2835,6 +2909,11 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 				LivePreRollConfiguration: &types.LivePreRollConfiguration{
 					AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 					MaxDurationSeconds:  ptr.Int32(1),
+					AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+						VastResponse: &types.PreRollVastResponse{
+							AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+						},
+					},
 				},
 				LogConfiguration: &types.LogConfiguration{
 					PercentEnabled: 1,
@@ -2892,6 +2971,9 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 							"key0": "__Value__",
 						},
 						CompressRequest: types.CompressionMethod("NONE"),
+					},
+					VastResponse: &types.VastResponse{
+						AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 					},
 				},
 				FunctionMapping: map[string]string{
@@ -2943,6 +3025,11 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 				LivePreRollConfiguration: &types.LivePreRollConfiguration{
 					AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 					MaxDurationSeconds:  ptr.Int32(1),
+					AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+						VastResponse: &types.PreRollVastResponse{
+							AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+						},
+					},
 				},
 				LogConfiguration: &types.LogConfiguration{
 					PercentEnabled: 1,
@@ -3000,6 +3087,9 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 							"key0": "__Value__",
 						},
 						CompressRequest: types.CompressionMethod("NONE"),
+					},
+					VastResponse: &types.VastResponse{
+						AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 					},
 				},
 				FunctionMapping: map[string]string{
@@ -3422,6 +3512,26 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		ConcurrentExecutorConfiguration: &types.ConcurrentExecutorConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			FunctionList: []types.FunctionRef{
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+				{
+					RunCondition: ptr.String("__RunCondition__"),
+					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
+				},
+			},
+			TimeoutMilliseconds: ptr.Int32(1),
+			MaxConcurrency:      ptr.Int32(1),
+		},
 		SequentialExecutorConfiguration: &types.SequentialExecutorConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -3431,10 +3541,12 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 				{
 					RunCondition: ptr.String("__RunCondition__"),
 					FunctionId:   ptr.String("__FunctionId__"),
+					Alias:        ptr.String("__Alias__"),
 				},
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
@@ -3496,6 +3608,11 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		LivePreRollConfiguration: &types.LivePreRollConfiguration{
 			AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
 			MaxDurationSeconds:  ptr.Int32(1),
+			AdDecisionServerConfiguration: &types.PreRollAdDecisionServerConfiguration{
+				VastResponse: &types.PreRollVastResponse{
+					AdSequencingMode: types.PreRollAdSequencingMode("FOLLOW_AD_SEQUENCE"),
+				},
+			},
 		},
 		LogConfiguration: &types.LogConfiguration{
 			PercentEnabled: 1,
@@ -3553,6 +3670,9 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 					"key0": "__Value__",
 				},
 				CompressRequest: types.CompressionMethod("NONE"),
+			},
+			VastResponse: &types.VastResponse{
+				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
 		},
 		FunctionMapping: map[string]string{

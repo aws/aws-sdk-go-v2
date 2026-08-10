@@ -1034,6 +1034,18 @@ func TestCheckSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateProxySettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProxySettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProxySettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRuleGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRuleGroup(context.Background(), nil, func(o *Options) {
@@ -2034,6 +2046,18 @@ func TestUpdateSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 	_, err := svc.UpdateProxyRulePriorities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateProxyRulePriorities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProxySettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProxySettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProxySettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

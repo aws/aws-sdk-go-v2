@@ -1,0 +1,5 @@
+POST /SparseJsonMaps
+
+Content-Type: application/json
+
+{"sparseBooleanMap":{"key0":true},"sparseNumberMap":{"key0":1},"sparseSetMap":{"key0":["__Member__","__Member__"]},"sparseStringMap":{"key0":"__Value__"},"sparseStructMap":{"key0":{"hi":"__Hi__"}}}

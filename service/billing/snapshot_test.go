@@ -158,6 +158,30 @@ func TestCheckSnapshot_GetCredits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEnterpriseSupportChargeSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnterpriseSupportChargeSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEnterpriseSupportChargeSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEnterpriseSupportContractDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnterpriseSupportContractDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEnterpriseSupportContractDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -175,6 +199,18 @@ func TestCheckSnapshot_ListBillingViews(t *testing.T) {
 	_, err := svc.ListBillingViews(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBillingViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEnterpriseSupportLinkedAccountCharges")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +397,30 @@ func TestUpdateSnapshot_GetCredits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEnterpriseSupportChargeSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnterpriseSupportChargeSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEnterpriseSupportChargeSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEnterpriseSupportContractDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnterpriseSupportContractDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEnterpriseSupportContractDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
@@ -378,6 +438,18 @@ func TestUpdateSnapshot_ListBillingViews(t *testing.T) {
 	_, err := svc.ListBillingViews(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBillingViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEnterpriseSupportLinkedAccountCharges")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

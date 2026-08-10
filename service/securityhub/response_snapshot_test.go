@@ -9176,6 +9176,65 @@ func TestCheckResponseSnapshot_ListFindingAggregators(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListFreeTrialStatusesV2(t *testing.T) {
+	want := &ListFreeTrialStatusesV2Output{
+		AccountFreeTrialStatuses: []types.AccountFreeTrialStatus{
+			{
+				AccountId:   ptr.String("__AccountId__"),
+				EvaluatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FreeTrialStatuses: []types.FreeTrialStatus{
+					{
+						FeatureType: types.FreeTrialType("SECURITY_HUB_V2"),
+						Status:      types.FreeTrialStatusValue("ACTIVE"),
+						StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						FeatureType: types.FreeTrialType("SECURITY_HUB_V2"),
+						Status:      types.FreeTrialStatusValue("ACTIVE"),
+						StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				AccountId:   ptr.String("__AccountId__"),
+				EvaluatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FreeTrialStatuses: []types.FreeTrialStatus{
+					{
+						FeatureType: types.FreeTrialType("SECURITY_HUB_V2"),
+						Status:      types.FreeTrialStatusValue("ACTIVE"),
+						StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						FeatureType: types.FreeTrialType("SECURITY_HUB_V2"),
+						Status:      types.FreeTrialStatusValue("ACTIVE"),
+						StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListFreeTrialStatusesV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListFreeTrialStatusesV2(context.Background(), &ListFreeTrialStatusesV2Input{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListFreeTrialStatusesV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListInvitations(t *testing.T) {
 	want := &ListInvitationsOutput{
 		Invitations: []types.Invitation{

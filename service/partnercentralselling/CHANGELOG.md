@@ -1,3 +1,16 @@
+# v1.23.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2026-08-04)
+
+* **Feature**: Partners can now create leads with only 5 required fields and free-text values for all other fields, reducing import friction. Engagement invitations now include enrichment data (propensity scores, lead readiness) directly in the response.
+
+# v1.22.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.22.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

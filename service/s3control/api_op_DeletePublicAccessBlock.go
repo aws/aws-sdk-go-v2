@@ -81,9 +81,6 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -96,12 +93,6 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
 		return err
 	}
@@ -112,9 +103,6 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpDeletePublicAccessBlockValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeletePublicAccessBlock"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

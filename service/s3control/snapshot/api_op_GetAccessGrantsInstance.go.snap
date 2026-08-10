@@ -2,9 +2,6 @@ GetAccessGrantsInstance
 	Initialize stack step
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		stashOperationInput
@@ -39,8 +36,6 @@ GetAccessGrantsInstance
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer

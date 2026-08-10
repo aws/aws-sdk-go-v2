@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions/types"
-	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -19,7 +18,6 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
-	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -182,15 +180,7 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	if len(got) == 0 || len(expected) == 0 {
-		return bytes.Equal(got, expected)
-	}
-	gv, gerr := smithycbor.Decode(got)
-	ev, eerr := smithycbor.Decode(expected)
-	if gerr != nil || eerr != nil {
-		return bytes.Equal(got, expected)
-	}
-	return reflect.DeepEqual(gv, ev)
+	return bytes.Equal(got, expected)
 }
 func TestCheckRequestSnapshot_ListRecommendedActions(t *testing.T) {
 	input := &ListRecommendedActionsInput{

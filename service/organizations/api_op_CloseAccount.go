@@ -5,7 +5,6 @@ package organizations
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Closes an Amazon Web Services member account within an organization. You can
@@ -49,8 +48,8 @@ import (
 //
 // After the permanent termination of the account after the 90-day waiting period,
 // Organizations logs a membership event in CloudTrail. The event is an
-// AccountDepartedOrganization event with departedMethod:Cleaned and departedTime .
-// This event is available only in the management account's event history.
+// AccountDepartedOrganization event with departureMethod:CLEANED and departureTime
+// . This event is available only in the management account's event history.
 //
 // [all features are enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
 //
@@ -102,9 +101,6 @@ func (c *Client) addOperationCloseAccountMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -117,19 +113,10 @@ func (c *Client) addOperationCloseAccountMiddlewares(stack *middleware.Stack, op
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCloseAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CloseAccount"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

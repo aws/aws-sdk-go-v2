@@ -5891,6 +5891,18 @@ func awsAwsquery_serializeDocumentNetworkInterfaceCountRequest(v *types.NetworkI
 	return nil
 }
 
+func awsAwsquery_serializeDocumentOperator(v *types.Operator, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Principal != nil {
+		objectKey := object.Key("Principal")
+		objectKey.String(*v.Principal)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentOverrides(v []types.LaunchTemplateOverrides, value query.Value) error {
 	array := value.Array("member")
 
@@ -7021,6 +7033,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.NewInstancesProtectedFromScaleIn != nil {
 		objectKey := object.Key("NewInstancesProtectedFromScaleIn")
 		objectKey.Boolean(*v.NewInstancesProtectedFromScaleIn)
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsAwsquery_serializeDocumentOperator(v.Operator, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.PlacementGroup != nil {

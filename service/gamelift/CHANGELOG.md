@@ -1,3 +1,16 @@
+# v1.61.0 (2026-08-06)
+
+* **Feature**: Adds support for C8a, C8i, C9g, M8a, M8i, and M9g EC2 instance type families for managed EC2 and container fleets. Also adds explicit anchors on most string regexes.
+
+# v1.60.3 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.60.2 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.60.1 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

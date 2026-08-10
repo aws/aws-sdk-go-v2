@@ -5739,6 +5739,11 @@ func awsAwsjson11_serializeDocumentClientProperties(v *types.ClientProperties, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientExperiencePolicy != nil {
+		ok := object.Key("ClientExperiencePolicy")
+		ok.String(*v.ClientExperiencePolicy)
+	}
+
 	if len(v.LogUploadEnabled) > 0 {
 		ok := object.Key("LogUploadEnabled")
 		ok.String(string(v.LogUploadEnabled))

@@ -298,6 +298,25 @@ type EksConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration for an exporter managed by the scraper.
+//
+// The following types satisfy this interface:
+//
+//	ExporterConfigurationMemberOpenSearchConfiguration
+type ExporterConfiguration interface {
+	isExporterConfiguration()
+}
+
+// The configuration that the scraper uses to export metrics to an Amazon
+// OpenSearch Service domain.
+type ExporterConfigurationMemberOpenSearchConfiguration struct {
+	Value OpenSearchExporterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExporterConfigurationMemberOpenSearchConfiguration) isExporterConfiguration() {}
+
 // Configuration for threshold settings that determine when values near expected
 // values should be ignored during anomaly detection.
 //
@@ -445,6 +464,17 @@ type LoggingFilter struct {
 	//
 	// This member is required.
 	QspThreshold *int64
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for exporting metrics to an Amazon OpenSearch Service domain.
+type OpenSearchExporterConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon OpenSearch Service domain.
+	//
+	// This member is required.
+	DomainArn *string
 
 	noSmithyDocumentSerde
 }
@@ -741,6 +771,10 @@ type ScraperDescription struct {
 	// (Optional) A name associated with the scraper.
 	Alias *string
 
+	// The exporter configurations for the scraper, if configured. The list contains
+	// at most one configuration for an Amazon OpenSearch Service domain.
+	Exporters []ExporterConfiguration
+
 	// This structure displays information about the IAM roles used for cross-account
 	// scraping configuration.
 	RoleConfiguration *RoleConfiguration
@@ -845,6 +879,10 @@ type ScraperSummary struct {
 
 	// (Optional) A name associated with the scraper.
 	Alias *string
+
+	// The exporter configurations for the scraper, if configured. The list contains
+	// at most one configuration for an Amazon OpenSearch Service domain.
+	Exporters []ExporterConfiguration
 
 	// This structure displays information about the IAM roles used for cross-account
 	// scraping configuration.
@@ -1080,6 +1118,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAnomalyDetectorConfiguration()     {}
 func (*UnknownUnionMember) isAnomalyDetectorMissingDataAction() {}
 func (*UnknownUnionMember) isDestination()                      {}
+func (*UnknownUnionMember) isExporterConfiguration()            {}
 func (*UnknownUnionMember) isIgnoreNearExpected()               {}
 func (*UnknownUnionMember) isScrapeConfiguration()              {}
 func (*UnknownUnionMember) isScraperLoggingDestination()        {}

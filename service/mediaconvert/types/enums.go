@@ -8896,6 +8896,7 @@ const (
 	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
 	S3StorageClassGlacier            S3StorageClass = "GLACIER"
 	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassGlacierIr          S3StorageClass = "GLACIER_IR"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -8911,6 +8912,7 @@ func (S3StorageClass) Values() []S3StorageClass {
 		"INTELLIGENT_TIERING",
 		"GLACIER",
 		"DEEP_ARCHIVE",
+		"GLACIER_IR",
 	}
 }
 

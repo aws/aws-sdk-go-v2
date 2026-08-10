@@ -3,11 +3,14 @@
 package bcmrecommendedactions
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions/types"
 	smithy "github.com/aws/smithy-go"
-	smithycbor "github.com/aws/smithy-go/encoding/cbor"
+	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"github.com/aws/smithy-go/tracing"
@@ -16,547 +19,797 @@ import (
 	"strings"
 )
 
-type smithyRpcv2cbor_deserializeOpListRecommendedActions struct {
+type awsAwsjson10_deserializeOpListRecommendedActions struct {
 }
 
-func (*smithyRpcv2cbor_deserializeOpListRecommendedActions) ID() string {
+func (*awsAwsjson10_deserializeOpListRecommendedActions) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *smithyRpcv2cbor_deserializeOpListRecommendedActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsAwsjson10_deserializeOpListRecommendedActions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
 
-	if err != nil {
-		return out, metadata, err
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorListRecommendedActions(response, &metadata)
 	}
-
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
-	}
-
-	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf(
-				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
-				resp.Header.Get("smithy-protocol"),
-				resp.Status,
-			),
-		}
-	}
-
-	if resp.StatusCode != 200 {
-		return out, metadata, rpc2_deserializeOpErrorListRecommendedActions(resp)
-	}
-
-	payload, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	if len(payload) == 0 {
-		out.Result = &ListRecommendedActionsOutput{}
-		return out, metadata, nil
-	}
-
-	cv, err := smithycbor.Decode(payload)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	output, err := deserializeCBOR_ListRecommendedActionsOutput(cv)
-	if err != nil {
-		return out, metadata, err
-	}
-
+	output := &ListRecommendedActionsOutput{}
 	out.Result = output
 
-	return out, metadata, nil
-}
-func deserializeCBOR_AccessDeniedException(v smithycbor.Value) (*types.AccessDeniedException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.AccessDeniedException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
-	return ds, nil
-}
 
-func deserializeCBOR_ActionType(v smithycbor.Value) (types.ActionType, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.ActionType(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.ActionType(av), nil
-}
-
-func deserializeCBOR_Context(v smithycbor.Value) (map[string]string, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]string{}
-	for key, sv := range av {
-
-		dv, err := deserializeCBOR_String(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_Feature(v smithycbor.Value) (types.Feature, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.Feature(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.Feature(av), nil
-}
-
-func deserializeCBOR_InternalServerException(v smithycbor.Value) (*types.InternalServerException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.InternalServerException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_NextSteps(v smithycbor.Value) ([]string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []string
-	for _, si := range av {
-
-		di, err := deserializeCBOR_String(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_RecommendedAction(v smithycbor.Value) (*types.RecommendedAction, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.RecommendedAction{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "id" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Id = ptr.String(dv)
-		}
-
-		if key == "type" {
-
-			dv, err := deserializeCBOR_ActionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Type = dv
-		}
-
-		if key == "accountId" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.AccountId = ptr.String(dv)
-		}
-
-		if key == "severity" {
-
-			dv, err := deserializeCBOR_Severity(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Severity = dv
-		}
-
-		if key == "feature" {
-
-			dv, err := deserializeCBOR_Feature(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Feature = dv
-		}
-
-		if key == "context" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_Context(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Context = dv
-		}
-
-		if key == "nextSteps" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_NextSteps(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextSteps = dv
-		}
-
-		if key == "lastUpdatedTimeStamp" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.LastUpdatedTimeStamp = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_RecommendedActions(v smithycbor.Value) ([]types.RecommendedAction, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.RecommendedAction
-	for _, si := range av {
-
-		di, err := deserializeCBOR_RecommendedAction(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_Severity(v smithycbor.Value) (types.Severity, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.Severity(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.Severity(av), nil
-}
-
-func deserializeCBOR_ThrottlingException(v smithycbor.Value) (*types.ThrottlingException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ThrottlingException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ValidationException(v smithycbor.Value) (*types.ValidationException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ValidationException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-
-		if key == "reason" {
-
-			dv, err := deserializeCBOR_ValidationExceptionReason(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Reason = dv
-		}
-
-		if key == "fieldList" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_ValidationExceptionFieldList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.FieldList = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ValidationExceptionField(v smithycbor.Value) (*types.ValidationExceptionField, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ValidationExceptionField{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "name" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Name = ptr.String(dv)
-		}
-
-		if key == "message" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ValidationExceptionFieldList(v smithycbor.Value) ([]types.ValidationExceptionField, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.ValidationExceptionField
-	for _, si := range av {
-
-		di, err := deserializeCBOR_ValidationExceptionField(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_ValidationExceptionReason(v smithycbor.Value) (types.ValidationExceptionReason, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.ValidationExceptionReason(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.ValidationExceptionReason(av), nil
-}
-
-func deserializeCBOR_String(v smithycbor.Value) (string, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return "", fmt.Errorf("unexpected value type %T", v)
-	}
-	return string(av), nil
-}
-
-func deserializeCBOR_ListRecommendedActionsOutput(v smithycbor.Value) (*ListRecommendedActionsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &ListRecommendedActionsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "recommendedActions" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_RecommendedActions(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.RecommendedActions = dv
-		}
-
-		if key == "nextToken" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextToken = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-func rpc2_deserializeOpErrorListRecommendedActions(resp *smithyhttp.Response) error {
-	payload, err := io.ReadAll(resp.Body)
+	err = awsAwsjson10_deserializeOpDocumentListRecommendedActionsOutput(&output, shape)
 	if err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
-	typ, msg, v, err := getProtocolErrorInfo(payload)
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorListRecommendedActions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
 	}
 
-	if len(typ) == 0 {
-		typ = "UnknownError"
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(msg) == 0 {
-		msg = "UnknownError"
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
-	_ = v
-	// namespace can be mangled by service, so matching by error shape name
-	errorParts := strings.Split(typ, "#")
-	errorName := errorParts[len(errorParts)-1]
-	switch string(errorName) {
-	case "AccessDeniedException":
-		verr, err := deserializeCBOR_AccessDeniedException(v)
-		if err != nil {
-			return &smithy.DeserializationError{
-				Err:      fmt.Errorf("deserialize com.amazonaws.bcmrecommendedactions#AccessDeniedException: %w", err),
-				Snapshot: payload,
-			}
-		}
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
-		return verr
-	case "InternalServerException":
-		verr, err := deserializeCBOR_InternalServerException(v)
-		if err != nil {
-			return &smithy.DeserializationError{
-				Err:      fmt.Errorf("deserialize com.amazonaws.bcmrecommendedactions#InternalServerException: %w", err),
-				Snapshot: payload,
-			}
-		}
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
-		return verr
-	case "ThrottlingException":
-		verr, err := deserializeCBOR_ThrottlingException(v)
-		if err != nil {
-			return &smithy.DeserializationError{
-				Err:      fmt.Errorf("deserialize com.amazonaws.bcmrecommendedactions#ThrottlingException: %w", err),
-				Snapshot: payload,
-			}
-		}
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
-		return verr
-	case "ValidationException":
-		verr, err := deserializeCBOR_ValidationException(v)
-		if err != nil {
-			return &smithy.DeserializationError{
-				Err:      fmt.Errorf("deserialize com.amazonaws.bcmrecommendedactions#ValidationException: %w", err),
-				Snapshot: payload,
-			}
-		}
-
-		return verr
 	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
 
-		return &smithy.GenericAPIError{Code: typ, Message: msg}
 	}
 }
-func getProtocolErrorInfo(payload []byte) (typ, msg string, v smithycbor.Value, err error) {
-	v, err = smithycbor.Decode(payload)
+
+func awsAwsjson10_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccessDeniedException{}
+	err := awsAwsjson10_deserializeDocumentAccessDeniedException(&output, shape)
+
 	if err != nil {
-		return "", "", nil, fmt.Errorf("decode: %w", err)
-	}
-
-	mv, ok := v.(smithycbor.Map)
-	if !ok {
-		return "", "", nil, fmt.Errorf("unexpected payload type %T", v)
-	}
-
-	if ctyp, ok := mv["__type"]; ok {
-		if ttyp, ok := ctyp.(smithycbor.String); ok {
-			typ = string(ttyp)
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
-	if cmsg, ok := mv["message"]; ok {
-		if tmsg, ok := cmsg.(smithycbor.String); ok {
-			msg = string(tmsg)
-		}
-	}
-
-	return typ, msg, mv, nil
+	errorBody.Seek(0, io.SeekStart)
+	return output
 }
-func getAwsQueryErrorCode(resp *smithyhttp.Response) string {
-	header := resp.Header.Get("x-amzn-query-error")
-	if header == "" {
-		return ""
+
+func awsAwsjson10_deserializeErrorInternalServerException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
 	}
 
-	parts := strings.Split(header, ";")
-	if len(parts) != 2 {
-		return ""
+	output := &types.InternalServerException{}
+	err := awsAwsjson10_deserializeDocumentInternalServerException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
 	}
 
-	return parts[0]
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ThrottlingException{}
+	err := awsAwsjson10_deserializeDocumentThrottlingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorValidationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ValidationException{}
+	err := awsAwsjson10_deserializeDocumentValidationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDeniedException
+	if *v == nil {
+		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentContext(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InternalServerException
+	if *v == nil {
+		sv = &types.InternalServerException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNextSteps(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NextStep to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRecommendedAction(v **types.RecommendedAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendedAction
+	if *v == nil {
+		sv = &types.RecommendedAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "context":
+			if err := awsAwsjson10_deserializeDocumentContext(&sv.Context, value); err != nil {
+				return err
+			}
+
+		case "feature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Feature to be of type string, got %T instead", value)
+				}
+				sv.Feature = types.Feature(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "lastUpdatedTimeStamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LastUpdatedTimeStamp = ptr.String(jtv)
+			}
+
+		case "nextSteps":
+			if err := awsAwsjson10_deserializeDocumentNextSteps(&sv.NextSteps, value); err != nil {
+				return err
+			}
+
+		case "severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Severity to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.Severity(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ActionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRecommendedActions(v *[]types.RecommendedAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecommendedAction
+	if *v == nil {
+		cv = []types.RecommendedAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecommendedAction
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRecommendedAction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationException
+	if *v == nil {
+		sv = &types.ValidationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fieldList":
+			if err := awsAwsjson10_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
+				return err
+			}
+
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationExceptionReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.ValidationExceptionReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.ValidationExceptionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationExceptionField
+	if *v == nil {
+		sv = &types.ValidationExceptionField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentValidationExceptionFieldList(v *[]types.ValidationExceptionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ValidationExceptionField
+	if *v == nil {
+		cv = []types.ValidationExceptionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ValidationExceptionField
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentValidationExceptionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentListRecommendedActionsOutput(v **ListRecommendedActionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListRecommendedActionsOutput
+	if *v == nil {
+		sv = &ListRecommendedActionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "recommendedActions":
+			if err := awsAwsjson10_deserializeDocumentRecommendedActions(&sv.RecommendedActions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type protocolErrorInfo struct {
+	Type    string `json:"__type"`
+	Message string
+	Code    any // nonstandard for awsjson but some services do present the type here
+}
+
+func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
+	var errInfo protocolErrorInfo
+	if err := decoder.Decode(&errInfo); err != nil {
+		if err == io.EOF {
+			return errInfo, nil
+		}
+		return errInfo, err
+	}
+
+	return errInfo, nil
+}
+
+func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
+	if len(headerType) != 0 {
+		return headerType, true
+	} else if len(bodyInfo.Type) != 0 {
+		return bodyInfo.Type, true
+	} else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
+		return code, true
+	}
+	return "", false
 }

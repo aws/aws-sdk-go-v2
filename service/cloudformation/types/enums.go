@@ -518,6 +518,7 @@ type DriftIgnoredReason string
 const (
 	DriftIgnoredReasonManagedByAws      DriftIgnoredReason = "MANAGED_BY_AWS"
 	DriftIgnoredReasonWriteOnlyProperty DriftIgnoredReason = "WRITE_ONLY_PROPERTY"
+	DriftIgnoredReasonSensitiveProperty DriftIgnoredReason = "SENSITIVE_PROPERTY"
 )
 
 // Values returns all known values for DriftIgnoredReason. Note that this can be
@@ -528,6 +529,7 @@ func (DriftIgnoredReason) Values() []DriftIgnoredReason {
 	return []DriftIgnoredReason{
 		"MANAGED_BY_AWS",
 		"WRITE_ONLY_PROPERTY",
+		"SENSITIVE_PROPERTY",
 	}
 }
 

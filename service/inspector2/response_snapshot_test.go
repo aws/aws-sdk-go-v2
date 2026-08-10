@@ -2482,6 +2482,120 @@ func TestCheckResponseSnapshot_GetSbomExport(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			CloudProvider: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmInstanceTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerImageTags: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRepositoryName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRegistryName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetSbomExport.response")

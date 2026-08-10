@@ -792,6 +792,9 @@ func TestCheckRequestSnapshot_CreateAutoScalingGroup(t *testing.T) {
 				TerminateHookAbandon: types.RetentionAction("retain"),
 			},
 		},
+		Operator: &types.Operator{
+			Principal: ptr.String("__Principal__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4246,6 +4249,9 @@ func TestUpdateRequestSnapshot_CreateAutoScalingGroup(t *testing.T) {
 			RetentionTriggers: &types.RetentionTriggers{
 				TerminateHookAbandon: types.RetentionAction("retain"),
 			},
+		},
+		Operator: &types.Operator{
+			Principal: ptr.String("__Principal__"),
 		},
 	}
 	body := &bytes.Buffer{}

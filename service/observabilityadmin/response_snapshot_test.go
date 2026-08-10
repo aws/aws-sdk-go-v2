@@ -340,6 +340,7 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 						EncryptionStrategy:                   types.EncryptionStrategy("CUSTOMER_MANAGED"),
 						KmsKeyArn:                            ptr.String("__KmsKeyArn__"),
 						EncryptionConflictResolutionStrategy: types.EncryptionConflictResolutionStrategy("ALLOW"),
+						EncryptionScope:                      types.EncryptionScope("ENCRYPTED_SOURCE_ONLY"),
 					},
 					BackupConfiguration: &types.LogsBackupConfiguration{
 						Region:    ptr.String("__Region__"),
@@ -762,6 +763,7 @@ func TestCheckResponseSnapshot_GetTelemetryRule(t *testing.T) {
 				MskMonitoringParameters: &types.MskMonitoringParameters{
 					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
 				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
 			},
 			Scope:             ptr.String("__Scope__"),
 			SelectionCriteria: ptr.String("__SelectionCriteria__"),
@@ -1033,6 +1035,7 @@ func TestCheckResponseSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 				MskMonitoringParameters: &types.MskMonitoringParameters{
 					EnhancedMonitoring: types.MskEnhancedMonitoringLevel("DEFAULT"),
 				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
 			},
 			Scope:             ptr.String("__Scope__"),
 			SelectionCriteria: ptr.String("__SelectionCriteria__"),

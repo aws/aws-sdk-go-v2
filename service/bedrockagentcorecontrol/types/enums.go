@@ -234,6 +234,80 @@ func (BrowserStatus) Values() []BrowserStatus {
 	}
 }
 
+type CapacityProviderStatus string
+
+// Enum values for CapacityProviderStatus
+const (
+	CapacityProviderStatusCreating     CapacityProviderStatus = "CREATING"
+	CapacityProviderStatusCreateFailed CapacityProviderStatus = "CREATE_FAILED"
+	CapacityProviderStatusUpdating     CapacityProviderStatus = "UPDATING"
+	CapacityProviderStatusUpdateFailed CapacityProviderStatus = "UPDATE_FAILED"
+	CapacityProviderStatusReady        CapacityProviderStatus = "READY"
+	CapacityProviderStatusDeleting     CapacityProviderStatus = "DELETING"
+	CapacityProviderStatusDeleteFailed CapacityProviderStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for CapacityProviderStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderStatus) Values() []CapacityProviderStatus {
+	return []CapacityProviderStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
+type CapacityProviderStatusCode string
+
+// Enum values for CapacityProviderStatusCode
+const (
+	CapacityProviderStatusCodeValidationError         CapacityProviderStatusCode = "VALIDATION_ERROR"
+	CapacityProviderStatusCodeQuotaExceeded           CapacityProviderStatusCode = "QUOTA_EXCEEDED"
+	CapacityProviderStatusCodeThrottled               CapacityProviderStatusCode = "THROTTLED"
+	CapacityProviderStatusCodeInternalServerException CapacityProviderStatusCode = "INTERNAL_SERVER_EXCEPTION"
+)
+
+// Values returns all known values for CapacityProviderStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderStatusCode) Values() []CapacityProviderStatusCode {
+	return []CapacityProviderStatusCode{
+		"VALIDATION_ERROR",
+		"QUOTA_EXCEEDED",
+		"THROTTLED",
+		"INTERNAL_SERVER_EXCEPTION",
+	}
+}
+
+type CapacityReservationPreference string
+
+// Enum values for CapacityReservationPreference
+const (
+	CapacityReservationPreferenceCapacityReservationsOnly CapacityReservationPreference = "capacity-reservations-only"
+	CapacityReservationPreferenceOpen                     CapacityReservationPreference = "open"
+	CapacityReservationPreferenceNone                     CapacityReservationPreference = "none"
+)
+
+// Values returns all known values for CapacityReservationPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationPreference) Values() []CapacityReservationPreference {
+	return []CapacityReservationPreference{
+		"capacity-reservations-only",
+		"open",
+		"none",
+	}
+}
+
 type ClaimMatchOperatorType string
 
 // Enum values for ClaimMatchOperatorType
@@ -611,6 +685,35 @@ func (DraftStatus) Values() []DraftStatus {
 	}
 }
 
+type EbsVolumeType string
+
+// Enum values for EbsVolumeType
+const (
+	EbsVolumeTypeStandard EbsVolumeType = "standard"
+	EbsVolumeTypeIo1      EbsVolumeType = "io1"
+	EbsVolumeTypeIo2      EbsVolumeType = "io2"
+	EbsVolumeTypeGp2      EbsVolumeType = "gp2"
+	EbsVolumeTypeSc1      EbsVolumeType = "sc1"
+	EbsVolumeTypeSt1      EbsVolumeType = "st1"
+	EbsVolumeTypeGp3      EbsVolumeType = "gp3"
+)
+
+// Values returns all known values for EbsVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EbsVolumeType) Values() []EbsVolumeType {
+	return []EbsVolumeType{
+		"standard",
+		"io1",
+		"io2",
+		"gp2",
+		"sc1",
+		"st1",
+		"gp3",
+	}
+}
+
 type EndpointIpAddressType string
 
 // Enum values for EndpointIpAddressType
@@ -866,6 +969,29 @@ const (
 func (GatewayProtocolType) Values() []GatewayProtocolType {
 	return []GatewayProtocolType{
 		"MCP",
+	}
+}
+
+type GatewayRateLimitStatus string
+
+// Enum values for GatewayRateLimitStatus
+const (
+	GatewayRateLimitStatusCreating GatewayRateLimitStatus = "CREATING"
+	GatewayRateLimitStatusActive   GatewayRateLimitStatus = "ACTIVE"
+	GatewayRateLimitStatusUpdating GatewayRateLimitStatus = "UPDATING"
+	GatewayRateLimitStatusDeleting GatewayRateLimitStatus = "DELETING"
+)
+
+// Values returns all known values for GatewayRateLimitStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRateLimitStatus) Values() []GatewayRateLimitStatus {
+	return []GatewayRateLimitStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
 	}
 }
 
@@ -1298,6 +1424,25 @@ func (MetadataValueType) Values() []MetadataValueType {
 	}
 }
 
+type Monitoring string
+
+// Enum values for Monitoring
+const (
+	MonitoringBasic    Monitoring = "BASIC"
+	MonitoringDetailed Monitoring = "DETAILED"
+)
+
+// Values returns all known values for Monitoring. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Monitoring) Values() []Monitoring {
+	return []Monitoring{
+		"BASIC",
+		"DETAILED",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
@@ -1408,6 +1553,25 @@ func (OnlineEvaluationExecutionStatus) Values() []OnlineEvaluationExecutionStatu
 	return []OnlineEvaluationExecutionStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type OperatingSystem string
+
+// Enum values for OperatingSystem
+const (
+	OperatingSystemLinuxX8664 OperatingSystem = "LINUX_X86_64"
+	OperatingSystemLinuxArm64 OperatingSystem = "LINUX_ARM64"
+)
+
+// Values returns all known values for OperatingSystem. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperatingSystem) Values() []OperatingSystem {
+	return []OperatingSystem{
+		"LINUX_X86_64",
+		"LINUX_ARM64",
 	}
 }
 
@@ -1574,6 +1738,25 @@ func (PaymentsAuthorizerType) Values() []PaymentsAuthorizerType {
 	return []PaymentsAuthorizerType{
 		"CUSTOM_JWT",
 		"AWS_IAM",
+	}
+}
+
+type Period string
+
+// Enum values for Period
+const (
+	PeriodSecond Period = "second"
+	PeriodMinute Period = "minute"
+)
+
+// Values returns all known values for Period. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Period) Values() []Period {
+	return []Period{
+		"second",
+		"minute",
 	}
 }
 
@@ -2085,6 +2268,7 @@ const (
 	TargetTypeAgentcoreRuntime TargetType = "AGENTCORE_RUNTIME"
 	TargetTypePassthrough      TargetType = "PASSTHROUGH"
 	TargetTypeProvider         TargetType = "PROVIDER"
+	TargetTypeHttpConnector    TargetType = "HTTP_CONNECTOR"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -2102,6 +2286,7 @@ func (TargetType) Values() []TargetType {
 		"AGENTCORE_RUNTIME",
 		"PASSTHROUGH",
 		"PROVIDER",
+		"HTTP_CONNECTOR",
 	}
 }
 

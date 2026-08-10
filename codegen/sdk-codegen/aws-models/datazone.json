@@ -3558,6 +3558,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC properties of a connection.</p>"
                     }
+                },
+                "gitProperties": {
+                    "target": "com.amazonaws.datazone#GitPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Git properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3656,6 +3662,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC properties of a connection.</p>"
                     }
+                },
+                "gitProperties": {
+                    "target": "com.amazonaws.datazone#GitPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Git properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3729,6 +3741,12 @@
                     "target": "com.amazonaws.datazone#VpcPropertiesPatch",
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC properties of a connection properties patch.</p>"
+                    }
+                },
+                "gitProperties": {
+                    "target": "com.amazonaws.datazone#GitPropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Git properties of a connection properties patch.</p>"
                     }
                 }
             },
@@ -4031,6 +4049,13 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VPC"
+                    }
+                },
+                "GIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Git connection type.</p>",
+                        "smithy.api#enumValue": "GIT"
                     }
                 }
             }
@@ -22782,6 +22807,128 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Git metadata for a notebook sync operation in Amazon SageMaker Unified Studio. Contains information about the Git repository, branch, and commit associated with the notebook.</p>"
+            }
+        },
+        "com.amazonaws.datazone#GitPropertiesInput": {
+            "type": "structure",
+            "members": {
+                "codeConnectionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "repositoryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Git repository. This is the owner and repository name, for example, owner/repo-name.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._\\-]+(/[a-zA-Z0-9._\\-]+)+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultBranch": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default branch of the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._\\-/]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Git connection properties that you specify when creating a Git connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#GitPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "codeConnectionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "repositoryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Git repository. This is the owner and repository name, for example, owner/repo-name.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._\\-]+(/[a-zA-Z0-9._\\-]+)+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultBranch": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default branch of the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._\\-/]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Git connection.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that describes why the Git connection failed. This member is populated when the connection status is CREATE_FAILED or UPDATE_FAILED.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of a Git connection returned by get and list operations, including connection status and any error details.</p>"
+            }
+        },
+        "com.amazonaws.datazone#GitPropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "codeConnectionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$"
+                    }
+                },
+                "defaultBranch": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default branch of the Git repository.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._\\-/]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties used to update an existing Git connection, such as the CodeConnections ARN or the default branch.</p>"
             }
         },
         "com.amazonaws.datazone#GitRepository": {

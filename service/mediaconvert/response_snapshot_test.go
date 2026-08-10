@@ -2519,6 +2519,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -3745,6 +3746,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -5456,6 +5458,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -6682,6 +6685,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -9522,6 +9526,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -10748,6 +10753,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -12459,6 +12465,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -13685,6 +13692,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -14961,6 +14969,7 @@ func TestCheckResponseSnapshot_CreatePreset(t *testing.T) {
 						VideoPid:            ptr.Int32(1),
 					},
 					MovSettings: &types.MovSettings{
+						AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 						ClapAtom:           types.MovClapAtom("INCLUDE"),
 						CslgAtom:           types.MovCslgAtom("INCLUDE"),
 						Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -18083,6 +18092,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -19309,6 +19319,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -21020,6 +21031,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -22246,6 +22258,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -25086,6 +25099,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -26312,6 +26326,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -28023,6 +28038,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -29249,6 +29265,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -32210,6 +32227,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -33436,6 +33454,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -35147,6 +35166,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -36373,6 +36393,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -39333,6 +39354,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -40559,6 +40581,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -42270,6 +42293,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -43496,6 +43520,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -44820,6 +44845,7 @@ func TestCheckResponseSnapshot_GetPreset(t *testing.T) {
 						VideoPid:            ptr.Int32(1),
 					},
 					MovSettings: &types.MovSettings{
+						AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 						ClapAtom:           types.MovClapAtom("INCLUDE"),
 						CslgAtom:           types.MovCslgAtom("INCLUDE"),
 						Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -47660,6 +47686,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -48886,6 +48913,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -50597,6 +50625,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -51823,6 +51852,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -54623,6 +54653,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -55849,6 +55880,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -57560,6 +57592,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -58786,6 +58819,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -61749,6 +61783,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -62975,6 +63010,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -64686,6 +64722,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -65912,6 +65949,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -68872,6 +68910,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -70098,6 +70137,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -71809,6 +71849,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -73035,6 +73076,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -74335,6 +74377,7 @@ func TestCheckResponseSnapshot_ListPresets(t *testing.T) {
 							VideoPid:            ptr.Int32(1),
 						},
 						MovSettings: &types.MovSettings{
+							AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 							ClapAtom:           types.MovClapAtom("INCLUDE"),
 							CslgAtom:           types.MovCslgAtom("INCLUDE"),
 							Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -75554,6 +75597,7 @@ func TestCheckResponseSnapshot_ListPresets(t *testing.T) {
 							VideoPid:            ptr.Int32(1),
 						},
 						MovSettings: &types.MovSettings{
+							AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 							ClapAtom:           types.MovClapAtom("INCLUDE"),
 							CslgAtom:           types.MovCslgAtom("INCLUDE"),
 							Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -76263,6 +76307,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 		ProbeResults: []types.ProbeResult{
 			{
 				Container: &types.Container{
+					BitRate:       ptr.Int64(1),
 					Duration:      ptr.Float64(1.0),
 					Format:        types.Format("mp4"),
 					StartTimecode: ptr.String("__StartTimecode__"),
@@ -76302,6 +76347,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
+									FieldOrder:              ptr.String("__FieldOrder__"),
 									Height:                  ptr.Int32(1),
 									Level:                   ptr.String("__Level__"),
 									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
@@ -76376,6 +76422,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
+									FieldOrder:              ptr.String("__FieldOrder__"),
 									Height:                  ptr.Int32(1),
 									Level:                   ptr.String("__Level__"),
 									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
@@ -76456,6 +76503,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 			},
 			{
 				Container: &types.Container{
+					BitRate:       ptr.Int64(1),
 					Duration:      ptr.Float64(1.0),
 					Format:        types.Format("mp4"),
 					StartTimecode: ptr.String("__StartTimecode__"),
@@ -76495,6 +76543,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
+									FieldOrder:              ptr.String("__FieldOrder__"),
 									Height:                  ptr.Int32(1),
 									Level:                   ptr.String("__Level__"),
 									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
@@ -76569,6 +76618,7 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
+									FieldOrder:              ptr.String("__FieldOrder__"),
 									Height:                  ptr.Int32(1),
 									Level:                   ptr.String("__Level__"),
 									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
@@ -79066,6 +79116,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -80292,6 +80343,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -82003,6 +82055,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -83229,6 +83282,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -86189,6 +86243,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -87415,6 +87470,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -89126,6 +89182,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -90352,6 +90409,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											VideoPid:            ptr.Int32(1),
 										},
 										MovSettings: &types.MovSettings{
+											AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 											ClapAtom:           types.MovClapAtom("INCLUDE"),
 											CslgAtom:           types.MovCslgAtom("INCLUDE"),
 											Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -93253,6 +93311,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -94479,6 +94538,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -96190,6 +96250,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -97416,6 +97477,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										VideoPid:            ptr.Int32(1),
 									},
 									MovSettings: &types.MovSettings{
+										AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 										ClapAtom:           types.MovClapAtom("INCLUDE"),
 										CslgAtom:           types.MovCslgAtom("INCLUDE"),
 										Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),
@@ -98692,6 +98754,7 @@ func TestCheckResponseSnapshot_UpdatePreset(t *testing.T) {
 						VideoPid:            ptr.Int32(1),
 					},
 					MovSettings: &types.MovSettings{
+						AudioDuration:      types.CmfcAudioDuration("DEFAULT_CODEC_DURATION"),
 						ClapAtom:           types.MovClapAtom("INCLUDE"),
 						CslgAtom:           types.MovCslgAtom("INCLUDE"),
 						Mpeg2FourCCControl: types.MovMpeg2FourCCControl("XDCAM"),

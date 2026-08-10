@@ -1,3 +1,13 @@
+# v1.152.0 (2026-08-05)
+
+* **Feature**: Added the PutDataCatalogExportConfiguration to export Glue Data Catalog metadata to systems tables stored in S3 Tables.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.151.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.151.0 (2026-07-29)
 
 * **Feature**: Adding filtering, partitioning, and VPC support to AWS Glue REST API connector

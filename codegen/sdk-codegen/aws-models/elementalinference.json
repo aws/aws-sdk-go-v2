@@ -393,6 +393,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that Elemental Inference assumes to access resources in your account on your behalf. For example, the smart crop feature uses this role to read graphics-compositing templates from your Amazon S3 bucket. You specify one access role for each feed. </p>"
+                    }
+                },
                 "outputs": {
                     "target": "com.amazonaws.elementalinference#CreateOutputList",
                     "traits": {
@@ -528,7 +534,14 @@
         },
         "com.amazonaws.elementalinference#CroppingConfig": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "templateGroups": {
+                    "target": "com.amazonaws.elementalinference#TemplateGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of template groups for the crop output. Each template group provides the graphics-compositing templates that Elemental Inference applies to the cropped video. You can specify from 1 to 4 template groups. </p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the crop feature.</p>"
             }
@@ -2468,6 +2481,16 @@
                 "target": "com.amazonaws.elementalinference#GetOutput"
             }
         },
+        "com.amazonaws.elementalinference#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$"
+            }
+        },
         "com.amazonaws.elementalinference#InternalServerErrorException": {
             "type": "structure",
             "members": {
@@ -2853,6 +2876,16 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.elementalinference#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"
+            }
+        },
         "com.amazonaws.elementalinference#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -3011,6 +3044,52 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateGroup": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the template group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateUris": {
+                    "target": "com.amazonaws.elementalinference#TemplateUriList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon S3 URIs that point to the graphics-compositing templates for this group. You can specify 1 or 2 URIs. Each URI must be in the form <code>s3://bucket-name/key</code>. Elemental Inference reads these templates using the IAM role that you specify in accessRoleArn. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A named set of graphics-compositing templates used by the crop feature, specified in the templateGroups array of a CroppingConfig. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#TemplateGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateUriList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#S3Uri"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -3353,6 +3432,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Required. You can specify the existing name (to leave it unchanged) or a new name. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that Elemental Inference assumes to access resources in your account on your behalf. You can specify the existing role (to leave it unchanged) or a new role. You specify one access role for each feed. </p>"
                     }
                 },
                 "id": {

@@ -5,7 +5,6 @@ package organizations
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified account from the organization.
@@ -21,7 +20,7 @@ import (
 //
 // When an account is removed from an organization, Organizations logs a
 // membership event in CloudTrail. The event is an AccountDepartedOrganization
-// event with departedMethod:Removed and departedTime . This event is available
+// event with departureMethod:REMOVED and departureTime . This event is available
 // only in the management account's event history.
 //
 //   - You can remove an account from your organization only if the account is
@@ -87,9 +86,6 @@ func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -102,19 +98,10 @@ func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *mid
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveAccountFromOrganizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "RemoveAccountFromOrganization"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableIpamInternetRegistryAssociation&ChildHandle=__ChildHandle__&ClientToken=__ClientToken__&DryRun=true&IpamInternetRegistryAssociationId=__IpamInternetRegistryAssociationId__&ParentBpkiTa=__ParentBpkiTa__&ParentHandle=__ParentHandle__&RpkiVersion=__RpkiVersion__&ServiceUri=__ServiceUri__&Version=2016-11-15

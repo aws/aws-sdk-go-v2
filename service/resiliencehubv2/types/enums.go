@@ -2,6 +2,27 @@
 
 package types
 
+type AccountTargeting string
+
+// Enum values for AccountTargeting
+const (
+	// Test run targets resources in the same account only.
+	AccountTargetingSingleAccount AccountTargeting = "SINGLE_ACCOUNT"
+	// Test run targets resources across multiple accounts.
+	AccountTargetingMultiAccount AccountTargeting = "MULTI_ACCOUNT"
+)
+
+// Values returns all known values for AccountTargeting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountTargeting) Values() []AccountTargeting {
+	return []AccountTargeting{
+		"SINGLE_ACCOUNT",
+		"MULTI_ACCOUNT",
+	}
+}
+
 type AchievabilityStatus string
 
 // Enum values for AchievabilityStatus
@@ -383,6 +404,27 @@ func (MultiRegionDisasterRecoveryApproach) Values() []MultiRegionDisasterRecover
 	}
 }
 
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeString     ParameterType = "STRING"
+	ParameterTypeStringList ParameterType = "STRING_LIST"
+	ParameterTypeInteger    ParameterType = "INTEGER"
+)
+
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"STRING",
+		"STRING_LIST",
+		"INTEGER",
+	}
+}
+
 type PolicyComponent string
 
 // Enum values for PolicyComponent
@@ -491,6 +533,7 @@ type ReportType string
 // Enum values for ReportType
 const (
 	ReportTypeFailureMode ReportType = "FAILURE_MODE"
+	ReportTypeTesting     ReportType = "TESTING"
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
@@ -500,6 +543,7 @@ const (
 func (ReportType) Values() []ReportType {
 	return []ReportType{
 		"FAILURE_MODE",
+		"TESTING",
 	}
 }
 
@@ -667,6 +711,25 @@ func (SortOrder) Values() []SortOrder {
 	}
 }
 
+type StopConditionSource string
+
+// Enum values for StopConditionSource
+const (
+	StopConditionSourceAwsCloudwatchAlarm StopConditionSource = "aws:cloudwatch:alarm"
+	StopConditionSourceNone               StopConditionSource = "none"
+)
+
+// Values returns all known values for StopConditionSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StopConditionSource) Values() []StopConditionSource {
+	return []StopConditionSource{
+		"aws:cloudwatch:alarm",
+		"none",
+	}
+}
+
 type SystemEventType string
 
 // Enum values for SystemEventType
@@ -697,6 +760,94 @@ func (SystemEventType) Values() []SystemEventType {
 		"SYSTEM_SERVICE_DISASSOCIATED",
 		"SYSTEM_POLICY_ASSOCIATED",
 		"SYSTEM_POLICY_DISASSOCIATED",
+	}
+}
+
+type TestRunSourceType string
+
+// Enum values for TestRunSourceType
+const (
+	TestRunSourceTypeSuccessCriteria TestRunSourceType = "SUCCESS_CRITERIA"
+	TestRunSourceTypeObservability   TestRunSourceType = "OBSERVABILITY"
+)
+
+// Values returns all known values for TestRunSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceType) Values() []TestRunSourceType {
+	return []TestRunSourceType{
+		"SUCCESS_CRITERIA",
+		"OBSERVABILITY",
+	}
+}
+
+type TestRunStatus string
+
+// Enum values for TestRunStatus
+const (
+	TestRunStatusInitializing TestRunStatus = "INITIALIZING"
+	TestRunStatusRunning      TestRunStatus = "RUNNING"
+	TestRunStatusStopping     TestRunStatus = "STOPPING"
+	TestRunStatusPassed       TestRunStatus = "PASSED"
+	TestRunStatusFailed       TestRunStatus = "FAILED"
+	TestRunStatusStopped      TestRunStatus = "STOPPED"
+	TestRunStatusError        TestRunStatus = "ERROR"
+)
+
+// Values returns all known values for TestRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunStatus) Values() []TestRunStatus {
+	return []TestRunStatus{
+		"INITIALIZING",
+		"RUNNING",
+		"STOPPING",
+		"PASSED",
+		"FAILED",
+		"STOPPED",
+		"ERROR",
+	}
+}
+
+type TestSourceOutcome string
+
+// Enum values for TestSourceOutcome
+const (
+	TestSourceOutcomePassed TestSourceOutcome = "PASSED"
+	TestSourceOutcomeFailed TestSourceOutcome = "FAILED"
+	TestSourceOutcomeError  TestSourceOutcome = "ERROR"
+)
+
+// Values returns all known values for TestSourceOutcome. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestSourceOutcome) Values() []TestSourceOutcome {
+	return []TestSourceOutcome{
+		"PASSED",
+		"FAILED",
+		"ERROR",
+	}
+}
+
+type TestSourceType string
+
+// Enum values for TestSourceType
+const (
+	TestSourceTypeSuccessCriteria TestSourceType = "SUCCESS_CRITERIA"
+	TestSourceTypeObservability   TestSourceType = "OBSERVABILITY"
+)
+
+// Values returns all known values for TestSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestSourceType) Values() []TestSourceType {
+	return []TestSourceType{
+		"SUCCESS_CRITERIA",
+		"OBSERVABILITY",
 	}
 }
 

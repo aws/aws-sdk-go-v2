@@ -1,3 +1,20 @@
+# v1.265.0 (2026-08-07)
+
+* **Feature**: Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances
+
+# v1.264.0 (2026-08-06)
+
+* **Feature**: Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.
+
+# v1.263.2 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.263.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.263.0 (2026-07-30)
 
 * **Feature**: Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).

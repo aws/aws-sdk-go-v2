@@ -728,6 +728,18 @@ func TestCheckResponseSnapshot_DescribeScraper(t *testing.T) {
 				SourceRoleArn: ptr.String("__SourceRoleArn__"),
 				TargetRoleArn: ptr.String("__TargetRoleArn__"),
 			},
+			Exporters: []types.ExporterConfiguration{
+				&types.ExporterConfigurationMemberOpenSearchConfiguration{
+					Value: types.OpenSearchExporterConfiguration{
+						DomainArn: ptr.String("__DomainArn__"),
+					},
+				},
+				&types.ExporterConfigurationMemberOpenSearchConfiguration{
+					Value: types.OpenSearchExporterConfiguration{
+						DomainArn: ptr.String("__DomainArn__"),
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeScraper.response")
@@ -1037,6 +1049,18 @@ func TestCheckResponseSnapshot_ListScrapers(t *testing.T) {
 					SourceRoleArn: ptr.String("__SourceRoleArn__"),
 					TargetRoleArn: ptr.String("__TargetRoleArn__"),
 				},
+				Exporters: []types.ExporterConfiguration{
+					&types.ExporterConfigurationMemberOpenSearchConfiguration{
+						Value: types.OpenSearchExporterConfiguration{
+							DomainArn: ptr.String("__DomainArn__"),
+						},
+					},
+					&types.ExporterConfigurationMemberOpenSearchConfiguration{
+						Value: types.OpenSearchExporterConfiguration{
+							DomainArn: ptr.String("__DomainArn__"),
+						},
+					},
+				},
 			},
 			{
 				Alias:     ptr.String("__Alias__"),
@@ -1073,6 +1097,18 @@ func TestCheckResponseSnapshot_ListScrapers(t *testing.T) {
 				RoleConfiguration: &types.RoleConfiguration{
 					SourceRoleArn: ptr.String("__SourceRoleArn__"),
 					TargetRoleArn: ptr.String("__TargetRoleArn__"),
+				},
+				Exporters: []types.ExporterConfiguration{
+					&types.ExporterConfigurationMemberOpenSearchConfiguration{
+						Value: types.OpenSearchExporterConfiguration{
+							DomainArn: ptr.String("__DomainArn__"),
+						},
+					},
+					&types.ExporterConfigurationMemberOpenSearchConfiguration{
+						Value: types.OpenSearchExporterConfiguration{
+							DomainArn: ptr.String("__DomainArn__"),
+						},
+					},
 				},
 			},
 		},

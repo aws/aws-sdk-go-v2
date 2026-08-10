@@ -943,6 +943,23 @@ type EngagementSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains enrichment data for engagement invitations. You can view propensity
+// scores, program eligibility, and lead readiness insights directly in the
+// invitation, before you take action on the invitation.
+type EnrichmentContext struct {
+
+	// The AI-generated lead readiness score for this lead. Use this score to assess
+	// lead quality and prioritize engagement efforts.
+	LeadInsights *LeadInsights
+
+	// The customer account data and propensity insights for the prospected account.
+	// It includes geographic, industry, and segment classifications, along with
+	// engagement and solution scoring.
+	ProspectingResultAws *InvitationProspectingResultAws
+
+	noSmithyDocumentSerde
+}
+
 // The expected duration of a partner's contract with the customer. Used to
 // convert Total Contract Value (TCV) to Monthly Recurring Revenue (MRR) for
 // opportunity dealsizing calculations.
@@ -1032,6 +1049,21 @@ type Invitation struct {
 	noSmithyDocumentSerde
 }
 
+// A subset of prospecting result data visible to invitation receivers. It
+// includes customer account details and AI-generated insights.
+type InvitationProspectingResultAws struct {
+
+	// The prospected customer account details, including geographic classification,
+	// industry segmentation, company size, and program eligibility.
+	Customer *ProspectingResultCustomer
+
+	// The AI-generated insights from the prospecting analysis, including marketplace
+	// engagement scoring, solution fit assessments, and solution categorization.
+	Insights *ProspectingInsights
+
+	noSmithyDocumentSerde
+}
+
 // Defines a filter to retrieve opportunities based on the last modified date.
 // This filter is useful for tracking changes or updates to opportunities over
 // time.
@@ -1045,6 +1077,25 @@ type LastModifiedDate struct {
 	// filter to retrieve only those opportunities that were modified before a given
 	// timestamp.
 	BeforeLastModifiedDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The address information for a lead customer, including city, state or region,
+// postal code, and country code.
+type LeadAddress struct {
+
+	// The city of the lead customer's address.
+	City *string
+
+	// The country code of the lead customer's address.
+	CountryCode *string
+
+	// The postal code of the lead customer's address.
+	PostalCode *string
+
+	// The state or region of the lead customer's address.
+	StateOrRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -1119,16 +1170,14 @@ type LeadContext struct {
 // strategies.
 type LeadCustomer struct {
 
-	// An object that contains an Address object's subset of fields.
-	//
-	// This member is required.
-	Address *AddressSummary
-
 	// The name of the lead customer's company. This field is essential for
 	// identifying and tracking the customer organization associated with the lead.
 	//
 	// This member is required.
 	CompanyName *string
+
+	// The address information for the lead customer.
+	Address *LeadAddress
 
 	// Indicates the customer's level of experience and adoption with AWS services.
 	// This assessment helps determine the appropriate engagement approach and solution
@@ -1138,12 +1187,12 @@ type LeadCustomer struct {
 	// Specifies the industry sector to which the lead customer's company belongs.
 	// This categorization helps in understanding the customer's business context and
 	// tailoring appropriate solutions.
-	Industry Industry
+	Industry *string
 
 	// Specifies the market segment classification of the lead customer, such as
 	// enterprise, mid-market, or small business. This segmentation helps in targeting
 	// appropriate solutions and engagement strategies.
-	MarketSegment MarketSegment
+	MarketSegment *string
 
 	// The website URL of the lead customer's company. This provides additional
 	// context about the customer organization and helps verify company legitimacy and
@@ -1177,42 +1226,34 @@ type LeadInteraction struct {
 	// This member is required.
 	Contact *LeadContact
 
-	// Describes the action taken by the customer during or as a result of the
-	// interaction, such as requesting information, scheduling a meeting, or expressing
-	// interest in a solution.
-	//
-	// This member is required.
-	CustomerAction *string
-
-	// The unique identifier of the specific source that generated the lead
-	// interaction. This ID provides traceability back to the original lead generation
-	// activity.
-	//
-	// This member is required.
-	SourceId *string
-
-	// The descriptive name of the source that generated the lead interaction,
-	// providing a human-readable identifier for the lead generation channel or
-	// activity.
-	//
-	// This member is required.
-	SourceName *string
-
-	// Specifies the type of source that generated the lead interaction, such as
-	// "Event", "Website", "Referral", or "Campaign". This categorization helps track
-	// lead generation effectiveness across different channels.
-	//
-	// This member is required.
-	SourceType *string
-
 	// Describes the business problem or challenge that the customer discussed during
 	// the interaction. This information helps qualify the lead and identify
 	// appropriate solutions.
 	BusinessProblem *string
 
+	// Describes the action taken by the customer during or as a result of the
+	// interaction, such as requesting information, scheduling a meeting, or expressing
+	// interest in a solution.
+	CustomerAction *string
+
 	// The date and time when the lead interaction occurred, in ISO 8601 format (UTC).
 	// This timestamp helps track the chronology of lead engagement activities.
 	InteractionDate *time.Time
+
+	// The unique identifier of the specific source that generated the lead
+	// interaction. This ID provides traceability back to the original lead generation
+	// activity.
+	SourceId *string
+
+	// The descriptive name of the source that generated the lead interaction,
+	// providing a human-readable identifier for the lead generation channel or
+	// activity.
+	SourceName *string
+
+	// Specifies the type of source that generated the lead interaction, such as
+	// "Event", "Website", "Referral", or "Campaign". This categorization helps track
+	// lead generation effectiveness across different channels.
+	SourceType *string
 
 	// Describes the specific use case or business scenario discussed during the lead
 	// interaction. This helps categorize the customer's interests and potential
@@ -1233,27 +1274,25 @@ type LeadInvitationCustomer struct {
 	// This member is required.
 	CompanyName *string
 
-	// The country code indicating the geographic location of the customer company.
-	// This information helps partners understand regional requirements and assess
-	// their ability to serve the customer effectively.
-	//
-	// This member is required.
-	CountryCode CountryCode
-
 	// Indicates the customer's level of experience and adoption with AWS services.
 	// This assessment helps partners understand the customer's cloud maturity and
 	// tailor their engagement approach accordingly.
 	AwsMaturity *string
 
+	// The country code indicating the geographic location of the customer company.
+	// This information helps partners understand regional requirements and assess
+	// their ability to serve the customer effectively.
+	CountryCode *string
+
 	// Specifies the industry sector of the customer company associated with the lead
 	// invitation. This categorization helps partners understand the customer's
 	// business context and assess solution fit.
-	Industry Industry
+	Industry *string
 
 	// Specifies the market segment classification of the customer, such as
 	// enterprise, mid-market, or small business. This segmentation helps partners
 	// determine the appropriate solution complexity and engagement strategy.
-	MarketSegment MarketSegment
+	MarketSegment *string
 
 	// The website URL of the customer company. This provides additional context about
 	// the customer organization and helps partners verify company details and assess
@@ -1278,22 +1317,16 @@ type LeadInvitationInteraction struct {
 	// The unique identifier of the specific source that generated the lead
 	// interaction. This provides traceability to the original lead generation activity
 	// for reference and follow-up purposes.
-	//
-	// This member is required.
 	SourceId *string
 
 	// The descriptive name of the source that generated the lead interaction. This
 	// human-readable identifier helps partners understand the specific lead generation
 	// channel or campaign that created the opportunity.
-	//
-	// This member is required.
 	SourceName *string
 
 	// Specifies the type of source that generated the lead interaction, such as
 	// "Event", "Website", or "Campaign". This helps partners understand the lead
 	// generation channel and assess lead quality based on the source type.
-	//
-	// This member is required.
 	SourceType *string
 
 	// Describes the specific use case or business scenario associated with the lead

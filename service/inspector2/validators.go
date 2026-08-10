@@ -3774,6 +3774,61 @@ func validateResourceFilterCriteria(v *types.ResourceFilterCriteria) error {
 			invalidParams.AddNested("LambdaFunctionTags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CloudProvider != nil {
+		if err := validateResourceStringFilterList(v.CloudProvider); err != nil {
+			invalidParams.AddNested("CloudProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderAccountId != nil {
+		if err := validateResourceStringFilterList(v.CloudProviderAccountId); err != nil {
+			invalidParams.AddNested("CloudProviderAccountId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderOrgId != nil {
+		if err := validateResourceStringFilterList(v.CloudProviderOrgId); err != nil {
+			invalidParams.AddNested("CloudProviderOrgId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderRegion != nil {
+		if err := validateResourceStringFilterList(v.CloudProviderRegion); err != nil {
+			invalidParams.AddNested("CloudProviderRegion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudVmInstanceTags != nil {
+		if err := validateResourceMapFilterList(v.CloudVmInstanceTags); err != nil {
+			invalidParams.AddNested("CloudVmInstanceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerImageTags != nil {
+		if err := validateResourceStringFilterList(v.CloudContainerImageTags); err != nil {
+			invalidParams.AddNested("CloudContainerImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerRepositoryName != nil {
+		if err := validateResourceStringFilterList(v.CloudContainerRepositoryName); err != nil {
+			invalidParams.AddNested("CloudContainerRepositoryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerRegistryName != nil {
+		if err := validateResourceStringFilterList(v.CloudContainerRegistryName); err != nil {
+			invalidParams.AddNested("CloudContainerRegistryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionName != nil {
+		if err := validateResourceStringFilterList(v.CloudServerlessFunctionName); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		if err := validateResourceStringFilterList(v.CloudServerlessFunctionRuntime); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionRuntime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionTags != nil {
+		if err := validateResourceMapFilterList(v.CloudServerlessFunctionTags); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

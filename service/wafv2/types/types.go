@@ -620,7 +620,7 @@ type ByteMatchStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
@@ -3981,7 +3981,7 @@ type RegexMatchStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
@@ -4050,7 +4050,7 @@ type RegexPatternSetReferenceStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
@@ -5170,7 +5170,7 @@ type SizeConstraintStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
@@ -5251,7 +5251,7 @@ type SqliMatchStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	// The sensitivity that you want WAF to use to inspect for SQL injection attacks.
@@ -6038,7 +6038,7 @@ type XssMatchStatement struct {
 	// it into individual query arguments. They are applied before the standard text
 	// transformations. Pre-parse text transformations are only supported when
 	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
-	// 3 pre-parse text transformations per rule statement.
+	// 10 pre-parse text transformations per rule statement.
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde

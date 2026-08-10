@@ -1,0 +1,5 @@
+PUT /XmlAttributesOnPayload
+
+Content-Type: application/xml
+
+<XmlAttributesPayloadRequest test="__Attr__"><foo>__Foo__</foo></XmlAttributesPayloadRequest>

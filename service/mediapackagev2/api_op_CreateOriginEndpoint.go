@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -95,6 +94,15 @@ type CreateOriginEndpointInput struct {
 	// content that falls within the window. The maximum startover window is 1,209,600
 	// seconds (14 days).
 	StartoverWindowSeconds *int32
+
+	// The output mode for stream names in egress manifests. This setting is valid
+	// only when the associated channel's InputType is HLS . You can't change the
+	// stream name output mode after you create the endpoint.
+	//
+	// INDEX uses numeric indices for stream names (for example, 1, 2, 3).
+	// PASSTHROUGH_NAME uses the stream names from the input manifest. If you don't
+	// specify a value, the default is INDEX .
+	StreamNameOutputMode types.StreamNameOutputMode
 
 	// A comma-separated list of tag key:value pairs that you define. For example:
 	//
@@ -187,6 +195,9 @@ type CreateOriginEndpointOutput struct {
 	// content that falls within the window.
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
@@ -209,9 +220,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -224,12 +232,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -237,9 +239,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateOriginEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateOriginEndpoint"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

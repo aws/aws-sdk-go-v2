@@ -153,6 +153,10 @@ type AdDecisionServerConfiguration struct {
 	// The HTTP request configuration parameters for the ad decision server.
 	HttpRequest *HttpRequest
 
+	// The settings that control how MediaTailor processes VAST responses from the ad
+	// decision server.
+	VastResponse *VastResponse
+
 	noSmithyDocumentSerde
 }
 
@@ -507,6 +511,54 @@ type ClipRange struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a CONCURRENT_EXECUTOR function. A CONCURRENT_EXECUTOR
+// runs a set of child functions in parallel, up to a maximum concurrency, and
+// combines their output when all functions complete. For more information about
+// functions, see [Working with functions]in the MediaTailor User Guide.
+//
+// [Working with functions]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+type ConcurrentExecutorConfiguration struct {
+
+	// The list of child functions that MediaTailor runs in parallel. Each entry
+	// specifies a child function to execute and an optional run condition expression
+	// that controls whether the function runs.
+	//
+	// This member is required.
+	FunctionList []FunctionRef
+
+	// The maximum number of child functions that MediaTailor runs simultaneously.
+	// When the list contains more functions than MaxConcurrency , MediaTailor starts
+	// additional functions as running ones complete, so that no more than
+	// MaxConcurrency functions run at the same time.
+	//
+	// This member is required.
+	MaxConcurrency *int32
+
+	// A map of output bindings that controls which bindings the executor commits to
+	// the session state after all child functions complete. Each key is a namespaced
+	// output path, and each value is an expression that MediaTailor evaluates against
+	// the combined results of the child functions.
+	//
+	// This member is required.
+	Output map[string]string
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// The maximum time, in milliseconds, for all child functions to complete. This
+	// timeout covers every function in the list, including any HTTP calls the child
+	// functions make. If the executor exceeds this timeout, MediaTailor discards all
+	// output from the executor and proceeds with default behavior.
+	//
+	// This member is required.
+	TimeoutMilliseconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a CUSTOM_OUTPUT function. MediaTailor evaluates the
 // output expressions against the current session state and commits the results as
 // output bindings. CUSTOM_OUTPUT functions do not make external calls. For more
@@ -642,6 +694,9 @@ type Function struct {
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
 
+	// The configuration for a CONCURRENT_EXECUTOR function.
+	ConcurrentExecutorConfiguration *ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function.
 	CustomOutputConfiguration *CustomOutputConfiguration
 
@@ -666,6 +721,10 @@ type Function struct {
 
 // A reference to a child function within a SEQUENTIAL_EXECUTOR function.
 type FunctionRef struct {
+
+	// An optional alternate name for the function within the executor. If omitted,
+	// MediaTailor uses the function identifier.
+	Alias *string
 
 	// The identifier of the child function to execute in this step.
 	FunctionId *string
@@ -845,6 +904,11 @@ type KeyValuePair struct {
 
 // The configuration for pre-roll ad insertion.
 type LivePreRollConfiguration struct {
+
+	// The configuration for the ad decision server (ADS) for live pre-roll ads. The
+	// configuration contains settings that control how MediaTailor processes VAST
+	// responses for pre-roll ad breaks.
+	AdDecisionServerConfiguration *PreRollAdDecisionServerConfiguration
 
 	// The URL for the ad decision server (ADS) for pre-roll ads. This includes the
 	// specification of static parameters and placeholders for dynamic parameters. AWS
@@ -1261,6 +1325,32 @@ type PrefetchSchedule struct {
 	//
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The ad decision server configuration for live pre-roll ads. It contains
+// settings that control how MediaTailor processes VAST responses for pre-roll ad
+// breaks.
+type PreRollAdDecisionServerConfiguration struct {
+
+	// The settings that control how MediaTailor processes VAST responses for live
+	// pre-roll ad breaks.
+	VastResponse *PreRollVastResponse
+
+	noSmithyDocumentSerde
+}
+
+// The settings that control how MediaTailor processes VAST responses from the ad
+// decision server for live pre-roll ad breaks.
+type PreRollVastResponse struct {
+
+	// The ad sequencing mode for live pre-roll ads. FOLLOW_AD_SEQUENCE inserts
+	// sequenced ads in increasing order and uses standalone ads only as replacements
+	// when a sequenced ad fails. IGNORE_AD_SEQUENCE inserts ads in the order they
+	// appear in the VAST response, regardless of sequence attributes. The default
+	// behavior is IGNORE_AD_SEQUENCE .
+	AdSequencingMode PreRollAdSequencingMode
 
 	noSmithyDocumentSerde
 }
@@ -1820,6 +1910,23 @@ type UpdateProgramTransition struct {
 
 	// The date and time that the program is scheduled to start, in epoch milliseconds.
 	ScheduledStartTimeMillis *int64
+
+	noSmithyDocumentSerde
+}
+
+// The settings that control how MediaTailor processes VAST responses from the ad
+// decision server.
+type VastResponse struct {
+
+	// The ad sequencing mode that controls how MediaTailor handles sequenced and
+	// standalone ads in VAST responses. FOLLOW_AD_SEQUENCE inserts sequenced ads in
+	// increasing order for both live and VOD workflows, using standalone ads only as
+	// replacements when a sequenced ad fails. FOLLOW_AD_SEQUENCE_ONLY_LIVE enables ad
+	// sequencing for live workflows only. FOLLOW_AD_SEQUENCE_ONLY_VOD enables ad
+	// sequencing for VOD workflows only. IGNORE_AD_SEQUENCE inserts ads in the order
+	// they appear in the VAST response, regardless of sequence attributes. The default
+	// behavior is IGNORE_AD_SEQUENCE .
+	AdSequencingMode AdSequencingMode
 
 	noSmithyDocumentSerde
 }

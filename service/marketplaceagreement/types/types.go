@@ -17,6 +17,7 @@ import (
 //	AcceptedTermMemberFixedUpfrontPricingTerm
 //	AcceptedTermMemberFreeTrialPricingTerm
 //	AcceptedTermMemberLegalTerm
+//	AcceptedTermMemberNetPaymentTerm
 //	AcceptedTermMemberPaymentScheduleTerm
 //	AcceptedTermMemberRecurringPaymentTerm
 //	AcceptedTermMemberRenewalTerm
@@ -78,6 +79,16 @@ type AcceptedTermMemberLegalTerm struct {
 }
 
 func (*AcceptedTermMemberLegalTerm) isAcceptedTerm() {}
+
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type AcceptedTermMemberNetPaymentTerm struct {
+	Value NetPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AcceptedTermMemberNetPaymentTerm) isAcceptedTerm() {}
 
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
@@ -873,6 +884,24 @@ type LegalTerm struct {
 	Id *string
 
 	// Category of the term being updated.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type NetPaymentTerm struct {
+
+	// The unique identifier for the term.
+	Id *string
+
+	// The duration after an invoice is issued within which the payment is due. The
+	// duration is represented in the ISO 8601 format (for example, P30D for 30 days
+	// or P60D for 60 days).
+	PaymentDuePeriod *string
+
+	// Type of the term being updated.
 	Type *string
 
 	noSmithyDocumentSerde

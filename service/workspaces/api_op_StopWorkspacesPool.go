@@ -5,13 +5,19 @@ package workspaces
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On December 31, 2027, Amazon Web Services will end
+// support for Amazon WorkSpaces Pools. After December 31, 2027, you will no longer
+// be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools
+// resources. For more information, see [Amazon WorkSpaces Pools end of support].
+//
 // Stops the specified pool.
 //
 // You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a
 // state of AVAILABLE , IMPAIRED , UNHEALTHY , or ERROR .
+//
+// [Amazon WorkSpaces Pools end of support]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
 func (c *Client) StopWorkspacesPool(ctx context.Context, params *StopWorkspacesPoolInput, optFns ...func(*Options)) (*StopWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &StopWorkspacesPoolInput{}
@@ -54,9 +60,6 @@ func (c *Client) addOperationStopWorkspacesPoolMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -69,19 +72,10 @@ func (c *Client) addOperationStopWorkspacesPoolMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopWorkspacesPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StopWorkspacesPool"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

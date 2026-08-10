@@ -2081,6 +2081,31 @@ func awsRestjson1_serializeDocumentOfferBuyerAccountsFilter(v *types.OfferBuyerA
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOfferCreatedBySourceFilter(v *types.OfferCreatedBySourceFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentOfferCreatedBySourceFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferCreatedBySourceFilterValueList(v []types.OfferCreatedBySourceString, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOfferEntityIdFilter(v *types.OfferEntityIdFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2120,6 +2145,13 @@ func awsRestjson1_serializeDocumentOfferFilters(v *types.OfferFilters, value smi
 	if v.BuyerAccounts != nil {
 		ok := object.Key("BuyerAccounts")
 		if err := awsRestjson1_serializeDocumentOfferBuyerAccountsFilter(v.BuyerAccounts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreatedBySource != nil {
+		ok := object.Key("CreatedBySource")
+		if err := awsRestjson1_serializeDocumentOfferCreatedBySourceFilter(v.CreatedBySource, ok); err != nil {
 			return err
 		}
 	}
@@ -2176,6 +2208,20 @@ func awsRestjson1_serializeDocumentOfferFilters(v *types.OfferFilters, value smi
 	if v.State != nil {
 		ok := object.Key("State")
 		if err := awsRestjson1_serializeDocumentOfferStateFilter(v.State, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetAgreementId != nil {
+		ok := object.Key("TargetAgreementId")
+		if err := awsRestjson1_serializeDocumentOfferTargetAgreementIdFilter(v.TargetAgreementId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetAgreementIntent != nil {
+		ok := object.Key("TargetAgreementIntent")
+		if err := awsRestjson1_serializeDocumentOfferTargetAgreementIntentFilter(v.TargetAgreementIntent, ok); err != nil {
 			return err
 		}
 	}
@@ -2649,6 +2695,56 @@ func awsRestjson1_serializeDocumentOfferStateFilter(v *types.OfferStateFilter, v
 }
 
 func awsRestjson1_serializeDocumentOfferStateFilterValueList(v []types.OfferStateString, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferTargetAgreementIdFilter(v *types.OfferTargetAgreementIdFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentOfferTargetAgreementIdFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferTargetAgreementIdFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferTargetAgreementIntentFilter(v *types.OfferTargetAgreementIntentFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentOfferTargetAgreementIntentFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferTargetAgreementIntentFilterValueList(v []types.OfferTargetAgreementIntentString, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

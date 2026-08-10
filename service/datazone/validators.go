@@ -4903,6 +4903,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 			invalidParams.AddNested("[amazonQProperties]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConnectionPropertiesInputMemberGitProperties:
+		if err := validateGitPropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConnectionPropertiesInputMemberHyperPodProperties:
 		if err := validateHyperPodPropertiesInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[hyperPodProperties]", err.(smithy.InvalidParamsError))
@@ -5520,6 +5525,27 @@ func validateGitMetadata(v *types.GitMetadata) error {
 	}
 	if v.CommitHash == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CommitHash"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitPropertiesInput(v *types.GitPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitPropertiesInput"}
+	if v.CodeConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeConnectionArn"))
+	}
+	if v.RepositoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryId"))
+	}
+	if v.DefaultBranch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultBranch"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

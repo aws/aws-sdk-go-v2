@@ -1,11 +1,8 @@
 UpdateBucketMetadataJournalTableConfiguration
 	Initialize stack step
 		AWSChecksum:SetupInputContext
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		S3Shared:ARNLookup
-		SetLogger
 		OperationInputValidation
+		S3Shared:ARNLookup
 	Serialize stack step
 		putBucketContext
 		setOperationInput
@@ -43,10 +40,9 @@ UpdateBucketMetadataJournalTableConfiguration
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		S3:ProcessResponseFor200Error
 		RecordResponseTiming
 		RequestResponseLogger

@@ -1,3 +1,13 @@
+# v1.48.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2026-07-31.2)
+
+* **Feature**: Amazon Managed Service for Prometheus adds support for an Amazon OpenSearch Service exporter for managed collectors.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.47.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

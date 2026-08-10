@@ -108,9 +108,6 @@ func (c *Client) addOperationInvokeCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeCodeInterpreterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -130,9 +127,6 @@ func (c *Client) addOperationInvokeCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpInvokeCodeInterpreterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "InvokeCodeInterpreter"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

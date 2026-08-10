@@ -1,3 +1,16 @@
+# v1.71.0 (2026-08-06)
+
+* **Feature**: EC2 Auto Scaling now supports being managed by other AWS services via the operator field.
+
+# v1.70.4 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.70.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.70.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

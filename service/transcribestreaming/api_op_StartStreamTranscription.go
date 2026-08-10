@@ -267,6 +267,18 @@ type StartStreamTranscriptionInput struct {
 	// [Partitioning speakers (diarization)]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
 	ShowSpeakerLabel bool
 
+	// Specify how numbers, dates, and other alphanumeric entities are rendered in
+	// your transcription results.
+	//
+	//   - WRITTEN renders these entities in their standard written form (for example,
+	//   $50 , 10:30 AM , and 101 ).
+	//
+	//   - SPOKEN renders these entities as words, exactly as they were spoken (for
+	//   example, fifty dollars , ten thirty a m , and one oh one ).
+	//
+	// If you don't specify a value, Amazon Transcribe uses WRITTEN by default.
+	TranscriptFormat types.TranscriptFormat
+
 	// Specify how you want your vocabulary filter applied to your transcript.
 	//
 	// To replace words with *** , choose mask .
@@ -409,6 +421,9 @@ type StartStreamTranscriptionOutput struct {
 	// Shows whether speaker partitioning was enabled for your transcription.
 	ShowSpeakerLabel bool
 
+	// Provides the transcript format that you specified in your request.
+	TranscriptFormat types.TranscriptFormat
+
 	// Provides the vocabulary filtering method used in your transcription.
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
@@ -450,9 +465,6 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamStartStreamTranscriptionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -478,9 +490,6 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpStartStreamTranscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "StartStreamTranscription"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -7,6 +7,32 @@ import (
 	"time"
 )
 
+// Configuration for abandonment-rate-based dialer throttling.
+type AbandonmentRatePacingConfig struct {
+
+	// Event from which connectionThresholdSeconds is measured.
+	//
+	// This member is required.
+	ConnectionStartPoint ConnectionStartPoint
+
+	// Seconds after connectionStartPoint before a contact counts as abandoned.
+	//
+	// This member is required.
+	ConnectionThresholdSeconds *int32
+
+	// Rolling window over which abandonmentRate is computed.
+	//
+	// This member is required.
+	EvaluationWindow *string
+
+	// Target abandonment rate.
+	//
+	// This member is required.
+	TargetRate *float64
+
+	noSmithyDocumentSerde
+}
+
 // Agentless config
 type AgentlessConfig struct {
 	noSmithyDocumentSerde
@@ -780,6 +806,24 @@ type OutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Pacing constraint the dialer may enforce.
+//
+// The following types satisfy this interface:
+//
+//	PacingStrategyMemberAbandonmentRate
+type PacingStrategy interface {
+	isPacingStrategy()
+}
+
+// Configuration for abandonment-rate-based dialer throttling.
+type PacingStrategyMemberAbandonmentRate struct {
+	Value AbandonmentRatePacingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*PacingStrategyMemberAbandonmentRate) isPacingStrategy() {}
+
 // Predictive config
 type PredictiveConfig struct {
 
@@ -787,6 +831,9 @@ type PredictiveConfig struct {
 	//
 	// This member is required.
 	BandwidthAllocation *float64
+
+	// Pacing strategies the dialer enforces simultaneously.
+	PacingStrategies []PacingStrategy
 
 	noSmithyDocumentSerde
 }
@@ -1349,6 +1396,7 @@ func (*UnknownUnionMember) isIntegrationConfig()        {}
 func (*UnknownUnionMember) isIntegrationIdentifier()    {}
 func (*UnknownUnionMember) isIntegrationSummary()       {}
 func (*UnknownUnionMember) isOpenHours()                {}
+func (*UnknownUnionMember) isPacingStrategy()           {}
 func (*UnknownUnionMember) isRestrictedPeriods()        {}
 func (*UnknownUnionMember) isSmsOutboundMode()          {}
 func (*UnknownUnionMember) isSource()                   {}

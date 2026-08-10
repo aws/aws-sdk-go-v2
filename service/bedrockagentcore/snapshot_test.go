@@ -182,6 +182,18 @@ func TestCheckSnapshot_DeleteBatchEvaluation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCapacityProviderSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityProviderSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCapacityProviderSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvent(context.Background(), nil, func(o *Options) {
@@ -954,6 +966,18 @@ func TestUpdateSnapshot_DeleteBatchEvaluation(t *testing.T) {
 	_, err := svc.DeleteBatchEvaluation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBatchEvaluation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCapacityProviderSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityProviderSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCapacityProviderSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

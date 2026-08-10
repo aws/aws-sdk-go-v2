@@ -180,7 +180,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^alias-\\S+|^arn:.*:alias\\/alias-\\S+$"
+                "smithy.api#pattern": "^(alias-\\S+|arn:.*:alias\\/alias-\\S+)$"
             }
         },
         "com.amazonaws.gamelift#AliasList": {
@@ -417,7 +417,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+$"
+                "smithy.api#pattern": "^(build-\\S+|arn:.*:build\\/build-\\S+)$"
             }
         },
         "com.amazonaws.gamelift#BuildList": {
@@ -752,7 +752,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?$|^arn:.*:compute\\/[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?$"
+                "smithy.api#pattern": "^([a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?|arn:.*:compute\\/[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?)$"
             }
         },
         "com.amazonaws.gamelift#ComputeStatus": {
@@ -2528,7 +2528,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Adds remote locations to an EC2 and begins populating the new locations with\n            instances. The new instances conform to the fleet's instance type, auto-scaling, and\n            other configuration settings.</p>\n         <note>\n            <p>You can't add remote locations to a fleet that resides in an Amazon Web Services Region that\n                doesn't support multiple locations. Fleets created prior to March 2021 can't support\n                multiple locations.</p>\n         </note>\n         <p>To add fleet locations, specify the fleet to be updated and provide a list of one or\n            more locations. </p>\n         <p>If successful, this operation returns the list of added locations with their status\n            set to <code>NEW</code>. Amazon GameLift Servers initiates the process of starting an instance in each\n            added location. You can track the status of each new location by monitoring location\n            creation events using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html\">DescribeFleetEvents</a>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up\n            fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations\">Update fleet locations</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting.</p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Adds remote locations to an EC2 and begins populating the new locations with\n            instances. The new instances conform to the fleet's instance type, auto-scaling, and\n            other configuration settings.</p>\n         <note>\n            <p>You can't add remote locations to a fleet that resides in an Amazon Web Services Region that\n                doesn't support multiple locations. Fleets created prior to March 2021 can't support\n                multiple locations.</p>\n         </note>\n         <p>To add fleet locations, specify the fleet to be updated and provide a list of one or\n            more locations. </p>\n         <p>If successful, this operation returns the list of added locations with their status\n            set to <code>NEW</code>. Amazon GameLift Servers initiates the process of starting an instance in each\n            added location. You can track the status of each new location by monitoring location\n            creation events using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html\">DescribeFleetEvents</a>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up\n            fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations\">Update fleet locations</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting.</p>"
             }
         },
         "com.amazonaws.gamelift#CreateFleetLocationsInput": {
@@ -3649,7 +3649,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#CustomInputLocationStringModel": {
@@ -3669,7 +3670,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^custom-[A-Za-z0-9\\-]+|^arn:.*:location\\/custom-\\S+$"
+                "smithy.api#pattern": "^(custom-[A-Za-z0-9\\-]+|arn:.*:location\\/custom-\\S+)$"
             }
         },
         "com.amazonaws.gamelift#DeleteAlias": {
@@ -3913,7 +3914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Deletes all resources and information related to a fleet and shuts down any currently\n            running fleet instances, including those in remote locations.</p>\n         <note>\n            <p>If the fleet being deleted has a VPC peering connection, you first need to get a\n                valid authorization (good for 24 hours) by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html\">CreateVpcPeeringAuthorization</a>. You don't need to explicitly delete the\n                VPC peering connection.</p>\n         </note>\n         <p>To delete a fleet, specify the fleet ID to be terminated. During the deletion process,\n            the fleet status is changed to <code>DELETING</code>. When completed, the status\n            switches to <code>TERMINATED</code> and the fleet event <code>FLEET_DELETED</code> is\n            emitted.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                Fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere</p>\n         <p>Deletes all resources and information related to a fleet and shuts down any currently\n            running fleet instances, including those in remote locations.</p>\n         <note>\n            <p>If the fleet being deleted has a VPC peering connection, you first need to get a\n                valid authorization (good for 24 hours) by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html\">CreateVpcPeeringAuthorization</a>. You don't need to explicitly delete the\n                VPC peering connection.</p>\n         </note>\n         <p>To delete a fleet, specify the fleet ID to be terminated. During the deletion process,\n            the fleet status is changed to <code>DELETING</code>. When completed, the status\n            switches to <code>TERMINATED</code> and the fleet event <code>FLEET_DELETED</code> is\n            emitted.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                Fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DeleteFleetInput": {
@@ -3958,7 +3959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Removes locations from a multi-location fleet. When deleting a location, all game\n            server process and all instances that are still active in the location are shut down. </p>\n         <p>To delete fleet locations, identify the fleet ID and provide a list of the locations\n            to be deleted. </p>\n         <p>If successful, GameLift sets the location status to <code>DELETING</code>, and begins\n            to shut down existing server processes and terminate instances in each location being\n            deleted. When completed, the location status changes to <code>TERMINATED</code>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Removes locations from a multi-location fleet. When deleting a location, all game\n            server process and all instances that are still active in the location are shut down. </p>\n         <p>To delete fleet locations, identify the fleet ID and provide a list of the locations\n            to be deleted. </p>\n         <p>If successful, GameLift sets the location status to <code>DELETING</code>, and begins\n            to shut down existing server processes and terminate instances in each location being\n            deleted. When completed, the location status changes to <code>TERMINATED</code>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DeleteFleetLocationsInput": {
@@ -4307,7 +4308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Deletes a fleet scaling policy. Once deleted, the policy is no longer in force and\n            Amazon GameLift Servers removes all record of it. To delete a scaling policy, specify both the scaling\n            policy name and the fleet ID it is associated with.</p>\n         <p>To temporarily suspend scaling policies, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html\">StopFleetActions</a>. This operation suspends all policies for the\n            fleet.</p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Deletes a fleet scaling policy. Once deleted, the policy is no longer in force and\n            Amazon GameLift Servers removes all record of it. To delete a scaling policy, specify both the scaling\n            policy name and the fleet ID it is associated with.</p>\n         <p>To temporarily suspend scaling policies, use <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html\">StopFleetActions</a>. This operation suspends all policies for the\n            fleet.</p>"
             }
         },
         "com.amazonaws.gamelift#DeleteScalingPolicyInput": {
@@ -5578,7 +5579,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves information on a fleet's remote locations, including life-cycle status and\n            any suspended fleet activity. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get data for specific locations, provide a fleet identifier and a list of\n                    locations. Location data is returned in the order that it is requested. </p>\n            </li>\n            <li>\n               <p>To get data for all locations, provide a fleet identifier only. Location data\n                    is returned in no particular order. </p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple locations, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>LocationAttributes</code> object is returned for each requested\n            location. If the fleet does not have a requested location, no information is returned.\n            </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting\n                up Amazon GameLift Servers fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting</p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves information on a fleet's remote locations, including life-cycle status and\n            any suspended fleet activity. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get data for specific locations, provide a fleet identifier and a list of\n                    locations. Location data is returned in the order that it is requested. </p>\n            </li>\n            <li>\n               <p>To get data for all locations, provide a fleet identifier only. Location data\n                    is returned in no particular order. </p>\n            </li>\n         </ul>\n         <p>When requesting attributes for multiple locations, use the pagination parameters to\n            retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>LocationAttributes</code> object is returned for each requested\n            location. If the fleet does not have a requested location, no information is returned.\n            </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting\n                up Amazon GameLift Servers fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\">\n                Amazon GameLift Servers service locations</a> for managed hosting</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5678,7 +5679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves the resource capacity settings for a fleet location. The data returned\n            includes the current capacity (number of EC2 instances) and some scaling settings for\n            the requested fleet location. For a managed container fleet, this operation also returns counts\n            for game server container groups.</p>\n         <p>Use this operation to retrieve capacity information for a fleet's remote location or\n            home Region (you can also retrieve home Region capacity by calling\n            <code>DescribeFleetCapacity</code>).</p>\n         <p>To retrieve capacity data, identify a fleet and location. </p>\n         <p>If successful, a <code>FleetCapacity</code> object is returned for the requested fleet\n            location. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\"> Amazon GameLift Servers service locations</a> for managed hosting</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift metrics for fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves the resource capacity settings for a fleet location. The data returned\n            includes the current capacity (number of EC2 instances) and some scaling settings for\n            the requested fleet location. For a managed container fleet, this operation also returns counts\n            for game server container groups.</p>\n         <p>Use this operation to retrieve capacity information for a fleet's remote location or\n            home Region (you can also retrieve home Region capacity by calling\n            <code>DescribeFleetCapacity</code>).</p>\n         <p>To retrieve capacity data, identify a fleet and location. </p>\n         <p>If successful, a <code>FleetCapacity</code> object is returned for the requested fleet\n            location. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\"> Amazon GameLift Servers service locations</a> for managed hosting</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift metrics for fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DescribeFleetLocationCapacityInput": {
@@ -5745,7 +5746,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Retrieves current usage data for a fleet location. Utilization data provides a\n            snapshot of current game hosting activity at the requested location. Use this operation\n            to retrieve utilization information for a fleet's remote location or home Region (you\n            can also retrieve home Region utilization by calling\n                <code>DescribeFleetUtilization</code>).</p>\n         <p>To retrieve utilization data, identify a fleet and location. </p>\n         <p>If successful, a <code>FleetUtilization</code> object is returned for the requested\n            fleet location. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\"> Amazon GameLift Servers service locations</a> for managed hosting</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift metrics for fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere</p>\n         <p>Retrieves current usage data for a fleet location. Utilization data provides a\n            snapshot of current game hosting activity at the requested location. Use this operation\n            to retrieve utilization information for a fleet's remote location or home Region (you\n            can also retrieve home Region utilization by calling\n                <code>DescribeFleetUtilization</code>).</p>\n         <p>To retrieve utilization data, identify a fleet and location. </p>\n         <p>If successful, a <code>FleetUtilization</code> object is returned for the requested\n            fleet location. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html\"> Amazon GameLift Servers service locations</a> for managed hosting</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift metrics for fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DescribeFleetLocationUtilizationInput": {
@@ -5812,7 +5813,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves a fleet's inbound connection permissions. Connection permissions specify IP\n            addresses and port settings that incoming traffic can use to access server processes in\n            the fleet. Game server processes that are running in the fleet must use a port that\n            falls within this range. </p>\n         <p>Use this operation in the following ways: </p>\n         <ul>\n            <li>\n               <p>To retrieve the port settings for a fleet, identify the fleet's unique\n                    identifier. </p>\n            </li>\n            <li>\n               <p>To check the status of recent updates to a fleet remote location, specify the\n                    fleet ID and a location. Port setting updates can take time to propagate across\n                    all locations. </p>\n            </li>\n         </ul>\n         <p>If successful, a set of <code>IpPermission</code> objects is returned for the\n            requested fleet ID. When specifying a location, this operation returns a pending status.\n            If the requested fleet has been deleted, the result set is empty.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Retrieves a fleet's inbound connection permissions. Connection permissions specify IP\n            addresses and port settings that incoming traffic can use to access server processes in\n            the fleet. Game server processes that are running in the fleet must use a port that\n            falls within this range. </p>\n         <p>Use this operation in the following ways: </p>\n         <ul>\n            <li>\n               <p>To retrieve the port settings for a fleet, identify the fleet's unique\n                    identifier. </p>\n            </li>\n            <li>\n               <p>To check the status of recent updates to a fleet remote location, specify the\n                    fleet ID and a location. Port setting updates can take time to propagate across\n                    all locations. </p>\n            </li>\n         </ul>\n         <p>If successful, a set of <code>IpPermission</code> objects is returned for the\n            requested fleet ID. When specifying a location, this operation returns a pending status.\n            If the requested fleet has been deleted, the result set is empty.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#DescribeFleetPortSettingsInput": {
@@ -5898,7 +5899,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves utilization statistics for one or more fleets. Utilization data provides a\n            snapshot of how the fleet's hosting resources are currently being used. For fleets with\n            remote locations, this operation retrieves data for the fleet's home Region only. See\n                <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationUtilization.html\">DescribeFleetLocationUtilization</a> to get utilization statistics for a\n            fleet's remote locations.</p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get utilization data for one or more specific fleets, provide a list of\n                    fleet IDs or fleet ARNs. </p>\n            </li>\n            <li>\n               <p>To get utilization data for all fleets, do not provide a fleet identifier.\n                </p>\n            </li>\n         </ul>\n         <p>When requesting multiple fleets, use the pagination parameters to retrieve results as\n            a set of sequential pages. </p>\n         <p>If successful, a <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_FleetUtilization.html\">FleetUtilization</a> object is returned for each requested fleet ID, unless the\n            fleet identifier is not found. Each fleet utilization object includes a\n                <code>Location</code> property, which is set to the fleet's home Region. </p>\n         <note>\n            <p>Some API operations may limit the number of fleet IDs allowed in one request. If a\n                request exceeds this limit, the request fails and the error message includes the\n                maximum allowed.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                Fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift Metrics for Fleets</a>\n         </p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Retrieves utilization statistics for one or more fleets. Utilization data provides a\n            snapshot of how the fleet's hosting resources are currently being used. For fleets with\n            remote locations, this operation retrieves data for the fleet's home Region only. See\n                <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationUtilization.html\">DescribeFleetLocationUtilization</a> to get utilization statistics for a\n            fleet's remote locations.</p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To get utilization data for one or more specific fleets, provide a list of\n                    fleet IDs or fleet ARNs. </p>\n            </li>\n            <li>\n               <p>To get utilization data for all fleets, do not provide a fleet identifier.\n                </p>\n            </li>\n         </ul>\n         <p>When requesting multiple fleets, use the pagination parameters to retrieve results as\n            a set of sequential pages. </p>\n         <p>If successful, a <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_FleetUtilization.html\">FleetUtilization</a> object is returned for each requested fleet ID, unless the\n            fleet identifier is not found. Each fleet utilization object includes a\n                <code>Location</code> property, which is set to the fleet's home Region. </p>\n         <note>\n            <p>Some API operations may limit the number of fleet IDs allowed in one request. If a\n                request exceeds this limit, the request fails and the error message includes the\n                maximum allowed.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                Fleets</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet\">GameLift Metrics for Fleets</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6996,7 +6997,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Retrieves all scaling policies applied to a fleet.</p>\n         <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this request\n            by policy status, such as to retrieve only active scaling policies. Use the pagination\n            parameters to retrieve results as a set of sequential pages. If successful, set of\n                <code>ScalingPolicy</code> objects is returned for the fleet.</p>\n         <p>A fleet may have all of its scaling policies suspended. This operation does not affect\n            the status of the scaling policies, which remains ACTIVE.</p>",
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Retrieves all scaling policies applied to a fleet.</p>\n         <p>To get a fleet's scaling policies, specify the fleet ID. You can filter this request\n            by policy status, such as to retrieve only active scaling policies. Use the pagination\n            parameters to retrieve results as a set of sequential pages. If successful, set of\n                <code>ScalingPolicy</code> objects is returned for the fleet.</p>\n         <p>A fleet may have all of its scaling policies suspended. This operation does not affect\n            the status of the scaling policies, which remains ACTIVE.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10384,6 +10385,132 @@
                     "traits": {
                         "smithy.api#enumValue": "r7a.48xlarge"
                     }
+                },
+                "c8a_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8a.medium"
+                    }
+                },
+                "c8a_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8a.large"
+                    }
+                },
+                "c8a_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8a.xlarge"
+                    }
+                },
+                "c8a_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8a.2xlarge"
+                    }
+                },
+                "c8i_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8i.large"
+                    }
+                },
+                "c8i_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8i.xlarge"
+                    }
+                },
+                "c8i_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8i.2xlarge"
+                    }
+                },
+                "c9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.medium"
+                    }
+                },
+                "c9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.large"
+                    }
+                },
+                "c9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.xlarge"
+                    }
+                },
+                "c9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.2xlarge"
+                    }
+                },
+                "m8a_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8a.medium"
+                    }
+                },
+                "m8a_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8a.large"
+                    }
+                },
+                "m8a_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8a.xlarge"
+                    }
+                },
+                "m8a_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8a.2xlarge"
+                    }
+                },
+                "m8i_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.large"
+                    }
+                },
+                "m8i_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.xlarge"
+                    }
+                },
+                "m8i_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.2xlarge"
+                    }
+                },
+                "m9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.large"
+                    }
+                },
+                "m9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.xlarge"
+                    }
+                },
+                "m9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.2xlarge"
+                    }
                 }
             }
         },
@@ -12903,7 +13030,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 96
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#GameServer": {
@@ -12998,7 +13126,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": "^.*\\S.*$"
             }
         },
         "com.amazonaws.gamelift#GameServerContainerDefinition": {
@@ -13175,7 +13303,8 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": "^.*\\S.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#GameServerGroup": {
@@ -13886,7 +14015,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]+|^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+$"
+                "smithy.api#pattern": "^([a-zA-Z0-9-\\.]+|arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+)$"
             }
         },
         "com.amazonaws.gamelift#GameServerGroupStatus": {
@@ -14316,7 +14445,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#GameSessionDetail": {
@@ -14641,7 +14771,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-]+|^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^([a-zA-Z0-9-]+|arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+)$"
             }
         },
         "com.amazonaws.gamelift#GameSessionQueueNameOrArnList": {
@@ -15515,7 +15645,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 262144
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#LatencyMap": {
@@ -17280,7 +17411,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 390000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#MatchmakingAcceptanceTimeoutInteger": {
@@ -17422,7 +17554,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*$"
+                "smithy.api#pattern": "^([a-zA-Z0-9-\\.]*|arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*)$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingConfigurationNameList": {
@@ -17563,7 +17695,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*$"
+                "smithy.api#pattern": "^([a-zA-Z0-9-\\.]*|arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*)$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingRuleSetNameList": {
@@ -17809,7 +17941,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": "^.*\\S.*$"
             }
         },
         "com.amazonaws.gamelift#NonEmptyString": {
@@ -18140,7 +18272,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#PlayerDataMap": {
@@ -18605,7 +18738,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Creates or updates a scaling policy for a fleet. Scaling policies are used to\n            automatically scale a fleet's hosting capacity to meet player demand. An active scaling\n            policy instructs Amazon GameLift Servers to track a fleet metric and automatically change the fleet's\n            capacity when a certain threshold is reached. There are two types of scaling policies:\n            target-based and rule-based. Use a target-based policy to quickly and efficiently manage\n            fleet scaling; this option is the most commonly used. Use rule-based policies when you\n            need to exert fine-grained control over auto-scaling. </p>\n         <p>Fleets can have multiple scaling policies of each type in force at the same time; you\n            can have one target-based policy, one or multiple rule-based scaling policies, or both.\n            We recommend caution, however, because multiple auto-scaling policies can have\n            unintended consequences.</p>\n         <p>Learn more about how to work with auto-scaling in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html\">Set Up Fleet Automatic\n                Scaling</a>.</p>\n         <p>\n            <b>Target-based policy</b>\n         </p>\n         <p>A target-based policy tracks a single metric: PercentAvailableGameSessions. This\n            metric tells us how much of a fleet's hosting capacity is ready to host game sessions\n            but is not currently in use. This is the fleet's buffer; it measures the additional\n            player demand that the fleet could handle at current capacity. With a target-based\n            policy, you set your ideal buffer size and leave it to Amazon GameLift Servers to take whatever action is\n            needed to maintain that target. </p>\n         <p>For example, you might choose to maintain a 10% buffer for a fleet that has the\n            capacity to host 100 simultaneous game sessions. This policy tells Amazon GameLift Servers to take action\n            whenever the fleet's available capacity falls below or rises above 10 game sessions.\n            Amazon GameLift Servers will start new instances or stop unused instances in order to return to the 10%\n            buffer. </p>\n         <p>To create or update a target-based policy, specify a fleet ID and name, and set the\n            policy type to \"TargetBased\". Specify the metric to track (PercentAvailableGameSessions)\n            and reference a <code>TargetConfiguration</code> object with your desired buffer value.\n            Exclude all other parameters. On a successful request, the policy name is returned. The\n            scaling policy is automatically in force as soon as it's successfully created. If the\n            fleet's auto-scaling actions are temporarily suspended, the new policy will be in force\n            once the fleet actions are restarted.</p>\n         <p>\n            <b>Rule-based policy</b>\n         </p>\n         <p>A rule-based policy tracks specified fleet metric, sets a threshold value, and\n            specifies the type of action to initiate when triggered. With a rule-based policy, you\n            can select from several available fleet metrics. Each policy specifies whether to scale\n            up or scale down (and by how much), so you need one policy for each type of action. </p>\n         <p>For example, a policy may make the following statement: \"If the percentage of idle\n            instances is greater than 20% for more than 15 minutes, then reduce the fleet capacity\n            by 10%.\"</p>\n         <p>A policy's rule statement has the following structure:</p>\n         <p>If <code>[MetricName]</code> is <code>[ComparisonOperator]</code>\n            <code>[Threshold]</code> for <code>[EvaluationPeriods]</code> minutes, then\n                <code>[ScalingAdjustmentType]</code> to/by <code>[ScalingAdjustment]</code>.</p>\n         <p>To implement the example, the rule statement would look like this:</p>\n         <p>If <code>[PercentIdleInstances]</code> is <code>[GreaterThanThreshold]</code>\n            <code>[20]</code> for <code>[15]</code> minutes, then\n                <code>[PercentChangeInCapacity]</code> to/by <code>[10]</code>.</p>\n         <p>To create or update a scaling policy, specify a unique combination of name and fleet\n            ID, and set the policy type to \"RuleBased\". Specify the parameter values for a policy\n            rule statement. On a successful request, the policy name is returned. Scaling policies\n            are automatically in force as soon as they're successfully created. If the fleet's\n            auto-scaling actions are temporarily suspended, the new policy will be in force once the\n            fleet actions are restarted.</p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Creates or updates a scaling policy for a fleet. Scaling policies are used to\n            automatically scale a fleet's hosting capacity to meet player demand. An active scaling\n            policy instructs Amazon GameLift Servers to track a fleet metric and automatically change the fleet's\n            capacity when a certain threshold is reached. There are two types of scaling policies:\n            target-based and rule-based. Use a target-based policy to quickly and efficiently manage\n            fleet scaling; this option is the most commonly used. Use rule-based policies when you\n            need to exert fine-grained control over auto-scaling. </p>\n         <p>Fleets can have multiple scaling policies of each type in force at the same time; you\n            can have one target-based policy, one or multiple rule-based scaling policies, or both.\n            We recommend caution, however, because multiple auto-scaling policies can have\n            unintended consequences.</p>\n         <p>Learn more about how to work with auto-scaling in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html\">Set Up Fleet Automatic\n                Scaling</a>.</p>\n         <p>\n            <b>Target-based policy</b>\n         </p>\n         <p>A target-based policy tracks a single metric: PercentAvailableGameSessions. This\n            metric tells us how much of a fleet's hosting capacity is ready to host game sessions\n            but is not currently in use. This is the fleet's buffer; it measures the additional\n            player demand that the fleet could handle at current capacity. With a target-based\n            policy, you set your ideal buffer size and leave it to Amazon GameLift Servers to take whatever action is\n            needed to maintain that target. </p>\n         <p>For example, you might choose to maintain a 10% buffer for a fleet that has the\n            capacity to host 100 simultaneous game sessions. This policy tells Amazon GameLift Servers to take action\n            whenever the fleet's available capacity falls below or rises above 10 game sessions.\n            Amazon GameLift Servers will start new instances or stop unused instances in order to return to the 10%\n            buffer. </p>\n         <p>To create or update a target-based policy, specify a fleet ID and name, and set the\n            policy type to \"TargetBased\". Specify the metric to track (PercentAvailableGameSessions)\n            and reference a <code>TargetConfiguration</code> object with your desired buffer value.\n            Exclude all other parameters. On a successful request, the policy name is returned. The\n            scaling policy is automatically in force as soon as it's successfully created. If the\n            fleet's auto-scaling actions are temporarily suspended, the new policy will be in force\n            once the fleet actions are restarted.</p>\n         <p>\n            <b>Rule-based policy</b>\n         </p>\n         <p>A rule-based policy tracks specified fleet metric, sets a threshold value, and\n            specifies the type of action to initiate when triggered. With a rule-based policy, you\n            can select from several available fleet metrics. Each policy specifies whether to scale\n            up or scale down (and by how much), so you need one policy for each type of action. </p>\n         <p>For example, a policy may make the following statement: \"If the percentage of idle\n            instances is greater than 20% for more than 15 minutes, then reduce the fleet capacity\n            by 10%.\"</p>\n         <p>A policy's rule statement has the following structure:</p>\n         <p>If <code>[MetricName]</code> is <code>[ComparisonOperator]</code>\n            <code>[Threshold]</code> for <code>[EvaluationPeriods]</code> minutes, then\n                <code>[ScalingAdjustmentType]</code> to/by <code>[ScalingAdjustment]</code>.</p>\n         <p>To implement the example, the rule statement would look like this:</p>\n         <p>If <code>[PercentIdleInstances]</code> is <code>[GreaterThanThreshold]</code>\n            <code>[20]</code> for <code>[15]</code> minutes, then\n                <code>[PercentChangeInCapacity]</code> to/by <code>[10]</code>.</p>\n         <p>To create or update a scaling policy, specify a unique combination of name and fleet\n            ID, and set the policy type to \"RuleBased\". Specify the parameter values for a policy\n            rule statement. On a successful request, the policy name is returned. Scaling policies\n            are automatically in force as soon as they're successfully created. If the fleet's\n            auto-scaling actions are temporarily suspended, the new policy will be in force once the\n            fleet actions are restarted.</p>"
             }
         },
         "com.amazonaws.gamelift#PutScalingPolicyInput": {
@@ -18709,7 +18842,8 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[\\s\\S]*$"
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#QueueSnsArnStringModel": {
@@ -18754,7 +18888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Anywhere, Container</p>\n         <p>Registers a compute resource in an Amazon GameLift Servers Anywhere fleet. </p>\n         <p>For an Anywhere fleet that's running the Amazon GameLift Servers Agent, the Agent\n            handles all compute registry tasks for you. For an Anywhere fleet that doesn't use the\n            Agent, call this operation to register fleet computes.</p>\n         <p>To register a compute, give the compute a name (must be unique within the\n            fleet) and specify the compute resource's DNS name or IP address. Provide a \n            fleet ID and a fleet location to associate with the compute being registered. You can\n            optionally include the path to a TLS certificate on the compute resource.</p>\n         <p>If successful, this operation returns compute details, including an Amazon GameLift Servers SDK\n            endpoint or Agent endpoint. Game server processes running on the compute can use this\n            endpoint to communicate with the Amazon GameLift Servers service. Each server process includes the SDK\n            endpoint in its call to the Amazon GameLift Servers server SDK action <code>InitSDK()</code>. </p>\n         <p>To view compute details, call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute.html\">DescribeCompute</a> with the compute name. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html\">Create an\n                        Anywhere fleet</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html\">Test your\n                        integration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html\">Server SDK\n                        reference guides</a> (for version 5.x)</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> Anywhere</p>\n         <p>Registers a compute resource in an Amazon GameLift Servers Anywhere fleet. </p>\n         <p>For an Anywhere fleet that's running the Amazon GameLift Servers Agent, the Agent\n            handles all compute registry tasks for you. For an Anywhere fleet that doesn't use the\n            Agent, call this operation to register fleet computes.</p>\n         <p>To register a compute, give the compute a name (must be unique within the\n            fleet) and specify the compute resource's DNS name or IP address. Provide a \n            fleet ID and a fleet location to associate with the compute being registered. You can\n            optionally include the path to a TLS certificate on the compute resource.</p>\n         <p>If successful, this operation returns compute details, including an Amazon GameLift Servers SDK\n            endpoint or Agent endpoint. Game server processes running on the compute can use this\n            endpoint to communicate with the Amazon GameLift Servers service. Each server process includes the SDK\n            endpoint in its call to the Amazon GameLift Servers server SDK action <code>InitSDK()</code>. </p>\n         <p>To view compute details, call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute.html\">DescribeCompute</a> with the compute name. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html\">Create an\n                        Anywhere fleet</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html\">Test your\n                        integration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html\">Server SDK\n                        reference guides</a> (for version 5.x)</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.gamelift#RegisterComputeInput": {
@@ -19488,7 +19622,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+$"
+                "smithy.api#pattern": "^(script-\\S+|arn:.*:script\\/script-\\S+)$"
             }
         },
         "com.amazonaws.gamelift#ScriptList": {
@@ -19680,7 +19814,7 @@
                     "min": 0,
                     "max": 300
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_/-]*(.fifo)?$"
+                "smithy.api#pattern": "^[a-zA-Z0-9:_/-]*(\\.fifo)?$"
             }
         },
         "com.amazonaws.gamelift#SortOrder": {
@@ -21269,7 +21403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere, Container</p>\n         <p>Updates a fleet's mutable attributes, such as game session protection and resource\n            creation limits.</p>\n         <p>To update fleet attributes, specify the fleet ID and the property values that you want\n            to change. If successful, Amazon GameLift Servers returns the identifiers for the updated fleet.</p>\n         <note>\n            <p>A managed fleet's runtime environment, which depends on the fleet's \n                Amazon Machine Image {AMI} version, can't be updated. You must create a new\n                fleet. As a best practice, we recommend replacing your managed fleets every 30\n                days to maintain a secure and up-to-date runtime environment for your hosted game\n                servers. For guidance, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html\">\n                    Security best practices for Amazon GameLift Servers</a>.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Anywhere</p>\n         <p>Updates a fleet's mutable attributes, such as game session protection and resource\n            creation limits.</p>\n         <p>To update fleet attributes, specify the fleet ID and the property values that you want\n            to change. If successful, Amazon GameLift Servers returns the identifiers for the updated fleet.</p>\n         <note>\n            <p>A managed fleet's runtime environment, which depends on the fleet's \n                Amazon Machine Image {AMI} version, can't be updated. You must create a new\n                fleet. As a best practice, we recommend replacing your managed fleets every 30\n                days to maintain a secure and up-to-date runtime environment for your hosted game\n                servers. For guidance, see <a href=\"https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html\">\n                    Security best practices for Amazon GameLift Servers</a>.</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#UpdateFleetAttributesInput": {
@@ -21492,7 +21626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2, Container</p>\n         <p>Updates permissions that allow inbound traffic to connect to game sessions in the\n            fleet. </p>\n         <p>To update settings, specify the fleet ID to be updated and specify the changes to be\n            made. List the permissions you want to add in\n                <code>InboundPermissionAuthorizations</code>, and permissions you want to remove in\n                <code>InboundPermissionRevocations</code>. Permissions to be removed must match\n            existing fleet permissions. </p>\n         <p>If successful, the fleet identifiers for the updated fleet are returned. For fleets with remote\n            locations, port setting updates can take time to propagate across all locations. You can\n            check the status of updates in each location by calling\n                <code>DescribeFleetPortSettings</code> with a location name.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This API works with the following fleet types:</b> EC2</p>\n         <p>Updates permissions that allow inbound traffic to connect to game sessions in the\n            fleet. </p>\n         <p>To update settings, specify the fleet ID to be updated and specify the changes to be\n            made. List the permissions you want to add in\n                <code>InboundPermissionAuthorizations</code>, and permissions you want to remove in\n                <code>InboundPermissionRevocations</code>. Permissions to be removed must match\n            existing fleet permissions. </p>\n         <p>If successful, the fleet identifiers for the updated fleet are returned. For fleets with remote\n            locations, port setting updates can take time to propagate across all locations. You can\n            check the status of updates in each location by calling\n                <code>DescribeFleetPortSettings</code> with a location name.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up Amazon GameLift Servers\n                fleets</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#UpdateFleetPortSettingsInput": {

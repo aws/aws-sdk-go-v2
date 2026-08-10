@@ -4153,6 +4153,7 @@
           "ap-southeast-5" : { },
           "ap-southeast-7" : { },
           "ca-central-1" : { },
+          "ca-west-1" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
           "eu-west-1" : { },
@@ -27603,6 +27604,7 @@
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
+          "ap-southeast-5" : { },
           "ca-central-1" : { },
           "ca-west-1" : { },
           "eu-central-1" : { },
@@ -30249,6 +30251,12 @@
         }
       },
       "redshift-serverless" : {
+        "endpoints" : {
+          "cn-north-1" : { },
+          "cn-northwest-1" : { }
+        }
+      },
+      "resource-explorer-2" : {
         "endpoints" : {
           "cn-north-1" : { },
           "cn-northwest-1" : { }

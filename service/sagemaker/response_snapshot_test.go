@@ -13730,6 +13730,7 @@ func TestCheckResponseSnapshot_DescribeTrainingJob(t *testing.T) {
 			Peft:                   types.Peft("LORA"),
 			EvaluationType:         types.EvaluationType("LLMAJEvaluation"),
 			EvaluatorArn:           ptr.String("__EvaluatorArn__"),
+			SequenceLength:         ptr.String("__SequenceLength__"),
 		},
 		MlflowConfig: &types.MlflowConfig{
 			MlflowResourceArn:    ptr.String("__MlflowResourceArn__"),

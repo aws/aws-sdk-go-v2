@@ -1045,6 +1045,7 @@ type ConnectionCredentials struct {
 //
 //	ConnectionPropertiesInputMemberAmazonQProperties
 //	ConnectionPropertiesInputMemberAthenaProperties
+//	ConnectionPropertiesInputMemberGitProperties
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
@@ -1079,6 +1080,15 @@ type ConnectionPropertiesInputMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesInputMemberAthenaProperties) isConnectionPropertiesInput() {}
+
+// The Git properties of a connection.
+type ConnectionPropertiesInputMemberGitProperties struct {
+	Value GitPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberGitProperties) isConnectionPropertiesInput() {}
 
 // The Amazon Web Services Glue properties of a connection.
 type ConnectionPropertiesInputMemberGlueProperties struct {
@@ -1204,6 +1214,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //
 //	ConnectionPropertiesOutputMemberAmazonQProperties
 //	ConnectionPropertiesOutputMemberAthenaProperties
+//	ConnectionPropertiesOutputMemberGitProperties
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
@@ -1238,6 +1249,15 @@ type ConnectionPropertiesOutputMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberAthenaProperties) isConnectionPropertiesOutput() {}
+
+// The Git properties of a connection.
+type ConnectionPropertiesOutputMemberGitProperties struct {
+	Value GitPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberGitProperties) isConnectionPropertiesOutput() {}
 
 // The Amazon Web Services Glue properties of a connection.
 type ConnectionPropertiesOutputMemberGlueProperties struct {
@@ -1363,6 +1383,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //
 //	ConnectionPropertiesPatchMemberAmazonQProperties
 //	ConnectionPropertiesPatchMemberAthenaProperties
+//	ConnectionPropertiesPatchMemberGitProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
 //	ConnectionPropertiesPatchMemberLakehouseProperties
@@ -1393,6 +1414,15 @@ type ConnectionPropertiesPatchMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberAthenaProperties) isConnectionPropertiesPatch() {}
+
+// The Git properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberGitProperties struct {
+	Value GitPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberGitProperties) isConnectionPropertiesPatch() {}
 
 // The Amazon Web Services Glue properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberGlueProperties struct {
@@ -3096,6 +3126,72 @@ type GitMetadata struct {
 
 	// The name of the file in the Git repository.
 	FileName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Git connection properties that you specify when creating a Git
+// connection.
+type GitPropertiesInput struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	//
+	// This member is required.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	//
+	// This member is required.
+	DefaultBranch *string
+
+	// The ID of the Git repository. This is the owner and repository name, for
+	// example, owner/repo-name.
+	//
+	// This member is required.
+	RepositoryId *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a Git connection returned by get and list operations,
+// including connection status and any error details.
+type GitPropertiesOutput struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	//
+	// This member is required.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	//
+	// This member is required.
+	DefaultBranch *string
+
+	// The ID of the Git repository. This is the owner and repository name, for
+	// example, owner/repo-name.
+	//
+	// This member is required.
+	RepositoryId *string
+
+	// The error message that describes why the Git connection failed. This member is
+	// populated when the connection status is CREATE_FAILED or UPDATE_FAILED.
+	ErrorMessage *string
+
+	// The status of the Git connection.
+	Status ConnectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The properties used to update an existing Git connection, such as the
+// CodeConnections ARN or the default branch.
+type GitPropertiesPatch struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	DefaultBranch *string
 
 	noSmithyDocumentSerde
 }

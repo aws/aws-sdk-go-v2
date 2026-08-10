@@ -7,12 +7,13 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of resources successfully backed up by Backup, including the
-// time the resource was saved, an Amazon Resource Name (ARN) of the resource, and
-// a resource type.
+// Returns an array of resources with recovery points created by Backup
+// (regardless of the recovery point's [status]), including the time the resource was
+// saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+//
+// [status]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status
 func (c *Client) ListProtectedResources(ctx context.Context, params *ListProtectedResourcesInput, optFns ...func(*Options)) (*ListProtectedResourcesOutput, error) {
 	if params == nil {
 		params = &ListProtectedResourcesInput{}
@@ -71,9 +72,6 @@ func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -86,16 +84,7 @@ func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListProtectedResources"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -101,6 +101,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesInput
 
@@ -157,6 +160,7 @@ var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
 var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.WorkflowsMwaaPropertiesInput
+var _ *types.GitPropertiesInput
 var _ *types.AmazonQPropertiesInput
 var _ *types.SnowflakePropertiesInput
 var _ *types.GluePropertiesInput
@@ -174,6 +178,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 	case *types.ConnectionPropertiesOutputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesOutput
@@ -228,6 +235,7 @@ var _ *types.S3PropertiesOutput
 var _ *types.WorkflowsMwaaPropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
+var _ *types.GitPropertiesOutput
 var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput
 var _ *types.SparkEmrPropertiesOutput
@@ -248,6 +256,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 
 	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesPatch
 
 	case *types.ConnectionPropertiesPatchMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesPatch
@@ -286,6 +297,7 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 }
 
 var _ *types.AmazonQPropertiesPatch
+var _ *types.GitPropertiesPatch
 var _ *types.SparkEmrPropertiesPatch
 var _ *types.MlflowPropertiesPatch
 var _ *types.IamPropertiesPatch

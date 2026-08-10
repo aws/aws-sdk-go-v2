@@ -105,7 +105,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname> <p> <b>AWS Partner Central API for Selling Reference Guide</b> </p> <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can automate interactions with AWS Partner Central, which helps to ensure effective engagements in joint business activities.</p> <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p> <p class=\"title\"> <b>Features offered by AWS Partner Central API</b> </p> <ol> <li> <p> <b>Opportunity management:</b> Manages coselling opportunities through API actions such as <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>, <code>ListOpportunities</code>, <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p> </li> <li> <p> <b>AWS referral management:</b> Manages referrals shared by AWS using actions such as <code>ListEngagementInvitations</code>, <code>GetEngagementInvitation</code>, <code>StartEngagementByAcceptingInvitation</code>, and <code>RejectEngagementInvitation</code>.</p> </li> <li> <p> <b>Entity association:</b> Associates related entities such as <i>AWS Products</i>, <i>Partner Solutions</i>, and <i>AWS Marketplace Private Offers</i> with opportunities using the actions <code>AssociateOpportunity</code>, and <code>DisassociateOpportunity</code>.</p> </li> <li> <p> <b>View AWS opportunity details:</b> Retrieves real-time summaries of AWS opportunities using the <code>GetAWSOpportunitySummary</code> action.</p> </li> <li> <p> <b>List solutions:</b> Provides list APIs for listing partner offers using <code>ListSolutions</code>.</p> </li> <li> <p> <b>Event subscription:</b> Subscribe to real-time opportunity updates through AWS EventBridge by using actions such as <i>Opportunity Created</i>, <i>Opportunity Updated</i>, <i>Engagement Invitation Accepted</i>, <i>Engagement Invitation Rejected</i>, and <i>Engagement Invitation Created</i>.</p> </li> </ol>",
+                "smithy.api#documentation": "<fullname>Partner Central</fullname> <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can automate interactions with AWS Partner Central, which helps to ensure effective engagements in joint business activities.</p> <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p> <p class=\"title\"> <b>Features offered by AWS Partner Central API</b> </p> <ol> <li> <p> <b>Opportunity management:</b> Manages coselling opportunities through API actions such as <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>, <code>ListOpportunities</code>, <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p> </li> <li> <p> <b>AWS referral management:</b> Manages referrals shared by AWS using actions such as <code>ListEngagementInvitations</code>, <code>GetEngagementInvitation</code>, <code>StartEngagementByAcceptingInvitation</code>, and <code>RejectEngagementInvitation</code>.</p> </li> <li> <p> <b>Entity association:</b> Associates related entities such as <i>AWS Products</i>, <i>Partner Solutions</i>, and <i>AWS Marketplace Private Offers</i> with opportunities using the actions <code>AssociateOpportunity</code>, and <code>DisassociateOpportunity</code>.</p> </li> <li> <p> <b>View AWS opportunity details:</b> Retrieves real-time summaries of AWS opportunities using the <code>GetAWSOpportunitySummary</code> action.</p> </li> <li> <p> <b>List solutions:</b> Provides list APIs for listing partner offers using <code>ListSolutions</code>.</p> </li> <li> <p> <b>Event subscription:</b> Subscribe to real-time opportunity updates through AWS EventBridge by using actions such as <i>Opportunity Created</i>, <i>Opportunity Updated</i>, <i>Engagement Invitation Accepted</i>, <i>Engagement Invitation Rejected</i>, and <i>Engagement Invitation Created</i>.</p> </li> </ol>",
                 "smithy.api#title": "Partner Central Selling API",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -1387,7 +1387,9 @@
         "com.amazonaws.partnercentralselling#AwsMaturity": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,20}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.partnercentralselling#AwsMemberBusinessTitle": {
@@ -4225,15 +4227,13 @@
                 "Title": {
                     "target": "com.amazonaws.partnercentralselling#EngagementTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the title of the <code>Engagement</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the title of the <code>Engagement</code>.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.partnercentralselling#EngagementDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides a description of the <code>Engagement</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Provides a description of the <code>Engagement</code>.</p>"
                     }
                 },
                 "Contexts": {
@@ -5745,7 +5745,9 @@
         "com.amazonaws.partnercentralselling#CustomerAction": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.partnercentralselling#CustomerContactsList": {
@@ -6827,13 +6829,35 @@
         "com.amazonaws.partnercentralselling#EngagementTitle": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,40}$"
+                "smithy.api#pattern": "^(?s).{0,40}$"
             }
         },
         "com.amazonaws.partnercentralselling#EngagementUseCase": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#EnrichmentContext": {
+            "type": "structure",
+            "members": {
+                "ProspectingResultAws": {
+                    "target": "com.amazonaws.partnercentralselling#InvitationProspectingResultAws",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer account data and propensity insights for the prospected account. It includes geographic, industry, and segment classifications, along with engagement and solution scoring.</p>"
+                    }
+                },
+                "LeadInsights": {
+                    "target": "com.amazonaws.partnercentralselling#LeadInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI-generated lead readiness score for this lead. Use this score to assess lead quality and prioritize engagement efforts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains enrichment data for engagement invitations. You can view propensity scores, program eligibility, and lead readiness insights directly in the invitation, before you take action on the invitation.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#EstimationUrl": {
@@ -7319,6 +7343,12 @@
                     "target": "com.amazonaws.partnercentralselling#EngagementMemberSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of active members currently part of the Engagement. This array contains a maximum of 10 members, each represented by an object with the following properties.</p> <ul> <li> <p>CompanyName: The name of the member's company.</p> </li> <li> <p>WebsiteUrl: The website URL of the member's company.</p> </li> </ul>"
+                    }
+                },
+                "EnrichmentContext": {
+                    "target": "com.amazonaws.partnercentralselling#EnrichmentContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment data for the engagement associated with this invitation. You can view propensity scores, program eligibility, and lead readiness assessments before taking action on the invitation.</p>"
                     }
                 }
             },
@@ -8307,6 +8337,26 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.partnercentralselling#InvitationProspectingResultAws": {
+            "type": "structure",
+            "members": {
+                "Customer": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResultCustomer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prospected customer account details, including geographic classification, industry segmentation, company size, and program eligibility.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI-generated insights from the prospecting analysis, including marketplace engagement scoring, solution fit assessments, and solution categorization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A subset of prospecting result data visible to invitation receivers. It includes customer account details and AI-generated insights.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#InvitationStatus": {
             "type": "enum",
             "members": {
@@ -8410,18 +8460,68 @@
                 "smithy.api#documentation": "<p>Defines a filter to retrieve opportunities based on the last modified date. This filter is useful for tracking changes or updates to opportunities over time.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadAddress": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 255
+                        }
+                    }
+                },
+                "PostalCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 20
+                        }
+                    }
+                },
+                "StateOrRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state or region of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 255
+                        }
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.partnercentralselling#LeadCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code of the lead customer's address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The address information for a lead customer, including city, state or region, postal code, and country code.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadBusinessProblem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadContact": {
             "type": "structure",
             "members": {
                 "BusinessTitle": {
-                    "target": "com.amazonaws.partnercentralselling#JobTitle",
+                    "target": "com.amazonaws.partnercentralselling#LeadJobTitle",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's business title or job role associated with the engagement.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Email": {
-                    "target": "com.amazonaws.partnercentralselling#Email",
+                    "target": "com.amazonaws.partnercentralselling#LeadEmail",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's email address associated with the engagement.</p>",
                         "smithy.api#required": {}
@@ -8442,7 +8542,7 @@
                     }
                 },
                 "Phone": {
-                    "target": "com.amazonaws.partnercentralselling#PhoneNumber",
+                    "target": "com.amazonaws.partnercentralselling#LeadPhoneNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's phone number associated with the engagement.</p>"
                     }
@@ -8487,11 +8587,20 @@
                 "smithy.api#documentation": "<p>Provides comprehensive details about a lead associated with an engagement. This structure contains information about lead qualification status, customer details, and interaction history to facilitate lead management and tracking within the engagement.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadCountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadCustomer": {
             "type": "structure",
             "members": {
                 "Industry": {
-                    "target": "com.amazonaws.partnercentralselling#Industry",
+                    "target": "com.amazonaws.partnercentralselling#LeadIndustry",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the industry sector to which the lead customer's company belongs. This categorization helps in understanding the customer's business context and tailoring appropriate solutions.</p>"
                     }
@@ -8504,15 +8613,15 @@
                     }
                 },
                 "WebsiteUrl": {
-                    "target": "com.amazonaws.partnercentralselling#CompanyWebsiteUrl",
+                    "target": "com.amazonaws.partnercentralselling#LeadWebsiteUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The website URL of the lead customer's company. This provides additional context about the customer organization and helps verify company legitimacy and size.</p>"
                     }
                 },
                 "Address": {
-                    "target": "com.amazonaws.partnercentralselling#AddressSummary",
+                    "target": "com.amazonaws.partnercentralselling#LeadAddress",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The address information for the lead customer.</p>"
                     }
                 },
                 "AwsMaturity": {
@@ -8522,7 +8631,7 @@
                     }
                 },
                 "MarketSegment": {
-                    "target": "com.amazonaws.partnercentralselling#MarketSegment",
+                    "target": "com.amazonaws.partnercentralselling#LeadMarketSegment",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the market segment classification of the lead customer, such as enterprise, mid-market, or small business. This segmentation helps in targeting appropriate solutions and engagement strategies.</p>"
                     }
@@ -8530,6 +8639,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains detailed information about the customer associated with the lead, including company details, industry classification, and AWS maturity level. This information helps qualify and categorize the lead for appropriate engagement strategies.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadIndustry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.partnercentralselling#LeadInsights": {
@@ -8552,22 +8679,25 @@
                 "SourceType": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", \"Referral\", or \"Campaign\". This categorization helps track lead generation effectiveness across different channels.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", \"Referral\", or \"Campaign\". This categorization helps track lead generation effectiveness across different channels.</p>"
                     }
                 },
                 "SourceId": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This ID provides traceability back to the original lead generation activity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This ID provides traceability back to the original lead generation activity.</p>"
                     }
                 },
                 "SourceName": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction, providing a human-readable identifier for the lead generation channel or activity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction, providing a human-readable identifier for the lead generation channel or activity.</p>"
                     }
                 },
                 "Usecase": {
@@ -8585,12 +8715,13 @@
                 "CustomerAction": {
                     "target": "com.amazonaws.partnercentralselling#CustomerAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the action taken by the customer during or as a result of the interaction, such as requesting information, scheduling a meeting, or expressing interest in a solution.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Describes the action taken by the customer during or as a result of the interaction, such as requesting information, scheduling a meeting, or expressing interest in a solution.</p>"
                     }
                 },
                 "BusinessProblem": {
-                    "target": "com.amazonaws.partnercentralselling#EngagementCustomerBusinessProblem",
+                    "target": "com.amazonaws.partnercentralselling#LeadBusinessProblem",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the business problem or challenge that the customer discussed during the interaction. This information helps qualify the lead and identify appropriate solutions.</p>"
                     }
@@ -8623,7 +8754,7 @@
             "type": "structure",
             "members": {
                 "Industry": {
-                    "target": "com.amazonaws.partnercentralselling#Industry",
+                    "target": "com.amazonaws.partnercentralselling#LeadIndustry",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the industry sector of the customer company associated with the lead invitation. This categorization helps partners understand the customer's business context and assess solution fit.</p>"
                     }
@@ -8636,16 +8767,17 @@
                     }
                 },
                 "WebsiteUrl": {
-                    "target": "com.amazonaws.partnercentralselling#CompanyWebsiteUrl",
+                    "target": "com.amazonaws.partnercentralselling#LeadWebsiteUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The website URL of the customer company. This provides additional context about the customer organization and helps partners verify company details and assess business size and legitimacy.</p>"
                     }
                 },
                 "CountryCode": {
-                    "target": "com.amazonaws.partnercentralselling#CountryCode",
+                    "target": "com.amazonaws.partnercentralselling#LeadCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The country code indicating the geographic location of the customer company. This information helps partners understand regional requirements and assess their ability to serve the customer effectively.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The country code indicating the geographic location of the customer company. This information helps partners understand regional requirements and assess their ability to serve the customer effectively.</p>"
                     }
                 },
                 "AwsMaturity": {
@@ -8655,7 +8787,7 @@
                     }
                 },
                 "MarketSegment": {
-                    "target": "com.amazonaws.partnercentralselling#MarketSegment",
+                    "target": "com.amazonaws.partnercentralselling#LeadMarketSegment",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the market segment classification of the customer, such as enterprise, mid-market, or small business. This segmentation helps partners determine the appropriate solution complexity and engagement strategy.</p>"
                     }
@@ -8671,22 +8803,25 @@
                 "SourceType": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", or \"Campaign\". This helps partners understand the lead generation channel and assess lead quality based on the source type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", or \"Campaign\". This helps partners understand the lead generation channel and assess lead quality based on the source type.</p>"
                     }
                 },
                 "SourceId": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This provides traceability to the original lead generation activity for reference and follow-up purposes.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This provides traceability to the original lead generation activity for reference and follow-up purposes.</p>"
                     }
                 },
                 "SourceName": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction. This human-readable identifier helps partners understand the specific lead generation channel or campaign that created the opportunity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction. This human-readable identifier helps partners understand the specific lead generation channel or campaign that created the opportunity.</p>"
                     }
                 },
                 "Usecase": {
@@ -8729,6 +8864,32 @@
                 "smithy.api#documentation": "<p>Represents the data payload of an engagement invitation for a lead opportunity. This contains detailed information about the customer and interaction history that partners use to evaluate whether to accept the lead engagement invitation.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadJobTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadMarketSegment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadQualificationStatus": {
             "type": "string",
             "traits": {
@@ -8739,19 +8900,28 @@
         "com.amazonaws.partnercentralselling#LeadSourceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
             }
         },
         "com.amazonaws.partnercentralselling#LeadSourceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
             }
         },
         "com.amazonaws.partnercentralselling#LeadSourceType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadWebsiteUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.partnercentralselling#LifeCycle": {
@@ -10780,41 +10950,6 @@
                 }
             }
         },
-        "com.amazonaws.partnercentralselling#MarketSegment": {
-            "type": "enum",
-            "members": {
-                "ENTERPRISE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Enterprise"
-                    }
-                },
-                "LARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Large"
-                    }
-                },
-                "MEDIUM": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Medium"
-                    }
-                },
-                "SMALL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Small"
-                    }
-                },
-                "MICRO": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Micro"
-                    }
-                }
-            }
-        },
         "com.amazonaws.partnercentralselling#Marketing": {
             "type": "structure",
             "members": {
@@ -11925,6 +12060,18 @@
         "com.amazonaws.partnercentralselling#ProspectingResultAws": {
             "type": "structure",
             "members": {
+                "Customer": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResultCustomer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the prospected customer account, including geographic, industry, and segment classifications.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Insights that AI generates from the prospecting analysis. These insights include engagement scores and solution fit assessments for the prospected customer.</p>"
+                    }
+                },
                 "StartTime": {
                     "target": "com.amazonaws.partnercentralselling#DateTime",
                     "traits": {
@@ -11953,18 +12100,6 @@
                     "target": "com.amazonaws.partnercentralselling#TaskName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name that the user provides for the prospecting task that generates this result.</p>"
-                    }
-                },
-                "Customer": {
-                    "target": "com.amazonaws.partnercentralselling#ProspectingResultCustomer",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the prospected customer account, including geographic, industry, and segment classifications.</p>"
-                    }
-                },
-                "Insights": {
-                    "target": "com.amazonaws.partnercentralselling#ProspectingInsights",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Insights that AI generates from the prospecting analysis. These insights include engagement scores and solution fit assessments for the prospected customer.</p>"
                     }
                 }
             },

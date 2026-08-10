@@ -59,7 +59,7 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 				StatusCode: 200,
 				Body:       asReadCloser(""),
 			},
-			expectedError: "received empty response payload",
+			expectedError: "",
 		},
 		"200InvalidResponse": {
 			response: &http.Response{

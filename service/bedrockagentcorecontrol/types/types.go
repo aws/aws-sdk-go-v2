@@ -186,6 +186,28 @@ type AgentRuntimeEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about an agent runtime version associated with a capacity
+// provider. This is returned by ListAgentRuntimeVersionsByCapacityProvider .
+type AgentRuntimeVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the agent runtime.
+	//
+	// This member is required.
+	AgentRuntimeArn *string
+
+	// The version of the agent runtime.
+	//
+	// This member is required.
+	AgentRuntimeVersion *string
+
+	// The current status of the agent runtime version.
+	//
+	// This member is required.
+	Status AgentRuntimeStatus
+
+	noSmithyDocumentSerde
+}
+
 // The agent skills descriptor for a registry record. Contains an optional skill
 // markdown definition in human-readable format and an optional structured skill
 // definition.
@@ -470,6 +492,29 @@ type AuthorizingClaimMatchValueType struct {
 	noSmithyDocumentSerde
 }
 
+// A limit definition within a BatchPut request (rateLimitId used for upsert
+// matching)
+type BatchPutLimitEntry struct {
+
+	// Ordered list of dimension key names defining the scope of a limit
+	//
+	// This member is required.
+	DimensionKeys []string
+
+	// List of rule entries within a limit
+	//
+	// This member is required.
+	Entries []LimitEntry
+
+	// Optional human-readable description for this limit.
+	Description *string
+
+	// Optional — if provided, used for upsert matching against existing limits.
+	RateLimitId *string
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration for using Amazon Bedrock models in evaluator assessments,
 //
 // including model selection and inference parameters.
@@ -634,6 +679,99 @@ type BrowserSummary struct {
 
 	// The name of the browser.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for customer-managed compute capacity for the AgentCore Runtime.
+// A capacity provider runs the AgentCore Runtime on the Instances compute type,
+// using Amazon Web Services managed compute in your account.
+type CapacityProviderConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the capacity provider to use for the
+	// AgentCore Runtime.
+	CapacityProviderArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a capacity provider, as returned by ListCapacityProviders . Each
+// summary includes the capacity provider identifier, Amazon Resource Name (ARN),
+// name, status, and last-updated timestamp.
+type CapacityProviderSummary struct {
+
+	// The Amazon Resource Name (ARN) of the capacity provider.
+	//
+	// This member is required.
+	CapacityProviderArn *string
+
+	// The unique identifier of the capacity provider.
+	//
+	// This member is required.
+	CapacityProviderId *string
+
+	// The timestamp when the capacity provider was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the capacity provider.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the capacity provider. For possible values, see
+	// CapacityProviderStatus .
+	//
+	// This member is required.
+	Status CapacityProviderStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a capacity provider volume mounted into the AgentCore
+// Runtime. This references a persistent volume by its logical name, as defined in
+// the capacity provider's list of volumes.
+type CapacityProviderVolumeConfiguration struct {
+
+	// The mount path for the capacity provider volume inside the AgentCore Runtime.
+	// The path must be under /mnt with exactly one subdirectory level (for example,
+	// /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
+
+	// The logical name of the capacity provider volume to mount. This name must match
+	// a volume that is defined in the capacity provider's list of volumes.
+	//
+	// This member is required.
+	VolumeName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Capacity Reservation targeting option for the instances.
+type CapacityReservationSpecification struct {
+
+	// The Capacity Reservation preference for the instances.
+	CapacityReservationPreference CapacityReservationPreference
+
+	// The target Capacity Reservation or Capacity Reservation group for the instances.
+	CapacityReservationTarget *CapacityReservationTarget
+
+	noSmithyDocumentSerde
+}
+
+// Information about the target Capacity Reservation or Capacity Reservation group
+// for the instances.
+type CapacityReservationTarget struct {
+
+	// The ID of the Capacity Reservation in which to run the instances.
+	CapacityReservationId *string
+
+	// The Amazon Resource Name (ARN) of the Capacity Reservation resource group in
+	// which to run the instances.
+	CapacityReservationResourceGroupArn *string
 
 	noSmithyDocumentSerde
 }
@@ -994,6 +1132,25 @@ type ComponentConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// The compute configuration for a capacity provider. This structure defines the
+// type and settings of the compute resources used to launch instances.
+//
+// The following types satisfy this interface:
+//
+//	ComputeConfigurationMemberEc2Configuration
+type ComputeConfiguration interface {
+	isComputeConfiguration()
+}
+
+// The Amazon EC2 compute configuration for the capacity provider.
+type ComputeConfigurationMemberEc2Configuration struct {
+	Value Ec2Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*ComputeConfigurationMemberEc2Configuration) isComputeConfiguration() {}
 
 // A condition that determines when a gateway rule applies. Conditions can match
 // on principals or request paths.
@@ -2008,6 +2165,79 @@ type Descriptors struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for an Amazon EBS-backed persistent volume. The service
+// creates persistent volumes when a session first launches, and the volumes
+// survive instance termination. The volumes persist until you delete the session.
+type EbsVolumeConfiguration struct {
+
+	// The logical name of the volume. Use this name to reference the volume when you
+	// mount it into an agent runtime.
+	//
+	// This member is required.
+	Name *string
+
+	// The size of the volume, in GiB.
+	//
+	// This member is required.
+	SizeGiB *int32
+
+	// Specifies whether to encrypt the volume. If true , the service encrypts the
+	// volume with the KMS key that you specify in kmsKeyId , or the default KMS key
+	// for Amazon EBS if you do not specify one. The default is true .
+	Encrypted *bool
+
+	// The number of IOPS to provision. Valid only for gp3 , io1 , and io2 volumes.
+	Iops *int32
+
+	// The identifier of the KMS key to use for encryption.
+	KmsKeyId *string
+
+	// An optional Amazon EBS snapshot ID. If provided, the volume is initialized from
+	// this snapshot the first time it is created. On subsequent restarts, the existing
+	// volume is used and the snapshot is ignored.
+	SnapshotId *string
+
+	// The throughput, in MiB/s. Valid only for gp3 volumes.
+	Throughput *int32
+
+	// The Amazon EBS volume type. If you do not specify a type, the default is gp3 .
+	VolumeType EbsVolumeType
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for Amazon EC2-based compute, including the launch template
+// source, networking, storage volumes, and instance lifecycle settings.
+type Ec2Configuration struct {
+
+	// The source of the launch template configuration that defines how instances are
+	// launched.
+	//
+	// This member is required.
+	LaunchTemplateSource LaunchTemplateSource
+
+	// The VPC configuration for launching instances, including subnets and security
+	// groups.
+	//
+	// This member is required.
+	VpcConfiguration *VpcConfiguration
+
+	// The lifecycle configuration for instances in the capacity provider.
+	LifecycleConfiguration *InstanceLifecycleConfiguration
+
+	// The configuration for the instance root volume. Specify the amount of free
+	// space to guarantee and, optionally, the Amazon EBS performance and encryption
+	// settings. The device name and delete-on-termination behavior are not
+	// configurable.
+	RootVolume *RootVolumeConfiguration
+
+	// The named persistent Amazon EBS volumes for the capacity provider. A capacity
+	// provider can define up to five volumes.
+	Volumes []VolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for an Amazon EFS access point filesystem mounted into the
 // AgentCore Runtime. EFS access points provide shared file storage accessible from
 // your AgentCore Runtime sessions.
@@ -2049,6 +2279,72 @@ type EfsConfiguration struct {
 	//
 	// This member is required.
 	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
+// A block device mapping for an instance store (ephemeral) volume.
+type EphemeralBlockDeviceMapping struct {
+
+	// The device name, for example /dev/sdh or xvdh .
+	DeviceName *string
+
+	// The shared Amazon EBS performance and encryption properties for a volume. These
+	// properties are common across the different volume configurations for a capacity
+	// provider.
+	Ebs *EphemeralEBSVolumeConfiguration
+
+	// The virtual device name ( ephemeralN ). Instance store volumes are numbered
+	// starting from 0. The number of available instance store volumes depends on the
+	// instance type. After you connect to the instance, you must mount the volume.
+	VirtualName *string
+
+	noSmithyDocumentSerde
+}
+
+// The shared Amazon EBS performance and encryption properties for a volume. These
+// properties are common across the different volume configurations for a capacity
+// provider.
+type EphemeralEBSVolumeConfiguration struct {
+
+	// The index of the Amazon EBS card. Applies to instances with multiple Amazon EBS
+	// cards.
+	EbsCardIndex *int32
+
+	// Specifies whether to encrypt the volume. Encrypted volumes can be attached only
+	// to instances that support Amazon EBS encryption. If you create a volume from a
+	// snapshot, you cannot specify an encryption value.
+	Encrypted *bool
+
+	// The number of IOPS to provision. For gp3 , io1 , and io2 volumes, this is the
+	// number of IOPS provisioned for the volume. For gp2 volumes, this sets the
+	// baseline IOPS performance. It also controls the rate at which the volume
+	// accumulates I/O credits for bursting. Supported values: gp3 , 3,000–80,000; io1
+	// , 100–64,000; io2 , 100–256,000.
+	Iops *int32
+
+	// The identifier (key ID, key alias, key ARN, or alias ARN) of the customer
+	// managed KMS key to use for Amazon EBS encryption.
+	KmsKeyId *string
+
+	// The ID of the snapshot.
+	SnapshotId *string
+
+	// The throughput to provision, in MiB/s. Valid only for gp3 volumes. Valid range:
+	// 125–2,000 MiB/s.
+	Throughput *int32
+
+	// The rate at which the volume is initialized after creation, in MiB/s. Supported
+	// only for volumes created from snapshots. Valid range: 100–300 MiB/s.
+	VolumeInitializationRate *int32
+
+	// The size of the volume, in GiB. You must specify either a snapshot ID or a
+	// volume size. Supported sizes: gp2 , 1–16,384; gp3 , 1–65,536; io1 , 4–16,384;
+	// io2 , 4–65,536.
+	VolumeSize *int32
+
+	// The Amazon EBS volume type. If you do not specify a type, the default is gp3 .
+	VolumeType EbsVolumeType
 
 	noSmithyDocumentSerde
 }
@@ -2458,12 +2754,24 @@ func (*ExtractionConfigurationMemberCustomExtractionConfiguration) isExtractionC
 //
 // The following types satisfy this interface:
 //
+//	FilesystemConfigurationMemberCapacityProviderVolume
 //	FilesystemConfigurationMemberEfsAccessPoint
 //	FilesystemConfigurationMemberS3FilesAccessPoint
 //	FilesystemConfigurationMemberSessionStorage
 type FilesystemConfiguration interface {
 	isFilesystemConfiguration()
 }
+
+// Configuration for a capacity provider volume to mount into the AgentCore
+// Runtime. This mounts a persistent volume that is defined on the capacity
+// provider, referenced by its logical name.
+type FilesystemConfigurationMemberCapacityProviderVolume struct {
+	Value CapacityProviderVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberCapacityProviderVolume) isFilesystemConfiguration() {}
 
 // Configuration for an Amazon EFS access point to mount into the AgentCore
 // Runtime.
@@ -2699,6 +3007,51 @@ type GatewayProtocolConfigurationMemberMcp struct {
 }
 
 func (*GatewayProtocolConfigurationMemberMcp) isGatewayProtocolConfiguration() {}
+
+// Shared fields for GatewayRateLimit responses
+type GatewayRateLimitDetail struct {
+
+	// The timestamp when the rate limit was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Ordered list of dimension key names defining the scope of a limit
+	//
+	// This member is required.
+	DimensionKeys []string
+
+	// List of rule entries within a limit
+	//
+	// This member is required.
+	Entries []LimitEntry
+
+	// The unique identifier of the gateway.
+	//
+	// This member is required.
+	GatewayIdentifier *string
+
+	// Limit identifier. Optional on Create (system-generates if not provided by
+	// customer). Always present in responses.
+	//
+	// This member is required.
+	RateLimitId *string
+
+	// Status of a gateway limit
+	//
+	// This member is required.
+	Status GatewayRateLimitStatus
+
+	// The timestamp when the rate limit was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Optional human-readable description for this limit.
+	Description *string
+
+	noSmithyDocumentSerde
+}
 
 // Detailed information about a gateway rule.
 type GatewayRuleDetail struct {
@@ -3959,12 +4312,40 @@ type HttpApiSchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The source identifying the HTTP connector integration.
+type HttpConnectorSource struct {
+
+	// The identifier for the HTTP connector integration.
+	//
+	// This member is required.
+	ConnectorId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an HTTP connector target. Use this configuration when you
+// want to route HTTP requests through a managed connector.
+type HttpConnectorTargetConfiguration struct {
+
+	// The source configuration identifying which HTTP connector to use.
+	//
+	// This member is required.
+	Source *HttpConnectorSource
+
+	// The resource parameters for this connector (for example, memoryId ). The service
+	// validates these parameters against the request path at runtime.
+	Parameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The HTTP target configuration for a gateway target. Contains the configuration
 // for HTTP-based target endpoints.
 //
 // The following types satisfy this interface:
 //
 //	HttpTargetConfigurationMemberAgentcoreRuntime
+//	HttpTargetConfigurationMemberConnector
 //	HttpTargetConfigurationMemberPassthrough
 type HttpTargetConfiguration interface {
 	isHttpTargetConfiguration()
@@ -3979,6 +4360,16 @@ type HttpTargetConfigurationMemberAgentcoreRuntime struct {
 }
 
 func (*HttpTargetConfigurationMemberAgentcoreRuntime) isHttpTargetConfiguration() {}
+
+// The connector-based configuration for the HTTP target. Use this configuration
+// when you want to route HTTP requests through a managed connector.
+type HttpTargetConfigurationMemberConnector struct {
+	Value HttpConnectorTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HttpTargetConfigurationMemberConnector) isHttpTargetConfiguration() {}
 
 // The passthrough configuration for the HTTP target. A passthrough target
 // forwards requests directly to an external HTTP endpoint.
@@ -4248,6 +4639,34 @@ type Insight struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that manages the lifecycle of instances in a capacity
+// provider, including idle timeout and maximum lifetime.
+type InstanceLifecycleConfiguration struct {
+
+	// The number of seconds an instance can remain idle before it is stopped. An
+	// instance is considered idle when all of its agents are idle. The default is 900
+	// seconds (15 minutes).
+	IdleInstanceTimeout *int32
+
+	// The maximum lifetime of an instance, in seconds. When an instance reaches this
+	// limit, the service terminates it regardless of activity. The default is 28800
+	// seconds (8 hours). The maximum is 1209600 seconds (14 days).
+	MaxLifetime *int32
+
+	noSmithyDocumentSerde
+}
+
+// The requirements for Amazon EC2 instance types in a capacity provider.
+type InstanceRequirements struct {
+
+	// The list of allowed instance types. You can specify up to 30 instance types.
+	//
+	// This member is required.
+	AllowedInstanceTypes []string
+
+	noSmithyDocumentSerde
+}
+
 // The interceptor configuration.
 //
 // The following types satisfy this interface:
@@ -4427,6 +4846,78 @@ type LambdaTransformConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters for launching Amazon EC2 instances in a capacity provider.
+type LaunchParameters struct {
+
+	// The requirements that determine which instance types can be launched.
+	//
+	// This member is required.
+	InstanceRequirements *InstanceRequirements
+
+	// The operating system and CPU architecture for the instances.
+	//
+	// This member is required.
+	OperatingSystem OperatingSystem
+
+	// The Capacity Reservation targeting option for the instances.
+	CapacityReservationSpecification *CapacityReservationSpecification
+
+	// The block device mappings for instance store (ephemeral) volumes. You can
+	// specify up to five mappings.
+	EphemeralVolumes []EphemeralBlockDeviceMapping
+
+	// The Amazon Resource Name (ARN) of the IAM instance profile to associate with
+	// launched instances. If provided, this overrides the default instance profile.
+	InstanceProfileArn *string
+
+	// The license configurations to associate with the instances. You can specify up
+	// to five configurations.
+	LicenseSpecifications []LicenseSpecification
+
+	// The monitoring level for the instances.
+	Monitoring Monitoring
+
+	// The tags to propagate to all Amazon EC2 resources (instances, volumes, and
+	// network interfaces) that the capacity provider creates.
+	PropagatedTags map[string]string
+
+	// The name of the SSH key pair to configure on the instances for SSH connectivity.
+	SshKeyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of the launch template configuration for a capacity provider. The
+// launchParameters member specifies the operating system, instance requirements,
+// and other settings used to launch instances.
+//
+// The following types satisfy this interface:
+//
+//	LaunchTemplateSourceMemberLaunchParameters
+type LaunchTemplateSource interface {
+	isLaunchTemplateSource()
+}
+
+// The parameters that AgentCore uses to create the launch template.
+type LaunchTemplateSourceMemberLaunchParameters struct {
+	Value LaunchParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*LaunchTemplateSourceMemberLaunchParameters) isLaunchTemplateSource() {}
+
+// A license configuration to associate with the instances.
+type LicenseSpecification struct {
+
+	// The Amazon Resource Name (ARN) of the license configuration.
+	//
+	// This member is required.
+	LicenseConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
 // LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
 // resources in AgentCore Runtime. This configuration helps optimize resource
 // utilization by automatically cleaning up idle sessions and preventing
@@ -4441,6 +4932,30 @@ type LifecycleConfiguration struct {
 	// Maximum lifetime for the instance in seconds. Once reached, instances will be
 	// automatically terminated and replaced. Default: 28800 seconds (8 hours).
 	MaxLifetime *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single rule entry within a limit, mapping dimension values to rate
+// configurations
+type LimitEntry struct {
+
+	// Map of dimension name to dimension value, matching the parent limit's
+	// dimensionKeys. Keys must exactly match the dimensionKeys. Values may be "" as a
+	// wildcard. "" may only appear at trailing positions (based on dimensionKeys
+	// ordering).
+	//
+	// This member is required.
+	Dimensions map[string]string
+
+	// Connection rate limits (per second only). Limited to 1 entry for now. — P2
+	Connections []RateConfig
+
+	// Request rate limits (RPS or RPM). Limited to 1 entry for now.
+	Requests []RateConfig
+
+	// Token rate limits (TPM). Limited to 1 entry for now. — P1
+	Tokens []RateConfig
 
 	noSmithyDocumentSerde
 }
@@ -6056,6 +6571,22 @@ type PaymentProviderConfigurationOutputMemberStripePrivyConfiguration struct {
 func (*PaymentProviderConfigurationOutputMemberStripePrivyConfiguration) isPaymentProviderConfigurationOutput() {
 }
 
+// The permissions configuration for a capacity provider. This specifies the IAM
+// role that AgentCore uses to manage the Amazon EC2 instances for the capacity
+// provider on your behalf.
+type PermissionsConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that AgentCore assumes to manage
+	// the capacity provider, including launching, tagging, and terminating instances
+	// and their network interfaces. We recommend scoping this role to the minimum
+	// permissions that your workloads require.
+	//
+	// This member is required.
+	CapacityProviderOperatorRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a complete policy resource within the AgentCore Policy system.
 // Policies are ARN-able resources that contain Cedar policy statements and
 // associated metadata for controlling agent behavior and access decisions. Each
@@ -6657,6 +7188,25 @@ type ProviderPrefix struct {
 	noSmithyDocumentSerde
 }
 
+// Rate configuration for a metric (requests or tokens)
+type RateConfig struct {
+
+	// Time period for rate limiting
+	//
+	// This member is required.
+	Period Period
+
+	// The rate value for the limit. For request limits, this is the number of
+	// requests allowed per period. For token limits, this is the number of tokens
+	// allowed per period. For connection limits, this is the number of concurrent
+	// connections allowed.
+	//
+	// This member is required.
+	Rate *float64
+
+	noSmithyDocumentSerde
+}
+
 //	The rating scale that defines how evaluators should score agent performance,
 //
 // supporting both numerical and categorical scales.
@@ -7009,6 +7559,41 @@ type ResourceLocationMemberS3 struct {
 }
 
 func (*ResourceLocationMemberS3) isResourceLocation() {}
+
+// The configuration for the root volume of a capacity provider instance. Specify
+// the amount of free space to guarantee on the root volume. The device name and
+// delete-on-termination settings are fixed and cannot be changed.
+type RootVolumeConfiguration struct {
+
+	// Specifies whether to encrypt the volume. Encrypted volumes can be attached only
+	// to instances that support Amazon EBS encryption. If you create a volume from a
+	// snapshot, you cannot specify an encryption value.
+	Encrypted *bool
+
+	// The free space guaranteed on the root volume, in GiB. AgentCore adds the
+	// operating system overhead on top of this value. The default is 8 GiB.
+	FreeSpaceGiB *int32
+
+	// The number of IOPS to provision. For gp3 , io1 , and io2 volumes, this is the
+	// number of IOPS provisioned for the volume. For gp2 volumes, this sets the
+	// baseline IOPS performance. It also controls the rate at which the volume
+	// accumulates I/O credits for bursting. Supported values: gp3 , 3,000–80,000; io1
+	// , 100–64,000; io2 , 100–256,000.
+	Iops *int32
+
+	// The identifier (key ID, key alias, key ARN, or alias ARN) of the customer
+	// managed KMS key to use for Amazon EBS encryption.
+	KmsKeyId *string
+
+	// The throughput to provision, in MiB/s. Valid only for gp3 volumes. Valid range:
+	// 125–2,000 MiB/s.
+	Throughput *int32
+
+	// The Amazon EBS volume type. If you do not specify a type, the default is gp3 .
+	VolumeType EbsVolumeType
+
+	noSmithyDocumentSerde
+}
 
 // An action that routes requests to a gateway target, either statically or with
 // weighted traffic splitting.
@@ -8725,6 +9310,26 @@ type VersionLineageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a persistent volume attached to a capacity provider. This
+// structure defines the storage backing for the persistent volumes used by agents
+// that run on capacity provider instances.
+//
+// The following types satisfy this interface:
+//
+//	VolumeConfigurationMemberEbsConfiguration
+type VolumeConfiguration interface {
+	isVolumeConfiguration()
+}
+
+// The configuration for an Amazon EBS-backed persistent volume.
+type VolumeConfigurationMemberEbsConfiguration struct {
+	Value EbsVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*VolumeConfigurationMemberEbsConfiguration) isVolumeConfiguration() {}
+
 // VpcConfig for the Agent.
 type VpcConfig struct {
 
@@ -8766,6 +9371,24 @@ type VpcConfig struct {
 	// agent runtimes. Passing this field in a CreateAgentRuntime request returns a
 	// ValidationException .
 	RequireServiceS3Endpoint *bool
+
+	noSmithyDocumentSerde
+}
+
+// The VPC configuration for launching Amazon EC2 instances.
+type VpcConfiguration struct {
+
+	// The IDs of the security groups to associate with the instances. You must
+	// specify at least one security group.
+	//
+	// This member is required.
+	SecurityGroups []string
+
+	// The IDs of the subnets in which to launch instances. You must specify at least
+	// one subnet.
+	//
+	// This member is required.
+	Subnets []string
 
 	noSmithyDocumentSerde
 }
@@ -8863,6 +9486,7 @@ func (*UnknownUnionMember) isCertificateLocation()                    {}
 func (*UnknownUnionMember) isClaimMatchValueType()                    {}
 func (*UnknownUnionMember) isCode()                                   {}
 func (*UnknownUnionMember) isCodeBasedEvaluatorConfig()               {}
+func (*UnknownUnionMember) isComputeConfiguration()                   {}
 func (*UnknownUnionMember) isCondition()                              {}
 func (*UnknownUnionMember) isConfigurationBundleAction()              {}
 func (*UnknownUnionMember) isConsolidationConfiguration()             {}
@@ -8900,6 +9524,7 @@ func (*UnknownUnionMember) isHttpTargetConfiguration()                {}
 func (*UnknownUnionMember) isInferenceTargetConfiguration()           {}
 func (*UnknownUnionMember) isInterceptorConfiguration()               {}
 func (*UnknownUnionMember) isInterceptorPayloadExclusionSelector()    {}
+func (*UnknownUnionMember) isLaunchTemplateSource()                   {}
 func (*UnknownUnionMember) isMatchPrincipalEntry()                    {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                 {}
 func (*UnknownUnionMember) isMcpToolSchemaConfiguration()             {}
@@ -8930,3 +9555,4 @@ func (*UnknownUnionMember) isToolsFileSystemConfiguration()           {}
 func (*UnknownUnionMember) isTriggerCondition()                       {}
 func (*UnknownUnionMember) isTriggerConditionInput()                  {}
 func (*UnknownUnionMember) isValidation()                             {}
+func (*UnknownUnionMember) isVolumeConfiguration()                    {}

@@ -5,7 +5,6 @@ package connect
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to confirm that the attached file has been uploaded using the
@@ -29,10 +28,11 @@ func (c *Client) CompleteAttachedFileUpload(ctx context.Context, params *Complet
 type CompleteAttachedFileUploadInput struct {
 
 	// The resource to which the attached file is (being) uploaded to. The supported
-	// resources are [Cases]and [Email].
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
@@ -70,9 +70,6 @@ func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middle
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -85,19 +82,10 @@ func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middle
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCompleteAttachedFileUploadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CompleteAttachedFileUpload"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

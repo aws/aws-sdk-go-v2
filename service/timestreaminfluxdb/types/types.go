@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Configuration for node modes in the DbCluster.
@@ -17,6 +18,105 @@ type ClusterConfiguration struct {
 
 	// The number of instances in the DbCluster which can only query.
 	QueryOnlyInstances *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for an automated backup schedule.
+type DbBackupConfiguration struct {
+
+	// Specifies whether this backup configuration is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The number of days to retain automated backups. Valid values are 1 to 365.
+	//
+	// This member is required.
+	RetentionDays *int32
+
+	// The type of automated backup schedule. Valid values are HOURLY, DAILY, WEEKLY,
+	// MONTHLY, CUSTOM_SCHEDULE, and CONTINUOUS.
+	//
+	// This member is required.
+	Type AutomatedDbBackupType
+
+	// A custom cron schedule expression for the backup. Required when type is
+	// CUSTOM_SCHEDULE.
+	CustomSchedule *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration and status for an automated backup schedule.
+type DbBackupConfigurationOutput struct {
+
+	// Indicates whether this backup configuration is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The number of days automated backups are retained.
+	//
+	// This member is required.
+	RetentionDays *int32
+
+	// The type of automated backup schedule.
+	//
+	// This member is required.
+	Type AutomatedDbBackupType
+
+	// The custom cron schedule expression for the backup, if applicable.
+	CustomSchedule *string
+
+	// The next scheduled time for an automated backup to be taken.
+	NextAutomatedBackupTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of a Timestream for InfluxDB backup.
+type DbBackupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the backup.
+	//
+	// This member is required.
+	Arn *string
+
+	// Service-generated unique identifier of the backup.
+	//
+	// This member is required.
+	Id *string
+
+	// The time when the backup was created.
+	CreatedAt *time.Time
+
+	// The identifier of the DB resource that the backup was created from.
+	DbResourceId *string
+
+	// The deployment type of the resource that the backup was created from.
+	DeploymentType ResourceDeploymentType
+
+	// The engine type of the resource that the backup was created from.
+	EngineType EngineType
+
+	// The date after which the backup will be automatically deleted.
+	ExpiresAfter *string
+
+	// The Amazon Web Services KMS key ARN used for encryption of the resource at the
+	// time of backup.
+	KmsKeyId *string
+
+	// The customer-provided name of the backup.
+	Name *string
+
+	// The status of the backup. Valid values are IN_PROGRESS, COMPLETED, FAILED,
+	// DELETING, and DELETED.
+	Status DbBackupStatus
+
+	// The type of backup. Valid values are HOURLY, DAILY, WEEKLY, MONTHLY,
+	// CUSTOM_SCHEDULE, ON_DEMAND, and CONTINUOUS.
+	Type DbBackupType
 
 	noSmithyDocumentSerde
 }
@@ -306,9 +406,9 @@ type InfluxDBv2Parameters struct {
 	// Default: 0
 	QueryInitialMemoryBytes *int64
 
-	// Maximum number of queries allowed in execution queue. When queue limit is
-	// reached, new queries are rejected. Setting to 0 allows an unlimited number of
-	// queries in the queue.
+	// Maximum total bytes of memory allowed for all running queries. When this limit
+	// is reached, new queries are rejected. Setting to 0 allows unlimited memory
+	// usage.
 	//
 	// Default: 0
 	QueryMaxMemoryBytes *int64

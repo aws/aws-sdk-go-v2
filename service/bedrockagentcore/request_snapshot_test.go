@@ -649,6 +649,34 @@ func TestCheckRequestSnapshot_DeleteBatchEvaluation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteCapacityProviderSession(t *testing.T) {
+	input := &DeleteCapacityProviderSessionInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		SessionId:          ptr.String("__SessionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCapacityProviderSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCapacityProviderSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteEvent(t *testing.T) {
 	input := &DeleteEventInput{
 		MemoryId:  ptr.String("__MemoryId__"),
@@ -3213,6 +3241,34 @@ func TestUpdateRequestSnapshot_DeleteBatchEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBatchEvaluation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteCapacityProviderSession(t *testing.T) {
+	input := &DeleteCapacityProviderSessionInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		SessionId:          ptr.String("__SessionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCapacityProviderSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCapacityProviderSession"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -14327,6 +14327,25 @@ func TestCheckResponseSnapshot_UpdateContactSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateContactTaskTemplate(t *testing.T) {
+	want := &UpdateContactTaskTemplateOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateContactTaskTemplate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateContactTaskTemplate(context.Background(), &UpdateContactTaskTemplateInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactTaskTemplate.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateDataTableAttribute(t *testing.T) {
 	want := &UpdateDataTableAttributeOutput{
 		Name: ptr.String("__Name__"),

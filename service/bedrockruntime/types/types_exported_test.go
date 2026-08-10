@@ -149,6 +149,12 @@ func ExampleContentBlock_outputUsage() {
 	case *types.ContentBlockMemberText:
 		_ = v.Value // Value is string
 
+	case *types.ContentBlockMemberToolAddition:
+		_ = v.Value // Value is types.ToolAdditionBlock
+
+	case *types.ContentBlockMemberToolRemoval:
+		_ = v.Value // Value is types.ToolRemovalBlock
+
 	case *types.ContentBlockMemberToolResult:
 		_ = v.Value // Value is types.ToolResultBlock
 
@@ -169,16 +175,18 @@ func ExampleContentBlock_outputUsage() {
 
 var _ *types.CitationsContentBlock
 var _ *types.SearchResultBlock
-var _ *types.DocumentBlock
 var _ *string
-var _ types.ReasoningContentBlock
 var _ *types.AudioBlock
-var _ *types.CachePointBlock
-var _ types.GuardrailConverseContentBlock
 var _ *types.ImageBlock
 var _ *types.ToolResultBlock
-var _ *types.VideoBlock
 var _ *types.ToolUseBlock
+var _ *types.ToolAdditionBlock
+var _ *types.ToolRemovalBlock
+var _ *types.DocumentBlock
+var _ types.ReasoningContentBlock
+var _ *types.CachePointBlock
+var _ types.GuardrailConverseContentBlock
+var _ *types.VideoBlock
 
 func ExampleContentBlockDelta_outputUsage() {
 	var union types.ContentBlockDelta

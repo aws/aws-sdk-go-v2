@@ -22,6 +22,31 @@ type AccountDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The free trial status of each Security Hub feature for an account.
+type AccountFreeTrialStatus struct {
+
+	// The Amazon Web Services account identifier that the free trial statuses apply
+	// to.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The date and time at which Security Hub evaluated the free trial statuses for
+	// this account. Every status in FreeTrialStatuses reflects this point in time.
+	//
+	// This member is required.
+	EvaluatedAt *time.Time
+
+	// An array of free trial statuses, one for each feature that has a free trial
+	// period for the account. The array is empty if the account has no free trial to
+	// report.
+	//
+	// This member is required.
+	FreeTrialStatuses []FreeTrialStatus
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about one of the following actions that affects or that was
 // taken on a resource:
 //
@@ -15656,6 +15681,45 @@ type FirewallPolicyStatelessRuleGroupReferencesDetails struct {
 
 	// The ARN of the stateless rule group.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The free trial period for a Security Hub feature, and whether the trial is
+// currently active.
+type FreeTrialStatus struct {
+
+	// The date and time at which the free trial period ends.
+	//
+	// This member is required.
+	ExpiresAt *time.Time
+
+	// The feature that the free trial period applies to. Valid values:
+	//
+	//   - SECURITY_HUB_V2 specifies Security Hub.
+	//
+	//   - SECURITY_HUB_V2_MULTI_CLOUD_AZURE specifies Security Hub coverage for
+	//   Microsoft Azure resources.
+	//
+	// This member is required.
+	FeatureType FreeTrialType
+
+	// The date and time at which the free trial period began.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// Whether the free trial period is currently active. Valid values:
+	//
+	//   - ACTIVE specifies that the free trial period is ongoing.
+	//
+	//   - INACTIVE specifies that the free trial period has ended, or that it never
+	//   started.
+	//
+	// To determine whether a trial has expired, compare ExpiresAt to the current time.
+	//
+	// This member is required.
+	Status FreeTrialStatusValue
 
 	noSmithyDocumentSerde
 }

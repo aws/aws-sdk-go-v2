@@ -1,7 +1,6 @@
-POST /service/AWSBCMPricingCalculator/operation/CreateWorkloadEstimate
+POST /
 
-Accept: application/cbor
-Content-Type: application/cbor
-Smithy-Protocol: rpc-v2-cbor
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.CreateWorkloadEstimate
 
-¤dnameh__Name__kclientTokeno__ClientToken__hrateTypepBEFORE_DISCOUNTSdtags¡dkey0i__Value__
+{"clientToken":"__ClientToken__","name":"__Name__","rateType":"BEFORE_DISCOUNTS","tags":{"key0":"__Value__"}}

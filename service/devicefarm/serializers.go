@@ -4965,6 +4965,17 @@ func awsAwsjson11_serializeDocumentExecutionConfiguration(v *types.ExecutionConf
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInsightsTypes(v []types.InsightsType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceLabels(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5148,6 +5159,13 @@ func awsAwsjson11_serializeDocumentScheduleRunConfiguration(v *types.ScheduleRun
 	if v.ExtraDataPackageArn != nil {
 		ok := object.Key("extraDataPackageArn")
 		ok.String(*v.ExtraDataPackageArn)
+	}
+
+	if v.InsightsTypes != nil {
+		ok := object.Key("insightsTypes")
+		if err := awsAwsjson11_serializeDocumentInsightsTypes(v.InsightsTypes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Locale != nil {

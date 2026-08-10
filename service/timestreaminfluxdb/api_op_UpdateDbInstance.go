@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -35,6 +34,9 @@ type UpdateDbInstanceInput struct {
 
 	// The amount of storage to allocate for your DB storage type (in gibibytes).
 	AllocatedStorage *int32
+
+	// A list of backup configurations to update for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfiguration
 
 	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
 	DbInstanceType types.DbInstanceType
@@ -101,6 +103,9 @@ type UpdateDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// The backup configurations for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
 
@@ -131,6 +136,9 @@ type UpdateDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -181,9 +189,6 @@ func (c *Client) addOperationUpdateDbInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -196,19 +201,10 @@ func (c *Client) addOperationUpdateDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateDbInstance"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

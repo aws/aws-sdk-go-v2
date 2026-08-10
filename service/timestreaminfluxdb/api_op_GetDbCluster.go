@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +58,9 @@ type GetDbClusterOutput struct {
 	// Configuration for node modes in the DbCluster.
 	ClusterConfiguration *types.ClusterConfiguration
 
+	// The backup configurations for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
@@ -86,6 +88,9 @@ type GetDbClusterOutput struct {
 	// key-value pair holding InfluxDB authorization values: organization, bucket,
 	// username, and password.
 	InfluxAuthParametersSecretArn *string
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB cluster.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB cluster.
 	LastMaintenanceTime *time.Time
@@ -140,9 +145,6 @@ func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -155,19 +157,10 @@ func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, op
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDbClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetDbCluster"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

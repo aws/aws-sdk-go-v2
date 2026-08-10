@@ -2854,33 +2854,6 @@ func awsAwsjson10_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentAddressSummary(v *types.AddressSummary, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.City != nil {
-		ok := object.Key("City")
-		ok.String(*v.City)
-	}
-
-	if len(v.CountryCode) > 0 {
-		ok := object.Key("CountryCode")
-		ok.String(string(v.CountryCode))
-	}
-
-	if v.PostalCode != nil {
-		ok := object.Key("PostalCode")
-		ok.String(*v.PostalCode)
-	}
-
-	if v.StateOrRegion != nil {
-		ok := object.Key("StateOrRegion")
-		ok.String(*v.StateOrRegion)
-	}
-
-	return nil
-}
-
 func awsAwsjson10_serializeDocumentApnPrograms(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3470,6 +3443,33 @@ func awsAwsjson10_serializeDocumentLastModifiedDate(v *types.LastModifiedDate, v
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentLeadAddress(v *types.LeadAddress, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.City != nil {
+		ok := object.Key("City")
+		ok.String(*v.City)
+	}
+
+	if v.CountryCode != nil {
+		ok := object.Key("CountryCode")
+		ok.String(*v.CountryCode)
+	}
+
+	if v.PostalCode != nil {
+		ok := object.Key("PostalCode")
+		ok.String(*v.PostalCode)
+	}
+
+	if v.StateOrRegion != nil {
+		ok := object.Key("StateOrRegion")
+		ok.String(*v.StateOrRegion)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentLeadContact(v *types.LeadContact, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3541,7 +3541,7 @@ func awsAwsjson10_serializeDocumentLeadCustomer(v *types.LeadCustomer, value smi
 
 	if v.Address != nil {
 		ok := object.Key("Address")
-		if err := awsAwsjson10_serializeDocumentAddressSummary(v.Address, ok); err != nil {
+		if err := awsAwsjson10_serializeDocumentLeadAddress(v.Address, ok); err != nil {
 			return err
 		}
 	}
@@ -3556,14 +3556,14 @@ func awsAwsjson10_serializeDocumentLeadCustomer(v *types.LeadCustomer, value smi
 		ok.String(*v.CompanyName)
 	}
 
-	if len(v.Industry) > 0 {
+	if v.Industry != nil {
 		ok := object.Key("Industry")
-		ok.String(string(v.Industry))
+		ok.String(*v.Industry)
 	}
 
-	if len(v.MarketSegment) > 0 {
+	if v.MarketSegment != nil {
 		ok := object.Key("MarketSegment")
-		ok.String(string(v.MarketSegment))
+		ok.String(*v.MarketSegment)
 	}
 
 	if v.WebsiteUrl != nil {
@@ -3662,19 +3662,19 @@ func awsAwsjson10_serializeDocumentLeadInvitationCustomer(v *types.LeadInvitatio
 		ok.String(*v.CompanyName)
 	}
 
-	if len(v.CountryCode) > 0 {
+	if v.CountryCode != nil {
 		ok := object.Key("CountryCode")
-		ok.String(string(v.CountryCode))
+		ok.String(*v.CountryCode)
 	}
 
-	if len(v.Industry) > 0 {
+	if v.Industry != nil {
 		ok := object.Key("Industry")
-		ok.String(string(v.Industry))
+		ok.String(*v.Industry)
 	}
 
-	if len(v.MarketSegment) > 0 {
+	if v.MarketSegment != nil {
 		ok := object.Key("MarketSegment")
-		ok.String(string(v.MarketSegment))
+		ok.String(*v.MarketSegment)
 	}
 
 	if v.WebsiteUrl != nil {

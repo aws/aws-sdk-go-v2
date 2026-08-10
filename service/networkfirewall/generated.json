@@ -89,6 +89,7 @@
         "api_op_UpdateProxyRule.go",
         "api_op_UpdateProxyRuleGroupPriorities.go",
         "api_op_UpdateProxyRulePriorities.go",
+        "api_op_UpdateProxySettings.go",
         "api_op_UpdateRuleGroup.go",
         "api_op_UpdateSubnetChangeProtection.go",
         "api_op_UpdateTLSInspectionConfiguration.go",

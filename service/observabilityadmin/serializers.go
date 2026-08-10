@@ -3844,6 +3844,11 @@ func awsRestjson1_serializeDocumentLogsEncryptionConfiguration(v *types.LogsEncr
 		ok.String(string(v.EncryptionConflictResolutionStrategy))
 	}
 
+	if len(v.EncryptionScope) > 0 {
+		ok := object.Key("EncryptionScope")
+		ok.String(string(v.EncryptionScope))
+	}
+
 	if len(v.EncryptionStrategy) > 0 {
 		ok := object.Key("EncryptionStrategy")
 		ok.String(string(v.EncryptionStrategy))
@@ -4084,6 +4089,11 @@ func awsRestjson1_serializeDocumentTelemetryDestinationConfiguration(v *types.Te
 		if err := awsRestjson1_serializeDocumentELBLoadBalancerLoggingParameters(v.ELBLoadBalancerLoggingParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if v.LogDeliveryParameters != nil {

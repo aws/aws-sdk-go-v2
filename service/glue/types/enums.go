@@ -1251,6 +1251,50 @@ func (ExistCondition) Values() []ExistCondition {
 	}
 }
 
+type ExportSetting string
+
+// Enum values for ExportSetting
+const (
+	ExportSettingEnabled  ExportSetting = "ENABLED"
+	ExportSettingDisabled ExportSetting = "DISABLED"
+)
+
+// Values returns all known values for ExportSetting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportSetting) Values() []ExportSetting {
+	return []ExportSetting{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ExportStatus string
+
+// Enum values for ExportStatus
+const (
+	ExportStatusEnabling  ExportStatus = "ENABLING"
+	ExportStatusEnabled   ExportStatus = "ENABLED"
+	ExportStatusDisabling ExportStatus = "DISABLING"
+	ExportStatusDisabled  ExportStatus = "DISABLED"
+	ExportStatusFailed    ExportStatus = "FAILED"
+)
+
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+		"FAILED",
+	}
+}
+
 type FederationSourceErrorCode string
 
 // Enum values for FederationSourceErrorCode

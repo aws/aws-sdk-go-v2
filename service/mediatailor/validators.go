@@ -1235,6 +1235,33 @@ func validateAvailMatchingCriteria(v *types.AvailMatchingCriteria) error {
 	}
 }
 
+func validateConcurrentExecutorConfiguration(v *types.ConcurrentExecutorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcurrentExecutorConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if v.Output == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Output"))
+	}
+	if v.FunctionList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionList"))
+	}
+	if v.TimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeoutMilliseconds"))
+	}
+	if v.MaxConcurrency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConcurrency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomOutputConfiguration(v *types.CustomOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -2157,6 +2184,11 @@ func validateOpPutFunctionInput(v *PutFunctionInput) error {
 	if v.CustomOutputConfiguration != nil {
 		if err := validateCustomOutputConfiguration(v.CustomOutputConfiguration); err != nil {
 			invalidParams.AddNested("CustomOutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConcurrentExecutorConfiguration != nil {
+		if err := validateConcurrentExecutorConfiguration(v.ConcurrentExecutorConfiguration); err != nil {
+			invalidParams.AddNested("ConcurrentExecutorConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SequentialExecutorConfiguration != nil {

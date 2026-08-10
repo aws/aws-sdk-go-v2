@@ -21,6 +21,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -182,6 +183,38 @@ func serdeNewClient() *Client {
 func serdeBodyEqual(got, expected []byte) bool {
 	return bytes.Equal(got, expected)
 }
+func TestCheckRequestSnapshot_CreateDbBackup(t *testing.T) {
+	input := &CreateDbBackupInput{
+		Name:          ptr.String("__Name__"),
+		DbResourceId:  ptr.String("__DbResourceId__"),
+		RetentionDays: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateDbCluster(t *testing.T) {
 	input := &CreateDbClusterInput{
 		Name:                       ptr.String("__Name__"),
@@ -216,6 +249,21 @@ func TestCheckRequestSnapshot_CreateDbCluster(t *testing.T) {
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
 		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -279,6 +327,21 @@ func TestCheckRequestSnapshot_CreateDbInstance(t *testing.T) {
 		},
 		Port:        ptr.Int32(1),
 		NetworkType: types.NetworkType("IPV4"),
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -396,9 +459,37 @@ func TestCheckRequestSnapshot_CreateDbParameterGroup(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteDbBackup(t *testing.T) {
+	input := &DeleteDbBackupInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteDbCluster(t *testing.T) {
 	input := &DeleteDbClusterInput{
-		DbClusterId: ptr.String("__DbClusterId__"),
+		DbClusterId:            ptr.String("__DbClusterId__"),
+		RetainAutomatedBackups: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -425,7 +516,8 @@ func TestCheckRequestSnapshot_DeleteDbCluster(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteDbInstance(t *testing.T) {
 	input := &DeleteDbInstanceInput{
-		Identifier: ptr.String("__Identifier__"),
+		Identifier:             ptr.String("__Identifier__"),
+		RetainAutomatedBackups: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -446,6 +538,33 @@ func TestCheckRequestSnapshot_DeleteDbInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDbInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDbBackup(t *testing.T) {
+	input := &GetDbBackupInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbBackup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -527,6 +646,35 @@ func TestCheckRequestSnapshot_GetDbParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbParameterGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDbBackups(t *testing.T) {
+	input := &ListDbBackupsInput{
+		DbResourceId: ptr.String("__DbResourceId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDbBackups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDbBackups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -729,6 +877,76 @@ func TestCheckRequestSnapshot_RebootDbInstance(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RestoreFromDbBackup(t *testing.T) {
+	input := &RestoreFromDbBackupInput{
+		Name:          ptr.String("__Name__"),
+		DbBackupId:    ptr.String("__DbBackupId__"),
+		RestoreToTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RestoreMode:   types.RestoreMode("NEW_RESOURCE"),
+		VpcSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				Enabled:    ptr.Bool(true),
+			},
+		},
+		MaintenanceSchedule: &types.MaintenanceSchedule{
+			Timezone:                   ptr.String("__Timezone__"),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Port:           ptr.Int32(1),
+		NetworkType:    types.NetworkType("IPV4"),
+		DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreFromDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreFromDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -807,6 +1025,20 @@ func TestCheckRequestSnapshot_UpdateDbCluster(t *testing.T) {
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
 		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -850,6 +1082,20 @@ func TestCheckRequestSnapshot_UpdateDbInstance(t *testing.T) {
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
 		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -873,6 +1119,38 @@ func TestCheckRequestSnapshot_UpdateDbInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_CreateDbBackup(t *testing.T) {
+	input := &CreateDbBackupInput{
+		Name:          ptr.String("__Name__"),
+		DbResourceId:  ptr.String("__DbResourceId__"),
+		RetentionDays: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateDbCluster(t *testing.T) {
 	input := &CreateDbClusterInput{
 		Name:                       ptr.String("__Name__"),
@@ -907,6 +1185,21 @@ func TestUpdateRequestSnapshot_CreateDbCluster(t *testing.T) {
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
 		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -970,6 +1263,21 @@ func TestUpdateRequestSnapshot_CreateDbInstance(t *testing.T) {
 		},
 		Port:        ptr.Int32(1),
 		NetworkType: types.NetworkType("IPV4"),
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1087,9 +1395,37 @@ func TestUpdateRequestSnapshot_CreateDbParameterGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteDbBackup(t *testing.T) {
+	input := &DeleteDbBackupInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteDbCluster(t *testing.T) {
 	input := &DeleteDbClusterInput{
-		DbClusterId: ptr.String("__DbClusterId__"),
+		DbClusterId:            ptr.String("__DbClusterId__"),
+		RetainAutomatedBackups: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1116,7 +1452,8 @@ func TestUpdateRequestSnapshot_DeleteDbCluster(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteDbInstance(t *testing.T) {
 	input := &DeleteDbInstanceInput{
-		Identifier: ptr.String("__Identifier__"),
+		Identifier:             ptr.String("__Identifier__"),
+		RetainAutomatedBackups: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1137,6 +1474,33 @@ func TestUpdateRequestSnapshot_DeleteDbInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDbInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDbBackup(t *testing.T) {
+	input := &GetDbBackupInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbBackup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1218,6 +1582,35 @@ func TestUpdateRequestSnapshot_GetDbParameterGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbParameterGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDbBackups(t *testing.T) {
+	input := &ListDbBackupsInput{
+		DbResourceId: ptr.String("__DbResourceId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDbBackups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDbBackups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1420,6 +1813,76 @@ func TestUpdateRequestSnapshot_RebootDbInstance(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_RestoreFromDbBackup(t *testing.T) {
+	input := &RestoreFromDbBackupInput{
+		Name:          ptr.String("__Name__"),
+		DbBackupId:    ptr.String("__DbBackupId__"),
+		RestoreToTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RestoreMode:   types.RestoreMode("NEW_RESOURCE"),
+		VpcSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
+			S3Configuration: &types.S3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				Enabled:    ptr.Bool(true),
+			},
+		},
+		MaintenanceSchedule: &types.MaintenanceSchedule{
+			Timezone:                   ptr.String("__Timezone__"),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Port:           ptr.Int32(1),
+		NetworkType:    types.NetworkType("IPV4"),
+		DeploymentType: types.ResourceDeploymentType("SINGLE_AZ"),
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreFromDbBackup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreFromDbBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1498,6 +1961,20 @@ func TestUpdateRequestSnapshot_UpdateDbCluster(t *testing.T) {
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
 		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1540,6 +2017,20 @@ func TestUpdateRequestSnapshot_UpdateDbInstance(t *testing.T) {
 		MaintenanceSchedule: &types.MaintenanceSchedule{
 			Timezone:                   ptr.String("__Timezone__"),
 			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		},
+		DbBackupConfigurations: []types.DbBackupConfiguration{
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
+			{
+				Type:           types.AutomatedDbBackupType("HOURLY"),
+				RetentionDays:  ptr.Int32(1),
+				Enabled:        ptr.Bool(true),
+				CustomSchedule: ptr.String("__CustomSchedule__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

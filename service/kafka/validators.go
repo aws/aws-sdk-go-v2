@@ -1513,6 +1513,33 @@ func validateApacheKafkaCluster(v *types.ApacheKafkaCluster) error {
 	}
 }
 
+func validateAuthorizerLogs(v *types.AuthorizerLogs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizerLogs"}
+	if v.CloudWatchLogs != nil {
+		if err := validateCloudWatchLogs(v.CloudWatchLogs); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Firehose != nil {
+		if err := validateFirehose(v.Firehose); err != nil {
+			invalidParams.AddNested("Firehose", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateS3(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeInfo) error {
 	if v == nil {
 		return nil
@@ -1978,6 +2005,11 @@ func validateLoggingInfo(v *types.LoggingInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LoggingInfo"}
+	if v.AuthorizerLogs != nil {
+		if err := validateAuthorizerLogs(v.AuthorizerLogs); err != nil {
+			invalidParams.AddNested("AuthorizerLogs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.BrokerLogs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerLogs"))
 	} else if v.BrokerLogs != nil {

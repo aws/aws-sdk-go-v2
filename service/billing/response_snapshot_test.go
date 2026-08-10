@@ -458,6 +458,212 @@ func TestCheckResponseSnapshot_GetCredits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetEnterpriseSupportChargeSummary(t *testing.T) {
+	want := &GetEnterpriseSupportChargeSummaryOutput{
+		PayerAccountId:                 ptr.String("__PayerAccountId__"),
+		BillingMonth:                   ptr.String("__BillingMonth__"),
+		BillingPeriodStartDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BillingPeriodEndDate:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IsEstimated:                    ptr.Bool(true),
+		BillDate:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SupportCharge:                  ptr.String("__SupportCharge__"),
+		TotalSupportCharge:             ptr.String("__TotalSupportCharge__"),
+		SupportDiscount:                ptr.String("__SupportDiscount__"),
+		TotalSupportEligibleSpend:      ptr.String("__TotalSupportEligibleSpend__"),
+		TotalSupportEligibleUsageSpend: ptr.String("__TotalSupportEligibleUsageSpend__"),
+		TotalSupportEligibleReservedInstanceSpend: ptr.String("__TotalSupportEligibleReservedInstanceSpend__"),
+		TotalSupportEligibleSavingsPlanSpend:      ptr.String("__TotalSupportEligibleSavingsPlanSpend__"),
+		SupportChargePercentage:                   ptr.String("__SupportChargePercentage__"),
+		SupportEffectivePricingPlan: &types.PricingPlan{
+			PricingPlanId:                  ptr.String("__PricingPlanId__"),
+			Name:                           ptr.String("__Name__"),
+			Description:                    ptr.String("__Description__"),
+			StartDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDate:                        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PlanDiscountPercent:            ptr.String("__PlanDiscountPercent__"),
+			DiscountAppliesToMinimumCharge: ptr.Bool(true),
+			MinimumCharge:                  ptr.String("__MinimumCharge__"),
+			Tiered:                         ptr.String("__Tiered__"),
+			Tiers: []types.PricingPlanTier{
+				{
+					TierMinimum:                            ptr.String("__TierMinimum__"),
+					TierMaximum:                            ptr.String("__TierMaximum__"),
+					BaseCharge:                             ptr.String("__BaseCharge__"),
+					AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+					AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+					Incremental:                            ptr.Bool(true),
+					Increment:                              ptr.String("__Increment__"),
+					IncrementCharge:                        ptr.String("__IncrementCharge__"),
+				},
+				{
+					TierMinimum:                            ptr.String("__TierMinimum__"),
+					TierMaximum:                            ptr.String("__TierMaximum__"),
+					BaseCharge:                             ptr.String("__BaseCharge__"),
+					AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+					AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+					Incremental:                            ptr.Bool(true),
+					Increment:                              ptr.String("__Increment__"),
+					IncrementCharge:                        ptr.String("__IncrementCharge__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEnterpriseSupportChargeSummary.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEnterpriseSupportChargeSummary(context.Background(), &GetEnterpriseSupportChargeSummaryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEnterpriseSupportChargeSummary.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetEnterpriseSupportContractDetails(t *testing.T) {
+	want := &GetEnterpriseSupportContractDetailsOutput{
+		IsContractActive:                             ptr.Bool(true),
+		SupportAllocationMethod:                      ptr.String("__SupportAllocationMethod__"),
+		SupportReservedInstanceAmortizationStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SupportReservedInstanceTreatmentMethod:       ptr.String("__SupportReservedInstanceTreatmentMethod__"),
+		SupportSavingsPlansAmortizationStartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SupportSavingsPlansTreatmentMethod:           ptr.String("__SupportSavingsPlansTreatmentMethod__"),
+		SupportProrateStartDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContractPayerAccountIds: []types.ContractAccount{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				IsGdn:     ptr.Bool(true),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				IsGdn:     ptr.Bool(true),
+			},
+		},
+		ChargedPayerAccountIds: []types.ChargeAccount{
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				ChargePercentage: ptr.String("__ChargePercentage__"),
+			},
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				ChargePercentage: ptr.String("__ChargePercentage__"),
+			},
+		},
+		AdditionalSupportCharge: []types.AdditionalCharge{
+			{
+				Description: ptr.String("__Description__"),
+				Amount:      ptr.String("__Amount__"),
+				ChargeType:  ptr.String("__ChargeType__"),
+			},
+			{
+				Description: ptr.String("__Description__"),
+				Amount:      ptr.String("__Amount__"),
+				ChargeType:  ptr.String("__ChargeType__"),
+			},
+		},
+		AdditionalSupportEligibleUsageSpend: []types.AdditionalCharge{
+			{
+				Description: ptr.String("__Description__"),
+				Amount:      ptr.String("__Amount__"),
+				ChargeType:  ptr.String("__ChargeType__"),
+			},
+			{
+				Description: ptr.String("__Description__"),
+				Amount:      ptr.String("__Amount__"),
+				ChargeType:  ptr.String("__ChargeType__"),
+			},
+		},
+		PricingPlans: []types.PricingPlan{
+			{
+				PricingPlanId:                  ptr.String("__PricingPlanId__"),
+				Name:                           ptr.String("__Name__"),
+				Description:                    ptr.String("__Description__"),
+				StartDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:                        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PlanDiscountPercent:            ptr.String("__PlanDiscountPercent__"),
+				DiscountAppliesToMinimumCharge: ptr.Bool(true),
+				MinimumCharge:                  ptr.String("__MinimumCharge__"),
+				Tiered:                         ptr.String("__Tiered__"),
+				Tiers: []types.PricingPlanTier{
+					{
+						TierMinimum:                            ptr.String("__TierMinimum__"),
+						TierMaximum:                            ptr.String("__TierMaximum__"),
+						BaseCharge:                             ptr.String("__BaseCharge__"),
+						AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+						AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+						Incremental:                            ptr.Bool(true),
+						Increment:                              ptr.String("__Increment__"),
+						IncrementCharge:                        ptr.String("__IncrementCharge__"),
+					},
+					{
+						TierMinimum:                            ptr.String("__TierMinimum__"),
+						TierMaximum:                            ptr.String("__TierMaximum__"),
+						BaseCharge:                             ptr.String("__BaseCharge__"),
+						AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+						AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+						Incremental:                            ptr.Bool(true),
+						Increment:                              ptr.String("__Increment__"),
+						IncrementCharge:                        ptr.String("__IncrementCharge__"),
+					},
+				},
+			},
+			{
+				PricingPlanId:                  ptr.String("__PricingPlanId__"),
+				Name:                           ptr.String("__Name__"),
+				Description:                    ptr.String("__Description__"),
+				StartDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:                        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PlanDiscountPercent:            ptr.String("__PlanDiscountPercent__"),
+				DiscountAppliesToMinimumCharge: ptr.Bool(true),
+				MinimumCharge:                  ptr.String("__MinimumCharge__"),
+				Tiered:                         ptr.String("__Tiered__"),
+				Tiers: []types.PricingPlanTier{
+					{
+						TierMinimum:                            ptr.String("__TierMinimum__"),
+						TierMaximum:                            ptr.String("__TierMaximum__"),
+						BaseCharge:                             ptr.String("__BaseCharge__"),
+						AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+						AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+						Incremental:                            ptr.Bool(true),
+						Increment:                              ptr.String("__Increment__"),
+						IncrementCharge:                        ptr.String("__IncrementCharge__"),
+					},
+					{
+						TierMinimum:                            ptr.String("__TierMinimum__"),
+						TierMaximum:                            ptr.String("__TierMaximum__"),
+						BaseCharge:                             ptr.String("__BaseCharge__"),
+						AdditionalPercentageOfAggregateCharges: ptr.String("__AdditionalPercentageOfAggregateCharges__"),
+						AggregateChargesAdjustment:             ptr.String("__AggregateChargesAdjustment__"),
+						Incremental:                            ptr.Bool(true),
+						Increment:                              ptr.String("__Increment__"),
+						IncrementCharge:                        ptr.String("__IncrementCharge__"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEnterpriseSupportContractDetails.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEnterpriseSupportContractDetails(context.Background(), &GetEnterpriseSupportContractDetailsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEnterpriseSupportContractDetails.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	want := &GetResourcePolicyOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -530,6 +736,111 @@ func TestCheckResponseSnapshot_ListBillingViews(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListBillingViews.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
+	want := &ListEnterpriseSupportLinkedAccountChargesOutput{
+		LinkedAccount: []types.LinkedAccountCharge{
+			{
+				AccountId:                         ptr.String("__AccountId__"),
+				PayerAccountId:                    ptr.String("__PayerAccountId__"),
+				AccountType:                       ptr.String("__AccountType__"),
+				BillableSeconds:                   ptr.Int64(1),
+				TotalSeconds:                      ptr.Int64(1),
+				TotalSupportEligibleSpend:         ptr.String("__TotalSupportEligibleSpend__"),
+				ProratedTotalSupportEligibleSpend: ptr.String("__ProratedTotalSupportEligibleSpend__"),
+				LinkedTimePeriods: []types.EnterpriseSupportTimePeriod{
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SubscriptionTimePeriods: []types.EnterpriseSupportTimePeriod{
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				TotalSupportEligibleReservedInstanceSpend: ptr.String("__TotalSupportEligibleReservedInstanceSpend__"),
+				TotalSupportEligibleSavingsPlanSpend:      ptr.String("__TotalSupportEligibleSavingsPlanSpend__"),
+				SupportEligibleSpendByService: []types.ServiceLevelAccountUsage{
+					{
+						ServiceCode:               ptr.String("__ServiceCode__"),
+						TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+					},
+					{
+						ServiceCode:               ptr.String("__ServiceCode__"),
+						TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+					},
+				},
+			},
+			{
+				AccountId:                         ptr.String("__AccountId__"),
+				PayerAccountId:                    ptr.String("__PayerAccountId__"),
+				AccountType:                       ptr.String("__AccountType__"),
+				BillableSeconds:                   ptr.Int64(1),
+				TotalSeconds:                      ptr.Int64(1),
+				TotalSupportEligibleSpend:         ptr.String("__TotalSupportEligibleSpend__"),
+				ProratedTotalSupportEligibleSpend: ptr.String("__ProratedTotalSupportEligibleSpend__"),
+				LinkedTimePeriods: []types.EnterpriseSupportTimePeriod{
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SubscriptionTimePeriods: []types.EnterpriseSupportTimePeriod{
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						BeginDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				TotalSupportEligibleReservedInstanceSpend: ptr.String("__TotalSupportEligibleReservedInstanceSpend__"),
+				TotalSupportEligibleSavingsPlanSpend:      ptr.String("__TotalSupportEligibleSavingsPlanSpend__"),
+				SupportEligibleSpendByService: []types.ServiceLevelAccountUsage{
+					{
+						ServiceCode:               ptr.String("__ServiceCode__"),
+						TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+					},
+					{
+						ServiceCode:               ptr.String("__ServiceCode__"),
+						TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEnterpriseSupportLinkedAccountCharges.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEnterpriseSupportLinkedAccountCharges(context.Background(), &ListEnterpriseSupportLinkedAccountChargesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEnterpriseSupportLinkedAccountCharges.response", err)
 	}
 }
 

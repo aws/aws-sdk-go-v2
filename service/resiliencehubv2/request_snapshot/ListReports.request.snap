@@ -1,3 +1,3 @@
-GET /v2/list-reports?maxResults=1&nextToken=__NextToken__&reportType=FAILURE_MODE&serviceArn=__ServiceArn__
+GET /v2/list-reports?maxResults=1&nextToken=__NextToken__&reportType=FAILURE_MODE&serviceArn=__ServiceArn__&testRunId=__TestRunId__
 
 

@@ -91,7 +91,6 @@
                     "items": "items"
                 },
                 "smithy.api#title": "AWS Billing and Cost Management Pricing Calculator",
-                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

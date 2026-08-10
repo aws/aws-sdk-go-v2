@@ -219,3 +219,69 @@ var _ *types.SystemUserJourneyDeletedMetadata
 var _ *types.SystemPolicyAssociatedMetadata
 var _ *types.SystemCreatedMetadata
 var _ *types.SystemUserJourneyCreatedMetadata
+
+func ExampleTestRunSourceSummary_outputUsage() {
+	var union types.TestRunSourceSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TestRunSourceSummaryMemberObservabilityAlarm:
+		_ = v.Value // Value is types.TestRunObservabilityAlarmSummary
+
+	case *types.TestRunSourceSummaryMemberSuccessCriteriaAlarm:
+		_ = v.Value // Value is types.TestRunSuccessCriteriaAlarmSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TestRunSuccessCriteriaAlarmSummary
+var _ *types.TestRunObservabilityAlarmSummary
+
+func ExampleTestSourceInput_outputUsage() {
+	var union types.TestSourceInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TestSourceInputMemberObservabilityAlarm:
+		_ = v.Value // Value is types.ObservabilityAlarmInput
+
+	case *types.TestSourceInputMemberSuccessCriteriaAlarm:
+		_ = v.Value // Value is types.SuccessCriteriaAlarmInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ObservabilityAlarmInput
+var _ *types.SuccessCriteriaAlarmInput
+
+func ExampleTestSourceSummary_outputUsage() {
+	var union types.TestSourceSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TestSourceSummaryMemberObservabilityAlarm:
+		_ = v.Value // Value is types.ObservabilityAlarmSummary
+
+	case *types.TestSourceSummaryMemberSuccessCriteriaAlarm:
+		_ = v.Value // Value is types.SuccessCriteriaAlarmSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ObservabilityAlarmSummary
+var _ *types.SuccessCriteriaAlarmSummary

@@ -308,30 +308,14 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 	want := &GetOfferOutput{
-		OfferId:             ptr.String("__OfferId__"),
-		Catalog:             ptr.String("__Catalog__"),
-		OfferName:           ptr.String("__OfferName__"),
-		AgreementProposalId: ptr.String("__AgreementProposalId__"),
-		ExpirationTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		AvailableFromTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OfferId:           ptr.String("__OfferId__"),
+		Catalog:           ptr.String("__Catalog__"),
+		OfferName:         ptr.String("__OfferName__"),
+		ExpirationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AvailableFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		SellerOfRecord: &types.SellerInformation{
 			SellerProfileId: ptr.String("__SellerProfileId__"),
 			DisplayName:     ptr.String("__DisplayName__"),
-		},
-		ReplacementAgreementId: ptr.String("__ReplacementAgreementId__"),
-		PricingModel: &types.PricingModel{
-			PricingModelType: types.PricingModelType("USAGE"),
-			DisplayName:      ptr.String("__DisplayName__"),
-		},
-		Badges: []types.PurchaseOptionBadge{
-			{
-				DisplayName: ptr.String("__DisplayName__"),
-				BadgeType:   types.PurchaseOptionBadgeType("PRIVATE_PRICING"),
-			},
-			{
-				DisplayName: ptr.String("__DisplayName__"),
-				BadgeType:   types.PurchaseOptionBadgeType("PRIVATE_PRICING"),
-			},
 		},
 		AssociatedEntities: []types.OfferAssociatedEntity{
 			{
@@ -367,6 +351,22 @@ func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 						DisplayName:     ptr.String("__DisplayName__"),
 					},
 				},
+			},
+		},
+		AgreementProposalId:    ptr.String("__AgreementProposalId__"),
+		ReplacementAgreementId: ptr.String("__ReplacementAgreementId__"),
+		PricingModel: &types.PricingModel{
+			PricingModelType: types.PricingModelType("USAGE"),
+			DisplayName:      ptr.String("__DisplayName__"),
+		},
+		Badges: []types.PurchaseOptionBadge{
+			{
+				DisplayName: ptr.String("__DisplayName__"),
+				BadgeType:   types.PurchaseOptionBadgeType("PRIVATE_PRICING"),
+			},
+			{
+				DisplayName: ptr.String("__DisplayName__"),
+				BadgeType:   types.PurchaseOptionBadgeType("PRIVATE_PRICING"),
 			},
 		},
 	}
@@ -502,16 +502,16 @@ func TestCheckResponseSnapshot_GetOfferTerms(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 	want := &GetProductOutput{
-		ProductId:        ptr.String("__ProductId__"),
-		Catalog:          ptr.String("__Catalog__"),
-		ProductName:      ptr.String("__ProductName__"),
-		DeployedOnAws:    types.DeployedOnAwsStatus("DEPLOYED"),
-		ShortDescription: ptr.String("__ShortDescription__"),
-		LongDescription:  ptr.String("__LongDescription__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Catalog:     ptr.String("__Catalog__"),
+		ProductName: ptr.String("__ProductName__"),
 		Manufacturer: &types.SellerInformation{
 			SellerProfileId: ptr.String("__SellerProfileId__"),
 			DisplayName:     ptr.String("__DisplayName__"),
 		},
+		DeployedOnAws:    types.DeployedOnAwsStatus("DEPLOYED"),
+		ShortDescription: ptr.String("__ShortDescription__"),
+		LongDescription:  ptr.String("__LongDescription__"),
 		LogoThumbnailUrl: ptr.String("__LogoThumbnailUrl__"),
 		FulfillmentOptionSummaries: []types.FulfillmentOptionSummary{
 			{
@@ -892,6 +892,16 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 					SellerProfileId: ptr.String("__SellerProfileId__"),
 					DisplayName:     ptr.String("__DisplayName__"),
 				},
+				FulfillmentOptionSummaries: []types.FulfillmentOptionSummary{
+					{
+						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
+						DisplayName:           ptr.String("__DisplayName__"),
+					},
+					{
+						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
+						DisplayName:           ptr.String("__DisplayName__"),
+					},
+				},
 				Catalog:          ptr.String("__Catalog__"),
 				ShortDescription: ptr.String("__ShortDescription__"),
 				LogoThumbnailUrl: ptr.String("__LogoThumbnailUrl__"),
@@ -903,16 +913,6 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 					{
 						CategoryId:  ptr.String("__CategoryId__"),
 						DisplayName: ptr.String("__DisplayName__"),
-					},
-				},
-				FulfillmentOptionSummaries: []types.FulfillmentOptionSummary{
-					{
-						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
-						DisplayName:           ptr.String("__DisplayName__"),
-					},
-					{
-						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
-						DisplayName:           ptr.String("__DisplayName__"),
 					},
 				},
 				Badges: []types.ListingBadge{
@@ -993,6 +993,16 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 					SellerProfileId: ptr.String("__SellerProfileId__"),
 					DisplayName:     ptr.String("__DisplayName__"),
 				},
+				FulfillmentOptionSummaries: []types.FulfillmentOptionSummary{
+					{
+						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
+						DisplayName:           ptr.String("__DisplayName__"),
+					},
+					{
+						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
+						DisplayName:           ptr.String("__DisplayName__"),
+					},
+				},
 				Catalog:          ptr.String("__Catalog__"),
 				ShortDescription: ptr.String("__ShortDescription__"),
 				LogoThumbnailUrl: ptr.String("__LogoThumbnailUrl__"),
@@ -1004,16 +1014,6 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 					{
 						CategoryId:  ptr.String("__CategoryId__"),
 						DisplayName: ptr.String("__DisplayName__"),
-					},
-				},
-				FulfillmentOptionSummaries: []types.FulfillmentOptionSummary{
-					{
-						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
-						DisplayName:           ptr.String("__DisplayName__"),
-					},
-					{
-						FulfillmentOptionType: types.FulfillmentOptionType("AMAZON_MACHINE_IMAGE"),
-						DisplayName:           ptr.String("__DisplayName__"),
 					},
 				},
 				Badges: []types.ListingBadge{

@@ -669,6 +669,11 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
+	if len(v.StreamNameOutputMode) > 0 {
+		ok := object.Key("StreamNameOutputMode")
+		ok.String(string(v.StreamNameOutputMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -2948,6 +2953,11 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 	if v.StartoverWindowSeconds != nil {
 		ok := object.Key("StartoverWindowSeconds")
 		ok.Integer(*v.StartoverWindowSeconds)
+	}
+
+	if len(v.StreamNameOutputMode) > 0 {
+		ok := object.Key("StreamNameOutputMode")
+		ok.String(string(v.StreamNameOutputMode))
 	}
 
 	if len(v.UriSeparator) > 0 {

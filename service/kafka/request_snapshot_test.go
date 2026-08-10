@@ -481,6 +481,21 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 		},
 		KafkaVersion: ptr.String("__KafkaVersion__"),
 		LoggingInfo: &types.LoggingInfo{
+			AuthorizerLogs: &types.AuthorizerLogs{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:  ptr.Bool(true),
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.Firehose{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        ptr.Bool(true),
+				},
+				S3: &types.S3{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: ptr.Bool(true),
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
 			BrokerLogs: &types.BrokerLogs{
 				CloudWatchLogs: &types.CloudWatchLogs{
 					Enabled:  ptr.Bool(true),
@@ -628,6 +643,21 @@ func TestCheckRequestSnapshot_CreateClusterV2(t *testing.T) {
 			},
 			KafkaVersion: ptr.String("__KafkaVersion__"),
 			LoggingInfo: &types.LoggingInfo{
+				AuthorizerLogs: &types.AuthorizerLogs{
+					CloudWatchLogs: &types.CloudWatchLogs{
+						Enabled:  ptr.Bool(true),
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					Firehose: &types.Firehose{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+						Enabled:        ptr.Bool(true),
+					},
+					S3: &types.S3{
+						Bucket:  ptr.String("__Bucket__"),
+						Enabled: ptr.Bool(true),
+						Prefix:  ptr.String("__Prefix__"),
+					},
+				},
 				BrokerLogs: &types.BrokerLogs{
 					CloudWatchLogs: &types.CloudWatchLogs{
 						Enabled:  ptr.Bool(true),
@@ -2460,6 +2490,21 @@ func TestCheckRequestSnapshot_UpdateMonitoring(t *testing.T) {
 			},
 		},
 		LoggingInfo: &types.LoggingInfo{
+			AuthorizerLogs: &types.AuthorizerLogs{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:  ptr.Bool(true),
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.Firehose{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        ptr.Bool(true),
+				},
+				S3: &types.S3{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: ptr.Bool(true),
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
 			BrokerLogs: &types.BrokerLogs{
 				CloudWatchLogs: &types.CloudWatchLogs{
 					Enabled:  ptr.Bool(true),
@@ -3024,6 +3069,21 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 		},
 		KafkaVersion: ptr.String("__KafkaVersion__"),
 		LoggingInfo: &types.LoggingInfo{
+			AuthorizerLogs: &types.AuthorizerLogs{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:  ptr.Bool(true),
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.Firehose{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        ptr.Bool(true),
+				},
+				S3: &types.S3{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: ptr.Bool(true),
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
 			BrokerLogs: &types.BrokerLogs{
 				CloudWatchLogs: &types.CloudWatchLogs{
 					Enabled:  ptr.Bool(true),
@@ -3171,6 +3231,21 @@ func TestUpdateRequestSnapshot_CreateClusterV2(t *testing.T) {
 			},
 			KafkaVersion: ptr.String("__KafkaVersion__"),
 			LoggingInfo: &types.LoggingInfo{
+				AuthorizerLogs: &types.AuthorizerLogs{
+					CloudWatchLogs: &types.CloudWatchLogs{
+						Enabled:  ptr.Bool(true),
+						LogGroup: ptr.String("__LogGroup__"),
+					},
+					Firehose: &types.Firehose{
+						DeliveryStream: ptr.String("__DeliveryStream__"),
+						Enabled:        ptr.Bool(true),
+					},
+					S3: &types.S3{
+						Bucket:  ptr.String("__Bucket__"),
+						Enabled: ptr.Bool(true),
+						Prefix:  ptr.String("__Prefix__"),
+					},
+				},
 				BrokerLogs: &types.BrokerLogs{
 					CloudWatchLogs: &types.CloudWatchLogs{
 						Enabled:  ptr.Bool(true),
@@ -5003,6 +5078,21 @@ func TestUpdateRequestSnapshot_UpdateMonitoring(t *testing.T) {
 			},
 		},
 		LoggingInfo: &types.LoggingInfo{
+			AuthorizerLogs: &types.AuthorizerLogs{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:  ptr.Bool(true),
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.Firehose{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        ptr.Bool(true),
+				},
+				S3: &types.S3{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: ptr.Bool(true),
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
 			BrokerLogs: &types.BrokerLogs{
 				CloudWatchLogs: &types.CloudWatchLogs{
 					Enabled:  ptr.Bool(true),

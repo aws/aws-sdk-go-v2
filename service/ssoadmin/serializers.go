@@ -7068,6 +7068,11 @@ func awsAwsjson11_serializeOpDocumentUpdateInstanceInput(v *UpdateInstanceInput,
 		ok.String(*v.Name)
 	}
 
+	if v.PermissionSetsEnabled != nil {
+		ok := object.Key("PermissionSetsEnabled")
+		ok.Boolean(*v.PermissionSetsEnabled)
+	}
+
 	return nil
 }
 

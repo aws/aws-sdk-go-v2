@@ -193,6 +193,34 @@ func (BrowserSessionStatus) Values() []BrowserSessionStatus {
 	}
 }
 
+type CapacityProviderSessionStatus string
+
+// Enum values for CapacityProviderSessionStatus
+const (
+	CapacityProviderSessionStatusProvisioning   CapacityProviderSessionStatus = "Provisioning"
+	CapacityProviderSessionStatusDeprovisioning CapacityProviderSessionStatus = "Deprovisioning"
+	CapacityProviderSessionStatusActive         CapacityProviderSessionStatus = "Active"
+	CapacityProviderSessionStatusDeleting       CapacityProviderSessionStatus = "Deleting"
+	CapacityProviderSessionStatusDeleted        CapacityProviderSessionStatus = "Deleted"
+	CapacityProviderSessionStatusStopped        CapacityProviderSessionStatus = "Stopped"
+)
+
+// Values returns all known values for CapacityProviderSessionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderSessionStatus) Values() []CapacityProviderSessionStatus {
+	return []CapacityProviderSessionStatus{
+		"Provisioning",
+		"Deprovisioning",
+		"Active",
+		"Deleting",
+		"Deleted",
+		"Stopped",
+	}
+}
+
 type CloudWatchLogsFilterOperator string
 
 // Enum values for CloudWatchLogsFilterOperator

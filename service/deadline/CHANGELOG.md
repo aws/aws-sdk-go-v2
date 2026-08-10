@@ -1,3 +1,13 @@
+# v1.36.0 (2026-08-05)
+
+* **Feature**: AWS Deadline Cloud now reports persistent volume costs alongside compute and license costs. Customers can view per-fleet storage costs in Usage Explorer by selecting the Usage Type grouping, helping them better understand the costs of their infrastructure.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.35.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

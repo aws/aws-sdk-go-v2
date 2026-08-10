@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
 	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) CborPutCompressedData(ctx context.Context, params *CborPutCompressedDataInput, optFns ...func(*Options)) (*CborPutCompressedDataOutput, error) {
@@ -47,9 +46,6 @@ func (c *Client) addOperationCborPutCompressedDataMiddlewares(stack *middleware.
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -62,12 +58,6 @@ func (c *Client) addOperationCborPutCompressedDataMiddlewares(stack *middleware.
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addIsRequestCompressionUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -78,9 +68,6 @@ func (c *Client) addOperationCborPutCompressedDataMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOperationCborPutCompressedDataRequestCompressionMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CborPutCompressedData"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -5,7 +5,6 @@ package organizations
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the organization. You can delete an organization only by using
@@ -14,7 +13,7 @@ import (
 //
 // When an organization is deleted, Organizations logs a membership event in
 // CloudTrail. The event is an AccountDepartedOrganization event with
-// departedMethod:Left and departedTime . This event is available only in the
+// departureMethod:LEFT and departureTime . This event is available only in the
 // management account's event history.
 func (c *Client) DeleteOrganization(ctx context.Context, params *DeleteOrganizationInput, optFns ...func(*Options)) (*DeleteOrganizationOutput, error) {
 	if params == nil {
@@ -52,9 +51,6 @@ func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Sta
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -67,16 +63,7 @@ func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteOrganization"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a function. A function defines reusable logic that
@@ -51,6 +50,11 @@ type PutFunctionInput struct {
 	// This member is required.
 	FunctionType types.FunctionType
 
+	// The configuration for a CONCURRENT_EXECUTOR function. Specifies the list of
+	// child functions to run in parallel, the maximum concurrency, an optional output
+	// block, and a timeout. Required when FunctionType is CONCURRENT_EXECUTOR .
+	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function. Specifies the runtime and
 	// output expressions. Required when FunctionType is CUSTOM_OUTPUT .
 	CustomOutputConfiguration *types.CustomOutputConfiguration
@@ -94,6 +98,9 @@ type PutFunctionOutput struct {
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
 
+	// The configuration for a CONCURRENT_EXECUTOR function.
+	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
+
 	// The configuration for a CUSTOM_OUTPUT function.
 	CustomOutputConfiguration *types.CustomOutputConfiguration
 
@@ -129,9 +136,6 @@ func (c *Client) addOperationPutFunctionMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -144,19 +148,10 @@ func (c *Client) addOperationPutFunctionMiddlewares(stack *middleware.Stack, opt
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutFunctionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "PutFunction"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

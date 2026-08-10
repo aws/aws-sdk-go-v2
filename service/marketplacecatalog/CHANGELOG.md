@@ -1,3 +1,13 @@
+# v1.44.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.0 (2026-07-31.2)
+
+* **Feature**: This release enhances the ListEntities API to support TargetAgreementId, TargetAgreementIntent, and CreatedBySource filters for the Offer entity type.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.43.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

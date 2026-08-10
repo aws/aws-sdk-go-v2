@@ -20900,6 +20900,31 @@ type ServerlessJobConfig struct {
 	//  The parameter-efficient fine-tuning configuration.
 	Peft Peft
 
+	//  The maximum sequence length, in tokens, that the customization job supports.
+	// SageMaker uses this value to select a training configuration for the base model
+	// that you specify. The parameter supports the following values:
+	//
+	//   - 1K
+	//
+	//   - 2K
+	//
+	//   - 4K
+	//
+	//   - 8K
+	//
+	//   - 16K
+	//
+	//   - 32K
+	//
+	//   - 64K
+	//
+	//   - 128K
+	//
+	// If you don't specify a value, SageMaker selects a training configuration based
+	// on the other values that you specify. The selection is not restricted to a
+	// particular sequence length.
+	SequenceLength *string
+
 	noSmithyDocumentSerde
 }
 

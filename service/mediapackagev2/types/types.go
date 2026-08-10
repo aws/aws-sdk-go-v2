@@ -1350,6 +1350,9 @@ type OriginEndpointListConfiguration struct {
 	// streaming option available from this endpoint.
 	MssManifests []ListMssManifestConfiguration
 
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode StreamNameOutputMode
+
 	// The separator character used in generated URIs for this origin endpoint.
 	UriSeparator UriSeparator
 

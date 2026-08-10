@@ -1,0 +1,27 @@
+200
+X-Boolean1: true
+X-Boolean2: true
+X-Booleanlist: true
+X-Booleanlist: true
+X-Byte: 1
+X-Double: 1
+X-Enum: Foo
+X-Enumlist: Foo
+X-Enumlist: Foo
+X-Float: 1
+X-Integer: 1
+X-Integerenum: 1
+X-Integerenumlist: 1
+X-Integerenumlist: 1
+X-Integerlist: 1
+X-Integerlist: 1
+X-Long: 1
+X-Short: 1
+X-String: __HeaderString__
+X-Stringlist: __Member__
+X-Stringlist: __Member__
+X-Stringset: __Member__
+X-Stringset: __Member__
+X-Timestamplist: Sat, 01 Jan 2000 00:00:00 GMT
+X-Timestamplist: Sat, 01 Jan 2000 00:00:00 GMT
+

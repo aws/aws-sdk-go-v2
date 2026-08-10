@@ -145,6 +145,28 @@ func TestCheckResponseSnapshot_CancelLegalHold(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateBackupAccessPoint(t *testing.T) {
+	want := &CreateBackupAccessPointOutput{
+		AccessPointArn: ptr.String("__AccessPointArn__"),
+		Status:         types.AccessPointStatus("AVAILABLE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateBackupAccessPoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateBackupAccessPoint(context.Background(), &CreateBackupAccessPointInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateBackupAccessPoint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateBackupPlan(t *testing.T) {
 	want := &CreateBackupPlanOutput{
 		BackupPlanId:  ptr.String("__BackupPlanId__"),
@@ -432,6 +454,25 @@ func TestCheckResponseSnapshot_CreateTieringConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteBackupAccessPoint(t *testing.T) {
+	want := &DeleteBackupAccessPointOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteBackupAccessPoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteBackupAccessPoint(context.Background(), &DeleteBackupAccessPointInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteBackupAccessPoint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteBackupPlan(t *testing.T) {
 	want := &DeleteBackupPlanOutput{
 		BackupPlanId:  ptr.String("__BackupPlanId__"),
@@ -662,6 +703,39 @@ func TestCheckResponseSnapshot_DeleteTieringConfiguration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTieringConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeBackupAccessPoint(t *testing.T) {
+	want := &DescribeBackupAccessPointOutput{
+		AccessPointArn: ptr.String("__AccessPointArn__"),
+		AccessPointMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+		BackupVaultName:  ptr.String("__BackupVaultName__"),
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:             ptr.String("__Name__"),
+		RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+		ResourceArn:      ptr.String("__ResourceArn__"),
+		ResourceType:     ptr.String("__ResourceType__"),
+		Status:           types.AccessPointStatus("AVAILABLE"),
+		StatusMessage:    ptr.String("__StatusMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeBackupAccessPoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeBackupAccessPoint(context.Background(), &DescribeBackupAccessPointInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeBackupAccessPoint.response", err)
 	}
 }
 
@@ -2425,6 +2499,165 @@ func TestCheckResponseSnapshot_GetTieringConfiguration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetTieringConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBackupAccessPoints(t *testing.T) {
+	want := &ListBackupAccessPointsOutput{
+		BackupAccessPoints: []types.ListAccessPointsMember{
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBackupAccessPoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBackupAccessPoints(context.Background(), &ListBackupAccessPointsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBackupAccessPoints.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBackupAccessPointsByRecoveryPoint(t *testing.T) {
+	want := &ListBackupAccessPointsByRecoveryPointOutput{
+		BackupAccessPoints: []types.ListAccessPointsMember{
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBackupAccessPointsByRecoveryPoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBackupAccessPointsByRecoveryPoint(context.Background(), &ListBackupAccessPointsByRecoveryPointInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBackupAccessPointsByRecoveryPoint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBackupAccessPointsByResource(t *testing.T) {
+	want := &ListBackupAccessPointsByResourceOutput{
+		BackupAccessPoints: []types.ListAccessPointsMember{
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+			{
+				AccessPointArn: ptr.String("__AccessPointArn__"),
+				AccessPointMetadata: map[string]string{
+					"key0": "__Value__",
+				},
+				BackupVaultArn:   ptr.String("__BackupVaultArn__"),
+				BackupVaultName:  ptr.String("__BackupVaultName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Name:             ptr.String("__Name__"),
+				RecoveryPointArn: ptr.String("__RecoveryPointArn__"),
+				ResourceArn:      ptr.String("__ResourceArn__"),
+				ResourceType:     ptr.String("__ResourceType__"),
+				Status:           types.AccessPointStatus("AVAILABLE"),
+				StatusMessage:    ptr.String("__StatusMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBackupAccessPointsByResource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBackupAccessPointsByResource(context.Background(), &ListBackupAccessPointsByResourceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBackupAccessPointsByResource.response", err)
 	}
 }
 
@@ -4673,7 +4906,7 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackupPlan(context.Background(), &CreateBackupPlanInput{})
+	_, opErr := svc.CreateBackupAccessPoint(context.Background(), &CreateBackupAccessPointInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4701,7 +4934,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRestoreTestingPlan(context.Background(), &CreateRestoreTestingPlanInput{})
+	_, opErr := svc.CreateBackupAccessPoint(context.Background(), &CreateBackupAccessPointInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4841,7 +5074,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackupPlan(context.Background(), &CreateBackupPlanInput{})
+	_, opErr := svc.CreateBackupAccessPoint(context.Background(), &CreateBackupAccessPointInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

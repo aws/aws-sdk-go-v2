@@ -8,10 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Container
+//	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Adds remote locations to an EC2 and begins populating the new locations with
 // instances. The new instances conform to the fleet's instance type, auto-scaling,
@@ -152,9 +151,6 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -167,12 +163,6 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -180,9 +170,6 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateFleetLocationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateFleetLocations"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

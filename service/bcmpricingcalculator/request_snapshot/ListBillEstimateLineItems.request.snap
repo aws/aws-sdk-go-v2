@@ -1,7 +1,6 @@
-POST /service/AWSBCMPricingCalculator/operation/ListBillEstimateLineItems
+POST /
 
-Accept: application/cbor
-Content-Type: application/cbor
-Smithy-Protocol: rpc-v2-cbor
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.ListBillEstimateLineItems
 
-¤gfilters‚£dnamepUSAGE_ACCOUNT_IDfvalues‚j__Member__j__Member__kmatchOptionfEQUALS£dnamepUSAGE_ACCOUNT_IDfvalues‚j__Member__j__Member__kmatchOptionfEQUALSinextTokenm__NextToken__jmaxResultsnbillEstimateIdr__BillEstimateId__
+{"billEstimateId":"__BillEstimateId__","filters":[{"matchOption":"EQUALS","name":"USAGE_ACCOUNT_ID","values":["__Member__","__Member__"]},{"matchOption":"EQUALS","name":"USAGE_ACCOUNT_ID","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

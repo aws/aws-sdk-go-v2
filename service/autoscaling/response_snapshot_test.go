@@ -937,6 +937,9 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 						TerminateHookAbandon: types.RetentionAction("retain"),
 					},
 				},
+				Operator: &types.Operator{
+					Principal: ptr.String("__Principal__"),
+				},
 			},
 			{
 				AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
@@ -1323,6 +1326,9 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 					RetentionTriggers: &types.RetentionTriggers{
 						TerminateHookAbandon: types.RetentionAction("retain"),
 					},
+				},
+				Operator: &types.Operator{
+					Principal: ptr.String("__Principal__"),
 				},
 			},
 		},

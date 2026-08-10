@@ -170,6 +170,26 @@ func (m *validateOpCreateSystem) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTest struct {
+}
+
+func (*validateOpCreateTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUserJourney struct {
 }
 
@@ -330,6 +350,46 @@ func (m *validateOpDeleteSystem) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTest struct {
+}
+
+func (*validateOpDeleteTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTestSources struct {
+}
+
+func (*validateOpDeleteTestSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTestSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTestSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTestSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteUserJourney struct {
 }
 
@@ -425,6 +485,66 @@ func (m *validateOpGetSystem) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTest struct {
+}
+
+func (*validateOpGetTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTestRun struct {
+}
+
+func (*validateOpGetTestRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTestRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTestRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTestRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTestTemplate struct {
+}
+
+func (*validateOpGetTestTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTestTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTestTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTestTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +690,26 @@ func (m *validateOpListInputSources) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResolvedTestRunTargetResources struct {
+}
+
+func (*validateOpListResolvedTestRunTargetResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResolvedTestRunTargetResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResolvedTestRunTargetResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResolvedTestRunTargetResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResources struct {
 }
 
@@ -690,6 +830,106 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTestRunEvents struct {
+}
+
+func (*validateOpListTestRunEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestRunEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestRunEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestRunEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTestRuns struct {
+}
+
+func (*validateOpListTestRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTestRunSources struct {
+}
+
+func (*validateOpListTestRunSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestRunSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestRunSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestRunSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTests struct {
+}
+
+func (*validateOpListTests) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTests) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTestSources struct {
+}
+
+func (*validateOpListTestSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTestSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTestSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTestSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUserJourneys struct {
 }
 
@@ -710,6 +950,26 @@ func (m *validateOpListUserJourneys) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTestSources struct {
+}
+
+func (*validateOpPutTestSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTestSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTestSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTestSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartFailureModeAssessment struct {
 }
 
@@ -725,6 +985,46 @@ func (m *validateOpStartFailureModeAssessment) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartFailureModeAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTestRun struct {
+}
+
+func (*validateOpStartTestRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTestRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTestRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTestRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopTestRun struct {
+}
+
+func (*validateOpStopTestRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTestRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTestRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTestRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -910,6 +1210,26 @@ func (m *validateOpUpdateSystem) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTest struct {
+}
+
+func (*validateOpUpdateTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserJourney struct {
 }
 
@@ -962,6 +1282,10 @@ func addOpCreateSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSystem{}, middleware.After)
 }
 
+func addOpCreateTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTest{}, middleware.After)
+}
+
 func addOpCreateUserJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserJourney{}, middleware.After)
 }
@@ -994,6 +1318,14 @@ func addOpDeleteSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSystem{}, middleware.After)
 }
 
+func addOpDeleteTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTest{}, middleware.After)
+}
+
+func addOpDeleteTestSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTestSources{}, middleware.After)
+}
+
 func addOpDeleteUserJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUserJourney{}, middleware.After)
 }
@@ -1012,6 +1344,18 @@ func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSystem{}, middleware.After)
+}
+
+func addOpGetTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTest{}, middleware.After)
+}
+
+func addOpGetTestRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTestRun{}, middleware.After)
+}
+
+func addOpGetTestTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTestTemplate{}, middleware.After)
 }
 
 func addOpGetUserJourneyValidationMiddleware(stack *middleware.Stack) error {
@@ -1042,6 +1386,10 @@ func addOpListInputSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInputSources{}, middleware.After)
 }
 
+func addOpListResolvedTestRunTargetResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResolvedTestRunTargetResources{}, middleware.After)
+}
+
 func addOpListResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResources{}, middleware.After)
 }
@@ -1066,12 +1414,44 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListTestRunEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestRunEvents{}, middleware.After)
+}
+
+func addOpListTestRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestRuns{}, middleware.After)
+}
+
+func addOpListTestRunSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestRunSources{}, middleware.After)
+}
+
+func addOpListTestsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTests{}, middleware.After)
+}
+
+func addOpListTestSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTestSources{}, middleware.After)
+}
+
 func addOpListUserJourneysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserJourneys{}, middleware.After)
 }
 
+func addOpPutTestSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTestSources{}, middleware.After)
+}
+
 func addOpStartFailureModeAssessmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFailureModeAssessment{}, middleware.After)
+}
+
+func addOpStartTestRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTestRun{}, middleware.After)
+}
+
+func addOpStopTestRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTestRun{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1108,6 +1488,10 @@ func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSystem{}, middleware.After)
+}
+
+func addOpUpdateTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTest{}, middleware.After)
 }
 
 func addOpUpdateUserJourneyValidationMiddleware(stack *middleware.Stack) error {
@@ -1188,6 +1572,21 @@ func validateEksSource(v *types.EksSource) error {
 	}
 	if v.Namespaces == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespaces"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObservabilityAlarmInput(v *types.ObservabilityAlarmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObservabilityAlarmInput"}
+	if v.AlarmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1339,6 +1738,97 @@ func validateServiceReportConfiguration(v *types.ServiceReportConfiguration) err
 	} else if v.ReportOutputs != nil {
 		if err := validateReportOutputConfigurationList(v.ReportOutputs); err != nil {
 			invalidParams.AddNested("ReportOutputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStopCondition(v *types.StopCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCondition"}
+	if len(v.Source) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStopConditionList(v []types.StopCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopConditionList"}
+	for i := range v {
+		if err := validateStopCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuccessCriteriaAlarmInput(v *types.SuccessCriteriaAlarmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuccessCriteriaAlarmInput"}
+	if v.AlarmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTestSourceInput(v types.TestSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestSourceInput"}
+	switch uv := v.(type) {
+	case *types.TestSourceInputMemberObservabilityAlarm:
+		if err := validateObservabilityAlarmInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[observabilityAlarm]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TestSourceInputMemberSuccessCriteriaAlarm:
+		if err := validateSuccessCriteriaAlarmInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[successCriteriaAlarm]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTestSourceInputList(v []types.TestSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestSourceInputList"}
+	for i := range v {
+		if err := validateTestSourceInput(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1513,6 +2003,29 @@ func validateOpCreateSystemInput(v *CreateSystemInput) error {
 	}
 }
 
+func validateOpCreateTestInput(v *CreateTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTestInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if v.TestTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestTemplateArn"))
+	}
+	if v.StopConditions != nil {
+		if err := validateStopConditionList(v.StopConditions); err != nil {
+			invalidParams.AddNested("StopConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUserJourneyInput(v *CreateUserJourneyInput) error {
 	if v == nil {
 		return nil
@@ -1651,6 +2164,49 @@ func validateOpDeleteSystemInput(v *DeleteSystemInput) error {
 	}
 }
 
+func validateOpDeleteTestInput(v *DeleteTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTestInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTestSourcesInput(v *DeleteTestSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTestSourcesInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if v.TestSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestSources"))
+	} else if v.TestSources != nil {
+		if err := validateTestSourceInputList(v.TestSources); err != nil {
+			invalidParams.AddNested("TestSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUserJourneyInput(v *DeleteUserJourneyInput) error {
 	if v == nil {
 		return nil
@@ -1724,6 +2280,57 @@ func validateOpGetSystemInput(v *GetSystemInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSystemInput"}
 	if v.SystemArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SystemArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTestInput(v *GetTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTestInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTestRunInput(v *GetTestRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTestRunInput"}
+	if v.TestRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestRunId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTestTemplateInput(v *GetTestTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTestTemplateInput"}
+	if v.TestTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestTemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1845,6 +2452,24 @@ func validateOpListInputSourcesInput(v *ListInputSourcesInput) error {
 	}
 }
 
+func validateOpListResolvedTestRunTargetResourcesInput(v *ListResolvedTestRunTargetResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResolvedTestRunTargetResourcesInput"}
+	if v.TestRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestRunId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListResourcesInput(v *ListResourcesInput) error {
 	if v == nil {
 		return nil
@@ -1935,6 +2560,90 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListTestRunEventsInput(v *ListTestRunEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestRunEventsInput"}
+	if v.TestRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestRunId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestRunsInput(v *ListTestRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestRunsInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestRunSourcesInput(v *ListTestRunSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestRunSourcesInput"}
+	if v.TestRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestRunId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestsInput(v *ListTestsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestsInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTestSourcesInput(v *ListTestSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTestSourcesInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListUserJourneysInput(v *ListUserJourneysInput) error {
 	if v == nil {
 		return nil
@@ -1950,11 +2659,72 @@ func validateOpListUserJourneysInput(v *ListUserJourneysInput) error {
 	}
 }
 
+func validateOpPutTestSourcesInput(v *PutTestSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTestSourcesInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if v.TestSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestSources"))
+	} else if v.TestSources != nil {
+		if err := validateTestSourceInputList(v.TestSources); err != nil {
+			invalidParams.AddNested("TestSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartFailureModeAssessmentInput(v *StartFailureModeAssessmentInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartFailureModeAssessmentInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTestRunInput(v *StartTestRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTestRunInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopTestRunInput(v *StopTestRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTestRunInput"}
+	if v.TestRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestRunId"))
+	}
 	if v.ServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
 	}
@@ -2128,6 +2898,29 @@ func validateOpUpdateSystemInput(v *UpdateSystemInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSystemInput"}
 	if v.SystemArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SystemArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTestInput(v *UpdateTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTestInput"}
+	if v.TestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestId"))
+	}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if v.StopConditions != nil {
+		if err := validateStopConditionList(v.StopConditions); err != nil {
+			invalidParams.AddNested("StopConditions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

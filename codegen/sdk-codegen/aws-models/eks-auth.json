@@ -9,7 +9,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You don't have permissions to perform the requested operation. The IAM principal\n            making the request must have at least one IAM permissions policy attached\n            that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access\n                management</a> in the <i>IAM User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>You don't have permissions to perform the requested operation. The IAM principal making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access management</a> in the <i>IAM User Guide</i>. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -52,7 +52,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used\n            by the EKS Pod Identity Agent.</p>\n         <p>We recommend that applications use the Amazon Web Services SDKs to connect to Amazon Web Services services; if\n            credentials from an EKS Pod Identity association are available in the pod, the latest versions of the\n            SDKs use them automatically.</p>",
+                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used by the EKS Pod Identity Agent.</p> <p>We recommend that applications use the Amazon Web Services SDKs to connect to Amazon Web Services services; if credentials from an EKS Pod Identity association are available in the pod, the latest versions of the SDKs use them automatically.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -77,6 +77,24 @@
                         "smithy.api#documentation": "<p>The token of the Kubernetes service account for the pod.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "eksNodeName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kubernetes node name of the worker node where the pod is running.</p>"
+                    }
+                },
+                "instanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance ID of the worker node where the pod is running.</p>"
+                    }
+                },
+                "zone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID of the worker node where the pod is running.</p>"
+                    }
                 }
             },
             "traits": {
@@ -89,14 +107,14 @@
                 "subject": {
                     "target": "com.amazonaws.eksauth#Subject",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "audience": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity that is allowed to use the credentials. This value is always\n                <code>pods.eks.amazonaws.com</code>.</p>",
+                        "smithy.api#documentation": "<p>The identity that is allowed to use the credentials. This value is always <code>pods.eks.amazonaws.com</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -110,14 +128,14 @@
                 "assumedRoleUser": {
                     "target": "com.amazonaws.eksauth#AssumedRoleUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session\n            name.</p>\n         <p>The ARN of the IAM role that the temporary credentials authenticate to.</p>\n         <p>The session name of the temporary session requested to STS. The value\n            is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role\n            session name of the role that is being assumed. The role ID is generated by IAM when\n            the role is created. The role session name part of the value follows this format:\n                    <code>eks-<i>clustername</i>-<i>podname</i>-<i>random\n                    UUID</i>\n            </code>\n         </p>",
+                        "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session name.</p> <p>The ARN of the IAM role that the temporary credentials authenticate to.</p> <p>The session name of the temporary session requested to STS. The value is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role session name of the role that is being assumed. The role ID is generated by IAM when the role is created. The role session name part of the value follows this format: <code>eks-<i>clustername</i>-<i>podname</i>-<i>random UUID</i> </code> </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentials": {
                     "target": "com.amazonaws.eksauth#Credentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary\n            credentials.</p>",
+                        "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary credentials.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -139,13 +157,13 @@
                 "assumeRoleId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session name of the temporary session requested to STS. The value\n            is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role\n            session name of the role that is being assumed. The role ID is generated by IAM when\n            the role is created. The role session name part of the value follows this format:\n                    <code>eks-<i>clustername</i>-<i>podname</i>-<i>random\n                    UUID</i>\n            </code>\n         </p>",
+                        "smithy.api#documentation": "<p>The session name of the temporary session requested to STS. The value is a unique identifier that contains the role ID, a colon (<code>:</code>), and the role session name of the role that is being assumed. The role ID is generated by IAM when the role is created. The role session name part of the value follows this format: <code>eks-<i>clustername</i>-<i>podname</i>-<i>random UUID</i> </code> </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session\n            name.</p>"
+                "smithy.api#documentation": "<p>An object with the permanent IAM role identity and the temporary session name.</p>"
             }
         },
         "com.amazonaws.eksauth#ClusterName": {
@@ -164,7 +182,7 @@
                 "sessionToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that applications inside the pods must pass to any service API to use the\n            temporary credentials.</p>",
+                        "smithy.api#documentation": "<p>The token that applications inside the pods must pass to any service API to use the temporary credentials.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -191,7 +209,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary\n            credentials.</p>",
+                "smithy.api#documentation": "<p>The <i>Amazon Web Services Signature Version 4</i> type of temporary credentials.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -214,7 +232,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only\n            used by the EKS Pod Identity Agent.</p>",
+                "smithy.api#documentation": "<p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used by the EKS Pod Identity Agent.</p>",
                 "smithy.api#title": "Amazon EKS Auth",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -775,7 +793,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API\n            request.</p>",
+                "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -788,7 +806,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning\n            will depend on the API, and will be documented in the error message.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning will depend on the API, and will be documented in the error message.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -870,20 +888,20 @@
                 "namespace": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>",
+                        "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The service account and the pods that use the service account must be in this namespace.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
+                        "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing the name of the Kubernetes service account inside the cluster to\n            associate the IAM credentials with.</p>"
+                "smithy.api#documentation": "<p>An object containing the name of the Kubernetes service account inside the cluster to associate the IAM credentials with.</p>"
             }
         },
         "com.amazonaws.eksauth#ThrottlingException": {

@@ -8,3708 +8,3950 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
 	smithy "github.com/aws/smithy-go"
-	smithycbor "github.com/aws/smithy-go/encoding/cbor"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"net/http"
-	"time"
+	"math"
+	"path"
 )
 
-type smithyRpcv2cbor_serializeOpBatchCreateBillScenarioCommitmentModification struct {
+type awsAwsjson10_serializeOpBatchCreateBillScenarioCommitmentModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchCreateBillScenarioCommitmentModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchCreateBillScenarioCommitmentModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchCreateBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchCreateBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchCreateBillScenarioCommitmentModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchCreateBillScenarioCommitmentModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchCreateBillScenarioCommitmentModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchCreateBillScenarioCommitmentModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchCreateBillScenarioCommitmentModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchCreateBillScenarioUsageModification struct {
+type awsAwsjson10_serializeOpBatchCreateBillScenarioUsageModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchCreateBillScenarioUsageModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchCreateBillScenarioUsageModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchCreateBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchCreateBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchCreateBillScenarioUsageModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchCreateBillScenarioUsageModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchCreateBillScenarioUsageModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchCreateBillScenarioUsageModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchCreateBillScenarioUsageModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchCreateWorkloadEstimateUsage struct {
+type awsAwsjson10_serializeOpBatchCreateWorkloadEstimateUsage struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchCreateWorkloadEstimateUsage) ID() string {
+func (*awsAwsjson10_serializeOpBatchCreateWorkloadEstimateUsage) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchCreateWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchCreateWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchCreateWorkloadEstimateUsageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchCreateWorkloadEstimateUsage"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchCreateWorkloadEstimateUsageInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchCreateWorkloadEstimateUsage")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchCreateWorkloadEstimateUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioCommitmentModification struct {
+type awsAwsjson10_serializeOpBatchDeleteBillScenarioCommitmentModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioCommitmentModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchDeleteBillScenarioCommitmentModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchDeleteBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchDeleteBillScenarioCommitmentModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchDeleteBillScenarioCommitmentModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchDeleteBillScenarioCommitmentModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchDeleteBillScenarioCommitmentModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchDeleteBillScenarioCommitmentModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioUsageModification struct {
+type awsAwsjson10_serializeOpBatchDeleteBillScenarioUsageModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioUsageModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchDeleteBillScenarioUsageModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchDeleteBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchDeleteBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchDeleteBillScenarioUsageModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchDeleteBillScenarioUsageModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchDeleteBillScenarioUsageModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchDeleteBillScenarioUsageModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchDeleteBillScenarioUsageModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchDeleteWorkloadEstimateUsage struct {
+type awsAwsjson10_serializeOpBatchDeleteWorkloadEstimateUsage struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchDeleteWorkloadEstimateUsage) ID() string {
+func (*awsAwsjson10_serializeOpBatchDeleteWorkloadEstimateUsage) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchDeleteWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchDeleteWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchDeleteWorkloadEstimateUsageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchDeleteWorkloadEstimateUsage"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchDeleteWorkloadEstimateUsageInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchDeleteWorkloadEstimateUsage")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchDeleteWorkloadEstimateUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioCommitmentModification struct {
+type awsAwsjson10_serializeOpBatchUpdateBillScenarioCommitmentModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioCommitmentModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchUpdateBillScenarioCommitmentModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchUpdateBillScenarioCommitmentModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchUpdateBillScenarioCommitmentModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchUpdateBillScenarioCommitmentModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchUpdateBillScenarioCommitmentModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchUpdateBillScenarioCommitmentModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchUpdateBillScenarioCommitmentModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioUsageModification struct {
+type awsAwsjson10_serializeOpBatchUpdateBillScenarioUsageModification struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioUsageModification) ID() string {
+func (*awsAwsjson10_serializeOpBatchUpdateBillScenarioUsageModification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchUpdateBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchUpdateBillScenarioUsageModification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchUpdateBillScenarioUsageModificationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchUpdateBillScenarioUsageModification"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchUpdateBillScenarioUsageModificationInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchUpdateBillScenarioUsageModification")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchUpdateBillScenarioUsageModificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpBatchUpdateWorkloadEstimateUsage struct {
+type awsAwsjson10_serializeOpBatchUpdateWorkloadEstimateUsage struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpBatchUpdateWorkloadEstimateUsage) ID() string {
+func (*awsAwsjson10_serializeOpBatchUpdateWorkloadEstimateUsage) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpBatchUpdateWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpBatchUpdateWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*BatchUpdateWorkloadEstimateUsageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/BatchUpdateWorkloadEstimateUsage"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_BatchUpdateWorkloadEstimateUsageInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.BatchUpdateWorkloadEstimateUsage")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchUpdateWorkloadEstimateUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpCreateBillEstimate struct {
+type awsAwsjson10_serializeOpCreateBillEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpCreateBillEstimate) ID() string {
+func (*awsAwsjson10_serializeOpCreateBillEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpCreateBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpCreateBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*CreateBillEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/CreateBillEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_CreateBillEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.CreateBillEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateBillEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpCreateBillScenario struct {
+type awsAwsjson10_serializeOpCreateBillScenario struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpCreateBillScenario) ID() string {
+func (*awsAwsjson10_serializeOpCreateBillScenario) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpCreateBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpCreateBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*CreateBillScenarioInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/CreateBillScenario"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_CreateBillScenarioInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.CreateBillScenario")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateBillScenarioInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpCreateWorkloadEstimate struct {
+type awsAwsjson10_serializeOpCreateWorkloadEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpCreateWorkloadEstimate) ID() string {
+func (*awsAwsjson10_serializeOpCreateWorkloadEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpCreateWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpCreateWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*CreateWorkloadEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/CreateWorkloadEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_CreateWorkloadEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.CreateWorkloadEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateWorkloadEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpDeleteBillEstimate struct {
+type awsAwsjson10_serializeOpDeleteBillEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpDeleteBillEstimate) ID() string {
+func (*awsAwsjson10_serializeOpDeleteBillEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpDeleteBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpDeleteBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*DeleteBillEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/DeleteBillEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_DeleteBillEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.DeleteBillEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteBillEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpDeleteBillScenario struct {
+type awsAwsjson10_serializeOpDeleteBillScenario struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpDeleteBillScenario) ID() string {
+func (*awsAwsjson10_serializeOpDeleteBillScenario) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpDeleteBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpDeleteBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*DeleteBillScenarioInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/DeleteBillScenario"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_DeleteBillScenarioInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.DeleteBillScenario")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteBillScenarioInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpDeleteWorkloadEstimate struct {
+type awsAwsjson10_serializeOpDeleteWorkloadEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpDeleteWorkloadEstimate) ID() string {
+func (*awsAwsjson10_serializeOpDeleteWorkloadEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpDeleteWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpDeleteWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*DeleteWorkloadEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/DeleteWorkloadEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_DeleteWorkloadEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.DeleteWorkloadEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteWorkloadEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpGetBillEstimate struct {
+type awsAwsjson10_serializeOpGetBillEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpGetBillEstimate) ID() string {
+func (*awsAwsjson10_serializeOpGetBillEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpGetBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpGetBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*GetBillEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/GetBillEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_GetBillEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.GetBillEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetBillEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpGetBillScenario struct {
+type awsAwsjson10_serializeOpGetBillScenario struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpGetBillScenario) ID() string {
+func (*awsAwsjson10_serializeOpGetBillScenario) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpGetBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpGetBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*GetBillScenarioInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/GetBillScenario"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_GetBillScenarioInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.GetBillScenario")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetBillScenarioInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpGetPreferences struct {
+type awsAwsjson10_serializeOpGetPreferences struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpGetPreferences) ID() string {
+func (*awsAwsjson10_serializeOpGetPreferences) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpGetPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpGetPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*GetPreferencesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/GetPreferences"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_GetPreferencesInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.GetPreferences")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetPreferencesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpGetWorkloadEstimate struct {
+type awsAwsjson10_serializeOpGetWorkloadEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpGetWorkloadEstimate) ID() string {
+func (*awsAwsjson10_serializeOpGetWorkloadEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpGetWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpGetWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*GetWorkloadEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/GetWorkloadEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_GetWorkloadEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.GetWorkloadEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetWorkloadEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillEstimateCommitments struct {
+type awsAwsjson10_serializeOpListBillEstimateCommitments struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillEstimateCommitments) ID() string {
+func (*awsAwsjson10_serializeOpListBillEstimateCommitments) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillEstimateCommitments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillEstimateCommitments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillEstimateCommitmentsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillEstimateCommitments"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillEstimateCommitmentsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillEstimateCommitments")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillEstimateCommitmentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillEstimateInputCommitmentModifications struct {
+type awsAwsjson10_serializeOpListBillEstimateInputCommitmentModifications struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillEstimateInputCommitmentModifications) ID() string {
+func (*awsAwsjson10_serializeOpListBillEstimateInputCommitmentModifications) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillEstimateInputCommitmentModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillEstimateInputCommitmentModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillEstimateInputCommitmentModificationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillEstimateInputCommitmentModifications"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillEstimateInputCommitmentModificationsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillEstimateInputCommitmentModifications")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillEstimateInputCommitmentModificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillEstimateInputUsageModifications struct {
+type awsAwsjson10_serializeOpListBillEstimateInputUsageModifications struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillEstimateInputUsageModifications) ID() string {
+func (*awsAwsjson10_serializeOpListBillEstimateInputUsageModifications) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillEstimateInputUsageModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillEstimateInputUsageModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillEstimateInputUsageModificationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillEstimateInputUsageModifications"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillEstimateInputUsageModificationsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillEstimateInputUsageModifications")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillEstimateInputUsageModificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillEstimateLineItems struct {
+type awsAwsjson10_serializeOpListBillEstimateLineItems struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillEstimateLineItems) ID() string {
+func (*awsAwsjson10_serializeOpListBillEstimateLineItems) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillEstimateLineItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillEstimateLineItems) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillEstimateLineItemsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillEstimateLineItems"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillEstimateLineItemsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillEstimateLineItems")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillEstimateLineItemsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillEstimates struct {
+type awsAwsjson10_serializeOpListBillEstimates struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillEstimates) ID() string {
+func (*awsAwsjson10_serializeOpListBillEstimates) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillEstimates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillEstimates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillEstimatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillEstimates"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillEstimatesInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillEstimates")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillEstimatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillScenarioCommitmentModifications struct {
+type awsAwsjson10_serializeOpListBillScenarioCommitmentModifications struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillScenarioCommitmentModifications) ID() string {
+func (*awsAwsjson10_serializeOpListBillScenarioCommitmentModifications) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillScenarioCommitmentModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillScenarioCommitmentModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillScenarioCommitmentModificationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillScenarioCommitmentModifications"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillScenarioCommitmentModificationsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillScenarioCommitmentModifications")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillScenarioCommitmentModificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillScenarios struct {
+type awsAwsjson10_serializeOpListBillScenarios struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillScenarios) ID() string {
+func (*awsAwsjson10_serializeOpListBillScenarios) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillScenarios) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillScenarios) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillScenariosInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillScenarios"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillScenariosInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillScenarios")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillScenariosInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListBillScenarioUsageModifications struct {
+type awsAwsjson10_serializeOpListBillScenarioUsageModifications struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListBillScenarioUsageModifications) ID() string {
+func (*awsAwsjson10_serializeOpListBillScenarioUsageModifications) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListBillScenarioUsageModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListBillScenarioUsageModifications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListBillScenarioUsageModificationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListBillScenarioUsageModifications"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListBillScenarioUsageModificationsInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListBillScenarioUsageModifications")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListBillScenarioUsageModificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListTagsForResource struct {
+type awsAwsjson10_serializeOpListTagsForResource struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListTagsForResource) ID() string {
+func (*awsAwsjson10_serializeOpListTagsForResource) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListTagsForResource"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListTagsForResourceInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListTagsForResource")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListWorkloadEstimates struct {
+type awsAwsjson10_serializeOpListWorkloadEstimates struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListWorkloadEstimates) ID() string {
+func (*awsAwsjson10_serializeOpListWorkloadEstimates) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListWorkloadEstimates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListWorkloadEstimates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListWorkloadEstimatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListWorkloadEstimates"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListWorkloadEstimatesInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListWorkloadEstimates")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListWorkloadEstimatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpListWorkloadEstimateUsage struct {
+type awsAwsjson10_serializeOpListWorkloadEstimateUsage struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpListWorkloadEstimateUsage) ID() string {
+func (*awsAwsjson10_serializeOpListWorkloadEstimateUsage) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpListWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpListWorkloadEstimateUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*ListWorkloadEstimateUsageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/ListWorkloadEstimateUsage"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_ListWorkloadEstimateUsageInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.ListWorkloadEstimateUsage")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListWorkloadEstimateUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpTagResource struct {
+type awsAwsjson10_serializeOpTagResource struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpTagResource) ID() string {
+func (*awsAwsjson10_serializeOpTagResource) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*TagResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/TagResource"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_TagResourceInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.TagResource")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpUntagResource struct {
+type awsAwsjson10_serializeOpUntagResource struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpUntagResource) ID() string {
+func (*awsAwsjson10_serializeOpUntagResource) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*UntagResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/UntagResource"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_UntagResourceInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.UntagResource")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpUpdateBillEstimate struct {
+type awsAwsjson10_serializeOpUpdateBillEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpUpdateBillEstimate) ID() string {
+func (*awsAwsjson10_serializeOpUpdateBillEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpUpdateBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpUpdateBillEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*UpdateBillEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/UpdateBillEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_UpdateBillEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.UpdateBillEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateBillEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpUpdateBillScenario struct {
+type awsAwsjson10_serializeOpUpdateBillScenario struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpUpdateBillScenario) ID() string {
+func (*awsAwsjson10_serializeOpUpdateBillScenario) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpUpdateBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpUpdateBillScenario) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*UpdateBillScenarioInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/UpdateBillScenario"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_UpdateBillScenarioInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.UpdateBillScenario")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateBillScenarioInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpUpdatePreferences struct {
+type awsAwsjson10_serializeOpUpdatePreferences struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpUpdatePreferences) ID() string {
+func (*awsAwsjson10_serializeOpUpdatePreferences) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpUpdatePreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpUpdatePreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*UpdatePreferencesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/UpdatePreferences"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_UpdatePreferencesInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.UpdatePreferences")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdatePreferencesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpUpdateWorkloadEstimate struct {
+type awsAwsjson10_serializeOpUpdateWorkloadEstimate struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpUpdateWorkloadEstimate) ID() string {
+func (*awsAwsjson10_serializeOpUpdateWorkloadEstimate) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpUpdateWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsAwsjson10_serializeOpUpdateWorkloadEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
 	input, ok := in.Parameters.(*UpdateWorkloadEstimateInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
-	}
 	_ = input
-
-	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	req.Method = http.MethodPost
-	req.URL.Path = "/service/AWSBCMPricingCalculator/operation/UpdateWorkloadEstimate"
-	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
-
-	req.Header.Set("Content-Type", "application/cbor")
-	req.Header.Set("Accept", "application/cbor")
-
-	cv, err := serializeCBOR_UpdateWorkloadEstimateInput(input)
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBCMPricingCalculator.UpdateWorkloadEstimate")
 
-	payload := bytes.NewReader(smithycbor.Encode(cv))
-	if req, err = req.SetStream(payload); err != nil {
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateWorkloadEstimateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	in.Request = req
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
 
 	endTimer()
 	span.End()
-
 	return next.HandleSerialize(ctx, in)
 }
-func serializeCBOR_AddReservedInstanceAction(v *types.AddReservedInstanceAction) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ReservedInstancesOfferingId != nil {
-		ser, err := serializeCBOR_String(*v.ReservedInstancesOfferingId)
-		if err != nil {
-			return nil, err
-		}
-		vm["reservedInstancesOfferingId"] = ser
-	}
+func awsAwsjson10_serializeDocumentAddReservedInstanceAction(v *types.AddReservedInstanceAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.InstanceCount != nil {
-		ser, err := serializeCBOR_Int32(*v.InstanceCount)
-		if err != nil {
-			return nil, err
-		}
-		vm["instanceCount"] = ser
+		ok := object.Key("instanceCount")
+		ok.Integer(*v.InstanceCount)
 	}
-	return vm, nil
+
+	if v.ReservedInstancesOfferingId != nil {
+		ok := object.Key("reservedInstancesOfferingId")
+		ok.String(*v.ReservedInstancesOfferingId)
+	}
+
+	return nil
 }
 
-func serializeCBOR_AddSavingsPlanAction(v *types.AddSavingsPlanAction) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.SavingsPlanOfferingId != nil {
-		ser, err := serializeCBOR_String(*v.SavingsPlanOfferingId)
-		if err != nil {
-			return nil, err
-		}
-		vm["savingsPlanOfferingId"] = ser
-	}
+func awsAwsjson10_serializeDocumentAddSavingsPlanAction(v *types.AddSavingsPlanAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Commitment != nil {
-		ser, err := serializeCBOR_Float64(*v.Commitment)
-		if err != nil {
-			return nil, err
+		ok := object.Key("commitment")
+		switch {
+		case math.IsNaN(*v.Commitment):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Commitment, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Commitment, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Commitment)
+
 		}
-		vm["commitment"] = ser
 	}
-	return vm, nil
+
+	if v.SavingsPlanOfferingId != nil {
+		ok := object.Key("savingsPlanOfferingId")
+		ok.String(*v.SavingsPlanOfferingId)
+	}
+
+	return nil
 }
 
-func serializeCBOR_BatchCreateBillScenarioCommitmentModificationEntries(v []types.BatchCreateBillScenarioCommitmentModificationEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchCreateBillScenarioCommitmentModificationEntries(v []types.BatchCreateBillScenarioCommitmentModificationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_BatchCreateBillScenarioCommitmentModificationEntry(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchCreateBillScenarioCommitmentModificationEntry(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchCreateBillScenarioCommitmentModificationEntry(v *types.BatchCreateBillScenarioCommitmentModificationEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Key != nil {
-		ser, err := serializeCBOR_String(*v.Key)
-		if err != nil {
-			return nil, err
-		}
-		vm["key"] = ser
-	}
-	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
-		}
-		vm["group"] = ser
-	}
-	if v.UsageAccountId != nil {
-		ser, err := serializeCBOR_String(*v.UsageAccountId)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageAccountId"] = ser
-	}
+func awsAwsjson10_serializeDocumentBatchCreateBillScenarioCommitmentModificationEntry(v *types.BatchCreateBillScenarioCommitmentModificationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.CommitmentAction != nil {
-		ser, err := serializeCBOR_BillScenarioCommitmentModificationAction(v.CommitmentAction)
-		if err != nil {
-			return nil, err
+		ok := object.Key("commitmentAction")
+		if err := awsAwsjson10_serializeDocumentBillScenarioCommitmentModificationAction(v.CommitmentAction, ok); err != nil {
+			return err
 		}
-		vm["commitmentAction"] = ser
 	}
-	return vm, nil
+
+	if v.Group != nil {
+		ok := object.Key("group")
+		ok.String(*v.Group)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.UsageAccountId != nil {
+		ok := object.Key("usageAccountId")
+		ok.String(*v.UsageAccountId)
+	}
+
+	return nil
 }
 
-func serializeCBOR_BatchCreateBillScenarioUsageModificationEntries(v []types.BatchCreateBillScenarioUsageModificationEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchCreateBillScenarioUsageModificationEntries(v []types.BatchCreateBillScenarioUsageModificationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_BatchCreateBillScenarioUsageModificationEntry(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchCreateBillScenarioUsageModificationEntry(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchCreateBillScenarioUsageModificationEntry(v *types.BatchCreateBillScenarioUsageModificationEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ServiceCode != nil {
-		ser, err := serializeCBOR_String(*v.ServiceCode)
-		if err != nil {
-			return nil, err
+func awsAwsjson10_serializeDocumentBatchCreateBillScenarioUsageModificationEntry(v *types.BatchCreateBillScenarioUsageModificationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Amounts != nil {
+		ok := object.Key("amounts")
+		if err := awsAwsjson10_serializeDocumentUsageAmounts(v.Amounts, ok); err != nil {
+			return err
 		}
-		vm["serviceCode"] = ser
 	}
-	if v.UsageType != nil {
-		ser, err := serializeCBOR_String(*v.UsageType)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageType"] = ser
-	}
-	if v.Operation != nil {
-		ser, err := serializeCBOR_String(*v.Operation)
-		if err != nil {
-			return nil, err
-		}
-		vm["operation"] = ser
-	}
+
 	if v.AvailabilityZone != nil {
-		ser, err := serializeCBOR_String(*v.AvailabilityZone)
-		if err != nil {
-			return nil, err
-		}
-		vm["availabilityZone"] = ser
+		ok := object.Key("availabilityZone")
+		ok.String(*v.AvailabilityZone)
 	}
-	if v.Key != nil {
-		ser, err := serializeCBOR_String(*v.Key)
-		if err != nil {
-			return nil, err
-		}
-		vm["key"] = ser
-	}
+
 	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
-		}
-		vm["group"] = ser
+		ok := object.Key("group")
+		ok.String(*v.Group)
 	}
-	if v.UsageAccountId != nil {
-		ser, err := serializeCBOR_String(*v.UsageAccountId)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageAccountId"] = ser
-	}
-	if v.Amounts != nil {
-		ser, err := serializeCBOR_UsageAmounts(v.Amounts)
-		if err != nil {
-			return nil, err
-		}
-		vm["amounts"] = ser
-	}
+
 	if v.HistoricalUsage != nil {
-		ser, err := serializeCBOR_HistoricalUsageEntity(v.HistoricalUsage)
-		if err != nil {
-			return nil, err
+		ok := object.Key("historicalUsage")
+		if err := awsAwsjson10_serializeDocumentHistoricalUsageEntity(v.HistoricalUsage, ok); err != nil {
+			return err
 		}
-		vm["historicalUsage"] = ser
 	}
-	return vm, nil
-}
 
-func serializeCBOR_BatchCreateWorkloadEstimateUsageEntries(v []types.BatchCreateWorkloadEstimateUsageEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
 
-		ser, err := serializeCBOR_BatchCreateWorkloadEstimateUsageEntry(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_BatchCreateWorkloadEstimateUsageEntry(v *types.BatchCreateWorkloadEstimateUsageEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ServiceCode != nil {
-		ser, err := serializeCBOR_String(*v.ServiceCode)
-		if err != nil {
-			return nil, err
-		}
-		vm["serviceCode"] = ser
-	}
-	if v.UsageType != nil {
-		ser, err := serializeCBOR_String(*v.UsageType)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageType"] = ser
-	}
 	if v.Operation != nil {
-		ser, err := serializeCBOR_String(*v.Operation)
-		if err != nil {
-			return nil, err
-		}
-		vm["operation"] = ser
+		ok := object.Key("operation")
+		ok.String(*v.Operation)
 	}
-	if v.Key != nil {
-		ser, err := serializeCBOR_String(*v.Key)
-		if err != nil {
-			return nil, err
-		}
-		vm["key"] = ser
+
+	if v.ServiceCode != nil {
+		ok := object.Key("serviceCode")
+		ok.String(*v.ServiceCode)
 	}
-	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
-		}
-		vm["group"] = ser
-	}
+
 	if v.UsageAccountId != nil {
-		ser, err := serializeCBOR_String(*v.UsageAccountId)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageAccountId"] = ser
+		ok := object.Key("usageAccountId")
+		ok.String(*v.UsageAccountId)
 	}
+
+	if v.UsageType != nil {
+		ok := object.Key("usageType")
+		ok.String(*v.UsageType)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchCreateWorkloadEstimateUsageEntries(v []types.BatchCreateWorkloadEstimateUsageEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchCreateWorkloadEstimateUsageEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchCreateWorkloadEstimateUsageEntry(v *types.BatchCreateWorkloadEstimateUsageEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Amount != nil {
-		ser, err := serializeCBOR_Float64(*v.Amount)
-		if err != nil {
-			return nil, err
+		ok := object.Key("amount")
+		switch {
+		case math.IsNaN(*v.Amount):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Amount, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Amount, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Amount)
+
 		}
-		vm["amount"] = ser
 	}
+
+	if v.Group != nil {
+		ok := object.Key("group")
+		ok.String(*v.Group)
+	}
+
 	if v.HistoricalUsage != nil {
-		ser, err := serializeCBOR_HistoricalUsageEntity(v.HistoricalUsage)
-		if err != nil {
-			return nil, err
+		ok := object.Key("historicalUsage")
+		if err := awsAwsjson10_serializeDocumentHistoricalUsageEntity(v.HistoricalUsage, ok); err != nil {
+			return err
 		}
-		vm["historicalUsage"] = ser
 	}
-	return vm, nil
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Operation != nil {
+		ok := object.Key("operation")
+		ok.String(*v.Operation)
+	}
+
+	if v.ServiceCode != nil {
+		ok := object.Key("serviceCode")
+		ok.String(*v.ServiceCode)
+	}
+
+	if v.UsageAccountId != nil {
+		ok := object.Key("usageAccountId")
+		ok.String(*v.UsageAccountId)
+	}
+
+	if v.UsageType != nil {
+		ok := object.Key("usageType")
+		ok.String(*v.UsageType)
+	}
+
+	return nil
 }
 
-func serializeCBOR_BatchDeleteBillScenarioCommitmentModificationEntries(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchDeleteBillScenarioCommitmentModificationEntries(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchDeleteBillScenarioUsageModificationEntries(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchDeleteBillScenarioUsageModificationEntries(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchDeleteWorkloadEstimateUsageEntries(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchDeleteWorkloadEstimateUsageEntries(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchUpdateBillScenarioCommitmentModificationEntries(v []types.BatchUpdateBillScenarioCommitmentModificationEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentBatchUpdateBillScenarioCommitmentModificationEntries(v []types.BatchUpdateBillScenarioCommitmentModificationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_BatchUpdateBillScenarioCommitmentModificationEntry(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchUpdateBillScenarioCommitmentModificationEntry(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_BatchUpdateBillScenarioCommitmentModificationEntry(v *types.BatchUpdateBillScenarioCommitmentModificationEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Id != nil {
-		ser, err := serializeCBOR_String(*v.Id)
-		if err != nil {
-			return nil, err
-		}
-		vm["id"] = ser
-	}
+func awsAwsjson10_serializeDocumentBatchUpdateBillScenarioCommitmentModificationEntry(v *types.BatchUpdateBillScenarioCommitmentModificationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
-		}
-		vm["group"] = ser
+		ok := object.Key("group")
+		ok.String(*v.Group)
 	}
-	return vm, nil
-}
 
-func serializeCBOR_BatchUpdateBillScenarioUsageModificationEntries(v []types.BatchUpdateBillScenarioUsageModificationEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_BatchUpdateBillScenarioUsageModificationEntry(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_BatchUpdateBillScenarioUsageModificationEntry(v *types.BatchUpdateBillScenarioUsageModificationEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if v.Id != nil {
-		ser, err := serializeCBOR_String(*v.Id)
-		if err != nil {
-			return nil, err
-		}
-		vm["id"] = ser
+		ok := object.Key("id")
+		ok.String(*v.Id)
 	}
-	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchUpdateBillScenarioUsageModificationEntries(v []types.BatchUpdateBillScenarioUsageModificationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchUpdateBillScenarioUsageModificationEntry(&v[i], av); err != nil {
+			return err
 		}
-		vm["group"] = ser
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchUpdateBillScenarioUsageModificationEntry(v *types.BatchUpdateBillScenarioUsageModificationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Amounts != nil {
-		ser, err := serializeCBOR_UsageAmounts(v.Amounts)
-		if err != nil {
-			return nil, err
+		ok := object.Key("amounts")
+		if err := awsAwsjson10_serializeDocumentUsageAmounts(v.Amounts, ok); err != nil {
+			return err
 		}
-		vm["amounts"] = ser
 	}
-	return vm, nil
-}
 
-func serializeCBOR_BatchUpdateWorkloadEstimateUsageEntries(v []types.BatchUpdateWorkloadEstimateUsageEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_BatchUpdateWorkloadEstimateUsageEntry(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_BatchUpdateWorkloadEstimateUsageEntry(v *types.BatchUpdateWorkloadEstimateUsageEntry) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Id != nil {
-		ser, err := serializeCBOR_String(*v.Id)
-		if err != nil {
-			return nil, err
-		}
-		vm["id"] = ser
-	}
 	if v.Group != nil {
-		ser, err := serializeCBOR_String(*v.Group)
-		if err != nil {
-			return nil, err
-		}
-		vm["group"] = ser
+		ok := object.Key("group")
+		ok.String(*v.Group)
 	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchUpdateWorkloadEstimateUsageEntries(v []types.BatchUpdateWorkloadEstimateUsageEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchUpdateWorkloadEstimateUsageEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchUpdateWorkloadEstimateUsageEntry(v *types.BatchUpdateWorkloadEstimateUsageEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Amount != nil {
-		ser, err := serializeCBOR_Float64(*v.Amount)
-		if err != nil {
-			return nil, err
+		ok := object.Key("amount")
+		switch {
+		case math.IsNaN(*v.Amount):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Amount, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Amount, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Amount)
+
 		}
-		vm["amount"] = ser
 	}
-	return vm, nil
+
+	if v.Group != nil {
+		ok := object.Key("group")
+		ok.String(*v.Group)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	return nil
 }
 
-func serializeCBOR_BillInterval(v *types.BillInterval) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Start != nil {
-		ser, err := serializeCBOR_Time(*v.Start)
-		if err != nil {
-			return nil, err
-		}
-		vm["start"] = ser
-	}
+func awsAwsjson10_serializeDocumentBillInterval(v *types.BillInterval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.End != nil {
-		ser, err := serializeCBOR_Time(*v.End)
-		if err != nil {
-			return nil, err
-		}
-		vm["end"] = ser
+		ok := object.Key("end")
+		ok.Double(smithytime.FormatEpochSeconds(*v.End))
 	}
-	return vm, nil
+
+	if v.Start != nil {
+		ok := object.Key("start")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Start))
+	}
+
+	return nil
 }
 
-func serializeCBOR_BillScenarioCommitmentModificationAction(v types.BillScenarioCommitmentModificationAction) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeDocumentBillScenarioCommitmentModificationAction(v types.BillScenarioCommitmentModificationAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	switch uv := v.(type) {
 	case *types.BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction:
-		ser, err := serializeCBOR_AddReservedInstanceAction(&uv.Value)
-		if err != nil {
-			return nil, err
+		av := object.Key("addReservedInstanceAction")
+		if err := awsAwsjson10_serializeDocumentAddReservedInstanceAction(&uv.Value, av); err != nil {
+			return err
 		}
-		vm["addReservedInstanceAction"] = ser
+
 	case *types.BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction:
-		ser, err := serializeCBOR_AddSavingsPlanAction(&uv.Value)
-		if err != nil {
-			return nil, err
+		av := object.Key("addSavingsPlanAction")
+		if err := awsAwsjson10_serializeDocumentAddSavingsPlanAction(&uv.Value, av); err != nil {
+			return err
 		}
-		vm["addSavingsPlanAction"] = ser
+
 	case *types.BillScenarioCommitmentModificationActionMemberNegateReservedInstanceAction:
-		ser, err := serializeCBOR_NegateReservedInstanceAction(&uv.Value)
-		if err != nil {
-			return nil, err
+		av := object.Key("negateReservedInstanceAction")
+		if err := awsAwsjson10_serializeDocumentNegateReservedInstanceAction(&uv.Value, av); err != nil {
+			return err
 		}
-		vm["negateReservedInstanceAction"] = ser
+
 	case *types.BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction:
-		ser, err := serializeCBOR_NegateSavingsPlanAction(&uv.Value)
-		if err != nil {
-			return nil, err
+		av := object.Key("negateSavingsPlanAction")
+		if err := awsAwsjson10_serializeDocumentNegateSavingsPlanAction(&uv.Value, av); err != nil {
+			return err
 		}
-		vm["negateSavingsPlanAction"] = ser
+
 	default:
-		return nil, fmt.Errorf("unknown variant type %T", v)
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
-	return vm, nil
+	return nil
 }
 
-func serializeCBOR_Expression(v *types.Expression) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeDocumentExpression(v *types.Expression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.And != nil {
-		ser, err := serializeCBOR_ExpressionList(v.And)
-		if err != nil {
-			return nil, err
+		ok := object.Key("and")
+		if err := awsAwsjson10_serializeDocumentExpressionList(v.And, ok); err != nil {
+			return err
 		}
-		vm["and"] = ser
 	}
-	if v.Or != nil {
-		ser, err := serializeCBOR_ExpressionList(v.Or)
-		if err != nil {
-			return nil, err
-		}
-		vm["or"] = ser
-	}
-	if v.Not != nil {
-		ser, err := serializeCBOR_Expression(v.Not)
-		if err != nil {
-			return nil, err
-		}
-		vm["not"] = ser
-	}
+
 	if v.CostCategories != nil {
-		ser, err := serializeCBOR_ExpressionFilter(v.CostCategories)
-		if err != nil {
-			return nil, err
+		ok := object.Key("costCategories")
+		if err := awsAwsjson10_serializeDocumentExpressionFilter(v.CostCategories, ok); err != nil {
+			return err
 		}
-		vm["costCategories"] = ser
 	}
+
 	if v.Dimensions != nil {
-		ser, err := serializeCBOR_ExpressionFilter(v.Dimensions)
-		if err != nil {
-			return nil, err
+		ok := object.Key("dimensions")
+		if err := awsAwsjson10_serializeDocumentExpressionFilter(v.Dimensions, ok); err != nil {
+			return err
 		}
-		vm["dimensions"] = ser
 	}
+
+	if v.Not != nil {
+		ok := object.Key("not")
+		if err := awsAwsjson10_serializeDocumentExpression(v.Not, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Or != nil {
+		ok := object.Key("or")
+		if err := awsAwsjson10_serializeDocumentExpressionList(v.Or, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
-		ser, err := serializeCBOR_ExpressionFilter(v.Tags)
-		if err != nil {
-			return nil, err
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentExpressionFilter(v.Tags, ok); err != nil {
+			return err
 		}
-		vm["tags"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_ExpressionFilter(v *types.ExpressionFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeDocumentExpressionFilter(v *types.ExpressionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Key != nil {
-		ser, err := serializeCBOR_String(*v.Key)
-		if err != nil {
-			return nil, err
-		}
-		vm["key"] = ser
+		ok := object.Key("key")
+		ok.String(*v.Key)
 	}
+
 	if v.MatchOptions != nil {
-		ser, err := serializeCBOR_StringList(v.MatchOptions)
-		if err != nil {
-			return nil, err
+		ok := object.Key("matchOptions")
+		if err := awsAwsjson10_serializeDocumentStringList(v.MatchOptions, ok); err != nil {
+			return err
 		}
-		vm["matchOptions"] = ser
 	}
+
 	if v.Values != nil {
-		ser, err := serializeCBOR_StringList(v.Values)
-		if err != nil {
-			return nil, err
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentStringList(v.Values, ok); err != nil {
+			return err
 		}
-		vm["values"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_ExpressionList(v []types.Expression) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentExpressionList(v []types.Expression, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_Expression(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentExpression(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_FilterTimestamp(v *types.FilterTimestamp) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeDocumentFilterTimestamp(v *types.FilterTimestamp, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.AfterTimestamp != nil {
-		ser, err := serializeCBOR_Time(*v.AfterTimestamp)
-		if err != nil {
-			return nil, err
-		}
-		vm["afterTimestamp"] = ser
+		ok := object.Key("afterTimestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.AfterTimestamp))
 	}
+
 	if v.BeforeTimestamp != nil {
-		ser, err := serializeCBOR_Time(*v.BeforeTimestamp)
-		if err != nil {
-			return nil, err
-		}
-		vm["beforeTimestamp"] = ser
+		ok := object.Key("beforeTimestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.BeforeTimestamp))
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_GroupSharingPreferenceEnum(v types.GroupSharingPreferenceEnum) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
+func awsAwsjson10_serializeDocumentHistoricalUsageEntity(v *types.HistoricalUsageEntity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
-func serializeCBOR_HistoricalUsageEntity(v *types.HistoricalUsageEntity) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ServiceCode != nil {
-		ser, err := serializeCBOR_String(*v.ServiceCode)
-		if err != nil {
-			return nil, err
-		}
-		vm["serviceCode"] = ser
-	}
-	if v.UsageType != nil {
-		ser, err := serializeCBOR_String(*v.UsageType)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageType"] = ser
-	}
-	if v.Operation != nil {
-		ser, err := serializeCBOR_String(*v.Operation)
-		if err != nil {
-			return nil, err
-		}
-		vm["operation"] = ser
-	}
-	if v.Location != nil {
-		ser, err := serializeCBOR_String(*v.Location)
-		if err != nil {
-			return nil, err
-		}
-		vm["location"] = ser
-	}
-	if v.UsageAccountId != nil {
-		ser, err := serializeCBOR_String(*v.UsageAccountId)
-		if err != nil {
-			return nil, err
-		}
-		vm["usageAccountId"] = ser
-	}
 	if v.BillInterval != nil {
-		ser, err := serializeCBOR_BillInterval(v.BillInterval)
-		if err != nil {
-			return nil, err
+		ok := object.Key("billInterval")
+		if err := awsAwsjson10_serializeDocumentBillInterval(v.BillInterval, ok); err != nil {
+			return err
 		}
-		vm["billInterval"] = ser
 	}
+
 	if v.FilterExpression != nil {
-		ser, err := serializeCBOR_Expression(v.FilterExpression)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filterExpression")
+		if err := awsAwsjson10_serializeDocumentExpression(v.FilterExpression, ok); err != nil {
+			return err
 		}
-		vm["filterExpression"] = ser
 	}
-	return vm, nil
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		ok.String(*v.Location)
+	}
+
+	if v.Operation != nil {
+		ok := object.Key("operation")
+		ok.String(*v.Operation)
+	}
+
+	if v.ServiceCode != nil {
+		ok := object.Key("serviceCode")
+		ok.String(*v.ServiceCode)
+	}
+
+	if v.UsageAccountId != nil {
+		ok := object.Key("usageAccountId")
+		ok.String(*v.UsageAccountId)
+	}
+
+	if v.UsageType != nil {
+		ok := object.Key("usageType")
+		ok.String(*v.UsageType)
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListBillEstimateLineItemsFilter(v *types.ListBillEstimateLineItemsFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if len(v.Name) > 0 {
-		ser, err := serializeCBOR_ListBillEstimateLineItemsFilterName(v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
-	if v.Values != nil {
-		ser, err := serializeCBOR_ListBillEstimateLineItemsFilterValues(v.Values)
-		if err != nil {
-			return nil, err
-		}
-		vm["values"] = ser
-	}
+func awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilter(v *types.ListBillEstimateLineItemsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if len(v.MatchOption) > 0 {
-		ser, err := serializeCBOR_MatchOption(v.MatchOption)
-		if err != nil {
-			return nil, err
-		}
-		vm["matchOption"] = ser
+		ok := object.Key("matchOption")
+		ok.String(string(v.MatchOption))
 	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillEstimateLineItemsFilterName(v types.ListBillEstimateLineItemsFilterName) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_ListBillEstimateLineItemsFilters(v []types.ListBillEstimateLineItemsFilter) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_ListBillEstimateLineItemsFilter(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListBillEstimateLineItemsFilterValues(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListBillEstimatesFilter(v *types.ListBillEstimatesFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if len(v.Name) > 0 {
-		ser, err := serializeCBOR_ListBillEstimatesFilterName(v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
+		ok := object.Key("name")
+		ok.String(string(v.Name))
 	}
+
 	if v.Values != nil {
-		ser, err := serializeCBOR_ListBillEstimatesFilterValues(v.Values)
-		if err != nil {
-			return nil, err
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilterValues(v.Values, ok); err != nil {
+			return err
 		}
-		vm["values"] = ser
 	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilters(v []types.ListBillEstimateLineItemsFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillEstimatesFilter(v *types.ListBillEstimatesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if len(v.MatchOption) > 0 {
-		ser, err := serializeCBOR_MatchOption(v.MatchOption)
-		if err != nil {
-			return nil, err
-		}
-		vm["matchOption"] = ser
+		ok := object.Key("matchOption")
+		ok.String(string(v.MatchOption))
 	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillEstimatesFilterName(v types.ListBillEstimatesFilterName) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_ListBillEstimatesFilters(v []types.ListBillEstimatesFilter) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_ListBillEstimatesFilter(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListBillEstimatesFilterValues(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListBillScenariosFilter(v *types.ListBillScenariosFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if len(v.Name) > 0 {
-		ser, err := serializeCBOR_ListBillScenariosFilterName(v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
+		ok := object.Key("name")
+		ok.String(string(v.Name))
 	}
+
 	if v.Values != nil {
-		ser, err := serializeCBOR_ListBillScenariosFilterValues(v.Values)
-		if err != nil {
-			return nil, err
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentListBillEstimatesFilterValues(v.Values, ok); err != nil {
+			return err
 		}
-		vm["values"] = ser
 	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillEstimatesFilters(v []types.ListBillEstimatesFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListBillEstimatesFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillEstimatesFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillScenariosFilter(v *types.ListBillScenariosFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if len(v.MatchOption) > 0 {
-		ser, err := serializeCBOR_MatchOption(v.MatchOption)
-		if err != nil {
-			return nil, err
-		}
-		vm["matchOption"] = ser
+		ok := object.Key("matchOption")
+		ok.String(string(v.MatchOption))
 	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillScenariosFilterName(v types.ListBillScenariosFilterName) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_ListBillScenariosFilters(v []types.ListBillScenariosFilter) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_ListBillScenariosFilter(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListBillScenariosFilterValues(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListUsageFilter(v *types.ListUsageFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if len(v.Name) > 0 {
-		ser, err := serializeCBOR_ListUsageFilterName(v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
+		ok := object.Key("name")
+		ok.String(string(v.Name))
 	}
+
 	if v.Values != nil {
-		ser, err := serializeCBOR_ListUsageFilterValues(v.Values)
-		if err != nil {
-			return nil, err
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentListBillScenariosFilterValues(v.Values, ok); err != nil {
+			return err
 		}
-		vm["values"] = ser
 	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillScenariosFilters(v []types.ListBillScenariosFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListBillScenariosFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListBillScenariosFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListUsageFilter(v *types.ListUsageFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if len(v.MatchOption) > 0 {
-		ser, err := serializeCBOR_MatchOption(v.MatchOption)
-		if err != nil {
-			return nil, err
-		}
-		vm["matchOption"] = ser
+		ok := object.Key("matchOption")
+		ok.String(string(v.MatchOption))
 	}
-	return vm, nil
-}
 
-func serializeCBOR_ListUsageFilterName(v types.ListUsageFilterName) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_ListUsageFilters(v []types.ListUsageFilter) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_ListUsageFilter(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListUsageFilterValues(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_ListWorkloadEstimatesFilter(v *types.ListWorkloadEstimatesFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if len(v.Name) > 0 {
-		ser, err := serializeCBOR_ListWorkloadEstimatesFilterName(v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
+		ok := object.Key("name")
+		ok.String(string(v.Name))
 	}
+
 	if v.Values != nil {
-		ser, err := serializeCBOR_ListWorkloadEstimatesFilterValues(v.Values)
-		if err != nil {
-			return nil, err
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentListUsageFilterValues(v.Values, ok); err != nil {
+			return err
 		}
-		vm["values"] = ser
 	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListUsageFilters(v []types.ListUsageFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListUsageFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListUsageFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListWorkloadEstimatesFilter(v *types.ListWorkloadEstimatesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if len(v.MatchOption) > 0 {
-		ser, err := serializeCBOR_MatchOption(v.MatchOption)
-		if err != nil {
-			return nil, err
-		}
-		vm["matchOption"] = ser
+		ok := object.Key("matchOption")
+		ok.String(string(v.MatchOption))
 	}
-	return vm, nil
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsAwsjson10_serializeDocumentListWorkloadEstimatesFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListWorkloadEstimatesFilterName(v types.ListWorkloadEstimatesFilterName) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
+func awsAwsjson10_serializeDocumentListWorkloadEstimatesFilters(v []types.ListWorkloadEstimatesFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
 
-func serializeCBOR_ListWorkloadEstimatesFilters(v []types.ListWorkloadEstimatesFilter) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
 	for i := range v {
-
-		ser, err := serializeCBOR_ListWorkloadEstimatesFilter(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListWorkloadEstimatesFilter(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_ListWorkloadEstimatesFilterValues(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentListWorkloadEstimatesFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_MatchOption(v types.MatchOption) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
+func awsAwsjson10_serializeDocumentNegateReservedInstanceAction(v *types.NegateReservedInstanceAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
-func serializeCBOR_NegateReservedInstanceAction(v *types.NegateReservedInstanceAction) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if v.ReservedInstancesId != nil {
-		ser, err := serializeCBOR_String(*v.ReservedInstancesId)
-		if err != nil {
-			return nil, err
-		}
-		vm["reservedInstancesId"] = ser
+		ok := object.Key("reservedInstancesId")
+		ok.String(*v.ReservedInstancesId)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_NegateSavingsPlanAction(v *types.NegateSavingsPlanAction) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeDocumentNegateSavingsPlanAction(v *types.NegateSavingsPlanAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.SavingsPlanId != nil {
-		ser, err := serializeCBOR_String(*v.SavingsPlanId)
-		if err != nil {
-			return nil, err
-		}
-		vm["savingsPlanId"] = ser
+		ok := object.Key("savingsPlanId")
+		ok.String(*v.SavingsPlanId)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_RateType(v types.RateType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
+func awsAwsjson10_serializeDocumentRateTypes(v []types.RateType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
 
-func serializeCBOR_RateTypes(v []types.RateType) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
 	for i := range v {
-
-		ser, err := serializeCBOR_RateType(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(string(v[i]))
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_ResourceTagKeys(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentResourceTagKeys(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_StringList(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
+		av := array.Value()
+		av.String(v[i])
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_Tags(v map[string]string) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	for k, vv := range v {
+func awsAwsjson10_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
-		ser, err := serializeCBOR_String(vv)
-		if err != nil {
-			return nil, err
-		}
-		vm[k] = ser
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
-	return vm, nil
+	return nil
 }
 
-func serializeCBOR_UsageAmount(v *types.UsageAmount) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StartHour != nil {
-		ser, err := serializeCBOR_Time(*v.StartHour)
-		if err != nil {
-			return nil, err
-		}
-		vm["startHour"] = ser
-	}
+func awsAwsjson10_serializeDocumentUsageAmount(v *types.UsageAmount, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Amount != nil {
-		ser, err := serializeCBOR_Float64(*v.Amount)
-		if err != nil {
-			return nil, err
+		ok := object.Key("amount")
+		switch {
+		case math.IsNaN(*v.Amount):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Amount, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Amount, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Amount)
+
 		}
-		vm["amount"] = ser
 	}
-	return vm, nil
+
+	if v.StartHour != nil {
+		ok := object.Key("startHour")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartHour))
+	}
+
+	return nil
 }
 
-func serializeCBOR_UsageAmounts(v []types.UsageAmount) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
+func awsAwsjson10_serializeDocumentUsageAmounts(v []types.UsageAmount, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
 	for i := range v {
-
-		ser, err := serializeCBOR_UsageAmount(&v[i])
-		if err != nil {
-			return nil, err
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentUsageAmount(&v[i], av); err != nil {
+			return err
 		}
-		vl = append(vl, ser)
 	}
-	return vl, nil
+	return nil
 }
 
-func serializeCBOR_WorkloadEstimateRateType(v types.WorkloadEstimateRateType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
+func awsAwsjson10_serializeOpDocumentBatchCreateBillScenarioCommitmentModificationInput(v *BatchCreateBillScenarioCommitmentModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
-func serializeCBOR_Float64(v float64) (smithycbor.Value, error) {
-	return smithycbor.Float64(v), nil
-}
-
-func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
-	if v < 0 {
-		return smithycbor.NegInt(uint64(-v)), nil
-	}
-	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_String(v string) (smithycbor.Value, error) {
-	return smithycbor.String(v), nil
-}
-
-func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
-	return &smithycbor.Tag{
-		ID:    1,
-		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
-	}, nil
-}
-
-func serializeCBOR_BatchCreateBillScenarioCommitmentModificationInput(v *BatchCreateBillScenarioCommitmentModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
 	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.CommitmentModifications != nil {
-		ser, err := serializeCBOR_BatchCreateBillScenarioCommitmentModificationEntries(v.CommitmentModifications)
-		if err != nil {
-			return nil, err
+		ok := object.Key("commitmentModifications")
+		if err := awsAwsjson10_serializeDocumentBatchCreateBillScenarioCommitmentModificationEntries(v.CommitmentModifications, ok); err != nil {
+			return err
 		}
-		vm["commitmentModifications"] = ser
 	}
-	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
-	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_BatchCreateBillScenarioUsageModificationInput(v *BatchCreateBillScenarioUsageModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentBatchCreateBillScenarioUsageModificationInput(v *BatchCreateBillScenarioUsageModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
 	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.UsageModifications != nil {
-		ser, err := serializeCBOR_BatchCreateBillScenarioUsageModificationEntries(v.UsageModifications)
-		if err != nil {
-			return nil, err
+		ok := object.Key("usageModifications")
+		if err := awsAwsjson10_serializeDocumentBatchCreateBillScenarioUsageModificationEntries(v.UsageModifications, ok); err != nil {
+			return err
 		}
-		vm["usageModifications"] = ser
 	}
-	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
-	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_BatchCreateWorkloadEstimateUsageInput(v *BatchCreateWorkloadEstimateUsageInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.WorkloadEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.WorkloadEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["workloadEstimateId"] = ser
+func awsAwsjson10_serializeOpDocumentBatchCreateWorkloadEstimateUsageInput(v *BatchCreateWorkloadEstimateUsageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
 	}
+
 	if v.Usage != nil {
-		ser, err := serializeCBOR_BatchCreateWorkloadEstimateUsageEntries(v.Usage)
-		if err != nil {
-			return nil, err
+		ok := object.Key("usage")
+		if err := awsAwsjson10_serializeDocumentBatchCreateWorkloadEstimateUsageEntries(v.Usage, ok); err != nil {
+			return err
 		}
-		vm["usage"] = ser
 	}
-	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
-	}
-	return vm, nil
-}
 
-func serializeCBOR_BatchDeleteBillScenarioCommitmentModificationInput(v *BatchDeleteBillScenarioCommitmentModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
-	}
-	if v.Ids != nil {
-		ser, err := serializeCBOR_BatchDeleteBillScenarioCommitmentModificationEntries(v.Ids)
-		if err != nil {
-			return nil, err
-		}
-		vm["ids"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_BatchDeleteBillScenarioUsageModificationInput(v *BatchDeleteBillScenarioUsageModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
-	}
-	if v.Ids != nil {
-		ser, err := serializeCBOR_BatchDeleteBillScenarioUsageModificationEntries(v.Ids)
-		if err != nil {
-			return nil, err
-		}
-		vm["ids"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_BatchDeleteWorkloadEstimateUsageInput(v *BatchDeleteWorkloadEstimateUsageInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if v.WorkloadEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.WorkloadEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["workloadEstimateId"] = ser
+		ok := object.Key("workloadEstimateId")
+		ok.String(*v.WorkloadEstimateId)
 	}
-	if v.Ids != nil {
-		ser, err := serializeCBOR_BatchDeleteWorkloadEstimateUsageEntries(v.Ids)
-		if err != nil {
-			return nil, err
-		}
-		vm["ids"] = ser
-	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_BatchUpdateBillScenarioCommitmentModificationInput(v *BatchUpdateBillScenarioCommitmentModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentBatchDeleteBillScenarioCommitmentModificationInput(v *BatchDeleteBillScenarioCommitmentModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
 	}
+
+	if v.Ids != nil {
+		ok := object.Key("ids")
+		if err := awsAwsjson10_serializeDocumentBatchDeleteBillScenarioCommitmentModificationEntries(v.Ids, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchDeleteBillScenarioUsageModificationInput(v *BatchDeleteBillScenarioUsageModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillScenarioId != nil {
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
+	}
+
+	if v.Ids != nil {
+		ok := object.Key("ids")
+		if err := awsAwsjson10_serializeDocumentBatchDeleteBillScenarioUsageModificationEntries(v.Ids, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchDeleteWorkloadEstimateUsageInput(v *BatchDeleteWorkloadEstimateUsageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Ids != nil {
+		ok := object.Key("ids")
+		if err := awsAwsjson10_serializeDocumentBatchDeleteWorkloadEstimateUsageEntries(v.Ids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkloadEstimateId != nil {
+		ok := object.Key("workloadEstimateId")
+		ok.String(*v.WorkloadEstimateId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchUpdateBillScenarioCommitmentModificationInput(v *BatchUpdateBillScenarioCommitmentModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillScenarioId != nil {
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
+	}
+
 	if v.CommitmentModifications != nil {
-		ser, err := serializeCBOR_BatchUpdateBillScenarioCommitmentModificationEntries(v.CommitmentModifications)
-		if err != nil {
-			return nil, err
+		ok := object.Key("commitmentModifications")
+		if err := awsAwsjson10_serializeDocumentBatchUpdateBillScenarioCommitmentModificationEntries(v.CommitmentModifications, ok); err != nil {
+			return err
 		}
-		vm["commitmentModifications"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_BatchUpdateBillScenarioUsageModificationInput(v *BatchUpdateBillScenarioUsageModificationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentBatchUpdateBillScenarioUsageModificationInput(v *BatchUpdateBillScenarioUsageModificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
 	}
+
 	if v.UsageModifications != nil {
-		ser, err := serializeCBOR_BatchUpdateBillScenarioUsageModificationEntries(v.UsageModifications)
-		if err != nil {
-			return nil, err
+		ok := object.Key("usageModifications")
+		if err := awsAwsjson10_serializeDocumentBatchUpdateBillScenarioUsageModificationEntries(v.UsageModifications, ok); err != nil {
+			return err
 		}
-		vm["usageModifications"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_BatchUpdateWorkloadEstimateUsageInput(v *BatchUpdateWorkloadEstimateUsageInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.WorkloadEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.WorkloadEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["workloadEstimateId"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentBatchUpdateWorkloadEstimateUsageInput(v *BatchUpdateWorkloadEstimateUsageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Usage != nil {
-		ser, err := serializeCBOR_BatchUpdateWorkloadEstimateUsageEntries(v.Usage)
-		if err != nil {
-			return nil, err
+		ok := object.Key("usage")
+		if err := awsAwsjson10_serializeDocumentBatchUpdateWorkloadEstimateUsageEntries(v.Usage, ok); err != nil {
+			return err
 		}
-		vm["usage"] = ser
 	}
-	return vm, nil
+
+	if v.WorkloadEstimateId != nil {
+		ok := object.Key("workloadEstimateId")
+		ok.String(*v.WorkloadEstimateId)
+	}
+
+	return nil
 }
 
-func serializeCBOR_CreateBillEstimateInput(v *CreateBillEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentCreateBillEstimateInput(v *CreateBillEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
 	}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
+
 	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
 	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if v.Tags != nil {
-		ser, err := serializeCBOR_Tags(v.Tags)
-		if err != nil {
-			return nil, err
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
 		}
-		vm["tags"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_CreateBillScenarioInput(v *CreateBillScenarioInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentCreateBillScenarioInput(v *CreateBillScenarioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
 	}
-	if v.Tags != nil {
-		ser, err := serializeCBOR_Tags(v.Tags)
-		if err != nil {
-			return nil, err
-		}
-		vm["tags"] = ser
-	}
-	if len(v.GroupSharingPreference) > 0 {
-		ser, err := serializeCBOR_GroupSharingPreferenceEnum(v.GroupSharingPreference)
-		if err != nil {
-			return nil, err
-		}
-		vm["groupSharingPreference"] = ser
-	}
+
 	if v.CostCategoryGroupSharingPreferenceArn != nil {
-		ser, err := serializeCBOR_String(*v.CostCategoryGroupSharingPreferenceArn)
-		if err != nil {
-			return nil, err
-		}
-		vm["costCategoryGroupSharingPreferenceArn"] = ser
+		ok := object.Key("costCategoryGroupSharingPreferenceArn")
+		ok.String(*v.CostCategoryGroupSharingPreferenceArn)
 	}
-	return vm, nil
+
+	if len(v.GroupSharingPreference) > 0 {
+		ok := object.Key("groupSharingPreference")
+		ok.String(string(v.GroupSharingPreference))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-func serializeCBOR_CreateWorkloadEstimateInput(v *CreateWorkloadEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentCreateWorkloadEstimateInput(v *CreateWorkloadEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.ClientToken != nil {
-		ser, err := serializeCBOR_String(*v.ClientToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientToken"] = ser
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
 	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if len(v.RateType) > 0 {
-		ser, err := serializeCBOR_WorkloadEstimateRateType(v.RateType)
-		if err != nil {
-			return nil, err
-		}
-		vm["rateType"] = ser
+		ok := object.Key("rateType")
+		ok.String(string(v.RateType))
 	}
+
 	if v.Tags != nil {
-		ser, err := serializeCBOR_Tags(v.Tags)
-		if err != nil {
-			return nil, err
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
 		}
-		vm["tags"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_DeleteBillEstimateInput(v *DeleteBillEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentDeleteBillEstimateInput(v *DeleteBillEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_DeleteBillScenarioInput(v *DeleteBillScenarioInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentDeleteBillScenarioInput(v *DeleteBillScenarioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_DeleteWorkloadEstimateInput(v *DeleteWorkloadEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentDeleteWorkloadEstimateInput(v *DeleteWorkloadEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_GetBillEstimateInput(v *GetBillEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentGetBillEstimateInput(v *GetBillEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_GetBillScenarioInput(v *GetBillScenarioInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentGetBillScenarioInput(v *GetBillScenarioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_GetPreferencesInput(v *GetPreferencesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentGetPreferencesInput(v *GetPreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
-	return vm, nil
+	return nil
 }
 
-func serializeCBOR_GetWorkloadEstimateInput(v *GetWorkloadEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentGetWorkloadEstimateInput(v *GetWorkloadEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_ListBillEstimateCommitmentsInput(v *ListBillEstimateCommitmentsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListBillEstimateCommitmentsInput(v *ListBillEstimateCommitmentsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.BillEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billEstimateId"] = ser
+		ok := object.Key("billEstimateId")
+		ok.String(*v.BillEstimateId)
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
+
 	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillEstimateInputCommitmentModificationsInput(v *ListBillEstimateInputCommitmentModificationsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.BillEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.BillEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billEstimateId"] = ser
-	}
 	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
-	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
-	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_ListBillEstimateInputUsageModificationsInput(v *ListBillEstimateInputUsageModificationsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListBillEstimateInputCommitmentModificationsInput(v *ListBillEstimateInputCommitmentModificationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.BillEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billEstimateId"] = ser
+		ok := object.Key("billEstimateId")
+		ok.String(*v.BillEstimateId)
 	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListBillEstimateInputUsageModificationsInput(v *ListBillEstimateInputUsageModificationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillEstimateId != nil {
+		ok := object.Key("billEstimateId")
+		ok.String(*v.BillEstimateId)
+	}
+
 	if v.Filters != nil {
-		ser, err := serializeCBOR_ListUsageFilters(v.Filters)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListUsageFilters(v.Filters, ok); err != nil {
+			return err
 		}
-		vm["filters"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
+
 	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
-	return vm, nil
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListBillEstimateLineItemsInput(v *ListBillEstimateLineItemsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListBillEstimateLineItemsInput(v *ListBillEstimateLineItemsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.BillEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.BillEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billEstimateId"] = ser
+		ok := object.Key("billEstimateId")
+		ok.String(*v.BillEstimateId)
 	}
+
 	if v.Filters != nil {
-		ser, err := serializeCBOR_ListBillEstimateLineItemsFilters(v.Filters)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListBillEstimateLineItemsFilters(v.Filters, ok); err != nil {
+			return err
 		}
-		vm["filters"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
+
 	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
-	return vm, nil
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListBillEstimatesInput(v *ListBillEstimatesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Filters != nil {
-		ser, err := serializeCBOR_ListBillEstimatesFilters(v.Filters)
-		if err != nil {
-			return nil, err
-		}
-		vm["filters"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentListBillEstimatesInput(v *ListBillEstimatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.CreatedAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.CreatedAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("createdAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.CreatedAtFilter, ok); err != nil {
+			return err
 		}
-		vm["createdAtFilter"] = ser
 	}
+
 	if v.ExpiresAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.ExpiresAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("expiresAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.ExpiresAtFilter, ok); err != nil {
+			return err
 		}
-		vm["expiresAtFilter"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
-	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
-	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillScenarioCommitmentModificationsInput(v *ListBillScenarioCommitmentModificationsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
-	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
-	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_ListBillScenariosInput(v *ListBillScenariosInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
 	if v.Filters != nil {
-		ser, err := serializeCBOR_ListBillScenariosFilters(v.Filters)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListBillEstimatesFilters(v.Filters, ok); err != nil {
+			return err
 		}
-		vm["filters"] = ser
 	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListBillScenarioCommitmentModificationsInput(v *ListBillScenarioCommitmentModificationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillScenarioId != nil {
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListBillScenariosInput(v *ListBillScenariosInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.CreatedAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.CreatedAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("createdAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.CreatedAtFilter, ok); err != nil {
+			return err
 		}
-		vm["createdAtFilter"] = ser
 	}
+
 	if v.ExpiresAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.ExpiresAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("expiresAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.ExpiresAtFilter, ok); err != nil {
+			return err
 		}
-		vm["expiresAtFilter"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
-	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
-	}
-	return vm, nil
-}
 
-func serializeCBOR_ListBillScenarioUsageModificationsInput(v *ListBillScenarioUsageModificationsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.BillScenarioId != nil {
-		ser, err := serializeCBOR_String(*v.BillScenarioId)
-		if err != nil {
-			return nil, err
-		}
-		vm["billScenarioId"] = ser
-	}
 	if v.Filters != nil {
-		ser, err := serializeCBOR_ListUsageFilters(v.Filters)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListBillScenariosFilters(v.Filters, ok); err != nil {
+			return err
 		}
-		vm["filters"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
+
 	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
-	return vm, nil
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListTagsForResourceInput(v *ListTagsForResourceInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListBillScenarioUsageModificationsInput(v *ListBillScenarioUsageModificationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillScenarioId != nil {
+		ok := object.Key("billScenarioId")
+		ok.String(*v.BillScenarioId)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListUsageFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Arn != nil {
-		ser, err := serializeCBOR_String(*v.Arn)
-		if err != nil {
-			return nil, err
-		}
-		vm["arn"] = ser
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_ListWorkloadEstimatesInput(v *ListWorkloadEstimatesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListWorkloadEstimatesInput(v *ListWorkloadEstimatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.CreatedAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.CreatedAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("createdAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.CreatedAtFilter, ok); err != nil {
+			return err
 		}
-		vm["createdAtFilter"] = ser
 	}
+
 	if v.ExpiresAtFilter != nil {
-		ser, err := serializeCBOR_FilterTimestamp(v.ExpiresAtFilter)
-		if err != nil {
-			return nil, err
+		ok := object.Key("expiresAtFilter")
+		if err := awsAwsjson10_serializeDocumentFilterTimestamp(v.ExpiresAtFilter, ok); err != nil {
+			return err
 		}
-		vm["expiresAtFilter"] = ser
 	}
+
 	if v.Filters != nil {
-		ser, err := serializeCBOR_ListWorkloadEstimatesFilters(v.Filters)
-		if err != nil {
-			return nil, err
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListWorkloadEstimatesFilters(v.Filters, ok); err != nil {
+			return err
 		}
-		vm["filters"] = ser
 	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
+
 	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
-	return vm, nil
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
 }
 
-func serializeCBOR_ListWorkloadEstimateUsageInput(v *ListWorkloadEstimateUsageInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentListWorkloadEstimateUsageInput(v *ListWorkloadEstimateUsageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListUsageFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	if v.WorkloadEstimateId != nil {
-		ser, err := serializeCBOR_String(*v.WorkloadEstimateId)
-		if err != nil {
-			return nil, err
-		}
-		vm["workloadEstimateId"] = ser
+		ok := object.Key("workloadEstimateId")
+		ok.String(*v.WorkloadEstimateId)
 	}
-	if v.Filters != nil {
-		ser, err := serializeCBOR_ListUsageFilters(v.Filters)
-		if err != nil {
-			return nil, err
-		}
-		vm["filters"] = ser
-	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["nextToken"] = ser
-	}
-	if v.MaxResults != nil {
-		ser, err := serializeCBOR_Int32(*v.MaxResults)
-		if err != nil {
-			return nil, err
-		}
-		vm["maxResults"] = ser
-	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_TagResourceInput(v *TagResourceInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Arn != nil {
-		ser, err := serializeCBOR_String(*v.Arn)
-		if err != nil {
-			return nil, err
-		}
-		vm["arn"] = ser
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
 	}
+
 	if v.Tags != nil {
-		ser, err := serializeCBOR_Tags(v.Tags)
-		if err != nil {
-			return nil, err
+		ok := object.Key("tags")
+		if err := awsAwsjson10_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
 		}
-		vm["tags"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_UntagResourceInput(v *UntagResourceInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
+func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Arn != nil {
-		ser, err := serializeCBOR_String(*v.Arn)
-		if err != nil {
-			return nil, err
-		}
-		vm["arn"] = ser
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
 	}
+
 	if v.TagKeys != nil {
-		ser, err := serializeCBOR_ResourceTagKeys(v.TagKeys)
-		if err != nil {
-			return nil, err
+		ok := object.Key("tagKeys")
+		if err := awsAwsjson10_serializeDocumentResourceTagKeys(v.TagKeys, ok); err != nil {
+			return err
 		}
-		vm["tagKeys"] = ser
 	}
-	return vm, nil
+
+	return nil
 }
 
-func serializeCBOR_UpdateBillEstimateInput(v *UpdateBillEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
-	}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentUpdateBillEstimateInput(v *UpdateBillEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.ExpiresAt != nil {
-		ser, err := serializeCBOR_Time(*v.ExpiresAt)
-		if err != nil {
-			return nil, err
-		}
-		vm["expiresAt"] = ser
+		ok := object.Key("expiresAt")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ExpiresAt))
 	}
-	return vm, nil
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
 }
 
-func serializeCBOR_UpdateBillScenarioInput(v *UpdateBillScenarioInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
-	}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
-	if v.ExpiresAt != nil {
-		ser, err := serializeCBOR_Time(*v.ExpiresAt)
-		if err != nil {
-			return nil, err
-		}
-		vm["expiresAt"] = ser
-	}
-	if len(v.GroupSharingPreference) > 0 {
-		ser, err := serializeCBOR_GroupSharingPreferenceEnum(v.GroupSharingPreference)
-		if err != nil {
-			return nil, err
-		}
-		vm["groupSharingPreference"] = ser
-	}
+func awsAwsjson10_serializeOpDocumentUpdateBillScenarioInput(v *UpdateBillScenarioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.CostCategoryGroupSharingPreferenceArn != nil {
-		ser, err := serializeCBOR_String(*v.CostCategoryGroupSharingPreferenceArn)
-		if err != nil {
-			return nil, err
-		}
-		vm["costCategoryGroupSharingPreferenceArn"] = ser
+		ok := object.Key("costCategoryGroupSharingPreferenceArn")
+		ok.String(*v.CostCategoryGroupSharingPreferenceArn)
 	}
-	return vm, nil
-}
 
-func serializeCBOR_UpdatePreferencesInput(v *UpdatePreferencesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ManagementAccountRateTypeSelections != nil {
-		ser, err := serializeCBOR_RateTypes(v.ManagementAccountRateTypeSelections)
-		if err != nil {
-			return nil, err
-		}
-		vm["managementAccountRateTypeSelections"] = ser
-	}
-	if v.MemberAccountRateTypeSelections != nil {
-		ser, err := serializeCBOR_RateTypes(v.MemberAccountRateTypeSelections)
-		if err != nil {
-			return nil, err
-		}
-		vm["memberAccountRateTypeSelections"] = ser
-	}
-	if v.StandaloneAccountRateTypeSelections != nil {
-		ser, err := serializeCBOR_RateTypes(v.StandaloneAccountRateTypeSelections)
-		if err != nil {
-			return nil, err
-		}
-		vm["standaloneAccountRateTypeSelections"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_UpdateWorkloadEstimateInput(v *UpdateWorkloadEstimateInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Identifier != nil {
-		ser, err := serializeCBOR_String(*v.Identifier)
-		if err != nil {
-			return nil, err
-		}
-		vm["identifier"] = ser
-	}
-	if v.Name != nil {
-		ser, err := serializeCBOR_String(*v.Name)
-		if err != nil {
-			return nil, err
-		}
-		vm["name"] = ser
-	}
 	if v.ExpiresAt != nil {
-		ser, err := serializeCBOR_Time(*v.ExpiresAt)
-		if err != nil {
-			return nil, err
-		}
-		vm["expiresAt"] = ser
+		ok := object.Key("expiresAt")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ExpiresAt))
 	}
-	return vm, nil
+
+	if len(v.GroupSharingPreference) > 0 {
+		ok := object.Key("groupSharingPreference")
+		ok.String(string(v.GroupSharingPreference))
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdatePreferencesInput(v *UpdatePreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManagementAccountRateTypeSelections != nil {
+		ok := object.Key("managementAccountRateTypeSelections")
+		if err := awsAwsjson10_serializeDocumentRateTypes(v.ManagementAccountRateTypeSelections, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MemberAccountRateTypeSelections != nil {
+		ok := object.Key("memberAccountRateTypeSelections")
+		if err := awsAwsjson10_serializeDocumentRateTypes(v.MemberAccountRateTypeSelections, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StandaloneAccountRateTypeSelections != nil {
+		ok := object.Key("standaloneAccountRateTypeSelections")
+		if err := awsAwsjson10_serializeDocumentRateTypes(v.StandaloneAccountRateTypeSelections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateWorkloadEstimateInput(v *UpdateWorkloadEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExpiresAt != nil {
+		ok := object.Key("expiresAt")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ExpiresAt))
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
 }

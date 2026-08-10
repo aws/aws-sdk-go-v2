@@ -78,9 +78,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceResourcePolicyMiddlewares(st
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -91,12 +88,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceResourcePolicyMiddlewares(st
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
 	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
@@ -112,9 +103,6 @@ func (c *Client) addOperationGetAccessGrantsInstanceResourcePolicyMiddlewares(st
 		return err
 	}
 	if err = addOpGetAccessGrantsInstanceResourcePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "GetAccessGrantsInstanceResourcePolicy"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {

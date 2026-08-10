@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Timestream for InfluxDB cluster.
@@ -62,6 +61,9 @@ type CreateDbClusterInput struct {
 	// organization.
 	Bucket *string
 
+	// A list of backup configurations to enable automated backups for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// The ID of the DB parameter group to assign to your DB cluster. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
@@ -85,6 +87,10 @@ type CreateDbClusterInput struct {
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	FailoverMode types.FailoverMode
+
+	// The Amazon Web Services KMS key identifier to use for encryption of the DB
+	// cluster. Can be a key ID, key ARN, alias name, or alias ARN.
+	KmsKeyId *string
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
@@ -159,9 +165,6 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -174,19 +177,10 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDbClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateDbCluster"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

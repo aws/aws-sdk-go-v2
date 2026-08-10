@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AmazonTimestreamInfluxDB.DeleteDbCluster
 
-{"dbClusterId":"__DbClusterId__"}
+{"dbClusterId":"__DbClusterId__","retainAutomatedBackups":true}

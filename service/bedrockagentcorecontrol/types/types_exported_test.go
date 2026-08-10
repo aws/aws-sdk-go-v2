@@ -185,6 +185,24 @@ func ExampleCodeBasedEvaluatorConfig_outputUsage() {
 
 var _ *types.LambdaEvaluatorConfig
 
+func ExampleComputeConfiguration_outputUsage() {
+	var union types.ComputeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ComputeConfigurationMemberEc2Configuration:
+		_ = v.Value // Value is types.Ec2Configuration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Ec2Configuration
+
 func ExampleCondition_outputUsage() {
 	var union types.Condition
 	// type switches can be used to check the union value
@@ -636,6 +654,9 @@ func ExampleFilesystemConfiguration_outputUsage() {
 	var union types.FilesystemConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.FilesystemConfigurationMemberCapacityProviderVolume:
+		_ = v.Value // Value is types.CapacityProviderVolumeConfiguration
+
 	case *types.FilesystemConfigurationMemberEfsAccessPoint:
 		_ = v.Value // Value is types.EfsAccessPointConfiguration
 
@@ -656,6 +677,7 @@ func ExampleFilesystemConfiguration_outputUsage() {
 
 var _ *types.S3FilesAccessPointConfiguration
 var _ *types.EfsAccessPointConfiguration
+var _ *types.CapacityProviderVolumeConfiguration
 var _ *types.SessionStorageConfiguration
 
 func ExampleFilterValue_outputUsage() {
@@ -948,6 +970,9 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		_ = v.Value // Value is types.RuntimeTargetConfiguration
 
+	case *types.HttpTargetConfigurationMemberConnector:
+		_ = v.Value // Value is types.HttpConnectorTargetConfiguration
+
 	case *types.HttpTargetConfigurationMemberPassthrough:
 		_ = v.Value // Value is types.PassthroughTargetConfiguration
 
@@ -961,6 +986,7 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 }
 
 var _ *types.RuntimeTargetConfiguration
+var _ *types.HttpConnectorTargetConfiguration
 var _ *types.PassthroughTargetConfiguration
 
 func ExampleInferenceTargetConfiguration_outputUsage() {
@@ -1020,6 +1046,24 @@ func ExampleInterceptorPayloadExclusionSelector_outputUsage() {
 }
 
 var _ types.InterceptorPayloadExclusion
+
+func ExampleLaunchTemplateSource_outputUsage() {
+	var union types.LaunchTemplateSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LaunchTemplateSourceMemberLaunchParameters:
+		_ = v.Value // Value is types.LaunchParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LaunchParameters
 
 func ExampleMatchPrincipalEntry_outputUsage() {
 	var union types.MatchPrincipalEntry
@@ -1747,3 +1791,21 @@ func ExampleValidation_outputUsage() {
 var _ *types.StringValidation
 var _ *types.NumberValidation
 var _ *types.StringListValidation
+
+func ExampleVolumeConfiguration_outputUsage() {
+	var union types.VolumeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VolumeConfigurationMemberEbsConfiguration:
+		_ = v.Value // Value is types.EbsVolumeConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EbsVolumeConfiguration

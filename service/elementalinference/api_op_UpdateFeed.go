@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the name and/or outputs in a feed.
@@ -53,6 +52,11 @@ type UpdateFeedInput struct {
 	//
 	// This member is required.
 	Outputs []types.UpdateOutput
+
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. You can specify the existing role (to leave it
+	// unchanged) or a new role. You specify one access role for each feed.
+	AccessRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -112,9 +116,6 @@ func (c *Client) addOperationUpdateFeedMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -127,19 +128,10 @@ func (c *Client) addOperationUpdateFeedMiddlewares(stack *middleware.Stack, opti
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "UpdateFeed"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

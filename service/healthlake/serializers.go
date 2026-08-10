@@ -2550,6 +2550,11 @@ func awsAwsjson10_serializeOpDocumentStartFHIRImportJobInput(v *StartFHIRImportJ
 		ok.String(*v.ProfileId)
 	}
 
+	if v.ProvenanceEnabled != nil {
+		ok := object.Key("ProvenanceEnabled")
+		ok.Boolean(*v.ProvenanceEnabled)
+	}
+
 	if len(v.ValidationLevel) > 0 {
 		ok := object.Key("ValidationLevel")
 		ok.String(string(v.ValidationLevel))

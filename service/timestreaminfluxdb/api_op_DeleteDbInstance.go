@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -32,6 +31,10 @@ type DeleteDbInstanceInput struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	// Specifies whether to retain automated backups after the DB instance is deleted.
+	// If set to true, automated backups are not deleted and can be restored later.
+	RetainAutomatedBackups *bool
 
 	noSmithyDocumentSerde
 }
@@ -65,6 +68,9 @@ type DeleteDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// The backup configurations that were associated with the deleted DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
 
@@ -95,6 +101,10 @@ type DeleteDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN that was used for encryption of the deleted
+	// DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -145,9 +155,6 @@ func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -160,19 +167,10 @@ func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteDbInstance"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

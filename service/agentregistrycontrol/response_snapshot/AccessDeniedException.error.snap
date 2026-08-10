@@ -1,0 +1,5 @@
+403
+Content-Type: application/json
+X-Amzn-Errortype: AccessDeniedException
+
+{"message":"__Message__"}

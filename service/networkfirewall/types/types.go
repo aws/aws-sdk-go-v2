@@ -177,6 +177,11 @@ type AnalysisTypeReportResult struct {
 //     using CreateVpcEndpointAssociation .
 type Attachment struct {
 
+	// The DNS name that resolves to the firewall endpoint in the subnet. This is
+	// populated for proxy mode firewalls, where clients direct traffic to the
+	// firewall's proxy using this name.
+	DnsName *string
+
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
 	// in the subnet. You use this to identify the firewall endpoint in the VPC route
 	// tables, when you redirect the VPC traffic through the endpoint.
@@ -322,9 +327,9 @@ type CIDRSummary struct {
 	noSmithyDocumentSerde
 }
 
-// High-level information about a container association, returned by the ListContainerAssociations
-// operation. You can use this information to retrieve the full details of a
-// container association using DescribeContainerAssociation.
+// The metadata for a container association returned by ListContainerAssociations .
+// Contains the ARN and name that you use to identify the container association in
+// other operations.
 type ContainerAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the container association.
@@ -336,16 +341,16 @@ type ContainerAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A key-value pair that defines a container attribute filter for a container
-// monitoring configuration.
+// A key-value filter pair used in container association monitoring configurations
+// to narrow which containers are tracked.
 type ContainerAttribute struct {
 
-	// The key of the container attribute to filter on.
+	// The attribute key to filter on.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the container attribute to filter on.
+	// The attribute value to match.
 	//
 	// This member is required.
 	Value *string
@@ -353,17 +358,20 @@ type ContainerAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a container cluster to monitor, along with optional attribute filters
-// that narrow the scope of monitored containers within the cluster.
+// Contains the monitoring configuration for a single cluster in a container
+// association. Specifies the cluster ARN and optional attribute filters to narrow
+// which containers are tracked.
 type ContainerMonitoringConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the container cluster to monitor.
+	// The ARN of the Amazon ECS or Amazon EKS cluster to monitor. The cluster must be
+	// in the same Region and account as the container association.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// A list of key-value pairs that filter which containers within the cluster are
-	// monitored. Only containers that match the specified attributes are included.
+	// Key-value pairs that filter which containers are tracked. For Amazon EKS, you
+	// can filter by namespace and Kubernetes labels. For Amazon ECS, you can filter by
+	// container instance attributes (EC2 launch type only).
 	AttributeFilters []ContainerAttribute
 
 	noSmithyDocumentSerde
@@ -652,8 +660,22 @@ type Firewall struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// The NAT gateways that the firewall uses to proxy traffic. This is set for proxy
+	// mode firewalls, where NoSourcePreservation is TRUE .
+	NatGatewayMappings []NatGatewayMapping
+
+	// Indicates whether the firewall operates in proxy mode, in which the source IP
+	// address of the traffic is not preserved. When this value is TRUE , the firewall
+	// proxies traffic through a NAT gateway and uses the NAT gateway's IP address as
+	// the source for traffic reaching the destination.
+	NoSourcePreservation bool
+
 	// The number of VpcEndpointAssociation resources that use this firewall.
 	NumberOfAssociations *int32
+
+	// The listener configuration for the firewall's proxy. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	ProxySettings *ProxySettings
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
@@ -672,6 +694,10 @@ type Firewall struct {
 	// different from the firewall owner's account ID when using a shared transit
 	// gateway.
 	TransitGatewayOwnerAccountId *string
+
+	// The VPC and subnets for the firewall endpoint. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	VpcEndpoint *VpcEndpoint
 
 	noSmithyDocumentSerde
 }
@@ -757,6 +783,14 @@ type FirewallPolicy struct {
 	//   - aws:alert_strict
 	//
 	//   - aws:alert_established
+	//
+	//   - aws:drop_established_app_layer
+	//
+	//   - aws:alert_established_app_layer
+	//
+	//   - aws:drop_established_app_layer_to_server
+	//
+	//   - aws:alert_established_app_layer_to_server
 	//
 	// For more information, see [Strict evaluation order] in the Network Firewall Developer Guide.
 	//
@@ -1353,6 +1387,46 @@ type MatchAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The definition and status of the attachment between a proxy mode firewall and a
+// NAT gateway that proxies its traffic.
+type NatGatewayAttachment struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	// The current status of the NAT gateway attachment.
+	//
+	// When this value is READY , the attachment is available to proxy traffic.
+	// Otherwise, this value reflects its state, for example CREATING or DELETING .
+	//
+	// This member is required.
+	Status NatGatewayAttachmentStatus
+
+	// The DNS name that resolves to the firewall's proxy for traffic sent through
+	// this NAT gateway attachment.
+	DnsName *string
+
+	// If Network Firewall encounters an issue with the NAT gateway attachment, it
+	// populates this with an explanation of the problem.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in CreateFirewall
+// when NoSourcePreservation is TRUE .
+type NatGatewayMapping struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration status for a single policy or rule group that is used
 // for a firewall endpoint. Network Firewall provides each endpoint with the rules
 // that are configured in the firewall policy. Each time you add a subnet or modify
@@ -1727,6 +1801,18 @@ type ProxyRulesByRequestPhase struct {
 	noSmithyDocumentSerde
 }
 
+// The listener configuration for a proxy mode firewall. This specifies the ports
+// and protocols on which the firewall's proxy listens for traffic.
+type ProxySettings struct {
+
+	// Listener properties for HTTP and HTTPS traffic.
+	//
+	// This member is required.
+	ListenerProperties []ListenerProperty
+
+	noSmithyDocumentSerde
+}
+
 // Stateless inspection criteria that publishes the specified metrics to Amazon
 // CloudWatch for the matching packet. This setting defines a CloudWatch dimension
 // value to be published.
@@ -1950,7 +2036,7 @@ type RuleOption struct {
 	// (signature ID), and can optionally include other keywords. For information about
 	// Suricata compatible keywords, see [Rule options]in the Suricata documentation.
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	//
 	// This member is required.
 	Keyword *string
@@ -1960,7 +2046,7 @@ type RuleOption struct {
 	// the Keyword . For more information about the settings for specific options, see [Rule options]
 	// .
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -1991,7 +2077,7 @@ type RulesSource struct {
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see [Rules Format].
 	//
-	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -2214,6 +2300,11 @@ type SourceMetadata struct {
 
 // Configuration settings for the handling of the stateful rule groups in a
 // firewall policy.
+//
+// Updating any setting in StatefulEngineOptions may require a restart of the
+// stateful engine in order to apply the changes. When this occurs, existing
+// connections will be treated according to your stream exception policy
+// configuration.
 type StatefulEngineOptions struct {
 
 	// Configures the amount of time that can pass without any traffic sent through
@@ -2265,7 +2356,7 @@ type StatefulEngineOptions struct {
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see [Rules Format].
 //
-// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when
@@ -2521,6 +2612,11 @@ type SyncState struct {
 	// firewall policy, Network Firewall synchronizes the rules in the endpoint, so it
 	// can properly filter network traffic.
 	Config map[string]PerObjectStatus
+
+	// The status of the NAT gateway attachments for a proxy mode firewall in the
+	// Availability Zone. This reflects the attachment of the firewall to each NAT
+	// gateway that proxies its traffic.
+	NatGatewayAttachments []NatGatewayAttachment
 
 	noSmithyDocumentSerde
 }
@@ -2789,6 +2885,30 @@ type UniqueSources struct {
 
 	// The number of unique source IP addresses that connected to a domain.
 	Count int32
+
+	noSmithyDocumentSerde
+}
+
+// The VPC and subnets for a proxy mode firewall endpoint. This is used in CreateFirewall when
+// NoSourcePreservation is TRUE , to specify where Network Firewall creates the
+// firewall endpoint.
+//
+// This differs from VpcEndpointAssociation, which defines additional secondary endpoints for a firewall
+// in other VPCs.
+type VpcEndpoint struct {
+
+	// The subnets in which Network Firewall creates the firewall endpoint for a proxy
+	// mode firewall. Each subnet must belong to a different Availability Zone in the
+	// VPC.
+	//
+	// This member is required.
+	SubnetMappings []SubnetMapping
+
+	// The unique identifier of the VPC where Network Firewall creates the proxy mode
+	// firewall endpoint.
+	//
+	// This member is required.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

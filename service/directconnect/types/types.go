@@ -7,6 +7,21 @@ import (
 	"time"
 )
 
+// A segment of an autonomous system (AS) path.
+type AsPathSegment struct {
+
+	// The autonomous system (AS) numbers in the segment.
+	Path []int64
+
+	// The type of the AS path segment.
+	//
+	// The valid values are seq (an ordered AS_SEQUENCE ) and set (an unordered AS_SET
+	// ).
+	PathType AsPathType
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Web Services Cloud WAN core network that the Direct Connect gateway
 // is associated to. This is only returned when a Direct Connect gateway is
 // associated to a Cloud WAN core network.
@@ -1243,6 +1258,39 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a route for a virtual interface.
+type Route struct {
+
+	// The address family of the route.
+	//
+	// The valid values are ipv4 and ipv6 .
+	AddressFamily AddressFamily
+
+	// The autonomous system (AS) path of the route.
+	AsPath []AsPathSegment
+
+	// The Direct Connect endpoint that terminates the logical connection. This device
+	// might be different than the device that terminates the physical connection.
+	AwsLogicalDeviceId *string
+
+	// The CIDR (prefix) of the route.
+	Cidr *string
+
+	// The BGP communities associated with the route.
+	Communities []string
+
+	// The direction of the route.
+	//
+	// The valid values are accepted (received from the customer network) and
+	// advertised (advertised to the customer network).
+	RouteDirection RouteDirection
+
+	// The time when the route was installed. The value is displayed in UTC format.
+	RouteInstalledAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a route filter prefix that a customer can advertise through
 // Border Gateway Protocol (BGP) over a public virtual interface.
 type RouteFilterPrefix struct {
@@ -1250,6 +1298,32 @@ type RouteFilterPrefix struct {
 	// The CIDR block for the advertised route. Separate multiple routes using commas.
 	// An IPv6 CIDR must use /64 or shorter.
 	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+// The filters used to limit the routes returned by ListVirtualInterfaceRoutes.
+type RouteFilters struct {
+
+	// The address family of the routes to return.
+	//
+	// The valid values are ipv4 and ipv6 .
+	AddressFamily AddressFamily
+
+	// The autonomous system (AS) numbers used to filter the routes by their AS path.
+	AsPath []int64
+
+	// The CIDRs (prefixes) used to filter the routes. You can specify up to 10 CIDRs.
+	Cidrs []string
+
+	// The BGP communities used to filter the routes.
+	Communities []string
+
+	// The direction of the routes to return.
+	//
+	// The valid values are accepted (routes received from the customer network) and
+	// advertised (routes advertised to the customer network).
+	RouteDirection RouteDirection
 
 	noSmithyDocumentSerde
 }

@@ -2306,7 +2306,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 },
                 "PositionalConstraint": {
@@ -12166,7 +12166,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
@@ -12239,7 +12239,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
@@ -13704,7 +13704,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
@@ -13859,7 +13859,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 },
                 "SensitivityLevel": {
@@ -15777,7 +15777,7 @@
                 "PreParseTextTransformations": {
                     "target": "com.amazonaws.wafv2#PreParseTextTransformations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 10 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },

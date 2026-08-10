@@ -1,0 +1,5 @@
+POST /contact/task-template
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","TaskTemplateId":"__TaskTemplateId__"}

@@ -2391,8 +2391,9 @@ func TestCheckRequestSnapshot_ModifyClientProperties(t *testing.T) {
 	input := &ModifyClientPropertiesInput{
 		ResourceId: ptr.String("__ResourceId__"),
 		ClientProperties: &types.ClientProperties{
-			ReconnectEnabled: types.ReconnectEnum("ENABLED"),
-			LogUploadEnabled: types.LogUploadEnum("ENABLED"),
+			ReconnectEnabled:       types.ReconnectEnum("ENABLED"),
+			LogUploadEnabled:       types.LogUploadEnum("ENABLED"),
+			ClientExperiencePolicy: ptr.String("__ClientExperiencePolicy__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5559,8 +5560,9 @@ func TestUpdateRequestSnapshot_ModifyClientProperties(t *testing.T) {
 	input := &ModifyClientPropertiesInput{
 		ResourceId: ptr.String("__ResourceId__"),
 		ClientProperties: &types.ClientProperties{
-			ReconnectEnabled: types.ReconnectEnum("ENABLED"),
-			LogUploadEnabled: types.LogUploadEnum("ENABLED"),
+			ReconnectEnabled:       types.ReconnectEnum("ENABLED"),
+			LogUploadEnabled:       types.LogUploadEnum("ENABLED"),
+			ClientExperiencePolicy: ptr.String("__ClientExperiencePolicy__"),
 		},
 	}
 	body := &bytes.Buffer{}

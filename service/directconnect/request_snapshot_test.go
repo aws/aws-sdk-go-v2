@@ -1944,6 +1944,51 @@ func TestCheckRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
+	input := &ListVirtualInterfaceRoutesInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		Filters: &types.RouteFilters{
+			RouteDirection: types.RouteDirection("accepted"),
+			AddressFamily:  types.AddressFamily("ipv4"),
+			Cidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AsPath: []int64{
+				1,
+				1,
+			},
+			Communities: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListVirtualInterfaceRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListVirtualInterfaceRoutes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListVirtualInterfaceTestHistory(t *testing.T) {
 	input := &ListVirtualInterfaceTestHistoryInput{
 		TestId:             ptr.String("__TestId__"),
@@ -4024,6 +4069,51 @@ func TestUpdateRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateMacSecKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
+	input := &ListVirtualInterfaceRoutesInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		Filters: &types.RouteFilters{
+			RouteDirection: types.RouteDirection("accepted"),
+			AddressFamily:  types.AddressFamily("ipv4"),
+			Cidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AsPath: []int64{
+				1,
+				1,
+			},
+			Communities: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListVirtualInterfaceRoutes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListVirtualInterfaceRoutes"); err != nil {
 		t.Fatal(err)
 	}
 }

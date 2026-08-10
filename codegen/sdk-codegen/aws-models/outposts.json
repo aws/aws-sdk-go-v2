@@ -44,6 +44,12 @@
                         "smithy.api#enumValue": "EC2"
                     }
                 },
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
+                    }
+                },
                 "ELASTICACHE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -184,7 +190,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about an address. </p>"
+                "smithy.api#documentation": "<p> Information about an address. </p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.outposts#AddressLine1": {

@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Approves a step in a plan execution that requires manual approval. When you
@@ -115,9 +114,6 @@ func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middlewa
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -130,12 +126,6 @@ func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middlewa
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
@@ -143,9 +133,6 @@ func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpApprovePlanExecutionStepValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ApprovePlanExecutionStep"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

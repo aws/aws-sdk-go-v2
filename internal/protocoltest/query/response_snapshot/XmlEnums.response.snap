@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=XmlEnums&Version=2020-01-08&fooEnum1=Foo&fooEnum2=Foo&fooEnum3=Foo&fooEnumList.member.1=Foo&fooEnumList.member.2=Foo&fooEnumMap.entry.1.key=key0&fooEnumMap.entry.1.value=Foo&fooEnumSet.member.1=Foo&fooEnumSet.member.2=Foo

@@ -4551,6 +4551,39 @@ type ResourceFilterCriteria struct {
 	// The account IDs used as resource filter criteria.
 	AccountId []ResourceStringFilter
 
+	// The cloud container image tags used as resource filter criteria.
+	CloudContainerImageTags []ResourceStringFilter
+
+	// The cloud container registry names used as resource filter criteria.
+	CloudContainerRegistryName []ResourceStringFilter
+
+	// The cloud container repository names used as resource filter criteria.
+	CloudContainerRepositoryName []ResourceStringFilter
+
+	// The cloud providers used as resource filter criteria.
+	CloudProvider []ResourceStringFilter
+
+	// The cloud provider account IDs used as resource filter criteria.
+	CloudProviderAccountId []ResourceStringFilter
+
+	// The cloud provider organization IDs used as resource filter criteria.
+	CloudProviderOrgId []ResourceStringFilter
+
+	// The cloud provider regions used as resource filter criteria.
+	CloudProviderRegion []ResourceStringFilter
+
+	// The cloud serverless function names used as resource filter criteria.
+	CloudServerlessFunctionName []ResourceStringFilter
+
+	// The cloud serverless function runtimes used as resource filter criteria.
+	CloudServerlessFunctionRuntime []ResourceStringFilter
+
+	// The cloud serverless function tags used as resource filter criteria.
+	CloudServerlessFunctionTags []ResourceMapFilter
+
+	// The cloud VM instance tags used as resource filter criteria.
+	CloudVmInstanceTags []ResourceMapFilter
+
 	// The EC2 instance tags used as resource filter criteria.
 	Ec2InstanceTags []ResourceMapFilter
 

@@ -1,0 +1,5 @@
+429
+Content-Type: application/json
+X-Amzn-Errortype: ThrottlingException
+
+{"message":"__Message__"}

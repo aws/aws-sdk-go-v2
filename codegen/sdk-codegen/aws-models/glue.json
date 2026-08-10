@@ -415,6 +415,9 @@
                     "target": "com.amazonaws.glue#GetDataCatalogEncryptionSettings"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetDataCatalogExportConfiguration"
+                },
+                {
                     "target": "com.amazonaws.glue#GetDataflowGraph"
                 },
                 {
@@ -710,6 +713,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#PutDataCatalogEncryptionSettings"
+                },
+                {
+                    "target": "com.amazonaws.glue#PutDataCatalogExportConfiguration"
                 },
                 {
                     "target": "com.amazonaws.glue#PutDataQualityProfileAnnotation"
@@ -21046,6 +21052,26 @@
                 }
             }
         },
+        "com.amazonaws.glue#ExportEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "SseAlgorithm": {
+                    "target": "com.amazonaws.glue#SseAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm used for the exported data. Valid values are <code>AES256</code> and <code>aws:kms</code>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.glue#KmsKeyArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt the exported data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The encryption configuration for exported data catalog metadata.</p>"
+            }
+        },
         "com.amazonaws.glue#ExportLabelsTaskRunProperties": {
             "type": "structure",
             "members": {
@@ -21058,6 +21084,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies configuration properties for an exporting labels task run.</p>"
+            }
+        },
+        "com.amazonaws.glue#ExportSetting": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The export setting for the data catalog.</p>"
+            }
+        },
+        "com.amazonaws.glue#ExportStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLING"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current status of the data catalog export.</p>"
             }
         },
         "com.amazonaws.glue#ExtendedString": {
@@ -24035,6 +24119,89 @@
                     "target": "com.amazonaws.glue#DataCatalogEncryptionSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The requested security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataCatalogExportConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetDataCatalogExportConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetDataCatalogExportConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current export configuration for the Glue Data Catalog. The export configuration controls whether catalog metadata is exported to S3 Tables.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-data-catalog-export-configuration",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataCatalogExportConfigurationInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataCatalogExportConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ExportSetting": {
+                    "target": "com.amazonaws.glue#ExportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export setting for the data catalog. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.glue#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export. Valid values are <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, <code>DISABLED</code>, and <code>FAILED</code>.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the exported data.</p>"
+                    }
+                },
+                "S3TableBucketArn": {
+                    "target": "com.amazonaws.glue#S3TableBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the S3 Tables bucket where catalog metadata is exported.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.glue#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the export configuration was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.glue#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the export configuration was last updated.</p>"
                     }
                 }
             },
@@ -34108,6 +34275,12 @@
                 "smithy.api#pattern": "^$|arn:aws[a-z0-9-]*:kms:"
             }
         },
+        "com.amazonaws.glue#KmsKeyArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+$"
+            }
+        },
         "com.amazonaws.glue#LabelCount": {
             "type": "integer",
             "traits": {
@@ -40733,6 +40906,88 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#PutDataCatalogExportConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutDataCatalogExportConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutDataCatalogExportConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the export configuration for the Glue Data Catalog. Use this operation to enable or disable the export of catalog metadata to S3 Tables.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/put-data-catalog-export-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.glue#PutDataCatalogExportConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ExportSetting": {
+                    "target": "com.amazonaws.glue#ExportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export setting for the data catalog. Specify <code>ENABLED</code> to start exporting catalog metadata to S3 Tables, or <code>DISABLED</code> to stop exporting. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the exported data. If not specified, the default encryption settings are used.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutDataCatalogExportConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ExportSetting": {
+                    "target": "com.amazonaws.glue#ExportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export setting for the data catalog.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the exported data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#PutDataQualityProfileAnnotation": {
             "type": "operation",
             "input": {
@@ -44146,6 +44401,9 @@
                 "smithy.api#documentation": "<p>Specifies additional connection options for the Amazon S3 data store.</p>"
             }
         },
+        "com.amazonaws.glue#S3TableBucketArn": {
+            "type": "string"
+        },
         "com.amazonaws.glue#S3Target": {
             "type": "structure",
             "members": {
@@ -46460,6 +46718,9 @@
             "traits": {
                 "smithy.api#pattern": "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\s])*$"
             }
+        },
+        "com.amazonaws.glue#SseAlgorithm": {
+            "type": "string"
         },
         "com.amazonaws.glue#StartBlueprintRun": {
             "type": "operation",

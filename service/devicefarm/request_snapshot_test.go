@@ -937,6 +937,10 @@ func TestCheckRequestSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 				},
 			},
 			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
 		},
 		ProjectArn: ptr.String("__ProjectArn__"),
 	}
@@ -2188,6 +2192,10 @@ func TestCheckRequestSnapshot_ScheduleRun(t *testing.T) {
 				},
 			},
 			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
 		},
 		ExecutionConfiguration: &types.ExecutionConfiguration{
 			JobTimeoutMinutes:  ptr.Int32(1),
@@ -3422,6 +3430,10 @@ func TestUpdateRequestSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 				},
 			},
 			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
 		},
 		ProjectArn: ptr.String("__ProjectArn__"),
 	}
@@ -4673,6 +4685,10 @@ func TestUpdateRequestSnapshot_ScheduleRun(t *testing.T) {
 				},
 			},
 			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			InsightsTypes: []types.InsightsType{
+				types.InsightsType("TEST_REPORT"),
+				types.InsightsType("TEST_REPORT"),
+			},
 		},
 		ExecutionConfiguration: &types.ExecutionConfiguration{
 			JobTimeoutMinutes:  ptr.Int32(1),

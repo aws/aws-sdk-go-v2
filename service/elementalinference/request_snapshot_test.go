@@ -190,7 +190,24 @@ func TestCheckRequestSnapshot_AssociateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -198,7 +215,24 @@ func TestCheckRequestSnapshot_AssociateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -263,12 +297,30 @@ func TestCheckRequestSnapshot_CreateDictionary(t *testing.T) {
 
 func TestCheckRequestSnapshot_CreateFeed(t *testing.T) {
 	input := &CreateFeedInput{
-		Name: ptr.String("__Name__"),
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
 		Outputs: []types.CreateOutput{
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -276,7 +328,24 @@ func TestCheckRequestSnapshot_CreateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -649,13 +718,31 @@ func TestCheckRequestSnapshot_UpdateDictionary(t *testing.T) {
 
 func TestCheckRequestSnapshot_UpdateFeed(t *testing.T) {
 	input := &UpdateFeedInput{
-		Name: ptr.String("__Name__"),
-		Id:   ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Id:            ptr.String("__Id__"),
 		Outputs: []types.UpdateOutput{
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -664,7 +751,24 @@ func TestCheckRequestSnapshot_UpdateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -702,7 +806,24 @@ func TestUpdateRequestSnapshot_AssociateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -710,7 +831,24 @@ func TestUpdateRequestSnapshot_AssociateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -775,12 +913,30 @@ func TestUpdateRequestSnapshot_CreateDictionary(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CreateFeed(t *testing.T) {
 	input := &CreateFeedInput{
-		Name: ptr.String("__Name__"),
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
 		Outputs: []types.CreateOutput{
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -788,7 +944,24 @@ func TestUpdateRequestSnapshot_CreateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:      types.OutputStatus("ENABLED"),
 				Description: ptr.String("__Description__"),
@@ -1161,13 +1334,31 @@ func TestUpdateRequestSnapshot_UpdateDictionary(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UpdateFeed(t *testing.T) {
 	input := &UpdateFeedInput{
-		Name: ptr.String("__Name__"),
-		Id:   ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Id:            ptr.String("__Id__"),
 		Outputs: []types.UpdateOutput{
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -1176,7 +1367,24 @@ func TestUpdateRequestSnapshot_UpdateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),

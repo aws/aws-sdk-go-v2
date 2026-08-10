@@ -27,6 +27,28 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.resiliencehubv2#AccountTargeting": {
+            "type": "enum",
+            "members": {
+                "SINGLE_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Test run targets resources in the same account only.",
+                        "smithy.api#enumValue": "SINGLE_ACCOUNT"
+                    }
+                },
+                "MULTI_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Test run targets resources across multiple accounts.",
+                        "smithy.api#enumValue": "MULTI_ACCOUNT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Whether a test run targets resources in a single AWS account or across multiple accounts."
+            }
+        },
         "com.amazonaws.resiliencehubv2#Achievability": {
             "type": "structure",
             "members": {
@@ -604,6 +626,17 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9_.-]{0,63}$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN of a CloudWatch alarm.</p>",
+                "smithy.api#length": {
+                    "min": 31,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:cloudwatch:[a-z]{2}(-[a-z]+)+-\\d{1}:\\d{12}:alarm:.+$"
             }
         },
         "com.amazonaws.resiliencehubv2#ConflictException": {
@@ -1346,7 +1379,7 @@
                 "regions": {
                     "target": "com.amazonaws.resiliencehubv2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the service operates.</p>",
+                        "smithy.api#documentation": "<p>The Regions where the service operates.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1494,6 +1527,113 @@
                     "target": "com.amazonaws.resiliencehubv2#System",
                     "traits": {
                         "smithy.api#documentation": "<p>The created system.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#CreateTest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#CreateTestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#CreateTestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a test instance",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "test-template": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a test for a service by configuring a test template. Each service has one test per template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/create-test"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#CreateTestRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service to create the test for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template to configure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration for the test.</p>"
+                    }
+                },
+                "stopConditions": {
+                    "target": "com.amazonaws.resiliencehubv2#StopConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stop conditions for the test.</p>"
+                    }
+                },
+                "roleName": {
+                    "target": "com.amazonaws.resiliencehubv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM execution role to use when running the test.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.resiliencehubv2#TestParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter values for the test.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#CreateTestResponse": {
+            "type": "structure",
+            "members": {
+                "test": {
+                    "target": "com.amazonaws.resiliencehubv2#Test",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created test.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2280,6 +2420,169 @@
                 ]
             }
         },
+        "com.amazonaws.resiliencehubv2#DeleteTest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#DeleteTestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#DeleteTestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a test.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/delete-test"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DeleteTestRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DeleteTestResponse": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the deleted test.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DeleteTestSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#DeleteTestSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#DeleteTestSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete test sources from a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Removes monitoring sources from a test. The operation is transactional and idempotent — removing a source that is not attached is a no-op.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/delete-test-sources"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DeleteTestSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to remove sources from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testSources": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSourceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monitoring sources to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DeleteTestSourcesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resiliencehubv2#DeleteUserJourney": {
             "type": "operation",
             "input": {
@@ -2790,6 +3093,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Identifies the actor that triggered an event.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ExperimentArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#Arn"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ExperimentDetails": {
+            "type": "structure",
+            "members": {
+                "experimentArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS FIS experiment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "details": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details about the experiment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an AWS Fault Injection Service (AWS FIS) experiment run as part of a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ExperimentDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#ExperimentDetails"
             }
         },
         "com.amazonaws.resiliencehubv2#FailedReportOutput": {
@@ -3447,6 +3783,235 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resiliencehubv2#GetTest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves a test by ID.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/get-test"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to retrieve.</p>",
+                        "smithy.api#httpQuery": "testId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestResponse": {
+            "type": "structure",
+            "members": {
+                "test": {
+                    "target": "com.amazonaws.resiliencehubv2#Test",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested test.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a test run",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves a test run by ID, including its status, results, and the configuration snapshotted when the run started.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/get-test-run"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestRunRequest": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test run to retrieve.</p>",
+                        "smithy.api#httpQuery": "testRunId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestRunResponse": {
+            "type": "structure",
+            "members": {
+                "testRun": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#GetTestTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a test template"
+                },
+                "smithy.api#documentation": "<p>Retrieves a resilience test template by ARN, including the parameters it accepts and the fault actions it runs.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/get-test-template"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template to retrieve.</p>",
+                        "smithy.api#httpQuery": "testTemplateArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetTestTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "testTemplate": {
+                    "target": "com.amazonaws.resiliencehubv2#TestTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resiliencehubv2#GetUserJourney": {
             "type": "operation",
             "input": {
@@ -3603,9 +4168,9 @@
                 "smithy.api#documentation": "<p>IAM role name (supports up to 64 characters per IAM limits).</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 576
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9_+=,.@\\-]{1,64}$"
+                "smithy.api#pattern": "^([A-Za-z0-9_+=,.@\\-]+/)*[A-Za-z0-9_+=,.@\\-]+$"
             }
         },
         "com.amazonaws.resiliencehubv2#IamServiceResource": {
@@ -4865,6 +5430,12 @@
                         "smithy.api#httpQuery": "reportType"
                     }
                 },
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#httpQuery": "testRunId"
+                    }
+                },
                 "maxResults": {
                     "target": "com.amazonaws.resiliencehubv2#MaxResults",
                     "traits": {
@@ -4895,6 +5466,110 @@
                     "target": "com.amazonaws.resiliencehubv2#ReportGenerationResultList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of report generation results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list resolved target resources for a test run",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the AWS resources that AWS Fault Injection Service (AWS FIS) resolved as targets for a test run.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/test-runs/{testRunId}/resolved-target-resources"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "resolvedTargetResources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test run to list resolved target resources for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "resolvedTargetResources": {
+                    "target": "com.amazonaws.resiliencehubv2#ResolvedTargetResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resolved target resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5768,6 +6443,598 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resiliencehubv2#ListTestRunEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list events for a test run",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the events in a test run's timeline.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/test-runs/{testRunId}/events"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "events"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunEventsRequest": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test run to list events for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return events at or after this timestamp.</p>",
+                        "smithy.api#httpQuery": "startedAt"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return events at or before this timestamp.</p>",
+                        "smithy.api#httpQuery": "endedAt"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunEventsResponse": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of test run events.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list test run source snapshots",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the monitoring source snapshots captured for a test run, optionally filtered by type.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/test-runs/{testRunId}/sources"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "testRunSources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test run to list sources for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter sources by type.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "testRunSources": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunSourceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of monitoring source snapshots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list test runs for a target",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the runs of a test, or all test runs for a service.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/list-test-runs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "testRuns"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service to list test runs for.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter test runs by test identifier.</p>",
+                        "smithy.api#httpQuery": "testId"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestRunsResponse": {
+            "type": "structure",
+            "members": {
+                "testRuns": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of test run summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list test sources on a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the monitoring sources attached to a test, optionally filtered by type.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/tests/{testId}/sources"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "testSources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to list sources for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter sources by type.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "testSources": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSourceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of configured monitoring sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list available test templates"
+                },
+                "smithy.api#documentation": "<p>Lists the available resilience test templates. A test template is a pre-configured, AWS recommended test that defines which resilience capability to validate.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/list-test-templates"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestTemplatesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "testTemplates": {
+                    "target": "com.amazonaws.resiliencehubv2#TestTemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of test template summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTests": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListTestsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list tests for a target",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the tests configured for a service.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/list-tests"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "tests"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service to list tests for.</p>",
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListTestsResponse": {
+            "type": "structure",
+            "members": {
+                "tests": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of test summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resiliencehubv2#ListUserJourneys": {
             "type": "operation",
             "input": {
@@ -5866,6 +7133,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3BucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket for log delivery.</p>"
+                    }
+                },
+                "cloudWatchLogGroupArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch Logs log group for log delivery.</p>"
+                    }
+                },
+                "logSchemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the log schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for test execution logging destinations.</p>"
             }
         },
         "com.amazonaws.resiliencehubv2#LongDescription": {
@@ -6051,6 +7344,9 @@
                     "target": "com.amazonaws.resiliencehubv2#CreateSystem"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#CreateTest"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#CreateUserJourney"
                 },
                 {
@@ -6075,6 +7371,12 @@
                     "target": "com.amazonaws.resiliencehubv2#DeleteSystem"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#DeleteTest"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#DeleteTestSources"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#DeleteUserJourney"
                 },
                 {
@@ -6088,6 +7390,15 @@
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#GetSystem"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#GetTest"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#GetTestRun"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#GetTestTemplate"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#GetUserJourney"
@@ -6120,6 +7431,9 @@
                     "target": "com.amazonaws.resiliencehubv2#ListReports"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#ListResolvedTestRunTargetResources"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#ListResources"
                 },
                 {
@@ -6144,10 +7458,37 @@
                     "target": "com.amazonaws.resiliencehubv2#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#ListTestRunEvents"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListTestRuns"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListTestRunSources"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListTests"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListTestSources"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListTestTemplates"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#ListUserJourneys"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#PutTestSources"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#StartFailureModeAssessment"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#StartTestRun"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#StopTestRun"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#TagResource"
@@ -6175,6 +7516,9 @@
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#UpdateSystem"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#UpdateTest"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#UpdateUserJourney"
@@ -7060,6 +8404,63 @@
                 "smithy.api#pattern": "^\\S{1,2000}$"
             }
         },
+        "com.amazonaws.resiliencehubv2#ObservabilityAlarmInput": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies an observability alarm by its ARN.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ObservabilityAlarmSummary": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID that owns the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the source was configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a configured observability alarm.</p>"
+            }
+        },
         "com.amazonaws.resiliencehubv2#ObservabilityRecommendation": {
             "type": "structure",
             "members": {
@@ -7103,6 +8504,52 @@
                     "max": 68
                 },
                 "smithy.api#pattern": "^ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The key of a test parameter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\w.-]+$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ParameterType": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "STRING_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LIST"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data type of a test template parameter.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A value of a test parameter.</p>",
+                "smithy.api#length": {
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.resiliencehubv2#PermissionModel": {
@@ -7320,6 +8767,90 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#PutTestSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#PutTestSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#PutTestSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to put test sources on a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Adds or updates the monitoring sources on a test. The operation is transactional — either every source is written or the call fails and nothing is written.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/put-test-sources"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PutTestSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to add sources to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testSources": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSourceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monitoring sources to add or update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PutTestSourcesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resiliencehubv2#QueryDataPoint": {
             "type": "structure",
             "members": {
@@ -7419,6 +8950,17 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#RegionSwitchExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier of an ARC Region switch plan execution detected during a test run.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z]{2}(-[a-z]+)+-[0-9]+/[0-9a-fA-F]{16}$"
+            }
+        },
         "com.amazonaws.resiliencehubv2#ReportGenerationErrorCode": {
             "type": "enum",
             "members": {
@@ -7473,6 +9015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Present for FAILURE_MODE reports.</p>"
                     }
+                },
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId"
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn"
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
@@ -7580,6 +9128,93 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILURE_MODE"
                     }
+                },
+                "TESTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TESTING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResolvedTargetInformation": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resiliencehubv2#ResolvedTargetInformationKey"
+            },
+            "value": {
+                "target": "com.amazonaws.resiliencehubv2#ResolvedTargetInformationValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResolvedTargetInformationKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The key of a resolved target information entry.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResolvedTargetInformationValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a resolved target information entry.</p>",
+                "smithy.api#length": {
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResolvedTargetResource": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS FIS resource type the target belongs to, such as aws:ec2:instance, aws:ecs:task, or aws:eks:pod.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target in the AWS FIS experiment template.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetInformation": {
+                    "target": "com.amazonaws.resiliencehubv2#ResolvedTargetInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw target information map as returned by AWS FIS.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single AWS resource that AWS Fault Injection Service (AWS FIS) resolved as a target during a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResolvedTargetResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#ResolvedTargetResource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
                 }
             }
         },
@@ -7952,7 +9587,7 @@
                 "regions": {
                     "target": "com.amazonaws.resiliencehubv2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the service operates.</p>"
+                        "smithy.api#documentation": "<p>The Regions where the service operates.</p>"
                     }
                 },
                 "permissionModel": {
@@ -8682,6 +10317,16 @@
                 "smithy.api#documentation": "<p>Metadata for a service input sources updated event.</p>"
             }
         },
+        "com.amazonaws.resiliencehubv2#ServiceOwnedArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An ARN owned by the service. Accepts either a standard 12-digit account ID or the literal \"aws\" for AWS-managed resources, such as AWS-managed test templates.</p>",
+                "smithy.api#length": {
+                    "min": 31
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):([0-9]{12}|aws):[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$"
+            }
+        },
         "com.amazonaws.resiliencehubv2#ServicePolicyAssociatedMetadata": {
             "type": "structure",
             "members": {
@@ -8901,7 +10546,7 @@
                 "regions": {
                     "target": "com.amazonaws.resiliencehubv2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Regions where the service operates.</p>"
+                        "smithy.api#documentation": "<p>The Regions where the service operates.</p>"
                     }
                 },
                 "policyArn": {
@@ -9264,6 +10909,239 @@
                 ]
             }
         },
+        "com.amazonaws.resiliencehubv2#StartTestRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#StartTestRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#StartTestRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to start a test run",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Starts a run of a test. Each run scopes to the current resources in the service and produces a pass or fail outcome.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/start-test-run"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StartTestRunRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StartTestRunResponse": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the started test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the started test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "experimentArns": {
+                    "target": "com.amazonaws.resiliencehubv2#ExperimentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the AWS Fault Injection Service (AWS FIS) experiments started for the run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopCondition": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.resiliencehubv2#StopConditionSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the stop condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the stop condition, such as the ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudWatch alarm that automatically stops a test run if it breaches its threshold.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#StopCondition"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopConditionSource": {
+            "type": "enum",
+            "members": {
+                "AWS_CLOUDWATCH_ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws:cloudwatch:alarm"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of a test stop condition, matching AWS Fault Injection Service (AWS FIS) stop condition sources.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopTestRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#StopTestRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#StopTestRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to stop a test run",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Stops an in-progress test run.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/stop-test-run"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopTestRunRequest": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test run to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StopTestRunResponse": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the stopped test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resiliencehubv2#StringChange": {
             "type": "structure",
             "members": {
@@ -9282,6 +11160,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a change from one string value to another.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#ParameterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#SuccessCriteriaAlarmInput": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a success criteria alarm by its ARN.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#SuccessCriteriaAlarmSummary": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID that owns the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the source was configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a configured success criteria alarm.</p>"
             }
         },
         "com.amazonaws.resiliencehubv2#SuggestedChangesList": {
@@ -10007,6 +11953,999 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains an effective RTO or RPO value and its source.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#Test": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template the test was created from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.resiliencehubv2#TestActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fault actions the test runs.</p>"
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration for the test.</p>"
+                    }
+                },
+                "stopConditions": {
+                    "target": "com.amazonaws.resiliencehubv2#StopConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stop conditions for the test.</p>"
+                    }
+                },
+                "roleName": {
+                    "target": "com.amazonaws.resiliencehubv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM execution role used to run the test.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.resiliencehubv2#TestParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter values configured for the test.</p>"
+                    }
+                },
+                "totalTestRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of runs of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "successfulTestRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful runs of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a test created for a service by configuring a test template.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestAction": {
+            "type": "structure",
+            "members": {
+                "actionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the fault action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the fault action.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type that the action targets.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a fault action that a test runs, along with the resource type it targets.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestAction"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The unique identifier of a test.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resiliencehubv2#ParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.resiliencehubv2#StringList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRun": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test that was run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test run started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test run ended.</p>"
+                    }
+                },
+                "experiments": {
+                    "target": "com.amazonaws.resiliencehubv2#ExperimentDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Fault Injection Service (AWS FIS) experiments run as part of the test run.</p>"
+                    }
+                },
+                "eventCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of events recorded for the test run. Use ListTestRunEvents to retrieve the details.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.resiliencehubv2#TestParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter values used for the test run.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable reason for test run failure. Only present when the status is FAILED or ERROR.</p>"
+                    }
+                },
+                "stopConditions": {
+                    "target": "com.amazonaws.resiliencehubv2#StopConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stop conditions snapshotted from the test when the run was started.</p>"
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration snapshotted from the test when the run was started.</p>"
+                    }
+                },
+                "roleName": {
+                    "target": "com.amazonaws.resiliencehubv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM execution role name snapshotted from the test when the run was started.</p>"
+                    }
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template snapshotted from the test when the run was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunReportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report configuration snapshotted from the service when the run was started.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunPolicySnapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resilience policy snapshotted from the service when the run was started.</p>"
+                    }
+                },
+                "reportOutput": {
+                    "target": "com.amazonaws.resiliencehubv2#ReportGenerationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report generation result for the test run. Present after report generation completes or fails.</p>"
+                    }
+                },
+                "regionSwitchPlanArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the ARC Region switch plan associated with the test run.</p>"
+                    }
+                },
+                "regionSwitchExecutionId": {
+                    "target": "com.amazonaws.resiliencehubv2#RegionSwitchExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the ARC Region switch execution detected during the test run.</p>"
+                    }
+                },
+                "permissionModel": {
+                    "target": "com.amazonaws.resiliencehubv2#PermissionModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permission model snapshotted from the service when the run was started.</p>"
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.resiliencehubv2#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Regions snapshotted from the service when the run was started.</p>"
+                    }
+                },
+                "accountTargeting": {
+                    "target": "com.amazonaws.resiliencehubv2#AccountTargeting",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether this test run targets a single account or multiple accounts."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single run of a test. Configuration is snapshotted from the test and service at the time the run is started.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEvent": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the event.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the event, such as action_started, action_completed, or rto_recovery_detected.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of what happened.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunEventAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Machine-parseable key-value attributes for the event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single event in a test run's timeline.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEventAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The key of a test run event attribute.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEventAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a test run event attribute.</p>",
+                "smithy.api#length": {
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEventAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resiliencehubv2#TestRunEventAttributeKey"
+            },
+            "value": {
+                "target": "com.amazonaws.resiliencehubv2#TestRunEventAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestRunEvent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The unique identifier of a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunObservabilityAlarmSummary": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID that owns the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an observability alarm snapshot captured for a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunPolicySnapshot": {
+            "type": "structure",
+            "members": {
+                "policyArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the policy.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.resiliencehubv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy.</p>"
+                    }
+                },
+                "availabilitySlo": {
+                    "target": "com.amazonaws.resiliencehubv2#AvailabilitySlo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability SLO targets.</p>"
+                    }
+                },
+                "multiAz": {
+                    "target": "com.amazonaws.resiliencehubv2#MultiAzTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multi-AZ resilience targets.</p>"
+                    }
+                },
+                "multiRegion": {
+                    "target": "com.amazonaws.resiliencehubv2#MultiRegionTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multi-Region resilience targets.</p>"
+                    }
+                },
+                "dataRecovery": {
+                    "target": "com.amazonaws.resiliencehubv2#DataRecoveryTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data recovery targets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A snapshot of the resilience policy captured onto a test run from the service when the run was started.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunReportConfiguration": {
+            "type": "structure",
+            "members": {
+                "reportOutput": {
+                    "target": "com.amazonaws.resiliencehubv2#ReportOutputConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output destinations for generated reports.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A snapshot of the report configuration captured onto a test run from the service when the run was started.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSourceSummary": {
+            "type": "union",
+            "members": {
+                "successCriteriaAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunSuccessCriteriaAlarmSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A success criteria alarm snapshot captured for the test run.</p>"
+                    }
+                },
+                "observabilityAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunObservabilityAlarmSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An observability alarm snapshot captured for the test run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A monitoring-source snapshot captured for a test run. Exactly one member is set.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSourceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestRunSourceSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSourceType": {
+            "type": "enum",
+            "members": {
+                "SUCCESS_CRITERIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS_CRITERIA"
+                    }
+                },
+                "OBSERVABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBSERVABILITY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a test run monitoring-source snapshot.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a test run through its lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSuccessCriteriaAlarmSummary": {
+            "type": "structure",
+            "members": {
+                "alarmArn": {
+                    "target": "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID that owns the CloudWatch alarm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outcome": {
+                    "target": "com.amazonaws.resiliencehubv2#TestSourceOutcome",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation outcome of the source. Absent while the source has not yet been evaluated; set to the terminal outcome afterwards.</p>"
+                    }
+                },
+                "outcomeReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable reason for the outcome.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a success criteria alarm snapshot captured for a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSummary": {
+            "type": "structure",
+            "members": {
+                "testRunId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the test run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test run started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test run ended.</p>"
+                    }
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template the test run was based on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test run belongs to.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable reason for test run failure. Only present when the status is FAILED or ERROR.</p>"
+                    }
+                },
+                "accountTargeting": {
+                    "target": "com.amazonaws.resiliencehubv2#AccountTargeting",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether this test run targets a single account or multiple accounts."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a test run.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestRunSummary"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceInput": {
+            "type": "union",
+            "members": {
+                "successCriteriaAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#SuccessCriteriaAlarmInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A success criteria alarm that determines whether the test passes or fails.</p>"
+                    }
+                },
+                "observabilityAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#ObservabilityAlarmInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An observability alarm included for visibility only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a monitoring source to add to or remove from a test. Exactly one member is set.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestSourceInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceOutcome": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The evaluation outcome of a test run success criteria source.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceSummary": {
+            "type": "union",
+            "members": {
+                "successCriteriaAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#SuccessCriteriaAlarmSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A configured success criteria alarm.</p>"
+                    }
+                },
+                "observabilityAlarm": {
+                    "target": "com.amazonaws.resiliencehubv2#ObservabilityAlarmSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A configured observability alarm.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configured monitoring source returned by ListTestSources. Exactly one member is set.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestSourceSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSourceType": {
+            "type": "enum",
+            "members": {
+                "SUCCESS_CRITERIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS_CRITERIA"
+                    }
+                },
+                "OBSERVABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBSERVABILITY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The purpose of a test monitoring source.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSummary": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template the test was created from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalTestRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of runs of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "successfulTestRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful runs of the test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the test was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a test.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestSummary"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestTemplate": {
+            "type": "structure",
+            "members": {
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the test template.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.resiliencehubv2#TestTemplateParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters the test template accepts.</p>"
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.resiliencehubv2#TestActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fault actions the test template runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pre-configured, AWS recommended test that defines which resilience capability to validate, the fault actions it runs, and the parameters it accepts.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestTemplateParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the parameter.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.resiliencehubv2#ParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the parameter is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of the parameter.</p>"
+                    }
+                },
+                "maxValues": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of values the parameter accepts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a parameter accepted by a test template.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestTemplateParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestTemplateParameter"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestTemplateSummary": {
+            "type": "structure",
+            "members": {
+                "testTemplateArn": {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceOwnedArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the test template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a test template.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestTemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#TestTemplateSummary"
             }
         },
         "com.amazonaws.resiliencehubv2#TestingRecommendation": {
@@ -10917,6 +13856,112 @@
                     "target": "com.amazonaws.resiliencehubv2#System",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated system.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#UpdateTest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#UpdateTestRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#UpdateTestResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a test",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates the configuration of an existing test.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/update-test"
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#UpdateTestRequest": {
+            "type": "structure",
+            "members": {
+                "testId": {
+                    "target": "com.amazonaws.resiliencehubv2#TestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the test to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service the test belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "loggingConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated logging configuration for the test.</p>"
+                    }
+                },
+                "stopConditions": {
+                    "target": "com.amazonaws.resiliencehubv2#StopConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated stop conditions for the test.</p>"
+                    }
+                },
+                "roleName": {
+                    "target": "com.amazonaws.resiliencehubv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated IAM execution role name.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.resiliencehubv2#TestParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated parameter values for the test.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#UpdateTestResponse": {
+            "type": "structure",
+            "members": {
+                "test": {
+                    "target": "com.amazonaws.resiliencehubv2#Test",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated test.</p>",
                         "smithy.api#required": {}
                     }
                 }

@@ -1,0 +1,5 @@
+POST /v2/create-test
+
+Content-Type: application/json
+
+{"loggingConfiguration":{"cloudWatchLogGroupArn":"__CloudWatchLogGroupArn__","logSchemaVersion":"__LogSchemaVersion__","s3BucketName":"__S3BucketName__"},"parameters":{"key0":["__Member__","__Member__"]},"roleName":"__RoleName__","serviceArn":"__ServiceArn__","stopConditions":[{"source":"aws:cloudwatch:alarm","value":"__Value__"},{"source":"aws:cloudwatch:alarm","value":"__Value__"}],"testTemplateArn":"__TestTemplateArn__"}

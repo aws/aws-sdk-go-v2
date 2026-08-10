@@ -208,11 +208,13 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 func TestCheckResponseSnapshot_CreateReport(t *testing.T) {
 	want := &CreateReportOutput{
 		ReportGenerationResult: &types.ReportGenerationResult{
-			ReportType:   types.ReportType("FAILURE_MODE"),
-			Status:       types.ReportGenerationStatus("PENDING"),
-			ServiceArn:   ptr.String("__ServiceArn__"),
-			AssessmentId: ptr.String("__AssessmentId__"),
-			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ReportType:      types.ReportType("FAILURE_MODE"),
+			Status:          types.ReportGenerationStatus("PENDING"),
+			ServiceArn:      ptr.String("__ServiceArn__"),
+			AssessmentId:    ptr.String("__AssessmentId__"),
+			TestRunId:       ptr.String("__TestRunId__"),
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ReportOutput: &types.ReportOutputMemberS3ReportOutput{
 				Value: types.S3ReportOutput{
 					S3ObjectKey: ptr.String("__S3ObjectKey__"),
@@ -483,6 +485,69 @@ func TestCheckResponseSnapshot_CreateSystem(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateTest(t *testing.T) {
+	want := &CreateTestOutput{
+		Test: &types.Test{
+			TestId:          ptr.String("__TestId__"),
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			ServiceArn:      ptr.String("__ServiceArn__"),
+			Name:            ptr.String("__Name__"),
+			Actions: []types.TestAction{
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+			},
+			LoggingConfiguration: &types.LoggingConfiguration{
+				S3BucketName:          ptr.String("__S3BucketName__"),
+				CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+				LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+			},
+			StopConditions: []types.StopCondition{
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+			},
+			RoleName: ptr.String("__RoleName__"),
+			Parameters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TotalTestRuns:      ptr.Int32(1),
+			SuccessfulTestRuns: ptr.Int32(1),
+			CreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateTest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateTest(context.Background(), &CreateTestInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateTest.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateUserJourney(t *testing.T) {
 	want := &CreateUserJourneyOutput{
 		UserJourney: &types.UserJourney{
@@ -661,6 +726,46 @@ func TestCheckResponseSnapshot_DeleteSystem(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSystem.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteTest(t *testing.T) {
+	want := &DeleteTestOutput{
+		TestId: ptr.String("__TestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTest(context.Background(), &DeleteTestInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteTestSources(t *testing.T) {
+	want := &DeleteTestSourcesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTestSources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTestSources(context.Background(), &DeleteTestSourcesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTestSources.response", err)
 	}
 }
 
@@ -997,6 +1102,257 @@ func TestCheckResponseSnapshot_GetSystem(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSystem.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTest(t *testing.T) {
+	want := &GetTestOutput{
+		Test: &types.Test{
+			TestId:          ptr.String("__TestId__"),
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			ServiceArn:      ptr.String("__ServiceArn__"),
+			Name:            ptr.String("__Name__"),
+			Actions: []types.TestAction{
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+			},
+			LoggingConfiguration: &types.LoggingConfiguration{
+				S3BucketName:          ptr.String("__S3BucketName__"),
+				CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+				LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+			},
+			StopConditions: []types.StopCondition{
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+			},
+			RoleName: ptr.String("__RoleName__"),
+			Parameters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TotalTestRuns:      ptr.Int32(1),
+			SuccessfulTestRuns: ptr.Int32(1),
+			CreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTest(context.Background(), &GetTestInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTestRun(t *testing.T) {
+	want := &GetTestRunOutput{
+		TestRun: &types.TestRun{
+			TestRunId:  ptr.String("__TestRunId__"),
+			TestId:     ptr.String("__TestId__"),
+			Status:     types.TestRunStatus("INITIALIZING"),
+			ServiceArn: ptr.String("__ServiceArn__"),
+			StartedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Experiments: []types.ExperimentDetails{
+				{
+					ExperimentArn: ptr.String("__ExperimentArn__"),
+					Details:       ptr.String("__Details__"),
+				},
+				{
+					ExperimentArn: ptr.String("__ExperimentArn__"),
+					Details:       ptr.String("__Details__"),
+				},
+			},
+			EventCount: ptr.Int32(1),
+			Parameters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+			StopConditions: []types.StopCondition{
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+			},
+			LoggingConfiguration: &types.LoggingConfiguration{
+				S3BucketName:          ptr.String("__S3BucketName__"),
+				CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+				LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+			},
+			RoleName:        ptr.String("__RoleName__"),
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			ReportConfiguration: &types.TestRunReportConfiguration{
+				ReportOutput: []types.ReportOutputConfiguration{
+					&types.ReportOutputConfigurationMemberS3{
+						Value: types.S3ReportOutputConfiguration{
+							BucketPath:  ptr.String("__BucketPath__"),
+							BucketOwner: ptr.String("__BucketOwner__"),
+						},
+					},
+					&types.ReportOutputConfigurationMemberS3{
+						Value: types.S3ReportOutputConfiguration{
+							BucketPath:  ptr.String("__BucketPath__"),
+							BucketOwner: ptr.String("__BucketOwner__"),
+						},
+					},
+				},
+			},
+			Policy: &types.TestRunPolicySnapshot{
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Name:      ptr.String("__Name__"),
+				AvailabilitySlo: &types.AvailabilitySlo{
+					Target: ptr.Float64(1.0),
+				},
+				MultiAz: &types.MultiAzTargets{
+					RtoInMinutes:             ptr.Int32(1),
+					RpoInMinutes:             ptr.Int32(1),
+					DisasterRecoveryApproach: types.MultiAzDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+				},
+				MultiRegion: &types.MultiRegionTargets{
+					RtoInMinutes:             ptr.Int32(1),
+					RpoInMinutes:             ptr.Int32(1),
+					DisasterRecoveryApproach: types.MultiRegionDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+				},
+				DataRecovery: &types.DataRecoveryTargets{
+					TimeBetweenBackupsInMinutes: ptr.Int32(1),
+				},
+			},
+			ReportOutput: &types.ReportGenerationResult{
+				ReportType:      types.ReportType("FAILURE_MODE"),
+				Status:          types.ReportGenerationStatus("PENDING"),
+				ServiceArn:      ptr.String("__ServiceArn__"),
+				AssessmentId:    ptr.String("__AssessmentId__"),
+				TestRunId:       ptr.String("__TestRunId__"),
+				TestTemplateArn: ptr.String("__TestTemplateArn__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportOutput: &types.ReportOutputMemberS3ReportOutput{
+					Value: types.S3ReportOutput{
+						S3ObjectKey: ptr.String("__S3ObjectKey__"),
+					},
+				},
+			},
+			RegionSwitchPlanArn:     ptr.String("__RegionSwitchPlanArn__"),
+			RegionSwitchExecutionId: ptr.String("__RegionSwitchExecutionId__"),
+			PermissionModel: &types.PermissionModel{
+				InvokerRoleName: ptr.String("__InvokerRoleName__"),
+				CrossAccountRoles: []types.CrossAccountRole{
+					{
+						CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+						ExternalId:          ptr.String("__ExternalId__"),
+					},
+					{
+						CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+						ExternalId:          ptr.String("__ExternalId__"),
+					},
+				},
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountTargeting: types.AccountTargeting("SINGLE_ACCOUNT"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTestRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTestRun(context.Background(), &GetTestRunInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTestRun.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTestTemplate(t *testing.T) {
+	want := &GetTestTemplateOutput{
+		TestTemplate: &types.TestTemplate{
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			Name:            ptr.String("__Name__"),
+			Description:     ptr.String("__Description__"),
+			Parameters: []types.TestTemplateParameter{
+				{
+					Name:         ptr.String("__Name__"),
+					Description:  ptr.String("__Description__"),
+					Type:         types.ParameterType("STRING"),
+					Required:     ptr.Bool(true),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					MaxValues:    ptr.Int32(1),
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					Description:  ptr.String("__Description__"),
+					Type:         types.ParameterType("STRING"),
+					Required:     ptr.Bool(true),
+					DefaultValue: ptr.String("__DefaultValue__"),
+					MaxValues:    ptr.Int32(1),
+				},
+			},
+			Actions: []types.TestAction{
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTestTemplate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTestTemplate(context.Background(), &GetTestTemplateInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTestTemplate.response", err)
 	}
 }
 
@@ -1622,11 +1978,13 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 	want := &ListReportsOutput{
 		ReportGenerationResults: []types.ReportGenerationResult{
 			{
-				ReportType:   types.ReportType("FAILURE_MODE"),
-				Status:       types.ReportGenerationStatus("PENDING"),
-				ServiceArn:   ptr.String("__ServiceArn__"),
-				AssessmentId: ptr.String("__AssessmentId__"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportType:      types.ReportType("FAILURE_MODE"),
+				Status:          types.ReportGenerationStatus("PENDING"),
+				ServiceArn:      ptr.String("__ServiceArn__"),
+				AssessmentId:    ptr.String("__AssessmentId__"),
+				TestRunId:       ptr.String("__TestRunId__"),
+				TestTemplateArn: ptr.String("__TestTemplateArn__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ReportOutput: &types.ReportOutputMemberS3ReportOutput{
 					Value: types.S3ReportOutput{
 						S3ObjectKey: ptr.String("__S3ObjectKey__"),
@@ -1634,11 +1992,13 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 				},
 			},
 			{
-				ReportType:   types.ReportType("FAILURE_MODE"),
-				Status:       types.ReportGenerationStatus("PENDING"),
-				ServiceArn:   ptr.String("__ServiceArn__"),
-				AssessmentId: ptr.String("__AssessmentId__"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReportType:      types.ReportType("FAILURE_MODE"),
+				Status:          types.ReportGenerationStatus("PENDING"),
+				ServiceArn:      ptr.String("__ServiceArn__"),
+				AssessmentId:    ptr.String("__AssessmentId__"),
+				TestRunId:       ptr.String("__TestRunId__"),
+				TestTemplateArn: ptr.String("__TestTemplateArn__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ReportOutput: &types.ReportOutputMemberS3ReportOutput{
 					Value: types.S3ReportOutput{
 						S3ObjectKey: ptr.String("__S3ObjectKey__"),
@@ -1662,6 +2022,43 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListReports.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResolvedTestRunTargetResources(t *testing.T) {
+	want := &ListResolvedTestRunTargetResourcesOutput{
+		ResolvedTargetResources: []types.ResolvedTargetResource{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				TargetName:   ptr.String("__TargetName__"),
+				TargetInformation: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				TargetName:   ptr.String("__TargetName__"),
+				TargetInformation: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResolvedTestRunTargetResources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResolvedTestRunTargetResources(context.Background(), &ListResolvedTestRunTargetResourcesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResolvedTestRunTargetResources.response", err)
 	}
 }
 
@@ -2126,6 +2523,245 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
+	want := &ListTestRunEventsOutput{
+		Events: []types.TestRunEvent{
+			{
+				EventId:   ptr.String("__EventId__"),
+				EventType: ptr.String("__EventType__"),
+				Message:   ptr.String("__Message__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				EventId:   ptr.String("__EventId__"),
+				EventType: ptr.String("__EventType__"),
+				Message:   ptr.String("__Message__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunEvents(context.Background(), &ListTestRunEventsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestRunSources(t *testing.T) {
+	want := &ListTestRunSourcesOutput{
+		TestRunSources: []types.TestRunSourceSummary{
+			&types.TestRunSourceSummaryMemberSuccessCriteriaAlarm{
+				Value: types.TestRunSuccessCriteriaAlarmSummary{
+					AlarmArn:      ptr.String("__AlarmArn__"),
+					AlarmName:     ptr.String("__AlarmName__"),
+					Region:        ptr.String("__Region__"),
+					AccountId:     ptr.String("__AccountId__"),
+					Outcome:       types.TestSourceOutcome("PASSED"),
+					OutcomeReason: ptr.String("__OutcomeReason__"),
+				},
+			},
+			&types.TestRunSourceSummaryMemberSuccessCriteriaAlarm{
+				Value: types.TestRunSuccessCriteriaAlarmSummary{
+					AlarmArn:      ptr.String("__AlarmArn__"),
+					AlarmName:     ptr.String("__AlarmName__"),
+					Region:        ptr.String("__Region__"),
+					AccountId:     ptr.String("__AccountId__"),
+					Outcome:       types.TestSourceOutcome("PASSED"),
+					OutcomeReason: ptr.String("__OutcomeReason__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunSources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunSources(context.Background(), &ListTestRunSourcesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunSources.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestRuns(t *testing.T) {
+	want := &ListTestRunsOutput{
+		TestRuns: []types.TestRunSummary{
+			{
+				TestRunId:        ptr.String("__TestRunId__"),
+				Status:           types.TestRunStatus("INITIALIZING"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TestTemplateArn:  ptr.String("__TestTemplateArn__"),
+				ServiceArn:       ptr.String("__ServiceArn__"),
+				ErrorMessage:     ptr.String("__ErrorMessage__"),
+				AccountTargeting: types.AccountTargeting("SINGLE_ACCOUNT"),
+			},
+			{
+				TestRunId:        ptr.String("__TestRunId__"),
+				Status:           types.TestRunStatus("INITIALIZING"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TestTemplateArn:  ptr.String("__TestTemplateArn__"),
+				ServiceArn:       ptr.String("__ServiceArn__"),
+				ErrorMessage:     ptr.String("__ErrorMessage__"),
+				AccountTargeting: types.AccountTargeting("SINGLE_ACCOUNT"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRuns.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRuns(context.Background(), &ListTestRunsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRuns.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestSources(t *testing.T) {
+	want := &ListTestSourcesOutput{
+		TestSources: []types.TestSourceSummary{
+			&types.TestSourceSummaryMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmSummary{
+					AlarmArn:  ptr.String("__AlarmArn__"),
+					AlarmName: ptr.String("__AlarmName__"),
+					Region:    ptr.String("__Region__"),
+					AccountId: ptr.String("__AccountId__"),
+					CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			&types.TestSourceSummaryMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmSummary{
+					AlarmArn:  ptr.String("__AlarmArn__"),
+					AlarmName: ptr.String("__AlarmName__"),
+					Region:    ptr.String("__Region__"),
+					AccountId: ptr.String("__AccountId__"),
+					CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestSources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestSources(context.Background(), &ListTestSourcesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestSources.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestTemplates(t *testing.T) {
+	want := &ListTestTemplatesOutput{
+		TestTemplates: []types.TestTemplateSummary{
+			{
+				TestTemplateArn: ptr.String("__TestTemplateArn__"),
+				Name:            ptr.String("__Name__"),
+				Description:     ptr.String("__Description__"),
+			},
+			{
+				TestTemplateArn: ptr.String("__TestTemplateArn__"),
+				Name:            ptr.String("__Name__"),
+				Description:     ptr.String("__Description__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestTemplates.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestTemplates(context.Background(), &ListTestTemplatesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestTemplates.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTests(t *testing.T) {
+	want := &ListTestsOutput{
+		Tests: []types.TestSummary{
+			{
+				TestId:             ptr.String("__TestId__"),
+				TestTemplateArn:    ptr.String("__TestTemplateArn__"),
+				ServiceArn:         ptr.String("__ServiceArn__"),
+				TotalTestRuns:      ptr.Int32(1),
+				SuccessfulTestRuns: ptr.Int32(1),
+				CreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TestId:             ptr.String("__TestId__"),
+				TestTemplateArn:    ptr.String("__TestTemplateArn__"),
+				ServiceArn:         ptr.String("__ServiceArn__"),
+				TotalTestRuns:      ptr.Int32(1),
+				SuccessfulTestRuns: ptr.Int32(1),
+				CreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTests.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTests(context.Background(), &ListTestsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTests.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListUserJourneys(t *testing.T) {
 	want := &ListUserJourneysOutput{
 		UserJourneySummaries: []types.UserJourneySummary{
@@ -2161,6 +2797,25 @@ func TestCheckResponseSnapshot_ListUserJourneys(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutTestSources(t *testing.T) {
+	want := &PutTestSourcesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutTestSources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTestSources(context.Background(), &PutTestSourcesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTestSources.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 	want := &StartFailureModeAssessmentOutput{
 		AssessmentId:     ptr.String("__AssessmentId__"),
@@ -2182,6 +2837,54 @@ func TestCheckResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartFailureModeAssessment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartTestRun(t *testing.T) {
+	want := &StartTestRunOutput{
+		TestRunId: ptr.String("__TestRunId__"),
+		Status:    types.TestRunStatus("INITIALIZING"),
+		ExperimentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTestRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTestRun(context.Background(), &StartTestRunInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTestRun.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopTestRun(t *testing.T) {
+	want := &StopTestRunOutput{
+		TestRunId: ptr.String("__TestRunId__"),
+		Status:    types.TestRunStatus("INITIALIZING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StopTestRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopTestRun(context.Background(), &StopTestRunInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopTestRun.response", err)
 	}
 }
 
@@ -2621,6 +3324,69 @@ func TestCheckResponseSnapshot_UpdateSystem(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSystem.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateTest(t *testing.T) {
+	want := &UpdateTestOutput{
+		Test: &types.Test{
+			TestId:          ptr.String("__TestId__"),
+			TestTemplateArn: ptr.String("__TestTemplateArn__"),
+			ServiceArn:      ptr.String("__ServiceArn__"),
+			Name:            ptr.String("__Name__"),
+			Actions: []types.TestAction{
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+				{
+					ActionId:     ptr.String("__ActionId__"),
+					Description:  ptr.String("__Description__"),
+					ResourceType: ptr.String("__ResourceType__"),
+				},
+			},
+			LoggingConfiguration: &types.LoggingConfiguration{
+				S3BucketName:          ptr.String("__S3BucketName__"),
+				CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+				LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+			},
+			StopConditions: []types.StopCondition{
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+				{
+					Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+					Value:  ptr.String("__Value__"),
+				},
+			},
+			RoleName: ptr.String("__RoleName__"),
+			Parameters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TotalTestRuns:      ptr.Int32(1),
+			SuccessfulTestRuns: ptr.Int32(1),
+			CreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateTest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateTest(context.Background(), &UpdateTestInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateTest.response", err)
 	}
 }
 

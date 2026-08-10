@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,16 +45,6 @@ type CreateEngagementInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Provides a description of the Engagement .
-	//
-	// This member is required.
-	Description *string
-
-	// Specifies the title of the Engagement .
-	//
-	// This member is required.
-	Title *string
-
 	// The Contexts field is a required array of objects, with a maximum of 5 contexts
 	// allowed, specifying detailed information about customer projects associated with
 	// the Engagement. Each context object contains a Type field indicating the
@@ -70,6 +59,12 @@ type CreateEngagementInput struct {
 	// effective collaboration between parties by providing relevant customer and
 	// project information.
 	Contexts []types.EngagementContextDetails
+
+	// Provides a description of the Engagement .
+	Description *string
+
+	// Specifies the title of the Engagement .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -103,9 +98,6 @@ func (c *Client) addOperationCreateEngagementMiddlewares(stack *middleware.Stack
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -118,12 +110,6 @@ func (c *Client) addOperationCreateEngagementMiddlewares(stack *middleware.Stack
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -131,9 +117,6 @@ func (c *Client) addOperationCreateEngagementMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateEngagementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "CreateEngagement"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

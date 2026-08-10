@@ -1,0 +1,5 @@
+POST /discoverable-records-search
+
+Content-Type: application/json
+
+{"filters":null,"maxResults":1,"registryIds":["__Member__","__Member__"],"searchQuery":"__SearchQuery__"}

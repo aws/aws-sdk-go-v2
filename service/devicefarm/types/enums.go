@@ -371,6 +371,23 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 	}
 }
 
+type InsightsType string
+
+// Enum values for InsightsType
+const (
+	InsightsTypeTestReport InsightsType = "TEST_REPORT"
+)
+
+// Values returns all known values for InsightsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsType) Values() []InsightsType {
+	return []InsightsType{
+		"TEST_REPORT",
+	}
+}
+
 type InstanceStatus string
 
 // Enum values for InstanceStatus
@@ -486,6 +503,31 @@ const (
 func (RecurringChargeFrequency) Values() []RecurringChargeFrequency {
 	return []RecurringChargeFrequency{
 		"MONTHLY",
+	}
+}
+
+type ReportStatus string
+
+// Enum values for ReportStatus
+const (
+	ReportStatusPending   ReportStatus = "PENDING"
+	ReportStatusRunning   ReportStatus = "RUNNING"
+	ReportStatusCompleted ReportStatus = "COMPLETED"
+	ReportStatusSkipped   ReportStatus = "SKIPPED"
+	ReportStatusErrored   ReportStatus = "ERRORED"
+)
+
+// Values returns all known values for ReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReportStatus) Values() []ReportStatus {
+	return []ReportStatus{
+		"PENDING",
+		"RUNNING",
+		"COMPLETED",
+		"SKIPPED",
+		"ERRORED",
 	}
 }
 

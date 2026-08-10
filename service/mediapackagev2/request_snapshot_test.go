@@ -711,7 +711,8 @@ func TestCheckRequestSnapshot_CreateOriginEndpoint(t *testing.T) {
 				types.EndpointErrorCondition("STALE_MANIFEST"),
 			},
 		},
-		UriSeparator: types.UriSeparator("UNDERSCORE"),
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1798,8 +1799,9 @@ func TestCheckRequestSnapshot_UpdateOriginEndpoint(t *testing.T) {
 				types.EndpointErrorCondition("STALE_MANIFEST"),
 			},
 		},
-		UriSeparator: types.UriSeparator("UNDERSCORE"),
-		ETag:         ptr.String("__ETag__"),
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
+		ETag:                 ptr.String("__ETag__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2351,7 +2353,8 @@ func TestUpdateRequestSnapshot_CreateOriginEndpoint(t *testing.T) {
 				types.EndpointErrorCondition("STALE_MANIFEST"),
 			},
 		},
-		UriSeparator: types.UriSeparator("UNDERSCORE"),
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3438,8 +3441,9 @@ func TestUpdateRequestSnapshot_UpdateOriginEndpoint(t *testing.T) {
 				types.EndpointErrorCondition("STALE_MANIFEST"),
 			},
 		},
-		UriSeparator: types.UriSeparator("UNDERSCORE"),
-		ETag:         ptr.String("__ETag__"),
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
+		ETag:                 ptr.String("__ETag__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

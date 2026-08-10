@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to retrieve metadata about multiple attached files on an associated
@@ -30,10 +29,11 @@ func (c *Client) BatchGetAttachedFileMetadata(ctx context.Context, params *Batch
 type BatchGetAttachedFileMetadataInput struct {
 
 	// The resource to which the attached file is (being) uploaded to. The supported
-	// resources are [Cases]and [Email].
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
@@ -77,9 +77,6 @@ func (c *Client) addOperationBatchGetAttachedFileMetadataMiddlewares(stack *midd
 		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
@@ -92,19 +89,10 @@ func (c *Client) addOperationBatchGetAttachedFileMetadataMiddlewares(stack *midd
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetAttachedFileMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "BatchGetAttachedFileMetadata"), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1,3 +1,16 @@
+# v1.73.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.0 (2026-08-04)
+
+* **Feature**: Added ClientExperiencePolicy to ClientProperties object for ModifyClientProperties and DescribeClientProperties APIs.
+
+# v1.72.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.72.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
