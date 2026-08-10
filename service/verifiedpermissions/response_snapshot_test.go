@@ -162,7 +162,18 @@ func TestCheckResponseSnapshot_BatchGetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{})
+	got, err := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{
+		Requests: []types.BatchGetPolicyInputItem{
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +275,109 @@ func TestCheckResponseSnapshot_BatchIsAuthorized(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchIsAuthorized(context.Background(), &BatchIsAuthorizedInput{})
+	got, err := svc.BatchIsAuthorized(context.Background(), &BatchIsAuthorizedInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Entities: &types.EntitiesDefinitionMemberEntityList{
+			Value: []types.EntityItem{
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+		Requests: []types.BatchIsAuthorizedInputItem{
+			{
+				Principal: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+			{
+				Principal: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +475,103 @@ func TestCheckResponseSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchIsAuthorizedWithToken(context.Background(), &BatchIsAuthorizedWithTokenInput{})
+	got, err := svc.BatchIsAuthorizedWithToken(context.Background(), &BatchIsAuthorizedWithTokenInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		IdentityToken: ptr.String("__IdentityToken__"),
+		AccessToken:   ptr.String("__AccessToken__"),
+		Entities: &types.EntitiesDefinitionMemberEntityList{
+			Value: []types.EntityItem{
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+		Requests: []types.BatchIsAuthorizedWithTokenInputItem{
+			{
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+			{
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +595,23 @@ func TestCheckResponseSnapshot_CreateIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{})
+	got, err := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Configuration: &types.ConfigurationMemberCognitoUserPoolConfiguration{
+			Value: types.CognitoUserPoolConfiguration{
+				UserPoolArn: ptr.String("__UserPoolArn__"),
+				ClientIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GroupConfiguration: &types.CognitoGroupConfiguration{
+					GroupEntityType: ptr.String("__GroupEntityType__"),
+				},
+			},
+		},
+		PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +655,17 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Definition: &types.PolicyDefinitionMemberStatic{
+			Value: types.StaticPolicyDefinition{
+				Description: ptr.String("__Description__"),
+				Statement:   ptr.String("__Statement__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +689,25 @@ func TestCheckResponseSnapshot_CreatePolicyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicyStore(context.Background(), &CreatePolicyStoreInput{})
+	got, err := svc.CreatePolicyStore(context.Background(), &CreatePolicyStoreInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ValidationSettings: &types.ValidationSettings{
+			Mode: types.ValidationMode("OFF"),
+		},
+		Description:        ptr.String("__Description__"),
+		DeletionProtection: types.DeletionProtection("ENABLED"),
+		EncryptionSettings: &types.EncryptionSettingsMemberKmsEncryptionSettings{
+			Value: types.KmsEncryptionSettings{
+				Key: ptr.String("__Key__"),
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +731,10 @@ func TestCheckResponseSnapshot_CreatePolicyStoreAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicyStoreAlias(context.Background(), &CreatePolicyStoreAliasInput{})
+	got, err := svc.CreatePolicyStoreAlias(context.Background(), &CreatePolicyStoreAliasInput{
+		AliasName:     ptr.String("__AliasName__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +758,13 @@ func TestCheckResponseSnapshot_CreatePolicyTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicyTemplate(context.Background(), &CreatePolicyTemplateInput{})
+	got, err := svc.CreatePolicyTemplate(context.Background(), &CreatePolicyTemplateInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Description:   ptr.String("__Description__"),
+		Statement:     ptr.String("__Statement__"),
+		Name:          ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +783,10 @@ func TestCheckResponseSnapshot_DeleteIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentitySource(context.Background(), &DeleteIdentitySourceInput{})
+	got, err := svc.DeleteIdentitySource(context.Background(), &DeleteIdentitySourceInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		IdentitySourceId: ptr.String("__IdentitySourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +805,10 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		PolicyId:      ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +827,9 @@ func TestCheckResponseSnapshot_DeletePolicyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicyStore(context.Background(), &DeletePolicyStoreInput{})
+	got, err := svc.DeletePolicyStore(context.Background(), &DeletePolicyStoreInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +848,10 @@ func TestCheckResponseSnapshot_DeletePolicyStoreAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicyStoreAlias(context.Background(), &DeletePolicyStoreAliasInput{})
+	got, err := svc.DeletePolicyStoreAlias(context.Background(), &DeletePolicyStoreAliasInput{
+		AliasName:    ptr.String("__AliasName__"),
+		DeletionMode: types.DeletionMode("SoftDelete"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +870,10 @@ func TestCheckResponseSnapshot_DeletePolicyTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicyTemplate(context.Background(), &DeletePolicyTemplateInput{})
+	got, err := svc.DeletePolicyTemplate(context.Background(), &DeletePolicyTemplateInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		PolicyTemplateId: ptr.String("__PolicyTemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +920,10 @@ func TestCheckResponseSnapshot_GetIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentitySource(context.Background(), &GetIdentitySourceInput{})
+	got, err := svc.GetIdentitySource(context.Background(), &GetIdentitySourceInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		IdentitySourceId: ptr.String("__IdentitySourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -695,7 +974,10 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		PolicyId:      ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -736,7 +1018,10 @@ func TestCheckResponseSnapshot_GetPolicyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicyStore(context.Background(), &GetPolicyStoreInput{})
+	got, err := svc.GetPolicyStore(context.Background(), &GetPolicyStoreInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Tags:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +1046,9 @@ func TestCheckResponseSnapshot_GetPolicyStoreAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicyStoreAlias(context.Background(), &GetPolicyStoreAliasInput{})
+	got, err := svc.GetPolicyStoreAlias(context.Background(), &GetPolicyStoreAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +1075,10 @@ func TestCheckResponseSnapshot_GetPolicyTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicyTemplate(context.Background(), &GetPolicyTemplateInput{})
+	got, err := svc.GetPolicyTemplate(context.Background(), &GetPolicyTemplateInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		PolicyTemplateId: ptr.String("__PolicyTemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -816,7 +1106,9 @@ func TestCheckResponseSnapshot_GetSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchema(context.Background(), &GetSchemaInput{})
+	got, err := svc.GetSchema(context.Background(), &GetSchemaInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1145,84 @@ func TestCheckResponseSnapshot_IsAuthorized(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IsAuthorized(context.Background(), &IsAuthorizedInput{})
+	got, err := svc.IsAuthorized(context.Background(), &IsAuthorizedInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Principal: &types.EntityIdentifier{
+			EntityType: ptr.String("__EntityType__"),
+			EntityId:   ptr.String("__EntityId__"),
+		},
+		Action: &types.ActionIdentifier{
+			ActionType: ptr.String("__ActionType__"),
+			ActionId:   ptr.String("__ActionId__"),
+		},
+		Resource: &types.EntityIdentifier{
+			EntityType: ptr.String("__EntityType__"),
+			EntityId:   ptr.String("__EntityId__"),
+		},
+		Context: &types.ContextDefinitionMemberContextMap{
+			Value: map[string]types.AttributeValue{
+				"key0": &types.AttributeValueMemberBoolean{
+					Value: true,
+				},
+			},
+		},
+		Entities: &types.EntitiesDefinitionMemberEntityList{
+			Value: []types.EntityItem{
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -894,7 +1263,82 @@ func TestCheckResponseSnapshot_IsAuthorizedWithToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IsAuthorizedWithToken(context.Background(), &IsAuthorizedWithTokenInput{})
+	got, err := svc.IsAuthorizedWithToken(context.Background(), &IsAuthorizedWithTokenInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		IdentityToken: ptr.String("__IdentityToken__"),
+		AccessToken:   ptr.String("__AccessToken__"),
+		Action: &types.ActionIdentifier{
+			ActionType: ptr.String("__ActionType__"),
+			ActionId:   ptr.String("__ActionId__"),
+		},
+		Resource: &types.EntityIdentifier{
+			EntityType: ptr.String("__EntityType__"),
+			EntityId:   ptr.String("__EntityId__"),
+		},
+		Context: &types.ContextDefinitionMemberContextMap{
+			Value: map[string]types.AttributeValue{
+				"key0": &types.AttributeValueMemberBoolean{
+					Value: true,
+				},
+			},
+		},
+		Entities: &types.EntitiesDefinitionMemberEntityList{
+			Value: []types.EntityItem{
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -975,7 +1419,19 @@ func TestCheckResponseSnapshot_ListIdentitySources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentitySources(context.Background(), &ListIdentitySourcesInput{})
+	got, err := svc.ListIdentitySources(context.Background(), &ListIdentitySourcesInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		Filters: []types.IdentitySourceFilter{
+			{
+				PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+			},
+			{
+				PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1518,21 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{})
+	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		Filter: &types.PolicyFilter{
+			Principal: &types.EntityReferenceMemberUnspecified{
+				Value: true,
+			},
+			Resource: &types.EntityReferenceMemberUnspecified{
+				Value: true,
+			},
+			PolicyType:       types.PolicyType("STATIC"),
+			PolicyTemplateId: ptr.String("__PolicyTemplateId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +1569,13 @@ func TestCheckResponseSnapshot_ListPolicyStoreAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyStoreAliases(context.Background(), &ListPolicyStoreAliasesInput{})
+	got, err := svc.ListPolicyStoreAliases(context.Background(), &ListPolicyStoreAliasesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.PolicyStoreAliasFilter{
+			PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1136,7 +1612,10 @@ func TestCheckResponseSnapshot_ListPolicyStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyStores(context.Background(), &ListPolicyStoresInput{})
+	got, err := svc.ListPolicyStores(context.Background(), &ListPolicyStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1654,11 @@ func TestCheckResponseSnapshot_ListPolicyTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyTemplates(context.Background(), &ListPolicyTemplatesInput{})
+	got, err := svc.ListPolicyTemplates(context.Background(), &ListPolicyTemplatesInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1198,7 +1681,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1710,12 @@ func TestCheckResponseSnapshot_PutSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSchema(context.Background(), &PutSchemaInput{})
+	got, err := svc.PutSchema(context.Background(), &PutSchemaInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Definition: &types.SchemaDefinitionMemberCedarJson{
+			Value: "__SchemaDefinitionMemberCedarJson__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1244,7 +1734,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1263,7 +1758,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1287,7 +1788,23 @@ func TestCheckResponseSnapshot_UpdateIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdentitySource(context.Background(), &UpdateIdentitySourceInput{})
+	got, err := svc.UpdateIdentitySource(context.Background(), &UpdateIdentitySourceInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		IdentitySourceId: ptr.String("__IdentitySourceId__"),
+		UpdateConfiguration: &types.UpdateConfigurationMemberCognitoUserPoolConfiguration{
+			Value: types.UpdateCognitoUserPoolConfiguration{
+				UserPoolArn: ptr.String("__UserPoolArn__"),
+				ClientIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GroupConfiguration: &types.UpdateCognitoGroupConfiguration{
+					GroupEntityType: ptr.String("__GroupEntityType__"),
+				},
+			},
+		},
+		PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1331,7 +1848,17 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{})
+	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		PolicyId:      ptr.String("__PolicyId__"),
+		Definition: &types.UpdatePolicyDefinitionMemberStatic{
+			Value: types.UpdateStaticPolicyDefinition{
+				Description: ptr.String("__Description__"),
+				Statement:   ptr.String("__Statement__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1355,7 +1882,14 @@ func TestCheckResponseSnapshot_UpdatePolicyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePolicyStore(context.Background(), &UpdatePolicyStoreInput{})
+	got, err := svc.UpdatePolicyStore(context.Background(), &UpdatePolicyStoreInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		ValidationSettings: &types.ValidationSettings{
+			Mode: types.ValidationMode("OFF"),
+		},
+		DeletionProtection: types.DeletionProtection("ENABLED"),
+		Description:        ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1379,7 +1913,13 @@ func TestCheckResponseSnapshot_UpdatePolicyTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePolicyTemplate(context.Background(), &UpdatePolicyTemplateInput{})
+	got, err := svc.UpdatePolicyTemplate(context.Background(), &UpdatePolicyTemplateInput{
+		PolicyStoreId:    ptr.String("__PolicyStoreId__"),
+		PolicyTemplateId: ptr.String("__PolicyTemplateId__"),
+		Description:      ptr.String("__Description__"),
+		Statement:        ptr.String("__Statement__"),
+		Name:             ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1400,7 +1940,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{})
+	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{
+		Requests: []types.BatchGetPolicyInputItem{
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1435,7 +1986,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{})
+	_, opErr := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Configuration: &types.ConfigurationMemberCognitoUserPoolConfiguration{
+			Value: types.CognitoUserPoolConfiguration{
+				UserPoolArn: ptr.String("__UserPoolArn__"),
+				ClientIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GroupConfiguration: &types.CognitoGroupConfiguration{
+					GroupEntityType: ptr.String("__GroupEntityType__"),
+				},
+			},
+		},
+		PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1460,7 +2027,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{})
+	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{
+		Requests: []types.BatchGetPolicyInputItem{
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1485,7 +2063,9 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePolicyStore(context.Background(), &DeletePolicyStoreInput{})
+	_, opErr := svc.DeletePolicyStore(context.Background(), &DeletePolicyStoreInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1512,7 +2092,109 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchIsAuthorized(context.Background(), &BatchIsAuthorizedInput{})
+	_, opErr := svc.BatchIsAuthorized(context.Background(), &BatchIsAuthorizedInput{
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Entities: &types.EntitiesDefinitionMemberEntityList{
+			Value: []types.EntityItem{
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+				{
+					Identifier: &types.EntityIdentifier{
+						EntityType: ptr.String("__EntityType__"),
+						EntityId:   ptr.String("__EntityId__"),
+					},
+					Attributes: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+					Parents: []types.EntityIdentifier{
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+						{
+							EntityType: ptr.String("__EntityType__"),
+							EntityId:   ptr.String("__EntityId__"),
+						},
+					},
+					Tags: map[string]types.CedarTagValue{
+						"key0": &types.CedarTagValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+		Requests: []types.BatchIsAuthorizedInputItem{
+			{
+				Principal: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+			{
+				Principal: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Action: &types.ActionIdentifier{
+					ActionType: ptr.String("__ActionType__"),
+					ActionId:   ptr.String("__ActionId__"),
+				},
+				Resource: &types.EntityIdentifier{
+					EntityType: ptr.String("__EntityType__"),
+					EntityId:   ptr.String("__EntityId__"),
+				},
+				Context: &types.ContextDefinitionMemberContextMap{
+					Value: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberBoolean{
+							Value: true,
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1541,7 +2223,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{})
+	_, opErr := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		PolicyStoreId: ptr.String("__PolicyStoreId__"),
+		Configuration: &types.ConfigurationMemberCognitoUserPoolConfiguration{
+			Value: types.CognitoUserPoolConfiguration{
+				UserPoolArn: ptr.String("__UserPoolArn__"),
+				ClientIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GroupConfiguration: &types.CognitoGroupConfiguration{
+					GroupEntityType: ptr.String("__GroupEntityType__"),
+				},
+			},
+		},
+		PrincipalEntityType: ptr.String("__PrincipalEntityType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1568,7 +2266,18 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{})
+	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{
+		Requests: []types.BatchGetPolicyInputItem{
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1594,7 +2303,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1629,7 +2343,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{})
+	_, opErr := svc.BatchGetPolicy(context.Background(), &BatchGetPolicyInput{
+		Requests: []types.BatchGetPolicyInputItem{
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+			{
+				PolicyStoreId: ptr.String("__PolicyStoreId__"),
+				PolicyId:      ptr.String("__PolicyId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

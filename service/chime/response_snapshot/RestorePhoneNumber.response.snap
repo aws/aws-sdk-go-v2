@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"PhoneNumber":{"Associations":[{"AssociatedTimestamp":"2000-01-01T00:00:00Z","Name":"AccountId","Value":"__Value__"},{"AssociatedTimestamp":"2000-01-01T00:00:00Z","Name":"AccountId","Value":"__Value__"}],"CallingName":"__CallingName__","CallingNameStatus":"Unassigned","Capabilities":{"InboundCall":true,"InboundMMS":true,"InboundSMS":true,"OutboundCall":true,"OutboundMMS":true,"OutboundSMS":true},"Country":"__Country__","CreatedTimestamp":"2000-01-01T00:00:00Z","DeletionTimestamp":"2000-01-01T00:00:00Z","E164PhoneNumber":"__E164PhoneNumber__","PhoneNumberId":"__PhoneNumberId__","ProductType":"BusinessCalling","Status":"AcquireInProgress","Type":"Local","UpdatedTimestamp":"2000-01-01T00:00:00Z"}}

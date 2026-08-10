@@ -141,7 +141,11 @@ func TestCheckResponseSnapshot_AcceptConnectionInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	got, err := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +164,13 @@ func TestCheckResponseSnapshot_AssociateAwsTrainingCertificationEmailDomain(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAwsTrainingCertificationEmailDomain(context.Background(), &AssociateAwsTrainingCertificationEmailDomainInput{})
+	got, err := svc.AssociateAwsTrainingCertificationEmailDomain(context.Background(), &AssociateAwsTrainingCertificationEmailDomainInput{
+		Catalog:               ptr.String("__Catalog__"),
+		Identifier:            ptr.String("__Identifier__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Email:                 ptr.String("__Email__"),
+		EmailVerificationCode: ptr.String("__EmailVerificationCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +211,13 @@ func TestCheckResponseSnapshot_CancelConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelConnection(context.Background(), &CancelConnectionInput{})
+	got, err := svc.CancelConnection(context.Background(), &CancelConnectionInput{
+		Catalog:        ptr.String("__Catalog__"),
+		Identifier:     ptr.String("__Identifier__"),
+		ConnectionType: types.ConnectionType("OPPORTUNITY_COLLABORATION"),
+		Reason:         ptr.String("__Reason__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -235,7 +251,11 @@ func TestCheckResponseSnapshot_CancelConnectionInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelConnectionInvitation(context.Background(), &CancelConnectionInvitationInput{})
+	got, err := svc.CancelConnectionInvitation(context.Background(), &CancelConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +326,12 @@ func TestCheckResponseSnapshot_CancelProfileUpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelProfileUpdateTask(context.Background(), &CancelProfileUpdateTaskInput{})
+	got, err := svc.CancelProfileUpdateTask(context.Background(), &CancelProfileUpdateTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		TaskId:      ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +365,15 @@ func TestCheckResponseSnapshot_CreateConnectionInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectionInvitation(context.Background(), &CreateConnectionInvitationInput{})
+	got, err := svc.CreateConnectionInvitation(context.Background(), &CreateConnectionInvitationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		ConnectionType:     types.ConnectionType("OPPORTUNITY_COLLABORATION"),
+		Email:              ptr.String("__Email__"),
+		Message:            ptr.String("__Message__"),
+		Name:               ptr.String("__Name__"),
+		ReceiverIdentifier: ptr.String("__ReceiverIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +447,29 @@ func TestCheckResponseSnapshot_CreatePartner(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePartner(context.Background(), &CreatePartnerInput{})
+	got, err := svc.CreatePartner(context.Background(), &CreatePartnerInput{
+		Catalog:             ptr.String("__Catalog__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		LegalName:           ptr.String("__LegalName__"),
+		PrimarySolutionType: types.PrimarySolutionType("SOFTWARE_PRODUCTS"),
+		AllianceLeadContact: &types.AllianceLeadContact{
+			FirstName:     ptr.String("__FirstName__"),
+			LastName:      ptr.String("__LastName__"),
+			Email:         ptr.String("__Email__"),
+			BusinessTitle: ptr.String("__BusinessTitle__"),
+		},
+		EmailVerificationCode: ptr.String("__EmailVerificationCode__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +488,12 @@ func TestCheckResponseSnapshot_DisassociateAwsTrainingCertificationEmailDomain(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAwsTrainingCertificationEmailDomain(context.Background(), &DisassociateAwsTrainingCertificationEmailDomainInput{})
+	got, err := svc.DisassociateAwsTrainingCertificationEmailDomain(context.Background(), &DisassociateAwsTrainingCertificationEmailDomainInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DomainName:  ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +522,10 @@ func TestCheckResponseSnapshot_GetAllianceLeadContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAllianceLeadContact(context.Background(), &GetAllianceLeadContactInput{})
+	got, err := svc.GetAllianceLeadContact(context.Background(), &GetAllianceLeadContactInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +566,10 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +603,10 @@ func TestCheckResponseSnapshot_GetConnectionInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectionInvitation(context.Background(), &GetConnectionInvitationInput{})
+	got, err := svc.GetConnectionInvitation(context.Background(), &GetConnectionInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -566,7 +635,9 @@ func TestCheckResponseSnapshot_GetConnectionPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectionPreferences(context.Background(), &GetConnectionPreferencesInput{})
+	got, err := svc.GetConnectionPreferences(context.Background(), &GetConnectionPreferencesInput{
+		Catalog: ptr.String("__Catalog__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +705,10 @@ func TestCheckResponseSnapshot_GetPartner(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPartner(context.Background(), &GetPartnerInput{})
+	got, err := svc.GetPartner(context.Background(), &GetPartnerInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -705,7 +779,10 @@ func TestCheckResponseSnapshot_GetProfileUpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileUpdateTask(context.Background(), &GetProfileUpdateTaskInput{})
+	got, err := svc.GetProfileUpdateTask(context.Background(), &GetProfileUpdateTaskInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +807,10 @@ func TestCheckResponseSnapshot_GetProfileVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfileVisibility(context.Background(), &GetProfileVisibilityInput{})
+	got, err := svc.GetProfileVisibility(context.Background(), &GetProfileVisibilityInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -769,7 +849,10 @@ func TestCheckResponseSnapshot_GetQualificationsAssociationDetails(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQualificationsAssociationDetails(context.Background(), &GetQualificationsAssociationDetailsInput{})
+	got, err := svc.GetQualificationsAssociationDetails(context.Background(), &GetQualificationsAssociationDetailsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,7 +883,10 @@ func TestCheckResponseSnapshot_GetQualificationsAssociationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQualificationsAssociationTask(context.Background(), &GetQualificationsAssociationTaskInput{})
+	got, err := svc.GetQualificationsAssociationTask(context.Background(), &GetQualificationsAssociationTaskInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +917,10 @@ func TestCheckResponseSnapshot_GetQualificationsDisassociationTask(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQualificationsDisassociationTask(context.Background(), &GetQualificationsDisassociationTaskInput{})
+	got, err := svc.GetQualificationsDisassociationTask(context.Background(), &GetQualificationsDisassociationTaskInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -868,7 +957,9 @@ func TestCheckResponseSnapshot_GetVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVerification(context.Background(), &GetVerificationInput{})
+	got, err := svc.GetVerification(context.Background(), &GetVerificationInput{
+		VerificationType: types.VerificationType("BUSINESS_VERIFICATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +1008,18 @@ func TestCheckResponseSnapshot_ListConnectionInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectionInvitations(context.Background(), &ListConnectionInvitationsInput{})
+	got, err := svc.ListConnectionInvitations(context.Background(), &ListConnectionInvitationsInput{
+		Catalog:        ptr.String("__Catalog__"),
+		NextToken:      ptr.String("__NextToken__"),
+		ConnectionType: types.ConnectionType("OPPORTUNITY_COLLABORATION"),
+		MaxResults:     ptr.Int32(1),
+		OtherParticipantIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParticipantType: types.ParticipantType("SENDER"),
+		Status:          types.InvitationStatus("PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -976,7 +1078,16 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		Catalog:        ptr.String("__Catalog__"),
+		NextToken:      ptr.String("__NextToken__"),
+		ConnectionType: ptr.String("__ConnectionType__"),
+		MaxResults:     ptr.Int32(1),
+		OtherParticipantIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1013,7 +1124,10 @@ func TestCheckResponseSnapshot_ListPartners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPartners(context.Background(), &ListPartnersInput{})
+	got, err := svc.ListPartners(context.Background(), &ListPartnersInput{
+		Catalog:   ptr.String("__Catalog__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1158,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1073,7 +1189,17 @@ func TestCheckResponseSnapshot_PutAllianceLeadContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAllianceLeadContact(context.Background(), &PutAllianceLeadContactInput{})
+	got, err := svc.PutAllianceLeadContact(context.Background(), &PutAllianceLeadContactInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		AllianceLeadContact: &types.AllianceLeadContact{
+			FirstName:     ptr.String("__FirstName__"),
+			LastName:      ptr.String("__LastName__"),
+			Email:         ptr.String("__Email__"),
+			BusinessTitle: ptr.String("__BusinessTitle__"),
+		},
+		EmailVerificationCode: ptr.String("__EmailVerificationCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1098,7 +1224,11 @@ func TestCheckResponseSnapshot_PutProfileVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProfileVisibility(context.Background(), &PutProfileVisibilityInput{})
+	got, err := svc.PutProfileVisibility(context.Background(), &PutProfileVisibilityInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Visibility: types.ProfileVisibility("PRIVATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1132,7 +1262,12 @@ func TestCheckResponseSnapshot_RejectConnectionInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectConnectionInvitation(context.Background(), &RejectConnectionInvitationInput{})
+	got, err := svc.RejectConnectionInvitation(context.Background(), &RejectConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Reason:      ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1286,10 @@ func TestCheckResponseSnapshot_SendEmailVerificationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEmailVerificationCode(context.Background(), &SendEmailVerificationCodeInput{})
+	got, err := svc.SendEmailVerificationCode(context.Background(), &SendEmailVerificationCodeInput{
+		Catalog: ptr.String("__Catalog__"),
+		Email:   ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1222,7 +1360,43 @@ func TestCheckResponseSnapshot_StartProfileUpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProfileUpdateTask(context.Background(), &StartProfileUpdateTaskInput{})
+	got, err := svc.StartProfileUpdateTask(context.Background(), &StartProfileUpdateTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		TaskDetails: &types.TaskDetails{
+			DisplayName:         ptr.String("__DisplayName__"),
+			Description:         ptr.String("__Description__"),
+			WebsiteUrl:          ptr.String("__WebsiteUrl__"),
+			LogoUrl:             ptr.String("__LogoUrl__"),
+			PrimarySolutionType: types.PrimarySolutionType("SOFTWARE_PRODUCTS"),
+			IndustrySegments: []types.IndustrySegment{
+				types.IndustrySegment("AGRICULTURE_MINING"),
+				types.IndustrySegment("AGRICULTURE_MINING"),
+			},
+			TranslationSourceLocale: ptr.String("__TranslationSourceLocale__"),
+			LocalizedContents: []types.LocalizedContent{
+				{
+					DisplayName: ptr.String("__DisplayName__"),
+					Description: ptr.String("__Description__"),
+					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+					LogoUrl:     ptr.String("__LogoUrl__"),
+					Locale:      ptr.String("__Locale__"),
+				},
+				{
+					DisplayName: ptr.String("__DisplayName__"),
+					Description: ptr.String("__Description__"),
+					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+					LogoUrl:     ptr.String("__LogoUrl__"),
+					Locale:      ptr.String("__Locale__"),
+				},
+			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1252,7 +1426,15 @@ func TestCheckResponseSnapshot_StartQualificationsAssociationTask(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQualificationsAssociationTask(context.Background(), &StartQualificationsAssociationTaskInput{})
+	got, err := svc.StartQualificationsAssociationTask(context.Background(), &StartQualificationsAssociationTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		PrimaryPartner: &types.QualificationsAssociationPartner{
+			ProfileId: ptr.String("__ProfileId__"),
+			AccountId: ptr.String("__AccountId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1282,7 +1464,15 @@ func TestCheckResponseSnapshot_StartQualificationsDisassociationTask(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQualificationsDisassociationTask(context.Background(), &StartQualificationsDisassociationTaskInput{})
+	got, err := svc.StartQualificationsDisassociationTask(context.Background(), &StartQualificationsDisassociationTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		AssociatedPartner: &types.QualificationsAssociationPartner{
+			ProfileId: ptr.String("__ProfileId__"),
+			AccountId: ptr.String("__AccountId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +1509,17 @@ func TestCheckResponseSnapshot_StartVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVerification(context.Background(), &StartVerificationInput{})
+	got, err := svc.StartVerification(context.Background(), &StartVerificationInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		VerificationDetails: &types.VerificationDetailsMemberBusinessVerificationDetails{
+			Value: types.BusinessVerificationDetails{
+				LegalName:                   ptr.String("__LegalName__"),
+				RegistrationId:              ptr.String("__RegistrationId__"),
+				CountryCode:                 ptr.String("__CountryCode__"),
+				JurisdictionOfIncorporation: ptr.String("__JurisdictionOfIncorporation__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +1538,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +1569,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1386,7 +1604,15 @@ func TestCheckResponseSnapshot_UpdateConnectionPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectionPreferences(context.Background(), &UpdateConnectionPreferencesInput{})
+	got, err := svc.UpdateConnectionPreferences(context.Background(), &UpdateConnectionPreferencesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Revision:   ptr.Int64(1),
+		AccessType: types.AccessType("ALLOW_ALL"),
+		ExcludedParticipantIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1408,7 +1634,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1434,7 +1664,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1459,7 +1693,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1485,7 +1723,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1511,7 +1753,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1538,7 +1784,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1580,7 +1830,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{})
+	_, opErr := svc.AcceptConnectionInvitation(context.Background(), &AcceptConnectionInvitationInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

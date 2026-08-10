@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListStackInstancesForProvisionedProduct
+
+{"NextPageToken":"__NextPageToken__","StackInstances":[{"Account":"__Account__","Region":"__Region__","StackInstanceStatus":"CURRENT"},{"Account":"__Account__","Region":"__Region__","StackInstanceStatus":"CURRENT"}]}

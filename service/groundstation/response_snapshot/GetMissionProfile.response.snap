@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"contactPostPassDurationSeconds":1,"contactPrePassDurationSeconds":1,"dataflowEdges":[["__Member__","__Member__"],["__Member__","__Member__"]],"minimumViableContactDurationSeconds":1,"missionProfileArn":"__MissionProfileArn__","missionProfileId":"__MissionProfileId__","name":"__Name__","region":"__Region__","streamsKmsKey":{"kmsKeyArn":"__KmsKeyMemberKmsKeyArn__"},"streamsKmsRole":"__StreamsKmsRole__","tags":{"key0":"__Value__"},"telemetrySinkConfigArn":"__TelemetrySinkConfigArn__","trackingConfigArn":"__TrackingConfigArn__"}

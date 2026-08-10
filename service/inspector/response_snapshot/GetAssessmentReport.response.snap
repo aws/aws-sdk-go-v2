@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.GetAssessmentReport
+
+{"status":"WORK_IN_PROGRESS","url":"__Url__"}

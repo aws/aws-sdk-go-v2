@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"monitors":[{"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING"},{"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING"}],"nextToken":"__NextToken__"}

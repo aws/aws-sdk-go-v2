@@ -116,7 +116,10 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJob(context.Background(), &CancelJobInput{})
+	got, err := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId:  ptr.String("__JobId__"),
+		Reason: ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +141,94 @@ func TestCheckResponseSnapshot_CreateComputeEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComputeEnvironment(context.Background(), &CreateComputeEnvironmentInput{})
+	got, err := svc.CreateComputeEnvironment(context.Background(), &CreateComputeEnvironmentInput{
+		ComputeEnvironmentName: ptr.String("__ComputeEnvironmentName__"),
+		Type:                   types.CEType("MANAGED"),
+		State:                  types.CEState("ENABLED"),
+		UnmanagedvCpus:         ptr.Int32(1),
+		ComputeResources: &types.ComputeResource{
+			Type:               types.CRType("EC2"),
+			AllocationStrategy: types.CRAllocationStrategy("BEST_FIT"),
+			MinvCpus:           ptr.Int32(1),
+			MaxvCpus:           ptr.Int32(1),
+			DesiredvCpus:       ptr.Int32(1),
+			InstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ImageId: ptr.String("__ImageId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2KeyPair:   ptr.String("__Ec2KeyPair__"),
+			InstanceRole: ptr.String("__InstanceRole__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			PlacementGroup:   ptr.String("__PlacementGroup__"),
+			BidPercentage:    ptr.Int32(1),
+			SpotIamFleetRole: ptr.String("__SpotIamFleetRole__"),
+			LaunchTemplate: &types.LaunchTemplateSpecification{
+				LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+				LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+				Version:            ptr.String("__Version__"),
+				Overrides: []types.LaunchTemplateSpecificationOverride{
+					{
+						LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+						LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+						Version:            ptr.String("__Version__"),
+						TargetInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+					},
+					{
+						LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+						LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+						Version:            ptr.String("__Version__"),
+						TargetInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+					},
+				},
+				UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+			},
+			Ec2Configuration: []types.Ec2Configuration{
+				{
+					ImageType:              ptr.String("__ImageType__"),
+					ImageIdOverride:        ptr.String("__ImageIdOverride__"),
+					BatchImageStatus:       ptr.String("__BatchImageStatus__"),
+					ImageKubernetesVersion: ptr.String("__ImageKubernetesVersion__"),
+				},
+				{
+					ImageType:              ptr.String("__ImageType__"),
+					ImageIdOverride:        ptr.String("__ImageIdOverride__"),
+					BatchImageStatus:       ptr.String("__BatchImageStatus__"),
+					ImageKubernetesVersion: ptr.String("__ImageKubernetesVersion__"),
+				},
+			},
+			ScalingPolicy: &types.ComputeScalingPolicy{
+				MinScaleDownDelayMinutes: ptr.Int32(1),
+			},
+		},
+		ServiceRole: ptr.String("__ServiceRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EksConfiguration: &types.EksConfiguration{
+			EksClusterArn:       ptr.String("__EksClusterArn__"),
+			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+		},
+		Context: ptr.String("__Context__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +250,14 @@ func TestCheckResponseSnapshot_CreateConsumableResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConsumableResource(context.Background(), &CreateConsumableResourceInput{})
+	got, err := svc.CreateConsumableResource(context.Background(), &CreateConsumableResourceInput{
+		ConsumableResourceName: ptr.String("__ConsumableResourceName__"),
+		TotalQuantity:          ptr.Int64(1),
+		ResourceType:           ptr.String("__ResourceType__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +279,50 @@ func TestCheckResponseSnapshot_CreateJobQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJobQueue(context.Background(), &CreateJobQueueInput{})
+	got, err := svc.CreateJobQueue(context.Background(), &CreateJobQueueInput{
+		JobQueueName:        ptr.String("__JobQueueName__"),
+		State:               types.JQState("ENABLED"),
+		SchedulingPolicyArn: ptr.String("__SchedulingPolicyArn__"),
+		Priority:            ptr.Int32(1),
+		ComputeEnvironmentOrder: []types.ComputeEnvironmentOrder{
+			{
+				Order:              ptr.Int32(1),
+				ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+			},
+			{
+				Order:              ptr.Int32(1),
+				ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+			},
+		},
+		ServiceEnvironmentOrder: []types.ServiceEnvironmentOrder{
+			{
+				Order:              ptr.Int32(1),
+				ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+			},
+			{
+				Order:              ptr.Int32(1),
+				ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+			},
+		},
+		JobQueueType: types.JobQueueType("EKS"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		JobStateTimeLimitActions: []types.JobStateTimeLimitAction{
+			{
+				Reason:         ptr.String("__Reason__"),
+				State:          types.JobStateTimeLimitActionsState("RUNNABLE"),
+				MaxTimeSeconds: ptr.Int32(1),
+				Action:         types.JobStateTimeLimitActionsAction("CANCEL"),
+			},
+			{
+				Reason:         ptr.String("__Reason__"),
+				State:          types.JobStateTimeLimitActionsState("RUNNABLE"),
+				MaxTimeSeconds: ptr.Int32(1),
+				Action:         types.JobStateTimeLimitActionsAction("CANCEL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +344,31 @@ func TestCheckResponseSnapshot_CreateQuotaShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuotaShare(context.Background(), &CreateQuotaShareInput{})
+	got, err := svc.CreateQuotaShare(context.Background(), &CreateQuotaShareInput{
+		QuotaShareName: ptr.String("__QuotaShareName__"),
+		JobQueue:       ptr.String("__JobQueue__"),
+		CapacityLimits: []types.QuotaShareCapacityLimit{
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+		},
+		ResourceSharingConfiguration: &types.QuotaShareResourceSharingConfiguration{
+			Strategy:    types.QuotaShareResourceSharingStrategy("RESERVE"),
+			BorrowLimit: ptr.Int32(1),
+		},
+		PreemptionConfiguration: &types.QuotaSharePreemptionConfiguration{
+			InSharePreemption: types.QuotaShareInSharePreemptionState("ENABLED"),
+		},
+		State: types.QuotaShareState("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +390,29 @@ func TestCheckResponseSnapshot_CreateSchedulingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchedulingPolicy(context.Background(), &CreateSchedulingPolicyInput{})
+	got, err := svc.CreateSchedulingPolicy(context.Background(), &CreateSchedulingPolicyInput{
+		Name: ptr.String("__Name__"),
+		QuotaSharePolicy: &types.QuotaSharePolicy{
+			IdleResourceAssignmentStrategy: types.QuotaShareIdleResourceAssignmentStrategy("FIFO"),
+		},
+		FairsharePolicy: &types.FairsharePolicy{
+			ShareDecaySeconds:  ptr.Int32(1),
+			ComputeReservation: ptr.Int32(1),
+			ShareDistribution: []types.ShareAttributes{
+				{
+					ShareIdentifier: ptr.String("__ShareIdentifier__"),
+					WeightFactor:    ptr.Float32(1.0),
+				},
+				{
+					ShareIdentifier: ptr.String("__ShareIdentifier__"),
+					WeightFactor:    ptr.Float32(1.0),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +434,24 @@ func TestCheckResponseSnapshot_CreateServiceEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceEnvironment(context.Background(), &CreateServiceEnvironmentInput{})
+	got, err := svc.CreateServiceEnvironment(context.Background(), &CreateServiceEnvironmentInput{
+		ServiceEnvironmentName: ptr.String("__ServiceEnvironmentName__"),
+		ServiceEnvironmentType: types.ServiceEnvironmentType("SAGEMAKER_TRAINING"),
+		State:                  types.ServiceEnvironmentState("ENABLED"),
+		CapacityLimits: []types.CapacityLimit{
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +470,9 @@ func TestCheckResponseSnapshot_DeleteComputeEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComputeEnvironment(context.Background(), &DeleteComputeEnvironmentInput{})
+	got, err := svc.DeleteComputeEnvironment(context.Background(), &DeleteComputeEnvironmentInput{
+		ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +491,9 @@ func TestCheckResponseSnapshot_DeleteConsumableResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConsumableResource(context.Background(), &DeleteConsumableResourceInput{})
+	got, err := svc.DeleteConsumableResource(context.Background(), &DeleteConsumableResourceInput{
+		ConsumableResource: ptr.String("__ConsumableResource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +512,9 @@ func TestCheckResponseSnapshot_DeleteJobQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJobQueue(context.Background(), &DeleteJobQueueInput{})
+	got, err := svc.DeleteJobQueue(context.Background(), &DeleteJobQueueInput{
+		JobQueue: ptr.String("__JobQueue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +533,9 @@ func TestCheckResponseSnapshot_DeleteQuotaShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuotaShare(context.Background(), &DeleteQuotaShareInput{})
+	got, err := svc.DeleteQuotaShare(context.Background(), &DeleteQuotaShareInput{
+		QuotaShareArn: ptr.String("__QuotaShareArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +554,9 @@ func TestCheckResponseSnapshot_DeleteSchedulingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchedulingPolicy(context.Background(), &DeleteSchedulingPolicyInput{})
+	got, err := svc.DeleteSchedulingPolicy(context.Background(), &DeleteSchedulingPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +575,9 @@ func TestCheckResponseSnapshot_DeleteServiceEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceEnvironment(context.Background(), &DeleteServiceEnvironmentInput{})
+	got, err := svc.DeleteServiceEnvironment(context.Background(), &DeleteServiceEnvironmentInput{
+		ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +596,9 @@ func TestCheckResponseSnapshot_DeregisterJobDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterJobDefinition(context.Background(), &DeregisterJobDefinitionInput{})
+	got, err := svc.DeregisterJobDefinition(context.Background(), &DeregisterJobDefinitionInput{
+		JobDefinition: ptr.String("__JobDefinition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -600,7 +817,14 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComputeEnvironments(context.Background(), &DescribeComputeEnvironmentsInput{})
+	got, err := svc.DescribeComputeEnvironments(context.Background(), &DescribeComputeEnvironmentsInput{
+		ComputeEnvironments: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +854,9 @@ func TestCheckResponseSnapshot_DescribeConsumableResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConsumableResource(context.Background(), &DescribeConsumableResourceInput{})
+	got, err := svc.DescribeConsumableResource(context.Background(), &DescribeConsumableResourceInput{
+		ConsumableResource: ptr.String("__ConsumableResource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7955,7 +8181,16 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobDefinitions(context.Background(), &DescribeJobDefinitionsInput{})
+	got, err := svc.DescribeJobDefinitions(context.Background(), &DescribeJobDefinitionsInput{
+		JobDefinitions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults:        ptr.Int32(1),
+		JobDefinitionName: ptr.String("__JobDefinitionName__"),
+		Status:            ptr.String("__Status__"),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8072,7 +8307,14 @@ func TestCheckResponseSnapshot_DescribeJobQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobQueues(context.Background(), &DescribeJobQueuesInput{})
+	got, err := svc.DescribeJobQueues(context.Background(), &DescribeJobQueuesInput{
+		JobQueues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16232,7 +16474,12 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobs(context.Background(), &DescribeJobsInput{})
+	got, err := svc.DescribeJobs(context.Background(), &DescribeJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16277,7 +16524,9 @@ func TestCheckResponseSnapshot_DescribeQuotaShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuotaShare(context.Background(), &DescribeQuotaShareInput{})
+	got, err := svc.DescribeQuotaShare(context.Background(), &DescribeQuotaShareInput{
+		QuotaShareArn: ptr.String("__QuotaShareArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16347,7 +16596,12 @@ func TestCheckResponseSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchedulingPolicies(context.Background(), &DescribeSchedulingPoliciesInput{})
+	got, err := svc.DescribeSchedulingPolicies(context.Background(), &DescribeSchedulingPoliciesInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16410,7 +16664,14 @@ func TestCheckResponseSnapshot_DescribeServiceEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceEnvironments(context.Background(), &DescribeServiceEnvironmentsInput{})
+	got, err := svc.DescribeServiceEnvironments(context.Background(), &DescribeServiceEnvironmentsInput{
+		ServiceEnvironments: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16527,7 +16788,9 @@ func TestCheckResponseSnapshot_DescribeServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceJob(context.Background(), &DescribeServiceJobInput{})
+	got, err := svc.DescribeServiceJob(context.Background(), &DescribeServiceJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16649,7 +16912,9 @@ func TestCheckResponseSnapshot_GetJobQueueSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobQueueSnapshot(context.Background(), &GetJobQueueSnapshotInput{})
+	got, err := svc.GetJobQueueSnapshot(context.Background(), &GetJobQueueSnapshotInput{
+		JobQueue: ptr.String("__JobQueue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16686,7 +16951,26 @@ func TestCheckResponseSnapshot_ListConsumableResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConsumableResources(context.Background(), &ListConsumableResourcesInput{})
+	got, err := svc.ListConsumableResources(context.Background(), &ListConsumableResourcesInput{
+		Filters: []types.KeyValuesPair{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16789,7 +17073,30 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		JobQueue:       ptr.String("__JobQueue__"),
+		ArrayJobId:     ptr.String("__ArrayJobId__"),
+		MultiNodeJobId: ptr.String("__MultiNodeJobId__"),
+		JobStatus:      types.JobStatus("SUBMITTED"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		Filters: []types.KeyValuesPair{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16860,7 +17167,27 @@ func TestCheckResponseSnapshot_ListJobsByConsumableResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobsByConsumableResource(context.Background(), &ListJobsByConsumableResourceInput{})
+	got, err := svc.ListJobsByConsumableResource(context.Background(), &ListJobsByConsumableResourceInput{
+		ConsumableResource: ptr.String("__ConsumableResource__"),
+		Filters: []types.KeyValuesPair{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16931,7 +17258,11 @@ func TestCheckResponseSnapshot_ListQuotaShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuotaShares(context.Background(), &ListQuotaSharesInput{})
+	got, err := svc.ListQuotaShares(context.Background(), &ListQuotaSharesInput{
+		JobQueue:   ptr.String("__JobQueue__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16960,7 +17291,10 @@ func TestCheckResponseSnapshot_ListSchedulingPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchedulingPolicies(context.Background(), &ListSchedulingPoliciesInput{})
+	got, err := svc.ListSchedulingPolicies(context.Background(), &ListSchedulingPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17043,7 +17377,28 @@ func TestCheckResponseSnapshot_ListServiceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceJobs(context.Background(), &ListServiceJobsInput{})
+	got, err := svc.ListServiceJobs(context.Background(), &ListServiceJobsInput{
+		JobQueue:   ptr.String("__JobQueue__"),
+		JobStatus:  types.ServiceJobStatus("SUBMITTED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.KeyValuesPair{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17066,7 +17421,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17089,7 +17446,3653 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterJobDefinition(context.Background(), &RegisterJobDefinitionInput{})
+	got, err := svc.RegisterJobDefinition(context.Background(), &RegisterJobDefinitionInput{
+		JobDefinitionName: ptr.String("__JobDefinitionName__"),
+		Type:              types.JobDefinitionType("container"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		SchedulingPriority: ptr.Int32(1),
+		ContainerProperties: &types.ContainerProperties{
+			Image:  ptr.String("__Image__"),
+			Vcpus:  ptr.Int32(1),
+			Memory: ptr.Int32(1),
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			JobRoleArn:       ptr.String("__JobRoleArn__"),
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			Volumes: []types.Volume{
+				{
+					Host: &types.Host{
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					Name: ptr.String("__Name__"),
+					EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+						FileSystemId:          ptr.String("__FileSystemId__"),
+						RootDirectory:         ptr.String("__RootDirectory__"),
+						TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+						TransitEncryptionPort: ptr.Int32(1),
+						AuthorizationConfig: &types.EFSAuthorizationConfig{
+							AccessPointId: ptr.String("__AccessPointId__"),
+							Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+						},
+					},
+					S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+						FileSystemArn:         ptr.String("__FileSystemArn__"),
+						RootDirectory:         ptr.String("__RootDirectory__"),
+						TransitEncryptionPort: ptr.Int32(1),
+						AccessPointArn:        ptr.String("__AccessPointArn__"),
+					},
+				},
+				{
+					Host: &types.Host{
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					Name: ptr.String("__Name__"),
+					EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+						FileSystemId:          ptr.String("__FileSystemId__"),
+						RootDirectory:         ptr.String("__RootDirectory__"),
+						TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+						TransitEncryptionPort: ptr.Int32(1),
+						AuthorizationConfig: &types.EFSAuthorizationConfig{
+							AccessPointId: ptr.String("__AccessPointId__"),
+							Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+						},
+					},
+					S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+						FileSystemArn:         ptr.String("__FileSystemArn__"),
+						RootDirectory:         ptr.String("__RootDirectory__"),
+						TransitEncryptionPort: ptr.Int32(1),
+						AccessPointArn:        ptr.String("__AccessPointArn__"),
+					},
+				},
+			},
+			Environment: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			MountPoints: []types.MountPoint{
+				{
+					ContainerPath: ptr.String("__ContainerPath__"),
+					ReadOnly:      ptr.Bool(true),
+					SourceVolume:  ptr.String("__SourceVolume__"),
+				},
+				{
+					ContainerPath: ptr.String("__ContainerPath__"),
+					ReadOnly:      ptr.Bool(true),
+					SourceVolume:  ptr.String("__SourceVolume__"),
+				},
+			},
+			ReadonlyRootFilesystem: ptr.Bool(true),
+			Privileged:             ptr.Bool(true),
+			Ulimits: []types.Ulimit{
+				{
+					HardLimit: ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SoftLimit: ptr.Int32(1),
+				},
+				{
+					HardLimit: ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SoftLimit: ptr.Int32(1),
+				},
+			},
+			User:         ptr.String("__User__"),
+			InstanceType: ptr.String("__InstanceType__"),
+			ResourceRequirements: []types.ResourceRequirement{
+				{
+					Value: ptr.String("__Value__"),
+					Type:  types.ResourceType("GPU"),
+				},
+				{
+					Value: ptr.String("__Value__"),
+					Type:  types.ResourceType("GPU"),
+				},
+			},
+			LinuxParameters: &types.LinuxParameters{
+				Devices: []types.Device{
+					{
+						HostPath:      ptr.String("__HostPath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						Permissions: []types.DeviceCgroupPermission{
+							types.DeviceCgroupPermission("READ"),
+							types.DeviceCgroupPermission("READ"),
+						},
+					},
+					{
+						HostPath:      ptr.String("__HostPath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						Permissions: []types.DeviceCgroupPermission{
+							types.DeviceCgroupPermission("READ"),
+							types.DeviceCgroupPermission("READ"),
+						},
+					},
+				},
+				InitProcessEnabled: ptr.Bool(true),
+				SharedMemorySize:   ptr.Int32(1),
+				Tmpfs: []types.Tmpfs{
+					{
+						ContainerPath: ptr.String("__ContainerPath__"),
+						Size:          ptr.Int32(1),
+						MountOptions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ContainerPath: ptr.String("__ContainerPath__"),
+						Size:          ptr.Int32(1),
+						MountOptions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MaxSwap:    ptr.Int32(1),
+				Swappiness: ptr.Int32(1),
+			},
+			LogConfiguration: &types.LogConfiguration{
+				LogDriver: types.LogDriver("json-file"),
+				Options: map[string]string{
+					"key0": "__Value__",
+				},
+				SecretOptions: []types.Secret{
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						ValueFrom: ptr.String("__ValueFrom__"),
+					},
+				},
+			},
+			Secrets: []types.Secret{
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					ValueFrom: ptr.String("__ValueFrom__"),
+				},
+			},
+			NetworkConfiguration: &types.NetworkConfiguration{
+				AssignPublicIp: types.AssignPublicIp("ENABLED"),
+			},
+			FargatePlatformConfiguration: &types.FargatePlatformConfiguration{
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+			},
+			EnableExecuteCommand: ptr.Bool(true),
+			EphemeralStorage: &types.EphemeralStorage{
+				SizeInGiB: ptr.Int32(1),
+			},
+			RuntimePlatform: &types.RuntimePlatform{
+				OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+				CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+			},
+			RepositoryCredentials: &types.RepositoryCredentials{
+				CredentialsParameter: ptr.String("__CredentialsParameter__"),
+			},
+		},
+		NodeProperties: &types.NodeProperties{
+			NumNodes: ptr.Int32(1),
+			MainNode: ptr.Int32(1),
+			NodeRangeProperties: []types.NodeRangeProperty{
+				{
+					TargetNodes: ptr.String("__TargetNodes__"),
+					Container: &types.ContainerProperties{
+						Image:  ptr.String("__Image__"),
+						Vcpus:  ptr.Int32(1),
+						Memory: ptr.Int32(1),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						JobRoleArn:       ptr.String("__JobRoleArn__"),
+						ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+						Volumes: []types.Volume{
+							{
+								Host: &types.Host{
+									SourcePath: ptr.String("__SourcePath__"),
+								},
+								Name: ptr.String("__Name__"),
+								EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+									FileSystemId:          ptr.String("__FileSystemId__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AuthorizationConfig: &types.EFSAuthorizationConfig{
+										AccessPointId: ptr.String("__AccessPointId__"),
+										Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+									},
+								},
+								S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+									FileSystemArn:         ptr.String("__FileSystemArn__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AccessPointArn:        ptr.String("__AccessPointArn__"),
+								},
+							},
+							{
+								Host: &types.Host{
+									SourcePath: ptr.String("__SourcePath__"),
+								},
+								Name: ptr.String("__Name__"),
+								EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+									FileSystemId:          ptr.String("__FileSystemId__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AuthorizationConfig: &types.EFSAuthorizationConfig{
+										AccessPointId: ptr.String("__AccessPointId__"),
+										Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+									},
+								},
+								S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+									FileSystemArn:         ptr.String("__FileSystemArn__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AccessPointArn:        ptr.String("__AccessPointArn__"),
+								},
+							},
+						},
+						Environment: []types.KeyValuePair{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						MountPoints: []types.MountPoint{
+							{
+								ContainerPath: ptr.String("__ContainerPath__"),
+								ReadOnly:      ptr.Bool(true),
+								SourceVolume:  ptr.String("__SourceVolume__"),
+							},
+							{
+								ContainerPath: ptr.String("__ContainerPath__"),
+								ReadOnly:      ptr.Bool(true),
+								SourceVolume:  ptr.String("__SourceVolume__"),
+							},
+						},
+						ReadonlyRootFilesystem: ptr.Bool(true),
+						Privileged:             ptr.Bool(true),
+						Ulimits: []types.Ulimit{
+							{
+								HardLimit: ptr.Int32(1),
+								Name:      ptr.String("__Name__"),
+								SoftLimit: ptr.Int32(1),
+							},
+							{
+								HardLimit: ptr.Int32(1),
+								Name:      ptr.String("__Name__"),
+								SoftLimit: ptr.Int32(1),
+							},
+						},
+						User:         ptr.String("__User__"),
+						InstanceType: ptr.String("__InstanceType__"),
+						ResourceRequirements: []types.ResourceRequirement{
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+						},
+						LinuxParameters: &types.LinuxParameters{
+							Devices: []types.Device{
+								{
+									HostPath:      ptr.String("__HostPath__"),
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Permissions: []types.DeviceCgroupPermission{
+										types.DeviceCgroupPermission("READ"),
+										types.DeviceCgroupPermission("READ"),
+									},
+								},
+								{
+									HostPath:      ptr.String("__HostPath__"),
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Permissions: []types.DeviceCgroupPermission{
+										types.DeviceCgroupPermission("READ"),
+										types.DeviceCgroupPermission("READ"),
+									},
+								},
+							},
+							InitProcessEnabled: ptr.Bool(true),
+							SharedMemorySize:   ptr.Int32(1),
+							Tmpfs: []types.Tmpfs{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Size:          ptr.Int32(1),
+									MountOptions: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Size:          ptr.Int32(1),
+									MountOptions: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							MaxSwap:    ptr.Int32(1),
+							Swappiness: ptr.Int32(1),
+						},
+						LogConfiguration: &types.LogConfiguration{
+							LogDriver: types.LogDriver("json-file"),
+							Options: map[string]string{
+								"key0": "__Value__",
+							},
+							SecretOptions: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+						},
+						Secrets: []types.Secret{
+							{
+								Name:      ptr.String("__Name__"),
+								ValueFrom: ptr.String("__ValueFrom__"),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								ValueFrom: ptr.String("__ValueFrom__"),
+							},
+						},
+						NetworkConfiguration: &types.NetworkConfiguration{
+							AssignPublicIp: types.AssignPublicIp("ENABLED"),
+						},
+						FargatePlatformConfiguration: &types.FargatePlatformConfiguration{
+							PlatformVersion: ptr.String("__PlatformVersion__"),
+						},
+						EnableExecuteCommand: ptr.Bool(true),
+						EphemeralStorage: &types.EphemeralStorage{
+							SizeInGiB: ptr.Int32(1),
+						},
+						RuntimePlatform: &types.RuntimePlatform{
+							OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+							CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+						},
+						RepositoryCredentials: &types.RepositoryCredentials{
+							CredentialsParameter: ptr.String("__CredentialsParameter__"),
+						},
+					},
+					InstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EcsProperties: &types.EcsProperties{
+						TaskProperties: []types.EcsTaskProperties{
+							{
+								Containers: []types.TaskContainerProperties{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+								},
+								EphemeralStorage: &types.EphemeralStorage{
+									SizeInGiB: ptr.Int32(1),
+								},
+								ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+								PlatformVersion:  ptr.String("__PlatformVersion__"),
+								IpcMode:          ptr.String("__IpcMode__"),
+								TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+								PidMode:          ptr.String("__PidMode__"),
+								NetworkConfiguration: &types.NetworkConfiguration{
+									AssignPublicIp: types.AssignPublicIp("ENABLED"),
+								},
+								RuntimePlatform: &types.RuntimePlatform{
+									OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+									CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+								},
+								Volumes: []types.Volume{
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+								},
+								EnableExecuteCommand: ptr.Bool(true),
+							},
+							{
+								Containers: []types.TaskContainerProperties{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+								},
+								EphemeralStorage: &types.EphemeralStorage{
+									SizeInGiB: ptr.Int32(1),
+								},
+								ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+								PlatformVersion:  ptr.String("__PlatformVersion__"),
+								IpcMode:          ptr.String("__IpcMode__"),
+								TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+								PidMode:          ptr.String("__PidMode__"),
+								NetworkConfiguration: &types.NetworkConfiguration{
+									AssignPublicIp: types.AssignPublicIp("ENABLED"),
+								},
+								RuntimePlatform: &types.RuntimePlatform{
+									OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+									CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+								},
+								Volumes: []types.Volume{
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+								},
+								EnableExecuteCommand: ptr.Bool(true),
+							},
+						},
+					},
+					EksProperties: &types.EksProperties{
+						PodProperties: &types.EksPodProperties{
+							ServiceAccountName: ptr.String("__ServiceAccountName__"),
+							HostNetwork:        ptr.Bool(true),
+							DnsPolicy:          ptr.String("__DnsPolicy__"),
+							ImagePullSecrets: []types.ImagePullSecret{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							Containers: []types.EksContainer{
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+							},
+							InitContainers: []types.EksContainer{
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+							},
+							Volumes: []types.EksVolume{
+								{
+									Name: ptr.String("__Name__"),
+									HostPath: &types.EksHostPath{
+										Path: ptr.String("__Path__"),
+									},
+									EmptyDir: &types.EksEmptyDir{
+										Medium:    ptr.String("__Medium__"),
+										SizeLimit: ptr.String("__SizeLimit__"),
+									},
+									Secret: &types.EksSecret{
+										SecretName: ptr.String("__SecretName__"),
+										Optional:   ptr.Bool(true),
+									},
+									PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+										ClaimName: ptr.String("__ClaimName__"),
+										ReadOnly:  ptr.Bool(true),
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									HostPath: &types.EksHostPath{
+										Path: ptr.String("__Path__"),
+									},
+									EmptyDir: &types.EksEmptyDir{
+										Medium:    ptr.String("__Medium__"),
+										SizeLimit: ptr.String("__SizeLimit__"),
+									},
+									Secret: &types.EksSecret{
+										SecretName: ptr.String("__SecretName__"),
+										Optional:   ptr.Bool(true),
+									},
+									PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+										ClaimName: ptr.String("__ClaimName__"),
+										ReadOnly:  ptr.Bool(true),
+									},
+								},
+							},
+							Metadata: &types.EksMetadata{
+								Labels: map[string]string{
+									"key0": "__Value__",
+								},
+								Annotations: map[string]string{
+									"key0": "__Value__",
+								},
+								Namespace: ptr.String("__Namespace__"),
+							},
+							ShareProcessNamespace: ptr.Bool(true),
+						},
+					},
+					ConsumableResourceProperties: &types.ConsumableResourceProperties{
+						ConsumableResourceList: []types.ConsumableResourceRequirement{
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+						},
+					},
+				},
+				{
+					TargetNodes: ptr.String("__TargetNodes__"),
+					Container: &types.ContainerProperties{
+						Image:  ptr.String("__Image__"),
+						Vcpus:  ptr.Int32(1),
+						Memory: ptr.Int32(1),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						JobRoleArn:       ptr.String("__JobRoleArn__"),
+						ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+						Volumes: []types.Volume{
+							{
+								Host: &types.Host{
+									SourcePath: ptr.String("__SourcePath__"),
+								},
+								Name: ptr.String("__Name__"),
+								EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+									FileSystemId:          ptr.String("__FileSystemId__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AuthorizationConfig: &types.EFSAuthorizationConfig{
+										AccessPointId: ptr.String("__AccessPointId__"),
+										Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+									},
+								},
+								S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+									FileSystemArn:         ptr.String("__FileSystemArn__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AccessPointArn:        ptr.String("__AccessPointArn__"),
+								},
+							},
+							{
+								Host: &types.Host{
+									SourcePath: ptr.String("__SourcePath__"),
+								},
+								Name: ptr.String("__Name__"),
+								EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+									FileSystemId:          ptr.String("__FileSystemId__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AuthorizationConfig: &types.EFSAuthorizationConfig{
+										AccessPointId: ptr.String("__AccessPointId__"),
+										Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+									},
+								},
+								S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+									FileSystemArn:         ptr.String("__FileSystemArn__"),
+									RootDirectory:         ptr.String("__RootDirectory__"),
+									TransitEncryptionPort: ptr.Int32(1),
+									AccessPointArn:        ptr.String("__AccessPointArn__"),
+								},
+							},
+						},
+						Environment: []types.KeyValuePair{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						MountPoints: []types.MountPoint{
+							{
+								ContainerPath: ptr.String("__ContainerPath__"),
+								ReadOnly:      ptr.Bool(true),
+								SourceVolume:  ptr.String("__SourceVolume__"),
+							},
+							{
+								ContainerPath: ptr.String("__ContainerPath__"),
+								ReadOnly:      ptr.Bool(true),
+								SourceVolume:  ptr.String("__SourceVolume__"),
+							},
+						},
+						ReadonlyRootFilesystem: ptr.Bool(true),
+						Privileged:             ptr.Bool(true),
+						Ulimits: []types.Ulimit{
+							{
+								HardLimit: ptr.Int32(1),
+								Name:      ptr.String("__Name__"),
+								SoftLimit: ptr.Int32(1),
+							},
+							{
+								HardLimit: ptr.Int32(1),
+								Name:      ptr.String("__Name__"),
+								SoftLimit: ptr.Int32(1),
+							},
+						},
+						User:         ptr.String("__User__"),
+						InstanceType: ptr.String("__InstanceType__"),
+						ResourceRequirements: []types.ResourceRequirement{
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+						},
+						LinuxParameters: &types.LinuxParameters{
+							Devices: []types.Device{
+								{
+									HostPath:      ptr.String("__HostPath__"),
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Permissions: []types.DeviceCgroupPermission{
+										types.DeviceCgroupPermission("READ"),
+										types.DeviceCgroupPermission("READ"),
+									},
+								},
+								{
+									HostPath:      ptr.String("__HostPath__"),
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Permissions: []types.DeviceCgroupPermission{
+										types.DeviceCgroupPermission("READ"),
+										types.DeviceCgroupPermission("READ"),
+									},
+								},
+							},
+							InitProcessEnabled: ptr.Bool(true),
+							SharedMemorySize:   ptr.Int32(1),
+							Tmpfs: []types.Tmpfs{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Size:          ptr.Int32(1),
+									MountOptions: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									Size:          ptr.Int32(1),
+									MountOptions: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							MaxSwap:    ptr.Int32(1),
+							Swappiness: ptr.Int32(1),
+						},
+						LogConfiguration: &types.LogConfiguration{
+							LogDriver: types.LogDriver("json-file"),
+							Options: map[string]string{
+								"key0": "__Value__",
+							},
+							SecretOptions: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+						},
+						Secrets: []types.Secret{
+							{
+								Name:      ptr.String("__Name__"),
+								ValueFrom: ptr.String("__ValueFrom__"),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								ValueFrom: ptr.String("__ValueFrom__"),
+							},
+						},
+						NetworkConfiguration: &types.NetworkConfiguration{
+							AssignPublicIp: types.AssignPublicIp("ENABLED"),
+						},
+						FargatePlatformConfiguration: &types.FargatePlatformConfiguration{
+							PlatformVersion: ptr.String("__PlatformVersion__"),
+						},
+						EnableExecuteCommand: ptr.Bool(true),
+						EphemeralStorage: &types.EphemeralStorage{
+							SizeInGiB: ptr.Int32(1),
+						},
+						RuntimePlatform: &types.RuntimePlatform{
+							OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+							CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+						},
+						RepositoryCredentials: &types.RepositoryCredentials{
+							CredentialsParameter: ptr.String("__CredentialsParameter__"),
+						},
+					},
+					InstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EcsProperties: &types.EcsProperties{
+						TaskProperties: []types.EcsTaskProperties{
+							{
+								Containers: []types.TaskContainerProperties{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+								},
+								EphemeralStorage: &types.EphemeralStorage{
+									SizeInGiB: ptr.Int32(1),
+								},
+								ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+								PlatformVersion:  ptr.String("__PlatformVersion__"),
+								IpcMode:          ptr.String("__IpcMode__"),
+								TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+								PidMode:          ptr.String("__PidMode__"),
+								NetworkConfiguration: &types.NetworkConfiguration{
+									AssignPublicIp: types.AssignPublicIp("ENABLED"),
+								},
+								RuntimePlatform: &types.RuntimePlatform{
+									OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+									CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+								},
+								Volumes: []types.Volume{
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+								},
+								EnableExecuteCommand: ptr.Bool(true),
+							},
+							{
+								Containers: []types.TaskContainerProperties{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										DependsOn: []types.TaskContainerDependency{
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+											{
+												ContainerName: ptr.String("__ContainerName__"),
+												Condition:     ptr.String("__Condition__"),
+											},
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Essential: ptr.Bool(true),
+										FirelensConfiguration: &types.FirelensConfiguration{
+											Type: types.FirelensConfigurationType("fluentd"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+										},
+										Image: ptr.String("__Image__"),
+										LinuxParameters: &types.LinuxParameters{
+											Devices: []types.Device{
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+												{
+													HostPath:      ptr.String("__HostPath__"),
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Permissions: []types.DeviceCgroupPermission{
+														types.DeviceCgroupPermission("READ"),
+														types.DeviceCgroupPermission("READ"),
+													},
+												},
+											},
+											InitProcessEnabled: ptr.Bool(true),
+											SharedMemorySize:   ptr.Int32(1),
+											Tmpfs: []types.Tmpfs{
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												{
+													ContainerPath: ptr.String("__ContainerPath__"),
+													Size:          ptr.Int32(1),
+													MountOptions: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											MaxSwap:    ptr.Int32(1),
+											Swappiness: ptr.Int32(1),
+										},
+										LogConfiguration: &types.LogConfiguration{
+											LogDriver: types.LogDriver("json-file"),
+											Options: map[string]string{
+												"key0": "__Value__",
+											},
+											SecretOptions: []types.Secret{
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+												{
+													Name:      ptr.String("__Name__"),
+													ValueFrom: ptr.String("__ValueFrom__"),
+												},
+											},
+										},
+										MountPoints: []types.MountPoint{
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+											{
+												ContainerPath: ptr.String("__ContainerPath__"),
+												ReadOnly:      ptr.Bool(true),
+												SourceVolume:  ptr.String("__SourceVolume__"),
+											},
+										},
+										Name:                   ptr.String("__Name__"),
+										Privileged:             ptr.Bool(true),
+										ReadonlyRootFilesystem: ptr.Bool(true),
+										RepositoryCredentials: &types.RepositoryCredentials{
+											CredentialsParameter: ptr.String("__CredentialsParameter__"),
+										},
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+										Secrets: []types.Secret{
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+											{
+												Name:      ptr.String("__Name__"),
+												ValueFrom: ptr.String("__ValueFrom__"),
+											},
+										},
+										Ulimits: []types.Ulimit{
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+											{
+												HardLimit: ptr.Int32(1),
+												Name:      ptr.String("__Name__"),
+												SoftLimit: ptr.Int32(1),
+											},
+										},
+										User:         ptr.String("__User__"),
+										StartTimeout: ptr.Int32(1),
+										StopTimeout:  ptr.Int32(1),
+									},
+								},
+								EphemeralStorage: &types.EphemeralStorage{
+									SizeInGiB: ptr.Int32(1),
+								},
+								ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+								PlatformVersion:  ptr.String("__PlatformVersion__"),
+								IpcMode:          ptr.String("__IpcMode__"),
+								TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+								PidMode:          ptr.String("__PidMode__"),
+								NetworkConfiguration: &types.NetworkConfiguration{
+									AssignPublicIp: types.AssignPublicIp("ENABLED"),
+								},
+								RuntimePlatform: &types.RuntimePlatform{
+									OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+									CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+								},
+								Volumes: []types.Volume{
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+									{
+										Host: &types.Host{
+											SourcePath: ptr.String("__SourcePath__"),
+										},
+										Name: ptr.String("__Name__"),
+										EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+											FileSystemId:          ptr.String("__FileSystemId__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AuthorizationConfig: &types.EFSAuthorizationConfig{
+												AccessPointId: ptr.String("__AccessPointId__"),
+												Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+											},
+										},
+										S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+											FileSystemArn:         ptr.String("__FileSystemArn__"),
+											RootDirectory:         ptr.String("__RootDirectory__"),
+											TransitEncryptionPort: ptr.Int32(1),
+											AccessPointArn:        ptr.String("__AccessPointArn__"),
+										},
+									},
+								},
+								EnableExecuteCommand: ptr.Bool(true),
+							},
+						},
+					},
+					EksProperties: &types.EksProperties{
+						PodProperties: &types.EksPodProperties{
+							ServiceAccountName: ptr.String("__ServiceAccountName__"),
+							HostNetwork:        ptr.Bool(true),
+							DnsPolicy:          ptr.String("__DnsPolicy__"),
+							ImagePullSecrets: []types.ImagePullSecret{
+								{
+									Name: ptr.String("__Name__"),
+								},
+								{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							Containers: []types.EksContainer{
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+							},
+							InitContainers: []types.EksContainer{
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+								{
+									Name:            ptr.String("__Name__"),
+									Image:           ptr.String("__Image__"),
+									ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									VolumeMounts: []types.EksContainerVolumeMount{
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+										{
+											Name:      ptr.String("__Name__"),
+											MountPath: ptr.String("__MountPath__"),
+											SubPath:   ptr.String("__SubPath__"),
+											ReadOnly:  ptr.Bool(true),
+										},
+									},
+									SecurityContext: &types.EksContainerSecurityContext{
+										RunAsUser:                ptr.Int64(1),
+										RunAsGroup:               ptr.Int64(1),
+										Privileged:               ptr.Bool(true),
+										AllowPrivilegeEscalation: ptr.Bool(true),
+										ReadOnlyRootFilesystem:   ptr.Bool(true),
+										RunAsNonRoot:             ptr.Bool(true),
+									},
+								},
+							},
+							Volumes: []types.EksVolume{
+								{
+									Name: ptr.String("__Name__"),
+									HostPath: &types.EksHostPath{
+										Path: ptr.String("__Path__"),
+									},
+									EmptyDir: &types.EksEmptyDir{
+										Medium:    ptr.String("__Medium__"),
+										SizeLimit: ptr.String("__SizeLimit__"),
+									},
+									Secret: &types.EksSecret{
+										SecretName: ptr.String("__SecretName__"),
+										Optional:   ptr.Bool(true),
+									},
+									PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+										ClaimName: ptr.String("__ClaimName__"),
+										ReadOnly:  ptr.Bool(true),
+									},
+								},
+								{
+									Name: ptr.String("__Name__"),
+									HostPath: &types.EksHostPath{
+										Path: ptr.String("__Path__"),
+									},
+									EmptyDir: &types.EksEmptyDir{
+										Medium:    ptr.String("__Medium__"),
+										SizeLimit: ptr.String("__SizeLimit__"),
+									},
+									Secret: &types.EksSecret{
+										SecretName: ptr.String("__SecretName__"),
+										Optional:   ptr.Bool(true),
+									},
+									PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+										ClaimName: ptr.String("__ClaimName__"),
+										ReadOnly:  ptr.Bool(true),
+									},
+								},
+							},
+							Metadata: &types.EksMetadata{
+								Labels: map[string]string{
+									"key0": "__Value__",
+								},
+								Annotations: map[string]string{
+									"key0": "__Value__",
+								},
+								Namespace: ptr.String("__Namespace__"),
+							},
+							ShareProcessNamespace: ptr.Bool(true),
+						},
+					},
+					ConsumableResourceProperties: &types.ConsumableResourceProperties{
+						ConsumableResourceList: []types.ConsumableResourceRequirement{
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+						},
+					},
+				},
+			},
+		},
+		RetryStrategy: &types.RetryStrategy{
+			Attempts: ptr.Int32(1),
+			EvaluateOnExit: []types.EvaluateOnExit{
+				{
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+					OnReason:       ptr.String("__OnReason__"),
+					OnExitCode:     ptr.String("__OnExitCode__"),
+					Action:         types.RetryAction("RETRY"),
+				},
+				{
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+					OnReason:       ptr.String("__OnReason__"),
+					OnExitCode:     ptr.String("__OnExitCode__"),
+					Action:         types.RetryAction("RETRY"),
+				},
+			},
+		},
+		PropagateTags: ptr.Bool(true),
+		Timeout: &types.JobTimeout{
+			AttemptDurationSeconds: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PlatformCapabilities: []types.PlatformCapability{
+			types.PlatformCapability("EC2"),
+			types.PlatformCapability("EC2"),
+		},
+		EksProperties: &types.EksProperties{
+			PodProperties: &types.EksPodProperties{
+				ServiceAccountName: ptr.String("__ServiceAccountName__"),
+				HostNetwork:        ptr.Bool(true),
+				DnsPolicy:          ptr.String("__DnsPolicy__"),
+				ImagePullSecrets: []types.ImagePullSecret{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				Containers: []types.EksContainer{
+					{
+						Name:            ptr.String("__Name__"),
+						Image:           ptr.String("__Image__"),
+						ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						VolumeMounts: []types.EksContainerVolumeMount{
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+						},
+						SecurityContext: &types.EksContainerSecurityContext{
+							RunAsUser:                ptr.Int64(1),
+							RunAsGroup:               ptr.Int64(1),
+							Privileged:               ptr.Bool(true),
+							AllowPrivilegeEscalation: ptr.Bool(true),
+							ReadOnlyRootFilesystem:   ptr.Bool(true),
+							RunAsNonRoot:             ptr.Bool(true),
+						},
+					},
+					{
+						Name:            ptr.String("__Name__"),
+						Image:           ptr.String("__Image__"),
+						ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						VolumeMounts: []types.EksContainerVolumeMount{
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+						},
+						SecurityContext: &types.EksContainerSecurityContext{
+							RunAsUser:                ptr.Int64(1),
+							RunAsGroup:               ptr.Int64(1),
+							Privileged:               ptr.Bool(true),
+							AllowPrivilegeEscalation: ptr.Bool(true),
+							ReadOnlyRootFilesystem:   ptr.Bool(true),
+							RunAsNonRoot:             ptr.Bool(true),
+						},
+					},
+				},
+				InitContainers: []types.EksContainer{
+					{
+						Name:            ptr.String("__Name__"),
+						Image:           ptr.String("__Image__"),
+						ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						VolumeMounts: []types.EksContainerVolumeMount{
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+						},
+						SecurityContext: &types.EksContainerSecurityContext{
+							RunAsUser:                ptr.Int64(1),
+							RunAsGroup:               ptr.Int64(1),
+							Privileged:               ptr.Bool(true),
+							AllowPrivilegeEscalation: ptr.Bool(true),
+							ReadOnlyRootFilesystem:   ptr.Bool(true),
+							RunAsNonRoot:             ptr.Bool(true),
+						},
+					},
+					{
+						Name:            ptr.String("__Name__"),
+						Image:           ptr.String("__Image__"),
+						ImagePullPolicy: ptr.String("__ImagePullPolicy__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						VolumeMounts: []types.EksContainerVolumeMount{
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+							{
+								Name:      ptr.String("__Name__"),
+								MountPath: ptr.String("__MountPath__"),
+								SubPath:   ptr.String("__SubPath__"),
+								ReadOnly:  ptr.Bool(true),
+							},
+						},
+						SecurityContext: &types.EksContainerSecurityContext{
+							RunAsUser:                ptr.Int64(1),
+							RunAsGroup:               ptr.Int64(1),
+							Privileged:               ptr.Bool(true),
+							AllowPrivilegeEscalation: ptr.Bool(true),
+							ReadOnlyRootFilesystem:   ptr.Bool(true),
+							RunAsNonRoot:             ptr.Bool(true),
+						},
+					},
+				},
+				Volumes: []types.EksVolume{
+					{
+						Name: ptr.String("__Name__"),
+						HostPath: &types.EksHostPath{
+							Path: ptr.String("__Path__"),
+						},
+						EmptyDir: &types.EksEmptyDir{
+							Medium:    ptr.String("__Medium__"),
+							SizeLimit: ptr.String("__SizeLimit__"),
+						},
+						Secret: &types.EksSecret{
+							SecretName: ptr.String("__SecretName__"),
+							Optional:   ptr.Bool(true),
+						},
+						PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+							ClaimName: ptr.String("__ClaimName__"),
+							ReadOnly:  ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						HostPath: &types.EksHostPath{
+							Path: ptr.String("__Path__"),
+						},
+						EmptyDir: &types.EksEmptyDir{
+							Medium:    ptr.String("__Medium__"),
+							SizeLimit: ptr.String("__SizeLimit__"),
+						},
+						Secret: &types.EksSecret{
+							SecretName: ptr.String("__SecretName__"),
+							Optional:   ptr.Bool(true),
+						},
+						PersistentVolumeClaim: &types.EksPersistentVolumeClaim{
+							ClaimName: ptr.String("__ClaimName__"),
+							ReadOnly:  ptr.Bool(true),
+						},
+					},
+				},
+				Metadata: &types.EksMetadata{
+					Labels: map[string]string{
+						"key0": "__Value__",
+					},
+					Annotations: map[string]string{
+						"key0": "__Value__",
+					},
+					Namespace: ptr.String("__Namespace__"),
+				},
+				ShareProcessNamespace: ptr.Bool(true),
+			},
+		},
+		EcsProperties: &types.EcsProperties{
+			TaskProperties: []types.EcsTaskProperties{
+				{
+					Containers: []types.TaskContainerProperties{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							DependsOn: []types.TaskContainerDependency{
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Essential: ptr.Bool(true),
+							FirelensConfiguration: &types.FirelensConfiguration{
+								Type: types.FirelensConfigurationType("fluentd"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Image: ptr.String("__Image__"),
+							LinuxParameters: &types.LinuxParameters{
+								Devices: []types.Device{
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+								},
+								InitProcessEnabled: ptr.Bool(true),
+								SharedMemorySize:   ptr.Int32(1),
+								Tmpfs: []types.Tmpfs{
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MaxSwap:    ptr.Int32(1),
+								Swappiness: ptr.Int32(1),
+							},
+							LogConfiguration: &types.LogConfiguration{
+								LogDriver: types.LogDriver("json-file"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+								SecretOptions: []types.Secret{
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+								},
+							},
+							MountPoints: []types.MountPoint{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+							},
+							Name:                   ptr.String("__Name__"),
+							Privileged:             ptr.Bool(true),
+							ReadonlyRootFilesystem: ptr.Bool(true),
+							RepositoryCredentials: &types.RepositoryCredentials{
+								CredentialsParameter: ptr.String("__CredentialsParameter__"),
+							},
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+							Secrets: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+							Ulimits: []types.Ulimit{
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+							},
+							User:         ptr.String("__User__"),
+							StartTimeout: ptr.Int32(1),
+							StopTimeout:  ptr.Int32(1),
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							DependsOn: []types.TaskContainerDependency{
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Essential: ptr.Bool(true),
+							FirelensConfiguration: &types.FirelensConfiguration{
+								Type: types.FirelensConfigurationType("fluentd"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Image: ptr.String("__Image__"),
+							LinuxParameters: &types.LinuxParameters{
+								Devices: []types.Device{
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+								},
+								InitProcessEnabled: ptr.Bool(true),
+								SharedMemorySize:   ptr.Int32(1),
+								Tmpfs: []types.Tmpfs{
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MaxSwap:    ptr.Int32(1),
+								Swappiness: ptr.Int32(1),
+							},
+							LogConfiguration: &types.LogConfiguration{
+								LogDriver: types.LogDriver("json-file"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+								SecretOptions: []types.Secret{
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+								},
+							},
+							MountPoints: []types.MountPoint{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+							},
+							Name:                   ptr.String("__Name__"),
+							Privileged:             ptr.Bool(true),
+							ReadonlyRootFilesystem: ptr.Bool(true),
+							RepositoryCredentials: &types.RepositoryCredentials{
+								CredentialsParameter: ptr.String("__CredentialsParameter__"),
+							},
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+							Secrets: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+							Ulimits: []types.Ulimit{
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+							},
+							User:         ptr.String("__User__"),
+							StartTimeout: ptr.Int32(1),
+							StopTimeout:  ptr.Int32(1),
+						},
+					},
+					EphemeralStorage: &types.EphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					PlatformVersion:  ptr.String("__PlatformVersion__"),
+					IpcMode:          ptr.String("__IpcMode__"),
+					TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+					PidMode:          ptr.String("__PidMode__"),
+					NetworkConfiguration: &types.NetworkConfiguration{
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+					RuntimePlatform: &types.RuntimePlatform{
+						OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+						CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+					},
+					Volumes: []types.Volume{
+						{
+							Host: &types.Host{
+								SourcePath: ptr.String("__SourcePath__"),
+							},
+							Name: ptr.String("__Name__"),
+							EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+								FileSystemId:          ptr.String("__FileSystemId__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AuthorizationConfig: &types.EFSAuthorizationConfig{
+									AccessPointId: ptr.String("__AccessPointId__"),
+									Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+								},
+							},
+							S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+								FileSystemArn:         ptr.String("__FileSystemArn__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AccessPointArn:        ptr.String("__AccessPointArn__"),
+							},
+						},
+						{
+							Host: &types.Host{
+								SourcePath: ptr.String("__SourcePath__"),
+							},
+							Name: ptr.String("__Name__"),
+							EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+								FileSystemId:          ptr.String("__FileSystemId__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AuthorizationConfig: &types.EFSAuthorizationConfig{
+									AccessPointId: ptr.String("__AccessPointId__"),
+									Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+								},
+							},
+							S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+								FileSystemArn:         ptr.String("__FileSystemArn__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AccessPointArn:        ptr.String("__AccessPointArn__"),
+							},
+						},
+					},
+					EnableExecuteCommand: ptr.Bool(true),
+				},
+				{
+					Containers: []types.TaskContainerProperties{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							DependsOn: []types.TaskContainerDependency{
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Essential: ptr.Bool(true),
+							FirelensConfiguration: &types.FirelensConfiguration{
+								Type: types.FirelensConfigurationType("fluentd"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Image: ptr.String("__Image__"),
+							LinuxParameters: &types.LinuxParameters{
+								Devices: []types.Device{
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+								},
+								InitProcessEnabled: ptr.Bool(true),
+								SharedMemorySize:   ptr.Int32(1),
+								Tmpfs: []types.Tmpfs{
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MaxSwap:    ptr.Int32(1),
+								Swappiness: ptr.Int32(1),
+							},
+							LogConfiguration: &types.LogConfiguration{
+								LogDriver: types.LogDriver("json-file"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+								SecretOptions: []types.Secret{
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+								},
+							},
+							MountPoints: []types.MountPoint{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+							},
+							Name:                   ptr.String("__Name__"),
+							Privileged:             ptr.Bool(true),
+							ReadonlyRootFilesystem: ptr.Bool(true),
+							RepositoryCredentials: &types.RepositoryCredentials{
+								CredentialsParameter: ptr.String("__CredentialsParameter__"),
+							},
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+							Secrets: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+							Ulimits: []types.Ulimit{
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+							},
+							User:         ptr.String("__User__"),
+							StartTimeout: ptr.Int32(1),
+							StopTimeout:  ptr.Int32(1),
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							DependsOn: []types.TaskContainerDependency{
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+								{
+									ContainerName: ptr.String("__ContainerName__"),
+									Condition:     ptr.String("__Condition__"),
+								},
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Essential: ptr.Bool(true),
+							FirelensConfiguration: &types.FirelensConfiguration{
+								Type: types.FirelensConfigurationType("fluentd"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Image: ptr.String("__Image__"),
+							LinuxParameters: &types.LinuxParameters{
+								Devices: []types.Device{
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+									{
+										HostPath:      ptr.String("__HostPath__"),
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Permissions: []types.DeviceCgroupPermission{
+											types.DeviceCgroupPermission("READ"),
+											types.DeviceCgroupPermission("READ"),
+										},
+									},
+								},
+								InitProcessEnabled: ptr.Bool(true),
+								SharedMemorySize:   ptr.Int32(1),
+								Tmpfs: []types.Tmpfs{
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									{
+										ContainerPath: ptr.String("__ContainerPath__"),
+										Size:          ptr.Int32(1),
+										MountOptions: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								MaxSwap:    ptr.Int32(1),
+								Swappiness: ptr.Int32(1),
+							},
+							LogConfiguration: &types.LogConfiguration{
+								LogDriver: types.LogDriver("json-file"),
+								Options: map[string]string{
+									"key0": "__Value__",
+								},
+								SecretOptions: []types.Secret{
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										ValueFrom: ptr.String("__ValueFrom__"),
+									},
+								},
+							},
+							MountPoints: []types.MountPoint{
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+								{
+									ContainerPath: ptr.String("__ContainerPath__"),
+									ReadOnly:      ptr.Bool(true),
+									SourceVolume:  ptr.String("__SourceVolume__"),
+								},
+							},
+							Name:                   ptr.String("__Name__"),
+							Privileged:             ptr.Bool(true),
+							ReadonlyRootFilesystem: ptr.Bool(true),
+							RepositoryCredentials: &types.RepositoryCredentials{
+								CredentialsParameter: ptr.String("__CredentialsParameter__"),
+							},
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+							Secrets: []types.Secret{
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									ValueFrom: ptr.String("__ValueFrom__"),
+								},
+							},
+							Ulimits: []types.Ulimit{
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+								{
+									HardLimit: ptr.Int32(1),
+									Name:      ptr.String("__Name__"),
+									SoftLimit: ptr.Int32(1),
+								},
+							},
+							User:         ptr.String("__User__"),
+							StartTimeout: ptr.Int32(1),
+							StopTimeout:  ptr.Int32(1),
+						},
+					},
+					EphemeralStorage: &types.EphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					PlatformVersion:  ptr.String("__PlatformVersion__"),
+					IpcMode:          ptr.String("__IpcMode__"),
+					TaskRoleArn:      ptr.String("__TaskRoleArn__"),
+					PidMode:          ptr.String("__PidMode__"),
+					NetworkConfiguration: &types.NetworkConfiguration{
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+					RuntimePlatform: &types.RuntimePlatform{
+						OperatingSystemFamily: ptr.String("__OperatingSystemFamily__"),
+						CpuArchitecture:       ptr.String("__CpuArchitecture__"),
+					},
+					Volumes: []types.Volume{
+						{
+							Host: &types.Host{
+								SourcePath: ptr.String("__SourcePath__"),
+							},
+							Name: ptr.String("__Name__"),
+							EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+								FileSystemId:          ptr.String("__FileSystemId__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AuthorizationConfig: &types.EFSAuthorizationConfig{
+									AccessPointId: ptr.String("__AccessPointId__"),
+									Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+								},
+							},
+							S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+								FileSystemArn:         ptr.String("__FileSystemArn__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AccessPointArn:        ptr.String("__AccessPointArn__"),
+							},
+						},
+						{
+							Host: &types.Host{
+								SourcePath: ptr.String("__SourcePath__"),
+							},
+							Name: ptr.String("__Name__"),
+							EfsVolumeConfiguration: &types.EFSVolumeConfiguration{
+								FileSystemId:          ptr.String("__FileSystemId__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryption:     types.EFSTransitEncryption("ENABLED"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AuthorizationConfig: &types.EFSAuthorizationConfig{
+									AccessPointId: ptr.String("__AccessPointId__"),
+									Iam:           types.EFSAuthorizationConfigIAM("ENABLED"),
+								},
+							},
+							S3filesVolumeConfiguration: &types.S3FilesVolumeConfiguration{
+								FileSystemArn:         ptr.String("__FileSystemArn__"),
+								RootDirectory:         ptr.String("__RootDirectory__"),
+								TransitEncryptionPort: ptr.Int32(1),
+								AccessPointArn:        ptr.String("__AccessPointArn__"),
+							},
+						},
+					},
+					EnableExecuteCommand: ptr.Bool(true),
+				},
+			},
+		},
+		ConsumableResourceProperties: &types.ConsumableResourceProperties{
+			ConsumableResourceList: []types.ConsumableResourceRequirement{
+				{
+					ConsumableResource: ptr.String("__ConsumableResource__"),
+					Quantity:           ptr.Int64(1),
+				},
+				{
+					ConsumableResource: ptr.String("__ConsumableResource__"),
+					Quantity:           ptr.Int64(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17112,7 +21115,966 @@ func TestCheckResponseSnapshot_SubmitJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitJob(context.Background(), &SubmitJobInput{})
+	got, err := svc.SubmitJob(context.Background(), &SubmitJobInput{
+		JobName:                    ptr.String("__JobName__"),
+		JobQueue:                   ptr.String("__JobQueue__"),
+		ShareIdentifier:            ptr.String("__ShareIdentifier__"),
+		SchedulingPriorityOverride: ptr.Int32(1),
+		ArrayProperties: &types.ArrayProperties{
+			Size: ptr.Int32(1),
+		},
+		DependsOn: []types.JobDependency{
+			{
+				JobId: ptr.String("__JobId__"),
+				Type:  types.ArrayJobDependency("N_TO_N"),
+			},
+			{
+				JobId: ptr.String("__JobId__"),
+				Type:  types.ArrayJobDependency("N_TO_N"),
+			},
+		},
+		JobDefinition: ptr.String("__JobDefinition__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ContainerOverrides: &types.ContainerOverrides{
+			Vcpus:  ptr.Int32(1),
+			Memory: ptr.Int32(1),
+			Command: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InstanceType: ptr.String("__InstanceType__"),
+			Environment: []types.KeyValuePair{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ResourceRequirements: []types.ResourceRequirement{
+				{
+					Value: ptr.String("__Value__"),
+					Type:  types.ResourceType("GPU"),
+				},
+				{
+					Value: ptr.String("__Value__"),
+					Type:  types.ResourceType("GPU"),
+				},
+			},
+		},
+		NodeOverrides: &types.NodeOverrides{
+			NumNodes: ptr.Int32(1),
+			NodePropertyOverrides: []types.NodePropertyOverride{
+				{
+					TargetNodes: ptr.String("__TargetNodes__"),
+					ContainerOverrides: &types.ContainerOverrides{
+						Vcpus:  ptr.Int32(1),
+						Memory: ptr.Int32(1),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstanceType: ptr.String("__InstanceType__"),
+						Environment: []types.KeyValuePair{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						ResourceRequirements: []types.ResourceRequirement{
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+						},
+					},
+					EcsPropertiesOverride: &types.EcsPropertiesOverride{
+						TaskProperties: []types.TaskPropertiesOverride{
+							{
+								Containers: []types.TaskContainerOverrides{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+								},
+							},
+							{
+								Containers: []types.TaskContainerOverrides{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					InstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EksPropertiesOverride: &types.EksPropertiesOverride{
+						PodProperties: &types.EksPodPropertiesOverride{
+							Containers: []types.EksContainerOverride{
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							InitContainers: []types.EksContainerOverride{
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							Metadata: &types.EksMetadata{
+								Labels: map[string]string{
+									"key0": "__Value__",
+								},
+								Annotations: map[string]string{
+									"key0": "__Value__",
+								},
+								Namespace: ptr.String("__Namespace__"),
+							},
+						},
+					},
+					ConsumableResourcePropertiesOverride: &types.ConsumableResourceProperties{
+						ConsumableResourceList: []types.ConsumableResourceRequirement{
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+						},
+					},
+				},
+				{
+					TargetNodes: ptr.String("__TargetNodes__"),
+					ContainerOverrides: &types.ContainerOverrides{
+						Vcpus:  ptr.Int32(1),
+						Memory: ptr.Int32(1),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstanceType: ptr.String("__InstanceType__"),
+						Environment: []types.KeyValuePair{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						ResourceRequirements: []types.ResourceRequirement{
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+								Type:  types.ResourceType("GPU"),
+							},
+						},
+					},
+					EcsPropertiesOverride: &types.EcsPropertiesOverride{
+						TaskProperties: []types.TaskPropertiesOverride{
+							{
+								Containers: []types.TaskContainerOverrides{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+								},
+							},
+							{
+								Containers: []types.TaskContainerOverrides{
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+									{
+										Command: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Environment: []types.KeyValuePair{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										Name: ptr.String("__Name__"),
+										ResourceRequirements: []types.ResourceRequirement{
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+											{
+												Value: ptr.String("__Value__"),
+												Type:  types.ResourceType("GPU"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					InstanceTypes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EksPropertiesOverride: &types.EksPropertiesOverride{
+						PodProperties: &types.EksPodPropertiesOverride{
+							Containers: []types.EksContainerOverride{
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							InitContainers: []types.EksContainerOverride{
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Image: ptr.String("__Image__"),
+									Command: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Args: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Env: []types.EksContainerEnvironmentVariable{
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Name:  ptr.String("__Name__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+									Resources: &types.EksContainerResourceRequirements{
+										Limits: map[string]string{
+											"key0": "__Value__",
+										},
+										Requests: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							Metadata: &types.EksMetadata{
+								Labels: map[string]string{
+									"key0": "__Value__",
+								},
+								Annotations: map[string]string{
+									"key0": "__Value__",
+								},
+								Namespace: ptr.String("__Namespace__"),
+							},
+						},
+					},
+					ConsumableResourcePropertiesOverride: &types.ConsumableResourceProperties{
+						ConsumableResourceList: []types.ConsumableResourceRequirement{
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+							{
+								ConsumableResource: ptr.String("__ConsumableResource__"),
+								Quantity:           ptr.Int64(1),
+							},
+						},
+					},
+				},
+			},
+		},
+		RetryStrategy: &types.RetryStrategy{
+			Attempts: ptr.Int32(1),
+			EvaluateOnExit: []types.EvaluateOnExit{
+				{
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+					OnReason:       ptr.String("__OnReason__"),
+					OnExitCode:     ptr.String("__OnExitCode__"),
+					Action:         types.RetryAction("RETRY"),
+				},
+				{
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+					OnReason:       ptr.String("__OnReason__"),
+					OnExitCode:     ptr.String("__OnExitCode__"),
+					Action:         types.RetryAction("RETRY"),
+				},
+			},
+		},
+		PropagateTags: ptr.Bool(true),
+		Timeout: &types.JobTimeout{
+			AttemptDurationSeconds: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EksPropertiesOverride: &types.EksPropertiesOverride{
+			PodProperties: &types.EksPodPropertiesOverride{
+				Containers: []types.EksContainerOverride{
+					{
+						Name:  ptr.String("__Name__"),
+						Image: ptr.String("__Image__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Image: ptr.String("__Image__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				InitContainers: []types.EksContainerOverride{
+					{
+						Name:  ptr.String("__Name__"),
+						Image: ptr.String("__Image__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Image: ptr.String("__Image__"),
+						Command: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Args: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Env: []types.EksContainerEnvironmentVariable{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Resources: &types.EksContainerResourceRequirements{
+							Limits: map[string]string{
+								"key0": "__Value__",
+							},
+							Requests: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				Metadata: &types.EksMetadata{
+					Labels: map[string]string{
+						"key0": "__Value__",
+					},
+					Annotations: map[string]string{
+						"key0": "__Value__",
+					},
+					Namespace: ptr.String("__Namespace__"),
+				},
+			},
+		},
+		EcsPropertiesOverride: &types.EcsPropertiesOverride{
+			TaskProperties: []types.TaskPropertiesOverride{
+				{
+					Containers: []types.TaskContainerOverrides{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Name: ptr.String("__Name__"),
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Name: ptr.String("__Name__"),
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Containers: []types.TaskContainerOverrides{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Name: ptr.String("__Name__"),
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Environment: []types.KeyValuePair{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Name: ptr.String("__Name__"),
+							ResourceRequirements: []types.ResourceRequirement{
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+									Type:  types.ResourceType("GPU"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ConsumableResourcePropertiesOverride: &types.ConsumableResourceProperties{
+			ConsumableResourceList: []types.ConsumableResourceRequirement{
+				{
+					ConsumableResource: ptr.String("__ConsumableResource__"),
+					Quantity:           ptr.Int64(1),
+				},
+				{
+					ConsumableResource: ptr.String("__ConsumableResource__"),
+					Quantity:           ptr.Int64(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17135,7 +22097,38 @@ func TestCheckResponseSnapshot_SubmitServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitServiceJob(context.Background(), &SubmitServiceJobInput{})
+	got, err := svc.SubmitServiceJob(context.Background(), &SubmitServiceJobInput{
+		JobName:  ptr.String("__JobName__"),
+		JobQueue: ptr.String("__JobQueue__"),
+		RetryStrategy: &types.ServiceJobRetryStrategy{
+			Attempts: ptr.Int32(1),
+			EvaluateOnExit: []types.ServiceJobEvaluateOnExit{
+				{
+					Action:         types.ServiceJobRetryAction("RETRY"),
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+				},
+				{
+					Action:         types.ServiceJobRetryAction("RETRY"),
+					OnStatusReason: ptr.String("__OnStatusReason__"),
+				},
+			},
+		},
+		SchedulingPriority:    ptr.Int32(1),
+		ServiceRequestPayload: ptr.String("__ServiceRequestPayload__"),
+		ServiceJobType:        types.ServiceJobType("SAGEMAKER_TRAINING"),
+		ShareIdentifier:       ptr.String("__ShareIdentifier__"),
+		QuotaShareName:        ptr.String("__QuotaShareName__"),
+		PreemptionConfiguration: &types.ServiceJobPreemptionConfiguration{
+			PreemptionRetriesBeforeTermination: ptr.Int32(1),
+		},
+		TimeoutConfig: &types.ServiceJobTimeout{
+			AttemptDurationSeconds: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17154,7 +22147,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17173,7 +22171,10 @@ func TestCheckResponseSnapshot_TerminateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateJob(context.Background(), &TerminateJobInput{})
+	got, err := svc.TerminateJob(context.Background(), &TerminateJobInput{
+		JobId:  ptr.String("__JobId__"),
+		Reason: ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17192,7 +22193,10 @@ func TestCheckResponseSnapshot_TerminateServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateServiceJob(context.Background(), &TerminateServiceJobInput{})
+	got, err := svc.TerminateServiceJob(context.Background(), &TerminateServiceJobInput{
+		JobId:  ptr.String("__JobId__"),
+		Reason: ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17211,7 +22215,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17233,7 +22243,90 @@ func TestCheckResponseSnapshot_UpdateComputeEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComputeEnvironment(context.Background(), &UpdateComputeEnvironmentInput{})
+	got, err := svc.UpdateComputeEnvironment(context.Background(), &UpdateComputeEnvironmentInput{
+		ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+		State:              types.CEState("ENABLED"),
+		UnmanagedvCpus:     ptr.Int32(1),
+		ComputeResources: &types.ComputeResourceUpdate{
+			MinvCpus:     ptr.Int32(1),
+			MaxvCpus:     ptr.Int32(1),
+			DesiredvCpus: ptr.Int32(1),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllocationStrategy: types.CRUpdateAllocationStrategy("BEST_FIT_PROGRESSIVE"),
+			InstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2KeyPair:   ptr.String("__Ec2KeyPair__"),
+			InstanceRole: ptr.String("__InstanceRole__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			PlacementGroup: ptr.String("__PlacementGroup__"),
+			BidPercentage:  ptr.Int32(1),
+			LaunchTemplate: &types.LaunchTemplateSpecification{
+				LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+				LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+				Version:            ptr.String("__Version__"),
+				Overrides: []types.LaunchTemplateSpecificationOverride{
+					{
+						LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+						LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+						Version:            ptr.String("__Version__"),
+						TargetInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+					},
+					{
+						LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+						LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+						Version:            ptr.String("__Version__"),
+						TargetInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+					},
+				},
+				UserdataType: types.UserdataType("EKS_BOOTSTRAP_SH"),
+			},
+			Ec2Configuration: []types.Ec2Configuration{
+				{
+					ImageType:              ptr.String("__ImageType__"),
+					ImageIdOverride:        ptr.String("__ImageIdOverride__"),
+					BatchImageStatus:       ptr.String("__BatchImageStatus__"),
+					ImageKubernetesVersion: ptr.String("__ImageKubernetesVersion__"),
+				},
+				{
+					ImageType:              ptr.String("__ImageType__"),
+					ImageIdOverride:        ptr.String("__ImageIdOverride__"),
+					BatchImageStatus:       ptr.String("__BatchImageStatus__"),
+					ImageKubernetesVersion: ptr.String("__ImageKubernetesVersion__"),
+				},
+			},
+			UpdateToLatestImageVersion: ptr.Bool(true),
+			Type:                       types.CRType("EC2"),
+			ImageId:                    ptr.String("__ImageId__"),
+			ScalingPolicy: &types.ComputeScalingPolicy{
+				MinScaleDownDelayMinutes: ptr.Int32(1),
+			},
+		},
+		ServiceRole: ptr.String("__ServiceRole__"),
+		UpdatePolicy: &types.UpdatePolicy{
+			TerminateJobsOnUpdate:      ptr.Bool(true),
+			JobExecutionTimeoutMinutes: ptr.Int64(1),
+		},
+		Context: ptr.String("__Context__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17256,7 +22349,12 @@ func TestCheckResponseSnapshot_UpdateConsumableResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConsumableResource(context.Background(), &UpdateConsumableResourceInput{})
+	got, err := svc.UpdateConsumableResource(context.Background(), &UpdateConsumableResourceInput{
+		ConsumableResource: ptr.String("__ConsumableResource__"),
+		Operation:          ptr.String("__Operation__"),
+		Quantity:           ptr.Int64(1),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17278,7 +22376,46 @@ func TestCheckResponseSnapshot_UpdateJobQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJobQueue(context.Background(), &UpdateJobQueueInput{})
+	got, err := svc.UpdateJobQueue(context.Background(), &UpdateJobQueueInput{
+		JobQueue:            ptr.String("__JobQueue__"),
+		State:               types.JQState("ENABLED"),
+		SchedulingPolicyArn: ptr.String("__SchedulingPolicyArn__"),
+		Priority:            ptr.Int32(1),
+		ComputeEnvironmentOrder: []types.ComputeEnvironmentOrder{
+			{
+				Order:              ptr.Int32(1),
+				ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+			},
+			{
+				Order:              ptr.Int32(1),
+				ComputeEnvironment: ptr.String("__ComputeEnvironment__"),
+			},
+		},
+		ServiceEnvironmentOrder: []types.ServiceEnvironmentOrder{
+			{
+				Order:              ptr.Int32(1),
+				ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+			},
+			{
+				Order:              ptr.Int32(1),
+				ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+			},
+		},
+		JobStateTimeLimitActions: []types.JobStateTimeLimitAction{
+			{
+				Reason:         ptr.String("__Reason__"),
+				State:          types.JobStateTimeLimitActionsState("RUNNABLE"),
+				MaxTimeSeconds: ptr.Int32(1),
+				Action:         types.JobStateTimeLimitActionsAction("CANCEL"),
+			},
+			{
+				Reason:         ptr.String("__Reason__"),
+				State:          types.JobStateTimeLimitActionsState("RUNNABLE"),
+				MaxTimeSeconds: ptr.Int32(1),
+				Action:         types.JobStateTimeLimitActionsAction("CANCEL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17300,7 +22437,27 @@ func TestCheckResponseSnapshot_UpdateQuotaShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuotaShare(context.Background(), &UpdateQuotaShareInput{})
+	got, err := svc.UpdateQuotaShare(context.Background(), &UpdateQuotaShareInput{
+		QuotaShareArn: ptr.String("__QuotaShareArn__"),
+		CapacityLimits: []types.QuotaShareCapacityLimit{
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+		},
+		ResourceSharingConfiguration: &types.QuotaShareResourceSharingConfiguration{
+			Strategy:    types.QuotaShareResourceSharingStrategy("RESERVE"),
+			BorrowLimit: ptr.Int32(1),
+		},
+		PreemptionConfiguration: &types.QuotaSharePreemptionConfiguration{
+			InSharePreemption: types.QuotaShareInSharePreemptionState("ENABLED"),
+		},
+		State: types.QuotaShareState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17319,7 +22476,26 @@ func TestCheckResponseSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchedulingPolicy(context.Background(), &UpdateSchedulingPolicyInput{})
+	got, err := svc.UpdateSchedulingPolicy(context.Background(), &UpdateSchedulingPolicyInput{
+		Arn: ptr.String("__Arn__"),
+		QuotaSharePolicy: &types.QuotaSharePolicy{
+			IdleResourceAssignmentStrategy: types.QuotaShareIdleResourceAssignmentStrategy("FIFO"),
+		},
+		FairsharePolicy: &types.FairsharePolicy{
+			ShareDecaySeconds:  ptr.Int32(1),
+			ComputeReservation: ptr.Int32(1),
+			ShareDistribution: []types.ShareAttributes{
+				{
+					ShareIdentifier: ptr.String("__ShareIdentifier__"),
+					WeightFactor:    ptr.Float32(1.0),
+				},
+				{
+					ShareIdentifier: ptr.String("__ShareIdentifier__"),
+					WeightFactor:    ptr.Float32(1.0),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17341,7 +22517,20 @@ func TestCheckResponseSnapshot_UpdateServiceEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceEnvironment(context.Background(), &UpdateServiceEnvironmentInput{})
+	got, err := svc.UpdateServiceEnvironment(context.Background(), &UpdateServiceEnvironmentInput{
+		ServiceEnvironment: ptr.String("__ServiceEnvironment__"),
+		State:              types.ServiceEnvironmentState("ENABLED"),
+		CapacityLimits: []types.CapacityLimit{
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+			{
+				MaxCapacity:  ptr.Int32(1),
+				CapacityUnit: ptr.String("__CapacityUnit__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17364,7 +22553,10 @@ func TestCheckResponseSnapshot_UpdateServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceJob(context.Background(), &UpdateServiceJobInput{})
+	got, err := svc.UpdateServiceJob(context.Background(), &UpdateServiceJobInput{
+		JobId:              ptr.String("__JobId__"),
+		SchedulingPriority: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17385,7 +22577,10 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId:  ptr.String("__JobId__"),
+		Reason: ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -17410,7 +22605,10 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId:  ptr.String("__JobId__"),
+		Reason: ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

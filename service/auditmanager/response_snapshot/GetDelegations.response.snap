@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"delegations":[{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","controlSetName":"__ControlSetName__","creationTime":946684800,"id":"__Id__","roleArn":"__RoleArn__","status":"IN_PROGRESS"},{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","controlSetName":"__ControlSetName__","creationTime":946684800,"id":"__Id__","roleArn":"__RoleArn__","status":"IN_PROGRESS"}],"nextToken":"__NextToken__"}

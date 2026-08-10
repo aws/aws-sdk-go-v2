@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudHsmFrontendService.DescribeHapg
+
+{"HapgArn":"__HapgArn__","HapgSerial":"__HapgSerial__","HsmsLastActionFailed":["__Member__","__Member__"],"HsmsPendingDeletion":["__Member__","__Member__"],"HsmsPendingRegistration":["__Member__","__Member__"],"Label":"__Label__","LastModifiedTimestamp":"__LastModifiedTimestamp__","PartitionSerialList":["__Member__","__Member__"],"State":"READY"}

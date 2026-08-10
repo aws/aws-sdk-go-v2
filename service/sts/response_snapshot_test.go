@@ -130,7 +130,48 @@ func TestCheckResponseSnapshot_AssumeRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeRole(context.Background(), &AssumeRoleInput{})
+	got, err := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,7 +208,21 @@ func TestCheckResponseSnapshot_AssumeRoleWithSAML(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{})
+	got, err := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{
+		RoleArn:       ptr.String("__RoleArn__"),
+		PrincipalArn:  ptr.String("__PrincipalArn__"),
+		SAMLAssertion: ptr.String("__SAMLAssertion__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +257,22 @@ func TestCheckResponseSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeRoleWithWebIdentity(context.Background(), &AssumeRoleWithWebIdentityInput{})
+	got, err := svc.AssumeRoleWithWebIdentity(context.Background(), &AssumeRoleWithWebIdentityInput{
+		RoleArn:          ptr.String("__RoleArn__"),
+		RoleSessionName:  ptr.String("__RoleSessionName__"),
+		WebIdentityToken: ptr.String("__WebIdentityToken__"),
+		ProviderId:       ptr.String("__ProviderId__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +299,13 @@ func TestCheckResponseSnapshot_AssumeRoot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeRoot(context.Background(), &AssumeRootInput{})
+	got, err := svc.AssumeRoot(context.Background(), &AssumeRootInput{
+		TargetPrincipal: ptr.String("__TargetPrincipal__"),
+		TaskPolicyArn: &types.PolicyDescriptorType{
+			Arn: ptr.String("__Arn__"),
+		},
+		DurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +326,9 @@ func TestCheckResponseSnapshot_DecodeAuthorizationMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecodeAuthorizationMessage(context.Background(), &DecodeAuthorizationMessageInput{})
+	got, err := svc.DecodeAuthorizationMessage(context.Background(), &DecodeAuthorizationMessageInput{
+		EncodedMessage: ptr.String("__EncodedMessage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +349,9 @@ func TestCheckResponseSnapshot_GetAccessKeyInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessKeyInfo(context.Background(), &GetAccessKeyInfoInput{})
+	got, err := svc.GetAccessKeyInfo(context.Background(), &GetAccessKeyInfoInput{
+		AccessKeyId: ptr.String("__AccessKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +402,9 @@ func TestCheckResponseSnapshot_GetDelegatedAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDelegatedAccessToken(context.Background(), &GetDelegatedAccessTokenInput{})
+	got, err := svc.GetDelegatedAccessToken(context.Background(), &GetDelegatedAccessTokenInput{
+		TradeInToken: ptr.String("__TradeInToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +435,29 @@ func TestCheckResponseSnapshot_GetFederationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{})
+	got, err := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{
+		Name:   ptr.String("__Name__"),
+		Policy: ptr.String("__Policy__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +483,11 @@ func TestCheckResponseSnapshot_GetSessionToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionToken(context.Background(), &GetSessionTokenInput{})
+	got, err := svc.GetSessionToken(context.Background(), &GetSessionTokenInput{
+		DurationSeconds: ptr.Int32(1),
+		SerialNumber:    ptr.String("__SerialNumber__"),
+		TokenCode:       ptr.String("__TokenCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +509,24 @@ func TestCheckResponseSnapshot_GetWebIdentityToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{})
+	got, err := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{
+		Audience: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds:  ptr.Int32(1),
+		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +547,48 @@ func TestCheckResponseSnapshot_Error_ExpiredTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{})
+	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -447,7 +613,9 @@ func TestCheckResponseSnapshot_Error_ExpiredTradeInTokenException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDelegatedAccessToken(context.Background(), &GetDelegatedAccessTokenInput{})
+	_, opErr := svc.GetDelegatedAccessToken(context.Background(), &GetDelegatedAccessTokenInput{
+		TradeInToken: ptr.String("__TradeInToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -472,7 +640,22 @@ func TestCheckResponseSnapshot_Error_IDPCommunicationErrorException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleWithWebIdentity(context.Background(), &AssumeRoleWithWebIdentityInput{})
+	_, opErr := svc.AssumeRoleWithWebIdentity(context.Background(), &AssumeRoleWithWebIdentityInput{
+		RoleArn:          ptr.String("__RoleArn__"),
+		RoleSessionName:  ptr.String("__RoleSessionName__"),
+		WebIdentityToken: ptr.String("__WebIdentityToken__"),
+		ProviderId:       ptr.String("__ProviderId__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -497,7 +680,21 @@ func TestCheckResponseSnapshot_Error_IDPRejectedClaimException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{})
+	_, opErr := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{
+		RoleArn:       ptr.String("__RoleArn__"),
+		PrincipalArn:  ptr.String("__PrincipalArn__"),
+		SAMLAssertion: ptr.String("__SAMLAssertion__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -522,7 +719,9 @@ func TestCheckResponseSnapshot_Error_InvalidAuthorizationMessageException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecodeAuthorizationMessage(context.Background(), &DecodeAuthorizationMessageInput{})
+	_, opErr := svc.DecodeAuthorizationMessage(context.Background(), &DecodeAuthorizationMessageInput{
+		EncodedMessage: ptr.String("__EncodedMessage__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -547,7 +746,21 @@ func TestCheckResponseSnapshot_Error_InvalidIdentityTokenException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{})
+	_, opErr := svc.AssumeRoleWithSAML(context.Background(), &AssumeRoleWithSAMLInput{
+		RoleArn:       ptr.String("__RoleArn__"),
+		PrincipalArn:  ptr.String("__PrincipalArn__"),
+		SAMLAssertion: ptr.String("__SAMLAssertion__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -572,7 +785,24 @@ func TestCheckResponseSnapshot_Error_JWTPayloadSizeExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{})
+	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{
+		Audience: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds:  ptr.Int32(1),
+		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -597,7 +827,48 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{})
+	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -622,7 +893,24 @@ func TestCheckResponseSnapshot_Error_OutboundWebIdentityFederationDisabledExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{})
+	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{
+		Audience: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds:  ptr.Int32(1),
+		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -647,7 +935,48 @@ func TestCheckResponseSnapshot_Error_PackedPolicyTooLargeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{})
+	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -672,7 +1001,48 @@ func TestCheckResponseSnapshot_Error_RegionDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{})
+	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -697,7 +1067,24 @@ func TestCheckResponseSnapshot_Error_SessionDurationEscalationException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{})
+	_, opErr := svc.GetWebIdentityToken(context.Background(), &GetWebIdentityTokenInput{
+		Audience: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds:  ptr.Int32(1),
+		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

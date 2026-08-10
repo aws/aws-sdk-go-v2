@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"analysisResult":"__AnalysisResult__","analyzerType":"REACHABILITY_ANALYZER","jobID":"__JobID__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","source":{"subnetID":"__SubnetID__","vpcID":"__VpcID__"},"status":"PENDING","target":{"subnetID":"__SubnetID__","vpcID":"__VpcID__"}},{"analysisResult":"__AnalysisResult__","analyzerType":"REACHABILITY_ANALYZER","jobID":"__JobID__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","source":{"subnetID":"__SubnetID__","vpcID":"__VpcID__"},"status":"PENDING","target":{"subnetID":"__SubnetID__","vpcID":"__VpcID__"}}],"nextToken":"__NextToken__"}

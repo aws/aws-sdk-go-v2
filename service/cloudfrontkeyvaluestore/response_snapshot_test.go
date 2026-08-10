@@ -121,7 +121,11 @@ func TestCheckResponseSnapshot_DeleteKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -149,7 +153,9 @@ func TestCheckResponseSnapshot_DescribeKeyValueStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKeyValueStore(context.Background(), &DescribeKeyValueStoreInput{})
+	got, err := svc.DescribeKeyValueStore(context.Background(), &DescribeKeyValueStoreInput{
+		KvsARN: ptr.String("__KvsARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +179,10 @@ func TestCheckResponseSnapshot_GetKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKey(context.Background(), &GetKeyInput{})
+	got, err := svc.GetKey(context.Background(), &GetKeyInput{
+		KvsARN: ptr.String("__KvsARN__"),
+		Key:    ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +213,11 @@ func TestCheckResponseSnapshot_ListKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeys(context.Background(), &ListKeysInput{})
+	got, err := svc.ListKeys(context.Background(), &ListKeysInput{
+		KvsARN:     ptr.String("__KvsARN__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +240,12 @@ func TestCheckResponseSnapshot_PutKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutKey(context.Background(), &PutKeyInput{})
+	got, err := svc.PutKey(context.Background(), &PutKeyInput{
+		Key:     ptr.String("__Key__"),
+		Value:   ptr.String("__Value__"),
+		KvsARN:  ptr.String("__KvsARN__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +268,28 @@ func TestCheckResponseSnapshot_UpdateKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKeys(context.Background(), &UpdateKeysInput{})
+	got, err := svc.UpdateKeys(context.Background(), &UpdateKeysInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		IfMatch: ptr.String("__IfMatch__"),
+		Puts: []types.PutKeyRequestListItem{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Deletes: []types.DeleteKeyRequestListItem{
+			{
+				Key: ptr.String("__Key__"),
+			},
+			{
+				Key: ptr.String("__Key__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +310,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -296,7 +339,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -321,7 +368,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -346,7 +397,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -371,7 +426,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -396,7 +455,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	_, opErr := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KvsARN:  ptr.String("__KvsARN__"),
+		Key:     ptr.String("__Key__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

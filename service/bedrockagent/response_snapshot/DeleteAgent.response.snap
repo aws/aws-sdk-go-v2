@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentId":"__AgentId__","agentStatus":"CREATING"}

@@ -119,7 +119,10 @@ func TestCheckResponseSnapshot_AcceptDomainTransferFromAnotherAwsAccount(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{})
+	got, err := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +143,14 @@ func TestCheckResponseSnapshot_AssociateDelegationSignerToDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{})
+	got, err := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		SigningAttributes: &types.DnssecSigningAttributes{
+			Algorithm: ptr.Int32(1),
+			Flags:     ptr.Int32(1),
+			PublicKey: ptr.String("__PublicKey__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +171,9 @@ func TestCheckResponseSnapshot_CancelDomainTransferToAnotherAwsAccount(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelDomainTransferToAnotherAwsAccount(context.Background(), &CancelDomainTransferToAnotherAwsAccountInput{})
+	got, err := svc.CancelDomainTransferToAnotherAwsAccount(context.Background(), &CancelDomainTransferToAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +194,10 @@ func TestCheckResponseSnapshot_CheckDomainAvailability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckDomainAvailability(context.Background(), &CheckDomainAvailabilityInput{})
+	got, err := svc.CheckDomainAvailability(context.Background(), &CheckDomainAvailabilityInput{
+		DomainName:  ptr.String("__DomainName__"),
+		IdnLangCode: ptr.String("__IdnLangCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +221,10 @@ func TestCheckResponseSnapshot_CheckDomainTransferability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckDomainTransferability(context.Background(), &CheckDomainTransferabilityInput{})
+	got, err := svc.CheckDomainTransferability(context.Background(), &CheckDomainTransferabilityInput{
+		DomainName: ptr.String("__DomainName__"),
+		AuthCode:   ptr.String("__AuthCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +245,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +266,13 @@ func TestCheckResponseSnapshot_DeleteTagsForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTagsForDomain(context.Background(), &DeleteTagsForDomainInput{})
+	got, err := svc.DeleteTagsForDomain(context.Background(), &DeleteTagsForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		TagsToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +291,9 @@ func TestCheckResponseSnapshot_DisableDomainAutoRenew(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDomainAutoRenew(context.Background(), &DisableDomainAutoRenewInput{})
+	got, err := svc.DisableDomainAutoRenew(context.Background(), &DisableDomainAutoRenewInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +314,9 @@ func TestCheckResponseSnapshot_DisableDomainTransferLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDomainTransferLock(context.Background(), &DisableDomainTransferLockInput{})
+	got, err := svc.DisableDomainTransferLock(context.Background(), &DisableDomainTransferLockInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +337,10 @@ func TestCheckResponseSnapshot_DisassociateDelegationSignerFromDomain(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDelegationSignerFromDomain(context.Background(), &DisassociateDelegationSignerFromDomainInput{})
+	got, err := svc.DisassociateDelegationSignerFromDomain(context.Background(), &DisassociateDelegationSignerFromDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		Id:         ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +359,9 @@ func TestCheckResponseSnapshot_EnableDomainAutoRenew(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDomainAutoRenew(context.Background(), &EnableDomainAutoRenewInput{})
+	got, err := svc.EnableDomainAutoRenew(context.Background(), &EnableDomainAutoRenewInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +382,9 @@ func TestCheckResponseSnapshot_EnableDomainTransferLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDomainTransferLock(context.Background(), &EnableDomainTransferLockInput{})
+	got, err := svc.EnableDomainTransferLock(context.Background(), &EnableDomainTransferLockInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +406,9 @@ func TestCheckResponseSnapshot_GetContactReachabilityStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactReachabilityStatus(context.Background(), &GetContactReachabilityStatusInput{})
+	got, err := svc.GetContactReachabilityStatus(context.Background(), &GetContactReachabilityStatusInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -546,7 +585,9 @@ func TestCheckResponseSnapshot_GetDomainDetail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainDetail(context.Background(), &GetDomainDetailInput{})
+	got, err := svc.GetDomainDetail(context.Background(), &GetDomainDetailInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +617,11 @@ func TestCheckResponseSnapshot_GetDomainSuggestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainSuggestions(context.Background(), &GetDomainSuggestionsInput{})
+	got, err := svc.GetDomainSuggestions(context.Background(), &GetDomainSuggestionsInput{
+		DomainName:      ptr.String("__DomainName__"),
+		SuggestionCount: 1,
+		OnlyAvailable:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -604,7 +649,9 @@ func TestCheckResponseSnapshot_GetOperationDetail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOperationDetail(context.Background(), &GetOperationDetailInput{})
+	got, err := svc.GetOperationDetail(context.Background(), &GetOperationDetailInput{
+		OperationId: ptr.String("__OperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +686,32 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		FilterConditions: []types.FilterCondition{
+			{
+				Name:     types.ListDomainsAttributeName("DomainName"),
+				Operator: types.Operator("LE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.ListDomainsAttributeName("DomainName"),
+				Operator: types.Operator("LE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortCondition: &types.SortCondition{
+			Name:      types.ListDomainsAttributeName("DomainName"),
+			SortOrder: types.SortOrder("ASC"),
+		},
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +754,21 @@ func TestCheckResponseSnapshot_ListOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{})
+	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{
+		SubmittedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+		Status: []types.OperationStatus{
+			types.OperationStatus("SUBMITTED"),
+			types.OperationStatus("SUBMITTED"),
+		},
+		Type: []types.OperationType{
+			types.OperationType("REGISTER_DOMAIN"),
+			types.OperationType("REGISTER_DOMAIN"),
+		},
+		SortBy:    types.ListOperationsSortAttributeName("SubmittedDate"),
+		SortOrder: types.SortOrder("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +837,11 @@ func TestCheckResponseSnapshot_ListPrices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrices(context.Background(), &ListPricesInput{})
+	got, err := svc.ListPrices(context.Background(), &ListPricesInput{
+		Tld:      ptr.String("__Tld__"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -781,7 +871,9 @@ func TestCheckResponseSnapshot_ListTagsForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForDomain(context.Background(), &ListTagsForDomainInput{})
+	got, err := svc.ListTagsForDomain(context.Background(), &ListTagsForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,7 +892,10 @@ func TestCheckResponseSnapshot_PushDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PushDomain(context.Background(), &PushDomainInput{})
+	got, err := svc.PushDomain(context.Background(), &PushDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		Target:     ptr.String("__Target__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +916,116 @@ func TestCheckResponseSnapshot_RegisterDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDomain(context.Background(), &RegisterDomainInput{})
+	got, err := svc.RegisterDomain(context.Background(), &RegisterDomainInput{
+		DomainName:      ptr.String("__DomainName__"),
+		IdnLangCode:     ptr.String("__IdnLangCode__"),
+		DurationInYears: ptr.Int32(1),
+		AutoRenew:       ptr.Bool(true),
+		AdminContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		RegistrantContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		TechContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		PrivacyProtectAdminContact:      ptr.Bool(true),
+		PrivacyProtectRegistrantContact: ptr.Bool(true),
+		PrivacyProtectTechContact:       ptr.Bool(true),
+		BillingContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		PrivacyProtectBillingContact: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -842,7 +1046,9 @@ func TestCheckResponseSnapshot_RejectDomainTransferFromAnotherAwsAccount(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectDomainTransferFromAnotherAwsAccount(context.Background(), &RejectDomainTransferFromAnotherAwsAccountInput{})
+	got, err := svc.RejectDomainTransferFromAnotherAwsAccount(context.Background(), &RejectDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +1069,11 @@ func TestCheckResponseSnapshot_RenewDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RenewDomain(context.Background(), &RenewDomainInput{})
+	got, err := svc.RenewDomain(context.Background(), &RenewDomainInput{
+		DomainName:        ptr.String("__DomainName__"),
+		DurationInYears:   ptr.Int32(1),
+		CurrentExpiryYear: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -886,7 +1096,9 @@ func TestCheckResponseSnapshot_ResendContactReachabilityEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResendContactReachabilityEmail(context.Background(), &ResendContactReachabilityEmailInput{})
+	got, err := svc.ResendContactReachabilityEmail(context.Background(), &ResendContactReachabilityEmailInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -905,7 +1117,9 @@ func TestCheckResponseSnapshot_ResendOperationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResendOperationAuthorization(context.Background(), &ResendOperationAuthorizationInput{})
+	got, err := svc.ResendOperationAuthorization(context.Background(), &ResendOperationAuthorizationInput{
+		OperationId: ptr.String("__OperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1140,9 @@ func TestCheckResponseSnapshot_RetrieveDomainAuthCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveDomainAuthCode(context.Background(), &RetrieveDomainAuthCodeInput{})
+	got, err := svc.RetrieveDomainAuthCode(context.Background(), &RetrieveDomainAuthCodeInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -947,7 +1163,133 @@ func TestCheckResponseSnapshot_TransferDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransferDomain(context.Background(), &TransferDomainInput{})
+	got, err := svc.TransferDomain(context.Background(), &TransferDomainInput{
+		DomainName:      ptr.String("__DomainName__"),
+		IdnLangCode:     ptr.String("__IdnLangCode__"),
+		DurationInYears: ptr.Int32(1),
+		Nameservers: []types.Nameserver{
+			{
+				Name: ptr.String("__Name__"),
+				GlueIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				GlueIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AuthCode:  ptr.String("__AuthCode__"),
+		AutoRenew: ptr.Bool(true),
+		AdminContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		RegistrantContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		TechContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		PrivacyProtectAdminContact:      ptr.Bool(true),
+		PrivacyProtectRegistrantContact: ptr.Bool(true),
+		PrivacyProtectTechContact:       ptr.Bool(true),
+		BillingContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		PrivacyProtectBillingContact: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -969,7 +1311,10 @@ func TestCheckResponseSnapshot_TransferDomainToAnotherAwsAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransferDomainToAnotherAwsAccount(context.Background(), &TransferDomainToAnotherAwsAccountInput{})
+	got, err := svc.TransferDomainToAnotherAwsAccount(context.Background(), &TransferDomainToAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		AccountId:  ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1335,113 @@ func TestCheckResponseSnapshot_UpdateDomainContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainContact(context.Background(), &UpdateDomainContactInput{})
+	got, err := svc.UpdateDomainContact(context.Background(), &UpdateDomainContactInput{
+		DomainName: ptr.String("__DomainName__"),
+		AdminContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		RegistrantContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		TechContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
+		BillingContact: &types.ContactDetail{
+			FirstName:        ptr.String("__FirstName__"),
+			LastName:         ptr.String("__LastName__"),
+			ContactType:      types.ContactType("PERSON"),
+			OrganizationName: ptr.String("__OrganizationName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			City:             ptr.String("__City__"),
+			State:            ptr.String("__State__"),
+			CountryCode:      types.CountryCode("AC"),
+			ZipCode:          ptr.String("__ZipCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			Email:            ptr.String("__Email__"),
+			Fax:              ptr.String("__Fax__"),
+			ExtraParams: []types.ExtraParam{
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  types.ExtraParamName("DUNS_NUMBER"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1462,13 @@ func TestCheckResponseSnapshot_UpdateDomainContactPrivacy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainContactPrivacy(context.Background(), &UpdateDomainContactPrivacyInput{})
+	got, err := svc.UpdateDomainContactPrivacy(context.Background(), &UpdateDomainContactPrivacyInput{
+		DomainName:        ptr.String("__DomainName__"),
+		AdminPrivacy:      ptr.Bool(true),
+		RegistrantPrivacy: ptr.Bool(true),
+		TechPrivacy:       ptr.Bool(true),
+		BillingPrivacy:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1032,7 +1489,26 @@ func TestCheckResponseSnapshot_UpdateDomainNameservers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainNameservers(context.Background(), &UpdateDomainNameserversInput{})
+	got, err := svc.UpdateDomainNameservers(context.Background(), &UpdateDomainNameserversInput{
+		DomainName: ptr.String("__DomainName__"),
+		FIAuthKey:  ptr.String("__FIAuthKey__"),
+		Nameservers: []types.Nameserver{
+			{
+				Name: ptr.String("__Name__"),
+				GlueIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				GlueIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1527,19 @@ func TestCheckResponseSnapshot_UpdateTagsForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTagsForDomain(context.Background(), &UpdateTagsForDomainInput{})
+	got, err := svc.UpdateTagsForDomain(context.Background(), &UpdateTagsForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		TagsToUpdate: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1088,7 +1576,12 @@ func TestCheckResponseSnapshot_ViewBilling(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ViewBilling(context.Background(), &ViewBillingInput{})
+	got, err := svc.ViewBilling(context.Background(), &ViewBillingInput{
+		Start:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		End:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1109,7 +1602,14 @@ func TestCheckResponseSnapshot_Error_DnssecLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{})
+	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		SigningAttributes: &types.DnssecSigningAttributes{
+			Algorithm: ptr.Int32(1),
+			Flags:     ptr.Int32(1),
+			PublicKey: ptr.String("__PublicKey__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1134,7 +1634,10 @@ func TestCheckResponseSnapshot_Error_DomainLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{})
+	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1160,7 +1663,14 @@ func TestCheckResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{})
+	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		SigningAttributes: &types.DnssecSigningAttributes{
+			Algorithm: ptr.Int32(1),
+			Flags:     ptr.Int32(1),
+			PublicKey: ptr.String("__PublicKey__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1185,7 +1695,10 @@ func TestCheckResponseSnapshot_Error_InvalidInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{})
+	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1210,7 +1723,10 @@ func TestCheckResponseSnapshot_Error_OperationLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{})
+	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1236,7 +1752,10 @@ func TestCheckResponseSnapshot_Error_TLDInMaintenance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckDomainAvailability(context.Background(), &CheckDomainAvailabilityInput{})
+	_, opErr := svc.CheckDomainAvailability(context.Background(), &CheckDomainAvailabilityInput{
+		DomainName:  ptr.String("__DomainName__"),
+		IdnLangCode: ptr.String("__IdnLangCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1261,7 +1780,14 @@ func TestCheckResponseSnapshot_Error_TLDRulesViolation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{})
+	_, opErr := svc.AssociateDelegationSignerToDomain(context.Background(), &AssociateDelegationSignerToDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		SigningAttributes: &types.DnssecSigningAttributes{
+			Algorithm: ptr.Int32(1),
+			Flags:     ptr.Int32(1),
+			PublicKey: ptr.String("__PublicKey__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1286,7 +1812,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedTLD(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{})
+	_, opErr := svc.AcceptDomainTransferFromAnotherAwsAccount(context.Background(), &AcceptDomainTransferFromAnotherAwsAccountInput{
+		DomainName: ptr.String("__DomainName__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationSummaries":[{"applicationId":"__ApplicationId__","applicationName":"__ApplicationName__","defaultKmsKeyId":"__DefaultKmsKeyId__","domain":"__Domain__"},{"applicationId":"__ApplicationId__","applicationName":"__ApplicationName__","defaultKmsKeyId":"__DefaultKmsKeyId__","domain":"__Domain__"}],"nextToken":"__NextToken__"}

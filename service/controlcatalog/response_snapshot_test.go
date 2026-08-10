@@ -158,7 +158,9 @@ func TestCheckResponseSnapshot_GetControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetControl(context.Background(), &GetControlInput{})
+	got, err := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +213,20 @@ func TestCheckResponseSnapshot_ListCommonControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCommonControls(context.Background(), &ListCommonControlsInput{})
+	got, err := svc.ListCommonControls(context.Background(), &ListCommonControlsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		CommonControlFilter: &types.CommonControlFilter{
+			Objectives: []types.ObjectiveResourceFilter{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +269,24 @@ func TestCheckResponseSnapshot_ListControlMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListControlMappings(context.Background(), &ListControlMappingsInput{})
+	got, err := svc.ListControlMappings(context.Background(), &ListControlMappingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.ControlMappingFilter{
+			ControlArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CommonControlArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MappingTypes: []types.MappingType{
+				types.MappingType("FRAMEWORK"),
+				types.MappingType("FRAMEWORK"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +359,26 @@ func TestCheckResponseSnapshot_ListControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListControls(context.Background(), &ListControlsInput{})
+	got, err := svc.ListControls(context.Background(), &ListControlsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.ControlFilter{
+			Implementations: &types.ImplementationFilter{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Identifiers: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			GovernedProviders: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +415,10 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +463,20 @@ func TestCheckResponseSnapshot_ListObjectives(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectives(context.Background(), &ListObjectivesInput{})
+	got, err := svc.ListObjectives(context.Background(), &ListObjectivesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		ObjectiveFilter: &types.ObjectiveFilter{
+			Domains: []types.DomainResourceFilter{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +497,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetControl(context.Background(), &GetControlInput{})
+	_, opErr := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -455,7 +524,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetControl(context.Background(), &GetControlInput{})
+	_, opErr := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -480,7 +551,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetControl(context.Background(), &GetControlInput{})
+	_, opErr := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -505,7 +578,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetControl(context.Background(), &GetControlInput{})
+	_, opErr := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -530,7 +605,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetControl(context.Background(), &GetControlInput{})
+	_, opErr := svc.GetControl(context.Background(), &GetControlInput{
+		ControlArn: ptr.String("__ControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

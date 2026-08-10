@@ -146,7 +146,34 @@ func TestCheckResponseSnapshot_CreateSupportPermit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	got, err := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +218,9 @@ func TestCheckResponseSnapshot_DeleteSupportPermit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSupportPermit(context.Background(), &DeleteSupportPermitInput{})
+	got, err := svc.DeleteSupportPermit(context.Background(), &DeleteSupportPermitInput{
+		SupportPermitIdentifier: ptr.String("__SupportPermitIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -214,7 +243,9 @@ func TestCheckResponseSnapshot_GetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAction(context.Background(), &GetActionInput{})
+	got, err := svc.GetAction(context.Background(), &GetActionInput{
+		Action: ptr.String("__Action__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +293,9 @@ func TestCheckResponseSnapshot_GetSupportPermit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSupportPermit(context.Background(), &GetSupportPermitInput{})
+	got, err := svc.GetSupportPermit(context.Background(), &GetSupportPermitInput{
+		SupportPermitIdentifier: ptr.String("__SupportPermitIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +328,11 @@ func TestCheckResponseSnapshot_ListActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActions(context.Background(), &ListActionsInput{})
+	got, err := svc.ListActions(context.Background(), &ListActionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Service:    ptr.String("__Service__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +401,11 @@ func TestCheckResponseSnapshot_ListSupportPermitRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportPermitRequests(context.Background(), &ListSupportPermitRequestsInput{})
+	got, err := svc.ListSupportPermitRequests(context.Background(), &ListSupportPermitRequestsInput{
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +480,14 @@ func TestCheckResponseSnapshot_ListSupportPermits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportPermits(context.Background(), &ListSupportPermitsInput{})
+	got, err := svc.ListSupportPermits(context.Background(), &ListSupportPermitsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SupportPermitStatuses: []types.SupportPermitStatus{
+			types.SupportPermitStatus("ACTIVE"),
+			types.SupportPermitStatus("ACTIVE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +510,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +533,9 @@ func TestCheckResponseSnapshot_RejectSupportPermitRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectSupportPermitRequest(context.Background(), &RejectSupportPermitRequestInput{})
+	got, err := svc.RejectSupportPermitRequest(context.Background(), &RejectSupportPermitRequestInput{
+		RequestArn: ptr.String("__RequestArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +554,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +578,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -542,7 +605,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -569,7 +659,34 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -595,7 +712,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -622,7 +766,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSupportPermit(context.Background(), &DeleteSupportPermitInput{})
+	_, opErr := svc.DeleteSupportPermit(context.Background(), &DeleteSupportPermitInput{
+		SupportPermitIdentifier: ptr.String("__SupportPermitIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -651,7 +797,34 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -677,7 +850,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -712,7 +912,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{})
+	_, opErr := svc.CreateSupportPermit(context.Background(), &CreateSupportPermitInput{
+		Permit: &types.Permit{
+			Actions: &types.ActionSetMemberAllActions{
+				Value: types.Unit{},
+			},
+			Resources: &types.ResourceSetMemberAllResourcesInRegion{
+				Value: types.Unit{},
+			},
+			Conditions: []types.Condition{
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+				&types.ConditionMemberAllowAfter{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SigningKeyInfo: &types.SigningKeyInfoMemberKmsKey{
+			Value: "__SigningKeyInfoMemberKmsKey__",
+		},
+		SupportCaseDisplayId: ptr.String("__SupportCaseDisplayId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

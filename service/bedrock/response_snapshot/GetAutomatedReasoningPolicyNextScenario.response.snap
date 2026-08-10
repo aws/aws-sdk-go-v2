@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"policyArn":"__PolicyArn__","scenario":{"alternateExpression":"__AlternateExpression__","expectedResult":"VALID","expression":"__Expression__","ruleIds":["__Member__","__Member__"]}}

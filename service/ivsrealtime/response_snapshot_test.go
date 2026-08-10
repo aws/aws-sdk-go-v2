@@ -131,7 +131,18 @@ func TestCheckResponseSnapshot_CreateEncoderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	got, err := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +189,20 @@ func TestCheckResponseSnapshot_CreateIngestConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIngestConfiguration(context.Background(), &CreateIngestConfigurationInput{})
+	got, err := svc.CreateIngestConfiguration(context.Background(), &CreateIngestConfigurationInput{
+		Name:     ptr.String("__Name__"),
+		StageArn: ptr.String("__StageArn__"),
+		UserId:   ptr.String("__UserId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		IngestProtocol:  types.IngestProtocol("RTMP"),
+		InsecureIngest:  true,
+		RedundantIngest: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +236,18 @@ func TestCheckResponseSnapshot_CreateParticipantToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateParticipantToken(context.Background(), &CreateParticipantTokenInput{})
+	got, err := svc.CreateParticipantToken(context.Background(), &CreateParticipantTokenInput{
+		StageArn: ptr.String("__StageArn__"),
+		Duration: ptr.Int32(1),
+		UserId:   ptr.String("__UserId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Capabilities: []types.ParticipantTokenCapability{
+			types.ParticipantTokenCapability("PUBLISH"),
+			types.ParticipantTokenCapability("PUBLISH"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +331,56 @@ func TestCheckResponseSnapshot_CreateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStage(context.Background(), &CreateStageInput{})
+	got, err := svc.CreateStage(context.Background(), &CreateStageInput{
+		Name: ptr.String("__Name__"),
+		ParticipantTokenConfigurations: []types.ParticipantTokenConfiguration{
+			{
+				Duration: ptr.Int32(1),
+				UserId:   ptr.String("__UserId__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				Capabilities: []types.ParticipantTokenCapability{
+					types.ParticipantTokenCapability("PUBLISH"),
+					types.ParticipantTokenCapability("PUBLISH"),
+				},
+			},
+			{
+				Duration: ptr.Int32(1),
+				UserId:   ptr.String("__UserId__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				Capabilities: []types.ParticipantTokenCapability{
+					types.ParticipantTokenCapability("PUBLISH"),
+					types.ParticipantTokenCapability("PUBLISH"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AutoParticipantRecordingConfiguration: &types.AutoParticipantRecordingConfiguration{
+			StorageConfigurationArn: ptr.String("__StorageConfigurationArn__"),
+			MediaTypes: []types.ParticipantRecordingMediaType{
+				types.ParticipantRecordingMediaType("AUDIO_VIDEO"),
+				types.ParticipantRecordingMediaType("AUDIO_VIDEO"),
+			},
+			ThumbnailConfiguration: &types.ParticipantThumbnailConfiguration{
+				TargetIntervalSeconds: ptr.Int32(1),
+				Storage: []types.ThumbnailStorageType{
+					types.ThumbnailStorageType("SEQUENTIAL"),
+					types.ThumbnailStorageType("SEQUENTIAL"),
+				},
+				RecordingMode: types.ThumbnailRecordingMode("INTERVAL"),
+			},
+			RecordingReconnectWindowSeconds: 1,
+			HlsConfiguration: &types.ParticipantRecordingHlsConfiguration{
+				TargetSegmentDurationSeconds: ptr.Int32(1),
+			},
+			RecordParticipantReplicas: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +410,15 @@ func TestCheckResponseSnapshot_CreateStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStorageConfiguration(context.Background(), &CreateStorageConfigurationInput{})
+	got, err := svc.CreateStorageConfiguration(context.Background(), &CreateStorageConfigurationInput{
+		Name: ptr.String("__Name__"),
+		S3: &types.S3StorageConfiguration{
+			BucketName: ptr.String("__BucketName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +437,9 @@ func TestCheckResponseSnapshot_DeleteEncoderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEncoderConfiguration(context.Background(), &DeleteEncoderConfigurationInput{})
+	got, err := svc.DeleteEncoderConfiguration(context.Background(), &DeleteEncoderConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +458,10 @@ func TestCheckResponseSnapshot_DeleteIngestConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIngestConfiguration(context.Background(), &DeleteIngestConfigurationInput{})
+	got, err := svc.DeleteIngestConfiguration(context.Background(), &DeleteIngestConfigurationInput{
+		Arn:   ptr.String("__Arn__"),
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +480,9 @@ func TestCheckResponseSnapshot_DeletePublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{})
+	got, err := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +501,9 @@ func TestCheckResponseSnapshot_DeleteStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{})
+	got, err := svc.DeleteStage(context.Background(), &DeleteStageInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +522,9 @@ func TestCheckResponseSnapshot_DeleteStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageConfiguration(context.Background(), &DeleteStorageConfigurationInput{})
+	got, err := svc.DeleteStorageConfiguration(context.Background(), &DeleteStorageConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +543,11 @@ func TestCheckResponseSnapshot_DisconnectParticipant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisconnectParticipant(context.Background(), &DisconnectParticipantInput{})
+	got, err := svc.DisconnectParticipant(context.Background(), &DisconnectParticipantInput{
+		StageArn:      ptr.String("__StageArn__"),
+		ParticipantId: ptr.String("__ParticipantId__"),
+		Reason:        ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +696,9 @@ func TestCheckResponseSnapshot_GetComposition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComposition(context.Background(), &GetCompositionInput{})
+	got, err := svc.GetComposition(context.Background(), &GetCompositionInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +731,9 @@ func TestCheckResponseSnapshot_GetEncoderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEncoderConfiguration(context.Background(), &GetEncoderConfigurationInput{})
+	got, err := svc.GetEncoderConfiguration(context.Background(), &GetEncoderConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +780,9 @@ func TestCheckResponseSnapshot_GetIngestConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIngestConfiguration(context.Background(), &GetIngestConfigurationInput{})
+	got, err := svc.GetIngestConfiguration(context.Background(), &GetIngestConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -715,7 +828,11 @@ func TestCheckResponseSnapshot_GetParticipant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetParticipant(context.Background(), &GetParticipantInput{})
+	got, err := svc.GetParticipant(context.Background(), &GetParticipantInput{
+		StageArn:      ptr.String("__StageArn__"),
+		SessionId:     ptr.String("__SessionId__"),
+		ParticipantId: ptr.String("__ParticipantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +861,9 @@ func TestCheckResponseSnapshot_GetPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{})
+	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -798,7 +917,9 @@ func TestCheckResponseSnapshot_GetStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStage(context.Background(), &GetStageInput{})
+	got, err := svc.GetStage(context.Background(), &GetStageInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +944,10 @@ func TestCheckResponseSnapshot_GetStageSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStageSession(context.Background(), &GetStageSessionInput{})
+	got, err := svc.GetStageSession(context.Background(), &GetStageSessionInput{
+		StageArn:  ptr.String("__StageArn__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +977,9 @@ func TestCheckResponseSnapshot_GetStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageConfiguration(context.Background(), &GetStorageConfigurationInput{})
+	got, err := svc.GetStorageConfiguration(context.Background(), &GetStorageConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +1008,13 @@ func TestCheckResponseSnapshot_ImportPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportPublicKey(context.Background(), &ImportPublicKeyInput{})
+	got, err := svc.ImportPublicKey(context.Background(), &ImportPublicKeyInput{
+		PublicKeyMaterial: ptr.String("__PublicKeyMaterial__"),
+		Name:              ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -953,7 +1085,12 @@ func TestCheckResponseSnapshot_ListCompositions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCompositions(context.Background(), &ListCompositionsInput{})
+	got, err := svc.ListCompositions(context.Background(), &ListCompositionsInput{
+		FilterByStageArn:                ptr.String("__FilterByStageArn__"),
+		FilterByEncoderConfigurationArn: ptr.String("__FilterByEncoderConfigurationArn__"),
+		NextToken:                       ptr.String("__NextToken__"),
+		MaxResults:                      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1127,10 @@ func TestCheckResponseSnapshot_ListEncoderConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEncoderConfigurations(context.Background(), &ListEncoderConfigurationsInput{})
+	got, err := svc.ListEncoderConfigurations(context.Background(), &ListEncoderConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +1173,12 @@ func TestCheckResponseSnapshot_ListIngestConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIngestConfigurations(context.Background(), &ListIngestConfigurationsInput{})
+	got, err := svc.ListIngestConfigurations(context.Background(), &ListIngestConfigurationsInput{
+		FilterByStageArn: ptr.String("__FilterByStageArn__"),
+		FilterByState:    types.IngestConfigurationState("ACTIVE"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1120,7 +1265,13 @@ func TestCheckResponseSnapshot_ListParticipantEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParticipantEvents(context.Background(), &ListParticipantEventsInput{})
+	got, err := svc.ListParticipantEvents(context.Background(), &ListParticipantEventsInput{
+		StageArn:      ptr.String("__StageArn__"),
+		SessionId:     ptr.String("__SessionId__"),
+		ParticipantId: ptr.String("__ParticipantId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1310,12 @@ func TestCheckResponseSnapshot_ListParticipantReplicas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParticipantReplicas(context.Background(), &ListParticipantReplicasInput{})
+	got, err := svc.ListParticipantReplicas(context.Background(), &ListParticipantReplicasInput{
+		SourceStageArn: ptr.String("__SourceStageArn__"),
+		ParticipantId:  ptr.String("__ParticipantId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1210,7 +1366,16 @@ func TestCheckResponseSnapshot_ListParticipants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParticipants(context.Background(), &ListParticipantsInput{})
+	got, err := svc.ListParticipants(context.Background(), &ListParticipantsInput{
+		StageArn:               ptr.String("__StageArn__"),
+		SessionId:              ptr.String("__SessionId__"),
+		FilterByUserId:         ptr.String("__FilterByUserId__"),
+		FilterByPublished:      true,
+		FilterByState:          types.ParticipantState("CONNECTED"),
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		FilterByRecordingState: types.ParticipantRecordingFilterByRecordingState("STARTING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1412,10 @@ func TestCheckResponseSnapshot_ListPublicKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{})
+	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +1448,11 @@ func TestCheckResponseSnapshot_ListStageSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStageSessions(context.Background(), &ListStageSessionsInput{})
+	got, err := svc.ListStageSessions(context.Background(), &ListStageSessionsInput{
+		StageArn:   ptr.String("__StageArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +1491,10 @@ func TestCheckResponseSnapshot_ListStages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStages(context.Background(), &ListStagesInput{})
+	got, err := svc.ListStages(context.Background(), &ListStagesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1362,7 +1537,10 @@ func TestCheckResponseSnapshot_ListStorageConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStorageConfigurations(context.Background(), &ListStorageConfigurationsInput{})
+	got, err := svc.ListStorageConfigurations(context.Background(), &ListStorageConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1385,7 +1563,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1534,7 +1714,110 @@ func TestCheckResponseSnapshot_StartComposition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartComposition(context.Background(), &StartCompositionInput{})
+	got, err := svc.StartComposition(context.Background(), &StartCompositionInput{
+		StageArn:         ptr.String("__StageArn__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		Layout: &types.LayoutConfiguration{
+			Grid: &types.GridConfiguration{
+				FeaturedParticipantAttribute: ptr.String("__FeaturedParticipantAttribute__"),
+				OmitStoppedVideo:             true,
+				VideoAspectRatio:             types.VideoAspectRatio("AUTO"),
+				VideoFillMode:                types.VideoFillMode("FILL"),
+				GridGap:                      1,
+				ParticipantOrderAttribute:    ptr.String("__ParticipantOrderAttribute__"),
+			},
+			Pip: &types.PipConfiguration{
+				FeaturedParticipantAttribute: ptr.String("__FeaturedParticipantAttribute__"),
+				OmitStoppedVideo:             true,
+				VideoFillMode:                types.VideoFillMode("FILL"),
+				GridGap:                      1,
+				PipParticipantAttribute:      ptr.String("__PipParticipantAttribute__"),
+				PipBehavior:                  types.PipBehavior("STATIC"),
+				PipOffset:                    1,
+				PipPosition:                  types.PipPosition("TOP_LEFT"),
+				PipWidth:                     ptr.Int32(1),
+				PipHeight:                    ptr.Int32(1),
+				ParticipantOrderAttribute:    ptr.String("__ParticipantOrderAttribute__"),
+			},
+		},
+		Destinations: []types.DestinationConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				Channel: &types.ChannelDestinationConfiguration{
+					ChannelArn:              ptr.String("__ChannelArn__"),
+					EncoderConfigurationArn: ptr.String("__EncoderConfigurationArn__"),
+				},
+				S3: &types.S3DestinationConfiguration{
+					StorageConfigurationArn: ptr.String("__StorageConfigurationArn__"),
+					EncoderConfigurationArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordingConfiguration: &types.RecordingConfiguration{
+						HlsConfiguration: &types.CompositionRecordingHlsConfiguration{
+							TargetSegmentDurationSeconds: ptr.Int32(1),
+						},
+						Format: types.RecordingConfigurationFormat("HLS"),
+					},
+					ThumbnailConfigurations: []types.CompositionThumbnailConfiguration{
+						{
+							TargetIntervalSeconds: ptr.Int32(1),
+							Storage: []types.ThumbnailStorageType{
+								types.ThumbnailStorageType("SEQUENTIAL"),
+								types.ThumbnailStorageType("SEQUENTIAL"),
+							},
+						},
+						{
+							TargetIntervalSeconds: ptr.Int32(1),
+							Storage: []types.ThumbnailStorageType{
+								types.ThumbnailStorageType("SEQUENTIAL"),
+								types.ThumbnailStorageType("SEQUENTIAL"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Channel: &types.ChannelDestinationConfiguration{
+					ChannelArn:              ptr.String("__ChannelArn__"),
+					EncoderConfigurationArn: ptr.String("__EncoderConfigurationArn__"),
+				},
+				S3: &types.S3DestinationConfiguration{
+					StorageConfigurationArn: ptr.String("__StorageConfigurationArn__"),
+					EncoderConfigurationArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordingConfiguration: &types.RecordingConfiguration{
+						HlsConfiguration: &types.CompositionRecordingHlsConfiguration{
+							TargetSegmentDurationSeconds: ptr.Int32(1),
+						},
+						Format: types.RecordingConfigurationFormat("HLS"),
+					},
+					ThumbnailConfigurations: []types.CompositionThumbnailConfiguration{
+						{
+							TargetIntervalSeconds: ptr.Int32(1),
+							Storage: []types.ThumbnailStorageType{
+								types.ThumbnailStorageType("SEQUENTIAL"),
+								types.ThumbnailStorageType("SEQUENTIAL"),
+							},
+						},
+						{
+							TargetIntervalSeconds: ptr.Int32(1),
+							Storage: []types.ThumbnailStorageType{
+								types.ThumbnailStorageType("SEQUENTIAL"),
+								types.ThumbnailStorageType("SEQUENTIAL"),
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1561,7 +1844,15 @@ func TestCheckResponseSnapshot_StartParticipantReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartParticipantReplication(context.Background(), &StartParticipantReplicationInput{})
+	got, err := svc.StartParticipantReplication(context.Background(), &StartParticipantReplicationInput{
+		SourceStageArn:         ptr.String("__SourceStageArn__"),
+		DestinationStageArn:    ptr.String("__DestinationStageArn__"),
+		ParticipantId:          ptr.String("__ParticipantId__"),
+		ReconnectWindowSeconds: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +1871,9 @@ func TestCheckResponseSnapshot_StopComposition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopComposition(context.Background(), &StopCompositionInput{})
+	got, err := svc.StopComposition(context.Background(), &StopCompositionInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1607,7 +1900,11 @@ func TestCheckResponseSnapshot_StopParticipantReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopParticipantReplication(context.Background(), &StopParticipantReplicationInput{})
+	got, err := svc.StopParticipantReplication(context.Background(), &StopParticipantReplicationInput{
+		SourceStageArn:      ptr.String("__SourceStageArn__"),
+		DestinationStageArn: ptr.String("__DestinationStageArn__"),
+		ParticipantId:       ptr.String("__ParticipantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1626,7 +1923,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1645,7 +1947,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1692,7 +2000,11 @@ func TestCheckResponseSnapshot_UpdateIngestConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIngestConfiguration(context.Background(), &UpdateIngestConfigurationInput{})
+	got, err := svc.UpdateIngestConfiguration(context.Background(), &UpdateIngestConfigurationInput{
+		Arn:             ptr.String("__Arn__"),
+		StageArn:        ptr.String("__StageArn__"),
+		RedundantIngest: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1746,7 +2058,30 @@ func TestCheckResponseSnapshot_UpdateStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{})
+	got, err := svc.UpdateStage(context.Background(), &UpdateStageInput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+		AutoParticipantRecordingConfiguration: &types.AutoParticipantRecordingConfiguration{
+			StorageConfigurationArn: ptr.String("__StorageConfigurationArn__"),
+			MediaTypes: []types.ParticipantRecordingMediaType{
+				types.ParticipantRecordingMediaType("AUDIO_VIDEO"),
+				types.ParticipantRecordingMediaType("AUDIO_VIDEO"),
+			},
+			ThumbnailConfiguration: &types.ParticipantThumbnailConfiguration{
+				TargetIntervalSeconds: ptr.Int32(1),
+				Storage: []types.ThumbnailStorageType{
+					types.ThumbnailStorageType("SEQUENTIAL"),
+					types.ThumbnailStorageType("SEQUENTIAL"),
+				},
+				RecordingMode: types.ThumbnailRecordingMode("INTERVAL"),
+			},
+			RecordingReconnectWindowSeconds: 1,
+			HlsConfiguration: &types.ParticipantRecordingHlsConfiguration{
+				TargetSegmentDurationSeconds: ptr.Int32(1),
+			},
+			RecordParticipantReplicas: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1764,7 +2099,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("AccessDeniedException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
@@ -1775,7 +2110,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1797,7 +2143,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ConflictException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -1808,7 +2154,18 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1830,7 +2187,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("InternalServerException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
@@ -1841,7 +2198,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1863,7 +2231,7 @@ func TestCheckResponseSnapshot_Error_PendingVerification(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("PendingVerification"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PendingVerification.error")
@@ -1874,7 +2242,18 @@ func TestCheckResponseSnapshot_Error_PendingVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1896,7 +2275,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ResourceNotFoundException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
@@ -1907,7 +2286,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1929,7 +2319,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ServiceQuotaExceededException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
@@ -1940,7 +2330,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1962,7 +2363,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
 		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
 		XFrameOptions:              ptr.String("__XFrameOptions__"),
-		XAmznErrorType:             ptr.String("__XAmznErrorType__"),
+		XAmznErrorType:             ptr.String("ValidationException"),
 		ExceptionMessage:           ptr.String("__ExceptionMessage__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
@@ -1973,7 +2374,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{})
+	_, opErr := svc.CreateEncoderConfiguration(context.Background(), &CreateEncoderConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Video: &types.Video{
+			Width:     ptr.Int32(1),
+			Height:    ptr.Int32(1),
+			Framerate: ptr.Float32(1.0),
+			Bitrate:   ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

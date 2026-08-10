@@ -120,7 +120,10 @@ func TestCheckResponseSnapshot_AssociateBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	got, err := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +145,10 @@ func TestCheckResponseSnapshot_AssociateDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDataProtectionSettings(context.Background(), &AssociateDataProtectionSettingsInput{})
+	got, err := svc.AssociateDataProtectionSettings(context.Background(), &AssociateDataProtectionSettingsInput{
+		PortalArn:                 ptr.String("__PortalArn__"),
+		DataProtectionSettingsArn: ptr.String("__DataProtectionSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +170,10 @@ func TestCheckResponseSnapshot_AssociateIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateIpAccessSettings(context.Background(), &AssociateIpAccessSettingsInput{})
+	got, err := svc.AssociateIpAccessSettings(context.Background(), &AssociateIpAccessSettingsInput{
+		PortalArn:           ptr.String("__PortalArn__"),
+		IpAccessSettingsArn: ptr.String("__IpAccessSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +195,10 @@ func TestCheckResponseSnapshot_AssociateNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateNetworkSettings(context.Background(), &AssociateNetworkSettingsInput{})
+	got, err := svc.AssociateNetworkSettings(context.Background(), &AssociateNetworkSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		NetworkSettingsArn: ptr.String("__NetworkSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +220,10 @@ func TestCheckResponseSnapshot_AssociateSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSessionLogger(context.Background(), &AssociateSessionLoggerInput{})
+	got, err := svc.AssociateSessionLogger(context.Background(), &AssociateSessionLoggerInput{
+		PortalArn:        ptr.String("__PortalArn__"),
+		SessionLoggerArn: ptr.String("__SessionLoggerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +245,10 @@ func TestCheckResponseSnapshot_AssociateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTrustStore(context.Background(), &AssociateTrustStoreInput{})
+	got, err := svc.AssociateTrustStore(context.Background(), &AssociateTrustStoreInput{
+		PortalArn:     ptr.String("__PortalArn__"),
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +270,10 @@ func TestCheckResponseSnapshot_AssociateUserAccessLoggingSettings(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateUserAccessLoggingSettings(context.Background(), &AssociateUserAccessLoggingSettingsInput{})
+	got, err := svc.AssociateUserAccessLoggingSettings(context.Background(), &AssociateUserAccessLoggingSettingsInput{
+		PortalArn:                    ptr.String("__PortalArn__"),
+		UserAccessLoggingSettingsArn: ptr.String("__UserAccessLoggingSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +295,10 @@ func TestCheckResponseSnapshot_AssociateUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateUserSettings(context.Background(), &AssociateUserSettingsInput{})
+	got, err := svc.AssociateUserSettings(context.Background(), &AssociateUserSettingsInput{
+		PortalArn:       ptr.String("__PortalArn__"),
+		UserSettingsArn: ptr.String("__UserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +319,38 @@ func TestCheckResponseSnapshot_CreateBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBrowserSettings(context.Background(), &CreateBrowserSettingsInput{})
+	got, err := svc.CreateBrowserSettings(context.Background(), &CreateBrowserSettingsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		BrowserPolicy: ptr.String("__BrowserPolicy__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		WebContentFilteringPolicy: &types.WebContentFilteringPolicy{
+			BlockedCategories: []types.Category{
+				types.Category("Cults"),
+				types.Category("Cults"),
+			},
+			AllowedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BlockedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,7 +371,82 @@ func TestCheckResponseSnapshot_CreateDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataProtectionSettings(context.Background(), &CreateDataProtectionSettingsInput{})
+	got, err := svc.CreateDataProtectionSettings(context.Background(), &CreateDataProtectionSettingsInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		InlineRedactionConfiguration: &types.InlineRedactionConfiguration{
+			InlineRedactionPatterns: []types.InlineRedactionPattern{
+				{
+					BuiltInPatternId: ptr.String("__BuiltInPatternId__"),
+					CustomPattern: &types.CustomPattern{
+						PatternName:        ptr.String("__PatternName__"),
+						PatternRegex:       ptr.String("__PatternRegex__"),
+						PatternDescription: ptr.String("__PatternDescription__"),
+						KeywordRegex:       ptr.String("__KeywordRegex__"),
+					},
+					RedactionPlaceHolder: &types.RedactionPlaceHolder{
+						RedactionPlaceHolderType: types.RedactionPlaceHolderType("CustomText"),
+						RedactionPlaceHolderText: ptr.String("__RedactionPlaceHolderText__"),
+					},
+					EnforcedUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExemptUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ConfidenceLevel: ptr.Int32(1),
+				},
+				{
+					BuiltInPatternId: ptr.String("__BuiltInPatternId__"),
+					CustomPattern: &types.CustomPattern{
+						PatternName:        ptr.String("__PatternName__"),
+						PatternRegex:       ptr.String("__PatternRegex__"),
+						PatternDescription: ptr.String("__PatternDescription__"),
+						KeywordRegex:       ptr.String("__KeywordRegex__"),
+					},
+					RedactionPlaceHolder: &types.RedactionPlaceHolder{
+						RedactionPlaceHolderType: types.RedactionPlaceHolderType("CustomText"),
+						RedactionPlaceHolderText: ptr.String("__RedactionPlaceHolderText__"),
+					},
+					EnforcedUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExemptUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ConfidenceLevel: ptr.Int32(1),
+				},
+			},
+			GlobalEnforcedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			GlobalExemptUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			GlobalConfidenceLevel: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +467,25 @@ func TestCheckResponseSnapshot_CreateIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{})
+	got, err := svc.CreateIdentityProvider(context.Background(), &CreateIdentityProviderInput{
+		PortalArn:            ptr.String("__PortalArn__"),
+		IdentityProviderName: ptr.String("__IdentityProviderName__"),
+		IdentityProviderType: types.IdentityProviderType("SAML"),
+		IdentityProviderDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +506,35 @@ func TestCheckResponseSnapshot_CreateIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIpAccessSettings(context.Background(), &CreateIpAccessSettingsInput{})
+	got, err := svc.CreateIpAccessSettings(context.Background(), &CreateIpAccessSettingsInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		IpRules: []types.IpRule{
+			{
+				IpRange:     ptr.String("__IpRange__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				IpRange:     ptr.String("__IpRange__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +555,28 @@ func TestCheckResponseSnapshot_CreateNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetworkSettings(context.Background(), &CreateNetworkSettingsInput{})
+	got, err := svc.CreateNetworkSettings(context.Background(), &CreateNetworkSettingsInput{
+		VpcId: ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +598,28 @@ func TestCheckResponseSnapshot_CreatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{})
+	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		AuthenticationType:    types.AuthenticationType("Standard"),
+		InstanceType:          types.InstanceType("standard.regular"),
+		MaxConcurrentSessions: ptr.Int32(1),
+		PortalCustomDomain:    ptr.String("__PortalCustomDomain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +640,36 @@ func TestCheckResponseSnapshot_CreateSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSessionLogger(context.Background(), &CreateSessionLoggerInput{})
+	got, err := svc.CreateSessionLogger(context.Background(), &CreateSessionLoggerInput{
+		EventFilter: &types.EventFilterMemberAll{
+			Value: types.Unit{},
+		},
+		LogConfiguration: &types.LogConfiguration{
+			S3: &types.S3LogConfiguration{
+				Bucket:          ptr.String("__Bucket__"),
+				KeyPrefix:       ptr.String("__KeyPrefix__"),
+				BucketOwner:     ptr.String("__BucketOwner__"),
+				LogFileFormat:   types.LogFileFormat("JSONLines"),
+				FolderStructure: types.FolderStructure("Flat"),
+			},
+		},
+		DisplayName:        ptr.String("__DisplayName__"),
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +690,23 @@ func TestCheckResponseSnapshot_CreateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		CertificateList: [][]byte{
+			[]byte("blob"),
+			[]byte("blob"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +727,20 @@ func TestCheckResponseSnapshot_CreateUserAccessLoggingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserAccessLoggingSettings(context.Background(), &CreateUserAccessLoggingSettingsInput{})
+	got, err := svc.CreateUserAccessLoggingSettings(context.Background(), &CreateUserAccessLoggingSettingsInput{
+		KinesisStreamArn: ptr.String("__KinesisStreamArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +761,92 @@ func TestCheckResponseSnapshot_CreateUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserSettings(context.Background(), &CreateUserSettingsInput{})
+	got, err := svc.CreateUserSettings(context.Background(), &CreateUserSettingsInput{
+		CopyAllowed:     types.EnabledType("Disabled"),
+		PasteAllowed:    types.EnabledType("Disabled"),
+		DownloadAllowed: types.EnabledType("Disabled"),
+		UploadAllowed:   types.EnabledType("Disabled"),
+		PrintAllowed:    types.EnabledType("Disabled"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DisconnectTimeoutInMinutes:     ptr.Int32(1),
+		IdleDisconnectTimeoutInMinutes: ptr.Int32(1),
+		ClientToken:                    ptr.String("__ClientToken__"),
+		CookieSynchronizationConfiguration: &types.CookieSynchronizationConfiguration{
+			Allowlist: []types.CookieSpecification{
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+			},
+			Blocklist: []types.CookieSpecification{
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		DeepLinkAllowed: types.EnabledType("Disabled"),
+		ToolbarConfiguration: &types.ToolbarConfiguration{
+			ToolbarType: types.ToolbarType("Floating"),
+			VisualMode:  types.VisualMode("Dark"),
+			HiddenToolbarItems: []types.ToolbarItem{
+				types.ToolbarItem("Windows"),
+				types.ToolbarItem("Windows"),
+			},
+			MaxDisplayResolution: types.MaxDisplayResolution("size4096X2160"),
+		},
+		BrandingConfigurationInput: &types.BrandingConfigurationCreateInput{
+			Logo: &types.IconImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			Wallpaper: &types.WallpaperImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			Favicon: &types.IconImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			LocalizedStrings: map[string]types.LocalizedBrandingStrings{
+				"key0": {
+					BrowserTabTitle:   ptr.String("__BrowserTabTitle__"),
+					WelcomeText:       ptr.String("__WelcomeText__"),
+					LoginTitle:        ptr.String("__LoginTitle__"),
+					LoginDescription:  ptr.String("__LoginDescription__"),
+					LoginButtonText:   ptr.String("__LoginButtonText__"),
+					ContactLink:       ptr.String("__ContactLink__"),
+					ContactButtonText: ptr.String("__ContactButtonText__"),
+					LoadingText:       ptr.String("__LoadingText__"),
+				},
+			},
+			ColorTheme:     types.ColorTheme("Light"),
+			TermsOfService: ptr.String("__TermsOfService__"),
+		},
+		WebAuthnAllowed: types.EnabledType("Disabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +865,9 @@ func TestCheckResponseSnapshot_DeleteBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBrowserSettings(context.Background(), &DeleteBrowserSettingsInput{})
+	got, err := svc.DeleteBrowserSettings(context.Background(), &DeleteBrowserSettingsInput{
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +886,9 @@ func TestCheckResponseSnapshot_DeleteDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataProtectionSettings(context.Background(), &DeleteDataProtectionSettingsInput{})
+	got, err := svc.DeleteDataProtectionSettings(context.Background(), &DeleteDataProtectionSettingsInput{
+		DataProtectionSettingsArn: ptr.String("__DataProtectionSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -542,7 +907,9 @@ func TestCheckResponseSnapshot_DeleteIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{})
+	got, err := svc.DeleteIdentityProvider(context.Background(), &DeleteIdentityProviderInput{
+		IdentityProviderArn: ptr.String("__IdentityProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +928,9 @@ func TestCheckResponseSnapshot_DeleteIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIpAccessSettings(context.Background(), &DeleteIpAccessSettingsInput{})
+	got, err := svc.DeleteIpAccessSettings(context.Background(), &DeleteIpAccessSettingsInput{
+		IpAccessSettingsArn: ptr.String("__IpAccessSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -580,7 +949,9 @@ func TestCheckResponseSnapshot_DeleteNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetworkSettings(context.Background(), &DeleteNetworkSettingsInput{})
+	got, err := svc.DeleteNetworkSettings(context.Background(), &DeleteNetworkSettingsInput{
+		NetworkSettingsArn: ptr.String("__NetworkSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -599,7 +970,9 @@ func TestCheckResponseSnapshot_DeletePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{})
+	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -618,7 +991,9 @@ func TestCheckResponseSnapshot_DeleteSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSessionLogger(context.Background(), &DeleteSessionLoggerInput{})
+	got, err := svc.DeleteSessionLogger(context.Background(), &DeleteSessionLoggerInput{
+		SessionLoggerArn: ptr.String("__SessionLoggerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -637,7 +1012,9 @@ func TestCheckResponseSnapshot_DeleteTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{})
+	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +1033,9 @@ func TestCheckResponseSnapshot_DeleteUserAccessLoggingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserAccessLoggingSettings(context.Background(), &DeleteUserAccessLoggingSettingsInput{})
+	got, err := svc.DeleteUserAccessLoggingSettings(context.Background(), &DeleteUserAccessLoggingSettingsInput{
+		UserAccessLoggingSettingsArn: ptr.String("__UserAccessLoggingSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -675,7 +1054,9 @@ func TestCheckResponseSnapshot_DeleteUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserSettings(context.Background(), &DeleteUserSettingsInput{})
+	got, err := svc.DeleteUserSettings(context.Background(), &DeleteUserSettingsInput{
+		UserSettingsArn: ptr.String("__UserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +1075,9 @@ func TestCheckResponseSnapshot_DisassociateBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateBrowserSettings(context.Background(), &DisassociateBrowserSettingsInput{})
+	got, err := svc.DisassociateBrowserSettings(context.Background(), &DisassociateBrowserSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +1096,9 @@ func TestCheckResponseSnapshot_DisassociateDataProtectionSettings(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDataProtectionSettings(context.Background(), &DisassociateDataProtectionSettingsInput{})
+	got, err := svc.DisassociateDataProtectionSettings(context.Background(), &DisassociateDataProtectionSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +1117,9 @@ func TestCheckResponseSnapshot_DisassociateIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateIpAccessSettings(context.Background(), &DisassociateIpAccessSettingsInput{})
+	got, err := svc.DisassociateIpAccessSettings(context.Background(), &DisassociateIpAccessSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +1138,9 @@ func TestCheckResponseSnapshot_DisassociateNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateNetworkSettings(context.Background(), &DisassociateNetworkSettingsInput{})
+	got, err := svc.DisassociateNetworkSettings(context.Background(), &DisassociateNetworkSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +1159,9 @@ func TestCheckResponseSnapshot_DisassociateSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSessionLogger(context.Background(), &DisassociateSessionLoggerInput{})
+	got, err := svc.DisassociateSessionLogger(context.Background(), &DisassociateSessionLoggerInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -789,7 +1180,9 @@ func TestCheckResponseSnapshot_DisassociateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTrustStore(context.Background(), &DisassociateTrustStoreInput{})
+	got, err := svc.DisassociateTrustStore(context.Background(), &DisassociateTrustStoreInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +1201,9 @@ func TestCheckResponseSnapshot_DisassociateUserAccessLoggingSettings(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateUserAccessLoggingSettings(context.Background(), &DisassociateUserAccessLoggingSettingsInput{})
+	got, err := svc.DisassociateUserAccessLoggingSettings(context.Background(), &DisassociateUserAccessLoggingSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +1222,9 @@ func TestCheckResponseSnapshot_DisassociateUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateUserSettings(context.Background(), &DisassociateUserSettingsInput{})
+	got, err := svc.DisassociateUserSettings(context.Background(), &DisassociateUserSettingsInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -846,7 +1243,10 @@ func TestCheckResponseSnapshot_ExpireSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExpireSession(context.Background(), &ExpireSessionInput{})
+	got, err := svc.ExpireSession(context.Background(), &ExpireSessionInput{
+		PortalId:  ptr.String("__PortalId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -892,7 +1292,9 @@ func TestCheckResponseSnapshot_GetBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBrowserSettings(context.Background(), &GetBrowserSettingsInput{})
+	got, err := svc.GetBrowserSettings(context.Background(), &GetBrowserSettingsInput{
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1385,9 @@ func TestCheckResponseSnapshot_GetDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataProtectionSettings(context.Background(), &GetDataProtectionSettingsInput{})
+	got, err := svc.GetDataProtectionSettings(context.Background(), &GetDataProtectionSettingsInput{
+		DataProtectionSettingsArn: ptr.String("__DataProtectionSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1415,9 @@ func TestCheckResponseSnapshot_GetIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityProvider(context.Background(), &GetIdentityProviderInput{})
+	got, err := svc.GetIdentityProvider(context.Background(), &GetIdentityProviderInput{
+		IdentityProviderArn: ptr.String("__IdentityProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1055,7 +1461,9 @@ func TestCheckResponseSnapshot_GetIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIpAccessSettings(context.Background(), &GetIpAccessSettingsInput{})
+	got, err := svc.GetIpAccessSettings(context.Background(), &GetIpAccessSettingsInput{
+		IpAccessSettingsArn: ptr.String("__IpAccessSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1091,7 +1499,9 @@ func TestCheckResponseSnapshot_GetNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkSettings(context.Background(), &GetNetworkSettingsInput{})
+	got, err := svc.GetNetworkSettings(context.Background(), &GetNetworkSettingsInput{
+		NetworkSettingsArn: ptr.String("__NetworkSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1547,9 @@ func TestCheckResponseSnapshot_GetPortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPortal(context.Background(), &GetPortalInput{})
+	got, err := svc.GetPortal(context.Background(), &GetPortalInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1571,9 @@ func TestCheckResponseSnapshot_GetPortalServiceProviderMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPortalServiceProviderMetadata(context.Background(), &GetPortalServiceProviderMetadataInput{})
+	got, err := svc.GetPortalServiceProviderMetadata(context.Background(), &GetPortalServiceProviderMetadataInput{
+		PortalArn: ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1191,7 +1605,10 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		PortalId:  ptr.String("__PortalId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1236,7 +1653,9 @@ func TestCheckResponseSnapshot_GetSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionLogger(context.Background(), &GetSessionLoggerInput{})
+	got, err := svc.GetSessionLogger(context.Background(), &GetSessionLoggerInput{
+		SessionLoggerArn: ptr.String("__SessionLoggerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1263,7 +1682,9 @@ func TestCheckResponseSnapshot_GetTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustStore(context.Background(), &GetTrustStoreInput{})
+	got, err := svc.GetTrustStore(context.Background(), &GetTrustStoreInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1292,7 +1713,10 @@ func TestCheckResponseSnapshot_GetTrustStoreCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustStoreCertificate(context.Background(), &GetTrustStoreCertificateInput{})
+	got, err := svc.GetTrustStoreCertificate(context.Background(), &GetTrustStoreCertificateInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		Thumbprint:    ptr.String("__Thumbprint__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1320,7 +1744,9 @@ func TestCheckResponseSnapshot_GetUserAccessLoggingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserAccessLoggingSettings(context.Background(), &GetUserAccessLoggingSettingsInput{})
+	got, err := svc.GetUserAccessLoggingSettings(context.Background(), &GetUserAccessLoggingSettingsInput{
+		UserAccessLoggingSettingsArn: ptr.String("__UserAccessLoggingSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1426,7 +1852,9 @@ func TestCheckResponseSnapshot_GetUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserSettings(context.Background(), &GetUserSettingsInput{})
+	got, err := svc.GetUserSettings(context.Background(), &GetUserSettingsInput{
+		UserSettingsArn: ptr.String("__UserSettingsArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1883,10 @@ func TestCheckResponseSnapshot_ListBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBrowserSettings(context.Background(), &ListBrowserSettingsInput{})
+	got, err := svc.ListBrowserSettings(context.Background(), &ListBrowserSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1490,7 +1921,10 @@ func TestCheckResponseSnapshot_ListDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataProtectionSettings(context.Background(), &ListDataProtectionSettingsInput{})
+	got, err := svc.ListDataProtectionSettings(context.Background(), &ListDataProtectionSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1957,11 @@ func TestCheckResponseSnapshot_ListIdentityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{})
+	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		PortalArn:  ptr.String("__PortalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1558,7 +1996,10 @@ func TestCheckResponseSnapshot_ListIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIpAccessSettings(context.Background(), &ListIpAccessSettingsInput{})
+	got, err := svc.ListIpAccessSettings(context.Background(), &ListIpAccessSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1589,7 +2030,10 @@ func TestCheckResponseSnapshot_ListNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworkSettings(context.Background(), &ListNetworkSettingsInput{})
+	got, err := svc.ListNetworkSettings(context.Background(), &ListNetworkSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1654,7 +2098,10 @@ func TestCheckResponseSnapshot_ListPortals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{})
+	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1705,7 +2152,10 @@ func TestCheckResponseSnapshot_ListSessionLoggers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessionLoggers(context.Background(), &ListSessionLoggersInput{})
+	got, err := svc.ListSessionLoggers(context.Background(), &ListSessionLoggersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2194,15 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		PortalId:   ptr.String("__PortalId__"),
+		Username:   ptr.String("__Username__"),
+		SessionId:  ptr.String("__SessionId__"),
+		SortBy:     types.SessionSortBy("StartTimeAscending"),
+		Status:     types.SessionStatus("Active"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1774,7 +2232,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1812,7 +2272,11 @@ func TestCheckResponseSnapshot_ListTrustStoreCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustStoreCertificates(context.Background(), &ListTrustStoreCertificatesInput{})
+	got, err := svc.ListTrustStoreCertificates(context.Background(), &ListTrustStoreCertificatesInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1841,7 +2305,10 @@ func TestCheckResponseSnapshot_ListTrustStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustStores(context.Background(), &ListTrustStoresInput{})
+	got, err := svc.ListTrustStores(context.Background(), &ListTrustStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1872,7 +2339,10 @@ func TestCheckResponseSnapshot_ListUserAccessLoggingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserAccessLoggingSettings(context.Background(), &ListUserAccessLoggingSettingsInput{})
+	got, err := svc.ListUserAccessLoggingSettings(context.Background(), &ListUserAccessLoggingSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2051,7 +2521,10 @@ func TestCheckResponseSnapshot_ListUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserSettings(context.Background(), &ListUserSettingsInput{})
+	got, err := svc.ListUserSettings(context.Background(), &ListUserSettingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2070,7 +2543,20 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2089,7 +2575,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2135,7 +2627,25 @@ func TestCheckResponseSnapshot_UpdateBrowserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBrowserSettings(context.Background(), &UpdateBrowserSettingsInput{})
+	got, err := svc.UpdateBrowserSettings(context.Background(), &UpdateBrowserSettingsInput{
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+		BrowserPolicy:      ptr.String("__BrowserPolicy__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		WebContentFilteringPolicy: &types.WebContentFilteringPolicy{
+			BlockedCategories: []types.Category{
+				types.Category("Cults"),
+				types.Category("Cults"),
+			},
+			AllowedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BlockedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2226,7 +2736,69 @@ func TestCheckResponseSnapshot_UpdateDataProtectionSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataProtectionSettings(context.Background(), &UpdateDataProtectionSettingsInput{})
+	got, err := svc.UpdateDataProtectionSettings(context.Background(), &UpdateDataProtectionSettingsInput{
+		DataProtectionSettingsArn: ptr.String("__DataProtectionSettingsArn__"),
+		InlineRedactionConfiguration: &types.InlineRedactionConfiguration{
+			InlineRedactionPatterns: []types.InlineRedactionPattern{
+				{
+					BuiltInPatternId: ptr.String("__BuiltInPatternId__"),
+					CustomPattern: &types.CustomPattern{
+						PatternName:        ptr.String("__PatternName__"),
+						PatternRegex:       ptr.String("__PatternRegex__"),
+						PatternDescription: ptr.String("__PatternDescription__"),
+						KeywordRegex:       ptr.String("__KeywordRegex__"),
+					},
+					RedactionPlaceHolder: &types.RedactionPlaceHolder{
+						RedactionPlaceHolderType: types.RedactionPlaceHolderType("CustomText"),
+						RedactionPlaceHolderText: ptr.String("__RedactionPlaceHolderText__"),
+					},
+					EnforcedUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExemptUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ConfidenceLevel: ptr.Int32(1),
+				},
+				{
+					BuiltInPatternId: ptr.String("__BuiltInPatternId__"),
+					CustomPattern: &types.CustomPattern{
+						PatternName:        ptr.String("__PatternName__"),
+						PatternRegex:       ptr.String("__PatternRegex__"),
+						PatternDescription: ptr.String("__PatternDescription__"),
+						KeywordRegex:       ptr.String("__KeywordRegex__"),
+					},
+					RedactionPlaceHolder: &types.RedactionPlaceHolder{
+						RedactionPlaceHolderType: types.RedactionPlaceHolderType("CustomText"),
+						RedactionPlaceHolderText: ptr.String("__RedactionPlaceHolderText__"),
+					},
+					EnforcedUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExemptUrls: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ConfidenceLevel: ptr.Int32(1),
+				},
+			},
+			GlobalEnforcedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			GlobalExemptUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			GlobalConfidenceLevel: ptr.Int32(1),
+		},
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2254,7 +2826,15 @@ func TestCheckResponseSnapshot_UpdateIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdentityProvider(context.Background(), &UpdateIdentityProviderInput{})
+	got, err := svc.UpdateIdentityProvider(context.Background(), &UpdateIdentityProviderInput{
+		IdentityProviderArn:  ptr.String("__IdentityProviderArn__"),
+		IdentityProviderName: ptr.String("__IdentityProviderName__"),
+		IdentityProviderType: types.IdentityProviderType("SAML"),
+		IdentityProviderDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2298,7 +2878,22 @@ func TestCheckResponseSnapshot_UpdateIpAccessSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIpAccessSettings(context.Background(), &UpdateIpAccessSettingsInput{})
+	got, err := svc.UpdateIpAccessSettings(context.Background(), &UpdateIpAccessSettingsInput{
+		IpAccessSettingsArn: ptr.String("__IpAccessSettingsArn__"),
+		DisplayName:         ptr.String("__DisplayName__"),
+		Description:         ptr.String("__Description__"),
+		IpRules: []types.IpRule{
+			{
+				IpRange:     ptr.String("__IpRange__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				IpRange:     ptr.String("__IpRange__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2334,7 +2929,19 @@ func TestCheckResponseSnapshot_UpdateNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetworkSettings(context.Background(), &UpdateNetworkSettingsInput{})
+	got, err := svc.UpdateNetworkSettings(context.Background(), &UpdateNetworkSettingsInput{
+		NetworkSettingsArn: ptr.String("__NetworkSettingsArn__"),
+		VpcId:              ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2380,7 +2987,14 @@ func TestCheckResponseSnapshot_UpdatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{})
+	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{
+		PortalArn:             ptr.String("__PortalArn__"),
+		DisplayName:           ptr.String("__DisplayName__"),
+		AuthenticationType:    types.AuthenticationType("Standard"),
+		InstanceType:          types.InstanceType("standard.regular"),
+		MaxConcurrentSessions: ptr.Int32(1),
+		PortalCustomDomain:    ptr.String("__PortalCustomDomain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2425,7 +3039,22 @@ func TestCheckResponseSnapshot_UpdateSessionLogger(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSessionLogger(context.Background(), &UpdateSessionLoggerInput{})
+	got, err := svc.UpdateSessionLogger(context.Background(), &UpdateSessionLoggerInput{
+		SessionLoggerArn: ptr.String("__SessionLoggerArn__"),
+		EventFilter: &types.EventFilterMemberAll{
+			Value: types.Unit{},
+		},
+		LogConfiguration: &types.LogConfiguration{
+			S3: &types.S3LogConfiguration{
+				Bucket:          ptr.String("__Bucket__"),
+				KeyPrefix:       ptr.String("__KeyPrefix__"),
+				BucketOwner:     ptr.String("__BucketOwner__"),
+				LogFileFormat:   types.LogFileFormat("JSONLines"),
+				FolderStructure: types.FolderStructure("Flat"),
+			},
+		},
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2446,7 +3075,18 @@ func TestCheckResponseSnapshot_UpdateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrustStore(context.Background(), &UpdateTrustStoreInput{})
+	got, err := svc.UpdateTrustStore(context.Background(), &UpdateTrustStoreInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		CertificatesToAdd: [][]byte{
+			[]byte("blob"),
+			[]byte("blob"),
+		},
+		CertificatesToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2474,7 +3114,11 @@ func TestCheckResponseSnapshot_UpdateUserAccessLoggingSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserAccessLoggingSettings(context.Background(), &UpdateUserAccessLoggingSettingsInput{})
+	got, err := svc.UpdateUserAccessLoggingSettings(context.Background(), &UpdateUserAccessLoggingSettingsInput{
+		UserAccessLoggingSettingsArn: ptr.String("__UserAccessLoggingSettingsArn__"),
+		KinesisStreamArn:             ptr.String("__KinesisStreamArn__"),
+		ClientToken:                  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2580,7 +3224,79 @@ func TestCheckResponseSnapshot_UpdateUserSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserSettings(context.Background(), &UpdateUserSettingsInput{})
+	got, err := svc.UpdateUserSettings(context.Background(), &UpdateUserSettingsInput{
+		UserSettingsArn:                ptr.String("__UserSettingsArn__"),
+		CopyAllowed:                    types.EnabledType("Disabled"),
+		PasteAllowed:                   types.EnabledType("Disabled"),
+		DownloadAllowed:                types.EnabledType("Disabled"),
+		UploadAllowed:                  types.EnabledType("Disabled"),
+		PrintAllowed:                   types.EnabledType("Disabled"),
+		DisconnectTimeoutInMinutes:     ptr.Int32(1),
+		IdleDisconnectTimeoutInMinutes: ptr.Int32(1),
+		ClientToken:                    ptr.String("__ClientToken__"),
+		CookieSynchronizationConfiguration: &types.CookieSynchronizationConfiguration{
+			Allowlist: []types.CookieSpecification{
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+			},
+			Blocklist: []types.CookieSpecification{
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+				{
+					Domain: ptr.String("__Domain__"),
+					Name:   ptr.String("__Name__"),
+					Path:   ptr.String("__Path__"),
+				},
+			},
+		},
+		DeepLinkAllowed: types.EnabledType("Disabled"),
+		ToolbarConfiguration: &types.ToolbarConfiguration{
+			ToolbarType: types.ToolbarType("Floating"),
+			VisualMode:  types.VisualMode("Dark"),
+			HiddenToolbarItems: []types.ToolbarItem{
+				types.ToolbarItem("Windows"),
+				types.ToolbarItem("Windows"),
+			},
+			MaxDisplayResolution: types.MaxDisplayResolution("size4096X2160"),
+		},
+		BrandingConfigurationInput: &types.BrandingConfigurationUpdateInput{
+			Logo: &types.IconImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			Wallpaper: &types.WallpaperImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			Favicon: &types.IconImageInputMemberBlob{
+				Value: []byte("blob"),
+			},
+			LocalizedStrings: map[string]types.LocalizedBrandingStrings{
+				"key0": {
+					BrowserTabTitle:   ptr.String("__BrowserTabTitle__"),
+					WelcomeText:       ptr.String("__WelcomeText__"),
+					LoginTitle:        ptr.String("__LoginTitle__"),
+					LoginDescription:  ptr.String("__LoginDescription__"),
+					LoginButtonText:   ptr.String("__LoginButtonText__"),
+					ContactLink:       ptr.String("__ContactLink__"),
+					ContactButtonText: ptr.String("__ContactButtonText__"),
+					LoadingText:       ptr.String("__LoadingText__"),
+				},
+			},
+			ColorTheme:     types.ColorTheme("Light"),
+			TermsOfService: ptr.String("__TermsOfService__"),
+		},
+		WebAuthnAllowed: types.EnabledType("Disabled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2601,7 +3317,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2628,7 +3347,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2654,7 +3376,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2681,7 +3406,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2710,7 +3438,38 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBrowserSettings(context.Background(), &CreateBrowserSettingsInput{})
+	_, opErr := svc.CreateBrowserSettings(context.Background(), &CreateBrowserSettingsInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomerManagedKey: ptr.String("__CustomerManagedKey__"),
+		AdditionalEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		BrowserPolicy: ptr.String("__BrowserPolicy__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		WebContentFilteringPolicy: &types.WebContentFilteringPolicy{
+			BlockedCategories: []types.Category{
+				types.Category("Cults"),
+				types.Category("Cults"),
+			},
+			AllowedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BlockedUrls: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2738,7 +3497,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2764,7 +3526,20 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2800,7 +3575,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{})
+	_, opErr := svc.AssociateBrowserSettings(context.Background(), &AssociateBrowserSettingsInput{
+		PortalArn:          ptr.String("__PortalArn__"),
+		BrowserSettingsArn: ptr.String("__BrowserSettingsArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

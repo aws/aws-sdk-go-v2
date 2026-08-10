@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sharedResources":[{"dnsNames":["__Member__","__Member__"],"error":{"code":"QUOTA_EXCEEDED","message":"__Message__"},"resourceArn":"__ResourceArn__","resourceShareArns":["__Member__","__Member__"],"status":"AVAILABLE","type":"RESOURCE_SHARE"},{"dnsNames":["__Member__","__Member__"],"error":{"code":"QUOTA_EXCEEDED","message":"__Message__"},"resourceArn":"__ResourceArn__","resourceShareArns":["__Member__","__Member__"],"status":"AVAILABLE","type":"RESOURCE_SHARE"}]}

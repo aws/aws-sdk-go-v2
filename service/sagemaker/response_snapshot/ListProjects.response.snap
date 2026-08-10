@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListProjects
+
+{"NextToken":"__NextToken__","ProjectSummaryList":[{"CreationTime":946684800,"ProjectArn":"__ProjectArn__","ProjectDescription":"__ProjectDescription__","ProjectId":"__ProjectId__","ProjectName":"__ProjectName__","ProjectStatus":"Pending"},{"CreationTime":946684800,"ProjectArn":"__ProjectArn__","ProjectDescription":"__ProjectDescription__","ProjectId":"__ProjectId__","ProjectName":"__ProjectName__","ProjectStatus":"Pending"}]}

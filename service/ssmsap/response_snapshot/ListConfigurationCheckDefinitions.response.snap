@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConfigurationChecks":[{"ApplicableApplicationTypes":["HANA","HANA"],"Description":"__Description__","Id":"SAP_CHECK_01","Name":"__Name__"},{"ApplicableApplicationTypes":["HANA","HANA"],"Description":"__Description__","Id":"SAP_CHECK_01","Name":"__Name__"}],"NextToken":"__NextToken__"}

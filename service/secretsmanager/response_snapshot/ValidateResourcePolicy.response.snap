@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: secretsmanager.ValidateResourcePolicy
+
+{"PolicyValidationPassed":true,"ValidationErrors":[{"CheckName":"__CheckName__","ErrorMessage":"__ErrorMessage__"},{"CheckName":"__CheckName__","ErrorMessage":"__ErrorMessage__"}]}

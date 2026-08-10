@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListDatasets
+
+{"DatasetSummaries":[{"CreatedAt":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","Status":"CREATED"},{"CreatedAt":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","Status":"CREATED"}],"NextToken":"__NextToken__"}

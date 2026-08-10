@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"SourceName":"__SourceName__","SourceObject":"__SourceObject__","TemplateId":"__TemplateId__"},{"SourceName":"__SourceName__","SourceObject":"__SourceObject__","TemplateId":"__TemplateId__"}],"NextToken":"__NextToken__"}

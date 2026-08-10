@@ -119,7 +119,13 @@ func TestCheckResponseSnapshot_CreateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +144,10 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		EndpointId: ptr.String("__EndpointId__"),
+		OutpostId:  ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +218,10 @@ func TestCheckResponseSnapshot_ListEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{})
+	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +258,10 @@ func TestCheckResponseSnapshot_ListOutpostsWithS3(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOutpostsWithS3(context.Background(), &ListOutpostsWithS3Input{})
+	got, err := svc.ListOutpostsWithS3(context.Background(), &ListOutpostsWithS3Input{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +332,11 @@ func TestCheckResponseSnapshot_ListSharedEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSharedEndpoints(context.Background(), &ListSharedEndpointsInput{})
+	got, err := svc.ListSharedEndpoints(context.Background(), &ListSharedEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+		OutpostId:  ptr.String("__OutpostId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +357,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -363,7 +388,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -388,7 +419,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -413,7 +450,13 @@ func TestCheckResponseSnapshot_Error_OutpostOfflineException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -438,7 +481,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -463,7 +512,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -488,7 +543,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		OutpostId:             ptr.String("__OutpostId__"),
+		SubnetId:              ptr.String("__SubnetId__"),
+		SecurityGroupId:       ptr.String("__SecurityGroupId__"),
+		AccessType:            types.EndpointAccessType("Private"),
+		CustomerOwnedIpv4Pool: ptr.String("__CustomerOwnedIpv4Pool__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

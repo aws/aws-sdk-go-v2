@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=XmlEnums&FooEnum1=Foo&FooEnum2=Foo&FooEnum3=Foo&FooEnumList.1=Foo&FooEnumList.2=Foo&FooEnumMap.entry.1.key=key0&FooEnumMap.entry.1.value=Foo&FooEnumSet.1=Foo&FooEnumSet.2=Foo&Version=2020-01-08

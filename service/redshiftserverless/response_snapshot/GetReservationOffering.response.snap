@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.GetReservationOffering
+
+{"reservationOffering":{"currencyCode":"__CurrencyCode__","duration":1,"hourlyCharge":1,"offeringId":"__OfferingId__","offeringType":"ALL_UPFRONT","upfrontCharge":1}}

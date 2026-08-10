@@ -123,7 +123,11 @@ func TestCheckResponseSnapshot_CloneBackend(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CloneBackend(context.Background(), &CloneBackendInput{})
+	got, err := svc.CloneBackend(context.Background(), &CloneBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		TargetEnvironmentName:  ptr.String("__TargetEnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -149,7 +153,13 @@ func TestCheckResponseSnapshot_CreateBackend(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackend(context.Background(), &CreateBackendInput{})
+	got, err := svc.CreateBackend(context.Background(), &CreateBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		AppName:                ptr.String("__AppName__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig:         &types.ResourceConfig{},
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +185,60 @@ func TestCheckResponseSnapshot_CreateBackendAPI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackendAPI(context.Background(), &CreateBackendAPIInput{})
+	got, err := svc.CreateBackendAPI(context.Background(), &CreateBackendAPIInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.BackendAPIResourceConfig{
+			AdditionalAuthTypes: []types.BackendAPIAuthType{
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+			},
+			ApiName: ptr.String("__ApiName__"),
+			ConflictResolution: &types.BackendAPIConflictResolution{
+				ResolutionStrategy: types.ResolutionStrategy("OPTIMISTIC_CONCURRENCY"),
+			},
+			DefaultAuthType: &types.BackendAPIAuthType{
+				Mode: types.Mode("API_KEY"),
+				Settings: &types.BackendAPIAppSyncAuthSettings{
+					CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+					Description:        ptr.String("__Description__"),
+					ExpirationTime:     ptr.Float64(1.0),
+					OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+					OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+					OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+					OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+					OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+				},
+			},
+			Service:         ptr.String("__Service__"),
+			TransformSchema: ptr.String("__TransformSchema__"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +264,100 @@ func TestCheckResponseSnapshot_CreateBackendAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackendAuth(context.Background(), &CreateBackendAuthInput{})
+	got, err := svc.CreateBackendAuth(context.Background(), &CreateBackendAuthInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.CreateBackendAuthResourceConfig{
+			AuthResources: types.AuthResources("USER_POOL_ONLY"),
+			IdentityPoolConfigs: &types.CreateBackendAuthIdentityPoolConfig{
+				IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+				UnauthenticatedLogin: ptr.Bool(true),
+			},
+			Service: types.Service("COGNITO"),
+			UserPoolConfigs: &types.CreateBackendAuthUserPoolConfig{
+				ForgotPassword: &types.CreateBackendAuthForgotPasswordConfig{
+					DeliveryMethod: types.DeliveryMethod("EMAIL"),
+					EmailSettings: &types.EmailSettings{
+						EmailMessage: ptr.String("__EmailMessage__"),
+						EmailSubject: ptr.String("__EmailSubject__"),
+					},
+					SmsSettings: &types.SmsSettings{
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+				Mfa: &types.CreateBackendAuthMFAConfig{
+					MFAMode: types.MFAMode("ON"),
+					Settings: &types.Settings{
+						MfaTypes: []types.MfaTypesElement{
+							types.MfaTypesElement("SMS"),
+							types.MfaTypesElement("SMS"),
+						},
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+				OAuth: &types.CreateBackendAuthOAuthConfig{
+					DomainPrefix:   ptr.String("__DomainPrefix__"),
+					OAuthGrantType: types.OAuthGrantType("CODE"),
+					OAuthScopes: []types.OAuthScopesElement{
+						types.OAuthScopesElement("PHONE"),
+						types.OAuthScopesElement("PHONE"),
+					},
+					RedirectSignInURIs: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RedirectSignOutURIs: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SocialProviderSettings: &types.SocialProviderSettings{
+						Facebook: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						Google: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						LoginWithAmazon: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						SignInWithApple: &types.BackendAuthAppleProviderConfig{
+							ClientId:   ptr.String("__ClientId__"),
+							KeyId:      ptr.String("__KeyId__"),
+							PrivateKey: ptr.String("__PrivateKey__"),
+							TeamId:     ptr.String("__TeamId__"),
+						},
+					},
+				},
+				PasswordPolicy: &types.CreateBackendAuthPasswordPolicyConfig{
+					AdditionalConstraints: []types.AdditionalConstraintsElement{
+						types.AdditionalConstraintsElement("REQUIRE_DIGIT"),
+						types.AdditionalConstraintsElement("REQUIRE_DIGIT"),
+					},
+					MinimumLength: ptr.Float64(1.0),
+				},
+				RequiredSignUpAttributes: []types.RequiredSignUpAttributesElement{
+					types.RequiredSignUpAttributesElement("ADDRESS"),
+					types.RequiredSignUpAttributesElement("ADDRESS"),
+				},
+				SignInMethod: types.SignInMethod("EMAIL"),
+				UserPoolName: ptr.String("__UserPoolName__"),
+				VerificationMessage: &types.CreateBackendAuthVerificationMessageConfig{
+					DeliveryMethod: types.DeliveryMethod("EMAIL"),
+					EmailSettings: &types.EmailSettings{
+						EmailMessage: ptr.String("__EmailMessage__"),
+						EmailSubject: ptr.String("__EmailSubject__"),
+					},
+					SmsSettings: &types.SmsSettings{
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+			},
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +381,10 @@ func TestCheckResponseSnapshot_CreateBackendConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackendConfig(context.Background(), &CreateBackendConfigInput{})
+	got, err := svc.CreateBackendConfig(context.Background(), &CreateBackendConfigInput{
+		AppId:               ptr.String("__AppId__"),
+		BackendManagerAppId: ptr.String("__BackendManagerAppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +408,25 @@ func TestCheckResponseSnapshot_CreateBackendStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackendStorage(context.Background(), &CreateBackendStorageInput{})
+	got, err := svc.CreateBackendStorage(context.Background(), &CreateBackendStorageInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.CreateBackendStorageResourceConfig{
+			BucketName: ptr.String("__BucketName__"),
+			Permissions: &types.BackendStoragePermissions{
+				Authenticated: []types.AuthenticatedElement{
+					types.AuthenticatedElement("READ"),
+					types.AuthenticatedElement("READ"),
+				},
+				UnAuthenticated: []types.UnAuthenticatedElement{
+					types.UnAuthenticatedElement("READ"),
+					types.UnAuthenticatedElement("READ"),
+				},
+			},
+			ServiceName: types.ServiceName("S3"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +450,9 @@ func TestCheckResponseSnapshot_CreateToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{
+		AppId: ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +478,10 @@ func TestCheckResponseSnapshot_DeleteBackend(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackend(context.Background(), &DeleteBackendInput{})
+	got, err := svc.DeleteBackend(context.Background(), &DeleteBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +507,60 @@ func TestCheckResponseSnapshot_DeleteBackendAPI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackendAPI(context.Background(), &DeleteBackendAPIInput{})
+	got, err := svc.DeleteBackendAPI(context.Background(), &DeleteBackendAPIInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.BackendAPIResourceConfig{
+			AdditionalAuthTypes: []types.BackendAPIAuthType{
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+			},
+			ApiName: ptr.String("__ApiName__"),
+			ConflictResolution: &types.BackendAPIConflictResolution{
+				ResolutionStrategy: types.ResolutionStrategy("OPTIMISTIC_CONCURRENCY"),
+			},
+			DefaultAuthType: &types.BackendAPIAuthType{
+				Mode: types.Mode("API_KEY"),
+				Settings: &types.BackendAPIAppSyncAuthSettings{
+					CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+					Description:        ptr.String("__Description__"),
+					ExpirationTime:     ptr.Float64(1.0),
+					OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+					OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+					OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+					OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+					OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+				},
+			},
+			Service:         ptr.String("__Service__"),
+			TransformSchema: ptr.String("__TransformSchema__"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +586,11 @@ func TestCheckResponseSnapshot_DeleteBackendAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackendAuth(context.Background(), &DeleteBackendAuthInput{})
+	got, err := svc.DeleteBackendAuth(context.Background(), &DeleteBackendAuthInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +614,12 @@ func TestCheckResponseSnapshot_DeleteBackendStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackendStorage(context.Background(), &DeleteBackendStorageInput{})
+	got, err := svc.DeleteBackendStorage(context.Background(), &DeleteBackendStorageInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+		ServiceName:            types.ServiceName("S3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +640,10 @@ func TestCheckResponseSnapshot_DeleteToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteToken(context.Background(), &DeleteTokenInput{})
+	got, err := svc.DeleteToken(context.Background(), &DeleteTokenInput{
+		AppId:     ptr.String("__AppId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +669,11 @@ func TestCheckResponseSnapshot_GenerateBackendAPIModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateBackendAPIModels(context.Background(), &GenerateBackendAPIModelsInput{})
+	got, err := svc.GenerateBackendAPIModels(context.Background(), &GenerateBackendAPIModelsInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +703,10 @@ func TestCheckResponseSnapshot_GetBackend(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackend(context.Background(), &GetBackendInput{})
+	got, err := svc.GetBackend(context.Background(), &GetBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +779,60 @@ func TestCheckResponseSnapshot_GetBackendAPI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendAPI(context.Background(), &GetBackendAPIInput{})
+	got, err := svc.GetBackendAPI(context.Background(), &GetBackendAPIInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.BackendAPIResourceConfig{
+			AdditionalAuthTypes: []types.BackendAPIAuthType{
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+			},
+			ApiName: ptr.String("__ApiName__"),
+			ConflictResolution: &types.BackendAPIConflictResolution{
+				ResolutionStrategy: types.ResolutionStrategy("OPTIMISTIC_CONCURRENCY"),
+			},
+			DefaultAuthType: &types.BackendAPIAuthType{
+				Mode: types.Mode("API_KEY"),
+				Settings: &types.BackendAPIAppSyncAuthSettings{
+					CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+					Description:        ptr.String("__Description__"),
+					ExpirationTime:     ptr.Float64(1.0),
+					OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+					OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+					OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+					OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+					OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+				},
+			},
+			Service:         ptr.String("__Service__"),
+			TransformSchema: ptr.String("__TransformSchema__"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +855,11 @@ func TestCheckResponseSnapshot_GetBackendAPIModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendAPIModels(context.Background(), &GetBackendAPIModelsInput{})
+	got, err := svc.GetBackendAPIModels(context.Background(), &GetBackendAPIModelsInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +972,11 @@ func TestCheckResponseSnapshot_GetBackendAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendAuth(context.Background(), &GetBackendAuthInput{})
+	got, err := svc.GetBackendAuth(context.Background(), &GetBackendAuthInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +1004,11 @@ func TestCheckResponseSnapshot_GetBackendJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendJob(context.Background(), &GetBackendJobInput{})
+	got, err := svc.GetBackendJob(context.Background(), &GetBackendJobInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		JobId:                  ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -727,7 +1046,11 @@ func TestCheckResponseSnapshot_GetBackendStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBackendStorage(context.Background(), &GetBackendStorageInput{})
+	got, err := svc.GetBackendStorage(context.Background(), &GetBackendStorageInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceName:           ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +1074,10 @@ func TestCheckResponseSnapshot_GetToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetToken(context.Background(), &GetTokenInput{})
+	got, err := svc.GetToken(context.Background(), &GetTokenInput{
+		AppId:     ptr.String("__AppId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -777,7 +1103,14 @@ func TestCheckResponseSnapshot_ImportBackendAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportBackendAuth(context.Background(), &ImportBackendAuthInput{})
+	got, err := svc.ImportBackendAuth(context.Background(), &ImportBackendAuthInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		IdentityPoolId:         ptr.String("__IdentityPoolId__"),
+		NativeClientId:         ptr.String("__NativeClientId__"),
+		UserPoolId:             ptr.String("__UserPoolId__"),
+		WebClientId:            ptr.String("__WebClientId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1134,12 @@ func TestCheckResponseSnapshot_ImportBackendStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportBackendStorage(context.Background(), &ImportBackendStorageInput{})
+	got, err := svc.ImportBackendStorage(context.Background(), &ImportBackendStorageInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		BucketName:             ptr.String("__BucketName__"),
+		ServiceName:            types.ServiceName("S3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +1182,15 @@ func TestCheckResponseSnapshot_ListBackendJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBackendJobs(context.Background(), &ListBackendJobsInput{})
+	got, err := svc.ListBackendJobs(context.Background(), &ListBackendJobsInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		JobId:                  ptr.String("__JobId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		Operation:              ptr.String("__Operation__"),
+		Status:                 ptr.String("__Status__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1221,9 @@ func TestCheckResponseSnapshot_ListS3Buckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListS3Buckets(context.Background(), &ListS3BucketsInput{})
+	got, err := svc.ListS3Buckets(context.Background(), &ListS3BucketsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1248,10 @@ func TestCheckResponseSnapshot_RemoveAllBackends(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAllBackends(context.Background(), &RemoveAllBackendsInput{})
+	got, err := svc.RemoveAllBackends(context.Background(), &RemoveAllBackendsInput{
+		AppId:           ptr.String("__AppId__"),
+		CleanAmplifyApp: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1272,9 @@ func TestCheckResponseSnapshot_RemoveBackendConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveBackendConfig(context.Background(), &RemoveBackendConfigInput{})
+	got, err := svc.RemoveBackendConfig(context.Background(), &RemoveBackendConfigInput{
+		AppId: ptr.String("__AppId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -947,7 +1300,60 @@ func TestCheckResponseSnapshot_UpdateBackendAPI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBackendAPI(context.Background(), &UpdateBackendAPIInput{})
+	got, err := svc.UpdateBackendAPI(context.Background(), &UpdateBackendAPIInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.BackendAPIResourceConfig{
+			AdditionalAuthTypes: []types.BackendAPIAuthType{
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+				{
+					Mode: types.Mode("API_KEY"),
+					Settings: &types.BackendAPIAppSyncAuthSettings{
+						CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+						Description:        ptr.String("__Description__"),
+						ExpirationTime:     ptr.Float64(1.0),
+						OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+						OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+						OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+						OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+						OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+					},
+				},
+			},
+			ApiName: ptr.String("__ApiName__"),
+			ConflictResolution: &types.BackendAPIConflictResolution{
+				ResolutionStrategy: types.ResolutionStrategy("OPTIMISTIC_CONCURRENCY"),
+			},
+			DefaultAuthType: &types.BackendAPIAuthType{
+				Mode: types.Mode("API_KEY"),
+				Settings: &types.BackendAPIAppSyncAuthSettings{
+					CognitoUserPoolId:  ptr.String("__CognitoUserPoolId__"),
+					Description:        ptr.String("__Description__"),
+					ExpirationTime:     ptr.Float64(1.0),
+					OpenIDAuthTTL:      ptr.String("__OpenIDAuthTTL__"),
+					OpenIDClientId:     ptr.String("__OpenIDClientId__"),
+					OpenIDIatTTL:       ptr.String("__OpenIDIatTTL__"),
+					OpenIDIssueURL:     ptr.String("__OpenIDIssueURL__"),
+					OpenIDProviderName: ptr.String("__OpenIDProviderName__"),
+				},
+			},
+			Service:         ptr.String("__Service__"),
+			TransformSchema: ptr.String("__TransformSchema__"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1379,93 @@ func TestCheckResponseSnapshot_UpdateBackendAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBackendAuth(context.Background(), &UpdateBackendAuthInput{})
+	got, err := svc.UpdateBackendAuth(context.Background(), &UpdateBackendAuthInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.UpdateBackendAuthResourceConfig{
+			AuthResources: types.AuthResources("USER_POOL_ONLY"),
+			IdentityPoolConfigs: &types.UpdateBackendAuthIdentityPoolConfig{
+				UnauthenticatedLogin: ptr.Bool(true),
+			},
+			Service: types.Service("COGNITO"),
+			UserPoolConfigs: &types.UpdateBackendAuthUserPoolConfig{
+				ForgotPassword: &types.UpdateBackendAuthForgotPasswordConfig{
+					DeliveryMethod: types.DeliveryMethod("EMAIL"),
+					EmailSettings: &types.EmailSettings{
+						EmailMessage: ptr.String("__EmailMessage__"),
+						EmailSubject: ptr.String("__EmailSubject__"),
+					},
+					SmsSettings: &types.SmsSettings{
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+				Mfa: &types.UpdateBackendAuthMFAConfig{
+					MFAMode: types.MFAMode("ON"),
+					Settings: &types.Settings{
+						MfaTypes: []types.MfaTypesElement{
+							types.MfaTypesElement("SMS"),
+							types.MfaTypesElement("SMS"),
+						},
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+				OAuth: &types.UpdateBackendAuthOAuthConfig{
+					DomainPrefix:   ptr.String("__DomainPrefix__"),
+					OAuthGrantType: types.OAuthGrantType("CODE"),
+					OAuthScopes: []types.OAuthScopesElement{
+						types.OAuthScopesElement("PHONE"),
+						types.OAuthScopesElement("PHONE"),
+					},
+					RedirectSignInURIs: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RedirectSignOutURIs: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SocialProviderSettings: &types.SocialProviderSettings{
+						Facebook: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						Google: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						LoginWithAmazon: &types.BackendAuthSocialProviderConfig{
+							ClientId:     ptr.String("__ClientId__"),
+							ClientSecret: ptr.String("__ClientSecret__"),
+						},
+						SignInWithApple: &types.BackendAuthAppleProviderConfig{
+							ClientId:   ptr.String("__ClientId__"),
+							KeyId:      ptr.String("__KeyId__"),
+							PrivateKey: ptr.String("__PrivateKey__"),
+							TeamId:     ptr.String("__TeamId__"),
+						},
+					},
+				},
+				PasswordPolicy: &types.UpdateBackendAuthPasswordPolicyConfig{
+					AdditionalConstraints: []types.AdditionalConstraintsElement{
+						types.AdditionalConstraintsElement("REQUIRE_DIGIT"),
+						types.AdditionalConstraintsElement("REQUIRE_DIGIT"),
+					},
+					MinimumLength: ptr.Float64(1.0),
+				},
+				VerificationMessage: &types.UpdateBackendAuthVerificationMessageConfig{
+					DeliveryMethod: types.DeliveryMethod("EMAIL"),
+					EmailSettings: &types.EmailSettings{
+						EmailMessage: ptr.String("__EmailMessage__"),
+						EmailSubject: ptr.String("__EmailSubject__"),
+					},
+					SmsSettings: &types.SmsSettings{
+						SmsMessage: ptr.String("__SmsMessage__"),
+					},
+				},
+			},
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1494,15 @@ func TestCheckResponseSnapshot_UpdateBackendConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBackendConfig(context.Background(), &UpdateBackendConfigInput{})
+	got, err := svc.UpdateBackendConfig(context.Background(), &UpdateBackendConfigInput{
+		AppId: ptr.String("__AppId__"),
+		LoginAuthConfig: &types.LoginAuthConfigReqObj{
+			AwsCognitoIdentityPoolId: ptr.String("__AwsCognitoIdentityPoolId__"),
+			AwsCognitoRegion:         ptr.String("__AwsCognitoRegion__"),
+			AwsUserPoolsId:           ptr.String("__AwsUserPoolsId__"),
+			AwsUserPoolsWebClientId:  ptr.String("__AwsUserPoolsWebClientId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1030,7 +1530,13 @@ func TestCheckResponseSnapshot_UpdateBackendJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBackendJob(context.Background(), &UpdateBackendJobInput{})
+	got, err := svc.UpdateBackendJob(context.Background(), &UpdateBackendJobInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		JobId:                  ptr.String("__JobId__"),
+		Operation:              ptr.String("__Operation__"),
+		Status:                 ptr.String("__Status__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1054,7 +1560,24 @@ func TestCheckResponseSnapshot_UpdateBackendStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBackendStorage(context.Background(), &UpdateBackendStorageInput{})
+	got, err := svc.UpdateBackendStorage(context.Background(), &UpdateBackendStorageInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		ResourceConfig: &types.UpdateBackendStorageResourceConfig{
+			Permissions: &types.BackendStoragePermissions{
+				Authenticated: []types.AuthenticatedElement{
+					types.AuthenticatedElement("READ"),
+					types.AuthenticatedElement("READ"),
+				},
+				UnAuthenticated: []types.UnAuthenticatedElement{
+					types.UnAuthenticatedElement("READ"),
+					types.UnAuthenticatedElement("READ"),
+				},
+			},
+			ServiceName: types.ServiceName("S3"),
+		},
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1075,7 +1598,11 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{})
+	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		TargetEnvironmentName:  ptr.String("__TargetEnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1100,7 +1627,11 @@ func TestCheckResponseSnapshot_Error_GatewayTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{})
+	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		TargetEnvironmentName:  ptr.String("__TargetEnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1126,7 +1657,11 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{})
+	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		TargetEnvironmentName:  ptr.String("__TargetEnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1152,7 +1687,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{})
+	_, opErr := svc.CloneBackend(context.Background(), &CloneBackendInput{
+		AppId:                  ptr.String("__AppId__"),
+		BackendEnvironmentName: ptr.String("__BackendEnvironmentName__"),
+		TargetEnvironmentName:  ptr.String("__TargetEnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

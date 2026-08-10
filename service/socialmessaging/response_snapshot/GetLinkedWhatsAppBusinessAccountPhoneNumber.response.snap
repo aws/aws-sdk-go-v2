@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"linkedWhatsAppBusinessAccountId":"__LinkedWhatsAppBusinessAccountId__","phoneNumber":{"arn":"__Arn__","dataLocalizationRegion":"__DataLocalizationRegion__","displayPhoneNumber":"__DisplayPhoneNumber__","displayPhoneNumberName":"__DisplayPhoneNumberName__","metaPhoneNumberId":"__MetaPhoneNumberId__","phoneNumber":"__PhoneNumber__","phoneNumberId":"__PhoneNumberId__","qualityRating":"__QualityRating__"}}

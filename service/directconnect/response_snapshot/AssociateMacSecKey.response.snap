@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.AssociateMacSecKey
+
+{"connectionId":"__ConnectionId__","macSecKeys":[{"ckn":"__Ckn__","secretARN":"__SecretARN__","startOn":"__StartOn__","state":"__State__"},{"ckn":"__Ckn__","secretARN":"__SecretARN__","startOn":"__StartOn__","state":"__State__"}]}

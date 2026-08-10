@@ -121,7 +121,9 @@ func TestCheckResponseSnapshot_AcceptGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	got, err := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +142,10 @@ func TestCheckResponseSnapshot_CheckInLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{})
+	got, err := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{
+		LicenseConsumptionToken: ptr.String("__LicenseConsumptionToken__"),
+		Beneficiary:             ptr.String("__Beneficiary__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +193,34 @@ func TestCheckResponseSnapshot_CheckoutBorrowLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{})
+	got, err := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		DigitalSignatureMethod: types.DigitalSignatureMethod("JWT_PS384"),
+		NodeId:                 ptr.String("__NodeId__"),
+		CheckoutMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +259,26 @@ func TestCheckResponseSnapshot_CheckoutLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckoutLicense(context.Background(), &CheckoutLicenseInput{})
+	got, err := svc.CheckoutLicense(context.Background(), &CheckoutLicenseInput{
+		ProductSKU:     ptr.String("__ProductSKU__"),
+		CheckoutType:   types.CheckoutType("PROVISIONAL"),
+		KeyFingerprint: ptr.String("__KeyFingerprint__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Beneficiary: ptr.String("__Beneficiary__"),
+		NodeId:      ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +301,30 @@ func TestCheckResponseSnapshot_CreateGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGrant(context.Background(), &CreateGrantInput{})
+	got, err := svc.CreateGrant(context.Background(), &CreateGrantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GrantName:   ptr.String("__GrantName__"),
+		LicenseArn:  ptr.String("__LicenseArn__"),
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HomeRegion: ptr.String("__HomeRegion__"),
+		AllowedOperations: []types.AllowedOperation{
+			types.AllowedOperation("CreateGrant"),
+			types.AllowedOperation("CreateGrant"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +347,21 @@ func TestCheckResponseSnapshot_CreateGrantVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGrantVersion(context.Background(), &CreateGrantVersionInput{})
+	got, err := svc.CreateGrantVersion(context.Background(), &CreateGrantVersionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		GrantArn:    ptr.String("__GrantArn__"),
+		GrantName:   ptr.String("__GrantName__"),
+		AllowedOperations: []types.AllowedOperation{
+			types.AllowedOperation("CreateGrant"),
+			types.AllowedOperation("CreateGrant"),
+		},
+		Status:        types.GrantStatus("PENDING_WORKFLOW"),
+		StatusReason:  ptr.String("__StatusReason__"),
+		SourceVersion: ptr.String("__SourceVersion__"),
+		Options: &types.Options{
+			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +384,70 @@ func TestCheckResponseSnapshot_CreateLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicense(context.Background(), &CreateLicenseInput{})
+	got, err := svc.CreateLicense(context.Background(), &CreateLicenseInput{
+		LicenseName: ptr.String("__LicenseName__"),
+		ProductName: ptr.String("__ProductName__"),
+		ProductSKU:  ptr.String("__ProductSKU__"),
+		Issuer: &types.Issuer{
+			Name:    ptr.String("__Name__"),
+			SignKey: ptr.String("__SignKey__"),
+		},
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Validity: &types.DatetimeRange{
+			Begin: ptr.String("__Begin__"),
+			End:   ptr.String("__End__"),
+		},
+		Entitlements: []types.Entitlement{
+			{
+				Name:         ptr.String("__Name__"),
+				Value:        ptr.String("__Value__"),
+				MaxCount:     ptr.Int64(1),
+				Overage:      ptr.Bool(true),
+				Unit:         types.EntitlementUnit("Count"),
+				AllowCheckIn: ptr.Bool(true),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Value:        ptr.String("__Value__"),
+				MaxCount:     ptr.Int64(1),
+				Overage:      ptr.Bool(true),
+				Unit:         types.EntitlementUnit("Count"),
+				AllowCheckIn: ptr.Bool(true),
+			},
+		},
+		Beneficiary: ptr.String("__Beneficiary__"),
+		ConsumptionConfiguration: &types.ConsumptionConfiguration{
+			RenewType: types.RenewType("None"),
+			ProvisionalConfiguration: &types.ProvisionalConfiguration{
+				MaxTimeToLiveInMinutes: ptr.Int32(1),
+			},
+			BorrowConfiguration: &types.BorrowConfiguration{
+				AllowEarlyCheckIn:      ptr.Bool(true),
+				MaxTimeToLiveInMinutes: ptr.Int32(1),
+			},
+		},
+		LicenseMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +469,43 @@ func TestCheckResponseSnapshot_CreateLicenseAssetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseAssetGroup(context.Background(), &CreateLicenseAssetGroupInput{})
+	got, err := svc.CreateLicenseAssetGroup(context.Background(), &CreateLicenseAssetGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseAssetGroupConfigurations: []types.LicenseAssetGroupConfiguration{
+			{
+				UsageDimension: ptr.String("__UsageDimension__"),
+			},
+			{
+				UsageDimension: ptr.String("__UsageDimension__"),
+			},
+		},
+		AssociatedLicenseAssetRulesetARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Properties: []types.LicenseAssetGroupProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -339,7 +526,459 @@ func TestCheckResponseSnapshot_CreateLicenseAssetRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseAssetRuleset(context.Background(), &CreateLicenseAssetRulesetInput{})
+	got, err := svc.CreateLicenseAssetRuleset(context.Background(), &CreateLicenseAssetRulesetInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rules: []types.LicenseAssetRule{
+			{
+				RuleStatement: &types.RuleStatement{
+					LicenseConfigurationRuleStatement: &types.LicenseConfigurationRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					LicenseRuleStatement: &types.LicenseRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InstanceRuleStatement: &types.InstanceRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ScriptRuleStatement: &types.ScriptRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Script:     ptr.String("__Script__"),
+						},
+					},
+				},
+			},
+			{
+				RuleStatement: &types.RuleStatement{
+					LicenseConfigurationRuleStatement: &types.LicenseConfigurationRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					LicenseRuleStatement: &types.LicenseRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InstanceRuleStatement: &types.InstanceRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ScriptRuleStatement: &types.ScriptRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Script:     ptr.String("__Script__"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +999,73 @@ func TestCheckResponseSnapshot_CreateLicenseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseConfiguration(context.Background(), &CreateLicenseConfigurationInput{})
+	got, err := svc.CreateLicenseConfiguration(context.Background(), &CreateLicenseConfigurationInput{
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		LicenseCountingType:   types.LicenseCountingType("vCPU"),
+		LicenseCount:          ptr.Int64(1),
+		LicenseCountHardLimit: ptr.Bool(true),
+		LicenseRules: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DisassociateWhenNotFound: ptr.Bool(true),
+		ProductInformationList: []types.ProductInformation{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ProductInformationFilterList: []types.ProductInformationFilter{
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ProductInformationFilterList: []types.ProductInformationFilter{
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+				},
+			},
+		},
+		LicenseExpiry: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +1086,35 @@ func TestCheckResponseSnapshot_CreateLicenseConversionTaskForResource(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseConversionTaskForResource(context.Background(), &CreateLicenseConversionTaskForResourceInput{})
+	got, err := svc.CreateLicenseConversionTaskForResource(context.Background(), &CreateLicenseConversionTaskForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SourceLicenseContext: &types.LicenseConversionContext{
+			UsageOperation: ptr.String("__UsageOperation__"),
+			ProductCodes: []types.ProductCodeListItem{
+				{
+					ProductCodeId:   ptr.String("__ProductCodeId__"),
+					ProductCodeType: types.ProductCodeType("marketplace"),
+				},
+				{
+					ProductCodeId:   ptr.String("__ProductCodeId__"),
+					ProductCodeType: types.ProductCodeType("marketplace"),
+				},
+			},
+		},
+		DestinationLicenseContext: &types.LicenseConversionContext{
+			UsageOperation: ptr.String("__UsageOperation__"),
+			ProductCodes: []types.ProductCodeListItem{
+				{
+					ProductCodeId:   ptr.String("__ProductCodeId__"),
+					ProductCodeType: types.ProductCodeType("marketplace"),
+				},
+				{
+					ProductCodeId:   ptr.String("__ProductCodeId__"),
+					ProductCodeType: types.ProductCodeType("marketplace"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +1135,41 @@ func TestCheckResponseSnapshot_CreateLicenseManagerReportGenerator(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseManagerReportGenerator(context.Background(), &CreateLicenseManagerReportGeneratorInput{})
+	got, err := svc.CreateLicenseManagerReportGenerator(context.Background(), &CreateLicenseManagerReportGeneratorInput{
+		ReportGeneratorName: ptr.String("__ReportGeneratorName__"),
+		Type: []types.ReportType{
+			types.ReportType("LicenseConfigurationSummaryReport"),
+			types.ReportType("LicenseConfigurationSummaryReport"),
+		},
+		ReportContext: &types.ReportContext{
+			LicenseConfigurationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LicenseAssetGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReportStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ReportEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ReportFrequency: &types.ReportFrequency{
+			Value:  ptr.Int32(1),
+			Period: types.ReportFrequencyType("DAY"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +1192,62 @@ func TestCheckResponseSnapshot_CreateLicenseVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseVersion(context.Background(), &CreateLicenseVersionInput{})
+	got, err := svc.CreateLicenseVersion(context.Background(), &CreateLicenseVersionInput{
+		LicenseArn:  ptr.String("__LicenseArn__"),
+		LicenseName: ptr.String("__LicenseName__"),
+		ProductName: ptr.String("__ProductName__"),
+		Issuer: &types.Issuer{
+			Name:    ptr.String("__Name__"),
+			SignKey: ptr.String("__SignKey__"),
+		},
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Validity: &types.DatetimeRange{
+			Begin: ptr.String("__Begin__"),
+			End:   ptr.String("__End__"),
+		},
+		LicenseMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Entitlements: []types.Entitlement{
+			{
+				Name:         ptr.String("__Name__"),
+				Value:        ptr.String("__Value__"),
+				MaxCount:     ptr.Int64(1),
+				Overage:      ptr.Bool(true),
+				Unit:         types.EntitlementUnit("Count"),
+				AllowCheckIn: ptr.Bool(true),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Value:        ptr.String("__Value__"),
+				MaxCount:     ptr.Int64(1),
+				Overage:      ptr.Bool(true),
+				Unit:         types.EntitlementUnit("Count"),
+				AllowCheckIn: ptr.Bool(true),
+			},
+		},
+		ConsumptionConfiguration: &types.ConsumptionConfiguration{
+			RenewType: types.RenewType("None"),
+			ProvisionalConfiguration: &types.ProvisionalConfiguration{
+				MaxTimeToLiveInMinutes: ptr.Int32(1),
+			},
+			BorrowConfiguration: &types.BorrowConfiguration{
+				AllowEarlyCheckIn:      ptr.Bool(true),
+				MaxTimeToLiveInMinutes: ptr.Int32(1),
+			},
+		},
+		Status:        types.LicenseStatus("AVAILABLE"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		SourceVersion: ptr.String("__SourceVersion__"),
+		ResetUsage:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -448,7 +1270,19 @@ func TestCheckResponseSnapshot_CreateToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{})
+	got, err := svc.CreateToken(context.Background(), &CreateTokenInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		RoleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExpirationInDays: ptr.Int32(1),
+		TokenProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +1305,11 @@ func TestCheckResponseSnapshot_DeleteGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGrant(context.Background(), &DeleteGrantInput{})
+	got, err := svc.DeleteGrant(context.Background(), &DeleteGrantInput{
+		GrantArn:     ptr.String("__GrantArn__"),
+		StatusReason: ptr.String("__StatusReason__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +1331,10 @@ func TestCheckResponseSnapshot_DeleteLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicense(context.Background(), &DeleteLicenseInput{})
+	got, err := svc.DeleteLicense(context.Background(), &DeleteLicenseInput{
+		LicenseArn:    ptr.String("__LicenseArn__"),
+		SourceVersion: ptr.String("__SourceVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +1355,9 @@ func TestCheckResponseSnapshot_DeleteLicenseAssetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseAssetGroup(context.Background(), &DeleteLicenseAssetGroupInput{})
+	got, err := svc.DeleteLicenseAssetGroup(context.Background(), &DeleteLicenseAssetGroupInput{
+		LicenseAssetGroupArn: ptr.String("__LicenseAssetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +1376,9 @@ func TestCheckResponseSnapshot_DeleteLicenseAssetRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseAssetRuleset(context.Background(), &DeleteLicenseAssetRulesetInput{})
+	got, err := svc.DeleteLicenseAssetRuleset(context.Background(), &DeleteLicenseAssetRulesetInput{
+		LicenseAssetRulesetArn: ptr.String("__LicenseAssetRulesetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +1397,9 @@ func TestCheckResponseSnapshot_DeleteLicenseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseConfiguration(context.Background(), &DeleteLicenseConfigurationInput{})
+	got, err := svc.DeleteLicenseConfiguration(context.Background(), &DeleteLicenseConfigurationInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +1418,9 @@ func TestCheckResponseSnapshot_DeleteLicenseManagerReportGenerator(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseManagerReportGenerator(context.Background(), &DeleteLicenseManagerReportGeneratorInput{})
+	got, err := svc.DeleteLicenseManagerReportGenerator(context.Background(), &DeleteLicenseManagerReportGeneratorInput{
+		LicenseManagerReportGeneratorArn: ptr.String("__LicenseManagerReportGeneratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +1439,9 @@ func TestCheckResponseSnapshot_DeleteToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteToken(context.Background(), &DeleteTokenInput{})
+	got, err := svc.DeleteToken(context.Background(), &DeleteTokenInput{
+		TokenId: ptr.String("__TokenId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +1463,10 @@ func TestCheckResponseSnapshot_ExtendLicenseConsumption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExtendLicenseConsumption(context.Background(), &ExtendLicenseConsumptionInput{})
+	got, err := svc.ExtendLicenseConsumption(context.Background(), &ExtendLicenseConsumptionInput{
+		LicenseConsumptionToken: ptr.String("__LicenseConsumptionToken__"),
+		DryRun:                  true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +1487,13 @@ func TestCheckResponseSnapshot_GetAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessToken(context.Background(), &GetAccessTokenInput{})
+	got, err := svc.GetAccessToken(context.Background(), &GetAccessTokenInput{
+		Token: ptr.String("__Token__"),
+		TokenProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +1531,10 @@ func TestCheckResponseSnapshot_GetGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGrant(context.Background(), &GetGrantInput{})
+	got, err := svc.GetGrant(context.Background(), &GetGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+		Version:  ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +1612,10 @@ func TestCheckResponseSnapshot_GetLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicense(context.Background(), &GetLicenseInput{})
+	got, err := svc.GetLicense(context.Background(), &GetLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Version:    ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,7 +1666,9 @@ func TestCheckResponseSnapshot_GetLicenseAssetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseAssetGroup(context.Background(), &GetLicenseAssetGroupInput{})
+	got, err := svc.GetLicenseAssetGroup(context.Background(), &GetLicenseAssetGroupInput{
+		LicenseAssetGroupArn: ptr.String("__LicenseAssetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1263,7 +2131,9 @@ func TestCheckResponseSnapshot_GetLicenseAssetRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseAssetRuleset(context.Background(), &GetLicenseAssetRulesetInput{})
+	got, err := svc.GetLicenseAssetRuleset(context.Background(), &GetLicenseAssetRulesetInput{
+		LicenseAssetRulesetArn: ptr.String("__LicenseAssetRulesetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1376,7 +2246,9 @@ func TestCheckResponseSnapshot_GetLicenseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseConfiguration(context.Background(), &GetLicenseConfigurationInput{})
+	got, err := svc.GetLicenseConfiguration(context.Background(), &GetLicenseConfigurationInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1429,7 +2301,9 @@ func TestCheckResponseSnapshot_GetLicenseConversionTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseConversionTask(context.Background(), &GetLicenseConversionTaskInput{})
+	got, err := svc.GetLicenseConversionTask(context.Background(), &GetLicenseConversionTaskInput{
+		LicenseConversionTaskId: ptr.String("__LicenseConversionTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1493,7 +2367,9 @@ func TestCheckResponseSnapshot_GetLicenseManagerReportGenerator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseManagerReportGenerator(context.Background(), &GetLicenseManagerReportGeneratorInput{})
+	got, err := svc.GetLicenseManagerReportGenerator(context.Background(), &GetLicenseManagerReportGeneratorInput{
+		LicenseManagerReportGeneratorArn: ptr.String("__LicenseManagerReportGeneratorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,7 +2405,9 @@ func TestCheckResponseSnapshot_GetLicenseUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseUsage(context.Background(), &GetLicenseUsageInput{})
+	got, err := svc.GetLicenseUsage(context.Background(), &GetLicenseUsageInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1604,7 +2482,12 @@ func TestCheckResponseSnapshot_ListAssetsForLicenseAssetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetsForLicenseAssetGroup(context.Background(), &ListAssetsForLicenseAssetGroupInput{})
+	got, err := svc.ListAssetsForLicenseAssetGroup(context.Background(), &ListAssetsForLicenseAssetGroupInput{
+		LicenseAssetGroupArn: ptr.String("__LicenseAssetGroupArn__"),
+		AssetType:            ptr.String("__AssetType__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1641,7 +2524,11 @@ func TestCheckResponseSnapshot_ListAssociationsForLicenseConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociationsForLicenseConfiguration(context.Background(), &ListAssociationsForLicenseConfigurationInput{})
+	got, err := svc.ListAssociationsForLicenseConfiguration(context.Background(), &ListAssociationsForLicenseConfigurationInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1700,7 +2587,30 @@ func TestCheckResponseSnapshot_ListDistributedGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributedGrants(context.Background(), &ListDistributedGrantsInput{})
+	got, err := svc.ListDistributedGrants(context.Background(), &ListDistributedGrantsInput{
+		GrantArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1761,7 +2671,11 @@ func TestCheckResponseSnapshot_ListFailuresForLicenseConfigurationOperations(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFailuresForLicenseConfigurationOperations(context.Background(), &ListFailuresForLicenseConfigurationOperationsInput{})
+	got, err := svc.ListFailuresForLicenseConfigurationOperations(context.Background(), &ListFailuresForLicenseConfigurationOperationsInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1846,7 +2760,26 @@ func TestCheckResponseSnapshot_ListLicenseAssetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseAssetGroups(context.Background(), &ListLicenseAssetGroupsInput{})
+	got, err := svc.ListLicenseAssetGroups(context.Background(), &ListLicenseAssetGroupsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2755,7 +3688,27 @@ func TestCheckResponseSnapshot_ListLicenseAssetRulesets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseAssetRulesets(context.Background(), &ListLicenseAssetRulesetsInput{})
+	got, err := svc.ListLicenseAssetRulesets(context.Background(), &ListLicenseAssetRulesetsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ShowAWSManagedLicenseAssetRulesets: true,
+		MaxResults:                         ptr.Int32(1),
+		NextToken:                          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2948,7 +3901,30 @@ func TestCheckResponseSnapshot_ListLicenseConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseConfigurations(context.Background(), &ListLicenseConfigurationsInput{})
+	got, err := svc.ListLicenseConfigurations(context.Background(), &ListLicenseConfigurationsInput{
+		LicenseConfigurationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3141,7 +4117,30 @@ func TestCheckResponseSnapshot_ListLicenseConfigurationsForOrganization(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseConfigurationsForOrganization(context.Background(), &ListLicenseConfigurationsForOrganizationInput{})
+	got, err := svc.ListLicenseConfigurationsForOrganization(context.Background(), &ListLicenseConfigurationsForOrganizationInput{
+		LicenseConfigurationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3234,7 +4233,26 @@ func TestCheckResponseSnapshot_ListLicenseConversionTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseConversionTasks(context.Background(), &ListLicenseConversionTasksInput{})
+	got, err := svc.ListLicenseConversionTasks(context.Background(), &ListLicenseConversionTasksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +4363,26 @@ func TestCheckResponseSnapshot_ListLicenseManagerReportGenerators(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseManagerReportGenerators(context.Background(), &ListLicenseManagerReportGeneratorsInput{})
+	got, err := svc.ListLicenseManagerReportGenerators(context.Background(), &ListLicenseManagerReportGeneratorsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3376,7 +4413,11 @@ func TestCheckResponseSnapshot_ListLicenseSpecificationsForResource(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseSpecificationsForResource(context.Background(), &ListLicenseSpecificationsForResourceInput{})
+	got, err := svc.ListLicenseSpecificationsForResource(context.Background(), &ListLicenseSpecificationsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3515,7 +4556,11 @@ func TestCheckResponseSnapshot_ListLicenseVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseVersions(context.Background(), &ListLicenseVersionsInput{})
+	got, err := svc.ListLicenseVersions(context.Background(), &ListLicenseVersionsInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3654,7 +4699,30 @@ func TestCheckResponseSnapshot_ListLicenses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenses(context.Background(), &ListLicensesInput{})
+	got, err := svc.ListLicenses(context.Background(), &ListLicensesInput{
+		LicenseArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3713,7 +4781,30 @@ func TestCheckResponseSnapshot_ListReceivedGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceivedGrants(context.Background(), &ListReceivedGrantsInput{})
+	got, err := svc.ListReceivedGrants(context.Background(), &ListReceivedGrantsInput{
+		GrantArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3772,7 +4863,27 @@ func TestCheckResponseSnapshot_ListReceivedGrantsForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceivedGrantsForOrganization(context.Background(), &ListReceivedGrantsForOrganizationInput{})
+	got, err := svc.ListReceivedGrantsForOrganization(context.Background(), &ListReceivedGrantsForOrganizationInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3927,7 +5038,30 @@ func TestCheckResponseSnapshot_ListReceivedLicenses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceivedLicenses(context.Background(), &ListReceivedLicensesInput{})
+	got, err := svc.ListReceivedLicenses(context.Background(), &ListReceivedLicensesInput{
+		LicenseArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4082,7 +5216,26 @@ func TestCheckResponseSnapshot_ListReceivedLicensesForOrganization(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceivedLicensesForOrganization(context.Background(), &ListReceivedLicensesForOrganizationInput{})
+	got, err := svc.ListReceivedLicensesForOrganization(context.Background(), &ListReceivedLicensesForOrganizationInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4139,7 +5292,22 @@ func TestCheckResponseSnapshot_ListResourceInventory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceInventory(context.Background(), &ListResourceInventoryInput{})
+	got, err := svc.ListResourceInventory(context.Background(), &ListResourceInventoryInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.InventoryFilter{
+			{
+				Name:      ptr.String("__Name__"),
+				Condition: types.InventoryFilterCondition("EQUALS"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				Condition: types.InventoryFilterCondition("EQUALS"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4169,7 +5337,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4222,7 +5392,30 @@ func TestCheckResponseSnapshot_ListTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTokens(context.Background(), &ListTokensInput{})
+	got, err := svc.ListTokens(context.Background(), &ListTokensInput{
+		TokenIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4261,7 +5454,27 @@ func TestCheckResponseSnapshot_ListUsageForLicenseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsageForLicenseConfiguration(context.Background(), &ListUsageForLicenseConfigurationInput{})
+	got, err := svc.ListUsageForLicenseConfiguration(context.Background(), &ListUsageForLicenseConfigurationInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4284,7 +5497,9 @@ func TestCheckResponseSnapshot_RejectGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectGrant(context.Background(), &RejectGrantInput{})
+	got, err := svc.RejectGrant(context.Background(), &RejectGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4303,7 +5518,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4322,7 +5549,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4344,7 +5577,35 @@ func TestCheckResponseSnapshot_UpdateLicenseAssetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLicenseAssetGroup(context.Background(), &UpdateLicenseAssetGroupInput{})
+	got, err := svc.UpdateLicenseAssetGroup(context.Background(), &UpdateLicenseAssetGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseAssetGroupConfigurations: []types.LicenseAssetGroupConfiguration{
+			{
+				UsageDimension: ptr.String("__UsageDimension__"),
+			},
+			{
+				UsageDimension: ptr.String("__UsageDimension__"),
+			},
+		},
+		AssociatedLicenseAssetRulesetARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Properties: []types.LicenseAssetGroupProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		LicenseAssetGroupArn: ptr.String("__LicenseAssetGroupArn__"),
+		Status:               types.LicenseAssetGroupStatus("ACTIVE"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4365,7 +5626,450 @@ func TestCheckResponseSnapshot_UpdateLicenseAssetRuleset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLicenseAssetRuleset(context.Background(), &UpdateLicenseAssetRulesetInput{})
+	got, err := svc.UpdateLicenseAssetRuleset(context.Background(), &UpdateLicenseAssetRulesetInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rules: []types.LicenseAssetRule{
+			{
+				RuleStatement: &types.RuleStatement{
+					LicenseConfigurationRuleStatement: &types.LicenseConfigurationRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					LicenseRuleStatement: &types.LicenseRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InstanceRuleStatement: &types.InstanceRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ScriptRuleStatement: &types.ScriptRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Script:     ptr.String("__Script__"),
+						},
+					},
+				},
+			},
+			{
+				RuleStatement: &types.RuleStatement{
+					LicenseConfigurationRuleStatement: &types.LicenseConfigurationRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					LicenseRuleStatement: &types.LicenseRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InstanceRuleStatement: &types.InstanceRuleStatement{
+						AndRuleStatement: &types.AndRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						OrRuleStatement: &types.OrRuleStatement{
+							MatchingRuleStatements: []types.MatchingRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Constraint: ptr.String("__Constraint__"),
+									ValueToMatch: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ScriptRuleStatements: []types.ScriptRuleStatement{
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+								{
+									KeyToMatch: ptr.String("__KeyToMatch__"),
+									Script:     ptr.String("__Script__"),
+								},
+							},
+						},
+						MatchingRuleStatement: &types.MatchingRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Constraint: ptr.String("__Constraint__"),
+							ValueToMatch: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ScriptRuleStatement: &types.ScriptRuleStatement{
+							KeyToMatch: ptr.String("__KeyToMatch__"),
+							Script:     ptr.String("__Script__"),
+						},
+					},
+				},
+			},
+		},
+		LicenseAssetRulesetArn: ptr.String("__LicenseAssetRulesetArn__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4384,7 +6088,64 @@ func TestCheckResponseSnapshot_UpdateLicenseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLicenseConfiguration(context.Background(), &UpdateLicenseConfigurationInput{})
+	got, err := svc.UpdateLicenseConfiguration(context.Background(), &UpdateLicenseConfigurationInput{
+		LicenseConfigurationArn:    ptr.String("__LicenseConfigurationArn__"),
+		LicenseConfigurationStatus: types.LicenseConfigurationStatus("AVAILABLE"),
+		LicenseRules: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseCount:          ptr.Int64(1),
+		LicenseCountHardLimit: ptr.Bool(true),
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		ProductInformationList: []types.ProductInformation{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ProductInformationFilterList: []types.ProductInformationFilter{
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ProductInformationFilterList: []types.ProductInformationFilter{
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+					{
+						ProductInformationFilterName: ptr.String("__ProductInformationFilterName__"),
+						ProductInformationFilterValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ProductInformationFilterComparator: ptr.String("__ProductInformationFilterComparator__"),
+					},
+				},
+			},
+		},
+		DisassociateWhenNotFound: ptr.Bool(true),
+		LicenseExpiry:            ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4403,7 +6164,32 @@ func TestCheckResponseSnapshot_UpdateLicenseManagerReportGenerator(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLicenseManagerReportGenerator(context.Background(), &UpdateLicenseManagerReportGeneratorInput{})
+	got, err := svc.UpdateLicenseManagerReportGenerator(context.Background(), &UpdateLicenseManagerReportGeneratorInput{
+		LicenseManagerReportGeneratorArn: ptr.String("__LicenseManagerReportGeneratorArn__"),
+		ReportGeneratorName:              ptr.String("__ReportGeneratorName__"),
+		Type: []types.ReportType{
+			types.ReportType("LicenseConfigurationSummaryReport"),
+			types.ReportType("LicenseConfigurationSummaryReport"),
+		},
+		ReportContext: &types.ReportContext{
+			LicenseConfigurationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LicenseAssetGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReportStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ReportEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ReportFrequency: &types.ReportFrequency{
+			Value:  ptr.Int32(1),
+			Period: types.ReportFrequencyType("DAY"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4422,7 +6208,29 @@ func TestCheckResponseSnapshot_UpdateLicenseSpecificationsForResource(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{})
+	got, err := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		AddLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+		RemoveLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4441,7 +6249,18 @@ func TestCheckResponseSnapshot_UpdateServiceSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{})
+	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{
+		S3BucketArn: ptr.String("__S3BucketArn__"),
+		SnsTopicArn: ptr.String("__SnsTopicArn__"),
+		OrganizationConfiguration: &types.OrganizationConfiguration{
+			EnableIntegration: true,
+		},
+		EnableCrossAccountsDiscovery: ptr.Bool(true),
+		EnabledDiscoverySourceRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4462,7 +6281,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4487,7 +6308,9 @@ func TestCheckResponseSnapshot_Error_AuthorizationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4512,7 +6335,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{})
+	_, opErr := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{
+		LicenseConsumptionToken: ptr.String("__LicenseConsumptionToken__"),
+		Beneficiary:             ptr.String("__Beneficiary__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4537,7 +6363,34 @@ func TestCheckResponseSnapshot_Error_EntitlementNotAllowedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{})
+	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		DigitalSignatureMethod: types.DigitalSignatureMethod("JWT_PS384"),
+		NodeId:                 ptr.String("__NodeId__"),
+		CheckoutMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4563,7 +6416,22 @@ func TestCheckResponseSnapshot_Error_FailedDependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListResourceInventory(context.Background(), &ListResourceInventoryInput{})
+	_, opErr := svc.ListResourceInventory(context.Background(), &ListResourceInventoryInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.InventoryFilter{
+			{
+				Name:      ptr.String("__Name__"),
+				Condition: types.InventoryFilterCondition("EQUALS"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				Condition: types.InventoryFilterCondition("EQUALS"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4588,7 +6456,11 @@ func TestCheckResponseSnapshot_Error_FilterLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListAssociationsForLicenseConfiguration(context.Background(), &ListAssociationsForLicenseConfigurationInput{})
+	_, opErr := svc.ListAssociationsForLicenseConfiguration(context.Background(), &ListAssociationsForLicenseConfigurationInput{
+		LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4613,7 +6485,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4638,7 +6512,29 @@ func TestCheckResponseSnapshot_Error_InvalidResourceStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{})
+	_, opErr := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		AddLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+		RemoveLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4663,7 +6559,29 @@ func TestCheckResponseSnapshot_Error_LicenseUsageException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{})
+	_, opErr := svc.UpdateLicenseSpecificationsForResource(context.Background(), &UpdateLicenseSpecificationsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		AddLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+		RemoveLicenseSpecifications: []types.LicenseSpecification{
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+			{
+				LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				AmiAssociationScope:     ptr.String("__AmiAssociationScope__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4688,7 +6606,34 @@ func TestCheckResponseSnapshot_Error_NoEntitlementsAllowedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{})
+	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		DigitalSignatureMethod: types.DigitalSignatureMethod("JWT_PS384"),
+		NodeId:                 ptr.String("__NodeId__"),
+		CheckoutMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4713,7 +6658,9 @@ func TestCheckResponseSnapshot_Error_RateLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4739,7 +6686,34 @@ func TestCheckResponseSnapshot_Error_RedirectException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{})
+	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		DigitalSignatureMethod: types.DigitalSignatureMethod("JWT_PS384"),
+		NodeId:                 ptr.String("__NodeId__"),
+		CheckoutMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4764,7 +6738,9 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4789,7 +6765,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{})
+	_, opErr := svc.CheckInLicense(context.Background(), &CheckInLicenseInput{
+		LicenseConsumptionToken: ptr.String("__LicenseConsumptionToken__"),
+		Beneficiary:             ptr.String("__Beneficiary__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4814,7 +6793,9 @@ func TestCheckResponseSnapshot_Error_ServerInternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4839,7 +6820,34 @@ func TestCheckResponseSnapshot_Error_UnsupportedDigitalSignatureMethodException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{})
+	_, opErr := svc.CheckoutBorrowLicense(context.Background(), &CheckoutBorrowLicenseInput{
+		LicenseArn: ptr.String("__LicenseArn__"),
+		Entitlements: []types.EntitlementData{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Unit:  types.EntitlementDataUnit("Count"),
+			},
+		},
+		DigitalSignatureMethod: types.DigitalSignatureMethod("JWT_PS384"),
+		NodeId:                 ptr.String("__NodeId__"),
+		CheckoutMetadata: []types.Metadata{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4864,7 +6872,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{})
+	_, opErr := svc.AcceptGrant(context.Background(), &AcceptGrantInput{
+		GrantArn: ptr.String("__GrantArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

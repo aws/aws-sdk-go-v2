@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"commandId":"__CommandId__","deprecated":true,"description":"__Description__","displayName":"__DisplayName__","lastUpdatedAt":946684800}

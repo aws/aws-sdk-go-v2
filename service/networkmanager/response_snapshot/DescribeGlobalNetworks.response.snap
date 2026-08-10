@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GlobalNetworks":[{"CreatedAt":946684800,"Description":"__Description__","GlobalNetworkArn":"__GlobalNetworkArn__","GlobalNetworkId":"__GlobalNetworkId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"CreatedAt":946684800,"Description":"__Description__","GlobalNetworkArn":"__GlobalNetworkArn__","GlobalNetworkId":"__GlobalNetworkId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextToken":"__NextToken__"}

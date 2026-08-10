@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Meeting":{"ExternalMeetingId":"__ExternalMeetingId__","MediaPlacement":{"AudioFallbackUrl":"__AudioFallbackUrl__","AudioHostUrl":"__AudioHostUrl__","EventIngestionUrl":"__EventIngestionUrl__","ScreenDataUrl":"__ScreenDataUrl__","ScreenSharingUrl":"__ScreenSharingUrl__","ScreenViewingUrl":"__ScreenViewingUrl__","SignalingUrl":"__SignalingUrl__","TurnControlUrl":"__TurnControlUrl__"},"MediaRegion":"__MediaRegion__","MeetingArn":"__MeetingArn__","MeetingFeatures":{"Attendee":{"MaxCount":1},"Audio":{"EchoReduction":"AVAILABLE"},"Content":{"MaxResolution":"None"},"Video":{"MaxResolution":"None"}},"MeetingHostId":"__MeetingHostId__","MeetingId":"__MeetingId__","PrimaryMeetingId":"__PrimaryMeetingId__","TenantIds":["__Member__","__Member__"]}}

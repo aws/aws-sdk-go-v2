@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentParameters":{"key0":"__Value__"},"periodInSeconds":1,"shouldProfile":true}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"lastModified":"2000-01-01T00:00:00Z","pageTitle":"__PageTitle__","productPageArn":"__ProductPageArn__","productPageId":"__ProductPageId__"},{"lastModified":"2000-01-01T00:00:00Z","pageTitle":"__PageTitle__","productPageArn":"__ProductPageArn__","productPageId":"__ProductPageId__"}],"nextToken":"__NextToken__"}

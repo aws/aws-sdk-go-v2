@@ -254,7 +254,9 @@ func TestCheckResponseSnapshot_GetRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{})
+	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{
+		RecommendationId: ptr.String("__RecommendationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +315,20 @@ func TestCheckResponseSnapshot_ListEfficiencyMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEfficiencyMetrics(context.Background(), &ListEfficiencyMetricsInput{})
+	got, err := svc.ListEfficiencyMetrics(context.Background(), &ListEfficiencyMetricsInput{
+		GroupBy:     ptr.String("__GroupBy__"),
+		Granularity: types.GranularityType("Daily"),
+		TimePeriod: &types.TimePeriod{
+			Start: ptr.String("__Start__"),
+			End:   ptr.String("__End__"),
+		},
+		MaxResults: ptr.Int32(1),
+		OrderBy: &types.OrderBy{
+			Dimension: ptr.String("__Dimension__"),
+			Order:     types.Order("Asc"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +364,12 @@ func TestCheckResponseSnapshot_ListEnrollmentStatuses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnrollmentStatuses(context.Background(), &ListEnrollmentStatusesInput{})
+	got, err := svc.ListEnrollmentStatuses(context.Background(), &ListEnrollmentStatusesInput{
+		IncludeOrganizationInfo: true,
+		AccountId:               ptr.String("__AccountId__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +408,61 @@ func TestCheckResponseSnapshot_ListRecommendationSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendationSummaries(context.Background(), &ListRecommendationSummariesInput{})
+	got, err := svc.ListRecommendationSummaries(context.Background(), &ListRecommendationSummariesInput{
+		Filter: &types.Filter{
+			RestartNeeded:    ptr.Bool(true),
+			RollbackPossible: ptr.Bool(true),
+			ImplementationEfforts: []types.ImplementationEffort{
+				types.ImplementationEffort("VeryLow"),
+				types.ImplementationEffort("VeryLow"),
+			},
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []types.ResourceType{
+				types.ResourceType("Ec2Instance"),
+				types.ResourceType("Ec2Instance"),
+			},
+			ActionTypes: []types.ActionType{
+				types.ActionType("Rightsize"),
+				types.ActionType("Rightsize"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RecommendationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		GroupBy:    ptr.String("__GroupBy__"),
+		MaxResults: ptr.Int32(1),
+		Metrics: []types.SummaryMetrics{
+			types.SummaryMetrics("SavingsPercentage"),
+			types.SummaryMetrics("SavingsPercentage"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +549,61 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		Filter: &types.Filter{
+			RestartNeeded:    ptr.Bool(true),
+			RollbackPossible: ptr.Bool(true),
+			ImplementationEfforts: []types.ImplementationEffort{
+				types.ImplementationEffort("VeryLow"),
+				types.ImplementationEffort("VeryLow"),
+			},
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []types.ResourceType{
+				types.ResourceType("Ec2Instance"),
+				types.ResourceType("Ec2Instance"),
+			},
+			ActionTypes: []types.ActionType{
+				types.ActionType("Rightsize"),
+				types.ActionType("Rightsize"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RecommendationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		OrderBy: &types.OrderBy{
+			Dimension: ptr.String("__Dimension__"),
+			Order:     types.Order("Asc"),
+		},
+		IncludeAllRecommendations: true,
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +624,10 @@ func TestCheckResponseSnapshot_UpdateEnrollmentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnrollmentStatus(context.Background(), &UpdateEnrollmentStatusInput{})
+	got, err := svc.UpdateEnrollmentStatus(context.Background(), &UpdateEnrollmentStatusInput{
+		Status:                types.EnrollmentStatus("Active"),
+		IncludeMemberAccounts: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -522,7 +653,14 @@ func TestCheckResponseSnapshot_UpdatePreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePreferences(context.Background(), &UpdatePreferencesInput{})
+	got, err := svc.UpdatePreferences(context.Background(), &UpdatePreferencesInput{
+		SavingsEstimationMode:           types.SavingsEstimationMode("BeforeDiscounts"),
+		MemberAccountDiscountVisibility: types.MemberAccountDiscountVisibility("All"),
+		PreferredCommitment: &types.PreferredCommitment{
+			Term:          types.Term("OneYear"),
+			PaymentOption: types.PaymentOption("AllUpfront"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +732,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecommendation(context.Background(), &GetRecommendationInput{})
+	_, opErr := svc.GetRecommendation(context.Background(), &GetRecommendationInput{
+		RecommendationId: ptr.String("__RecommendationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

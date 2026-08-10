@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"modelDeploymentSummaries":[{"createdAt":"2000-01-01T00:00:00Z","customModelDeploymentArn":"__CustomModelDeploymentArn__","customModelDeploymentName":"__CustomModelDeploymentName__","failureMessage":"__FailureMessage__","lastUpdatedAt":"2000-01-01T00:00:00Z","modelArn":"__ModelArn__","status":"Creating"},{"createdAt":"2000-01-01T00:00:00Z","customModelDeploymentArn":"__CustomModelDeploymentArn__","customModelDeploymentName":"__CustomModelDeploymentName__","failureMessage":"__FailureMessage__","lastUpdatedAt":"2000-01-01T00:00:00Z","modelArn":"__ModelArn__","status":"Creating"}],"nextToken":"__NextToken__"}

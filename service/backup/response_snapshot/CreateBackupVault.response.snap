@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationDate":946684800}

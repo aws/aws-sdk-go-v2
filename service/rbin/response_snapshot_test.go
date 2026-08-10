@@ -164,7 +164,50 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		RetentionPeriod: &types.RetentionPeriod{
+			RetentionPeriodValue: ptr.Int32(1),
+			RetentionPeriodUnit:  types.RetentionPeriodUnit("DAYS"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		LockConfiguration: &types.LockConfiguration{
+			UnlockDelay: &types.UnlockDelay{
+				UnlockDelayValue: ptr.Int32(1),
+				UnlockDelayUnit:  types.UnlockDelayUnit("DAYS"),
+			},
+		},
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +226,9 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +285,9 @@ func TestCheckResponseSnapshot_GetRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRule(context.Background(), &GetRuleInput{})
+	got, err := svc.GetRule(context.Background(), &GetRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +330,32 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		LockState: types.LockState("locked"),
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +385,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +443,15 @@ func TestCheckResponseSnapshot_LockRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LockRule(context.Background(), &LockRuleInput{})
+	got, err := svc.LockRule(context.Background(), &LockRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+		LockConfiguration: &types.LockConfiguration{
+			UnlockDelay: &types.UnlockDelay{
+				UnlockDelayValue: ptr.Int32(1),
+				UnlockDelayUnit:  types.UnlockDelayUnit("DAYS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +470,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +539,9 @@ func TestCheckResponseSnapshot_UnlockRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnlockRule(context.Background(), &UnlockRuleInput{})
+	got, err := svc.UnlockRule(context.Background(), &UnlockRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +560,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -515,7 +617,35 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{})
+	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+		RetentionPeriod: &types.RetentionPeriod{
+			RetentionPeriodValue: ptr.Int32(1),
+			RetentionPeriodUnit:  types.RetentionPeriodUnit("DAYS"),
+		},
+		Description:  ptr.String("__Description__"),
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +667,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -562,7 +694,50 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		RetentionPeriod: &types.RetentionPeriod{
+			RetentionPeriodValue: ptr.Int32(1),
+			RetentionPeriodUnit:  types.RetentionPeriodUnit("DAYS"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		LockConfiguration: &types.LockConfiguration{
+			UnlockDelay: &types.UnlockDelay{
+				UnlockDelayValue: ptr.Int32(1),
+				UnlockDelayUnit:  types.UnlockDelayUnit("DAYS"),
+			},
+		},
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -588,7 +763,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -614,7 +791,50 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		RetentionPeriod: &types.RetentionPeriod{
+			RetentionPeriodValue: ptr.Int32(1),
+			RetentionPeriodUnit:  types.RetentionPeriodUnit("DAYS"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		LockConfiguration: &types.LockConfiguration{
+			UnlockDelay: &types.UnlockDelay{
+				UnlockDelayValue: ptr.Int32(1),
+				UnlockDelayUnit:  types.UnlockDelayUnit("DAYS"),
+			},
+		},
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -640,7 +860,50 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		RetentionPeriod: &types.RetentionPeriod{
+			RetentionPeriodValue: ptr.Int32(1),
+			RetentionPeriodUnit:  types.RetentionPeriodUnit("DAYS"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceType: types.ResourceType("EBS_SNAPSHOT"),
+		ResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+		LockConfiguration: &types.LockConfiguration{
+			UnlockDelay: &types.UnlockDelay{
+				UnlockDelayValue: ptr.Int32(1),
+				UnlockDelayUnit:  types.UnlockDelayUnit("DAYS"),
+			},
+		},
+		ExcludeResourceTags: []types.ResourceTag{
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+			{
+				ResourceTagKey:   ptr.String("__ResourceTagKey__"),
+				ResourceTagValue: ptr.String("__ResourceTagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

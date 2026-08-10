@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"serviceMetadata":[{"category":"__Category__","description":"__Description__","displayName":"__DisplayName__","name":"__Name__"},{"category":"__Category__","description":"__Description__","displayName":"__DisplayName__","name":"__Name__"}]}

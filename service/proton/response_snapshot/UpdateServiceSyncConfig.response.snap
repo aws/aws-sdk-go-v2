@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.UpdateServiceSyncConfig
+
+{"serviceSyncConfig":{"branch":"__Branch__","filePath":"__FilePath__","repositoryName":"__RepositoryName__","repositoryProvider":"GITHUB","serviceName":"__ServiceName__"}}

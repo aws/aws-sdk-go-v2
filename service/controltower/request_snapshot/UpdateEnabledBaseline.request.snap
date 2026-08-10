@@ -2,4 +2,4 @@ POST /update-enabled-baseline
 
 Content-Type: application/json
 
-{"baselineVersion":"__BaselineVersion__","enabledBaselineIdentifier":"__EnabledBaselineIdentifier__","parameters":[{"key":"__Key__"},{"key":"__Key__"}]}
+{"baselineVersion":"__BaselineVersion__","enabledBaselineIdentifier":"__EnabledBaselineIdentifier__","parameters":[{"key":"__Key__","value":"__Document__"},{"key":"__Key__","value":"__Document__"}]}

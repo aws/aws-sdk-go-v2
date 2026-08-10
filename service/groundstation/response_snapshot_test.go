@@ -120,7 +120,9 @@ func TestCheckResponseSnapshot_CancelContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelContact(context.Background(), &CancelContactInput{})
+	got, err := svc.CancelContact(context.Background(), &CancelContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +145,27 @@ func TestCheckResponseSnapshot_CreateConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfig(context.Background(), &CreateConfigInput{})
+	got, err := svc.CreateConfig(context.Background(), &CreateConfigInput{
+		Name: ptr.String("__Name__"),
+		ConfigData: &types.ConfigTypeDataMemberAntennaDownlinkConfig{
+			Value: types.AntennaDownlinkConfig{
+				SpectrumConfig: &types.SpectrumConfig{
+					CenterFrequency: &types.Frequency{
+						Value: ptr.Float64(1.0),
+						Units: types.FrequencyUnits("GHz"),
+					},
+					Bandwidth: &types.FrequencyBandwidth{
+						Value: ptr.Float64(1.0),
+						Units: types.BandwidthUnits("GHz"),
+					},
+					Polarization: types.Polarization("RIGHT_HAND"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +186,217 @@ func TestCheckResponseSnapshot_CreateDataflowEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataflowEndpointGroup(context.Background(), &CreateDataflowEndpointGroupInput{})
+	got, err := svc.CreateDataflowEndpointGroup(context.Background(), &CreateDataflowEndpointGroupInput{
+		EndpointDetails: []types.EndpointDetails{
+			{
+				SecurityDetails: &types.SecurityDetails{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+				Endpoint: &types.DataflowEndpoint{
+					Name: ptr.String("__Name__"),
+					Address: &types.SocketAddress{
+						Name: ptr.String("__Name__"),
+						Port: ptr.Int32(1),
+					},
+					Status: types.EndpointStatus("created"),
+					Mtu:    ptr.Int32(1),
+				},
+				AwsGroundStationAgentEndpoint: &types.AwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					EgressAddress: &types.ConnectionDetails{
+						SocketAddress: &types.SocketAddress{
+							Name: ptr.String("__Name__"),
+							Port: ptr.Int32(1),
+						},
+						Mtu: ptr.Int32(1),
+					},
+					IngressAddress: &types.RangedConnectionDetails{
+						SocketAddress: &types.RangedSocketAddress{
+							Name: ptr.String("__Name__"),
+							PortRange: &types.IntegerRange{
+								Minimum: ptr.Int32(1),
+								Maximum: ptr.Int32(1),
+							},
+						},
+						Mtu: ptr.Int32(1),
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				UplinkAwsGroundStationAgentEndpoint: &types.UplinkAwsGroundStationAgentEndpointDetails{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				DownlinkAwsGroundStationAgentEndpoint: &types.DownlinkAwsGroundStationAgentEndpointDetails{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.DownlinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.DownlinkConnectionDetails{
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+							EgressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				HealthStatus: types.CapabilityHealth("HEALTHY"),
+				HealthReasons: []types.CapabilityHealthReason{
+					types.CapabilityHealthReason("NO_REGISTERED_AGENT"),
+					types.CapabilityHealthReason("NO_REGISTERED_AGENT"),
+				},
+			},
+			{
+				SecurityDetails: &types.SecurityDetails{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+				Endpoint: &types.DataflowEndpoint{
+					Name: ptr.String("__Name__"),
+					Address: &types.SocketAddress{
+						Name: ptr.String("__Name__"),
+						Port: ptr.Int32(1),
+					},
+					Status: types.EndpointStatus("created"),
+					Mtu:    ptr.Int32(1),
+				},
+				AwsGroundStationAgentEndpoint: &types.AwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					EgressAddress: &types.ConnectionDetails{
+						SocketAddress: &types.SocketAddress{
+							Name: ptr.String("__Name__"),
+							Port: ptr.Int32(1),
+						},
+						Mtu: ptr.Int32(1),
+					},
+					IngressAddress: &types.RangedConnectionDetails{
+						SocketAddress: &types.RangedSocketAddress{
+							Name: ptr.String("__Name__"),
+							PortRange: &types.IntegerRange{
+								Minimum: ptr.Int32(1),
+								Maximum: ptr.Int32(1),
+							},
+						},
+						Mtu: ptr.Int32(1),
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				UplinkAwsGroundStationAgentEndpoint: &types.UplinkAwsGroundStationAgentEndpointDetails{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				DownlinkAwsGroundStationAgentEndpoint: &types.DownlinkAwsGroundStationAgentEndpointDetails{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.DownlinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.DownlinkConnectionDetails{
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+							EgressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+					AgentStatus:  types.AgentStatus("SUCCESS"),
+					AuditResults: types.AuditResults("HEALTHY"),
+				},
+				HealthStatus: types.CapabilityHealth("HEALTHY"),
+				HealthReasons: []types.CapabilityHealthReason{
+					types.CapabilityHealthReason("NO_REGISTERED_AGENT"),
+					types.CapabilityHealthReason("NO_REGISTERED_AGENT"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ContactPrePassDurationSeconds:  ptr.Int32(1),
+		ContactPostPassDurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +417,67 @@ func TestCheckResponseSnapshot_CreateDataflowEndpointGroupV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataflowEndpointGroupV2(context.Background(), &CreateDataflowEndpointGroupV2Input{})
+	got, err := svc.CreateDataflowEndpointGroupV2(context.Background(), &CreateDataflowEndpointGroupV2Input{
+		Endpoints: []types.CreateEndpointDetails{
+			&types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint{
+				Value: types.UplinkAwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			&types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint{
+				Value: types.UplinkAwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+		ContactPrePassDurationSeconds:  ptr.Int32(1),
+		ContactPostPassDurationSeconds: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +498,44 @@ func TestCheckResponseSnapshot_CreateEphemeris(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEphemeris(context.Background(), &CreateEphemerisInput{})
+	got, err := svc.CreateEphemeris(context.Background(), &CreateEphemerisInput{
+		SatelliteId:    ptr.String("__SatelliteId__"),
+		Enabled:        ptr.Bool(true),
+		Priority:       ptr.Int32(1),
+		ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:           ptr.String("__Name__"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		Ephemeris: &types.EphemerisDataMemberTle{
+			Value: types.TLEEphemeris{
+				S3Object: &types.S3Object{
+					Bucket:  ptr.String("__Bucket__"),
+					Key:     ptr.String("__Key__"),
+					Version: ptr.String("__Version__"),
+				},
+				TleData: []types.TLEData{
+					{
+						TleLine1: ptr.String("__TleLine1__"),
+						TleLine2: ptr.String("__TleLine2__"),
+						ValidTimeRange: &types.TimeRange{
+							StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						TleLine1: ptr.String("__TleLine1__"),
+						TleLine2: ptr.String("__TleLine2__"),
+						ValidTimeRange: &types.TimeRange{
+							StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +556,31 @@ func TestCheckResponseSnapshot_CreateMissionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMissionProfile(context.Background(), &CreateMissionProfileInput{})
+	got, err := svc.CreateMissionProfile(context.Background(), &CreateMissionProfileInput{
+		Name:                                ptr.String("__Name__"),
+		ContactPrePassDurationSeconds:       ptr.Int32(1),
+		ContactPostPassDurationSeconds:      ptr.Int32(1),
+		MinimumViableContactDurationSeconds: ptr.Int32(1),
+		DataflowEdges: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TrackingConfigArn:      ptr.String("__TrackingConfigArn__"),
+		TelemetrySinkConfigArn: ptr.String("__TelemetrySinkConfigArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamsKmsKey: &types.KmsKeyMemberKmsKeyArn{
+			Value: "__KmsKeyMemberKmsKeyArn__",
+		},
+		StreamsKmsRole: ptr.String("__StreamsKmsRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +603,10 @@ func TestCheckResponseSnapshot_DeleteConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfig(context.Background(), &DeleteConfigInput{})
+	got, err := svc.DeleteConfig(context.Background(), &DeleteConfigInput{
+		ConfigId:   ptr.String("__ConfigId__"),
+		ConfigType: types.ConfigCapabilityType("antenna-downlink"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +627,9 @@ func TestCheckResponseSnapshot_DeleteDataflowEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataflowEndpointGroup(context.Background(), &DeleteDataflowEndpointGroupInput{})
+	got, err := svc.DeleteDataflowEndpointGroup(context.Background(), &DeleteDataflowEndpointGroupInput{
+		DataflowEndpointGroupId: ptr.String("__DataflowEndpointGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +650,9 @@ func TestCheckResponseSnapshot_DeleteEphemeris(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEphemeris(context.Background(), &DeleteEphemerisInput{})
+	got, err := svc.DeleteEphemeris(context.Background(), &DeleteEphemerisInput{
+		EphemerisId: ptr.String("__EphemerisId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +673,9 @@ func TestCheckResponseSnapshot_DeleteMissionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMissionProfile(context.Background(), &DeleteMissionProfileInput{})
+	got, err := svc.DeleteMissionProfile(context.Background(), &DeleteMissionProfileInput{
+		MissionProfileId: ptr.String("__MissionProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +899,9 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContact(context.Background(), &DescribeContactInput{})
+	got, err := svc.DescribeContact(context.Background(), &DescribeContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +1125,10 @@ func TestCheckResponseSnapshot_DescribeContactVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContactVersion(context.Background(), &DescribeContactVersionInput{})
+	got, err := svc.DescribeContactVersion(context.Background(), &DescribeContactVersionInput{
+		ContactId: ptr.String("__ContactId__"),
+		VersionId: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -812,7 +1179,9 @@ func TestCheckResponseSnapshot_DescribeEphemeris(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEphemeris(context.Background(), &DescribeEphemerisInput{})
+	got, err := svc.DescribeEphemeris(context.Background(), &DescribeEphemerisInput{
+		EphemerisId: ptr.String("__EphemerisId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +1203,9 @@ func TestCheckResponseSnapshot_GetAgentConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentConfiguration(context.Background(), &GetAgentConfigurationInput{})
+	got, err := svc.GetAgentConfiguration(context.Background(), &GetAgentConfigurationInput{
+		AgentId: ptr.String("__AgentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -857,7 +1228,10 @@ func TestCheckResponseSnapshot_GetAgentTaskResponseUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentTaskResponseUrl(context.Background(), &GetAgentTaskResponseUrlInput{})
+	got, err := svc.GetAgentTaskResponseUrl(context.Background(), &GetAgentTaskResponseUrlInput{
+		AgentId: ptr.String("__AgentId__"),
+		TaskId:  ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -899,7 +1273,10 @@ func TestCheckResponseSnapshot_GetConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfig(context.Background(), &GetConfigInput{})
+	got, err := svc.GetConfig(context.Background(), &GetConfigInput{
+		ConfigId:   ptr.String("__ConfigId__"),
+		ConfigType: types.ConfigCapabilityType("antenna-downlink"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1130,7 +1507,9 @@ func TestCheckResponseSnapshot_GetDataflowEndpointGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataflowEndpointGroup(context.Background(), &GetDataflowEndpointGroupInput{})
+	got, err := svc.GetDataflowEndpointGroup(context.Background(), &GetDataflowEndpointGroupInput{
+		DataflowEndpointGroupId: ptr.String("__DataflowEndpointGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1155,7 +1534,10 @@ func TestCheckResponseSnapshot_GetMinuteUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMinuteUsage(context.Background(), &GetMinuteUsageInput{})
+	got, err := svc.GetMinuteUsage(context.Background(), &GetMinuteUsageInput{
+		Month: ptr.Int32(1),
+		Year:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1201,7 +1583,9 @@ func TestCheckResponseSnapshot_GetMissionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMissionProfile(context.Background(), &GetMissionProfileInput{})
+	got, err := svc.GetMissionProfile(context.Background(), &GetMissionProfileInput{
+		MissionProfileId: ptr.String("__MissionProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1618,9 @@ func TestCheckResponseSnapshot_GetSatellite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSatellite(context.Background(), &GetSatelliteInput{})
+	got, err := svc.GetSatellite(context.Background(), &GetSatelliteInput{
+		SatelliteId: ptr.String("__SatelliteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1267,7 +1653,11 @@ func TestCheckResponseSnapshot_ListAntennas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAntennas(context.Background(), &ListAntennasInput{})
+	got, err := svc.ListAntennas(context.Background(), &ListAntennasInput{
+		GroundStationId: ptr.String("__GroundStationId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1302,7 +1692,10 @@ func TestCheckResponseSnapshot_ListConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigs(context.Background(), &ListConfigsInput{})
+	got, err := svc.ListConfigs(context.Background(), &ListConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1351,7 +1744,11 @@ func TestCheckResponseSnapshot_ListContactVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactVersions(context.Background(), &ListContactVersionsInput{})
+	got, err := svc.ListContactVersions(context.Background(), &ListContactVersionsInput{
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1452,7 +1849,24 @@ func TestCheckResponseSnapshot_ListContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContacts(context.Background(), &ListContactsInput{})
+	got, err := svc.ListContacts(context.Background(), &ListContactsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StatusList: []types.ContactStatus{
+			types.ContactStatus("SCHEDULING"),
+			types.ContactStatus("SCHEDULING"),
+		},
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroundStation:     ptr.String("__GroundStation__"),
+		SatelliteArn:      ptr.String("__SatelliteArn__"),
+		MissionProfileArn: ptr.String("__MissionProfileArn__"),
+		Ephemeris: &types.EphemerisFilterMemberAzEl{
+			Value: types.AzElEphemerisFilter{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1483,7 +1897,10 @@ func TestCheckResponseSnapshot_ListDataflowEndpointGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataflowEndpointGroups(context.Background(), &ListDataflowEndpointGroupsInput{})
+	got, err := svc.ListDataflowEndpointGroups(context.Background(), &ListDataflowEndpointGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1534,7 +1951,18 @@ func TestCheckResponseSnapshot_ListEphemerides(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEphemerides(context.Background(), &ListEphemeridesInput{})
+	got, err := svc.ListEphemerides(context.Background(), &ListEphemeridesInput{
+		SatelliteId:   ptr.String("__SatelliteId__"),
+		EphemerisType: types.EphemerisType("TLE"),
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusList: []types.EphemerisStatus{
+			types.EphemerisStatus("VALIDATING"),
+			types.EphemerisStatus("VALIDATING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1581,7 +2009,17 @@ func TestCheckResponseSnapshot_ListGroundStationReservations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroundStationReservations(context.Background(), &ListGroundStationReservationsInput{})
+	got, err := svc.ListGroundStationReservations(context.Background(), &ListGroundStationReservationsInput{
+		GroundStationId: ptr.String("__GroundStationId__"),
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ReservationTypes: []types.ReservationType{
+			types.ReservationType("MAINTENANCE"),
+			types.ReservationType("MAINTENANCE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1614,7 +2052,11 @@ func TestCheckResponseSnapshot_ListGroundStations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroundStations(context.Background(), &ListGroundStationsInput{})
+	got, err := svc.ListGroundStations(context.Background(), &ListGroundStationsInput{
+		SatelliteId: ptr.String("__SatelliteId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1649,7 +2091,10 @@ func TestCheckResponseSnapshot_ListMissionProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMissionProfiles(context.Background(), &ListMissionProfilesInput{})
+	got, err := svc.ListMissionProfiles(context.Background(), &ListMissionProfilesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1702,7 +2147,10 @@ func TestCheckResponseSnapshot_ListSatellites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSatellites(context.Background(), &ListSatellitesInput{})
+	got, err := svc.ListSatellites(context.Background(), &ListSatellitesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1725,7 +2173,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1746,7 +2196,54 @@ func TestCheckResponseSnapshot_RegisterAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterAgent(context.Background(), &RegisterAgentInput{})
+	got, err := svc.RegisterAgent(context.Background(), &RegisterAgentInput{
+		DiscoveryData: &types.DiscoveryData{
+			PublicIpAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PrivateIpAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CapabilityArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		AgentDetails: &types.AgentDetails{
+			AgentVersion: ptr.String("__AgentVersion__"),
+			InstanceId:   ptr.String("__InstanceId__"),
+			InstanceType: ptr.String("__InstanceType__"),
+			ReservedCpuCores: []int32{
+				1,
+				1,
+			},
+			AgentCpuCores: []int32{
+				1,
+				1,
+			},
+			ComponentVersions: []types.ComponentVersion{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Versions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Versions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1768,7 +2265,23 @@ func TestCheckResponseSnapshot_ReserveContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReserveContact(context.Background(), &ReserveContactInput{})
+	got, err := svc.ReserveContact(context.Background(), &ReserveContactInput{
+		MissionProfileArn: ptr.String("__MissionProfileArn__"),
+		SatelliteArn:      ptr.String("__SatelliteArn__"),
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroundStation:     ptr.String("__GroundStation__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TrackingOverrides: &types.TrackingOverrides{
+			ProgramTrackSettings: &types.ProgramTrackSettingsMemberAzEl{
+				Value: types.AzElProgramTrackSettings{
+					EphemerisId: ptr.String("__EphemerisId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1787,7 +2300,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1806,7 +2324,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1827,7 +2351,36 @@ func TestCheckResponseSnapshot_UpdateAgentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentStatus(context.Background(), &UpdateAgentStatusInput{})
+	got, err := svc.UpdateAgentStatus(context.Background(), &UpdateAgentStatusInput{
+		AgentId: ptr.String("__AgentId__"),
+		TaskId:  ptr.String("__TaskId__"),
+		AggregateStatus: &types.AggregateStatus{
+			Status: types.AgentStatus("SUCCESS"),
+			SignatureMap: map[string]bool{
+				"key0": true,
+			},
+		},
+		ComponentStatuses: []types.ComponentStatusData{
+			{
+				ComponentType:  ptr.String("__ComponentType__"),
+				CapabilityArn:  ptr.String("__CapabilityArn__"),
+				Status:         types.AgentStatus("SUCCESS"),
+				BytesSent:      ptr.Int64(1),
+				BytesReceived:  ptr.Int64(1),
+				PacketsDropped: ptr.Int64(1),
+				DataflowId:     ptr.String("__DataflowId__"),
+			},
+			{
+				ComponentType:  ptr.String("__ComponentType__"),
+				CapabilityArn:  ptr.String("__CapabilityArn__"),
+				Status:         types.AgentStatus("SUCCESS"),
+				BytesSent:      ptr.Int64(1),
+				BytesReceived:  ptr.Int64(1),
+				PacketsDropped: ptr.Int64(1),
+				DataflowId:     ptr.String("__DataflowId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1850,7 +2403,26 @@ func TestCheckResponseSnapshot_UpdateConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfig(context.Background(), &UpdateConfigInput{})
+	got, err := svc.UpdateConfig(context.Background(), &UpdateConfigInput{
+		ConfigId:   ptr.String("__ConfigId__"),
+		Name:       ptr.String("__Name__"),
+		ConfigType: types.ConfigCapabilityType("antenna-downlink"),
+		ConfigData: &types.ConfigTypeDataMemberAntennaDownlinkConfig{
+			Value: types.AntennaDownlinkConfig{
+				SpectrumConfig: &types.SpectrumConfig{
+					CenterFrequency: &types.Frequency{
+						Value: ptr.Float64(1.0),
+						Units: types.FrequencyUnits("GHz"),
+					},
+					Bandwidth: &types.FrequencyBandwidth{
+						Value: ptr.Float64(1.0),
+						Units: types.BandwidthUnits("GHz"),
+					},
+					Polarization: types.Polarization("RIGHT_HAND"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1872,7 +2444,18 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{})
+	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{
+		ContactId:   ptr.String("__ContactId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		TrackingOverrides: &types.TrackingOverrides{
+			ProgramTrackSettings: &types.ProgramTrackSettingsMemberAzEl{
+				Value: types.AzElProgramTrackSettings{
+					EphemerisId: ptr.String("__EphemerisId__"),
+				},
+			},
+		},
+		SatelliteArn: ptr.String("__SatelliteArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1893,7 +2476,12 @@ func TestCheckResponseSnapshot_UpdateEphemeris(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEphemeris(context.Background(), &UpdateEphemerisInput{})
+	got, err := svc.UpdateEphemeris(context.Background(), &UpdateEphemerisInput{
+		EphemerisId: ptr.String("__EphemerisId__"),
+		Enabled:     ptr.Bool(true),
+		Name:        ptr.String("__Name__"),
+		Priority:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1914,7 +2502,29 @@ func TestCheckResponseSnapshot_UpdateMissionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMissionProfile(context.Background(), &UpdateMissionProfileInput{})
+	got, err := svc.UpdateMissionProfile(context.Background(), &UpdateMissionProfileInput{
+		MissionProfileId:                    ptr.String("__MissionProfileId__"),
+		Name:                                ptr.String("__Name__"),
+		ContactPrePassDurationSeconds:       ptr.Int32(1),
+		ContactPostPassDurationSeconds:      ptr.Int32(1),
+		MinimumViableContactDurationSeconds: ptr.Int32(1),
+		DataflowEdges: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TrackingConfigArn:      ptr.String("__TrackingConfigArn__"),
+		TelemetrySinkConfigArn: ptr.String("__TelemetrySinkConfigArn__"),
+		StreamsKmsKey: &types.KmsKeyMemberKmsKeyArn{
+			Value: "__KmsKeyMemberKmsKeyArn__",
+		},
+		StreamsKmsRole: ptr.String("__StreamsKmsRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1936,7 +2546,9 @@ func TestCheckResponseSnapshot_Error_DependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{})
+	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1962,7 +2574,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{})
+	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1987,7 +2601,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteEphemeris(context.Background(), &DeleteEphemerisInput{})
+	_, opErr := svc.DeleteEphemeris(context.Background(), &DeleteEphemerisInput{
+		EphemerisId: ptr.String("__EphemerisId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2013,7 +2629,27 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfig(context.Background(), &CreateConfigInput{})
+	_, opErr := svc.CreateConfig(context.Background(), &CreateConfigInput{
+		Name: ptr.String("__Name__"),
+		ConfigData: &types.ConfigTypeDataMemberAntennaDownlinkConfig{
+			Value: types.AntennaDownlinkConfig{
+				SpectrumConfig: &types.SpectrumConfig{
+					CenterFrequency: &types.Frequency{
+						Value: ptr.Float64(1.0),
+						Units: types.FrequencyUnits("GHz"),
+					},
+					Bandwidth: &types.FrequencyBandwidth{
+						Value: ptr.Float64(1.0),
+						Units: types.BandwidthUnits("GHz"),
+					},
+					Polarization: types.Polarization("RIGHT_HAND"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2038,7 +2674,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{})
+	_, opErr := svc.CancelContact(context.Background(), &CancelContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2064,7 +2702,67 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataflowEndpointGroupV2(context.Background(), &CreateDataflowEndpointGroupV2Input{})
+	_, opErr := svc.CreateDataflowEndpointGroupV2(context.Background(), &CreateDataflowEndpointGroupV2Input{
+		Endpoints: []types.CreateEndpointDetails{
+			&types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint{
+				Value: types.UplinkAwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			&types.CreateEndpointDetailsMemberUplinkAwsGroundStationAgentEndpoint{
+				Value: types.UplinkAwsGroundStationAgentEndpoint{
+					Name: ptr.String("__Name__"),
+					DataflowDetails: &types.UplinkDataflowDetailsMemberAgentConnectionDetails{
+						Value: types.UplinkConnectionDetails{
+							IngressAddressAndPort: &types.ConnectionDetails{
+								SocketAddress: &types.SocketAddress{
+									Name: ptr.String("__Name__"),
+									Port: ptr.Int32(1),
+								},
+								Mtu: ptr.Int32(1),
+							},
+							AgentIpAndPortAddress: &types.RangedConnectionDetails{
+								SocketAddress: &types.RangedSocketAddress{
+									Name: ptr.String("__Name__"),
+									PortRange: &types.IntegerRange{
+										Minimum: ptr.Int32(1),
+										Maximum: ptr.Int32(1),
+									},
+								},
+								Mtu: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+		ContactPrePassDurationSeconds:  ptr.Int32(1),
+		ContactPostPassDurationSeconds: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

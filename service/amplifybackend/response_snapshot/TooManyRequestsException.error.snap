@@ -1,0 +1,4 @@
+429
+Content-Type: application/json
+
+{"__type":"TooManyRequestsException","limitType":"__LimitType__","message":"__Message__"}

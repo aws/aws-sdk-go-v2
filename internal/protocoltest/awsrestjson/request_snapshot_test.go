@@ -7,6 +7,7 @@ package awsrestjson
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
@@ -19,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -182,7 +184,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AllQueryStringTypes(t *testing.T) {
 	input := &AllQueryStringTypesInput{
@@ -373,7 +396,7 @@ func TestCheckRequestSnapshot_DatetimeOffsets(t *testing.T) {
 func TestCheckRequestSnapshot_DocumentType(t *testing.T) {
 	input := &DocumentTypeInput{
 		StringValue:   ptr.String("__StringValue__"),
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -401,7 +424,7 @@ func TestCheckRequestSnapshot_DocumentType(t *testing.T) {
 func TestCheckRequestSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 	input := &DocumentTypeAsMapValueInput{
 		DocValuedMap: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -429,7 +452,7 @@ func TestCheckRequestSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 
 func TestCheckRequestSnapshot_DocumentTypeAsPayload(t *testing.T) {
 	input := &DocumentTypeAsPayloadInput{
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2614,11 +2637,11 @@ func TestCheckRequestSnapshot_OperationWithDefaults(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			DefaultDocumentMap:     nil,
-			DefaultDocumentString:  nil,
-			DefaultDocumentBoolean: nil,
-			DefaultDocumentList:    nil,
-			DefaultNullDocument:    nil,
+			DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+			DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+			DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+			DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+			DefaultNullDocument:    document.NewLazyDocument("__Document__"),
 			DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DefaultBlob:            []byte("blob"),
 			DefaultByte:            ptr.Int8(1),
@@ -3108,7 +3131,8 @@ func TestCheckRequestSnapshot_SparseJsonMaps(t *testing.T) {
 
 func TestCheckRequestSnapshot_StreamingTraits(t *testing.T) {
 	input := &StreamingTraitsInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3135,7 +3159,8 @@ func TestCheckRequestSnapshot_StreamingTraits(t *testing.T) {
 
 func TestCheckRequestSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 	input := &StreamingTraitsRequireLengthInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3162,7 +3187,8 @@ func TestCheckRequestSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 
 func TestCheckRequestSnapshot_StreamingTraitsWithMediaType(t *testing.T) {
 	input := &StreamingTraitsWithMediaTypeInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3625,7 +3651,7 @@ func TestUpdateRequestSnapshot_DatetimeOffsets(t *testing.T) {
 func TestUpdateRequestSnapshot_DocumentType(t *testing.T) {
 	input := &DocumentTypeInput{
 		StringValue:   ptr.String("__StringValue__"),
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3653,7 +3679,7 @@ func TestUpdateRequestSnapshot_DocumentType(t *testing.T) {
 func TestUpdateRequestSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 	input := &DocumentTypeAsMapValueInput{
 		DocValuedMap: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3681,7 +3707,7 @@ func TestUpdateRequestSnapshot_DocumentTypeAsMapValue(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DocumentTypeAsPayload(t *testing.T) {
 	input := &DocumentTypeAsPayloadInput{
-		DocumentValue: nil,
+		DocumentValue: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5866,11 +5892,11 @@ func TestUpdateRequestSnapshot_OperationWithDefaults(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			DefaultDocumentMap:     nil,
-			DefaultDocumentString:  nil,
-			DefaultDocumentBoolean: nil,
-			DefaultDocumentList:    nil,
-			DefaultNullDocument:    nil,
+			DefaultDocumentMap:     document.NewLazyDocument("__Document__"),
+			DefaultDocumentString:  document.NewLazyDocument("__Document__"),
+			DefaultDocumentBoolean: document.NewLazyDocument("__Document__"),
+			DefaultDocumentList:    document.NewLazyDocument("__Document__"),
+			DefaultNullDocument:    document.NewLazyDocument("__Document__"),
 			DefaultTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DefaultBlob:            []byte("blob"),
 			DefaultByte:            ptr.Int8(1),
@@ -6360,7 +6386,8 @@ func TestUpdateRequestSnapshot_SparseJsonMaps(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StreamingTraits(t *testing.T) {
 	input := &StreamingTraitsInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6387,7 +6414,8 @@ func TestUpdateRequestSnapshot_StreamingTraits(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 	input := &StreamingTraitsRequireLengthInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6414,7 +6442,8 @@ func TestUpdateRequestSnapshot_StreamingTraitsRequireLength(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StreamingTraitsWithMediaType(t *testing.T) {
 	input := &StreamingTraitsWithMediaTypeInput{
-		Foo: ptr.String("__Foo__"),
+		Foo:  ptr.String("__Foo__"),
+		Blob: io.NopCloser(bytes.NewReader([]byte("__Blob__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""

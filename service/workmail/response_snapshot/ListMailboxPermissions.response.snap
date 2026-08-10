@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListMailboxPermissions
+
+{"NextToken":"__NextToken__","Permissions":[{"GranteeId":"__GranteeId__","GranteeType":"GROUP","PermissionValues":["FULL_ACCESS","FULL_ACCESS"]},{"GranteeId":"__GranteeId__","GranteeType":"GROUP","PermissionValues":["FULL_ACCESS","FULL_ACCESS"]}]}

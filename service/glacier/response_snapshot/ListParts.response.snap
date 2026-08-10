@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ArchiveDescription":"__ArchiveDescription__","CreationDate":"__CreationDate__","Marker":"__Marker__","MultipartUploadId":"__MultipartUploadId__","PartSizeInBytes":1,"Parts":[{"RangeInBytes":"__RangeInBytes__","SHA256TreeHash":"__SHA256TreeHash__"},{"RangeInBytes":"__RangeInBytes__","SHA256TreeHash":"__SHA256TreeHash__"}],"VaultARN":"__VaultARN__"}

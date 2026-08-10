@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CalculatedAttributeName":"__CalculatedAttributeName__","DisplayName":"__DisplayName__","IsDataPartial":"__IsDataPartial__","LastObjectTimestamp":946684800,"Value":"__Value__"}

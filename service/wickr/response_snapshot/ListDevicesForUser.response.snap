@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"devices":[{"appId":"__AppId__","created":"__Created__","lastLogin":"__LastLogin__","statusText":"__StatusText__","suspend":true,"type":"__Type__"},{"appId":"__AppId__","created":"__Created__","lastLogin":"__LastLogin__","statusText":"__StatusText__","suspend":true,"type":"__Type__"}],"nextToken":"__NextToken__"}

@@ -116,7 +116,12 @@ func TestCheckResponseSnapshot_CompleteRollout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	got, err := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +143,11 @@ func TestCheckResponseSnapshot_Sample(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Sample(context.Background(), &SampleInput{})
+	got, err := svc.Sample(context.Background(), &SampleInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Body:         []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,6 +159,7 @@ func TestCheckResponseSnapshot_Sample(t *testing.T) {
 func TestCheckResponseSnapshot_SampleWithResponseStream(t *testing.T) {
 	want := &SampleWithResponseStreamOutput{
 		ContentType: ptr.String("__ContentType__"),
+		Body:        io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("SampleWithResponseStream.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -159,7 +169,11 @@ func TestCheckResponseSnapshot_SampleWithResponseStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SampleWithResponseStream(context.Background(), &SampleWithResponseStreamInput{})
+	got, err := svc.SampleWithResponseStream(context.Background(), &SampleWithResponseStreamInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Body:         []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +192,15 @@ func TestCheckResponseSnapshot_UpdateReward(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReward(context.Background(), &UpdateRewardInput{})
+	got, err := svc.UpdateReward(context.Background(), &UpdateRewardInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Rewards: []float64{
+			1.0,
+			1.0,
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +221,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -224,7 +251,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -249,7 +281,12 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -274,7 +311,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -299,7 +341,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -324,7 +371,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -349,7 +401,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{})
+	_, opErr := svc.CompleteRollout(context.Background(), &CompleteRolloutInput{
+		JobArn:       ptr.String("__JobArn__"),
+		TrajectoryId: ptr.String("__TrajectoryId__"),
+		Status:       types.CompletionStatus("ready"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

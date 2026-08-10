@@ -119,7 +119,63 @@ func TestCheckResponseSnapshot_AssociateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	got, err := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +207,14 @@ func TestCheckResponseSnapshot_CreateDictionary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDictionary(context.Background(), &CreateDictionaryInput{})
+	got, err := svc.CreateDictionary(context.Background(), &CreateDictionaryInput{
+		Name:     ptr.String("__Name__"),
+		Language: types.DictionaryLanguage("eng"),
+		Entries:  ptr.String("__Entries__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +302,65 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFeed(context.Background(), &CreateFeedInput{})
+	got, err := svc.CreateFeed(context.Background(), &CreateFeedInput{
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +383,9 @@ func TestCheckResponseSnapshot_DeleteDictionary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDictionary(context.Background(), &DeleteDictionaryInput{})
+	got, err := svc.DeleteDictionary(context.Background(), &DeleteDictionaryInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +408,9 @@ func TestCheckResponseSnapshot_DeleteFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFeed(context.Background(), &DeleteFeedInput{})
+	got, err := svc.DeleteFeed(context.Background(), &DeleteFeedInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +432,11 @@ func TestCheckResponseSnapshot_DisassociateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFeed(context.Background(), &DisassociateFeedInput{})
+	got, err := svc.DisassociateFeed(context.Background(), &DisassociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		DryRun:                 true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +457,9 @@ func TestCheckResponseSnapshot_ExportDictionaryEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportDictionaryEntries(context.Background(), &ExportDictionaryEntriesInput{})
+	got, err := svc.ExportDictionaryEntries(context.Background(), &ExportDictionaryEntriesInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +491,9 @@ func TestCheckResponseSnapshot_GetDictionary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDictionary(context.Background(), &GetDictionaryInput{})
+	got, err := svc.GetDictionary(context.Background(), &GetDictionaryInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -448,7 +581,9 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFeed(context.Background(), &GetFeedInput{})
+	got, err := svc.GetFeed(context.Background(), &GetFeedInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +620,10 @@ func TestCheckResponseSnapshot_ListDictionaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDictionaries(context.Background(), &ListDictionariesInput{})
+	got, err := svc.ListDictionaries(context.Background(), &ListDictionariesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +664,10 @@ func TestCheckResponseSnapshot_ListFeeds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFeeds(context.Background(), &ListFeedsInput{})
+	got, err := svc.ListFeeds(context.Background(), &ListFeedsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -549,7 +690,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +711,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +735,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +773,12 @@ func TestCheckResponseSnapshot_UpdateDictionary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDictionary(context.Background(), &UpdateDictionaryInput{})
+	got, err := svc.UpdateDictionary(context.Background(), &UpdateDictionaryInput{
+		Id:       ptr.String("__Id__"),
+		Name:     ptr.String("__Name__"),
+		Language: types.DictionaryLanguage("eng"),
+		Entries:  ptr.String("__Entries__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +866,65 @@ func TestCheckResponseSnapshot_UpdateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFeed(context.Background(), &UpdateFeedInput{})
+	got, err := svc.UpdateFeed(context.Background(), &UpdateFeedInput{
+		Name:          ptr.String("__Name__"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Id:            ptr.String("__Id__"),
+		Outputs: []types.UpdateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:          types.OutputStatus("ENABLED"),
+				Description:     ptr.String("__Description__"),
+				FromAssociation: ptr.Bool(true),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:          types.OutputStatus("ENABLED"),
+				Description:     ptr.String("__Description__"),
+				FromAssociation: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +945,63 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -753,7 +1026,63 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -778,7 +1107,63 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -803,7 +1188,63 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +1269,63 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -853,7 +1350,63 @@ func TestCheckResponseSnapshot_Error_TooManyRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -878,7 +1431,63 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{})
+	_, opErr := svc.AssociateFeed(context.Background(), &AssociateFeedInput{
+		Id:                     ptr.String("__Id__"),
+		AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
+		Outputs: []types.CreateOutput{
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				OutputConfig: &types.OutputConfigMemberCropping{
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				Status:      types.OutputStatus("ENABLED"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

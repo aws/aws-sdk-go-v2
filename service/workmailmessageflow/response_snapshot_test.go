@@ -107,7 +107,9 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 	})
 }
 func TestCheckResponseSnapshot_GetRawMessageContent(t *testing.T) {
-	want := &GetRawMessageContentOutput{}
+	want := &GetRawMessageContentOutput{
+		MessageContent: io.NopCloser(bytes.NewReader([]byte("__MessageContent__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetRawMessageContent.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -116,7 +118,9 @@ func TestCheckResponseSnapshot_GetRawMessageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRawMessageContent(context.Background(), &GetRawMessageContentInput{})
+	got, err := svc.GetRawMessageContent(context.Background(), &GetRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +139,16 @@ func TestCheckResponseSnapshot_PutRawMessageContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{})
+	got, err := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+		Content: &types.RawMessageContent{
+			S3Reference: &types.S3Reference{
+				Bucket:        ptr.String("__Bucket__"),
+				Key:           ptr.String("__Key__"),
+				ObjectVersion: ptr.String("__ObjectVersion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +169,16 @@ func TestCheckResponseSnapshot_Error_InvalidContentLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{})
+	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+		Content: &types.RawMessageContent{
+			S3Reference: &types.S3Reference{
+				Bucket:        ptr.String("__Bucket__"),
+				Key:           ptr.String("__Key__"),
+				ObjectVersion: ptr.String("__ObjectVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -181,7 +203,16 @@ func TestCheckResponseSnapshot_Error_MessageFrozen(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{})
+	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+		Content: &types.RawMessageContent{
+			S3Reference: &types.S3Reference{
+				Bucket:        ptr.String("__Bucket__"),
+				Key:           ptr.String("__Key__"),
+				ObjectVersion: ptr.String("__ObjectVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -206,7 +237,16 @@ func TestCheckResponseSnapshot_Error_MessageRejected(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{})
+	_, opErr := svc.PutRawMessageContent(context.Background(), &PutRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+		Content: &types.RawMessageContent{
+			S3Reference: &types.S3Reference{
+				Bucket:        ptr.String("__Bucket__"),
+				Key:           ptr.String("__Key__"),
+				ObjectVersion: ptr.String("__ObjectVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -231,7 +271,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRawMessageContent(context.Background(), &GetRawMessageContentInput{})
+	_, opErr := svc.GetRawMessageContent(context.Background(), &GetRawMessageContentInput{
+		MessageId: ptr.String("__MessageId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

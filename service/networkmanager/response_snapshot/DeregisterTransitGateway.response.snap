@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"TransitGatewayRegistration":{"GlobalNetworkId":"__GlobalNetworkId__","State":{"Code":"PENDING","Message":"__Message__"},"TransitGatewayArn":"__TransitGatewayArn__"}}

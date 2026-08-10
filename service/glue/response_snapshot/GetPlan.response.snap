@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetPlan
+
+{"PythonScript":"__PythonScript__","ScalaCode":"__ScalaCode__"}

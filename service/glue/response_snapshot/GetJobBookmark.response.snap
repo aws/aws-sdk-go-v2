@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetJobBookmark
+
+{"JobBookmarkEntry":{"Attempt":1,"JobBookmark":"__JobBookmark__","JobName":"__JobName__","PreviousRunId":"__PreviousRunId__","Run":1,"RunId":"__RunId__","Version":1}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"marketplaceModelEndpoints":[{"createdAt":"2000-01-01T00:00:00Z","endpointArn":"__EndpointArn__","modelSourceIdentifier":"__ModelSourceIdentifier__","status":"REGISTERED","statusMessage":"__StatusMessage__","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","endpointArn":"__EndpointArn__","modelSourceIdentifier":"__ModelSourceIdentifier__","status":"REGISTERED","statusMessage":"__StatusMessage__","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

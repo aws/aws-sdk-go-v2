@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ReportJob":{"CompletionTime":946684800,"CreationTime":946684800,"ReportDestination":{"S3BucketName":"__S3BucketName__","S3Keys":["__Member__","__Member__"]},"ReportJobId":"__ReportJobId__","ReportPlanArn":"__ReportPlanArn__","ReportTemplate":"__ReportTemplate__","Status":"__Status__","StatusMessage":"__StatusMessage__"}}

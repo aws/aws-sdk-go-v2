@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CalculatedAttributeName":"__CalculatedAttributeName__","CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","LastUpdatedAt":946684800,"Status":"PREPARING","Tags":{"key0":"__Value__"},"UseHistoricalData":true},{"CalculatedAttributeName":"__CalculatedAttributeName__","CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","LastUpdatedAt":946684800,"Status":"PREPARING","Tags":{"key0":"__Value__"},"UseHistoricalData":true}],"NextToken":"__NextToken__"}

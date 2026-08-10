@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.ListPartners
+
+{"NextToken":"__NextToken__","PartnerSummaryList":[{"Arn":"__Arn__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","Id":"__Id__","LegalName":"__LegalName__"},{"Arn":"__Arn__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","Id":"__Id__","LegalName":"__LegalName__"}]}

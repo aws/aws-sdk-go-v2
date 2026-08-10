@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListSchemas
+
+{"NextToken":"__NextToken__","Schemas":[{"CreatedTime":"__CreatedTime__","Description":"__Description__","RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaStatus":"AVAILABLE","UpdatedTime":"__UpdatedTime__"},{"CreatedTime":"__CreatedTime__","Description":"__Description__","RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaStatus":"AVAILABLE","UpdatedTime":"__UpdatedTime__"}]}

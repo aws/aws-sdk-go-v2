@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"connectInstanceConfig":{"connectInstanceId":"__ConnectInstanceId__","encryptionConfig":{"enabled":true,"encryptionType":"KMS","keyArn":"__KeyArn__"},"serviceLinkedRoleArn":"__ServiceLinkedRoleArn__"}}

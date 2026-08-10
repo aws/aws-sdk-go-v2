@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Flow":{"Arn":"__Arn__","CreatedBy":"__CreatedBy__","CreatedTime":946684800,"Description":"__Description__","FlowDefinition":"__Document__","FlowId":"__FlowId__","LastUpdatedBy":"__LastUpdatedBy__","LastUpdatedTime":946684800,"Name":"__Name__","PublishState":"PUBLISHED","StepAliases":[{"StepAlias":"__StepAlias__","StepId":"__StepId__"},{"StepAlias":"__StepAlias__","StepId":"__StepId__"}]},"RequestId":"__RequestId__","Status":200}

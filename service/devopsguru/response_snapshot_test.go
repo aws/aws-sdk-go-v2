@@ -119,7 +119,23 @@ func TestCheckResponseSnapshot_AddNotificationChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	got, err := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +154,9 @@ func TestCheckResponseSnapshot_DeleteInsight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInsight(context.Background(), &DeleteInsightInput{})
+	got, err := svc.DeleteInsight(context.Background(), &DeleteInsightInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +204,10 @@ func TestCheckResponseSnapshot_DescribeAccountOverview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountOverview(context.Background(), &DescribeAccountOverviewInput{})
+	got, err := svc.DescribeAccountOverview(context.Background(), &DescribeAccountOverviewInput{
+		FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +823,10 @@ func TestCheckResponseSnapshot_DescribeAnomaly(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAnomaly(context.Background(), &DescribeAnomalyInput{})
+	got, err := svc.DescribeAnomaly(context.Background(), &DescribeAnomalyInput{
+		Id:        ptr.String("__Id__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +875,9 @@ func TestCheckResponseSnapshot_DescribeFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFeedback(context.Background(), &DescribeFeedbackInput{})
+	got, err := svc.DescribeFeedback(context.Background(), &DescribeFeedbackInput{
+		InsightId: ptr.String("__InsightId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -947,7 +973,10 @@ func TestCheckResponseSnapshot_DescribeInsight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInsight(context.Background(), &DescribeInsightInput{})
+	got, err := svc.DescribeInsight(context.Background(), &DescribeInsightInput{
+		Id:        ptr.String("__Id__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1000,16 @@ func TestCheckResponseSnapshot_DescribeOrganizationHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationHealth(context.Background(), &DescribeOrganizationHealthInput{})
+	got, err := svc.DescribeOrganizationHealth(context.Background(), &DescribeOrganizationHealthInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -993,7 +1031,18 @@ func TestCheckResponseSnapshot_DescribeOrganizationOverview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationOverview(context.Background(), &DescribeOrganizationOverviewInput{})
+	got, err := svc.DescribeOrganizationOverview(context.Background(), &DescribeOrganizationOverviewInput{
+		FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1139,19 @@ func TestCheckResponseSnapshot_DescribeOrganizationResourceCollectionHealth(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationResourceCollectionHealth(context.Background(), &DescribeOrganizationResourceCollectionHealthInput{})
+	got, err := svc.DescribeOrganizationResourceCollectionHealth(context.Background(), &DescribeOrganizationResourceCollectionHealthInput{
+		OrganizationResourceCollectionType: types.OrganizationResourceCollectionType("AWS_CLOUD_FORMATION"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1171,7 +1232,10 @@ func TestCheckResponseSnapshot_DescribeResourceCollectionHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourceCollectionHealth(context.Background(), &DescribeResourceCollectionHealthInput{})
+	got, err := svc.DescribeResourceCollectionHealth(context.Background(), &DescribeResourceCollectionHealthInput{
+		ResourceCollectionType: types.ResourceCollectionType("AWS_CLOUD_FORMATION"),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1335,9 @@ func TestCheckResponseSnapshot_GetCostEstimation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCostEstimation(context.Background(), &GetCostEstimationInput{})
+	got, err := svc.GetCostEstimation(context.Background(), &GetCostEstimationInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1316,7 +1382,10 @@ func TestCheckResponseSnapshot_GetResourceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceCollection(context.Background(), &GetResourceCollectionInput{})
+	got, err := svc.GetResourceCollection(context.Background(), &GetResourceCollectionInput{
+		ResourceCollectionType: types.ResourceCollectionType("AWS_CLOUD_FORMATION"),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2533,7 +2602,24 @@ func TestCheckResponseSnapshot_ListAnomaliesForInsight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnomaliesForInsight(context.Background(), &ListAnomaliesForInsightInput{})
+	got, err := svc.ListAnomaliesForInsight(context.Background(), &ListAnomaliesForInsightInput{
+		InsightId: ptr.String("__InsightId__"),
+		StartTimeRange: &types.StartTimeRange{
+			FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountId:  ptr.String("__AccountId__"),
+		Filters: &types.ListAnomaliesForInsightFilters{
+			ServiceCollection: &types.ServiceCollection{
+				ServiceNames: []types.ServiceName{
+					types.ServiceName("API_GATEWAY"),
+					types.ServiceName("API_GATEWAY"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2661,7 +2747,11 @@ func TestCheckResponseSnapshot_ListAnomalousLogGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnomalousLogGroups(context.Background(), &ListAnomalousLogGroupsInput{})
+	got, err := svc.ListAnomalousLogGroups(context.Background(), &ListAnomalousLogGroupsInput{
+		InsightId:  ptr.String("__InsightId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2772,7 +2862,45 @@ func TestCheckResponseSnapshot_ListEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEvents(context.Background(), &ListEventsInput{})
+	got, err := svc.ListEvents(context.Background(), &ListEventsInput{
+		Filters: &types.ListEventsFilters{
+			InsightId: ptr.String("__InsightId__"),
+			EventTimeRange: &types.EventTimeRange{
+				FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			EventClass:  types.EventClass("INFRASTRUCTURE"),
+			EventSource: ptr.String("__EventSource__"),
+			DataSource:  types.EventDataSource("AWS_CLOUD_TRAIL"),
+			ResourceCollection: &types.ResourceCollection{
+				CloudFormation: &types.CloudFormationCollection{
+					StackNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Tags: []types.TagCollection{
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountId:  ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2981,7 +3109,29 @@ func TestCheckResponseSnapshot_ListInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{})
+	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{
+		StatusFilter: &types.ListInsightsStatusFilter{
+			Ongoing: &types.ListInsightsOngoingStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+			},
+			Closed: &types.ListInsightsClosedStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+				EndTimeRange: &types.EndTimeRange{
+					FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			Any: &types.ListInsightsAnyStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+				StartTimeRange: &types.StartTimeRange{
+					FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3064,7 +3214,17 @@ func TestCheckResponseSnapshot_ListMonitoredResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitoredResources(context.Background(), &ListMonitoredResourcesInput{})
+	got, err := svc.ListMonitoredResources(context.Background(), &ListMonitoredResourcesInput{
+		Filters: &types.ListMonitoredResourcesFilters{
+			ResourcePermission: types.ResourcePermission("FULL_PERMISSION"),
+			ResourceTypeFilters: []types.ResourceTypeFilter{
+				types.ResourceTypeFilter("LOG_GROUPS"),
+				types.ResourceTypeFilter("LOG_GROUPS"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3123,7 +3283,9 @@ func TestCheckResponseSnapshot_ListNotificationChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotificationChannels(context.Background(), &ListNotificationChannelsInput{})
+	got, err := svc.ListNotificationChannels(context.Background(), &ListNotificationChannelsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3324,7 +3486,37 @@ func TestCheckResponseSnapshot_ListOrganizationInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationInsights(context.Background(), &ListOrganizationInsightsInput{})
+	got, err := svc.ListOrganizationInsights(context.Background(), &ListOrganizationInsightsInput{
+		StatusFilter: &types.ListInsightsStatusFilter{
+			Ongoing: &types.ListInsightsOngoingStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+			},
+			Closed: &types.ListInsightsClosedStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+				EndTimeRange: &types.EndTimeRange{
+					FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			Any: &types.ListInsightsAnyStatusFilter{
+				Type: types.InsightType("REACTIVE"),
+				StartTimeRange: &types.StartTimeRange{
+					FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3577,7 +3769,12 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		InsightId: ptr.String("__InsightId__"),
+		NextToken: ptr.String("__NextToken__"),
+		Locale:    types.Locale("DE_DE"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3596,7 +3793,12 @@ func TestCheckResponseSnapshot_PutFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{})
+	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{
+		InsightFeedback: &types.InsightFeedback{
+			Id:       ptr.String("__Id__"),
+			Feedback: types.InsightFeedbackOption("VALID_COLLECTION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3615,7 +3817,9 @@ func TestCheckResponseSnapshot_RemoveNotificationChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveNotificationChannel(context.Background(), &RemoveNotificationChannelInput{})
+	got, err := svc.RemoveNotificationChannel(context.Background(), &RemoveNotificationChannelInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3824,7 +4028,55 @@ func TestCheckResponseSnapshot_SearchInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchInsights(context.Background(), &SearchInsightsInput{})
+	got, err := svc.SearchInsights(context.Background(), &SearchInsightsInput{
+		StartTimeRange: &types.StartTimeRange{
+			FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: &types.SearchInsightsFilters{
+			Severities: []types.InsightSeverity{
+				types.InsightSeverity("LOW"),
+				types.InsightSeverity("LOW"),
+			},
+			Statuses: []types.InsightStatus{
+				types.InsightStatus("ONGOING"),
+				types.InsightStatus("ONGOING"),
+			},
+			ResourceCollection: &types.ResourceCollection{
+				CloudFormation: &types.CloudFormationCollection{
+					StackNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Tags: []types.TagCollection{
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ServiceCollection: &types.ServiceCollection{
+				ServiceNames: []types.ServiceName{
+					types.ServiceName("API_GATEWAY"),
+					types.ServiceName("API_GATEWAY"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Type:       types.InsightType("REACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4033,7 +4285,59 @@ func TestCheckResponseSnapshot_SearchOrganizationInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchOrganizationInsights(context.Background(), &SearchOrganizationInsightsInput{})
+	got, err := svc.SearchOrganizationInsights(context.Background(), &SearchOrganizationInsightsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTimeRange: &types.StartTimeRange{
+			FromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: &types.SearchOrganizationInsightsFilters{
+			Severities: []types.InsightSeverity{
+				types.InsightSeverity("LOW"),
+				types.InsightSeverity("LOW"),
+			},
+			Statuses: []types.InsightStatus{
+				types.InsightStatus("ONGOING"),
+				types.InsightStatus("ONGOING"),
+			},
+			ResourceCollection: &types.ResourceCollection{
+				CloudFormation: &types.CloudFormationCollection{
+					StackNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Tags: []types.TagCollection{
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ServiceCollection: &types.ServiceCollection{
+				ServiceNames: []types.ServiceName{
+					types.ServiceName("API_GATEWAY"),
+					types.ServiceName("API_GATEWAY"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Type:       types.InsightType("REACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4052,7 +4356,33 @@ func TestCheckResponseSnapshot_StartCostEstimation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCostEstimation(context.Background(), &StartCostEstimationInput{})
+	got, err := svc.StartCostEstimation(context.Background(), &StartCostEstimationInput{
+		ResourceCollection: &types.CostEstimationResourceCollectionFilter{
+			CloudFormation: &types.CloudFormationCostEstimationResourceCollectionFilter{
+				StackNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tags: []types.TagCostEstimationResourceCollectionFilter{
+				{
+					AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+					TagValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+					TagValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4071,7 +4401,13 @@ func TestCheckResponseSnapshot_UpdateEventSourcesConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventSourcesConfig(context.Background(), &UpdateEventSourcesConfigInput{})
+	got, err := svc.UpdateEventSourcesConfig(context.Background(), &UpdateEventSourcesConfigInput{
+		EventSources: &types.EventSourcesConfig{
+			AmazonCodeGuruProfiler: &types.AmazonCodeGuruProfilerIntegration{
+				Status: types.EventSourceOptInStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4090,7 +4426,33 @@ func TestCheckResponseSnapshot_UpdateResourceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceCollection(context.Background(), &UpdateResourceCollectionInput{})
+	got, err := svc.UpdateResourceCollection(context.Background(), &UpdateResourceCollectionInput{
+		Action: types.UpdateResourceCollectionAction("ADD"),
+		ResourceCollection: &types.UpdateResourceCollectionFilter{
+			CloudFormation: &types.UpdateCloudFormationCollectionFilter{
+				StackNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tags: []types.UpdateTagCollectionFilter{
+				{
+					AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+					TagValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AppBoundaryKey: ptr.String("__AppBoundaryKey__"),
+					TagValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4109,7 +4471,21 @@ func TestCheckResponseSnapshot_UpdateServiceIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceIntegration(context.Background(), &UpdateServiceIntegrationInput{})
+	got, err := svc.UpdateServiceIntegration(context.Background(), &UpdateServiceIntegrationInput{
+		ServiceIntegration: &types.UpdateServiceIntegrationConfig{
+			OpsCenter: &types.OpsCenterIntegrationConfig{
+				OptInStatus: types.OptInStatus("ENABLED"),
+			},
+			LogsAnomalyDetection: &types.LogsAnomalyDetectionIntegrationConfig{
+				OptInStatus: types.OptInStatus("ENABLED"),
+			},
+			KMSServerSideEncryption: &types.KMSServerSideEncryptionIntegrationConfig{
+				KMSKeyId:    ptr.String("__KMSKeyId__"),
+				OptInStatus: types.OptInStatus("ENABLED"),
+				Type:        types.ServerSideEncryptionType("CUSTOMER_MANAGED_KEY"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4130,7 +4506,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4157,7 +4549,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4183,7 +4591,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4210,7 +4634,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4235,7 +4675,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4263,7 +4719,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4299,7 +4771,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{})
+	_, opErr := svc.AddNotificationChannel(context.Background(), &AddNotificationChannelInput{
+		Config: &types.NotificationChannelConfig{
+			Sns: &types.SnsChannelConfig{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			Filters: &types.NotificationFilterConfig{
+				Severities: []types.InsightSeverity{
+					types.InsightSeverity("LOW"),
+					types.InsightSeverity("LOW"),
+				},
+				MessageTypes: []types.NotificationMessageType{
+					types.NotificationMessageType("NEW_INSIGHT"),
+					types.NotificationMessageType("NEW_INSIGHT"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

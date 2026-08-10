@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EventDestinations":[{"CloudWatchLogsDestination":{"IamRoleArn":"__IamRoleArn__","LogGroupArn":"__LogGroupArn__"},"Enabled":true,"KinesisFirehoseDestination":{"DeliveryStreamArn":"__DeliveryStreamArn__","IamRoleArn":"__IamRoleArn__"},"MatchingEventTypes":["INITIATED_CALL","INITIATED_CALL"],"Name":"__Name__","SnsDestination":{"TopicArn":"__TopicArn__"}},{"CloudWatchLogsDestination":{"IamRoleArn":"__IamRoleArn__","LogGroupArn":"__LogGroupArn__"},"Enabled":true,"KinesisFirehoseDestination":{"DeliveryStreamArn":"__DeliveryStreamArn__","IamRoleArn":"__IamRoleArn__"},"MatchingEventTypes":["INITIATED_CALL","INITIATED_CALL"],"Name":"__Name__","SnsDestination":{"TopicArn":"__TopicArn__"}}]}

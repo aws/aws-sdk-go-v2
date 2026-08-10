@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Rules":[{"Actions":[{"Type":"FINDING_FIELDS_UPDATE"},{"Type":"FINDING_FIELDS_UPDATE"}],"CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","RuleArn":"__RuleArn__","RuleId":"__RuleId__","RuleName":"__RuleName__","RuleOrder":1,"RuleStatus":"ENABLED","UpdatedAt":"2000-01-01T00:00:00Z"},{"Actions":[{"Type":"FINDING_FIELDS_UPDATE"},{"Type":"FINDING_FIELDS_UPDATE"}],"CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","RuleArn":"__RuleArn__","RuleId":"__RuleId__","RuleName":"__RuleName__","RuleOrder":1,"RuleStatus":"ENABLED","UpdatedAt":"2000-01-01T00:00:00Z"}]}

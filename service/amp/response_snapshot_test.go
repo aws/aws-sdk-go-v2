@@ -122,7 +122,11 @@ func TestCheckResponseSnapshot_CreateAlertManagerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	got, err := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +155,34 @@ func TestCheckResponseSnapshot_CreateAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnomalyDetector(context.Background(), &CreateAnomalyDetectorInput{})
+	got, err := svc.CreateAnomalyDetector(context.Background(), &CreateAnomalyDetectorInput{
+		WorkspaceId:                 ptr.String("__WorkspaceId__"),
+		Alias:                       ptr.String("__Alias__"),
+		EvaluationIntervalInSeconds: ptr.Int32(1),
+		MissingDataAction: &types.AnomalyDetectorMissingDataActionMemberMarkAsAnomaly{
+			Value: true,
+		},
+		Configuration: &types.AnomalyDetectorConfigurationMemberRandomCutForest{
+			Value: types.RandomCutForestConfiguration{
+				Query:       ptr.String("__Query__"),
+				ShingleSize: ptr.Int32(1),
+				SampleSize:  ptr.Int32(1),
+				IgnoreNearExpectedFromAbove: &types.IgnoreNearExpectedMemberAmount{
+					Value: 1.0,
+				},
+				IgnoreNearExpectedFromBelow: &types.IgnoreNearExpectedMemberAmount{
+					Value: 1.0,
+				},
+			},
+		},
+		Labels: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +206,11 @@ func TestCheckResponseSnapshot_CreateLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{})
+	got, err := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		LogGroupArn: ptr.String("__LogGroupArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +234,28 @@ func TestCheckResponseSnapshot_CreateQueryLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueryLoggingConfiguration(context.Background(), &CreateQueryLoggingConfigurationInput{})
+	got, err := svc.CreateQueryLoggingConfiguration(context.Background(), &CreateQueryLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Destinations: []types.LoggingDestination{
+			{
+				CloudWatchLogs: &types.CloudWatchLogDestination{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				Filters: &types.LoggingFilter{
+					QspThreshold: ptr.Int64(1),
+				},
+			},
+			{
+				CloudWatchLogs: &types.CloudWatchLogDestination{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				Filters: &types.LoggingFilter{
+					QspThreshold: ptr.Int64(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -228,7 +284,15 @@ func TestCheckResponseSnapshot_CreateRuleGroupsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleGroupsNamespace(context.Background(), &CreateRuleGroupsNamespaceInput{})
+	got, err := svc.CreateRuleGroupsNamespace(context.Background(), &CreateRuleGroupsNamespaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +320,50 @@ func TestCheckResponseSnapshot_CreateScraper(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScraper(context.Background(), &CreateScraperInput{})
+	got, err := svc.CreateScraper(context.Background(), &CreateScraperInput{
+		Alias: ptr.String("__Alias__"),
+		ScrapeConfiguration: &types.ScrapeConfigurationMemberConfigurationBlob{
+			Value: []byte("blob"),
+		},
+		Source: &types.SourceMemberEksConfiguration{
+			Value: types.EksConfiguration{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Destination: &types.DestinationMemberAmpConfiguration{
+			Value: types.AmpConfiguration{
+				WorkspaceArn: ptr.String("__WorkspaceArn__"),
+			},
+		},
+		RoleConfiguration: &types.RoleConfiguration{
+			SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			TargetRoleArn: ptr.String("__TargetRoleArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +392,14 @@ func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		Alias:       ptr.String("__Alias__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +418,10 @@ func TestCheckResponseSnapshot_DeleteAlertManagerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlertManagerDefinition(context.Background(), &DeleteAlertManagerDefinitionInput{})
+	got, err := svc.DeleteAlertManagerDefinition(context.Background(), &DeleteAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -323,7 +440,11 @@ func TestCheckResponseSnapshot_DeleteAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	got, err := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		WorkspaceId:       ptr.String("__WorkspaceId__"),
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +463,10 @@ func TestCheckResponseSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{})
+	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +485,10 @@ func TestCheckResponseSnapshot_DeleteQueryLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueryLoggingConfiguration(context.Background(), &DeleteQueryLoggingConfigurationInput{})
+	got, err := svc.DeleteQueryLoggingConfiguration(context.Background(), &DeleteQueryLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +507,11 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +530,11 @@ func TestCheckResponseSnapshot_DeleteRuleGroupsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleGroupsNamespace(context.Background(), &DeleteRuleGroupsNamespaceInput{})
+	got, err := svc.DeleteRuleGroupsNamespace(context.Background(), &DeleteRuleGroupsNamespaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -423,7 +558,10 @@ func TestCheckResponseSnapshot_DeleteScraper(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScraper(context.Background(), &DeleteScraperInput{})
+	got, err := svc.DeleteScraper(context.Background(), &DeleteScraperInput{
+		ScraperId:   ptr.String("__ScraperId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +580,10 @@ func TestCheckResponseSnapshot_DeleteScraperLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScraperLoggingConfiguration(context.Background(), &DeleteScraperLoggingConfigurationInput{})
+	got, err := svc.DeleteScraperLoggingConfiguration(context.Background(), &DeleteScraperLoggingConfigurationInput{
+		ScraperId:   ptr.String("__ScraperId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -461,7 +602,10 @@ func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +634,9 @@ func TestCheckResponseSnapshot_DescribeAlertManagerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlertManagerDefinition(context.Background(), &DescribeAlertManagerDefinitionInput{})
+	got, err := svc.DescribeAlertManagerDefinition(context.Background(), &DescribeAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +690,10 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAnomalyDetector(context.Background(), &DescribeAnomalyDetectorInput{})
+	got, err := svc.DescribeAnomalyDetector(context.Background(), &DescribeAnomalyDetectorInput{
+		WorkspaceId:       ptr.String("__WorkspaceId__"),
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -574,7 +723,9 @@ func TestCheckResponseSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoggingConfiguration(context.Background(), &DescribeLoggingConfigurationInput{})
+	got, err := svc.DescribeLoggingConfiguration(context.Background(), &DescribeLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +772,9 @@ func TestCheckResponseSnapshot_DescribeQueryLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQueryLoggingConfiguration(context.Background(), &DescribeQueryLoggingConfigurationInput{})
+	got, err := svc.DescribeQueryLoggingConfiguration(context.Background(), &DescribeQueryLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +797,9 @@ func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{})
+	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +833,10 @@ func TestCheckResponseSnapshot_DescribeRuleGroupsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuleGroupsNamespace(context.Background(), &DescribeRuleGroupsNamespaceInput{})
+	got, err := svc.DescribeRuleGroupsNamespace(context.Background(), &DescribeRuleGroupsNamespaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +908,9 @@ func TestCheckResponseSnapshot_DescribeScraper(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScraper(context.Background(), &DescribeScraperInput{})
+	got, err := svc.DescribeScraper(context.Background(), &DescribeScraperInput{
+		ScraperId: ptr.String("__ScraperId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +959,9 @@ func TestCheckResponseSnapshot_DescribeScraperLoggingConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScraperLoggingConfiguration(context.Background(), &DescribeScraperLoggingConfigurationInput{})
+	got, err := svc.DescribeScraperLoggingConfiguration(context.Background(), &DescribeScraperLoggingConfigurationInput{
+		ScraperId: ptr.String("__ScraperId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +995,9 @@ func TestCheckResponseSnapshot_DescribeWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{})
+	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -880,7 +1044,9 @@ func TestCheckResponseSnapshot_DescribeWorkspaceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceConfiguration(context.Background(), &DescribeWorkspaceConfigurationInput{})
+	got, err := svc.DescribeWorkspaceConfiguration(context.Background(), &DescribeWorkspaceConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -952,7 +1118,12 @@ func TestCheckResponseSnapshot_ListAnomalyDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnomalyDetectors(context.Background(), &ListAnomalyDetectorsInput{})
+	got, err := svc.ListAnomalyDetectors(context.Background(), &ListAnomalyDetectorsInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Alias:       ptr.String("__Alias__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1001,7 +1172,12 @@ func TestCheckResponseSnapshot_ListRuleGroupsNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleGroupsNamespaces(context.Background(), &ListRuleGroupsNamespacesInput{})
+	got, err := svc.ListRuleGroupsNamespaces(context.Background(), &ListRuleGroupsNamespacesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1122,7 +1298,16 @@ func TestCheckResponseSnapshot_ListScrapers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScrapers(context.Background(), &ListScrapersInput{})
+	got, err := svc.ListScrapers(context.Background(), &ListScrapersInput{
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1330,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1194,7 +1381,11 @@ func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		Alias:      ptr.String("__Alias__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +1409,11 @@ func TestCheckResponseSnapshot_PutAlertManagerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAlertManagerDefinition(context.Background(), &PutAlertManagerDefinitionInput{})
+	got, err := svc.PutAlertManagerDefinition(context.Background(), &PutAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1442,31 @@ func TestCheckResponseSnapshot_PutAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAnomalyDetector(context.Background(), &PutAnomalyDetectorInput{})
+	got, err := svc.PutAnomalyDetector(context.Background(), &PutAnomalyDetectorInput{
+		WorkspaceId:                 ptr.String("__WorkspaceId__"),
+		AnomalyDetectorId:           ptr.String("__AnomalyDetectorId__"),
+		EvaluationIntervalInSeconds: ptr.Int32(1),
+		MissingDataAction: &types.AnomalyDetectorMissingDataActionMemberMarkAsAnomaly{
+			Value: true,
+		},
+		Configuration: &types.AnomalyDetectorConfigurationMemberRandomCutForest{
+			Value: types.RandomCutForestConfiguration{
+				Query:       ptr.String("__Query__"),
+				ShingleSize: ptr.Int32(1),
+				SampleSize:  ptr.Int32(1),
+				IgnoreNearExpectedFromAbove: &types.IgnoreNearExpectedMemberAmount{
+					Value: 1.0,
+				},
+				IgnoreNearExpectedFromBelow: &types.IgnoreNearExpectedMemberAmount{
+					Value: 1.0,
+				},
+			},
+		},
+		Labels: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1269,7 +1488,12 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		WorkspaceId:    ptr.String("__WorkspaceId__"),
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,7 +1522,12 @@ func TestCheckResponseSnapshot_PutRuleGroupsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRuleGroupsNamespace(context.Background(), &PutRuleGroupsNamespaceInput{})
+	got, err := svc.PutRuleGroupsNamespace(context.Background(), &PutRuleGroupsNamespaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1317,7 +1546,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1336,7 +1570,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1360,7 +1600,11 @@ func TestCheckResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{})
+	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		LogGroupArn: ptr.String("__LogGroupArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1384,7 +1628,28 @@ func TestCheckResponseSnapshot_UpdateQueryLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueryLoggingConfiguration(context.Background(), &UpdateQueryLoggingConfigurationInput{})
+	got, err := svc.UpdateQueryLoggingConfiguration(context.Background(), &UpdateQueryLoggingConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Destinations: []types.LoggingDestination{
+			{
+				CloudWatchLogs: &types.CloudWatchLogDestination{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				Filters: &types.LoggingFilter{
+					QspThreshold: ptr.Int64(1),
+				},
+			},
+			{
+				CloudWatchLogs: &types.CloudWatchLogDestination{
+					LogGroupArn: ptr.String("__LogGroupArn__"),
+				},
+				Filters: &types.LoggingFilter{
+					QspThreshold: ptr.Int64(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1412,7 +1677,35 @@ func TestCheckResponseSnapshot_UpdateScraper(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScraper(context.Background(), &UpdateScraperInput{})
+	got, err := svc.UpdateScraper(context.Background(), &UpdateScraperInput{
+		ScraperId: ptr.String("__ScraperId__"),
+		Alias:     ptr.String("__Alias__"),
+		ScrapeConfiguration: &types.ScrapeConfigurationMemberConfigurationBlob{
+			Value: []byte("blob"),
+		},
+		Destination: &types.DestinationMemberAmpConfiguration{
+			Value: types.AmpConfiguration{
+				WorkspaceArn: ptr.String("__WorkspaceArn__"),
+			},
+		},
+		RoleConfiguration: &types.RoleConfiguration{
+			SourceRoleArn: ptr.String("__SourceRoleArn__"),
+			TargetRoleArn: ptr.String("__TargetRoleArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1436,7 +1729,32 @@ func TestCheckResponseSnapshot_UpdateScraperLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScraperLoggingConfiguration(context.Background(), &UpdateScraperLoggingConfigurationInput{})
+	got, err := svc.UpdateScraperLoggingConfiguration(context.Background(), &UpdateScraperLoggingConfigurationInput{
+		ScraperId: ptr.String("__ScraperId__"),
+		LoggingDestination: &types.ScraperLoggingDestinationMemberCloudWatchLogs{
+			Value: types.CloudWatchLogDestination{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+		},
+		ScraperComponents: []types.ScraperComponent{
+			{
+				Type: types.ScraperComponentType("SERVICE_DISCOVERY"),
+				Config: &types.ComponentConfig{
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			{
+				Type: types.ScraperComponentType("SERVICE_DISCOVERY"),
+				Config: &types.ComponentConfig{
+					Options: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1773,11 @@ func TestCheckResponseSnapshot_UpdateWorkspaceAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceAlias(context.Background(), &UpdateWorkspaceAliasInput{})
+	got, err := svc.UpdateWorkspaceAlias(context.Background(), &UpdateWorkspaceAliasInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Alias:       ptr.String("__Alias__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +1801,31 @@ func TestCheckResponseSnapshot_UpdateWorkspaceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceConfiguration(context.Background(), &UpdateWorkspaceConfigurationInput{})
+	got, err := svc.UpdateWorkspaceConfiguration(context.Background(), &UpdateWorkspaceConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		LimitsPerLabelSet: []types.LimitsPerLabelSet{
+			{
+				Limits: &types.LimitsPerLabelSetEntry{
+					MaxSeries: ptr.Int64(1),
+				},
+				LabelSet: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Limits: &types.LimitsPerLabelSetEntry{
+					MaxSeries: ptr.Int64(1),
+				},
+				LabelSet: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		RetentionPeriodInDays:         ptr.Int32(1),
+		OutOfOrderTimeWindowInSeconds: ptr.Int32(1),
+		RuleQueryOffsetInSeconds:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1500,7 +1846,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1527,7 +1877,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1553,7 +1907,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1580,7 +1938,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1609,7 +1971,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1637,7 +2003,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1673,7 +2043,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{})
+	_, opErr := svc.CreateAlertManagerDefinition(context.Background(), &CreateAlertManagerDefinitionInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Data:        []byte("blob"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

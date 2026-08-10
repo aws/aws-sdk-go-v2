@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListExperiences
+
+{"NextToken":"__NextToken__","SummaryItems":[{"CreatedAt":946684800,"Endpoints":[{"Endpoint":"__Endpoint__","EndpointType":"HOME"},{"Endpoint":"__Endpoint__","EndpointType":"HOME"}],"Id":"__Id__","Name":"__Name__","Status":"CREATING"},{"CreatedAt":946684800,"Endpoints":[{"Endpoint":"__Endpoint__","EndpointType":"HOME"},{"Endpoint":"__Endpoint__","EndpointType":"HOME"}],"Id":"__Id__","Name":"__Name__","Status":"CREATING"}]}

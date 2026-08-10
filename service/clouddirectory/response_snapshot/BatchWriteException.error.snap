@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"BatchWriteException","Index":1,"Message":"__Message__","Type":"InternalServiceException"}

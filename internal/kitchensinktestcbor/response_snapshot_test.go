@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcbor/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -115,7 +116,9 @@ func TestCheckResponseSnapshot_CborGetItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CborGetItem(context.Background(), &CborGetItemInput{})
+	got, err := svc.CborGetItem(context.Background(), &CborGetItemInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -134,7 +137,9 @@ func TestCheckResponseSnapshot_CborPutCompressedData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CborPutCompressedData(context.Background(), &CborPutCompressedDataInput{})
+	got, err := svc.CborPutCompressedData(context.Background(), &CborPutCompressedDataInput{
+		Data: ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -153,7 +158,9 @@ func TestCheckResponseSnapshot_Error_CborItemNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CborGetItem(context.Background(), &CborGetItemInput{})
+	_, opErr := svc.CborGetItem(context.Background(), &CborGetItemInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

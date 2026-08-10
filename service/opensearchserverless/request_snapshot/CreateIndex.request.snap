@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: OpenSearchServerless.CreateIndex
 
-{"id":"__Id__","indexName":"__IndexName__"}
+{"id":"__Id__","indexName":"__IndexName__","indexSchema":"__Document__"}

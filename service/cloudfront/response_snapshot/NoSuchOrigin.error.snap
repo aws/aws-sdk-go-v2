@@ -1,0 +1,4 @@
+404
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>NoSuchOrigin</Code><Message>__Message__</Message></Error></ErrorResponse>

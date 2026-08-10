@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListDeviceInstances
+
+{"deviceInstances":[{"arn":"__Arn__","deviceArn":"__DeviceArn__","instanceProfile":{"arn":"__Arn__","description":"__Description__","excludeAppPackagesFromCleanup":["__Member__","__Member__"],"name":"__Name__","packageCleanup":true,"rebootAfterUse":true},"labels":["__Member__","__Member__"],"status":"IN_USE","udid":"__Udid__"},{"arn":"__Arn__","deviceArn":"__DeviceArn__","instanceProfile":{"arn":"__Arn__","description":"__Description__","excludeAppPackagesFromCleanup":["__Member__","__Member__"],"name":"__Name__","packageCleanup":true,"rebootAfterUse":true},"labels":["__Member__","__Member__"],"status":"IN_USE","udid":"__Udid__"}],"nextToken":"__NextToken__"}

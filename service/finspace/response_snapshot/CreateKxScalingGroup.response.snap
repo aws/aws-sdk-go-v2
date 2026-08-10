@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"availabilityZoneId":"__AvailabilityZoneId__","createdTimestamp":946684800,"environmentId":"__EnvironmentId__","hostType":"__HostType__","lastModifiedTimestamp":946684800,"scalingGroupName":"__ScalingGroupName__","status":"CREATING"}

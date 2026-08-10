@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_ActivateEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	got, err := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +142,9 @@ func TestCheckResponseSnapshot_CancelReplay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelReplay(context.Background(), &CancelReplayInput{})
+	got, err := svc.CancelReplay(context.Background(), &CancelReplayInput{
+		ReplayName: ptr.String("__ReplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +168,14 @@ func TestCheckResponseSnapshot_CreateApiDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{})
+	got, err := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{
+		Name:                         ptr.String("__Name__"),
+		Description:                  ptr.String("__Description__"),
+		ConnectionArn:                ptr.String("__ConnectionArn__"),
+		InvocationEndpoint:           ptr.String("__InvocationEndpoint__"),
+		HttpMethod:                   types.ApiDestinationHttpMethod("POST"),
+		InvocationRateLimitPerSecond: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +199,14 @@ func TestCheckResponseSnapshot_CreateArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateArchive(context.Background(), &CreateArchiveInput{})
+	got, err := svc.CreateArchive(context.Background(), &CreateArchiveInput{
+		ArchiveName:      ptr.String("__ArchiveName__"),
+		EventSourceArn:   ptr.String("__EventSourceArn__"),
+		Description:      ptr.String("__Description__"),
+		EventPattern:     ptr.String("__EventPattern__"),
+		RetentionDays:    ptr.Int32(1),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +230,116 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		AuthorizationType: types.ConnectionAuthorizationType("BASIC"),
+		AuthParameters: &types.CreateConnectionAuthRequestParameters{
+			BasicAuthParameters: &types.CreateConnectionBasicAuthRequestParameters{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			OAuthParameters: &types.CreateConnectionOAuthRequestParameters{
+				ClientParameters: &types.CreateConnectionOAuthClientRequestParameters{
+					ClientID:     ptr.String("__ClientID__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+				},
+				AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+				HttpMethod:            types.ConnectionOAuthHttpMethod("GET"),
+				OAuthHttpParameters: &types.ConnectionHttpParameters{
+					HeaderParameters: []types.ConnectionHeaderParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					QueryStringParameters: []types.ConnectionQueryStringParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					BodyParameters: []types.ConnectionBodyParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+				},
+			},
+			ApiKeyAuthParameters: &types.CreateConnectionApiKeyAuthRequestParameters{
+				ApiKeyName:  ptr.String("__ApiKeyName__"),
+				ApiKeyValue: ptr.String("__ApiKeyValue__"),
+			},
+			InvocationHttpParameters: &types.ConnectionHttpParameters{
+				HeaderParameters: []types.ConnectionHeaderParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				QueryStringParameters: []types.ConnectionQueryStringParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				BodyParameters: []types.ConnectionBodyParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+			},
+			ConnectivityParameters: &types.ConnectivityResourceParameters{
+				ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+					ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+				},
+			},
+		},
+		InvocationConnectivityParameters: &types.ConnectivityResourceParameters{
+			ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+				ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +384,32 @@ func TestCheckResponseSnapshot_CreateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingConfig: &types.RoutingConfig{
+			FailoverConfig: &types.FailoverConfig{
+				Primary: &types.Primary{
+					HealthCheck: ptr.String("__HealthCheck__"),
+				},
+				Secondary: &types.Secondary{
+					Route: ptr.String("__Route__"),
+				},
+			},
+		},
+		ReplicationConfig: &types.ReplicationConfig{
+			State: types.ReplicationState("ENABLED"),
+		},
+		EventBuses: []types.EndpointEventBus{
+			{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+			{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +439,29 @@ func TestCheckResponseSnapshot_CreateEventBus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventBus(context.Background(), &CreateEventBusInput{})
+	got, err := svc.CreateEventBus(context.Background(), &CreateEventBusInput{
+		Name:             ptr.String("__Name__"),
+		EventSourceName:  ptr.String("__EventSourceName__"),
+		Description:      ptr.String("__Description__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			Arn: ptr.String("__Arn__"),
+		},
+		LogConfig: &types.LogConfig{
+			IncludeDetail: types.IncludeDetail("NONE"),
+			Level:         types.Level("OFF"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +482,10 @@ func TestCheckResponseSnapshot_CreatePartnerEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePartnerEventSource(context.Background(), &CreatePartnerEventSourceInput{})
+	got, err := svc.CreatePartnerEventSource(context.Background(), &CreatePartnerEventSourceInput{
+		Name:    ptr.String("__Name__"),
+		Account: ptr.String("__Account__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +504,9 @@ func TestCheckResponseSnapshot_DeactivateEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateEventSource(context.Background(), &DeactivateEventSourceInput{})
+	got, err := svc.DeactivateEventSource(context.Background(), &DeactivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +531,9 @@ func TestCheckResponseSnapshot_DeauthorizeConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeauthorizeConnection(context.Background(), &DeauthorizeConnectionInput{})
+	got, err := svc.DeauthorizeConnection(context.Background(), &DeauthorizeConnectionInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +552,9 @@ func TestCheckResponseSnapshot_DeleteApiDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApiDestination(context.Background(), &DeleteApiDestinationInput{})
+	got, err := svc.DeleteApiDestination(context.Background(), &DeleteApiDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +573,9 @@ func TestCheckResponseSnapshot_DeleteArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{})
+	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{
+		ArchiveName: ptr.String("__ArchiveName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +600,9 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +621,9 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +642,9 @@ func TestCheckResponseSnapshot_DeleteEventBus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventBus(context.Background(), &DeleteEventBusInput{})
+	got, err := svc.DeleteEventBus(context.Background(), &DeleteEventBusInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +663,10 @@ func TestCheckResponseSnapshot_DeletePartnerEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePartnerEventSource(context.Background(), &DeletePartnerEventSourceInput{})
+	got, err := svc.DeletePartnerEventSource(context.Background(), &DeletePartnerEventSourceInput{
+		Name:    ptr.String("__Name__"),
+		Account: ptr.String("__Account__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +685,11 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Name:         ptr.String("__Name__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		Force:        true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +719,9 @@ func TestCheckResponseSnapshot_DescribeApiDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApiDestination(context.Background(), &DescribeApiDestinationInput{})
+	got, err := svc.DescribeApiDestination(context.Background(), &DescribeApiDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -553,7 +753,9 @@ func TestCheckResponseSnapshot_DescribeArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeArchive(context.Background(), &DescribeArchiveInput{})
+	got, err := svc.DescribeArchive(context.Background(), &DescribeArchiveInput{
+		ArchiveName: ptr.String("__ArchiveName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +889,9 @@ func TestCheckResponseSnapshot_DescribeConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnection(context.Background(), &DescribeConnectionInput{})
+	got, err := svc.DescribeConnection(context.Background(), &DescribeConnectionInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +942,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpoint(context.Background(), &DescribeEndpointInput{})
+	got, err := svc.DescribeEndpoint(context.Background(), &DescribeEndpointInput{
+		Name:       ptr.String("__Name__"),
+		HomeRegion: ptr.String("__HomeRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +979,9 @@ func TestCheckResponseSnapshot_DescribeEventBus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventBus(context.Background(), &DescribeEventBusInput{})
+	got, err := svc.DescribeEventBus(context.Background(), &DescribeEventBusInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -798,7 +1007,9 @@ func TestCheckResponseSnapshot_DescribeEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventSource(context.Background(), &DescribeEventSourceInput{})
+	got, err := svc.DescribeEventSource(context.Background(), &DescribeEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +1031,9 @@ func TestCheckResponseSnapshot_DescribePartnerEventSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePartnerEventSource(context.Background(), &DescribePartnerEventSourceInput{})
+	got, err := svc.DescribePartnerEventSource(context.Background(), &DescribePartnerEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1071,9 @@ func TestCheckResponseSnapshot_DescribeReplay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplay(context.Background(), &DescribeReplayInput{})
+	got, err := svc.DescribeReplay(context.Background(), &DescribeReplayInput{
+		ReplayName: ptr.String("__ReplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -888,7 +1103,10 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRule(context.Background(), &DescribeRuleInput{})
+	got, err := svc.DescribeRule(context.Background(), &DescribeRuleInput{
+		Name:         ptr.String("__Name__"),
+		EventBusName: ptr.String("__EventBusName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +1125,10 @@ func TestCheckResponseSnapshot_DisableRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableRule(context.Background(), &DisableRuleInput{})
+	got, err := svc.DisableRule(context.Background(), &DisableRuleInput{
+		Name:         ptr.String("__Name__"),
+		EventBusName: ptr.String("__EventBusName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1147,10 @@ func TestCheckResponseSnapshot_EnableRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableRule(context.Background(), &EnableRuleInput{})
+	got, err := svc.EnableRule(context.Background(), &EnableRuleInput{
+		Name:         ptr.String("__Name__"),
+		EventBusName: ptr.String("__EventBusName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1195,12 @@ func TestCheckResponseSnapshot_ListApiDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApiDestinations(context.Background(), &ListApiDestinationsInput{})
+	got, err := svc.ListApiDestinations(context.Background(), &ListApiDestinationsInput{
+		NamePrefix:    ptr.String("__NamePrefix__"),
+		ConnectionArn: ptr.String("__ConnectionArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		Limit:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1243,13 @@ func TestCheckResponseSnapshot_ListArchives(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArchives(context.Background(), &ListArchivesInput{})
+	got, err := svc.ListArchives(context.Background(), &ListArchivesInput{
+		NamePrefix:     ptr.String("__NamePrefix__"),
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		State:          types.ArchiveState("ENABLED"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1057,7 +1292,12 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		NamePrefix:      ptr.String("__NamePrefix__"),
+		ConnectionState: types.ConnectionState("CREATING"),
+		NextToken:       ptr.String("__NextToken__"),
+		Limit:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1146,7 +1386,12 @@ func TestCheckResponseSnapshot_ListEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{})
+	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		HomeRegion: ptr.String("__HomeRegion__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1185,7 +1430,11 @@ func TestCheckResponseSnapshot_ListEventBuses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventBuses(context.Background(), &ListEventBusesInput{})
+	got, err := svc.ListEventBuses(context.Background(), &ListEventBusesInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		NextToken:  ptr.String("__NextToken__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1224,7 +1473,11 @@ func TestCheckResponseSnapshot_ListEventSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventSources(context.Background(), &ListEventSourcesInput{})
+	got, err := svc.ListEventSources(context.Background(), &ListEventSourcesInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		NextToken:  ptr.String("__NextToken__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1259,7 +1512,11 @@ func TestCheckResponseSnapshot_ListPartnerEventSourceAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPartnerEventSourceAccounts(context.Background(), &ListPartnerEventSourceAccountsInput{})
+	got, err := svc.ListPartnerEventSourceAccounts(context.Background(), &ListPartnerEventSourceAccountsInput{
+		EventSourceName: ptr.String("__EventSourceName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		Limit:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1547,11 @@ func TestCheckResponseSnapshot_ListPartnerEventSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPartnerEventSources(context.Background(), &ListPartnerEventSourcesInput{})
+	got, err := svc.ListPartnerEventSources(context.Background(), &ListPartnerEventSourcesInput{
+		NamePrefix: ptr.String("__NamePrefix__"),
+		NextToken:  ptr.String("__NextToken__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1335,7 +1596,13 @@ func TestCheckResponseSnapshot_ListReplays(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReplays(context.Background(), &ListReplaysInput{})
+	got, err := svc.ListReplays(context.Background(), &ListReplaysInput{
+		NamePrefix:     ptr.String("__NamePrefix__"),
+		State:          types.ReplayState("STARTING"),
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1360,7 +1627,12 @@ func TestCheckResponseSnapshot_ListRuleNamesByTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleNamesByTarget(context.Background(), &ListRuleNamesByTargetInput{})
+	got, err := svc.ListRuleNamesByTarget(context.Background(), &ListRuleNamesByTargetInput{
+		TargetArn:    ptr.String("__TargetArn__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		Limit:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1677,12 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		NamePrefix:   ptr.String("__NamePrefix__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		Limit:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1435,7 +1712,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1776,7 +2055,12 @@ func TestCheckResponseSnapshot_ListTargetsByRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetsByRule(context.Background(), &ListTargetsByRuleInput{})
+	got, err := svc.ListTargetsByRule(context.Background(), &ListTargetsByRuleInput{
+		Rule:         ptr.String("__Rule__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		Limit:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1809,7 +2093,35 @@ func TestCheckResponseSnapshot_PutEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEvents(context.Background(), &PutEventsInput{})
+	got, err := svc.PutEvents(context.Background(), &PutEventsInput{
+		Entries: []types.PutEventsRequestEntry{
+			{
+				Time:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Source: ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DetailType:   ptr.String("__DetailType__"),
+				Detail:       ptr.String("__Detail__"),
+				EventBusName: ptr.String("__EventBusName__"),
+				TraceHeader:  ptr.String("__TraceHeader__"),
+			},
+			{
+				Time:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Source: ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DetailType:   ptr.String("__DetailType__"),
+				Detail:       ptr.String("__Detail__"),
+				EventBusName: ptr.String("__EventBusName__"),
+				TraceHeader:  ptr.String("__TraceHeader__"),
+			},
+		},
+		EndpointId: ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1842,7 +2154,30 @@ func TestCheckResponseSnapshot_PutPartnerEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPartnerEvents(context.Background(), &PutPartnerEventsInput{})
+	got, err := svc.PutPartnerEvents(context.Background(), &PutPartnerEventsInput{
+		Entries: []types.PutPartnerEventsRequestEntry{
+			{
+				Time:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Source: ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DetailType: ptr.String("__DetailType__"),
+				Detail:     ptr.String("__Detail__"),
+			},
+			{
+				Time:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Source: ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DetailType: ptr.String("__DetailType__"),
+				Detail:     ptr.String("__Detail__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1861,7 +2196,18 @@ func TestCheckResponseSnapshot_PutPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPermission(context.Background(), &PutPermissionInput{})
+	got, err := svc.PutPermission(context.Background(), &PutPermissionInput{
+		EventBusName: ptr.String("__EventBusName__"),
+		Action:       ptr.String("__Action__"),
+		Principal:    ptr.String("__Principal__"),
+		StatementId:  ptr.String("__StatementId__"),
+		Condition: &types.Condition{
+			Type:  ptr.String("__Type__"),
+			Key:   ptr.String("__Key__"),
+			Value: ptr.String("__Value__"),
+		},
+		Policy: ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1882,7 +2228,25 @@ func TestCheckResponseSnapshot_PutRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRule(context.Background(), &PutRuleInput{})
+	got, err := svc.PutRule(context.Background(), &PutRuleInput{
+		Name:               ptr.String("__Name__"),
+		ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		EventPattern:       ptr.String("__EventPattern__"),
+		State:              types.RuleState("ENABLED"),
+		Description:        ptr.String("__Description__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EventBusName: ptr.String("__EventBusName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1915,7 +2279,330 @@ func TestCheckResponseSnapshot_PutTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTargets(context.Background(), &PutTargetsInput{})
+	got, err := svc.PutTargets(context.Background(), &PutTargetsInput{
+		Rule:         ptr.String("__Rule__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		Targets: []types.Target{
+			{
+				Id:        ptr.String("__Id__"),
+				Arn:       ptr.String("__Arn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				Input:     ptr.String("__Input__"),
+				InputPath: ptr.String("__InputPath__"),
+				InputTransformer: &types.InputTransformer{
+					InputPathsMap: map[string]string{
+						"key0": "__Value__",
+					},
+					InputTemplate: ptr.String("__InputTemplate__"),
+				},
+				KinesisParameters: &types.KinesisParameters{
+					PartitionKeyPath: ptr.String("__PartitionKeyPath__"),
+				},
+				RunCommandParameters: &types.RunCommandParameters{
+					RunCommandTargets: []types.RunCommandTarget{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				EcsParameters: &types.EcsParameters{
+					TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+					TaskCount:         ptr.Int32(1),
+					LaunchType:        types.LaunchType("EC2"),
+					NetworkConfiguration: &types.NetworkConfiguration{
+						AwsvpcConfiguration: &types.AwsVpcConfiguration{
+							Subnets: []string{
+								"__Member__",
+								"__Member__",
+							},
+							SecurityGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+							AssignPublicIp: types.AssignPublicIp("ENABLED"),
+						},
+					},
+					PlatformVersion: ptr.String("__PlatformVersion__"),
+					Group:           ptr.String("__Group__"),
+					CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+						{
+							CapacityProvider: ptr.String("__CapacityProvider__"),
+							Weight:           1,
+							Base:             1,
+						},
+						{
+							CapacityProvider: ptr.String("__CapacityProvider__"),
+							Weight:           1,
+							Base:             1,
+						},
+					},
+					EnableECSManagedTags: true,
+					EnableExecuteCommand: true,
+					PlacementConstraints: []types.PlacementConstraint{
+						{
+							Type:       types.PlacementConstraintType("distinctInstance"),
+							Expression: ptr.String("__Expression__"),
+						},
+						{
+							Type:       types.PlacementConstraintType("distinctInstance"),
+							Expression: ptr.String("__Expression__"),
+						},
+					},
+					PlacementStrategy: []types.PlacementStrategy{
+						{
+							Type:  types.PlacementStrategyType("random"),
+							Field: ptr.String("__Field__"),
+						},
+						{
+							Type:  types.PlacementStrategyType("random"),
+							Field: ptr.String("__Field__"),
+						},
+					},
+					PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+					ReferenceId:   ptr.String("__ReferenceId__"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				BatchParameters: &types.BatchParameters{
+					JobDefinition: ptr.String("__JobDefinition__"),
+					JobName:       ptr.String("__JobName__"),
+					ArrayProperties: &types.BatchArrayProperties{
+						Size: 1,
+					},
+					RetryStrategy: &types.BatchRetryStrategy{
+						Attempts: 1,
+					},
+				},
+				SqsParameters: &types.SqsParameters{
+					MessageGroupId: ptr.String("__MessageGroupId__"),
+				},
+				HttpParameters: &types.HttpParameters{
+					PathParameterValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HeaderParameters: map[string]string{
+						"key0": "__Value__",
+					},
+					QueryStringParameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				RedshiftDataParameters: &types.RedshiftDataParameters{
+					SecretManagerArn: ptr.String("__SecretManagerArn__"),
+					Database:         ptr.String("__Database__"),
+					DbUser:           ptr.String("__DbUser__"),
+					Sql:              ptr.String("__Sql__"),
+					StatementName:    ptr.String("__StatementName__"),
+					WithEvent:        true,
+					Sqls: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+					PipelineParameterList: []types.SageMakerPipelineParameter{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				RetryPolicy: &types.RetryPolicy{
+					MaximumRetryAttempts:     ptr.Int32(1),
+					MaximumEventAgeInSeconds: ptr.Int32(1),
+				},
+				AppSyncParameters: &types.AppSyncParameters{
+					GraphQLOperation: ptr.String("__GraphQLOperation__"),
+				},
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Arn:       ptr.String("__Arn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				Input:     ptr.String("__Input__"),
+				InputPath: ptr.String("__InputPath__"),
+				InputTransformer: &types.InputTransformer{
+					InputPathsMap: map[string]string{
+						"key0": "__Value__",
+					},
+					InputTemplate: ptr.String("__InputTemplate__"),
+				},
+				KinesisParameters: &types.KinesisParameters{
+					PartitionKeyPath: ptr.String("__PartitionKeyPath__"),
+				},
+				RunCommandParameters: &types.RunCommandParameters{
+					RunCommandTargets: []types.RunCommandTarget{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				EcsParameters: &types.EcsParameters{
+					TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+					TaskCount:         ptr.Int32(1),
+					LaunchType:        types.LaunchType("EC2"),
+					NetworkConfiguration: &types.NetworkConfiguration{
+						AwsvpcConfiguration: &types.AwsVpcConfiguration{
+							Subnets: []string{
+								"__Member__",
+								"__Member__",
+							},
+							SecurityGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+							AssignPublicIp: types.AssignPublicIp("ENABLED"),
+						},
+					},
+					PlatformVersion: ptr.String("__PlatformVersion__"),
+					Group:           ptr.String("__Group__"),
+					CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+						{
+							CapacityProvider: ptr.String("__CapacityProvider__"),
+							Weight:           1,
+							Base:             1,
+						},
+						{
+							CapacityProvider: ptr.String("__CapacityProvider__"),
+							Weight:           1,
+							Base:             1,
+						},
+					},
+					EnableECSManagedTags: true,
+					EnableExecuteCommand: true,
+					PlacementConstraints: []types.PlacementConstraint{
+						{
+							Type:       types.PlacementConstraintType("distinctInstance"),
+							Expression: ptr.String("__Expression__"),
+						},
+						{
+							Type:       types.PlacementConstraintType("distinctInstance"),
+							Expression: ptr.String("__Expression__"),
+						},
+					},
+					PlacementStrategy: []types.PlacementStrategy{
+						{
+							Type:  types.PlacementStrategyType("random"),
+							Field: ptr.String("__Field__"),
+						},
+						{
+							Type:  types.PlacementStrategyType("random"),
+							Field: ptr.String("__Field__"),
+						},
+					},
+					PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+					ReferenceId:   ptr.String("__ReferenceId__"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				BatchParameters: &types.BatchParameters{
+					JobDefinition: ptr.String("__JobDefinition__"),
+					JobName:       ptr.String("__JobName__"),
+					ArrayProperties: &types.BatchArrayProperties{
+						Size: 1,
+					},
+					RetryStrategy: &types.BatchRetryStrategy{
+						Attempts: 1,
+					},
+				},
+				SqsParameters: &types.SqsParameters{
+					MessageGroupId: ptr.String("__MessageGroupId__"),
+				},
+				HttpParameters: &types.HttpParameters{
+					PathParameterValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HeaderParameters: map[string]string{
+						"key0": "__Value__",
+					},
+					QueryStringParameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				RedshiftDataParameters: &types.RedshiftDataParameters{
+					SecretManagerArn: ptr.String("__SecretManagerArn__"),
+					Database:         ptr.String("__Database__"),
+					DbUser:           ptr.String("__DbUser__"),
+					Sql:              ptr.String("__Sql__"),
+					StatementName:    ptr.String("__StatementName__"),
+					WithEvent:        true,
+					Sqls: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SageMakerPipelineParameters: &types.SageMakerPipelineParameters{
+					PipelineParameterList: []types.SageMakerPipelineParameter{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				RetryPolicy: &types.RetryPolicy{
+					MaximumRetryAttempts:     ptr.Int32(1),
+					MaximumEventAgeInSeconds: ptr.Int32(1),
+				},
+				AppSyncParameters: &types.AppSyncParameters{
+					GraphQLOperation: ptr.String("__GraphQLOperation__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1934,7 +2621,11 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{})
+	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{
+		StatementId:          ptr.String("__StatementId__"),
+		RemoveAllPermissions: true,
+		EventBusName:         ptr.String("__EventBusName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1967,7 +2658,15 @@ func TestCheckResponseSnapshot_RemoveTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTargets(context.Background(), &RemoveTargetsInput{})
+	got, err := svc.RemoveTargets(context.Background(), &RemoveTargetsInput{
+		Rule:         ptr.String("__Rule__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1991,7 +2690,20 @@ func TestCheckResponseSnapshot_StartReplay(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReplay(context.Background(), &StartReplayInput{})
+	got, err := svc.StartReplay(context.Background(), &StartReplayInput{
+		ReplayName:     ptr.String("__ReplayName__"),
+		Description:    ptr.String("__Description__"),
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		EventStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Destination: &types.ReplayDestination{
+			Arn: ptr.String("__Arn__"),
+			FilterArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2010,7 +2722,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2031,7 +2755,10 @@ func TestCheckResponseSnapshot_TestEventPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestEventPattern(context.Background(), &TestEventPatternInput{})
+	got, err := svc.TestEventPattern(context.Background(), &TestEventPatternInput{
+		EventPattern: ptr.String("__EventPattern__"),
+		Event:        ptr.String("__Event__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2050,7 +2777,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2074,7 +2807,14 @@ func TestCheckResponseSnapshot_UpdateApiDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApiDestination(context.Background(), &UpdateApiDestinationInput{})
+	got, err := svc.UpdateApiDestination(context.Background(), &UpdateApiDestinationInput{
+		Name:                         ptr.String("__Name__"),
+		Description:                  ptr.String("__Description__"),
+		ConnectionArn:                ptr.String("__ConnectionArn__"),
+		InvocationEndpoint:           ptr.String("__InvocationEndpoint__"),
+		HttpMethod:                   types.ApiDestinationHttpMethod("POST"),
+		InvocationRateLimitPerSecond: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2098,7 +2838,13 @@ func TestCheckResponseSnapshot_UpdateArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateArchive(context.Background(), &UpdateArchiveInput{})
+	got, err := svc.UpdateArchive(context.Background(), &UpdateArchiveInput{
+		ArchiveName:      ptr.String("__ArchiveName__"),
+		Description:      ptr.String("__Description__"),
+		EventPattern:     ptr.String("__EventPattern__"),
+		RetentionDays:    ptr.Int32(1),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2123,7 +2869,116 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{})
+	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		AuthorizationType: types.ConnectionAuthorizationType("BASIC"),
+		AuthParameters: &types.UpdateConnectionAuthRequestParameters{
+			BasicAuthParameters: &types.UpdateConnectionBasicAuthRequestParameters{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			OAuthParameters: &types.UpdateConnectionOAuthRequestParameters{
+				ClientParameters: &types.UpdateConnectionOAuthClientRequestParameters{
+					ClientID:     ptr.String("__ClientID__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+				},
+				AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+				HttpMethod:            types.ConnectionOAuthHttpMethod("GET"),
+				OAuthHttpParameters: &types.ConnectionHttpParameters{
+					HeaderParameters: []types.ConnectionHeaderParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					QueryStringParameters: []types.ConnectionQueryStringParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					BodyParameters: []types.ConnectionBodyParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+				},
+			},
+			ApiKeyAuthParameters: &types.UpdateConnectionApiKeyAuthRequestParameters{
+				ApiKeyName:  ptr.String("__ApiKeyName__"),
+				ApiKeyValue: ptr.String("__ApiKeyValue__"),
+			},
+			InvocationHttpParameters: &types.ConnectionHttpParameters{
+				HeaderParameters: []types.ConnectionHeaderParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				QueryStringParameters: []types.ConnectionQueryStringParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				BodyParameters: []types.ConnectionBodyParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+			},
+			ConnectivityParameters: &types.ConnectivityResourceParameters{
+				ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+					ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+				},
+			},
+		},
+		InvocationConnectivityParameters: &types.ConnectivityResourceParameters{
+			ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+				ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2170,7 +3025,32 @@ func TestCheckResponseSnapshot_UpdateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{})
+	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingConfig: &types.RoutingConfig{
+			FailoverConfig: &types.FailoverConfig{
+				Primary: &types.Primary{
+					HealthCheck: ptr.String("__HealthCheck__"),
+				},
+				Secondary: &types.Secondary{
+					Route: ptr.String("__Route__"),
+				},
+			},
+		},
+		ReplicationConfig: &types.ReplicationConfig{
+			State: types.ReplicationState("ENABLED"),
+		},
+		EventBuses: []types.EndpointEventBus{
+			{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+			{
+				EventBusArn: ptr.String("__EventBusArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2201,7 +3081,18 @@ func TestCheckResponseSnapshot_UpdateEventBus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventBus(context.Background(), &UpdateEventBusInput{})
+	got, err := svc.UpdateEventBus(context.Background(), &UpdateEventBusInput{
+		Name:             ptr.String("__Name__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		Description:      ptr.String("__Description__"),
+		DeadLetterConfig: &types.DeadLetterConfig{
+			Arn: ptr.String("__Arn__"),
+		},
+		LogConfig: &types.LogConfig{
+			IncludeDetail: types.IncludeDetail("NONE"),
+			Level:         types.Level("OFF"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2222,7 +3113,116 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		AuthorizationType: types.ConnectionAuthorizationType("BASIC"),
+		AuthParameters: &types.CreateConnectionAuthRequestParameters{
+			BasicAuthParameters: &types.CreateConnectionBasicAuthRequestParameters{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			OAuthParameters: &types.CreateConnectionOAuthRequestParameters{
+				ClientParameters: &types.CreateConnectionOAuthClientRequestParameters{
+					ClientID:     ptr.String("__ClientID__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+				},
+				AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+				HttpMethod:            types.ConnectionOAuthHttpMethod("GET"),
+				OAuthHttpParameters: &types.ConnectionHttpParameters{
+					HeaderParameters: []types.ConnectionHeaderParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					QueryStringParameters: []types.ConnectionQueryStringParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					BodyParameters: []types.ConnectionBodyParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+				},
+			},
+			ApiKeyAuthParameters: &types.CreateConnectionApiKeyAuthRequestParameters{
+				ApiKeyName:  ptr.String("__ApiKeyName__"),
+				ApiKeyValue: ptr.String("__ApiKeyValue__"),
+			},
+			InvocationHttpParameters: &types.ConnectionHttpParameters{
+				HeaderParameters: []types.ConnectionHeaderParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				QueryStringParameters: []types.ConnectionQueryStringParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				BodyParameters: []types.ConnectionBodyParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+			},
+			ConnectivityParameters: &types.ConnectivityResourceParameters{
+				ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+					ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+				},
+			},
+		},
+		InvocationConnectivityParameters: &types.ConnectivityResourceParameters{
+			ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+				ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2247,7 +3247,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2272,7 +3274,9 @@ func TestCheckResponseSnapshot_Error_IllegalStatusException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelReplay(context.Background(), &CancelReplayInput{})
+	_, opErr := svc.CancelReplay(context.Background(), &CancelReplayInput{
+		ReplayName: ptr.String("__ReplayName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2297,7 +3301,9 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2322,7 +3328,14 @@ func TestCheckResponseSnapshot_Error_InvalidEventPatternException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateArchive(context.Background(), &CreateArchiveInput{})
+	_, opErr := svc.CreateArchive(context.Background(), &CreateArchiveInput{
+		ArchiveName:      ptr.String("__ArchiveName__"),
+		EventSourceArn:   ptr.String("__EventSourceArn__"),
+		Description:      ptr.String("__Description__"),
+		EventPattern:     ptr.String("__EventPattern__"),
+		RetentionDays:    ptr.Int32(1),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2347,7 +3360,9 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2372,7 +3387,14 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{})
+	_, opErr := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{
+		Name:                         ptr.String("__Name__"),
+		Description:                  ptr.String("__Description__"),
+		ConnectionArn:                ptr.String("__ConnectionArn__"),
+		InvocationEndpoint:           ptr.String("__InvocationEndpoint__"),
+		HttpMethod:                   types.ApiDestinationHttpMethod("POST"),
+		InvocationRateLimitPerSecond: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2397,7 +3419,11 @@ func TestCheckResponseSnapshot_Error_ManagedRuleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	_, opErr := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Name:         ptr.String("__Name__"),
+		EventBusName: ptr.String("__EventBusName__"),
+		Force:        true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2422,7 +3448,9 @@ func TestCheckResponseSnapshot_Error_OperationDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2447,7 +3475,18 @@ func TestCheckResponseSnapshot_Error_PolicyLengthExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutPermission(context.Background(), &PutPermissionInput{})
+	_, opErr := svc.PutPermission(context.Background(), &PutPermissionInput{
+		EventBusName: ptr.String("__EventBusName__"),
+		Action:       ptr.String("__Action__"),
+		Principal:    ptr.String("__Principal__"),
+		StatementId:  ptr.String("__StatementId__"),
+		Condition: &types.Condition{
+			Type:  ptr.String("__Type__"),
+			Key:   ptr.String("__Key__"),
+			Value: ptr.String("__Value__"),
+		},
+		Policy: ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2472,7 +3511,14 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{})
+	_, opErr := svc.CreateApiDestination(context.Background(), &CreateApiDestinationInput{
+		Name:                         ptr.String("__Name__"),
+		Description:                  ptr.String("__Description__"),
+		ConnectionArn:                ptr.String("__ConnectionArn__"),
+		InvocationEndpoint:           ptr.String("__InvocationEndpoint__"),
+		HttpMethod:                   types.ApiDestinationHttpMethod("POST"),
+		InvocationRateLimitPerSecond: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2497,7 +3543,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{})
+	_, opErr := svc.ActivateEventSource(context.Background(), &ActivateEventSourceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2522,7 +3570,116 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		AuthorizationType: types.ConnectionAuthorizationType("BASIC"),
+		AuthParameters: &types.CreateConnectionAuthRequestParameters{
+			BasicAuthParameters: &types.CreateConnectionBasicAuthRequestParameters{
+				Username: ptr.String("__Username__"),
+				Password: ptr.String("__Password__"),
+			},
+			OAuthParameters: &types.CreateConnectionOAuthRequestParameters{
+				ClientParameters: &types.CreateConnectionOAuthClientRequestParameters{
+					ClientID:     ptr.String("__ClientID__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+				},
+				AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+				HttpMethod:            types.ConnectionOAuthHttpMethod("GET"),
+				OAuthHttpParameters: &types.ConnectionHttpParameters{
+					HeaderParameters: []types.ConnectionHeaderParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					QueryStringParameters: []types.ConnectionQueryStringParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+					BodyParameters: []types.ConnectionBodyParameter{
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+						{
+							Key:           ptr.String("__Key__"),
+							Value:         ptr.String("__Value__"),
+							IsValueSecret: true,
+						},
+					},
+				},
+			},
+			ApiKeyAuthParameters: &types.CreateConnectionApiKeyAuthRequestParameters{
+				ApiKeyName:  ptr.String("__ApiKeyName__"),
+				ApiKeyValue: ptr.String("__ApiKeyValue__"),
+			},
+			InvocationHttpParameters: &types.ConnectionHttpParameters{
+				HeaderParameters: []types.ConnectionHeaderParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				QueryStringParameters: []types.ConnectionQueryStringParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+				BodyParameters: []types.ConnectionBodyParameter{
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+					{
+						Key:           ptr.String("__Key__"),
+						Value:         ptr.String("__Value__"),
+						IsValueSecret: true,
+					},
+				},
+			},
+			ConnectivityParameters: &types.ConnectivityResourceParameters{
+				ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+					ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+				},
+			},
+		},
+		InvocationConnectivityParameters: &types.ConnectivityResourceParameters{
+			ResourceParameters: &types.ConnectivityResourceConfigurationArn{
+				ResourceConfigurationArn: ptr.String("__ResourceConfigurationArn__"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

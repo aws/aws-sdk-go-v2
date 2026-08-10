@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreationStatus":"CREATION_IN_PROGRESS","DataSourceId":"__DataSourceId__","RequestId":"__RequestId__","Status":200}

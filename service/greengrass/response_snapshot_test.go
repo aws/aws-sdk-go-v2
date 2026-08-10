@@ -118,7 +118,10 @@ func TestCheckResponseSnapshot_AssociateRoleToGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{})
+	got, err := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +142,9 @@ func TestCheckResponseSnapshot_AssociateServiceRoleToAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{})
+	got, err := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +171,31 @@ func TestCheckResponseSnapshot_CreateConnectorDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectorDefinition(context.Background(), &CreateConnectorDefinitionInput{})
+	got, err := svc.CreateConnectorDefinition(context.Background(), &CreateConnectorDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.ConnectorDefinitionVersion{
+			Connectors: []types.Connector{
+				{
+					ConnectorArn: ptr.String("__ConnectorArn__"),
+					Id:           ptr.String("__Id__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					ConnectorArn: ptr.String("__ConnectorArn__"),
+					Id:           ptr.String("__Id__"),
+					Parameters: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +219,26 @@ func TestCheckResponseSnapshot_CreateConnectorDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectorDefinitionVersion(context.Background(), &CreateConnectorDefinitionVersionInput{})
+	got, err := svc.CreateConnectorDefinitionVersion(context.Background(), &CreateConnectorDefinitionVersionInput{
+		AmznClientToken:       ptr.String("__AmznClientToken__"),
+		ConnectorDefinitionId: ptr.String("__ConnectorDefinitionId__"),
+		Connectors: []types.Connector{
+			{
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				Id:           ptr.String("__Id__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				Id:           ptr.String("__Id__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +265,29 @@ func TestCheckResponseSnapshot_CreateCoreDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCoreDefinition(context.Background(), &CreateCoreDefinitionInput{})
+	got, err := svc.CreateCoreDefinition(context.Background(), &CreateCoreDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.CoreDefinitionVersion{
+			Cores: []types.Core{
+				{
+					CertificateArn: ptr.String("__CertificateArn__"),
+					Id:             ptr.String("__Id__"),
+					SyncShadow:     ptr.Bool(true),
+					ThingArn:       ptr.String("__ThingArn__"),
+				},
+				{
+					CertificateArn: ptr.String("__CertificateArn__"),
+					Id:             ptr.String("__Id__"),
+					SyncShadow:     ptr.Bool(true),
+					ThingArn:       ptr.String("__ThingArn__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +311,24 @@ func TestCheckResponseSnapshot_CreateCoreDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCoreDefinitionVersion(context.Background(), &CreateCoreDefinitionVersionInput{})
+	got, err := svc.CreateCoreDefinitionVersion(context.Background(), &CreateCoreDefinitionVersionInput{
+		AmznClientToken:  ptr.String("__AmznClientToken__"),
+		CoreDefinitionId: ptr.String("__CoreDefinitionId__"),
+		Cores: []types.Core{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				Id:             ptr.String("__Id__"),
+				SyncShadow:     ptr.Bool(true),
+				ThingArn:       ptr.String("__ThingArn__"),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				Id:             ptr.String("__Id__"),
+				SyncShadow:     ptr.Bool(true),
+				ThingArn:       ptr.String("__ThingArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +350,13 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		DeploymentId:    ptr.String("__DeploymentId__"),
+		DeploymentType:  types.DeploymentType("NewDeployment"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupVersionId:  ptr.String("__GroupVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +383,29 @@ func TestCheckResponseSnapshot_CreateDeviceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeviceDefinition(context.Background(), &CreateDeviceDefinitionInput{})
+	got, err := svc.CreateDeviceDefinition(context.Background(), &CreateDeviceDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.DeviceDefinitionVersion{
+			Devices: []types.Device{
+				{
+					CertificateArn: ptr.String("__CertificateArn__"),
+					Id:             ptr.String("__Id__"),
+					SyncShadow:     ptr.Bool(true),
+					ThingArn:       ptr.String("__ThingArn__"),
+				},
+				{
+					CertificateArn: ptr.String("__CertificateArn__"),
+					Id:             ptr.String("__Id__"),
+					SyncShadow:     ptr.Bool(true),
+					ThingArn:       ptr.String("__ThingArn__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -314,7 +429,24 @@ func TestCheckResponseSnapshot_CreateDeviceDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeviceDefinitionVersion(context.Background(), &CreateDeviceDefinitionVersionInput{})
+	got, err := svc.CreateDeviceDefinitionVersion(context.Background(), &CreateDeviceDefinitionVersionInput{
+		AmznClientToken:    ptr.String("__AmznClientToken__"),
+		DeviceDefinitionId: ptr.String("__DeviceDefinitionId__"),
+		Devices: []types.Device{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				Id:             ptr.String("__Id__"),
+				SyncShadow:     ptr.Bool(true),
+				ThingArn:       ptr.String("__ThingArn__"),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				Id:             ptr.String("__Id__"),
+				SyncShadow:     ptr.Bool(true),
+				ThingArn:       ptr.String("__ThingArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +473,98 @@ func TestCheckResponseSnapshot_CreateFunctionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunctionDefinition(context.Background(), &CreateFunctionDefinitionInput{})
+	got, err := svc.CreateFunctionDefinition(context.Background(), &CreateFunctionDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.FunctionDefinitionVersion{
+			DefaultConfig: &types.FunctionDefaultConfig{
+				Execution: &types.FunctionDefaultExecutionConfig{
+					IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+					RunAs: &types.FunctionRunAsConfig{
+						Gid: ptr.Int32(1),
+						Uid: ptr.Int32(1),
+					},
+				},
+			},
+			Functions: []types.Function{
+				{
+					FunctionArn: ptr.String("__FunctionArn__"),
+					FunctionConfiguration: &types.FunctionConfiguration{
+						EncodingType: types.EncodingType("binary"),
+						Environment: &types.FunctionConfigurationEnvironment{
+							AccessSysfs: ptr.Bool(true),
+							Execution: &types.FunctionExecutionConfig{
+								IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+								RunAs: &types.FunctionRunAsConfig{
+									Gid: ptr.Int32(1),
+									Uid: ptr.Int32(1),
+								},
+							},
+							ResourceAccessPolicies: []types.ResourceAccessPolicy{
+								{
+									Permission: types.Permission("ro"),
+									ResourceId: ptr.String("__ResourceId__"),
+								},
+								{
+									Permission: types.Permission("ro"),
+									ResourceId: ptr.String("__ResourceId__"),
+								},
+							},
+							Variables: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						ExecArgs:                ptr.String("__ExecArgs__"),
+						Executable:              ptr.String("__Executable__"),
+						MemorySize:              ptr.Int32(1),
+						Pinned:                  ptr.Bool(true),
+						Timeout:                 ptr.Int32(1),
+						FunctionRuntimeOverride: ptr.String("__FunctionRuntimeOverride__"),
+					},
+					Id: ptr.String("__Id__"),
+				},
+				{
+					FunctionArn: ptr.String("__FunctionArn__"),
+					FunctionConfiguration: &types.FunctionConfiguration{
+						EncodingType: types.EncodingType("binary"),
+						Environment: &types.FunctionConfigurationEnvironment{
+							AccessSysfs: ptr.Bool(true),
+							Execution: &types.FunctionExecutionConfig{
+								IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+								RunAs: &types.FunctionRunAsConfig{
+									Gid: ptr.Int32(1),
+									Uid: ptr.Int32(1),
+								},
+							},
+							ResourceAccessPolicies: []types.ResourceAccessPolicy{
+								{
+									Permission: types.Permission("ro"),
+									ResourceId: ptr.String("__ResourceId__"),
+								},
+								{
+									Permission: types.Permission("ro"),
+									ResourceId: ptr.String("__ResourceId__"),
+								},
+							},
+							Variables: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						ExecArgs:                ptr.String("__ExecArgs__"),
+						Executable:              ptr.String("__Executable__"),
+						MemorySize:              ptr.Int32(1),
+						Pinned:                  ptr.Bool(true),
+						Timeout:                 ptr.Int32(1),
+						FunctionRuntimeOverride: ptr.String("__FunctionRuntimeOverride__"),
+					},
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +588,93 @@ func TestCheckResponseSnapshot_CreateFunctionDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunctionDefinitionVersion(context.Background(), &CreateFunctionDefinitionVersionInput{})
+	got, err := svc.CreateFunctionDefinitionVersion(context.Background(), &CreateFunctionDefinitionVersionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		DefaultConfig: &types.FunctionDefaultConfig{
+			Execution: &types.FunctionDefaultExecutionConfig{
+				IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+				RunAs: &types.FunctionRunAsConfig{
+					Gid: ptr.Int32(1),
+					Uid: ptr.Int32(1),
+				},
+			},
+		},
+		FunctionDefinitionId: ptr.String("__FunctionDefinitionId__"),
+		Functions: []types.Function{
+			{
+				FunctionArn: ptr.String("__FunctionArn__"),
+				FunctionConfiguration: &types.FunctionConfiguration{
+					EncodingType: types.EncodingType("binary"),
+					Environment: &types.FunctionConfigurationEnvironment{
+						AccessSysfs: ptr.Bool(true),
+						Execution: &types.FunctionExecutionConfig{
+							IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+							RunAs: &types.FunctionRunAsConfig{
+								Gid: ptr.Int32(1),
+								Uid: ptr.Int32(1),
+							},
+						},
+						ResourceAccessPolicies: []types.ResourceAccessPolicy{
+							{
+								Permission: types.Permission("ro"),
+								ResourceId: ptr.String("__ResourceId__"),
+							},
+							{
+								Permission: types.Permission("ro"),
+								ResourceId: ptr.String("__ResourceId__"),
+							},
+						},
+						Variables: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					ExecArgs:                ptr.String("__ExecArgs__"),
+					Executable:              ptr.String("__Executable__"),
+					MemorySize:              ptr.Int32(1),
+					Pinned:                  ptr.Bool(true),
+					Timeout:                 ptr.Int32(1),
+					FunctionRuntimeOverride: ptr.String("__FunctionRuntimeOverride__"),
+				},
+				Id: ptr.String("__Id__"),
+			},
+			{
+				FunctionArn: ptr.String("__FunctionArn__"),
+				FunctionConfiguration: &types.FunctionConfiguration{
+					EncodingType: types.EncodingType("binary"),
+					Environment: &types.FunctionConfigurationEnvironment{
+						AccessSysfs: ptr.Bool(true),
+						Execution: &types.FunctionExecutionConfig{
+							IsolationMode: types.FunctionIsolationMode("GreengrassContainer"),
+							RunAs: &types.FunctionRunAsConfig{
+								Gid: ptr.Int32(1),
+								Uid: ptr.Int32(1),
+							},
+						},
+						ResourceAccessPolicies: []types.ResourceAccessPolicy{
+							{
+								Permission: types.Permission("ro"),
+								ResourceId: ptr.String("__ResourceId__"),
+							},
+							{
+								Permission: types.Permission("ro"),
+								ResourceId: ptr.String("__ResourceId__"),
+							},
+						},
+						Variables: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					ExecArgs:                ptr.String("__ExecArgs__"),
+					Executable:              ptr.String("__Executable__"),
+					MemorySize:              ptr.Int32(1),
+					Pinned:                  ptr.Bool(true),
+					Timeout:                 ptr.Int32(1),
+					FunctionRuntimeOverride: ptr.String("__FunctionRuntimeOverride__"),
+				},
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +701,22 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.GroupVersion{
+			ConnectorDefinitionVersionArn:    ptr.String("__ConnectorDefinitionVersionArn__"),
+			CoreDefinitionVersionArn:         ptr.String("__CoreDefinitionVersionArn__"),
+			DeviceDefinitionVersionArn:       ptr.String("__DeviceDefinitionVersionArn__"),
+			FunctionDefinitionVersionArn:     ptr.String("__FunctionDefinitionVersionArn__"),
+			LoggerDefinitionVersionArn:       ptr.String("__LoggerDefinitionVersionArn__"),
+			ResourceDefinitionVersionArn:     ptr.String("__ResourceDefinitionVersionArn__"),
+			SubscriptionDefinitionVersionArn: ptr.String("__SubscriptionDefinitionVersionArn__"),
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +737,10 @@ func TestCheckResponseSnapshot_CreateGroupCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroupCertificateAuthority(context.Background(), &CreateGroupCertificateAuthorityInput{})
+	got, err := svc.CreateGroupCertificateAuthority(context.Background(), &CreateGroupCertificateAuthorityInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		GroupId:         ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -437,7 +764,17 @@ func TestCheckResponseSnapshot_CreateGroupVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroupVersion(context.Background(), &CreateGroupVersionInput{})
+	got, err := svc.CreateGroupVersion(context.Background(), &CreateGroupVersionInput{
+		AmznClientToken:                  ptr.String("__AmznClientToken__"),
+		ConnectorDefinitionVersionArn:    ptr.String("__ConnectorDefinitionVersionArn__"),
+		CoreDefinitionVersionArn:         ptr.String("__CoreDefinitionVersionArn__"),
+		DeviceDefinitionVersionArn:       ptr.String("__DeviceDefinitionVersionArn__"),
+		FunctionDefinitionVersionArn:     ptr.String("__FunctionDefinitionVersionArn__"),
+		GroupId:                          ptr.String("__GroupId__"),
+		LoggerDefinitionVersionArn:       ptr.String("__LoggerDefinitionVersionArn__"),
+		ResourceDefinitionVersionArn:     ptr.String("__ResourceDefinitionVersionArn__"),
+		SubscriptionDefinitionVersionArn: ptr.String("__SubscriptionDefinitionVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +801,31 @@ func TestCheckResponseSnapshot_CreateLoggerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoggerDefinition(context.Background(), &CreateLoggerDefinitionInput{})
+	got, err := svc.CreateLoggerDefinition(context.Background(), &CreateLoggerDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.LoggerDefinitionVersion{
+			Loggers: []types.Logger{
+				{
+					Component: types.LoggerComponent("GreengrassSystem"),
+					Id:        ptr.String("__Id__"),
+					Level:     types.LoggerLevel("DEBUG"),
+					Space:     ptr.Int32(1),
+					Type:      types.LoggerType("FileSystem"),
+				},
+				{
+					Component: types.LoggerComponent("GreengrassSystem"),
+					Id:        ptr.String("__Id__"),
+					Level:     types.LoggerLevel("DEBUG"),
+					Space:     ptr.Int32(1),
+					Type:      types.LoggerType("FileSystem"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +849,26 @@ func TestCheckResponseSnapshot_CreateLoggerDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoggerDefinitionVersion(context.Background(), &CreateLoggerDefinitionVersionInput{})
+	got, err := svc.CreateLoggerDefinitionVersion(context.Background(), &CreateLoggerDefinitionVersionInput{
+		AmznClientToken:    ptr.String("__AmznClientToken__"),
+		LoggerDefinitionId: ptr.String("__LoggerDefinitionId__"),
+		Loggers: []types.Logger{
+			{
+				Component: types.LoggerComponent("GreengrassSystem"),
+				Id:        ptr.String("__Id__"),
+				Level:     types.LoggerLevel("DEBUG"),
+				Space:     ptr.Int32(1),
+				Type:      types.LoggerType("FileSystem"),
+			},
+			{
+				Component: types.LoggerComponent("GreengrassSystem"),
+				Id:        ptr.String("__Id__"),
+				Level:     types.LoggerLevel("DEBUG"),
+				Space:     ptr.Int32(1),
+				Type:      types.LoggerType("FileSystem"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -515,7 +895,105 @@ func TestCheckResponseSnapshot_CreateResourceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceDefinition(context.Background(), &CreateResourceDefinitionInput{})
+	got, err := svc.CreateResourceDefinition(context.Background(), &CreateResourceDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.ResourceDefinitionVersion{
+			Resources: []types.Resource{
+				{
+					Id:   ptr.String("__Id__"),
+					Name: ptr.String("__Name__"),
+					ResourceDataContainer: &types.ResourceDataContainer{
+						LocalDeviceResourceData: &types.LocalDeviceResourceData{
+							GroupOwnerSetting: &types.GroupOwnerSetting{
+								AutoAddGroupOwner: ptr.Bool(true),
+								GroupOwner:        ptr.String("__GroupOwner__"),
+							},
+							SourcePath: ptr.String("__SourcePath__"),
+						},
+						LocalVolumeResourceData: &types.LocalVolumeResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							GroupOwnerSetting: &types.GroupOwnerSetting{
+								AutoAddGroupOwner: ptr.Bool(true),
+								GroupOwner:        ptr.String("__GroupOwner__"),
+							},
+							SourcePath: ptr.String("__SourcePath__"),
+						},
+						S3MachineLearningModelResourceData: &types.S3MachineLearningModelResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							OwnerSetting: &types.ResourceDownloadOwnerSetting{
+								GroupOwner:      ptr.String("__GroupOwner__"),
+								GroupPermission: types.Permission("ro"),
+							},
+							S3Uri: ptr.String("__S3Uri__"),
+						},
+						SageMakerMachineLearningModelResourceData: &types.SageMakerMachineLearningModelResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							OwnerSetting: &types.ResourceDownloadOwnerSetting{
+								GroupOwner:      ptr.String("__GroupOwner__"),
+								GroupPermission: types.Permission("ro"),
+							},
+							SageMakerJobArn: ptr.String("__SageMakerJobArn__"),
+						},
+						SecretsManagerSecretResourceData: &types.SecretsManagerSecretResourceData{
+							ARN: ptr.String("__ARN__"),
+							AdditionalStagingLabelsToDownload: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Id:   ptr.String("__Id__"),
+					Name: ptr.String("__Name__"),
+					ResourceDataContainer: &types.ResourceDataContainer{
+						LocalDeviceResourceData: &types.LocalDeviceResourceData{
+							GroupOwnerSetting: &types.GroupOwnerSetting{
+								AutoAddGroupOwner: ptr.Bool(true),
+								GroupOwner:        ptr.String("__GroupOwner__"),
+							},
+							SourcePath: ptr.String("__SourcePath__"),
+						},
+						LocalVolumeResourceData: &types.LocalVolumeResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							GroupOwnerSetting: &types.GroupOwnerSetting{
+								AutoAddGroupOwner: ptr.Bool(true),
+								GroupOwner:        ptr.String("__GroupOwner__"),
+							},
+							SourcePath: ptr.String("__SourcePath__"),
+						},
+						S3MachineLearningModelResourceData: &types.S3MachineLearningModelResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							OwnerSetting: &types.ResourceDownloadOwnerSetting{
+								GroupOwner:      ptr.String("__GroupOwner__"),
+								GroupPermission: types.Permission("ro"),
+							},
+							S3Uri: ptr.String("__S3Uri__"),
+						},
+						SageMakerMachineLearningModelResourceData: &types.SageMakerMachineLearningModelResourceData{
+							DestinationPath: ptr.String("__DestinationPath__"),
+							OwnerSetting: &types.ResourceDownloadOwnerSetting{
+								GroupOwner:      ptr.String("__GroupOwner__"),
+								GroupPermission: types.Permission("ro"),
+							},
+							SageMakerJobArn: ptr.String("__SageMakerJobArn__"),
+						},
+						SecretsManagerSecretResourceData: &types.SecretsManagerSecretResourceData{
+							ARN: ptr.String("__ARN__"),
+							AdditionalStagingLabelsToDownload: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +1017,100 @@ func TestCheckResponseSnapshot_CreateResourceDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceDefinitionVersion(context.Background(), &CreateResourceDefinitionVersionInput{})
+	got, err := svc.CreateResourceDefinitionVersion(context.Background(), &CreateResourceDefinitionVersionInput{
+		AmznClientToken:      ptr.String("__AmznClientToken__"),
+		ResourceDefinitionId: ptr.String("__ResourceDefinitionId__"),
+		Resources: []types.Resource{
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				ResourceDataContainer: &types.ResourceDataContainer{
+					LocalDeviceResourceData: &types.LocalDeviceResourceData{
+						GroupOwnerSetting: &types.GroupOwnerSetting{
+							AutoAddGroupOwner: ptr.Bool(true),
+							GroupOwner:        ptr.String("__GroupOwner__"),
+						},
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					LocalVolumeResourceData: &types.LocalVolumeResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						GroupOwnerSetting: &types.GroupOwnerSetting{
+							AutoAddGroupOwner: ptr.Bool(true),
+							GroupOwner:        ptr.String("__GroupOwner__"),
+						},
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					S3MachineLearningModelResourceData: &types.S3MachineLearningModelResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						OwnerSetting: &types.ResourceDownloadOwnerSetting{
+							GroupOwner:      ptr.String("__GroupOwner__"),
+							GroupPermission: types.Permission("ro"),
+						},
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+					SageMakerMachineLearningModelResourceData: &types.SageMakerMachineLearningModelResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						OwnerSetting: &types.ResourceDownloadOwnerSetting{
+							GroupOwner:      ptr.String("__GroupOwner__"),
+							GroupPermission: types.Permission("ro"),
+						},
+						SageMakerJobArn: ptr.String("__SageMakerJobArn__"),
+					},
+					SecretsManagerSecretResourceData: &types.SecretsManagerSecretResourceData{
+						ARN: ptr.String("__ARN__"),
+						AdditionalStagingLabelsToDownload: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				ResourceDataContainer: &types.ResourceDataContainer{
+					LocalDeviceResourceData: &types.LocalDeviceResourceData{
+						GroupOwnerSetting: &types.GroupOwnerSetting{
+							AutoAddGroupOwner: ptr.Bool(true),
+							GroupOwner:        ptr.String("__GroupOwner__"),
+						},
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					LocalVolumeResourceData: &types.LocalVolumeResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						GroupOwnerSetting: &types.GroupOwnerSetting{
+							AutoAddGroupOwner: ptr.Bool(true),
+							GroupOwner:        ptr.String("__GroupOwner__"),
+						},
+						SourcePath: ptr.String("__SourcePath__"),
+					},
+					S3MachineLearningModelResourceData: &types.S3MachineLearningModelResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						OwnerSetting: &types.ResourceDownloadOwnerSetting{
+							GroupOwner:      ptr.String("__GroupOwner__"),
+							GroupPermission: types.Permission("ro"),
+						},
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+					SageMakerMachineLearningModelResourceData: &types.SageMakerMachineLearningModelResourceData{
+						DestinationPath: ptr.String("__DestinationPath__"),
+						OwnerSetting: &types.ResourceDownloadOwnerSetting{
+							GroupOwner:      ptr.String("__GroupOwner__"),
+							GroupPermission: types.Permission("ro"),
+						},
+						SageMakerJobArn: ptr.String("__SageMakerJobArn__"),
+					},
+					SecretsManagerSecretResourceData: &types.SecretsManagerSecretResourceData{
+						ARN: ptr.String("__ARN__"),
+						AdditionalStagingLabelsToDownload: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +1133,18 @@ func TestCheckResponseSnapshot_CreateSoftwareUpdateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSoftwareUpdateJob(context.Background(), &CreateSoftwareUpdateJobInput{})
+	got, err := svc.CreateSoftwareUpdateJob(context.Background(), &CreateSoftwareUpdateJobInput{
+		AmznClientToken:     ptr.String("__AmznClientToken__"),
+		S3UrlSignerRole:     ptr.String("__S3UrlSignerRole__"),
+		SoftwareToUpdate:    types.SoftwareToUpdate("core"),
+		UpdateAgentLogLevel: types.UpdateAgentLogLevel("NONE"),
+		UpdateTargets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UpdateTargetsArchitecture:    types.UpdateTargetsArchitecture("armv6l"),
+		UpdateTargetsOperatingSystem: types.UpdateTargetsOperatingSystem("ubuntu"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +1171,29 @@ func TestCheckResponseSnapshot_CreateSubscriptionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriptionDefinition(context.Background(), &CreateSubscriptionDefinitionInput{})
+	got, err := svc.CreateSubscriptionDefinition(context.Background(), &CreateSubscriptionDefinitionInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		InitialVersion: &types.SubscriptionDefinitionVersion{
+			Subscriptions: []types.Subscription{
+				{
+					Id:      ptr.String("__Id__"),
+					Source:  ptr.String("__Source__"),
+					Subject: ptr.String("__Subject__"),
+					Target:  ptr.String("__Target__"),
+				},
+				{
+					Id:      ptr.String("__Id__"),
+					Source:  ptr.String("__Source__"),
+					Subject: ptr.String("__Subject__"),
+					Target:  ptr.String("__Target__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +1217,24 @@ func TestCheckResponseSnapshot_CreateSubscriptionDefinitionVersion(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriptionDefinitionVersion(context.Background(), &CreateSubscriptionDefinitionVersionInput{})
+	got, err := svc.CreateSubscriptionDefinitionVersion(context.Background(), &CreateSubscriptionDefinitionVersionInput{
+		AmznClientToken:          ptr.String("__AmznClientToken__"),
+		SubscriptionDefinitionId: ptr.String("__SubscriptionDefinitionId__"),
+		Subscriptions: []types.Subscription{
+			{
+				Id:      ptr.String("__Id__"),
+				Source:  ptr.String("__Source__"),
+				Subject: ptr.String("__Subject__"),
+				Target:  ptr.String("__Target__"),
+			},
+			{
+				Id:      ptr.String("__Id__"),
+				Source:  ptr.String("__Source__"),
+				Subject: ptr.String("__Subject__"),
+				Target:  ptr.String("__Target__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -632,7 +1253,9 @@ func TestCheckResponseSnapshot_DeleteConnectorDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectorDefinition(context.Background(), &DeleteConnectorDefinitionInput{})
+	got, err := svc.DeleteConnectorDefinition(context.Background(), &DeleteConnectorDefinitionInput{
+		ConnectorDefinitionId: ptr.String("__ConnectorDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -651,7 +1274,9 @@ func TestCheckResponseSnapshot_DeleteCoreDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCoreDefinition(context.Background(), &DeleteCoreDefinitionInput{})
+	got, err := svc.DeleteCoreDefinition(context.Background(), &DeleteCoreDefinitionInput{
+		CoreDefinitionId: ptr.String("__CoreDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -670,7 +1295,9 @@ func TestCheckResponseSnapshot_DeleteDeviceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeviceDefinition(context.Background(), &DeleteDeviceDefinitionInput{})
+	got, err := svc.DeleteDeviceDefinition(context.Background(), &DeleteDeviceDefinitionInput{
+		DeviceDefinitionId: ptr.String("__DeviceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +1316,9 @@ func TestCheckResponseSnapshot_DeleteFunctionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunctionDefinition(context.Background(), &DeleteFunctionDefinitionInput{})
+	got, err := svc.DeleteFunctionDefinition(context.Background(), &DeleteFunctionDefinitionInput{
+		FunctionDefinitionId: ptr.String("__FunctionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +1337,9 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -727,7 +1358,9 @@ func TestCheckResponseSnapshot_DeleteLoggerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoggerDefinition(context.Background(), &DeleteLoggerDefinitionInput{})
+	got, err := svc.DeleteLoggerDefinition(context.Background(), &DeleteLoggerDefinitionInput{
+		LoggerDefinitionId: ptr.String("__LoggerDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +1379,9 @@ func TestCheckResponseSnapshot_DeleteResourceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceDefinition(context.Background(), &DeleteResourceDefinitionInput{})
+	got, err := svc.DeleteResourceDefinition(context.Background(), &DeleteResourceDefinitionInput{
+		ResourceDefinitionId: ptr.String("__ResourceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -765,7 +1400,9 @@ func TestCheckResponseSnapshot_DeleteSubscriptionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriptionDefinition(context.Background(), &DeleteSubscriptionDefinitionInput{})
+	got, err := svc.DeleteSubscriptionDefinition(context.Background(), &DeleteSubscriptionDefinitionInput{
+		SubscriptionDefinitionId: ptr.String("__SubscriptionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +1423,9 @@ func TestCheckResponseSnapshot_DisassociateRoleFromGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateRoleFromGroup(context.Background(), &DisassociateRoleFromGroupInput{})
+	got, err := svc.DisassociateRoleFromGroup(context.Background(), &DisassociateRoleFromGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +1468,9 @@ func TestCheckResponseSnapshot_GetAssociatedRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssociatedRole(context.Background(), &GetAssociatedRoleInput{})
+	got, err := svc.GetAssociatedRole(context.Background(), &GetAssociatedRoleInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1511,9 @@ func TestCheckResponseSnapshot_GetBulkDeploymentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBulkDeploymentStatus(context.Background(), &GetBulkDeploymentStatusInput{})
+	got, err := svc.GetBulkDeploymentStatus(context.Background(), &GetBulkDeploymentStatusInput{
+		BulkDeploymentId: ptr.String("__BulkDeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -905,7 +1548,9 @@ func TestCheckResponseSnapshot_GetConnectivityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectivityInfo(context.Background(), &GetConnectivityInfoInput{})
+	got, err := svc.GetConnectivityInfo(context.Background(), &GetConnectivityInfoInput{
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1580,9 @@ func TestCheckResponseSnapshot_GetConnectorDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectorDefinition(context.Background(), &GetConnectorDefinitionInput{})
+	got, err := svc.GetConnectorDefinition(context.Background(), &GetConnectorDefinitionInput{
+		ConnectorDefinitionId: ptr.String("__ConnectorDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1625,11 @@ func TestCheckResponseSnapshot_GetConnectorDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectorDefinitionVersion(context.Background(), &GetConnectorDefinitionVersionInput{})
+	got, err := svc.GetConnectorDefinitionVersion(context.Background(), &GetConnectorDefinitionVersionInput{
+		ConnectorDefinitionId:        ptr.String("__ConnectorDefinitionId__"),
+		ConnectorDefinitionVersionId: ptr.String("__ConnectorDefinitionVersionId__"),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1659,9 @@ func TestCheckResponseSnapshot_GetCoreDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreDefinition(context.Background(), &GetCoreDefinitionInput{})
+	got, err := svc.GetCoreDefinition(context.Background(), &GetCoreDefinitionInput{
+		CoreDefinitionId: ptr.String("__CoreDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1702,10 @@ func TestCheckResponseSnapshot_GetCoreDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreDefinitionVersion(context.Background(), &GetCoreDefinitionVersionInput{})
+	got, err := svc.GetCoreDefinitionVersion(context.Background(), &GetCoreDefinitionVersionInput{
+		CoreDefinitionId:        ptr.String("__CoreDefinitionId__"),
+		CoreDefinitionVersionId: ptr.String("__CoreDefinitionVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1739,10 @@ func TestCheckResponseSnapshot_GetDeploymentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentStatus(context.Background(), &GetDeploymentStatusInput{})
+	got, err := svc.GetDeploymentStatus(context.Background(), &GetDeploymentStatusInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		GroupId:      ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1113,7 +1772,9 @@ func TestCheckResponseSnapshot_GetDeviceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeviceDefinition(context.Background(), &GetDeviceDefinitionInput{})
+	got, err := svc.GetDeviceDefinition(context.Background(), &GetDeviceDefinitionInput{
+		DeviceDefinitionId: ptr.String("__DeviceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1154,7 +1815,11 @@ func TestCheckResponseSnapshot_GetDeviceDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeviceDefinitionVersion(context.Background(), &GetDeviceDefinitionVersionInput{})
+	got, err := svc.GetDeviceDefinitionVersion(context.Background(), &GetDeviceDefinitionVersionInput{
+		DeviceDefinitionId:        ptr.String("__DeviceDefinitionId__"),
+		DeviceDefinitionVersionId: ptr.String("__DeviceDefinitionVersionId__"),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1184,7 +1849,9 @@ func TestCheckResponseSnapshot_GetFunctionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionDefinition(context.Background(), &GetFunctionDefinitionInput{})
+	got, err := svc.GetFunctionDefinition(context.Background(), &GetFunctionDefinitionInput{
+		FunctionDefinitionId: ptr.String("__FunctionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1294,7 +1961,11 @@ func TestCheckResponseSnapshot_GetFunctionDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunctionDefinitionVersion(context.Background(), &GetFunctionDefinitionVersionInput{})
+	got, err := svc.GetFunctionDefinitionVersion(context.Background(), &GetFunctionDefinitionVersionInput{
+		FunctionDefinitionId:        ptr.String("__FunctionDefinitionId__"),
+		FunctionDefinitionVersionId: ptr.String("__FunctionDefinitionVersionId__"),
+		NextToken:                   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1324,7 +1995,9 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1347,7 +2020,10 @@ func TestCheckResponseSnapshot_GetGroupCertificateAuthority(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupCertificateAuthority(context.Background(), &GetGroupCertificateAuthorityInput{})
+	got, err := svc.GetGroupCertificateAuthority(context.Background(), &GetGroupCertificateAuthorityInput{
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		GroupId:                ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +2046,9 @@ func TestCheckResponseSnapshot_GetGroupCertificateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupCertificateConfiguration(context.Background(), &GetGroupCertificateConfigurationInput{})
+	got, err := svc.GetGroupCertificateConfiguration(context.Background(), &GetGroupCertificateConfigurationInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1403,7 +2081,10 @@ func TestCheckResponseSnapshot_GetGroupVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupVersion(context.Background(), &GetGroupVersionInput{})
+	got, err := svc.GetGroupVersion(context.Background(), &GetGroupVersionInput{
+		GroupId:        ptr.String("__GroupId__"),
+		GroupVersionId: ptr.String("__GroupVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +2114,9 @@ func TestCheckResponseSnapshot_GetLoggerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoggerDefinition(context.Background(), &GetLoggerDefinitionInput{})
+	got, err := svc.GetLoggerDefinition(context.Background(), &GetLoggerDefinitionInput{
+		LoggerDefinitionId: ptr.String("__LoggerDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1475,7 +2158,11 @@ func TestCheckResponseSnapshot_GetLoggerDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoggerDefinitionVersion(context.Background(), &GetLoggerDefinitionVersionInput{})
+	got, err := svc.GetLoggerDefinitionVersion(context.Background(), &GetLoggerDefinitionVersionInput{
+		LoggerDefinitionId:        ptr.String("__LoggerDefinitionId__"),
+		LoggerDefinitionVersionId: ptr.String("__LoggerDefinitionVersionId__"),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1505,7 +2192,9 @@ func TestCheckResponseSnapshot_GetResourceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceDefinition(context.Background(), &GetResourceDefinitionInput{})
+	got, err := svc.GetResourceDefinition(context.Background(), &GetResourceDefinitionInput{
+		ResourceDefinitionId: ptr.String("__ResourceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1621,7 +2310,10 @@ func TestCheckResponseSnapshot_GetResourceDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceDefinitionVersion(context.Background(), &GetResourceDefinitionVersionInput{})
+	got, err := svc.GetResourceDefinitionVersion(context.Background(), &GetResourceDefinitionVersionInput{
+		ResourceDefinitionId:        ptr.String("__ResourceDefinitionId__"),
+		ResourceDefinitionVersionId: ptr.String("__ResourceDefinitionVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1673,7 +2365,9 @@ func TestCheckResponseSnapshot_GetSubscriptionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionDefinition(context.Background(), &GetSubscriptionDefinitionInput{})
+	got, err := svc.GetSubscriptionDefinition(context.Background(), &GetSubscriptionDefinitionInput{
+		SubscriptionDefinitionId: ptr.String("__SubscriptionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1714,7 +2408,11 @@ func TestCheckResponseSnapshot_GetSubscriptionDefinitionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionDefinitionVersion(context.Background(), &GetSubscriptionDefinitionVersionInput{})
+	got, err := svc.GetSubscriptionDefinitionVersion(context.Background(), &GetSubscriptionDefinitionVersionInput{
+		NextToken:                       ptr.String("__NextToken__"),
+		SubscriptionDefinitionId:        ptr.String("__SubscriptionDefinitionId__"),
+		SubscriptionDefinitionVersionId: ptr.String("__SubscriptionDefinitionVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1740,7 +2438,9 @@ func TestCheckResponseSnapshot_GetThingRuntimeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThingRuntimeConfiguration(context.Background(), &GetThingRuntimeConfigurationInput{})
+	got, err := svc.GetThingRuntimeConfiguration(context.Background(), &GetThingRuntimeConfigurationInput{
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1801,7 +2501,11 @@ func TestCheckResponseSnapshot_ListBulkDeploymentDetailedReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBulkDeploymentDetailedReports(context.Background(), &ListBulkDeploymentDetailedReportsInput{})
+	got, err := svc.ListBulkDeploymentDetailedReports(context.Background(), &ListBulkDeploymentDetailedReportsInput{
+		BulkDeploymentId: ptr.String("__BulkDeploymentId__"),
+		MaxResults:       ptr.String("__MaxResults__"),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1834,7 +2538,10 @@ func TestCheckResponseSnapshot_ListBulkDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBulkDeployments(context.Background(), &ListBulkDeploymentsInput{})
+	got, err := svc.ListBulkDeployments(context.Background(), &ListBulkDeploymentsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1869,7 +2576,11 @@ func TestCheckResponseSnapshot_ListConnectorDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectorDefinitionVersions(context.Background(), &ListConnectorDefinitionVersionsInput{})
+	got, err := svc.ListConnectorDefinitionVersions(context.Background(), &ListConnectorDefinitionVersionsInput{
+		ConnectorDefinitionId: ptr.String("__ConnectorDefinitionId__"),
+		MaxResults:            ptr.String("__MaxResults__"),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1916,7 +2627,10 @@ func TestCheckResponseSnapshot_ListConnectorDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectorDefinitions(context.Background(), &ListConnectorDefinitionsInput{})
+	got, err := svc.ListConnectorDefinitions(context.Background(), &ListConnectorDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1951,7 +2665,11 @@ func TestCheckResponseSnapshot_ListCoreDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreDefinitionVersions(context.Background(), &ListCoreDefinitionVersionsInput{})
+	got, err := svc.ListCoreDefinitionVersions(context.Background(), &ListCoreDefinitionVersionsInput{
+		CoreDefinitionId: ptr.String("__CoreDefinitionId__"),
+		MaxResults:       ptr.String("__MaxResults__"),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1998,7 +2716,10 @@ func TestCheckResponseSnapshot_ListCoreDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreDefinitions(context.Background(), &ListCoreDefinitionsInput{})
+	got, err := svc.ListCoreDefinitions(context.Background(), &ListCoreDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2035,7 +2756,11 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		GroupId:    ptr.String("__GroupId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2070,7 +2795,11 @@ func TestCheckResponseSnapshot_ListDeviceDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeviceDefinitionVersions(context.Background(), &ListDeviceDefinitionVersionsInput{})
+	got, err := svc.ListDeviceDefinitionVersions(context.Background(), &ListDeviceDefinitionVersionsInput{
+		DeviceDefinitionId: ptr.String("__DeviceDefinitionId__"),
+		MaxResults:         ptr.String("__MaxResults__"),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2117,7 +2846,10 @@ func TestCheckResponseSnapshot_ListDeviceDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeviceDefinitions(context.Background(), &ListDeviceDefinitionsInput{})
+	got, err := svc.ListDeviceDefinitions(context.Background(), &ListDeviceDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2152,7 +2884,11 @@ func TestCheckResponseSnapshot_ListFunctionDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionDefinitionVersions(context.Background(), &ListFunctionDefinitionVersionsInput{})
+	got, err := svc.ListFunctionDefinitionVersions(context.Background(), &ListFunctionDefinitionVersionsInput{
+		FunctionDefinitionId: ptr.String("__FunctionDefinitionId__"),
+		MaxResults:           ptr.String("__MaxResults__"),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2199,7 +2935,10 @@ func TestCheckResponseSnapshot_ListFunctionDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctionDefinitions(context.Background(), &ListFunctionDefinitionsInput{})
+	got, err := svc.ListFunctionDefinitions(context.Background(), &ListFunctionDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2229,7 +2968,9 @@ func TestCheckResponseSnapshot_ListGroupCertificateAuthorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupCertificateAuthorities(context.Background(), &ListGroupCertificateAuthoritiesInput{})
+	got, err := svc.ListGroupCertificateAuthorities(context.Background(), &ListGroupCertificateAuthoritiesInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +3005,11 @@ func TestCheckResponseSnapshot_ListGroupVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupVersions(context.Background(), &ListGroupVersionsInput{})
+	got, err := svc.ListGroupVersions(context.Background(), &ListGroupVersionsInput{
+		GroupId:    ptr.String("__GroupId__"),
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2305,7 +3050,10 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2340,7 +3088,11 @@ func TestCheckResponseSnapshot_ListLoggerDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoggerDefinitionVersions(context.Background(), &ListLoggerDefinitionVersionsInput{})
+	got, err := svc.ListLoggerDefinitionVersions(context.Background(), &ListLoggerDefinitionVersionsInput{
+		LoggerDefinitionId: ptr.String("__LoggerDefinitionId__"),
+		MaxResults:         ptr.String("__MaxResults__"),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2387,7 +3139,10 @@ func TestCheckResponseSnapshot_ListLoggerDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoggerDefinitions(context.Background(), &ListLoggerDefinitionsInput{})
+	got, err := svc.ListLoggerDefinitions(context.Background(), &ListLoggerDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2422,7 +3177,11 @@ func TestCheckResponseSnapshot_ListResourceDefinitionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceDefinitionVersions(context.Background(), &ListResourceDefinitionVersionsInput{})
+	got, err := svc.ListResourceDefinitionVersions(context.Background(), &ListResourceDefinitionVersionsInput{
+		MaxResults:           ptr.String("__MaxResults__"),
+		NextToken:            ptr.String("__NextToken__"),
+		ResourceDefinitionId: ptr.String("__ResourceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2469,7 +3228,10 @@ func TestCheckResponseSnapshot_ListResourceDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceDefinitions(context.Background(), &ListResourceDefinitionsInput{})
+	got, err := svc.ListResourceDefinitions(context.Background(), &ListResourceDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2504,7 +3266,11 @@ func TestCheckResponseSnapshot_ListSubscriptionDefinitionVersions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionDefinitionVersions(context.Background(), &ListSubscriptionDefinitionVersionsInput{})
+	got, err := svc.ListSubscriptionDefinitionVersions(context.Background(), &ListSubscriptionDefinitionVersionsInput{
+		MaxResults:               ptr.String("__MaxResults__"),
+		NextToken:                ptr.String("__NextToken__"),
+		SubscriptionDefinitionId: ptr.String("__SubscriptionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2551,7 +3317,10 @@ func TestCheckResponseSnapshot_ListSubscriptionDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionDefinitions(context.Background(), &ListSubscriptionDefinitionsInput{})
+	got, err := svc.ListSubscriptionDefinitions(context.Background(), &ListSubscriptionDefinitionsInput{
+		MaxResults: ptr.String("__MaxResults__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2574,7 +3343,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2596,7 +3367,11 @@ func TestCheckResponseSnapshot_ResetDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetDeployments(context.Background(), &ResetDeploymentsInput{})
+	got, err := svc.ResetDeployments(context.Background(), &ResetDeploymentsInput{
+		AmznClientToken: ptr.String("__AmznClientToken__"),
+		Force:           ptr.Bool(true),
+		GroupId:         ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2618,7 +3393,14 @@ func TestCheckResponseSnapshot_StartBulkDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBulkDeployment(context.Background(), &StartBulkDeploymentInput{})
+	got, err := svc.StartBulkDeployment(context.Background(), &StartBulkDeploymentInput{
+		AmznClientToken:  ptr.String("__AmznClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		InputFileUri:     ptr.String("__InputFileUri__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2637,7 +3419,9 @@ func TestCheckResponseSnapshot_StopBulkDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBulkDeployment(context.Background(), &StopBulkDeploymentInput{})
+	got, err := svc.StopBulkDeployment(context.Background(), &StopBulkDeploymentInput{
+		BulkDeploymentId: ptr.String("__BulkDeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2656,7 +3440,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2675,7 +3464,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2697,7 +3492,23 @@ func TestCheckResponseSnapshot_UpdateConnectivityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectivityInfo(context.Background(), &UpdateConnectivityInfoInput{})
+	got, err := svc.UpdateConnectivityInfo(context.Background(), &UpdateConnectivityInfoInput{
+		ConnectivityInfo: []types.ConnectivityInfo{
+			{
+				HostAddress: ptr.String("__HostAddress__"),
+				Id:          ptr.String("__Id__"),
+				Metadata:    ptr.String("__Metadata__"),
+				PortNumber:  ptr.Int32(1),
+			},
+			{
+				HostAddress: ptr.String("__HostAddress__"),
+				Id:          ptr.String("__Id__"),
+				Metadata:    ptr.String("__Metadata__"),
+				PortNumber:  ptr.Int32(1),
+			},
+		},
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2716,7 +3527,10 @@ func TestCheckResponseSnapshot_UpdateConnectorDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectorDefinition(context.Background(), &UpdateConnectorDefinitionInput{})
+	got, err := svc.UpdateConnectorDefinition(context.Background(), &UpdateConnectorDefinitionInput{
+		ConnectorDefinitionId: ptr.String("__ConnectorDefinitionId__"),
+		Name:                  ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2735,7 +3549,10 @@ func TestCheckResponseSnapshot_UpdateCoreDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCoreDefinition(context.Background(), &UpdateCoreDefinitionInput{})
+	got, err := svc.UpdateCoreDefinition(context.Background(), &UpdateCoreDefinitionInput{
+		CoreDefinitionId: ptr.String("__CoreDefinitionId__"),
+		Name:             ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2754,7 +3571,10 @@ func TestCheckResponseSnapshot_UpdateDeviceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeviceDefinition(context.Background(), &UpdateDeviceDefinitionInput{})
+	got, err := svc.UpdateDeviceDefinition(context.Background(), &UpdateDeviceDefinitionInput{
+		DeviceDefinitionId: ptr.String("__DeviceDefinitionId__"),
+		Name:               ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2773,7 +3593,10 @@ func TestCheckResponseSnapshot_UpdateFunctionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunctionDefinition(context.Background(), &UpdateFunctionDefinitionInput{})
+	got, err := svc.UpdateFunctionDefinition(context.Background(), &UpdateFunctionDefinitionInput{
+		FunctionDefinitionId: ptr.String("__FunctionDefinitionId__"),
+		Name:                 ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2792,7 +3615,10 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+		Name:    ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2815,7 +3641,10 @@ func TestCheckResponseSnapshot_UpdateGroupCertificateConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroupCertificateConfiguration(context.Background(), &UpdateGroupCertificateConfigurationInput{})
+	got, err := svc.UpdateGroupCertificateConfiguration(context.Background(), &UpdateGroupCertificateConfigurationInput{
+		CertificateExpiryInMilliseconds: ptr.String("__CertificateExpiryInMilliseconds__"),
+		GroupId:                         ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2834,7 +3663,10 @@ func TestCheckResponseSnapshot_UpdateLoggerDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLoggerDefinition(context.Background(), &UpdateLoggerDefinitionInput{})
+	got, err := svc.UpdateLoggerDefinition(context.Background(), &UpdateLoggerDefinitionInput{
+		LoggerDefinitionId: ptr.String("__LoggerDefinitionId__"),
+		Name:               ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2853,7 +3685,10 @@ func TestCheckResponseSnapshot_UpdateResourceDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceDefinition(context.Background(), &UpdateResourceDefinitionInput{})
+	got, err := svc.UpdateResourceDefinition(context.Background(), &UpdateResourceDefinitionInput{
+		Name:                 ptr.String("__Name__"),
+		ResourceDefinitionId: ptr.String("__ResourceDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2872,7 +3707,10 @@ func TestCheckResponseSnapshot_UpdateSubscriptionDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriptionDefinition(context.Background(), &UpdateSubscriptionDefinitionInput{})
+	got, err := svc.UpdateSubscriptionDefinition(context.Background(), &UpdateSubscriptionDefinitionInput{
+		Name:                     ptr.String("__Name__"),
+		SubscriptionDefinitionId: ptr.String("__SubscriptionDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2891,7 +3729,12 @@ func TestCheckResponseSnapshot_UpdateThingRuntimeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThingRuntimeConfiguration(context.Background(), &UpdateThingRuntimeConfigurationInput{})
+	got, err := svc.UpdateThingRuntimeConfiguration(context.Background(), &UpdateThingRuntimeConfigurationInput{
+		TelemetryConfiguration: &types.TelemetryConfigurationUpdate{
+			Telemetry: types.Telemetry("On"),
+		},
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2922,7 +3765,10 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{})
+	_, opErr := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2957,7 +3803,10 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{})
+	_, opErr := svc.AssociateRoleToGroup(context.Background(), &AssociateRoleToGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

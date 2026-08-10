@@ -7,8 +7,10 @@ package bedrockagent
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AssociateAgentCollaborator(t *testing.T) {
 	input := &AssociateAgentCollaboratorInput{
@@ -286,7 +310,7 @@ func TestCheckRequestSnapshot_CreateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 				{
 					PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -305,7 +329,7 @@ func TestCheckRequestSnapshot_CreateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 			},
 			OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -489,7 +513,7 @@ func TestCheckRequestSnapshot_CreateDataSource(t *testing.T) {
 						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 					},
 				},
-				ConnectorParameters: nil,
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),
@@ -1305,7 +1329,7 @@ func TestCheckRequestSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -1353,7 +1377,7 @@ func TestCheckRequestSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -3162,7 +3186,7 @@ func TestCheckRequestSnapshot_UpdateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 				{
 					PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -3181,7 +3205,7 @@ func TestCheckRequestSnapshot_UpdateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 			},
 			OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -3429,7 +3453,7 @@ func TestCheckRequestSnapshot_UpdateDataSource(t *testing.T) {
 						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 					},
 				},
-				ConnectorParameters: nil,
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),
@@ -4207,7 +4231,7 @@ func TestCheckRequestSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -4255,7 +4279,7 @@ func TestCheckRequestSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -4509,7 +4533,7 @@ func TestUpdateRequestSnapshot_CreateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 				{
 					PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -4528,7 +4552,7 @@ func TestUpdateRequestSnapshot_CreateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 			},
 			OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -4712,7 +4736,7 @@ func TestUpdateRequestSnapshot_CreateDataSource(t *testing.T) {
 						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 					},
 				},
-				ConnectorParameters: nil,
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),
@@ -5528,7 +5552,7 @@ func TestUpdateRequestSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -5576,7 +5600,7 @@ func TestUpdateRequestSnapshot_CreatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -7385,7 +7409,7 @@ func TestUpdateRequestSnapshot_UpdateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 				{
 					PromptType:         types.PromptType("PRE_PROCESSING"),
@@ -7404,7 +7428,7 @@ func TestUpdateRequestSnapshot_UpdateAgent(t *testing.T) {
 					},
 					ParserMode:                   types.CreationMode("DEFAULT"),
 					FoundationModel:              ptr.String("__FoundationModel__"),
-					AdditionalModelRequestFields: nil,
+					AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				},
 			},
 			OverrideLambda: ptr.String("__OverrideLambda__"),
@@ -7652,7 +7676,7 @@ func TestUpdateRequestSnapshot_UpdateDataSource(t *testing.T) {
 						VideoExtractionStatus: types.EnabledOrDisabledState("ENABLED"),
 					},
 				},
-				ConnectorParameters: nil,
+				ConnectorParameters: document.NewLazyDocument("__Document__"),
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),
@@ -8430,7 +8454,7 @@ func TestUpdateRequestSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),
@@ -8478,7 +8502,7 @@ func TestUpdateRequestSnapshot_UpdatePrompt(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				AdditionalModelRequestFields: nil,
+				AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 				GenAiResource: &types.PromptGenAiResourceMemberAgent{
 					Value: types.PromptAgentResource{
 						AgentIdentifier: ptr.String("__AgentIdentifier__"),

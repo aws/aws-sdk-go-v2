@@ -116,7 +116,10 @@ func TestCheckResponseSnapshot_AssociateToConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{})
+	got, err := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{
+		Resource:          ptr.String("__Resource__"),
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +162,27 @@ func TestCheckResponseSnapshot_CreateChimeWebhookConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{})
+	got, err := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{
+		WebhookDescription: ptr.String("__WebhookDescription__"),
+		WebhookUrl:         ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +203,64 @@ func TestCheckResponseSnapshot_CreateCustomAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomAction(context.Background(), &CreateCustomActionInput{})
+	got, err := svc.CreateCustomAction(context.Background(), &CreateCustomActionInput{
+		Definition: &types.CustomActionDefinition{
+			CommandText: ptr.String("__CommandText__"),
+		},
+		AliasName: ptr.String("__AliasName__"),
+		Attachments: []types.CustomActionAttachment{
+			{
+				NotificationType: ptr.String("__NotificationType__"),
+				ButtonText:       ptr.String("__ButtonText__"),
+				Criteria: []types.CustomActionAttachmentCriteria{
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+				},
+				Variables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				NotificationType: ptr.String("__NotificationType__"),
+				ButtonText:       ptr.String("__ButtonText__"),
+				Criteria: []types.CustomActionAttachmentCriteria{
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+				},
+				Variables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ActionName:  ptr.String("__ActionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +312,35 @@ func TestCheckResponseSnapshot_CreateMicrosoftTeamsChannelConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMicrosoftTeamsChannelConfiguration(context.Background(), &CreateMicrosoftTeamsChannelConfigurationInput{})
+	got, err := svc.CreateMicrosoftTeamsChannelConfiguration(context.Background(), &CreateMicrosoftTeamsChannelConfigurationInput{
+		ChannelId:   ptr.String("__ChannelId__"),
+		ChannelName: ptr.String("__ChannelName__"),
+		TeamId:      ptr.String("__TeamId__"),
+		TeamName:    ptr.String("__TeamName__"),
+		TenantId:    ptr.String("__TenantId__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +391,33 @@ func TestCheckResponseSnapshot_CreateSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	got, err := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		SlackTeamId:      ptr.String("__SlackTeamId__"),
+		SlackChannelId:   ptr.String("__SlackChannelId__"),
+		SlackChannelName: ptr.String("__SlackChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -302,7 +436,9 @@ func TestCheckResponseSnapshot_DeleteChimeWebhookConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{})
+	got, err := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +457,9 @@ func TestCheckResponseSnapshot_DeleteCustomAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomAction(context.Background(), &DeleteCustomActionInput{})
+	got, err := svc.DeleteCustomAction(context.Background(), &DeleteCustomActionInput{
+		CustomActionArn: ptr.String("__CustomActionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +478,9 @@ func TestCheckResponseSnapshot_DeleteMicrosoftTeamsChannelConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMicrosoftTeamsChannelConfiguration(context.Background(), &DeleteMicrosoftTeamsChannelConfigurationInput{})
+	got, err := svc.DeleteMicrosoftTeamsChannelConfiguration(context.Background(), &DeleteMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +499,9 @@ func TestCheckResponseSnapshot_DeleteMicrosoftTeamsConfiguredTeam(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMicrosoftTeamsConfiguredTeam(context.Background(), &DeleteMicrosoftTeamsConfiguredTeamInput{})
+	got, err := svc.DeleteMicrosoftTeamsConfiguredTeam(context.Background(), &DeleteMicrosoftTeamsConfiguredTeamInput{
+		TeamId: ptr.String("__TeamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +520,10 @@ func TestCheckResponseSnapshot_DeleteMicrosoftTeamsUserIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMicrosoftTeamsUserIdentity(context.Background(), &DeleteMicrosoftTeamsUserIdentityInput{})
+	got, err := svc.DeleteMicrosoftTeamsUserIdentity(context.Background(), &DeleteMicrosoftTeamsUserIdentityInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		UserId:               ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +542,9 @@ func TestCheckResponseSnapshot_DeleteSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{})
+	got, err := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +563,11 @@ func TestCheckResponseSnapshot_DeleteSlackUserIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlackUserIdentity(context.Background(), &DeleteSlackUserIdentityInput{})
+	got, err := svc.DeleteSlackUserIdentity(context.Background(), &DeleteSlackUserIdentityInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		SlackTeamId:          ptr.String("__SlackTeamId__"),
+		SlackUserId:          ptr.String("__SlackUserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +586,9 @@ func TestCheckResponseSnapshot_DeleteSlackWorkspaceAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlackWorkspaceAuthorization(context.Background(), &DeleteSlackWorkspaceAuthorizationInput{})
+	got, err := svc.DeleteSlackWorkspaceAuthorization(context.Background(), &DeleteSlackWorkspaceAuthorizationInput{
+		SlackTeamId: ptr.String("__SlackTeamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +657,11 @@ func TestCheckResponseSnapshot_DescribeChimeWebhookConfigurations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChimeWebhookConfigurations(context.Background(), &DescribeChimeWebhookConfigurationsInput{})
+	got, err := svc.DescribeChimeWebhookConfigurations(context.Background(), &DescribeChimeWebhookConfigurationsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +746,11 @@ func TestCheckResponseSnapshot_DescribeSlackChannelConfigurations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSlackChannelConfigurations(context.Background(), &DescribeSlackChannelConfigurationsInput{})
+	got, err := svc.DescribeSlackChannelConfigurations(context.Background(), &DescribeSlackChannelConfigurationsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +787,11 @@ func TestCheckResponseSnapshot_DescribeSlackUserIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSlackUserIdentities(context.Background(), &DescribeSlackUserIdentitiesInput{})
+	got, err := svc.DescribeSlackUserIdentities(context.Background(), &DescribeSlackUserIdentitiesInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +826,10 @@ func TestCheckResponseSnapshot_DescribeSlackWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSlackWorkspaces(context.Background(), &DescribeSlackWorkspacesInput{})
+	got, err := svc.DescribeSlackWorkspaces(context.Background(), &DescribeSlackWorkspacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +848,10 @@ func TestCheckResponseSnapshot_DisassociateFromConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFromConfiguration(context.Background(), &DisassociateFromConfigurationInput{})
+	got, err := svc.DisassociateFromConfiguration(context.Background(), &DisassociateFromConfigurationInput{
+		Resource:          ptr.String("__Resource__"),
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +943,9 @@ func TestCheckResponseSnapshot_GetCustomAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomAction(context.Background(), &GetCustomActionInput{})
+	got, err := svc.GetCustomAction(context.Background(), &GetCustomActionInput{
+		CustomActionArn: ptr.String("__CustomActionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -824,7 +997,9 @@ func TestCheckResponseSnapshot_GetMicrosoftTeamsChannelConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), &GetMicrosoftTeamsChannelConfigurationInput{})
+	got, err := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), &GetMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1028,11 @@ func TestCheckResponseSnapshot_ListAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociations(context.Background(), &ListAssociationsInput{})
+	got, err := svc.ListAssociations(context.Background(), &ListAssociationsInput{
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1057,10 @@ func TestCheckResponseSnapshot_ListCustomActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomActions(context.Background(), &ListCustomActionsInput{})
+	got, err := svc.ListCustomActions(context.Background(), &ListCustomActionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -965,7 +1147,11 @@ func TestCheckResponseSnapshot_ListMicrosoftTeamsChannelConfigurations(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrosoftTeamsChannelConfigurations(context.Background(), &ListMicrosoftTeamsChannelConfigurationsInput{})
+	got, err := svc.ListMicrosoftTeamsChannelConfigurations(context.Background(), &ListMicrosoftTeamsChannelConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		TeamId:     ptr.String("__TeamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1188,10 @@ func TestCheckResponseSnapshot_ListMicrosoftTeamsConfiguredTeams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrosoftTeamsConfiguredTeams(context.Background(), &ListMicrosoftTeamsConfiguredTeamsInput{})
+	got, err := svc.ListMicrosoftTeamsConfiguredTeams(context.Background(), &ListMicrosoftTeamsConfiguredTeamsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1232,11 @@ func TestCheckResponseSnapshot_ListMicrosoftTeamsUserIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMicrosoftTeamsUserIdentities(context.Background(), &ListMicrosoftTeamsUserIdentitiesInput{})
+	got, err := svc.ListMicrosoftTeamsUserIdentities(context.Background(), &ListMicrosoftTeamsUserIdentitiesInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1073,7 +1266,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1092,7 +1287,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1318,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1135,7 +1348,10 @@ func TestCheckResponseSnapshot_UpdateAccountPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountPreferences(context.Background(), &UpdateAccountPreferencesInput{})
+	got, err := svc.UpdateAccountPreferences(context.Background(), &UpdateAccountPreferencesInput{
+		UserAuthorizationRequired:     ptr.Bool(true),
+		TrainingDataCollectionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1394,17 @@ func TestCheckResponseSnapshot_UpdateChimeWebhookConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChimeWebhookConfiguration(context.Background(), &UpdateChimeWebhookConfigurationInput{})
+	got, err := svc.UpdateChimeWebhookConfiguration(context.Background(), &UpdateChimeWebhookConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		WebhookDescription:   ptr.String("__WebhookDescription__"),
+		WebhookUrl:           ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1199,7 +1425,53 @@ func TestCheckResponseSnapshot_UpdateCustomAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomAction(context.Background(), &UpdateCustomActionInput{})
+	got, err := svc.UpdateCustomAction(context.Background(), &UpdateCustomActionInput{
+		CustomActionArn: ptr.String("__CustomActionArn__"),
+		Definition: &types.CustomActionDefinition{
+			CommandText: ptr.String("__CommandText__"),
+		},
+		AliasName: ptr.String("__AliasName__"),
+		Attachments: []types.CustomActionAttachment{
+			{
+				NotificationType: ptr.String("__NotificationType__"),
+				ButtonText:       ptr.String("__ButtonText__"),
+				Criteria: []types.CustomActionAttachmentCriteria{
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+				},
+				Variables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				NotificationType: ptr.String("__NotificationType__"),
+				ButtonText:       ptr.String("__ButtonText__"),
+				Criteria: []types.CustomActionAttachmentCriteria{
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+					{
+						Operator:     types.CustomActionAttachmentCriteriaOperator("HAS_VALUE"),
+						VariableName: ptr.String("__VariableName__"),
+						Value:        ptr.String("__Value__"),
+					},
+				},
+				Variables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1251,7 +1523,22 @@ func TestCheckResponseSnapshot_UpdateMicrosoftTeamsChannelConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMicrosoftTeamsChannelConfiguration(context.Background(), &UpdateMicrosoftTeamsChannelConfigurationInput{})
+	got, err := svc.UpdateMicrosoftTeamsChannelConfiguration(context.Background(), &UpdateMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		ChannelId:            ptr.String("__ChannelId__"),
+		ChannelName:          ptr.String("__ChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1302,7 +1589,22 @@ func TestCheckResponseSnapshot_UpdateSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{})
+	got, err := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		SlackChannelId:       ptr.String("__SlackChannelId__"),
+		SlackChannelName:     ptr.String("__SlackChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1323,7 +1625,27 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{})
+	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{
+		WebhookDescription: ptr.String("__WebhookDescription__"),
+		WebhookUrl:         ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1348,7 +1670,27 @@ func TestCheckResponseSnapshot_Error_CreateChimeWebhookConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{})
+	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{
+		WebhookDescription: ptr.String("__WebhookDescription__"),
+		WebhookUrl:         ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1373,7 +1715,33 @@ func TestCheckResponseSnapshot_Error_CreateSlackChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		SlackTeamId:      ptr.String("__SlackTeamId__"),
+		SlackChannelId:   ptr.String("__SlackChannelId__"),
+		SlackChannelName: ptr.String("__SlackChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1398,7 +1766,35 @@ func TestCheckResponseSnapshot_Error_CreateTeamsChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrosoftTeamsChannelConfiguration(context.Background(), &CreateMicrosoftTeamsChannelConfigurationInput{})
+	_, opErr := svc.CreateMicrosoftTeamsChannelConfiguration(context.Background(), &CreateMicrosoftTeamsChannelConfigurationInput{
+		ChannelId:   ptr.String("__ChannelId__"),
+		ChannelName: ptr.String("__ChannelName__"),
+		TeamId:      ptr.String("__TeamId__"),
+		TeamName:    ptr.String("__TeamName__"),
+		TenantId:    ptr.String("__TenantId__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1423,7 +1819,9 @@ func TestCheckResponseSnapshot_Error_DeleteChimeWebhookConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{})
+	_, opErr := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1448,7 +1846,10 @@ func TestCheckResponseSnapshot_Error_DeleteMicrosoftTeamsUserIdentityException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMicrosoftTeamsUserIdentity(context.Background(), &DeleteMicrosoftTeamsUserIdentityInput{})
+	_, opErr := svc.DeleteMicrosoftTeamsUserIdentity(context.Background(), &DeleteMicrosoftTeamsUserIdentityInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		UserId:               ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1473,7 +1874,9 @@ func TestCheckResponseSnapshot_Error_DeleteSlackChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{})
+	_, opErr := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1498,7 +1901,11 @@ func TestCheckResponseSnapshot_Error_DeleteSlackUserIdentityException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSlackUserIdentity(context.Background(), &DeleteSlackUserIdentityInput{})
+	_, opErr := svc.DeleteSlackUserIdentity(context.Background(), &DeleteSlackUserIdentityInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		SlackTeamId:          ptr.String("__SlackTeamId__"),
+		SlackUserId:          ptr.String("__SlackUserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1523,7 +1930,9 @@ func TestCheckResponseSnapshot_Error_DeleteSlackWorkspaceAuthorizationFault(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSlackWorkspaceAuthorization(context.Background(), &DeleteSlackWorkspaceAuthorizationInput{})
+	_, opErr := svc.DeleteSlackWorkspaceAuthorization(context.Background(), &DeleteSlackWorkspaceAuthorizationInput{
+		SlackTeamId: ptr.String("__SlackTeamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1548,7 +1957,9 @@ func TestCheckResponseSnapshot_Error_DeleteTeamsChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMicrosoftTeamsChannelConfiguration(context.Background(), &DeleteMicrosoftTeamsChannelConfigurationInput{})
+	_, opErr := svc.DeleteMicrosoftTeamsChannelConfiguration(context.Background(), &DeleteMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1573,7 +1984,9 @@ func TestCheckResponseSnapshot_Error_DeleteTeamsConfiguredTeamException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMicrosoftTeamsConfiguredTeam(context.Background(), &DeleteMicrosoftTeamsConfiguredTeamInput{})
+	_, opErr := svc.DeleteMicrosoftTeamsConfiguredTeam(context.Background(), &DeleteMicrosoftTeamsConfiguredTeamInput{
+		TeamId: ptr.String("__TeamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1598,7 +2011,11 @@ func TestCheckResponseSnapshot_Error_DescribeChimeWebhookConfigurationsException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeChimeWebhookConfigurations(context.Background(), &DescribeChimeWebhookConfigurationsInput{})
+	_, opErr := svc.DescribeChimeWebhookConfigurations(context.Background(), &DescribeChimeWebhookConfigurationsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1623,7 +2040,11 @@ func TestCheckResponseSnapshot_Error_DescribeSlackChannelConfigurationsException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeSlackChannelConfigurations(context.Background(), &DescribeSlackChannelConfigurationsInput{})
+	_, opErr := svc.DescribeSlackChannelConfigurations(context.Background(), &DescribeSlackChannelConfigurationsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1648,7 +2069,11 @@ func TestCheckResponseSnapshot_Error_DescribeSlackUserIdentitiesException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeSlackUserIdentities(context.Background(), &DescribeSlackUserIdentitiesInput{})
+	_, opErr := svc.DescribeSlackUserIdentities(context.Background(), &DescribeSlackUserIdentitiesInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1673,7 +2098,10 @@ func TestCheckResponseSnapshot_Error_DescribeSlackWorkspacesException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeSlackWorkspaces(context.Background(), &DescribeSlackWorkspacesInput{})
+	_, opErr := svc.DescribeSlackWorkspaces(context.Background(), &DescribeSlackWorkspacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1723,7 +2151,9 @@ func TestCheckResponseSnapshot_Error_GetTeamsChannelConfigurationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), &GetMicrosoftTeamsChannelConfigurationInput{})
+	_, opErr := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), &GetMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1748,7 +2178,10 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{})
+	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{
+		Resource:          ptr.String("__Resource__"),
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1773,7 +2206,27 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{})
+	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{
+		WebhookDescription: ptr.String("__WebhookDescription__"),
+		WebhookUrl:         ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1798,7 +2251,10 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{})
+	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{
+		Resource:          ptr.String("__Resource__"),
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1823,7 +2279,27 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{})
+	_, opErr := svc.CreateChimeWebhookConfiguration(context.Background(), &CreateChimeWebhookConfigurationInput{
+		WebhookDescription: ptr.String("__WebhookDescription__"),
+		WebhookUrl:         ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:        ptr.String("__IamRoleArn__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		LoggingLevel:      ptr.String("__LoggingLevel__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1848,7 +2324,10 @@ func TestCheckResponseSnapshot_Error_ListMicrosoftTeamsConfiguredTeamsException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListMicrosoftTeamsConfiguredTeams(context.Background(), &ListMicrosoftTeamsConfiguredTeamsInput{})
+	_, opErr := svc.ListMicrosoftTeamsConfiguredTeams(context.Background(), &ListMicrosoftTeamsConfiguredTeamsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1873,7 +2352,11 @@ func TestCheckResponseSnapshot_Error_ListMicrosoftTeamsUserIdentitiesException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListMicrosoftTeamsUserIdentities(context.Background(), &ListMicrosoftTeamsUserIdentitiesInput{})
+	_, opErr := svc.ListMicrosoftTeamsUserIdentities(context.Background(), &ListMicrosoftTeamsUserIdentitiesInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1898,7 +2381,11 @@ func TestCheckResponseSnapshot_Error_ListTeamsChannelConfigurationsException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListMicrosoftTeamsChannelConfigurations(context.Background(), &ListMicrosoftTeamsChannelConfigurationsInput{})
+	_, opErr := svc.ListMicrosoftTeamsChannelConfigurations(context.Background(), &ListMicrosoftTeamsChannelConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		TeamId:     ptr.String("__TeamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1923,7 +2410,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{})
+	_, opErr := svc.DeleteChimeWebhookConfiguration(context.Background(), &DeleteChimeWebhookConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1948,7 +2437,9 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1973,7 +2464,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1998,7 +2501,10 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{})
+	_, opErr := svc.AssociateToConfiguration(context.Background(), &AssociateToConfigurationInput{
+		Resource:          ptr.String("__Resource__"),
+		ChatConfiguration: ptr.String("__ChatConfiguration__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2023,7 +2529,10 @@ func TestCheckResponseSnapshot_Error_UpdateAccountPreferencesException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateAccountPreferences(context.Background(), &UpdateAccountPreferencesInput{})
+	_, opErr := svc.UpdateAccountPreferences(context.Background(), &UpdateAccountPreferencesInput{
+		UserAuthorizationRequired:     ptr.Bool(true),
+		TrainingDataCollectionEnabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2048,7 +2557,17 @@ func TestCheckResponseSnapshot_Error_UpdateChimeWebhookConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateChimeWebhookConfiguration(context.Background(), &UpdateChimeWebhookConfigurationInput{})
+	_, opErr := svc.UpdateChimeWebhookConfiguration(context.Background(), &UpdateChimeWebhookConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		WebhookDescription:   ptr.String("__WebhookDescription__"),
+		WebhookUrl:           ptr.String("__WebhookUrl__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2073,7 +2592,22 @@ func TestCheckResponseSnapshot_Error_UpdateSlackChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{})
+	_, opErr := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		SlackChannelId:       ptr.String("__SlackChannelId__"),
+		SlackChannelName:     ptr.String("__SlackChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2098,7 +2632,22 @@ func TestCheckResponseSnapshot_Error_UpdateTeamsChannelConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateMicrosoftTeamsChannelConfiguration(context.Background(), &UpdateMicrosoftTeamsChannelConfigurationInput{})
+	_, opErr := svc.UpdateMicrosoftTeamsChannelConfiguration(context.Background(), &UpdateMicrosoftTeamsChannelConfigurationInput{
+		ChatConfigurationArn: ptr.String("__ChatConfigurationArn__"),
+		ChannelId:            ptr.String("__ChannelId__"),
+		ChannelName:          ptr.String("__ChannelName__"),
+		SnsTopicArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IamRoleArn:   ptr.String("__IamRoleArn__"),
+		LoggingLevel: ptr.String("__LoggingLevel__"),
+		GuardrailPolicyArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserAuthorizationRequired: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

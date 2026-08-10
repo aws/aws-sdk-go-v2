@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupingAttributeDefinitions":[{"DefaultGroupingValue":"__DefaultGroupingValue__","GroupingName":"__GroupingName__","GroupingSourceKeys":["__Member__","__Member__"]},{"DefaultGroupingValue":"__DefaultGroupingValue__","GroupingName":"__GroupingName__","GroupingSourceKeys":["__Member__","__Member__"]}],"NextToken":"__NextToken__","UpdatedAt":946684800}

@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -118,7 +119,17 @@ func TestCheckResponseSnapshot_GenerateDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateDataSet(context.Background(), &GenerateDataSetInput{})
+	got, err := svc.GenerateDataSet(context.Background(), &GenerateDataSetInput{
+		DataSetType:             types.DataSetType("customer_subscriber_hourly_monthly_subscriptions"),
+		DataSetPublicationDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RoleNameArn:             ptr.String("__RoleNameArn__"),
+		DestinationS3BucketName: ptr.String("__DestinationS3BucketName__"),
+		DestinationS3Prefix:     ptr.String("__DestinationS3Prefix__"),
+		SnsTopicArn:             ptr.String("__SnsTopicArn__"),
+		CustomerDefinedValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +150,17 @@ func TestCheckResponseSnapshot_StartSupportDataExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSupportDataExport(context.Background(), &StartSupportDataExportInput{})
+	got, err := svc.StartSupportDataExport(context.Background(), &StartSupportDataExportInput{
+		DataSetType:             types.SupportDataSetType("customer_support_contacts_data"),
+		FromDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RoleNameArn:             ptr.String("__RoleNameArn__"),
+		DestinationS3BucketName: ptr.String("__DestinationS3BucketName__"),
+		DestinationS3Prefix:     ptr.String("__DestinationS3Prefix__"),
+		SnsTopicArn:             ptr.String("__SnsTopicArn__"),
+		CustomerDefinedValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +181,17 @@ func TestCheckResponseSnapshot_Error_MarketplaceCommerceAnalyticsException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GenerateDataSet(context.Background(), &GenerateDataSetInput{})
+	_, opErr := svc.GenerateDataSet(context.Background(), &GenerateDataSetInput{
+		DataSetType:             types.DataSetType("customer_subscriber_hourly_monthly_subscriptions"),
+		DataSetPublicationDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RoleNameArn:             ptr.String("__RoleNameArn__"),
+		DestinationS3BucketName: ptr.String("__DestinationS3BucketName__"),
+		DestinationS3Prefix:     ptr.String("__DestinationS3Prefix__"),
+		SnsTopicArn:             ptr.String("__SnsTopicArn__"),
+		CustomerDefinedValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

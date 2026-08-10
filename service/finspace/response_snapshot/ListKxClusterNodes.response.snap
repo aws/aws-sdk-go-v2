@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","nodes":[{"availabilityZoneId":"__AvailabilityZoneId__","launchTime":946684800,"nodeId":"__NodeId__","status":"RUNNING"},{"availabilityZoneId":"__AvailabilityZoneId__","launchTime":946684800,"nodeId":"__NodeId__","status":"RUNNING"}]}

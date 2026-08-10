@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"blueprints":[{"blueprintArn":"__BlueprintArn__","blueprintName":"__BlueprintName__","blueprintStage":"DEVELOPMENT","blueprintVersion":"__BlueprintVersion__","creationTime":"2000-01-01T00:00:00Z","lastModifiedTime":"2000-01-01T00:00:00Z"},{"blueprintArn":"__BlueprintArn__","blueprintName":"__BlueprintName__","blueprintStage":"DEVELOPMENT","blueprintVersion":"__BlueprintVersion__","creationTime":"2000-01-01T00:00:00Z","lastModifiedTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

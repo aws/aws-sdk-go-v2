@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deploymentEvents":[{"description":"__Description__","name":"__Name__","status":"CANCELED","statusReason":"__StatusReason__","timestamp":946684800},{"description":"__Description__","name":"__Name__","status":"CANCELED","statusReason":"__StatusReason__","timestamp":946684800}],"nextToken":"__NextToken__"}

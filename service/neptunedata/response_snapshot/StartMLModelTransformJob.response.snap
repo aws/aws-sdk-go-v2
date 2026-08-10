@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationTimeInMillis":1,"id":"__Id__"}

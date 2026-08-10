@@ -1,0 +1,6 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+Location: __Location__
+
+<OriginAccessControl xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Id>__Id__</Id><OriginAccessControlConfig><Description>__Description__</Description><Name>__Name__</Name><OriginAccessControlOriginType>s3</OriginAccessControlOriginType><SigningBehavior>never</SigningBehavior><SigningProtocol>sigv4</SigningProtocol></OriginAccessControlConfig></OriginAccessControl>

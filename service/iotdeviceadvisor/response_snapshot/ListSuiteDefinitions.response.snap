@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","suiteDefinitionInformationList":[{"createdAt":946684800,"defaultDevices":[{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"}],"intendedForQualification":true,"isLongDurationTest":true,"protocol":"MqttV3_1_1","suiteDefinitionId":"__SuiteDefinitionId__","suiteDefinitionName":"__SuiteDefinitionName__"},{"createdAt":946684800,"defaultDevices":[{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"}],"intendedForQualification":true,"isLongDurationTest":true,"protocol":"MqttV3_1_1","suiteDefinitionId":"__SuiteDefinitionId__","suiteDefinitionName":"__SuiteDefinitionName__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SessionId":"__SessionId__","StreamUrl":"__StreamUrl__","TokenValue":"__TokenValue__"}

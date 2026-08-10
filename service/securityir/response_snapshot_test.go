@@ -142,7 +142,13 @@ func TestCheckResponseSnapshot_BatchGetMemberAccountDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	got, err := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +169,9 @@ func TestCheckResponseSnapshot_CancelMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMembership(context.Background(), &CancelMembershipInput{})
+	got, err := svc.CancelMembership(context.Background(), &CancelMembershipInput{
+		MembershipId: ptr.String("__MembershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +193,9 @@ func TestCheckResponseSnapshot_CloseCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CloseCase(context.Background(), &CloseCaseInput{})
+	got, err := svc.CloseCase(context.Background(), &CloseCaseInput{
+		CaseId: ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +216,55 @@ func TestCheckResponseSnapshot_CreateCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{})
+	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		ResolverType:              types.ResolverType("AWS"),
+		Title:                     ptr.String("__Title__"),
+		Description:               ptr.String("__Description__"),
+		EngagementType:            types.EngagementType("Security Incident"),
+		ReportedIncidentStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ImpactedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Watchers: []types.Watcher{
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+		},
+		ThreatActorIpAddresses: []types.ThreatActorIp{
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+		},
+		ImpactedServices: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImpactedAwsRegions: []types.ImpactedAwsRegion{
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +285,11 @@ func TestCheckResponseSnapshot_CreateCaseComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCaseComment(context.Background(), &CreateCaseCommentInput{})
+	got, err := svc.CreateCaseComment(context.Background(), &CreateCaseCommentInput{
+		CaseId:      ptr.String("__CaseId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Body:        ptr.String("__Body__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +310,44 @@ func TestCheckResponseSnapshot_CreateMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMembership(context.Background(), &CreateMembershipInput{})
+	got, err := svc.CreateMembership(context.Background(), &CreateMembershipInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		MembershipName: ptr.String("__MembershipName__"),
+		IncidentResponseTeam: []types.IncidentResponder{
+			{
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+				Email:    ptr.String("__Email__"),
+				CommunicationPreferences: []types.CommunicationType{
+					types.CommunicationType("Case Created"),
+					types.CommunicationType("Case Created"),
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+				Email:    ptr.String("__Email__"),
+				CommunicationPreferences: []types.CommunicationType{
+					types.CommunicationType("Case Created"),
+					types.CommunicationType("Case Created"),
+				},
+			},
+		},
+		OptInFeatures: []types.OptInFeature{
+			{
+				FeatureName: types.OptInFeatureName("Triage"),
+				IsEnabled:   ptr.Bool(true),
+			},
+			{
+				FeatureName: types.OptInFeatureName("Triage"),
+				IsEnabled:   ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CoverEntireOrganization: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +444,9 @@ func TestCheckResponseSnapshot_GetCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCase(context.Background(), &GetCaseInput{})
+	got, err := svc.GetCase(context.Background(), &GetCaseInput{
+		CaseId: ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +467,10 @@ func TestCheckResponseSnapshot_GetCaseAttachmentDownloadUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCaseAttachmentDownloadUrl(context.Background(), &GetCaseAttachmentDownloadUrlInput{})
+	got, err := svc.GetCaseAttachmentDownloadUrl(context.Background(), &GetCaseAttachmentDownloadUrlInput{
+		CaseId:       ptr.String("__CaseId__"),
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -387,7 +491,12 @@ func TestCheckResponseSnapshot_GetCaseAttachmentUploadUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCaseAttachmentUploadUrl(context.Background(), &GetCaseAttachmentUploadUrlInput{})
+	got, err := svc.GetCaseAttachmentUploadUrl(context.Background(), &GetCaseAttachmentUploadUrlInput{
+		CaseId:        ptr.String("__CaseId__"),
+		FileName:      ptr.String("__FileName__"),
+		ContentLength: ptr.Int64(1),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +563,9 @@ func TestCheckResponseSnapshot_GetMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMembership(context.Background(), &GetMembershipInput{})
+	got, err := svc.GetMembership(context.Background(), &GetMembershipInput{
+		MembershipId: ptr.String("__MembershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +601,11 @@ func TestCheckResponseSnapshot_ListCaseEdits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCaseEdits(context.Background(), &ListCaseEditsInput{})
+	got, err := svc.ListCaseEdits(context.Background(), &ListCaseEditsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		CaseId:     ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +653,10 @@ func TestCheckResponseSnapshot_ListCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCases(context.Background(), &ListCasesInput{})
+	got, err := svc.ListCases(context.Background(), &ListCasesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +696,11 @@ func TestCheckResponseSnapshot_ListComments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComments(context.Background(), &ListCommentsInput{})
+	got, err := svc.ListComments(context.Background(), &ListCommentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		CaseId:     ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +749,11 @@ func TestCheckResponseSnapshot_ListInvestigations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{})
+	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		CaseId:     ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +790,10 @@ func TestCheckResponseSnapshot_ListMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemberships(context.Background(), &ListMembershipsInput{})
+	got, err := svc.ListMemberships(context.Background(), &ListMembershipsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +816,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +837,12 @@ func TestCheckResponseSnapshot_SendFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendFeedback(context.Background(), &SendFeedbackInput{})
+	got, err := svc.SendFeedback(context.Background(), &SendFeedbackInput{
+		CaseId:     ptr.String("__CaseId__"),
+		ResultId:   ptr.String("__ResultId__"),
+		Usefulness: types.UsefulnessRating("USEFUL"),
+		Comment:    ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +861,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +885,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +910,100 @@ func TestCheckResponseSnapshot_UpdateCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCase(context.Background(), &UpdateCaseInput{})
+	got, err := svc.UpdateCase(context.Background(), &UpdateCaseInput{
+		CaseId:                    ptr.String("__CaseId__"),
+		Title:                     ptr.String("__Title__"),
+		Description:               ptr.String("__Description__"),
+		ReportedIncidentStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ActualIncidentStartDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EngagementType:            types.EngagementType("Security Incident"),
+		WatchersToAdd: []types.Watcher{
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+		},
+		WatchersToDelete: []types.Watcher{
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+			{
+				Email:    ptr.String("__Email__"),
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+			},
+		},
+		ThreatActorIpAddressesToAdd: []types.ThreatActorIp{
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+		},
+		ThreatActorIpAddressesToDelete: []types.ThreatActorIp{
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+			{
+				IpAddress: ptr.String("__IpAddress__"),
+				UserAgent: ptr.String("__UserAgent__"),
+			},
+		},
+		ImpactedServicesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImpactedServicesToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImpactedAwsRegionsToAdd: []types.ImpactedAwsRegion{
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+		},
+		ImpactedAwsRegionsToDelete: []types.ImpactedAwsRegion{
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+			{
+				Region: types.AwsRegion("af-south-1"),
+			},
+		},
+		ImpactedAccountsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImpactedAccountsToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CaseMetadata: []types.CaseMetadataEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -785,7 +1025,11 @@ func TestCheckResponseSnapshot_UpdateCaseComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCaseComment(context.Background(), &UpdateCaseCommentInput{})
+	got, err := svc.UpdateCaseComment(context.Background(), &UpdateCaseCommentInput{
+		CaseId:    ptr.String("__CaseId__"),
+		CommentId: ptr.String("__CommentId__"),
+		Body:      ptr.String("__Body__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1050,10 @@ func TestCheckResponseSnapshot_UpdateCaseStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCaseStatus(context.Background(), &UpdateCaseStatusInput{})
+	got, err := svc.UpdateCaseStatus(context.Background(), &UpdateCaseStatusInput{
+		CaseId:     ptr.String("__CaseId__"),
+		CaseStatus: types.SelfManagedCaseStatus("Submitted"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +1072,52 @@ func TestCheckResponseSnapshot_UpdateMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMembership(context.Background(), &UpdateMembershipInput{})
+	got, err := svc.UpdateMembership(context.Background(), &UpdateMembershipInput{
+		MembershipId:   ptr.String("__MembershipId__"),
+		MembershipName: ptr.String("__MembershipName__"),
+		IncidentResponseTeam: []types.IncidentResponder{
+			{
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+				Email:    ptr.String("__Email__"),
+				CommunicationPreferences: []types.CommunicationType{
+					types.CommunicationType("Case Created"),
+					types.CommunicationType("Case Created"),
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				JobTitle: ptr.String("__JobTitle__"),
+				Email:    ptr.String("__Email__"),
+				CommunicationPreferences: []types.CommunicationType{
+					types.CommunicationType("Case Created"),
+					types.CommunicationType("Case Created"),
+				},
+			},
+		},
+		OptInFeatures: []types.OptInFeature{
+			{
+				FeatureName: types.OptInFeatureName("Triage"),
+				IsEnabled:   ptr.Bool(true),
+			},
+			{
+				FeatureName: types.OptInFeatureName("Triage"),
+				IsEnabled:   ptr.Bool(true),
+			},
+		},
+		MembershipAccountsConfigurationsUpdate: &types.MembershipAccountsConfigurationsUpdate{
+			CoverEntireOrganization: ptr.Bool(true),
+			OrganizationalUnitsToAdd: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitsToRemove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		UndoMembershipCancellation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -848,7 +1140,10 @@ func TestCheckResponseSnapshot_UpdateResolverType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolverType(context.Background(), &UpdateResolverTypeInput{})
+	got, err := svc.UpdateResolverType(context.Background(), &UpdateResolverTypeInput{
+		CaseId:       ptr.String("__CaseId__"),
+		ResolverType: types.ResolverType("AWS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,7 +1164,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -896,7 +1197,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -922,7 +1229,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -947,7 +1260,13 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -972,7 +1291,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -997,7 +1322,13 @@ func TestCheckResponseSnapshot_Error_SecurityIncidentResponseNotActiveException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1026,7 +1357,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1054,7 +1391,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1090,7 +1433,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{})
+	_, opErr := svc.BatchGetMemberAccountDetails(context.Background(), &BatchGetMemberAccountDetailsInput{
+		MembershipId: ptr.String("__MembershipId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

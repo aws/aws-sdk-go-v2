@@ -147,7 +147,19 @@ func TestCheckResponseSnapshot_AcceptDirectConnectGatewayAssociationProposal(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{})
+	got, err := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{
+		DirectConnectGatewayId:        ptr.String("__DirectConnectGatewayId__"),
+		ProposalId:                    ptr.String("__ProposalId__"),
+		AssociatedGatewayOwnerAccount: ptr.String("__AssociatedGatewayOwnerAccount__"),
+		OverrideAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +230,13 @@ func TestCheckResponseSnapshot_AllocateConnectionOnInterconnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllocateConnectionOnInterconnect(context.Background(), &AllocateConnectionOnInterconnectInput{})
+	got, err := svc.AllocateConnectionOnInterconnect(context.Background(), &AllocateConnectionOnInterconnectInput{
+		Bandwidth:      ptr.String("__Bandwidth__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		OwnerAccount:   ptr.String("__OwnerAccount__"),
+		InterconnectId: ptr.String("__InterconnectId__"),
+		Vlan:           1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +307,23 @@ func TestCheckResponseSnapshot_AllocateHostedConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{})
+	got, err := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		OwnerAccount:   ptr.String("__OwnerAccount__"),
+		Bandwidth:      ptr.String("__Bandwidth__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Vlan:           1,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +414,32 @@ func TestCheckResponseSnapshot_AllocatePrivateVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllocatePrivateVirtualInterface(context.Background(), &AllocatePrivateVirtualInterfaceInput{})
+	got, err := svc.AllocatePrivateVirtualInterface(context.Background(), &AllocatePrivateVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+		NewPrivateVirtualInterfaceAllocation: &types.NewPrivateVirtualInterfaceAllocation{
+			VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+			Vlan:                 1,
+			Asn:                  1,
+			AsnLong:              ptr.Int64(1),
+			Mtu:                  ptr.Int32(1),
+			AuthKey:              ptr.String("__AuthKey__"),
+			AmazonAddress:        ptr.String("__AmazonAddress__"),
+			AddressFamily:        types.AddressFamily("ipv4"),
+			CustomerAddress:      ptr.String("__CustomerAddress__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RateLimit: ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +530,39 @@ func TestCheckResponseSnapshot_AllocatePublicVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllocatePublicVirtualInterface(context.Background(), &AllocatePublicVirtualInterfaceInput{})
+	got, err := svc.AllocatePublicVirtualInterface(context.Background(), &AllocatePublicVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+		NewPublicVirtualInterfaceAllocation: &types.NewPublicVirtualInterfaceAllocation{
+			VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+			Vlan:                 1,
+			Asn:                  1,
+			AsnLong:              ptr.Int64(1),
+			AuthKey:              ptr.String("__AuthKey__"),
+			AmazonAddress:        ptr.String("__AmazonAddress__"),
+			CustomerAddress:      ptr.String("__CustomerAddress__"),
+			AddressFamily:        types.AddressFamily("ipv4"),
+			RouteFilterPrefixes: []types.RouteFilterPrefix{
+				{
+					Cidr: ptr.String("__Cidr__"),
+				},
+				{
+					Cidr: ptr.String("__Cidr__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RateLimit: ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +655,32 @@ func TestCheckResponseSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AllocateTransitVirtualInterface(context.Background(), &AllocateTransitVirtualInterfaceInput{})
+	got, err := svc.AllocateTransitVirtualInterface(context.Background(), &AllocateTransitVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+		NewTransitVirtualInterfaceAllocation: &types.NewTransitVirtualInterfaceAllocation{
+			VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+			Vlan:                 1,
+			Asn:                  1,
+			AsnLong:              ptr.Int64(1),
+			Mtu:                  ptr.Int32(1),
+			AuthKey:              ptr.String("__AuthKey__"),
+			AmazonAddress:        ptr.String("__AmazonAddress__"),
+			CustomerAddress:      ptr.String("__CustomerAddress__"),
+			AddressFamily:        types.AddressFamily("ipv4"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RateLimit: ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -635,7 +751,10 @@ func TestCheckResponseSnapshot_AssociateConnectionWithLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateConnectionWithLag(context.Background(), &AssociateConnectionWithLagInput{})
+	got, err := svc.AssociateConnectionWithLag(context.Background(), &AssociateConnectionWithLagInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		LagId:        ptr.String("__LagId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +825,10 @@ func TestCheckResponseSnapshot_AssociateHostedConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateHostedConnection(context.Background(), &AssociateHostedConnectionInput{})
+	got, err := svc.AssociateHostedConnection(context.Background(), &AssociateHostedConnectionInput{
+		ConnectionId:       ptr.String("__ConnectionId__"),
+		ParentConnectionId: ptr.String("__ParentConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +863,12 @@ func TestCheckResponseSnapshot_AssociateMacSecKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMacSecKey(context.Background(), &AssociateMacSecKeyInput{})
+	got, err := svc.AssociateMacSecKey(context.Background(), &AssociateMacSecKeyInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		SecretARN:    ptr.String("__SecretARN__"),
+		Ckn:          ptr.String("__Ckn__"),
+		Cak:          ptr.String("__Cak__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +959,10 @@ func TestCheckResponseSnapshot_AssociateVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateVirtualInterface(context.Background(), &AssociateVirtualInterfaceInput{})
+	got, err := svc.AssociateVirtualInterface(context.Background(), &AssociateVirtualInterfaceInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		ConnectionId:       ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +983,9 @@ func TestCheckResponseSnapshot_ConfirmConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmConnection(context.Background(), &ConfirmConnectionInput{})
+	got, err := svc.ConfirmConnection(context.Background(), &ConfirmConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -874,7 +1006,9 @@ func TestCheckResponseSnapshot_ConfirmCustomerAgreement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmCustomerAgreement(context.Background(), &ConfirmCustomerAgreementInput{})
+	got, err := svc.ConfirmCustomerAgreement(context.Background(), &ConfirmCustomerAgreementInput{
+		AgreementName: ptr.String("__AgreementName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -895,7 +1029,11 @@ func TestCheckResponseSnapshot_ConfirmPrivateVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmPrivateVirtualInterface(context.Background(), &ConfirmPrivateVirtualInterfaceInput{})
+	got, err := svc.ConfirmPrivateVirtualInterface(context.Background(), &ConfirmPrivateVirtualInterfaceInput{
+		VirtualInterfaceId:     ptr.String("__VirtualInterfaceId__"),
+		VirtualGatewayId:       ptr.String("__VirtualGatewayId__"),
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -916,7 +1054,9 @@ func TestCheckResponseSnapshot_ConfirmPublicVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmPublicVirtualInterface(context.Background(), &ConfirmPublicVirtualInterfaceInput{})
+	got, err := svc.ConfirmPublicVirtualInterface(context.Background(), &ConfirmPublicVirtualInterfaceInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1077,10 @@ func TestCheckResponseSnapshot_ConfirmTransitVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmTransitVirtualInterface(context.Background(), &ConfirmTransitVirtualInterfaceInput{})
+	got, err := svc.ConfirmTransitVirtualInterface(context.Background(), &ConfirmTransitVirtualInterfaceInput{
+		VirtualInterfaceId:     ptr.String("__VirtualInterfaceId__"),
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1030,7 +1173,17 @@ func TestCheckResponseSnapshot_CreateBGPPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBGPPeer(context.Background(), &CreateBGPPeerInput{})
+	got, err := svc.CreateBGPPeer(context.Background(), &CreateBGPPeerInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		NewBGPPeer: &types.NewBGPPeer{
+			Asn:             1,
+			AsnLong:         ptr.Int64(1),
+			AuthKey:         ptr.String("__AuthKey__"),
+			AddressFamily:   types.AddressFamily("ipv4"),
+			AmazonAddress:   ptr.String("__AmazonAddress__"),
+			CustomerAddress: ptr.String("__CustomerAddress__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1101,7 +1254,24 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		Location:       ptr.String("__Location__"),
+		Bandwidth:      ptr.String("__Bandwidth__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		LagId:          ptr.String("__LagId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProviderName:  ptr.String("__ProviderName__"),
+		RequestMACSec: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1139,7 +1309,20 @@ func TestCheckResponseSnapshot_CreateDirectConnectGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectConnectGateway(context.Background(), &CreateDirectConnectGatewayInput{})
+	got, err := svc.CreateDirectConnectGateway(context.Background(), &CreateDirectConnectGatewayInput{
+		DirectConnectGatewayName: ptr.String("__DirectConnectGatewayName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonSideAsn: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1188,7 +1371,19 @@ func TestCheckResponseSnapshot_CreateDirectConnectGatewayAssociation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectConnectGatewayAssociation(context.Background(), &CreateDirectConnectGatewayAssociationInput{})
+	got, err := svc.CreateDirectConnectGatewayAssociation(context.Background(), &CreateDirectConnectGatewayAssociationInput{
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		GatewayId:              ptr.String("__GatewayId__"),
+		AddAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+		VirtualGatewayId: ptr.String("__VirtualGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1236,7 +1431,27 @@ func TestCheckResponseSnapshot_CreateDirectConnectGatewayAssociationProposal(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectConnectGatewayAssociationProposal(context.Background(), &CreateDirectConnectGatewayAssociationProposalInput{})
+	got, err := svc.CreateDirectConnectGatewayAssociationProposal(context.Background(), &CreateDirectConnectGatewayAssociationProposalInput{
+		DirectConnectGatewayId:           ptr.String("__DirectConnectGatewayId__"),
+		DirectConnectGatewayOwnerAccount: ptr.String("__DirectConnectGatewayOwnerAccount__"),
+		GatewayId:                        ptr.String("__GatewayId__"),
+		AddAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+		RemoveAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1297,7 +1512,24 @@ func TestCheckResponseSnapshot_CreateInterconnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInterconnect(context.Background(), &CreateInterconnectInput{})
+	got, err := svc.CreateInterconnect(context.Background(), &CreateInterconnectInput{
+		InterconnectName: ptr.String("__InterconnectName__"),
+		Bandwidth:        ptr.String("__Bandwidth__"),
+		Location:         ptr.String("__Location__"),
+		LagId:            ptr.String("__LagId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProviderName:  ptr.String("__ProviderName__"),
+		RequestMACSec: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1473,7 +1705,35 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLag(context.Background(), &CreateLagInput{})
+	got, err := svc.CreateLag(context.Background(), &CreateLagInput{
+		NumberOfConnections:  1,
+		Location:             ptr.String("__Location__"),
+		ConnectionsBandwidth: ptr.String("__ConnectionsBandwidth__"),
+		LagName:              ptr.String("__LagName__"),
+		ConnectionId:         ptr.String("__ConnectionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChildConnectionTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProviderName:  ptr.String("__ProviderName__"),
+		RequestMACSec: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1564,7 +1824,34 @@ func TestCheckResponseSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrivateVirtualInterface(context.Background(), &CreatePrivateVirtualInterfaceInput{})
+	got, err := svc.CreatePrivateVirtualInterface(context.Background(), &CreatePrivateVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		NewPrivateVirtualInterface: &types.NewPrivateVirtualInterface{
+			VirtualInterfaceName:   ptr.String("__VirtualInterfaceName__"),
+			Vlan:                   1,
+			Asn:                    1,
+			AsnLong:                ptr.Int64(1),
+			Mtu:                    ptr.Int32(1),
+			AuthKey:                ptr.String("__AuthKey__"),
+			AmazonAddress:          ptr.String("__AmazonAddress__"),
+			CustomerAddress:        ptr.String("__CustomerAddress__"),
+			AddressFamily:          types.AddressFamily("ipv4"),
+			VirtualGatewayId:       ptr.String("__VirtualGatewayId__"),
+			DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			EnableSiteLink: ptr.Bool(true),
+			RateLimit:      ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1655,7 +1942,38 @@ func TestCheckResponseSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePublicVirtualInterface(context.Background(), &CreatePublicVirtualInterfaceInput{})
+	got, err := svc.CreatePublicVirtualInterface(context.Background(), &CreatePublicVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		NewPublicVirtualInterface: &types.NewPublicVirtualInterface{
+			VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+			Vlan:                 1,
+			Asn:                  1,
+			AsnLong:              ptr.Int64(1),
+			AuthKey:              ptr.String("__AuthKey__"),
+			AmazonAddress:        ptr.String("__AmazonAddress__"),
+			CustomerAddress:      ptr.String("__CustomerAddress__"),
+			AddressFamily:        types.AddressFamily("ipv4"),
+			RouteFilterPrefixes: []types.RouteFilterPrefix{
+				{
+					Cidr: ptr.String("__Cidr__"),
+				},
+				{
+					Cidr: ptr.String("__Cidr__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RateLimit: ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1748,7 +2066,33 @@ func TestCheckResponseSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTransitVirtualInterface(context.Background(), &CreateTransitVirtualInterfaceInput{})
+	got, err := svc.CreateTransitVirtualInterface(context.Background(), &CreateTransitVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		NewTransitVirtualInterface: &types.NewTransitVirtualInterface{
+			VirtualInterfaceName:   ptr.String("__VirtualInterfaceName__"),
+			Vlan:                   1,
+			Asn:                    1,
+			AsnLong:                ptr.Int64(1),
+			Mtu:                    ptr.Int32(1),
+			AuthKey:                ptr.String("__AuthKey__"),
+			AmazonAddress:          ptr.String("__AmazonAddress__"),
+			CustomerAddress:        ptr.String("__CustomerAddress__"),
+			AddressFamily:          types.AddressFamily("ipv4"),
+			DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			EnableSiteLink: ptr.Bool(true),
+			RateLimit:      ptr.String("__RateLimit__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1841,7 +2185,13 @@ func TestCheckResponseSnapshot_DeleteBGPPeer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBGPPeer(context.Background(), &DeleteBGPPeerInput{})
+	got, err := svc.DeleteBGPPeer(context.Background(), &DeleteBGPPeerInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		Asn:                1,
+		AsnLong:            ptr.Int64(1),
+		CustomerAddress:    ptr.String("__CustomerAddress__"),
+		BgpPeerId:          ptr.String("__BgpPeerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1912,7 +2262,9 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1950,7 +2302,9 @@ func TestCheckResponseSnapshot_DeleteDirectConnectGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectConnectGateway(context.Background(), &DeleteDirectConnectGatewayInput{})
+	got, err := svc.DeleteDirectConnectGateway(context.Background(), &DeleteDirectConnectGatewayInput{
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1999,7 +2353,11 @@ func TestCheckResponseSnapshot_DeleteDirectConnectGatewayAssociation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectConnectGatewayAssociation(context.Background(), &DeleteDirectConnectGatewayAssociationInput{})
+	got, err := svc.DeleteDirectConnectGatewayAssociation(context.Background(), &DeleteDirectConnectGatewayAssociationInput{
+		AssociationId:          ptr.String("__AssociationId__"),
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		VirtualGatewayId:       ptr.String("__VirtualGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2047,7 +2405,9 @@ func TestCheckResponseSnapshot_DeleteDirectConnectGatewayAssociationProposal(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectConnectGatewayAssociationProposal(context.Background(), &DeleteDirectConnectGatewayAssociationProposalInput{})
+	got, err := svc.DeleteDirectConnectGatewayAssociationProposal(context.Background(), &DeleteDirectConnectGatewayAssociationProposalInput{
+		ProposalId: ptr.String("__ProposalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2068,7 +2428,9 @@ func TestCheckResponseSnapshot_DeleteInterconnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInterconnect(context.Background(), &DeleteInterconnectInput{})
+	got, err := svc.DeleteInterconnect(context.Background(), &DeleteInterconnectInput{
+		InterconnectId: ptr.String("__InterconnectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2244,7 +2606,9 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLag(context.Background(), &DeleteLagInput{})
+	got, err := svc.DeleteLag(context.Background(), &DeleteLagInput{
+		LagId: ptr.String("__LagId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2265,7 +2629,9 @@ func TestCheckResponseSnapshot_DeleteVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualInterface(context.Background(), &DeleteVirtualInterfaceInput{})
+	got, err := svc.DeleteVirtualInterface(context.Background(), &DeleteVirtualInterfaceInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2289,7 +2655,11 @@ func TestCheckResponseSnapshot_DescribeConnectionLoa(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionLoa(context.Background(), &DescribeConnectionLoaInput{})
+	got, err := svc.DescribeConnectionLoa(context.Background(), &DescribeConnectionLoaInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		ProviderName:   ptr.String("__ProviderName__"),
+		LoaContentType: types.LoaContentType("application/pdf"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2418,7 +2788,11 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnections(context.Background(), &DescribeConnectionsInput{})
+	got, err := svc.DescribeConnections(context.Background(), &DescribeConnectionsInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2547,7 +2921,9 @@ func TestCheckResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionsOnInterconnect(context.Background(), &DescribeConnectionsOnInterconnectInput{})
+	got, err := svc.DescribeConnectionsOnInterconnect(context.Background(), &DescribeConnectionsOnInterconnectInput{
+		InterconnectId: ptr.String("__InterconnectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2657,7 +3033,13 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGatewayAssociationProposals(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectConnectGatewayAssociationProposals(context.Background(), &DescribeDirectConnectGatewayAssociationProposalsInput{})
+	got, err := svc.DescribeDirectConnectGatewayAssociationProposals(context.Background(), &DescribeDirectConnectGatewayAssociationProposalsInput{
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		ProposalId:             ptr.String("__ProposalId__"),
+		AssociatedGatewayId:    ptr.String("__AssociatedGatewayId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2738,7 +3120,14 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGatewayAssociations(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectConnectGatewayAssociations(context.Background(), &DescribeDirectConnectGatewayAssociationsInput{})
+	got, err := svc.DescribeDirectConnectGatewayAssociations(context.Background(), &DescribeDirectConnectGatewayAssociationsInput{
+		AssociationId:          ptr.String("__AssociationId__"),
+		AssociatedGatewayId:    ptr.String("__AssociatedGatewayId__"),
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		VirtualGatewayId:       ptr.String("__VirtualGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2779,7 +3168,12 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGatewayAttachments(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectConnectGatewayAttachments(context.Background(), &DescribeDirectConnectGatewayAttachmentsInput{})
+	got, err := svc.DescribeDirectConnectGatewayAttachments(context.Background(), &DescribeDirectConnectGatewayAttachmentsInput{
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		VirtualInterfaceId:     ptr.String("__VirtualInterfaceId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2838,7 +3232,11 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectConnectGateways(context.Background(), &DescribeDirectConnectGatewaysInput{})
+	got, err := svc.DescribeDirectConnectGateways(context.Background(), &DescribeDirectConnectGatewaysInput{
+		DirectConnectGatewayId: ptr.String("__DirectConnectGatewayId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2967,7 +3365,11 @@ func TestCheckResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHostedConnections(context.Background(), &DescribeHostedConnectionsInput{})
+	got, err := svc.DescribeHostedConnections(context.Background(), &DescribeHostedConnectionsInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2991,7 +3393,11 @@ func TestCheckResponseSnapshot_DescribeInterconnectLoa(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInterconnectLoa(context.Background(), &DescribeInterconnectLoaInput{})
+	got, err := svc.DescribeInterconnectLoa(context.Background(), &DescribeInterconnectLoaInput{
+		InterconnectId: ptr.String("__InterconnectId__"),
+		ProviderName:   ptr.String("__ProviderName__"),
+		LoaContentType: types.LoaContentType("application/pdf"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3100,7 +3506,11 @@ func TestCheckResponseSnapshot_DescribeInterconnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInterconnects(context.Background(), &DescribeInterconnectsInput{})
+	got, err := svc.DescribeInterconnects(context.Background(), &DescribeInterconnectsInput{
+		InterconnectId: ptr.String("__InterconnectId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3439,7 +3849,11 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLags(context.Background(), &DescribeLagsInput{})
+	got, err := svc.DescribeLags(context.Background(), &DescribeLagsInput{
+		LagId:      ptr.String("__LagId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3461,7 +3875,11 @@ func TestCheckResponseSnapshot_DescribeLoa(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoa(context.Background(), &DescribeLoaInput{})
+	got, err := svc.DescribeLoa(context.Background(), &DescribeLoaInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		ProviderName:   ptr.String("__ProviderName__"),
+		LoaContentType: types.LoaContentType("application/pdf"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3548,7 +3966,10 @@ func TestCheckResponseSnapshot_DescribeRouterConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRouterConfiguration(context.Background(), &DescribeRouterConfigurationInput{})
+	got, err := svc.DescribeRouterConfiguration(context.Background(), &DescribeRouterConfigurationInput{
+		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
+		RouterTypeIdentifier: ptr.String("__RouterTypeIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3596,7 +4017,12 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3795,7 +4221,12 @@ func TestCheckResponseSnapshot_DescribeVirtualInterfaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualInterfaces(context.Background(), &DescribeVirtualInterfacesInput{})
+	got, err := svc.DescribeVirtualInterfaces(context.Background(), &DescribeVirtualInterfacesInput{
+		ConnectionId:       ptr.String("__ConnectionId__"),
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3866,7 +4297,10 @@ func TestCheckResponseSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateConnectionFromLag(context.Background(), &DisassociateConnectionFromLagInput{})
+	got, err := svc.DisassociateConnectionFromLag(context.Background(), &DisassociateConnectionFromLagInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		LagId:        ptr.String("__LagId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3901,7 +4335,10 @@ func TestCheckResponseSnapshot_DisassociateMacSecKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMacSecKey(context.Background(), &DisassociateMacSecKeyInput{})
+	got, err := svc.DisassociateMacSecKey(context.Background(), &DisassociateMacSecKeyInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		SecretARN:    ptr.String("__SecretARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3979,7 +4416,27 @@ func TestCheckResponseSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualInterfaceRoutes(context.Background(), &ListVirtualInterfaceRoutesInput{})
+	got, err := svc.ListVirtualInterfaceRoutes(context.Background(), &ListVirtualInterfaceRoutesInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		Filters: &types.RouteFilters{
+			RouteDirection: types.RouteDirection("accepted"),
+			AddressFamily:  types.AddressFamily("ipv4"),
+			Cidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AsPath: []int64{
+				1,
+				1,
+			},
+			Communities: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4028,7 +4485,17 @@ func TestCheckResponseSnapshot_ListVirtualInterfaceTestHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualInterfaceTestHistory(context.Background(), &ListVirtualInterfaceTestHistoryInput{})
+	got, err := svc.ListVirtualInterfaceTestHistory(context.Background(), &ListVirtualInterfaceTestHistoryInput{
+		TestId:             ptr.String("__TestId__"),
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		BgpPeers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:     ptr.String("__Status__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4061,7 +4528,14 @@ func TestCheckResponseSnapshot_StartBgpFailoverTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBgpFailoverTest(context.Background(), &StartBgpFailoverTestInput{})
+	got, err := svc.StartBgpFailoverTest(context.Background(), &StartBgpFailoverTestInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		BgpPeers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TestDurationInMinutes: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4094,7 +4568,9 @@ func TestCheckResponseSnapshot_StopBgpFailoverTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBgpFailoverTest(context.Background(), &StopBgpFailoverTestInput{})
+	got, err := svc.StopBgpFailoverTest(context.Background(), &StopBgpFailoverTestInput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4113,7 +4589,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4132,7 +4620,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4203,7 +4697,11 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{})
+	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		EncryptionMode: ptr.String("__EncryptionMode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4241,7 +4739,10 @@ func TestCheckResponseSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectConnectGateway(context.Background(), &UpdateDirectConnectGatewayInput{})
+	got, err := svc.UpdateDirectConnectGateway(context.Background(), &UpdateDirectConnectGatewayInput{
+		DirectConnectGatewayId:      ptr.String("__DirectConnectGatewayId__"),
+		NewDirectConnectGatewayName: ptr.String("__NewDirectConnectGatewayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4290,7 +4791,25 @@ func TestCheckResponseSnapshot_UpdateDirectConnectGatewayAssociation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectConnectGatewayAssociation(context.Background(), &UpdateDirectConnectGatewayAssociationInput{})
+	got, err := svc.UpdateDirectConnectGatewayAssociation(context.Background(), &UpdateDirectConnectGatewayAssociationInput{
+		AssociationId: ptr.String("__AssociationId__"),
+		AddAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+		RemoveAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4466,7 +4985,12 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLag(context.Background(), &UpdateLagInput{})
+	got, err := svc.UpdateLag(context.Background(), &UpdateLagInput{
+		LagId:          ptr.String("__LagId__"),
+		LagName:        ptr.String("__LagName__"),
+		MinimumLinks:   1,
+		EncryptionMode: ptr.String("__EncryptionMode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4557,7 +5081,13 @@ func TestCheckResponseSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualInterfaceAttributes(context.Background(), &UpdateVirtualInterfaceAttributesInput{})
+	got, err := svc.UpdateVirtualInterfaceAttributes(context.Background(), &UpdateVirtualInterfaceAttributesInput{
+		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
+		Mtu:                  ptr.Int32(1),
+		EnableSiteLink:       ptr.Bool(true),
+		VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+		RateLimit:            ptr.String("__RateLimit__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4578,7 +5108,19 @@ func TestCheckResponseSnapshot_Error_DirectConnectClientException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{})
+	_, opErr := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{
+		DirectConnectGatewayId:        ptr.String("__DirectConnectGatewayId__"),
+		ProposalId:                    ptr.String("__ProposalId__"),
+		AssociatedGatewayOwnerAccount: ptr.String("__AssociatedGatewayOwnerAccount__"),
+		OverrideAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4603,7 +5145,19 @@ func TestCheckResponseSnapshot_Error_DirectConnectServerException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{})
+	_, opErr := svc.AcceptDirectConnectGatewayAssociationProposal(context.Background(), &AcceptDirectConnectGatewayAssociationProposalInput{
+		DirectConnectGatewayId:        ptr.String("__DirectConnectGatewayId__"),
+		ProposalId:                    ptr.String("__ProposalId__"),
+		AssociatedGatewayOwnerAccount: ptr.String("__AssociatedGatewayOwnerAccount__"),
+		OverrideAllowedPrefixesToDirectConnectGateway: []types.RouteFilterPrefix{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4628,7 +5182,23 @@ func TestCheckResponseSnapshot_Error_DuplicateTagKeysException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{})
+	_, opErr := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		OwnerAccount:   ptr.String("__OwnerAccount__"),
+		Bandwidth:      ptr.String("__Bandwidth__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Vlan:           1,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4653,7 +5223,32 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AllocatePrivateVirtualInterface(context.Background(), &AllocatePrivateVirtualInterfaceInput{})
+	_, opErr := svc.AllocatePrivateVirtualInterface(context.Background(), &AllocatePrivateVirtualInterfaceInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+		NewPrivateVirtualInterfaceAllocation: &types.NewPrivateVirtualInterfaceAllocation{
+			VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
+			Vlan:                 1,
+			Asn:                  1,
+			AsnLong:              ptr.Int64(1),
+			Mtu:                  ptr.Int32(1),
+			AuthKey:              ptr.String("__AuthKey__"),
+			AmazonAddress:        ptr.String("__AmazonAddress__"),
+			AddressFamily:        types.AddressFamily("ipv4"),
+			CustomerAddress:      ptr.String("__CustomerAddress__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RateLimit: ptr.String("__RateLimit__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4678,7 +5273,23 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{})
+	_, opErr := svc.AllocateHostedConnection(context.Background(), &AllocateHostedConnectionInput{
+		ConnectionId:   ptr.String("__ConnectionId__"),
+		OwnerAccount:   ptr.String("__OwnerAccount__"),
+		Bandwidth:      ptr.String("__Bandwidth__"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Vlan:           1,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

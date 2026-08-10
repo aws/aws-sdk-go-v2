@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DestinationName":"__DestinationName__","ImportedWirelessDeviceList":[{"Sidewalk":{"LastUpdateTime":"2000-01-01T00:00:00Z","OnboardingStatus":"INITIALIZED","OnboardingStatusReason":"__OnboardingStatusReason__","SidewalkManufacturingSn":"__SidewalkManufacturingSn__"}},{"Sidewalk":{"LastUpdateTime":"2000-01-01T00:00:00Z","OnboardingStatus":"INITIALIZED","OnboardingStatusReason":"__OnboardingStatusReason__","SidewalkManufacturingSn":"__SidewalkManufacturingSn__"}}],"NextToken":"__NextToken__","Positioning":"Enabled","Sidewalk":{"Positioning":{"DestinationName":"__DestinationName__"}}}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.ListSchemaExtensions
+
+{"NextToken":"__NextToken__","SchemaExtensionsInfo":[{"Description":"__Description__","DirectoryId":"__DirectoryId__","EndDateTime":946684800,"SchemaExtensionId":"__SchemaExtensionId__","SchemaExtensionStatus":"Initializing","SchemaExtensionStatusReason":"__SchemaExtensionStatusReason__","StartDateTime":946684800},{"Description":"__Description__","DirectoryId":"__DirectoryId__","EndDateTime":946684800,"SchemaExtensionId":"__SchemaExtensionId__","SchemaExtensionStatus":"Initializing","SchemaExtensionStatusReason":"__SchemaExtensionStatusReason__","StartDateTime":946684800}]}

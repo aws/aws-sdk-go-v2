@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeFleetAdvisorSchemaObjectSummary
+
+{"FleetAdvisorSchemaObjects":[{"CodeLineCount":1,"CodeSize":1,"NumberOfObjects":1,"ObjectType":"__ObjectType__","SchemaId":"__SchemaId__"},{"CodeLineCount":1,"CodeSize":1,"NumberOfObjects":1,"ObjectType":"__ObjectType__","SchemaId":"__SchemaId__"}],"NextToken":"__NextToken__"}

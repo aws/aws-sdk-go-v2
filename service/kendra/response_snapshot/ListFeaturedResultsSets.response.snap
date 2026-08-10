@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListFeaturedResultsSets
+
+{"FeaturedResultsSetSummaryItems":[{"CreationTimestamp":1,"FeaturedResultsSetId":"__FeaturedResultsSetId__","FeaturedResultsSetName":"__FeaturedResultsSetName__","LastUpdatedTimestamp":1,"Status":"ACTIVE"},{"CreationTimestamp":1,"FeaturedResultsSetId":"__FeaturedResultsSetId__","FeaturedResultsSetName":"__FeaturedResultsSetName__","LastUpdatedTimestamp":1,"Status":"ACTIVE"}],"NextToken":"__NextToken__"}

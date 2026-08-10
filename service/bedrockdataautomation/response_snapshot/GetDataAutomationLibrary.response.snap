@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"library":{"creationTime":"2000-01-01T00:00:00Z","entityTypes":[{"entityMetadata":"__EntityMetadata__","entityType":"VOCABULARY"},{"entityMetadata":"__EntityMetadata__","entityType":"VOCABULARY"}],"kmsEncryptionContext":{"key0":"__Value__"},"kmsKeyId":"__KmsKeyId__","libraryArn":"__LibraryArn__","libraryDescription":"__LibraryDescription__","libraryName":"__LibraryName__","status":"ACTIVE"}}

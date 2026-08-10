@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"UserArn":"__UserArn__","UserId":"__UserId__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.ListSecurityConfigs
+
+{"nextToken":"__NextToken__","securityConfigSummaries":[{"configVersion":"__ConfigVersion__","createdDate":1,"description":"__Description__","id":"__Id__","lastModifiedDate":1,"type":"saml"},{"configVersion":"__ConfigVersion__","createdDate":1,"description":"__Description__","id":"__Id__","lastModifiedDate":1,"type":"saml"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"artifacts":[{"artifactFileName":"__ArtifactFileName__","artifactId":"__ArtifactId__"},{"artifactFileName":"__ArtifactFileName__","artifactId":"__ArtifactId__"}],"nextToken":"__NextToken__"}

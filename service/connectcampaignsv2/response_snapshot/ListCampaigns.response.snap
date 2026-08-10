@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"campaignSummaryList":[{"arn":"__Arn__","channelSubtypes":["TELEPHONY","TELEPHONY"],"connectCampaignFlowArn":"__ConnectCampaignFlowArn__","connectInstanceId":"__ConnectInstanceId__","entryLimitsConfig":{"maxEntryCount":1,"minEntryInterval":"__MinEntryInterval__"},"id":"__Id__","name":"__Name__","schedule":{"endTime":"2000-01-01T00:00:00Z","refreshFrequency":"__RefreshFrequency__","startTime":"2000-01-01T00:00:00Z"},"type":"MANAGED"},{"arn":"__Arn__","channelSubtypes":["TELEPHONY","TELEPHONY"],"connectCampaignFlowArn":"__ConnectCampaignFlowArn__","connectInstanceId":"__ConnectInstanceId__","entryLimitsConfig":{"maxEntryCount":1,"minEntryInterval":"__MinEntryInterval__"},"id":"__Id__","name":"__Name__","schedule":{"endTime":"2000-01-01T00:00:00Z","refreshFrequency":"__RefreshFrequency__","startTime":"2000-01-01T00:00:00Z"},"type":"MANAGED"}],"nextToken":"__NextToken__"}

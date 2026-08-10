@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterNodes
+
+{"ClusterNodeSummaries":[{"CurrentImageReleaseVersion":"__CurrentImageReleaseVersion__","ImageVersionStatus":"UpToDate","InstanceGroupName":"__InstanceGroupName__","InstanceId":"__InstanceId__","InstanceStatus":{"Message":"__Message__","Status":"Running"},"InstanceType":"ml.p4d.24xlarge","LastSoftwareUpdateTime":946684800,"LaunchTime":946684800,"NodeLogicalId":"__NodeLogicalId__","PrivateDnsHostname":"__PrivateDnsHostname__","UltraServerInfo":{"Id":"__Id__","Type":"__Type__"}},{"CurrentImageReleaseVersion":"__CurrentImageReleaseVersion__","ImageVersionStatus":"UpToDate","InstanceGroupName":"__InstanceGroupName__","InstanceId":"__InstanceId__","InstanceStatus":{"Message":"__Message__","Status":"Running"},"InstanceType":"ml.p4d.24xlarge","LastSoftwareUpdateTime":946684800,"LaunchTime":946684800,"NodeLogicalId":"__NodeLogicalId__","PrivateDnsHostname":"__PrivateDnsHostname__","UltraServerInfo":{"Id":"__Id__","Type":"__Type__"}}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","SegmentDefinitionArn":"__SegmentDefinitionArn__","SegmentDefinitionName":"__SegmentDefinitionName__","SegmentType":"CLASSIC","Tags":{"key0":"__Value__"}},{"CreatedAt":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","SegmentDefinitionArn":"__SegmentDefinitionArn__","SegmentDefinitionName":"__SegmentDefinitionName__","SegmentType":"CLASSIC","Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListFaqs
+
+{"FaqSummaryItems":[{"CreatedAt":946684800,"FileFormat":"CSV","Id":"__Id__","LanguageCode":"__LanguageCode__","Name":"__Name__","Status":"CREATING","UpdatedAt":946684800},{"CreatedAt":946684800,"FileFormat":"CSV","Id":"__Id__","LanguageCode":"__LanguageCode__","Name":"__Name__","Status":"CREATING","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

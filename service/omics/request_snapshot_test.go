@@ -7,8 +7,10 @@ package omics
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -181,7 +184,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AbortMultipartReadSetUpload(t *testing.T) {
 	input := &AbortMultipartReadSetUploadInput{
@@ -3286,7 +3310,7 @@ func TestCheckRequestSnapshot_StartRun(t *testing.T) {
 		CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
 		RunGroupId:      ptr.String("__RunGroupId__"),
 		Priority:        ptr.Int32(1),
-		Parameters:      nil,
+		Parameters:      document.NewLazyDocument("__Document__"),
 		StorageCapacity: ptr.Int32(1),
 		OutputUri:       ptr.String("__OutputUri__"),
 		LogLevel:        types.RunLogLevel("OFF"),
@@ -3301,7 +3325,7 @@ func TestCheckRequestSnapshot_StartRun(t *testing.T) {
 		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
-		EngineSettings:      nil,
+		EngineSettings:      document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3342,7 +3366,7 @@ func TestCheckRequestSnapshot_StartRunBatch(t *testing.T) {
 			CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
 			RunGroupId:      ptr.String("__RunGroupId__"),
 			Priority:        ptr.Int32(1),
-			Parameters:      nil,
+			Parameters:      document.NewLazyDocument("__Document__"),
 			StorageCapacity: ptr.Int32(1),
 			OutputUri:       ptr.String("__OutputUri__"),
 			LogLevel:        types.RunLogLevel("OFF"),
@@ -3356,7 +3380,7 @@ func TestCheckRequestSnapshot_StartRunBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
-			EngineSettings:      nil,
+			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},
 		BatchRunSettings: &types.BatchRunSettingsMemberInlineSettings{
@@ -3366,24 +3390,24 @@ func TestCheckRequestSnapshot_StartRunBatch(t *testing.T) {
 					Name:                ptr.String("__Name__"),
 					OutputUri:           ptr.String("__OutputUri__"),
 					Priority:            ptr.Int32(1),
-					Parameters:          nil,
+					Parameters:          document.NewLazyDocument("__Document__"),
 					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
 					RunTags: map[string]string{
 						"key0": "__Value__",
 					},
-					EngineSettings: nil,
+					EngineSettings: document.NewLazyDocument("__Document__"),
 				},
 				{
 					RunSettingId:        ptr.String("__RunSettingId__"),
 					Name:                ptr.String("__Name__"),
 					OutputUri:           ptr.String("__OutputUri__"),
 					Priority:            ptr.Int32(1),
-					Parameters:          nil,
+					Parameters:          document.NewLazyDocument("__Document__"),
 					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
 					RunTags: map[string]string{
 						"key0": "__Value__",
 					},
-					EngineSettings: nil,
+					EngineSettings: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -3767,6 +3791,7 @@ func TestCheckRequestSnapshot_UploadReadSetPart(t *testing.T) {
 		UploadId:        ptr.String("__UploadId__"),
 		PartSource:      types.ReadSetPartSource("SOURCE1"),
 		PartNumber:      ptr.Int32(1),
+		Payload:         io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6893,7 +6918,7 @@ func TestUpdateRequestSnapshot_StartRun(t *testing.T) {
 		CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
 		RunGroupId:      ptr.String("__RunGroupId__"),
 		Priority:        ptr.Int32(1),
-		Parameters:      nil,
+		Parameters:      document.NewLazyDocument("__Document__"),
 		StorageCapacity: ptr.Int32(1),
 		OutputUri:       ptr.String("__OutputUri__"),
 		LogLevel:        types.RunLogLevel("OFF"),
@@ -6908,7 +6933,7 @@ func TestUpdateRequestSnapshot_StartRun(t *testing.T) {
 		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
-		EngineSettings:      nil,
+		EngineSettings:      document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6949,7 +6974,7 @@ func TestUpdateRequestSnapshot_StartRunBatch(t *testing.T) {
 			CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
 			RunGroupId:      ptr.String("__RunGroupId__"),
 			Priority:        ptr.Int32(1),
-			Parameters:      nil,
+			Parameters:      document.NewLazyDocument("__Document__"),
 			StorageCapacity: ptr.Int32(1),
 			OutputUri:       ptr.String("__OutputUri__"),
 			LogLevel:        types.RunLogLevel("OFF"),
@@ -6963,7 +6988,7 @@ func TestUpdateRequestSnapshot_StartRunBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
-			EngineSettings:      nil,
+			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},
 		BatchRunSettings: &types.BatchRunSettingsMemberInlineSettings{
@@ -6973,24 +6998,24 @@ func TestUpdateRequestSnapshot_StartRunBatch(t *testing.T) {
 					Name:                ptr.String("__Name__"),
 					OutputUri:           ptr.String("__OutputUri__"),
 					Priority:            ptr.Int32(1),
-					Parameters:          nil,
+					Parameters:          document.NewLazyDocument("__Document__"),
 					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
 					RunTags: map[string]string{
 						"key0": "__Value__",
 					},
-					EngineSettings: nil,
+					EngineSettings: document.NewLazyDocument("__Document__"),
 				},
 				{
 					RunSettingId:        ptr.String("__RunSettingId__"),
 					Name:                ptr.String("__Name__"),
 					OutputUri:           ptr.String("__OutputUri__"),
 					Priority:            ptr.Int32(1),
-					Parameters:          nil,
+					Parameters:          document.NewLazyDocument("__Document__"),
 					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
 					RunTags: map[string]string{
 						"key0": "__Value__",
 					},
-					EngineSettings: nil,
+					EngineSettings: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -7374,6 +7399,7 @@ func TestUpdateRequestSnapshot_UploadReadSetPart(t *testing.T) {
 		UploadId:        ptr.String("__UploadId__"),
 		PartSource:      types.ReadSetPartSource("SOURCE1"),
 		PartNumber:      ptr.Int32(1),
+		Payload:         io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
 	}
 	body := &bytes.Buffer{}
 	method := ""

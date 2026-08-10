@@ -120,7 +120,24 @@ func TestCheckResponseSnapshot_CreateActivity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	got, err := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +160,48 @@ func TestCheckResponseSnapshot_CreateStateMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	got, err := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +223,20 @@ func TestCheckResponseSnapshot_CreateStateMachineAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{})
+	got, err := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		RoutingConfiguration: []types.RoutingConfigurationListItem{
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +255,9 @@ func TestCheckResponseSnapshot_DeleteActivity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteActivity(context.Background(), &DeleteActivityInput{})
+	got, err := svc.DeleteActivity(context.Background(), &DeleteActivityInput{
+		ActivityArn: ptr.String("__ActivityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +276,9 @@ func TestCheckResponseSnapshot_DeleteStateMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStateMachine(context.Background(), &DeleteStateMachineInput{})
+	got, err := svc.DeleteStateMachine(context.Background(), &DeleteStateMachineInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +297,9 @@ func TestCheckResponseSnapshot_DeleteStateMachineAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStateMachineAlias(context.Background(), &DeleteStateMachineAliasInput{})
+	got, err := svc.DeleteStateMachineAlias(context.Background(), &DeleteStateMachineAliasInput{
+		StateMachineAliasArn: ptr.String("__StateMachineAliasArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +318,9 @@ func TestCheckResponseSnapshot_DeleteStateMachineVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStateMachineVersion(context.Background(), &DeleteStateMachineVersionInput{})
+	got, err := svc.DeleteStateMachineVersion(context.Background(), &DeleteStateMachineVersionInput{
+		StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +348,9 @@ func TestCheckResponseSnapshot_DescribeActivity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeActivity(context.Background(), &DescribeActivityInput{})
+	got, err := svc.DescribeActivity(context.Background(), &DescribeActivityInput{
+		ActivityArn: ptr.String("__ActivityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +394,10 @@ func TestCheckResponseSnapshot_DescribeExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{})
+	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		IncludedData: types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +451,9 @@ func TestCheckResponseSnapshot_DescribeMapRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMapRun(context.Background(), &DescribeMapRunInput{})
+	got, err := svc.DescribeMapRun(context.Background(), &DescribeMapRunInput{
+		MapRunArn: ptr.String("__MapRunArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +513,10 @@ func TestCheckResponseSnapshot_DescribeStateMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStateMachine(context.Background(), &DescribeStateMachineInput{})
+	got, err := svc.DescribeStateMachine(context.Background(), &DescribeStateMachineInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		IncludedData:    types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +551,9 @@ func TestCheckResponseSnapshot_DescribeStateMachineAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStateMachineAlias(context.Background(), &DescribeStateMachineAliasInput{})
+	got, err := svc.DescribeStateMachineAlias(context.Background(), &DescribeStateMachineAliasInput{
+		StateMachineAliasArn: ptr.String("__StateMachineAliasArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +611,10 @@ func TestCheckResponseSnapshot_DescribeStateMachineForExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStateMachineForExecution(context.Background(), &DescribeStateMachineForExecutionInput{})
+	got, err := svc.DescribeStateMachineForExecution(context.Background(), &DescribeStateMachineForExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		IncludedData: types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -542,7 +636,10 @@ func TestCheckResponseSnapshot_GetActivityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetActivityTask(context.Background(), &GetActivityTaskInput{})
+	got, err := svc.GetActivityTask(context.Background(), &GetActivityTaskInput{
+		ActivityArn: ptr.String("__ActivityArn__"),
+		WorkerName:  ptr.String("__WorkerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -985,7 +1082,13 @@ func TestCheckResponseSnapshot_GetExecutionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExecutionHistory(context.Background(), &GetExecutionHistoryInput{})
+	got, err := svc.GetExecutionHistory(context.Background(), &GetExecutionHistoryInput{
+		ExecutionArn:         ptr.String("__ExecutionArn__"),
+		MaxResults:           1,
+		ReverseOrder:         true,
+		NextToken:            ptr.String("__NextToken__"),
+		IncludeExecutionData: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1018,7 +1121,10 @@ func TestCheckResponseSnapshot_ListActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActivities(context.Background(), &ListActivitiesInput{})
+	got, err := svc.ListActivities(context.Background(), &ListActivitiesInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1175,14 @@ func TestCheckResponseSnapshot_ListExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{})
+	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		StatusFilter:    types.ExecutionStatus("RUNNING"),
+		MaxResults:      1,
+		NextToken:       ptr.String("__NextToken__"),
+		MapRunArn:       ptr.String("__MapRunArn__"),
+		RedriveFilter:   types.ExecutionRedriveFilter("REDRIVEN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1106,7 +1219,11 @@ func TestCheckResponseSnapshot_ListMapRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMapRuns(context.Background(), &ListMapRunsInput{})
+	got, err := svc.ListMapRuns(context.Background(), &ListMapRunsInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		MaxResults:   1,
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1254,11 @@ func TestCheckResponseSnapshot_ListStateMachineAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStateMachineAliases(context.Background(), &ListStateMachineAliasesInput{})
+	got, err := svc.ListStateMachineAliases(context.Background(), &ListStateMachineAliasesInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1289,11 @@ func TestCheckResponseSnapshot_ListStateMachineVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStateMachineVersions(context.Background(), &ListStateMachineVersionsInput{})
+	got, err := svc.ListStateMachineVersions(context.Background(), &ListStateMachineVersionsInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1203,7 +1328,10 @@ func TestCheckResponseSnapshot_ListStateMachines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStateMachines(context.Background(), &ListStateMachinesInput{})
+	got, err := svc.ListStateMachines(context.Background(), &ListStateMachinesInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1233,7 +1361,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1255,7 +1385,11 @@ func TestCheckResponseSnapshot_PublishStateMachineVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishStateMachineVersion(context.Background(), &PublishStateMachineVersionInput{})
+	got, err := svc.PublishStateMachineVersion(context.Background(), &PublishStateMachineVersionInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		RevisionId:      ptr.String("__RevisionId__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1276,7 +1410,10 @@ func TestCheckResponseSnapshot_RedriveExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{})
+	got, err := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1295,7 +1432,11 @@ func TestCheckResponseSnapshot_SendTaskFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{})
+	got, err := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Error:     ptr.String("__Error__"),
+		Cause:     ptr.String("__Cause__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1314,7 +1455,9 @@ func TestCheckResponseSnapshot_SendTaskHeartbeat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendTaskHeartbeat(context.Background(), &SendTaskHeartbeatInput{})
+	got, err := svc.SendTaskHeartbeat(context.Background(), &SendTaskHeartbeatInput{
+		TaskToken: ptr.String("__TaskToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1333,7 +1476,10 @@ func TestCheckResponseSnapshot_SendTaskSuccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendTaskSuccess(context.Background(), &SendTaskSuccessInput{})
+	got, err := svc.SendTaskSuccess(context.Background(), &SendTaskSuccessInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Output:    ptr.String("__Output__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1355,7 +1501,12 @@ func TestCheckResponseSnapshot_StartExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExecution(context.Background(), &StartExecutionInput{})
+	got, err := svc.StartExecution(context.Background(), &StartExecutionInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Name:            ptr.String("__Name__"),
+		Input:           ptr.String("__Input__"),
+		TraceHeader:     ptr.String("__TraceHeader__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1396,7 +1547,13 @@ func TestCheckResponseSnapshot_StartSyncExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSyncExecution(context.Background(), &StartSyncExecutionInput{})
+	got, err := svc.StartSyncExecution(context.Background(), &StartSyncExecutionInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Name:            ptr.String("__Name__"),
+		Input:           ptr.String("__Input__"),
+		TraceHeader:     ptr.String("__TraceHeader__"),
+		IncludedData:    types.IncludedData("ALL_DATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1417,7 +1574,11 @@ func TestCheckResponseSnapshot_StopExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopExecution(context.Background(), &StopExecutionInput{})
+	got, err := svc.StopExecution(context.Background(), &StopExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		Error:        ptr.String("__Error__"),
+		Cause:        ptr.String("__Cause__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1436,7 +1597,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1497,7 +1670,30 @@ func TestCheckResponseSnapshot_TestState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestState(context.Background(), &TestStateInput{})
+	got, err := svc.TestState(context.Background(), &TestStateInput{
+		Definition:      ptr.String("__Definition__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Input:           ptr.String("__Input__"),
+		InspectionLevel: types.InspectionLevel("INFO"),
+		RevealSecrets:   true,
+		Variables:       ptr.String("__Variables__"),
+		StateName:       ptr.String("__StateName__"),
+		Mock: &types.MockInput{
+			Result: ptr.String("__Result__"),
+			ErrorOutput: &types.MockErrorOutput{
+				Error: ptr.String("__Error__"),
+				Cause: ptr.String("__Cause__"),
+			},
+			FieldValidationMode: types.MockResponseValidationMode("STRICT"),
+		},
+		Context: ptr.String("__Context__"),
+		StateConfiguration: &types.TestStateConfiguration{
+			RetrierRetryCount:        ptr.Int32(1),
+			ErrorCausedByState:       ptr.String("__ErrorCausedByState__"),
+			MapIterationFailureCount: ptr.Int32(1),
+			MapItemReaderData:        ptr.String("__MapItemReaderData__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +1712,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1535,7 +1737,12 @@ func TestCheckResponseSnapshot_UpdateMapRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMapRun(context.Background(), &UpdateMapRunInput{})
+	got, err := svc.UpdateMapRun(context.Background(), &UpdateMapRunInput{
+		MapRunArn:                  ptr.String("__MapRunArn__"),
+		MaxConcurrency:             ptr.Int32(1),
+		ToleratedFailurePercentage: ptr.Float32(1.0),
+		ToleratedFailureCount:      ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1558,7 +1765,37 @@ func TestCheckResponseSnapshot_UpdateStateMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStateMachine(context.Background(), &UpdateStateMachineInput{})
+	got, err := svc.UpdateStateMachine(context.Background(), &UpdateStateMachineInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Definition:      ptr.String("__Definition__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1579,7 +1816,20 @@ func TestCheckResponseSnapshot_UpdateStateMachineAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStateMachineAlias(context.Background(), &UpdateStateMachineAliasInput{})
+	got, err := svc.UpdateStateMachineAlias(context.Background(), &UpdateStateMachineAliasInput{
+		StateMachineAliasArn: ptr.String("__StateMachineAliasArn__"),
+		Description:          ptr.String("__Description__"),
+		RoutingConfiguration: []types.RoutingConfigurationListItem{
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1615,7 +1865,12 @@ func TestCheckResponseSnapshot_ValidateStateMachineDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateStateMachineDefinition(context.Background(), &ValidateStateMachineDefinitionInput{})
+	got, err := svc.ValidateStateMachineDefinition(context.Background(), &ValidateStateMachineDefinitionInput{
+		Definition: ptr.String("__Definition__"),
+		Type:       types.StateMachineType("STANDARD"),
+		Severity:   types.ValidateStateMachineDefinitionSeverity("ERROR"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1636,7 +1891,24 @@ func TestCheckResponseSnapshot_Error_ActivityAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1661,7 +1933,9 @@ func TestCheckResponseSnapshot_Error_ActivityDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeActivity(context.Background(), &DescribeActivityInput{})
+	_, opErr := svc.DescribeActivity(context.Background(), &DescribeActivityInput{
+		ActivityArn: ptr.String("__ActivityArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1686,7 +1960,24 @@ func TestCheckResponseSnapshot_Error_ActivityLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1711,7 +2002,10 @@ func TestCheckResponseSnapshot_Error_ActivityWorkerLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetActivityTask(context.Background(), &GetActivityTaskInput{})
+	_, opErr := svc.GetActivityTask(context.Background(), &GetActivityTaskInput{
+		ActivityArn: ptr.String("__ActivityArn__"),
+		WorkerName:  ptr.String("__WorkerName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1736,7 +2030,48 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1761,7 +2096,12 @@ func TestCheckResponseSnapshot_Error_ExecutionAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartExecution(context.Background(), &StartExecutionInput{})
+	_, opErr := svc.StartExecution(context.Background(), &StartExecutionInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Name:            ptr.String("__Name__"),
+		Input:           ptr.String("__Input__"),
+		TraceHeader:     ptr.String("__TraceHeader__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1786,7 +2126,10 @@ func TestCheckResponseSnapshot_Error_ExecutionDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{})
+	_, opErr := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		IncludedData: types.IncludedData("ALL_DATA"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1811,7 +2154,10 @@ func TestCheckResponseSnapshot_Error_ExecutionLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{})
+	_, opErr := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1836,7 +2182,10 @@ func TestCheckResponseSnapshot_Error_ExecutionNotRedrivable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{})
+	_, opErr := svc.RedriveExecution(context.Background(), &RedriveExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1861,7 +2210,48 @@ func TestCheckResponseSnapshot_Error_InvalidArn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1886,7 +2276,48 @@ func TestCheckResponseSnapshot_Error_InvalidDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1911,7 +2342,24 @@ func TestCheckResponseSnapshot_Error_InvalidEncryptionConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1936,7 +2384,12 @@ func TestCheckResponseSnapshot_Error_InvalidExecutionInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartExecution(context.Background(), &StartExecutionInput{})
+	_, opErr := svc.StartExecution(context.Background(), &StartExecutionInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Name:            ptr.String("__Name__"),
+		Input:           ptr.String("__Input__"),
+		TraceHeader:     ptr.String("__TraceHeader__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1961,7 +2414,48 @@ func TestCheckResponseSnapshot_Error_InvalidLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1986,7 +2480,24 @@ func TestCheckResponseSnapshot_Error_InvalidName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2011,7 +2522,10 @@ func TestCheckResponseSnapshot_Error_InvalidOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendTaskSuccess(context.Background(), &SendTaskSuccessInput{})
+	_, opErr := svc.SendTaskSuccess(context.Background(), &SendTaskSuccessInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Output:    ptr.String("__Output__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2036,7 +2550,13 @@ func TestCheckResponseSnapshot_Error_InvalidToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetExecutionHistory(context.Background(), &GetExecutionHistoryInput{})
+	_, opErr := svc.GetExecutionHistory(context.Background(), &GetExecutionHistoryInput{
+		ExecutionArn:         ptr.String("__ExecutionArn__"),
+		MaxResults:           1,
+		ReverseOrder:         true,
+		NextToken:            ptr.String("__NextToken__"),
+		IncludeExecutionData: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2061,7 +2581,48 @@ func TestCheckResponseSnapshot_Error_InvalidTracingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2086,7 +2647,24 @@ func TestCheckResponseSnapshot_Error_KmsAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2112,7 +2690,10 @@ func TestCheckResponseSnapshot_Error_KmsInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{})
+	_, opErr := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{
+		ExecutionArn: ptr.String("__ExecutionArn__"),
+		IncludedData: types.IncludedData("ALL_DATA"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2137,7 +2718,24 @@ func TestCheckResponseSnapshot_Error_KmsThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2162,7 +2760,37 @@ func TestCheckResponseSnapshot_Error_MissingRequiredParameter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateStateMachine(context.Background(), &UpdateStateMachineInput{})
+	_, opErr := svc.UpdateStateMachine(context.Background(), &UpdateStateMachineInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		Definition:      ptr.String("__Definition__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2188,7 +2816,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{})
+	_, opErr := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		RoutingConfiguration: []types.RoutingConfigurationListItem{
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2213,7 +2854,20 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{})
+	_, opErr := svc.CreateStateMachineAlias(context.Background(), &CreateStateMachineAliasInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		RoutingConfiguration: []types.RoutingConfigurationListItem{
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+			{
+				StateMachineVersionArn: ptr.String("__StateMachineVersionArn__"),
+				Weight:                 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2238,7 +2892,48 @@ func TestCheckResponseSnapshot_Error_StateMachineAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2263,7 +2958,48 @@ func TestCheckResponseSnapshot_Error_StateMachineDeleting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2288,7 +3024,10 @@ func TestCheckResponseSnapshot_Error_StateMachineDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStateMachine(context.Background(), &DescribeStateMachineInput{})
+	_, opErr := svc.DescribeStateMachine(context.Background(), &DescribeStateMachineInput{
+		StateMachineArn: ptr.String("__StateMachineArn__"),
+		IncludedData:    types.IncludedData("ALL_DATA"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2313,7 +3052,48 @@ func TestCheckResponseSnapshot_Error_StateMachineLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2338,7 +3118,48 @@ func TestCheckResponseSnapshot_Error_StateMachineTypeNotSupported(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2363,7 +3184,11 @@ func TestCheckResponseSnapshot_Error_TaskDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{})
+	_, opErr := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Error:     ptr.String("__Error__"),
+		Cause:     ptr.String("__Cause__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2388,7 +3213,11 @@ func TestCheckResponseSnapshot_Error_TaskTimedOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{})
+	_, opErr := svc.SendTaskFailure(context.Background(), &SendTaskFailureInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Error:     ptr.String("__Error__"),
+		Cause:     ptr.String("__Cause__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2414,7 +3243,24 @@ func TestCheckResponseSnapshot_Error_TooManyTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{})
+	_, opErr := svc.CreateActivity(context.Background(), &CreateActivityInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2440,7 +3286,48 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{})
+	_, opErr := svc.CreateStateMachine(context.Background(), &CreateStateMachineInput{
+		Name:       ptr.String("__Name__"),
+		Definition: ptr.String("__Definition__"),
+		RoleArn:    ptr.String("__RoleArn__"),
+		Type:       types.StateMachineType("STANDARD"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			Level:                types.LogLevel("ALL"),
+			IncludeExecutionData: true,
+			Destinations: []types.LogDestination{
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+				{
+					CloudWatchLogsLogGroup: &types.CloudWatchLogsLogGroup{
+						LogGroupArn: ptr.String("__LogGroupArn__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TracingConfiguration: &types.TracingConfiguration{
+			Enabled: true,
+		},
+		Publish:            true,
+		VersionDescription: ptr.String("__VersionDescription__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId:                     ptr.String("__KmsKeyId__"),
+			KmsDataKeyReusePeriodSeconds: ptr.Int32(1),
+			Type:                         types.EncryptionType("AWS_OWNED_KEY"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -119,7 +119,25 @@ func TestCheckResponseSnapshot_ActivateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{})
+	got, err := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{
+		ActivationKey:     ptr.String("__ActivationKey__"),
+		GatewayName:       ptr.String("__GatewayName__"),
+		GatewayTimezone:   ptr.String("__GatewayTimezone__"),
+		GatewayRegion:     ptr.String("__GatewayRegion__"),
+		GatewayType:       ptr.String("__GatewayType__"),
+		TapeDriveType:     ptr.String("__TapeDriveType__"),
+		MediumChangerType: ptr.String("__MediumChangerType__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +158,13 @@ func TestCheckResponseSnapshot_AddCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddCache(context.Background(), &AddCacheInput{})
+	got, err := svc.AddCache(context.Background(), &AddCacheInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		DiskIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +185,19 @@ func TestCheckResponseSnapshot_AddTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +218,13 @@ func TestCheckResponseSnapshot_AddUploadBuffer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddUploadBuffer(context.Background(), &AddUploadBufferInput{})
+	got, err := svc.AddUploadBuffer(context.Background(), &AddUploadBufferInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		DiskIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +245,13 @@ func TestCheckResponseSnapshot_AddWorkingStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddWorkingStorage(context.Background(), &AddWorkingStorageInput{})
+	got, err := svc.AddWorkingStorage(context.Background(), &AddWorkingStorageInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		DiskIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +272,11 @@ func TestCheckResponseSnapshot_AssignTapePool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssignTapePool(context.Background(), &AssignTapePoolInput{})
+	got, err := svc.AssignTapePool(context.Background(), &AssignTapePoolInput{
+		TapeARN:                   ptr.String("__TapeARN__"),
+		PoolId:                    ptr.String("__PoolId__"),
+		BypassGovernanceRetention: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +297,33 @@ func TestCheckResponseSnapshot_AssociateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFileSystem(context.Background(), &AssociateFileSystemInput{})
+	got, err := svc.AssociateFileSystem(context.Background(), &AssociateFileSystemInput{
+		UserName:    ptr.String("__UserName__"),
+		Password:    ptr.String("__Password__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		GatewayARN:  ptr.String("__GatewayARN__"),
+		LocationARN: ptr.String("__LocationARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuditDestinationARN: ptr.String("__AuditDestinationARN__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+		EndpointNetworkConfiguration: &types.EndpointNetworkConfiguration{
+			IpAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +345,13 @@ func TestCheckResponseSnapshot_AttachVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachVolume(context.Background(), &AttachVolumeInput{})
+	got, err := svc.AttachVolume(context.Background(), &AttachVolumeInput{
+		GatewayARN:         ptr.String("__GatewayARN__"),
+		TargetName:         ptr.String("__TargetName__"),
+		VolumeARN:          ptr.String("__VolumeARN__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		DiskId:             ptr.String("__DiskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +372,10 @@ func TestCheckResponseSnapshot_CancelArchival(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelArchival(context.Background(), &CancelArchivalInput{})
+	got, err := svc.CancelArchival(context.Background(), &CancelArchivalInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		TapeARN:    ptr.String("__TapeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +396,9 @@ func TestCheckResponseSnapshot_CancelCacheReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelCacheReport(context.Background(), &CancelCacheReportInput{})
+	got, err := svc.CancelCacheReport(context.Background(), &CancelCacheReportInput{
+		CacheReportARN: ptr.String("__CacheReportARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +419,10 @@ func TestCheckResponseSnapshot_CancelRetrieval(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelRetrieval(context.Background(), &CancelRetrievalInput{})
+	got, err := svc.CancelRetrieval(context.Background(), &CancelRetrievalInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		TapeARN:    ptr.String("__TapeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +444,27 @@ func TestCheckResponseSnapshot_CreateCachediSCSIVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCachediSCSIVolume(context.Background(), &CreateCachediSCSIVolumeInput{})
+	got, err := svc.CreateCachediSCSIVolume(context.Background(), &CreateCachediSCSIVolumeInput{
+		GatewayARN:         ptr.String("__GatewayARN__"),
+		VolumeSizeInBytes:  1,
+		SnapshotId:         ptr.String("__SnapshotId__"),
+		TargetName:         ptr.String("__TargetName__"),
+		SourceVolumeARN:    ptr.String("__SourceVolumeARN__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		KMSEncrypted:       ptr.Bool(true),
+		KMSKey:             ptr.String("__KMSKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +485,49 @@ func TestCheckResponseSnapshot_CreateNFSFileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNFSFileShare(context.Background(), &CreateNFSFileShareInput{})
+	got, err := svc.CreateNFSFileShare(context.Background(), &CreateNFSFileShareInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		NFSFileShareDefaults: &types.NFSFileShareDefaults{
+			FileMode:      ptr.String("__FileMode__"),
+			DirectoryMode: ptr.String("__DirectoryMode__"),
+			GroupId:       ptr.Int64(1),
+			OwnerId:       ptr.Int64(1),
+		},
+		GatewayARN:          ptr.String("__GatewayARN__"),
+		EncryptionType:      types.EncryptionType("SseS3"),
+		KMSEncrypted:        ptr.Bool(true),
+		KMSKey:              ptr.String("__KMSKey__"),
+		Role:                ptr.String("__Role__"),
+		LocationARN:         ptr.String("__LocationARN__"),
+		DefaultStorageClass: ptr.String("__DefaultStorageClass__"),
+		ObjectACL:           types.ObjectACL("private"),
+		ClientList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Squash:               ptr.String("__Squash__"),
+		ReadOnly:             ptr.Bool(true),
+		GuessMIMETypeEnabled: ptr.Bool(true),
+		RequesterPays:        ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileShareName: ptr.String("__FileShareName__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+		NotificationPolicy:  ptr.String("__NotificationPolicy__"),
+		VPCEndpointDNSName:  ptr.String("__VPCEndpointDNSName__"),
+		BucketRegion:        ptr.String("__BucketRegion__"),
+		AuditDestinationARN: ptr.String("__AuditDestinationARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +548,55 @@ func TestCheckResponseSnapshot_CreateSMBFileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSMBFileShare(context.Background(), &CreateSMBFileShareInput{})
+	got, err := svc.CreateSMBFileShare(context.Background(), &CreateSMBFileShareInput{
+		ClientToken:            ptr.String("__ClientToken__"),
+		GatewayARN:             ptr.String("__GatewayARN__"),
+		EncryptionType:         types.EncryptionType("SseS3"),
+		KMSEncrypted:           ptr.Bool(true),
+		KMSKey:                 ptr.String("__KMSKey__"),
+		Role:                   ptr.String("__Role__"),
+		LocationARN:            ptr.String("__LocationARN__"),
+		DefaultStorageClass:    ptr.String("__DefaultStorageClass__"),
+		ObjectACL:              types.ObjectACL("private"),
+		ReadOnly:               ptr.Bool(true),
+		GuessMIMETypeEnabled:   ptr.Bool(true),
+		RequesterPays:          ptr.Bool(true),
+		SMBACLEnabled:          ptr.Bool(true),
+		AccessBasedEnumeration: ptr.Bool(true),
+		AdminUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ValidUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InvalidUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuditDestinationARN: ptr.String("__AuditDestinationARN__"),
+		Authentication:      ptr.String("__Authentication__"),
+		CaseSensitivity:     types.CaseSensitivity("ClientSpecified"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileShareName: ptr.String("__FileShareName__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+		NotificationPolicy: ptr.String("__NotificationPolicy__"),
+		VPCEndpointDNSName: ptr.String("__VPCEndpointDNSName__"),
+		BucketRegion:       ptr.String("__BucketRegion__"),
+		OplocksEnabled:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +618,20 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		VolumeARN:           ptr.String("__VolumeARN__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +654,20 @@ func TestCheckResponseSnapshot_CreateSnapshotFromVolumeRecoveryPoint(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSnapshotFromVolumeRecoveryPoint(context.Background(), &CreateSnapshotFromVolumeRecoveryPointInput{})
+	got, err := svc.CreateSnapshotFromVolumeRecoveryPoint(context.Background(), &CreateSnapshotFromVolumeRecoveryPointInput{
+		VolumeARN:           ptr.String("__VolumeARN__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +690,26 @@ func TestCheckResponseSnapshot_CreateStorediSCSIVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStorediSCSIVolume(context.Background(), &CreateStorediSCSIVolumeInput{})
+	got, err := svc.CreateStorediSCSIVolume(context.Background(), &CreateStorediSCSIVolumeInput{
+		GatewayARN:           ptr.String("__GatewayARN__"),
+		DiskId:               ptr.String("__DiskId__"),
+		SnapshotId:           ptr.String("__SnapshotId__"),
+		PreserveExistingData: true,
+		TargetName:           ptr.String("__TargetName__"),
+		NetworkInterfaceId:   ptr.String("__NetworkInterfaceId__"),
+		KMSEncrypted:         ptr.Bool(true),
+		KMSKey:               ptr.String("__KMSKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +730,22 @@ func TestCheckResponseSnapshot_CreateTapePool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTapePool(context.Background(), &CreateTapePoolInput{})
+	got, err := svc.CreateTapePool(context.Background(), &CreateTapePoolInput{
+		PoolName:                ptr.String("__PoolName__"),
+		StorageClass:            types.TapeStorageClass("DEEP_ARCHIVE"),
+		RetentionLockType:       types.RetentionLockType("COMPLIANCE"),
+		RetentionLockTimeInDays: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +766,25 @@ func TestCheckResponseSnapshot_CreateTapeWithBarcode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTapeWithBarcode(context.Background(), &CreateTapeWithBarcodeInput{})
+	got, err := svc.CreateTapeWithBarcode(context.Background(), &CreateTapeWithBarcodeInput{
+		GatewayARN:      ptr.String("__GatewayARN__"),
+		TapeSizeInBytes: ptr.Int64(1),
+		TapeBarcode:     ptr.String("__TapeBarcode__"),
+		KMSEncrypted:    ptr.Bool(true),
+		KMSKey:          ptr.String("__KMSKey__"),
+		PoolId:          ptr.String("__PoolId__"),
+		Worm:            true,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -528,7 +808,27 @@ func TestCheckResponseSnapshot_CreateTapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTapes(context.Background(), &CreateTapesInput{})
+	got, err := svc.CreateTapes(context.Background(), &CreateTapesInput{
+		GatewayARN:        ptr.String("__GatewayARN__"),
+		TapeSizeInBytes:   ptr.Int64(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+		NumTapesToCreate:  ptr.Int32(1),
+		TapeBarcodePrefix: ptr.String("__TapeBarcodePrefix__"),
+		KMSEncrypted:      ptr.Bool(true),
+		KMSKey:            ptr.String("__KMSKey__"),
+		PoolId:            ptr.String("__PoolId__"),
+		Worm:              true,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -549,7 +849,9 @@ func TestCheckResponseSnapshot_DeleteAutomaticTapeCreationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutomaticTapeCreationPolicy(context.Background(), &DeleteAutomaticTapeCreationPolicyInput{})
+	got, err := svc.DeleteAutomaticTapeCreationPolicy(context.Background(), &DeleteAutomaticTapeCreationPolicyInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +872,10 @@ func TestCheckResponseSnapshot_DeleteBandwidthRateLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBandwidthRateLimit(context.Background(), &DeleteBandwidthRateLimitInput{})
+	got, err := svc.DeleteBandwidthRateLimit(context.Background(), &DeleteBandwidthRateLimitInput{
+		GatewayARN:    ptr.String("__GatewayARN__"),
+		BandwidthType: ptr.String("__BandwidthType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +896,9 @@ func TestCheckResponseSnapshot_DeleteCacheReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCacheReport(context.Background(), &DeleteCacheReportInput{})
+	got, err := svc.DeleteCacheReport(context.Background(), &DeleteCacheReportInput{
+		CacheReportARN: ptr.String("__CacheReportARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +920,10 @@ func TestCheckResponseSnapshot_DeleteChapCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChapCredentials(context.Background(), &DeleteChapCredentialsInput{})
+	got, err := svc.DeleteChapCredentials(context.Background(), &DeleteChapCredentialsInput{
+		TargetARN:     ptr.String("__TargetARN__"),
+		InitiatorName: ptr.String("__InitiatorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +944,10 @@ func TestCheckResponseSnapshot_DeleteFileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFileShare(context.Background(), &DeleteFileShareInput{})
+	got, err := svc.DeleteFileShare(context.Background(), &DeleteFileShareInput{
+		FileShareARN: ptr.String("__FileShareARN__"),
+		ForceDelete:  true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +968,9 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{})
+	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -676,7 +991,9 @@ func TestCheckResponseSnapshot_DeleteSnapshotSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSnapshotSchedule(context.Background(), &DeleteSnapshotScheduleInput{})
+	got, err := svc.DeleteSnapshotSchedule(context.Background(), &DeleteSnapshotScheduleInput{
+		VolumeARN: ptr.String("__VolumeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +1014,11 @@ func TestCheckResponseSnapshot_DeleteTape(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTape(context.Background(), &DeleteTapeInput{})
+	got, err := svc.DeleteTape(context.Background(), &DeleteTapeInput{
+		GatewayARN:                ptr.String("__GatewayARN__"),
+		TapeARN:                   ptr.String("__TapeARN__"),
+		BypassGovernanceRetention: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +1039,10 @@ func TestCheckResponseSnapshot_DeleteTapeArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTapeArchive(context.Background(), &DeleteTapeArchiveInput{})
+	got, err := svc.DeleteTapeArchive(context.Background(), &DeleteTapeArchiveInput{
+		TapeARN:                   ptr.String("__TapeARN__"),
+		BypassGovernanceRetention: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +1063,9 @@ func TestCheckResponseSnapshot_DeleteTapePool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTapePool(context.Background(), &DeleteTapePoolInput{})
+	got, err := svc.DeleteTapePool(context.Background(), &DeleteTapePoolInput{
+		PoolARN: ptr.String("__PoolARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -760,7 +1086,9 @@ func TestCheckResponseSnapshot_DeleteVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{})
+	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{
+		VolumeARN: ptr.String("__VolumeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +1111,9 @@ func TestCheckResponseSnapshot_DescribeAvailabilityMonitorTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAvailabilityMonitorTest(context.Background(), &DescribeAvailabilityMonitorTestInput{})
+	got, err := svc.DescribeAvailabilityMonitorTest(context.Background(), &DescribeAvailabilityMonitorTestInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1136,9 @@ func TestCheckResponseSnapshot_DescribeBandwidthRateLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBandwidthRateLimit(context.Background(), &DescribeBandwidthRateLimitInput{})
+	got, err := svc.DescribeBandwidthRateLimit(context.Background(), &DescribeBandwidthRateLimitInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1185,9 @@ func TestCheckResponseSnapshot_DescribeBandwidthRateLimitSchedule(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBandwidthRateLimitSchedule(context.Background(), &DescribeBandwidthRateLimitScheduleInput{})
+	got, err := svc.DescribeBandwidthRateLimitSchedule(context.Background(), &DescribeBandwidthRateLimitScheduleInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +1217,9 @@ func TestCheckResponseSnapshot_DescribeCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCache(context.Background(), &DescribeCacheInput{})
+	got, err := svc.DescribeCache(context.Background(), &DescribeCacheInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -956,7 +1292,9 @@ func TestCheckResponseSnapshot_DescribeCacheReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCacheReport(context.Background(), &DescribeCacheReportInput{})
+	got, err := svc.DescribeCacheReport(context.Background(), &DescribeCacheReportInput{
+		CacheReportARN: ptr.String("__CacheReportARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1020,7 +1358,12 @@ func TestCheckResponseSnapshot_DescribeCachediSCSIVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCachediSCSIVolumes(context.Background(), &DescribeCachediSCSIVolumesInput{})
+	got, err := svc.DescribeCachediSCSIVolumes(context.Background(), &DescribeCachediSCSIVolumesInput{
+		VolumeARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1054,7 +1397,9 @@ func TestCheckResponseSnapshot_DescribeChapCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChapCredentials(context.Background(), &DescribeChapCredentialsInput{})
+	got, err := svc.DescribeChapCredentials(context.Background(), &DescribeChapCredentialsInput{
+		TargetARN: ptr.String("__TargetARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1489,12 @@ func TestCheckResponseSnapshot_DescribeFileSystemAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileSystemAssociations(context.Background(), &DescribeFileSystemAssociationsInput{})
+	got, err := svc.DescribeFileSystemAssociations(context.Background(), &DescribeFileSystemAssociationsInput{
+		FileSystemAssociationARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1209,7 +1559,9 @@ func TestCheckResponseSnapshot_DescribeGatewayInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGatewayInformation(context.Background(), &DescribeGatewayInformationInput{})
+	got, err := svc.DescribeGatewayInformation(context.Background(), &DescribeGatewayInformationInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1238,7 +1590,9 @@ func TestCheckResponseSnapshot_DescribeMaintenanceStartTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMaintenanceStartTime(context.Background(), &DescribeMaintenanceStartTimeInput{})
+	got, err := svc.DescribeMaintenanceStartTime(context.Background(), &DescribeMaintenanceStartTimeInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1352,7 +1706,12 @@ func TestCheckResponseSnapshot_DescribeNFSFileShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNFSFileShares(context.Background(), &DescribeNFSFileSharesInput{})
+	got, err := svc.DescribeNFSFileShares(context.Background(), &DescribeNFSFileSharesInput{
+		FileShareARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1478,7 +1837,12 @@ func TestCheckResponseSnapshot_DescribeSMBFileShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSMBFileShares(context.Background(), &DescribeSMBFileSharesInput{})
+	got, err := svc.DescribeSMBFileShares(context.Background(), &DescribeSMBFileSharesInput{
+		FileShareARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1510,7 +1874,9 @@ func TestCheckResponseSnapshot_DescribeSMBSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSMBSettings(context.Background(), &DescribeSMBSettingsInput{})
+	got, err := svc.DescribeSMBSettings(context.Background(), &DescribeSMBSettingsInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1545,7 +1911,9 @@ func TestCheckResponseSnapshot_DescribeSnapshotSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSnapshotSchedule(context.Background(), &DescribeSnapshotScheduleInput{})
+	got, err := svc.DescribeSnapshotSchedule(context.Background(), &DescribeSnapshotScheduleInput{
+		VolumeARN: ptr.String("__VolumeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1981,12 @@ func TestCheckResponseSnapshot_DescribeStorediSCSIVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStorediSCSIVolumes(context.Background(), &DescribeStorediSCSIVolumesInput{})
+	got, err := svc.DescribeStorediSCSIVolumes(context.Background(), &DescribeStorediSCSIVolumesInput{
+		VolumeARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1666,7 +2039,14 @@ func TestCheckResponseSnapshot_DescribeTapeArchives(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTapeArchives(context.Background(), &DescribeTapeArchivesInput{})
+	got, err := svc.DescribeTapeArchives(context.Background(), &DescribeTapeArchivesInput{
+		TapeARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1702,7 +2082,11 @@ func TestCheckResponseSnapshot_DescribeTapeRecoveryPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTapeRecoveryPoints(context.Background(), &DescribeTapeRecoveryPointsInput{})
+	got, err := svc.DescribeTapeRecoveryPoints(context.Background(), &DescribeTapeRecoveryPointsInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		Marker:     ptr.String("__Marker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1755,7 +2139,15 @@ func TestCheckResponseSnapshot_DescribeTapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTapes(context.Background(), &DescribeTapesInput{})
+	got, err := svc.DescribeTapes(context.Background(), &DescribeTapesInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		TapeARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1782,7 +2174,9 @@ func TestCheckResponseSnapshot_DescribeUploadBuffer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUploadBuffer(context.Background(), &DescribeUploadBufferInput{})
+	got, err := svc.DescribeUploadBuffer(context.Background(), &DescribeUploadBufferInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1830,7 +2224,15 @@ func TestCheckResponseSnapshot_DescribeVTLDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVTLDevices(context.Background(), &DescribeVTLDevicesInput{})
+	got, err := svc.DescribeVTLDevices(context.Background(), &DescribeVTLDevicesInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		VTLDeviceARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1857,7 +2259,9 @@ func TestCheckResponseSnapshot_DescribeWorkingStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkingStorage(context.Background(), &DescribeWorkingStorageInput{})
+	got, err := svc.DescribeWorkingStorage(context.Background(), &DescribeWorkingStorageInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1878,7 +2282,10 @@ func TestCheckResponseSnapshot_DetachVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachVolume(context.Background(), &DetachVolumeInput{})
+	got, err := svc.DetachVolume(context.Background(), &DetachVolumeInput{
+		VolumeARN:   ptr.String("__VolumeARN__"),
+		ForceDetach: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1899,7 +2306,9 @@ func TestCheckResponseSnapshot_DisableGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableGateway(context.Background(), &DisableGatewayInput{})
+	got, err := svc.DisableGateway(context.Background(), &DisableGatewayInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1920,7 +2329,10 @@ func TestCheckResponseSnapshot_DisassociateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFileSystem(context.Background(), &DisassociateFileSystemInput{})
+	got, err := svc.DisassociateFileSystem(context.Background(), &DisassociateFileSystemInput{
+		FileSystemAssociationARN: ptr.String("__FileSystemAssociationARN__"),
+		ForceDelete:              true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1941,7 +2353,10 @@ func TestCheckResponseSnapshot_EvictFilesFailingUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvictFilesFailingUpload(context.Background(), &EvictFilesFailingUploadInput{})
+	got, err := svc.EvictFilesFailingUpload(context.Background(), &EvictFilesFailingUploadInput{
+		FileShareARN: ptr.String("__FileShareARN__"),
+		ForceRemove:  true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1963,7 +2378,18 @@ func TestCheckResponseSnapshot_JoinDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.JoinDomain(context.Background(), &JoinDomainInput{})
+	got, err := svc.JoinDomain(context.Background(), &JoinDomainInput{
+		GatewayARN:         ptr.String("__GatewayARN__"),
+		DomainName:         ptr.String("__DomainName__"),
+		OrganizationalUnit: ptr.String("__OrganizationalUnit__"),
+		DomainControllers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TimeoutInSeconds: ptr.Int32(1),
+		UserName:         ptr.String("__UserName__"),
+		Password:         ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2023,7 +2449,9 @@ func TestCheckResponseSnapshot_ListAutomaticTapeCreationPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomaticTapeCreationPolicies(context.Background(), &ListAutomaticTapeCreationPoliciesInput{})
+	got, err := svc.ListAutomaticTapeCreationPolicies(context.Background(), &ListAutomaticTapeCreationPoliciesInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2152,7 +2580,9 @@ func TestCheckResponseSnapshot_ListCacheReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCacheReports(context.Background(), &ListCacheReportsInput{})
+	got, err := svc.ListCacheReports(context.Background(), &ListCacheReportsInput{
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2190,7 +2620,11 @@ func TestCheckResponseSnapshot_ListFileShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFileShares(context.Background(), &ListFileSharesInput{})
+	got, err := svc.ListFileShares(context.Background(), &ListFileSharesInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		Limit:      ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2226,7 +2660,11 @@ func TestCheckResponseSnapshot_ListFileSystemAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFileSystemAssociations(context.Background(), &ListFileSystemAssociationsInput{})
+	got, err := svc.ListFileSystemAssociations(context.Background(), &ListFileSystemAssociationsInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		Limit:      ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2275,7 +2713,10 @@ func TestCheckResponseSnapshot_ListGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{})
+	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +2765,9 @@ func TestCheckResponseSnapshot_ListLocalDisks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLocalDisks(context.Background(), &ListLocalDisksInput{})
+	got, err := svc.ListLocalDisks(context.Background(), &ListLocalDisksInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2356,7 +2799,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Marker:      ptr.String("__Marker__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2395,7 +2842,14 @@ func TestCheckResponseSnapshot_ListTapePools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTapePools(context.Background(), &ListTapePoolsInput{})
+	got, err := svc.ListTapePools(context.Background(), &ListTapePoolsInput{
+		PoolARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2438,7 +2892,14 @@ func TestCheckResponseSnapshot_ListTapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTapes(context.Background(), &ListTapesInput{})
+	got, err := svc.ListTapes(context.Background(), &ListTapesInput{
+		TapeARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2462,7 +2923,9 @@ func TestCheckResponseSnapshot_ListVolumeInitiators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVolumeInitiators(context.Background(), &ListVolumeInitiatorsInput{})
+	got, err := svc.ListVolumeInitiators(context.Background(), &ListVolumeInitiatorsInput{
+		VolumeARN: ptr.String("__VolumeARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2497,7 +2960,9 @@ func TestCheckResponseSnapshot_ListVolumeRecoveryPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVolumeRecoveryPoints(context.Background(), &ListVolumeRecoveryPointsInput{})
+	got, err := svc.ListVolumeRecoveryPoints(context.Background(), &ListVolumeRecoveryPointsInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2539,7 +3004,11 @@ func TestCheckResponseSnapshot_ListVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVolumes(context.Background(), &ListVolumesInput{})
+	got, err := svc.ListVolumes(context.Background(), &ListVolumesInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		Marker:     ptr.String("__Marker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2561,7 +3030,9 @@ func TestCheckResponseSnapshot_NotifyWhenUploaded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyWhenUploaded(context.Background(), &NotifyWhenUploadedInput{})
+	got, err := svc.NotifyWhenUploaded(context.Background(), &NotifyWhenUploadedInput{
+		FileShareARN: ptr.String("__FileShareARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2583,7 +3054,14 @@ func TestCheckResponseSnapshot_RefreshCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RefreshCache(context.Background(), &RefreshCacheInput{})
+	got, err := svc.RefreshCache(context.Background(), &RefreshCacheInput{
+		FileShareARN: ptr.String("__FileShareARN__"),
+		FolderList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recursive: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2604,7 +3082,13 @@ func TestCheckResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2625,7 +3109,9 @@ func TestCheckResponseSnapshot_ResetCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetCache(context.Background(), &ResetCacheInput{})
+	got, err := svc.ResetCache(context.Background(), &ResetCacheInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2646,7 +3132,10 @@ func TestCheckResponseSnapshot_RetrieveTapeArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveTapeArchive(context.Background(), &RetrieveTapeArchiveInput{})
+	got, err := svc.RetrieveTapeArchive(context.Background(), &RetrieveTapeArchiveInput{
+		TapeARN:    ptr.String("__TapeARN__"),
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2667,7 +3156,10 @@ func TestCheckResponseSnapshot_RetrieveTapeRecoveryPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveTapeRecoveryPoint(context.Background(), &RetrieveTapeRecoveryPointInput{})
+	got, err := svc.RetrieveTapeRecoveryPoint(context.Background(), &RetrieveTapeRecoveryPointInput{
+		TapeARN:    ptr.String("__TapeARN__"),
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2688,7 +3180,10 @@ func TestCheckResponseSnapshot_SetLocalConsolePassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetLocalConsolePassword(context.Background(), &SetLocalConsolePasswordInput{})
+	got, err := svc.SetLocalConsolePassword(context.Background(), &SetLocalConsolePasswordInput{
+		GatewayARN:           ptr.String("__GatewayARN__"),
+		LocalConsolePassword: ptr.String("__LocalConsolePassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2709,7 +3204,10 @@ func TestCheckResponseSnapshot_SetSMBGuestPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetSMBGuestPassword(context.Background(), &SetSMBGuestPasswordInput{})
+	got, err := svc.SetSMBGuestPassword(context.Background(), &SetSMBGuestPasswordInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		Password:   ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2730,7 +3228,9 @@ func TestCheckResponseSnapshot_ShutdownGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ShutdownGateway(context.Background(), &ShutdownGatewayInput{})
+	got, err := svc.ShutdownGateway(context.Background(), &ShutdownGatewayInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2751,7 +3251,9 @@ func TestCheckResponseSnapshot_StartAvailabilityMonitorTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAvailabilityMonitorTest(context.Background(), &StartAvailabilityMonitorTestInput{})
+	got, err := svc.StartAvailabilityMonitorTest(context.Background(), &StartAvailabilityMonitorTestInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2772,7 +3274,56 @@ func TestCheckResponseSnapshot_StartCacheReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCacheReport(context.Background(), &StartCacheReportInput{})
+	got, err := svc.StartCacheReport(context.Background(), &StartCacheReportInput{
+		FileShareARN:       ptr.String("__FileShareARN__"),
+		Role:               ptr.String("__Role__"),
+		LocationARN:        ptr.String("__LocationARN__"),
+		BucketRegion:       ptr.String("__BucketRegion__"),
+		VPCEndpointDNSName: ptr.String("__VPCEndpointDNSName__"),
+		InclusionFilters: []types.CacheReportFilter{
+			{
+				Name: types.CacheReportFilterName("UploadState"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.CacheReportFilterName("UploadState"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExclusionFilters: []types.CacheReportFilter{
+			{
+				Name: types.CacheReportFilterName("UploadState"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.CacheReportFilterName("UploadState"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2793,7 +3344,9 @@ func TestCheckResponseSnapshot_StartGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartGateway(context.Background(), &StartGatewayInput{})
+	got, err := svc.StartGateway(context.Background(), &StartGatewayInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2814,7 +3367,25 @@ func TestCheckResponseSnapshot_UpdateAutomaticTapeCreationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomaticTapeCreationPolicy(context.Background(), &UpdateAutomaticTapeCreationPolicyInput{})
+	got, err := svc.UpdateAutomaticTapeCreationPolicy(context.Background(), &UpdateAutomaticTapeCreationPolicyInput{
+		AutomaticTapeCreationRules: []types.AutomaticTapeCreationRule{
+			{
+				TapeBarcodePrefix: ptr.String("__TapeBarcodePrefix__"),
+				PoolId:            ptr.String("__PoolId__"),
+				TapeSizeInBytes:   ptr.Int64(1),
+				MinimumNumTapes:   ptr.Int32(1),
+				Worm:              true,
+			},
+			{
+				TapeBarcodePrefix: ptr.String("__TapeBarcodePrefix__"),
+				PoolId:            ptr.String("__PoolId__"),
+				TapeSizeInBytes:   ptr.Int64(1),
+				MinimumNumTapes:   ptr.Int32(1),
+				Worm:              true,
+			},
+		},
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2835,7 +3406,11 @@ func TestCheckResponseSnapshot_UpdateBandwidthRateLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBandwidthRateLimit(context.Background(), &UpdateBandwidthRateLimitInput{})
+	got, err := svc.UpdateBandwidthRateLimit(context.Background(), &UpdateBandwidthRateLimitInput{
+		GatewayARN:                           ptr.String("__GatewayARN__"),
+		AverageUploadRateLimitInBitsPerSec:   ptr.Int64(1),
+		AverageDownloadRateLimitInBitsPerSec: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2856,7 +3431,35 @@ func TestCheckResponseSnapshot_UpdateBandwidthRateLimitSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBandwidthRateLimitSchedule(context.Background(), &UpdateBandwidthRateLimitScheduleInput{})
+	got, err := svc.UpdateBandwidthRateLimitSchedule(context.Background(), &UpdateBandwidthRateLimitScheduleInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		BandwidthRateLimitIntervals: []types.BandwidthRateLimitInterval{
+			{
+				StartHourOfDay:    ptr.Int32(1),
+				StartMinuteOfHour: ptr.Int32(1),
+				EndHourOfDay:      ptr.Int32(1),
+				EndMinuteOfHour:   ptr.Int32(1),
+				DaysOfWeek: []int32{
+					1,
+					1,
+				},
+				AverageUploadRateLimitInBitsPerSec:   ptr.Int64(1),
+				AverageDownloadRateLimitInBitsPerSec: ptr.Int64(1),
+			},
+			{
+				StartHourOfDay:    ptr.Int32(1),
+				StartMinuteOfHour: ptr.Int32(1),
+				EndHourOfDay:      ptr.Int32(1),
+				EndMinuteOfHour:   ptr.Int32(1),
+				DaysOfWeek: []int32{
+					1,
+					1,
+				},
+				AverageUploadRateLimitInBitsPerSec:   ptr.Int64(1),
+				AverageDownloadRateLimitInBitsPerSec: ptr.Int64(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2878,7 +3481,12 @@ func TestCheckResponseSnapshot_UpdateChapCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChapCredentials(context.Background(), &UpdateChapCredentialsInput{})
+	got, err := svc.UpdateChapCredentials(context.Background(), &UpdateChapCredentialsInput{
+		TargetARN:                     ptr.String("__TargetARN__"),
+		SecretToAuthenticateInitiator: ptr.String("__SecretToAuthenticateInitiator__"),
+		InitiatorName:                 ptr.String("__InitiatorName__"),
+		SecretToAuthenticateTarget:    ptr.String("__SecretToAuthenticateTarget__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2899,7 +3507,15 @@ func TestCheckResponseSnapshot_UpdateFileSystemAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFileSystemAssociation(context.Background(), &UpdateFileSystemAssociationInput{})
+	got, err := svc.UpdateFileSystemAssociation(context.Background(), &UpdateFileSystemAssociationInput{
+		FileSystemAssociationARN: ptr.String("__FileSystemAssociationARN__"),
+		UserName:                 ptr.String("__UserName__"),
+		Password:                 ptr.String("__Password__"),
+		AuditDestinationARN:      ptr.String("__AuditDestinationARN__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2921,7 +3537,13 @@ func TestCheckResponseSnapshot_UpdateGatewayInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayInformation(context.Background(), &UpdateGatewayInformationInput{})
+	got, err := svc.UpdateGatewayInformation(context.Background(), &UpdateGatewayInformationInput{
+		GatewayARN:            ptr.String("__GatewayARN__"),
+		GatewayName:           ptr.String("__GatewayName__"),
+		GatewayTimezone:       ptr.String("__GatewayTimezone__"),
+		CloudWatchLogGroupARN: ptr.String("__CloudWatchLogGroupARN__"),
+		GatewayCapacity:       types.GatewayCapacity("Small"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2942,7 +3564,9 @@ func TestCheckResponseSnapshot_UpdateGatewaySoftwareNow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewaySoftwareNow(context.Background(), &UpdateGatewaySoftwareNowInput{})
+	got, err := svc.UpdateGatewaySoftwareNow(context.Background(), &UpdateGatewaySoftwareNowInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2963,7 +3587,16 @@ func TestCheckResponseSnapshot_UpdateMaintenanceStartTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMaintenanceStartTime(context.Background(), &UpdateMaintenanceStartTimeInput{})
+	got, err := svc.UpdateMaintenanceStartTime(context.Background(), &UpdateMaintenanceStartTimeInput{
+		GatewayARN:   ptr.String("__GatewayARN__"),
+		HourOfDay:    ptr.Int32(1),
+		MinuteOfHour: ptr.Int32(1),
+		DayOfWeek:    ptr.Int32(1),
+		DayOfMonth:   ptr.Int32(1),
+		SoftwareUpdatePreferences: &types.SoftwareUpdatePreferences{
+			AutomaticUpdatePolicy: types.AutomaticUpdatePolicy("ALL_VERSIONS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2984,7 +3617,34 @@ func TestCheckResponseSnapshot_UpdateNFSFileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNFSFileShare(context.Background(), &UpdateNFSFileShareInput{})
+	got, err := svc.UpdateNFSFileShare(context.Background(), &UpdateNFSFileShareInput{
+		FileShareARN:   ptr.String("__FileShareARN__"),
+		EncryptionType: types.EncryptionType("SseS3"),
+		KMSEncrypted:   ptr.Bool(true),
+		KMSKey:         ptr.String("__KMSKey__"),
+		NFSFileShareDefaults: &types.NFSFileShareDefaults{
+			FileMode:      ptr.String("__FileMode__"),
+			DirectoryMode: ptr.String("__DirectoryMode__"),
+			GroupId:       ptr.Int64(1),
+			OwnerId:       ptr.Int64(1),
+		},
+		DefaultStorageClass: ptr.String("__DefaultStorageClass__"),
+		ObjectACL:           types.ObjectACL("private"),
+		ClientList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Squash:               ptr.String("__Squash__"),
+		ReadOnly:             ptr.Bool(true),
+		GuessMIMETypeEnabled: ptr.Bool(true),
+		RequesterPays:        ptr.Bool(true),
+		FileShareName:        ptr.String("__FileShareName__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+		NotificationPolicy:  ptr.String("__NotificationPolicy__"),
+		AuditDestinationARN: ptr.String("__AuditDestinationARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3005,7 +3665,39 @@ func TestCheckResponseSnapshot_UpdateSMBFileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSMBFileShare(context.Background(), &UpdateSMBFileShareInput{})
+	got, err := svc.UpdateSMBFileShare(context.Background(), &UpdateSMBFileShareInput{
+		FileShareARN:           ptr.String("__FileShareARN__"),
+		EncryptionType:         types.EncryptionType("SseS3"),
+		KMSEncrypted:           ptr.Bool(true),
+		KMSKey:                 ptr.String("__KMSKey__"),
+		DefaultStorageClass:    ptr.String("__DefaultStorageClass__"),
+		ObjectACL:              types.ObjectACL("private"),
+		ReadOnly:               ptr.Bool(true),
+		GuessMIMETypeEnabled:   ptr.Bool(true),
+		RequesterPays:          ptr.Bool(true),
+		SMBACLEnabled:          ptr.Bool(true),
+		AccessBasedEnumeration: ptr.Bool(true),
+		AdminUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ValidUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InvalidUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuditDestinationARN: ptr.String("__AuditDestinationARN__"),
+		CaseSensitivity:     types.CaseSensitivity("ClientSpecified"),
+		FileShareName:       ptr.String("__FileShareName__"),
+		CacheAttributes: &types.CacheAttributes{
+			CacheStaleTimeoutInSeconds: ptr.Int32(1),
+		},
+		NotificationPolicy: ptr.String("__NotificationPolicy__"),
+		OplocksEnabled:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3026,7 +3718,10 @@ func TestCheckResponseSnapshot_UpdateSMBFileShareVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSMBFileShareVisibility(context.Background(), &UpdateSMBFileShareVisibilityInput{})
+	got, err := svc.UpdateSMBFileShareVisibility(context.Background(), &UpdateSMBFileShareVisibilityInput{
+		GatewayARN:        ptr.String("__GatewayARN__"),
+		FileSharesVisible: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3047,7 +3742,15 @@ func TestCheckResponseSnapshot_UpdateSMBLocalGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSMBLocalGroups(context.Background(), &UpdateSMBLocalGroupsInput{})
+	got, err := svc.UpdateSMBLocalGroups(context.Background(), &UpdateSMBLocalGroupsInput{
+		GatewayARN: ptr.String("__GatewayARN__"),
+		SMBLocalGroups: &types.SMBLocalGroups{
+			GatewayAdmins: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3068,7 +3771,10 @@ func TestCheckResponseSnapshot_UpdateSMBSecurityStrategy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSMBSecurityStrategy(context.Background(), &UpdateSMBSecurityStrategyInput{})
+	got, err := svc.UpdateSMBSecurityStrategy(context.Background(), &UpdateSMBSecurityStrategyInput{
+		GatewayARN:          ptr.String("__GatewayARN__"),
+		SMBSecurityStrategy: types.SMBSecurityStrategy("ClientSpecified"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3089,7 +3795,22 @@ func TestCheckResponseSnapshot_UpdateSnapshotSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSnapshotSchedule(context.Background(), &UpdateSnapshotScheduleInput{})
+	got, err := svc.UpdateSnapshotSchedule(context.Background(), &UpdateSnapshotScheduleInput{
+		VolumeARN:         ptr.String("__VolumeARN__"),
+		StartAt:           ptr.Int32(1),
+		RecurrenceInHours: ptr.Int32(1),
+		Description:       ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3110,7 +3831,10 @@ func TestCheckResponseSnapshot_UpdateVTLDeviceType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVTLDeviceType(context.Background(), &UpdateVTLDeviceTypeInput{})
+	got, err := svc.UpdateVTLDeviceType(context.Background(), &UpdateVTLDeviceTypeInput{
+		VTLDeviceARN: ptr.String("__VTLDeviceARN__"),
+		DeviceType:   ptr.String("__DeviceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3137,7 +3861,25 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{})
+	_, opErr := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{
+		ActivationKey:     ptr.String("__ActivationKey__"),
+		GatewayName:       ptr.String("__GatewayName__"),
+		GatewayTimezone:   ptr.String("__GatewayTimezone__"),
+		GatewayRegion:     ptr.String("__GatewayRegion__"),
+		GatewayType:       ptr.String("__GatewayType__"),
+		TapeDriveType:     ptr.String("__TapeDriveType__"),
+		MediumChangerType: ptr.String("__MediumChangerType__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3168,7 +3910,25 @@ func TestCheckResponseSnapshot_Error_InvalidGatewayRequestException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{})
+	_, opErr := svc.ActivateGateway(context.Background(), &ActivateGatewayInput{
+		ActivationKey:     ptr.String("__ActivationKey__"),
+		GatewayName:       ptr.String("__GatewayName__"),
+		GatewayTimezone:   ptr.String("__GatewayTimezone__"),
+		GatewayRegion:     ptr.String("__GatewayRegion__"),
+		GatewayType:       ptr.String("__GatewayType__"),
+		TapeDriveType:     ptr.String("__TapeDriveType__"),
+		MediumChangerType: ptr.String("__MediumChangerType__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3199,7 +3959,20 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	_, opErr := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		VolumeARN:           ptr.String("__VolumeARN__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

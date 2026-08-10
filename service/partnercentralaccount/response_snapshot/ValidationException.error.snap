@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.AcceptConnectionInvitation
+
+{"__type":"ValidationException","ErrorDetails":[{"FieldValidationError":{"Code":"REQUIRED_FIELD_MISSING","Message":"__Message__","Name":"__Name__"}},{"FieldValidationError":{"Code":"REQUIRED_FIELD_MISSING","Message":"__Message__","Name":"__Name__"}}],"Message":"__Message__","Reason":"REQUEST_VALIDATION_FAILED"}

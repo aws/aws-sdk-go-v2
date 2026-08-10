@@ -138,7 +138,12 @@ func TestCheckResponseSnapshot_ApplyPendingMaintenanceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	got, err := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +182,15 @@ func TestCheckResponseSnapshot_CopyClusterSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyClusterSnapshot(context.Background(), &CopyClusterSnapshotInput{})
+	got, err := svc.CopyClusterSnapshot(context.Background(), &CopyClusterSnapshotInput{
+		SnapshotArn:        ptr.String("__SnapshotArn__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +246,31 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterName:       ptr.String("__ClusterName__"),
+		AuthType:          types.Auth("PLAIN_TEXT"),
+		AdminUserName:     ptr.String("__AdminUserName__"),
+		AdminUserPassword: ptr.String("__AdminUserPassword__"),
+		ShardCapacity:     ptr.Int32(1),
+		ShardCount:        ptr.Int32(1),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BackupRetentionPeriod: ptr.Int32(1),
+		PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
+		ShardInstanceCount:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +309,13 @@ func TestCheckResponseSnapshot_CreateClusterSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateClusterSnapshot(context.Background(), &CreateClusterSnapshotInput{})
+	got, err := svc.CreateClusterSnapshot(context.Background(), &CreateClusterSnapshotInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		SnapshotName: ptr.String("__SnapshotName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +371,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +412,9 @@ func TestCheckResponseSnapshot_DeleteClusterSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteClusterSnapshot(context.Background(), &DeleteClusterSnapshotInput{})
+	got, err := svc.DeleteClusterSnapshot(context.Background(), &DeleteClusterSnapshotInput{
+		SnapshotArn: ptr.String("__SnapshotArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -423,7 +470,9 @@ func TestCheckResponseSnapshot_GetCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCluster(context.Background(), &GetClusterInput{})
+	got, err := svc.GetCluster(context.Background(), &GetClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +511,9 @@ func TestCheckResponseSnapshot_GetClusterSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClusterSnapshot(context.Background(), &GetClusterSnapshotInput{})
+	got, err := svc.GetClusterSnapshot(context.Background(), &GetClusterSnapshotInput{
+		SnapshotArn: ptr.String("__SnapshotArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +554,9 @@ func TestCheckResponseSnapshot_GetPendingMaintenanceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPendingMaintenanceAction(context.Background(), &GetPendingMaintenanceActionInput{})
+	got, err := svc.GetPendingMaintenanceAction(context.Background(), &GetPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +593,12 @@ func TestCheckResponseSnapshot_ListClusterSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusterSnapshots(context.Background(), &ListClusterSnapshotsInput{})
+	got, err := svc.ListClusterSnapshots(context.Background(), &ListClusterSnapshotsInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		SnapshotType: ptr.String("__SnapshotType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -573,7 +631,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -638,7 +699,10 @@ func TestCheckResponseSnapshot_ListPendingMaintenanceActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPendingMaintenanceActions(context.Background(), &ListPendingMaintenanceActionsInput{})
+	got, err := svc.ListPendingMaintenanceActions(context.Background(), &ListPendingMaintenanceActionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +725,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -717,7 +783,24 @@ func TestCheckResponseSnapshot_RestoreClusterFromSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreClusterFromSnapshot(context.Background(), &RestoreClusterFromSnapshotInput{})
+	got, err := svc.RestoreClusterFromSnapshot(context.Background(), &RestoreClusterFromSnapshotInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		SnapshotArn: ptr.String("__SnapshotArn__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ShardCapacity:      ptr.Int32(1),
+		ShardInstanceCount: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -773,7 +856,9 @@ func TestCheckResponseSnapshot_StartCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCluster(context.Background(), &StartClusterInput{})
+	got, err := svc.StartCluster(context.Background(), &StartClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +914,9 @@ func TestCheckResponseSnapshot_StopCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCluster(context.Background(), &StopClusterInput{})
+	got, err := svc.StopCluster(context.Background(), &StopClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -848,7 +935,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -867,7 +959,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -923,7 +1021,26 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterArn:    ptr.String("__ClusterArn__"),
+		AuthType:      types.Auth("PLAIN_TEXT"),
+		ShardCapacity: ptr.Int32(1),
+		ShardCount:    ptr.Int32(1),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdminUserPassword:          ptr.String("__AdminUserPassword__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+		BackupRetentionPeriod:      ptr.Int32(1),
+		PreferredBackupWindow:      ptr.String("__PreferredBackupWindow__"),
+		ShardInstanceCount:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -944,7 +1061,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -971,7 +1093,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -996,7 +1123,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1023,7 +1155,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1048,7 +1185,15 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyClusterSnapshot(context.Background(), &CopyClusterSnapshotInput{})
+	_, opErr := svc.CopyClusterSnapshot(context.Background(), &CopyClusterSnapshotInput{
+		SnapshotArn:        ptr.String("__SnapshotArn__"),
+		TargetSnapshotName: ptr.String("__TargetSnapshotName__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1074,7 +1219,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1110,7 +1260,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	_, opErr := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ApplyAction: ptr.String("__ApplyAction__"),
+		OptInType:   types.OptInType("IMMEDIATE"),
+		ApplyOn:     ptr.String("__ApplyOn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

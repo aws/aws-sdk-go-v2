@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListImpersonationRoles
+
+{"NextToken":"__NextToken__","Roles":[{"DateCreated":946684800,"DateModified":946684800,"ImpersonationRoleId":"__ImpersonationRoleId__","Name":"__Name__","Type":"FULL_ACCESS"},{"DateCreated":946684800,"DateModified":946684800,"ImpersonationRoleId":"__ImpersonationRoleId__","Name":"__Name__","Type":"FULL_ACCESS"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"replicationSet":{"arn":"__Arn__","createdBy":"__CreatedBy__","createdTime":946684800,"deletionProtected":true,"lastModifiedBy":"__LastModifiedBy__","lastModifiedTime":946684800,"regionMap":{"key0":{"sseKmsKeyId":"__SseKmsKeyId__","status":"ACTIVE","statusMessage":"__StatusMessage__","statusUpdateDateTime":946684800}},"status":"ACTIVE"}}

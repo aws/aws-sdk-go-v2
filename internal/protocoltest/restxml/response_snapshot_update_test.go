@@ -5,11 +5,14 @@
 package restxml
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/aws/smithy-go"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/restxml"
@@ -32,6 +35,11 @@ func serdeRespCreatePath(path string) (*os.File, error) {
 }
 
 func serdeRespWriteSnapshot(op string, status int, header http.Header, body []byte) error {
+	if es, eh, eb, err := serdeRespReadSnapshot(op); err == nil &&
+		es == status && serdeRespHeaderEqual(eh, header) && bytes.Equal(body, eb) {
+		return nil
+	}
+
 	f, err := serdeRespCreatePath(serdeRespSSPath(op))
 	if err != nil {
 		return err
@@ -60,11 +68,64 @@ func serdeRespWriteSnapshot(op string, status int, header http.Header, body []by
 	return err
 }
 
-// serdeRespXMLErrorEnvelope wraps serialized error members in the XML
-// error envelope the restXml/query deserializers parse:
-// <ErrorResponse><Error><Code>CODE</Code>MEMBERS</Error></ErrorResponse>.
-// It strips the serialized body's outer root element and re-parents the
-// members under <Error>.
+func serdeRespHeaderEqual(a, b http.Header) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for k, av := range a {
+		bv, ok := b[k]
+		if !ok || !slices.Equal(av, bv) {
+			return false
+		}
+	}
+	return true
+}
+
+// inject __type into cbor since our error "serializers" don't like a real response would have
+func serdeRespSpliceCBORType(t *testing.T, body []byte, code string) []byte {
+	pair := append(
+		smithycbor.Encode(smithycbor.String("__type")),
+		smithycbor.Encode(smithycbor.String(code))...,
+	)
+	if len(body) == 0 {
+		return append(append([]byte{0xbf}, pair...), 0xff)
+	}
+
+	if body[0] != 0xbf {
+		t.Fatalf("expected cbor indefinite map header, got %#x", body[0])
+	}
+
+	out := make([]byte, 0, len(body)+len(pair))
+	out = append(out, 0xbf)
+	out = append(out, pair...)
+	return append(out, body[1:]...)
+}
+
+// inject __type into json since our error "serializers" don't like a real response would have
+func serdeRespSpliceJSONType(t *testing.T, body []byte, code string) []byte {
+	quoted, err := json.Marshal(code)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	entry := append([]byte(`"__type":`), quoted...)
+	trimmed := bytes.TrimLeft(body, " \t\r\n")
+	if len(trimmed) == 0 {
+		return append(append([]byte{'{'}, entry...), '}')
+	}
+	if trimmed[0] != '{' {
+		t.Fatalf("expected json object body, got %q", trimmed[0])
+	}
+
+	rest := bytes.TrimLeft(trimmed[1:], " \t\r\n")
+	out := append([]byte{'{'}, entry...)
+	if len(rest) > 0 && rest[0] != '}' {
+		out = append(out, ',')
+	}
+	return append(out, rest...)
+}
+
+// inject the xml envelope since our error "serializers" don't like a real response woul have
 func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	inner := ""
 	s := strings.TrimSpace(string(body))
@@ -432,33 +493,6 @@ func TestUpdateResponseSnapshot_GreetingWithErrors(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_HttpEmptyPrefixHeaders(t *testing.T) {
-	want := &HttpEmptyPrefixHeadersOutput{
-		PrefixHeaders: map[string]string{
-			"key0": "__Value__",
-		},
-		SpecificHeader: ptr.String("__SpecificHeader__"),
-	}
-	proto := restxml.New(schemas.RestXml)
-	opSchema := smithy.NewOperationSchema(schemas.HttpEmptyPrefixHeaders, schemas.HttpEmptyPrefixHeadersOutput, schemas.HttpEmptyPrefixHeadersOutput)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("HttpEmptyPrefixHeaders.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_HttpEnumPayload(t *testing.T) {
 	want := &HttpEnumPayloadOutput{
 		Payload: types.StringEnum("enumvalue"),
@@ -807,7 +841,7 @@ func TestUpdateResponseSnapshot_HttpRequestWithLabelsAndTimestampFormat(t *testi
 
 func TestUpdateResponseSnapshot_HttpResponseCode(t *testing.T) {
 	want := &HttpResponseCodeOutput{
-		Status: ptr.Int32(1),
+		Status: ptr.Int32(200),
 	}
 	proto := restxml.New(schemas.RestXml)
 	opSchema := smithy.NewOperationSchema(schemas.HttpResponseCode, schemas.HttpResponseCodeOutput, schemas.HttpResponseCodeOutput)
@@ -849,30 +883,6 @@ func TestUpdateResponseSnapshot_HttpStringPayload(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("HttpStringPayload.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_IgnoreQueryParamsInResponse(t *testing.T) {
-	want := &IgnoreQueryParamsInResponseOutput{
-		Baz: ptr.String("__Baz__"),
-	}
-	proto := restxml.New(schemas.RestXml)
-	opSchema := smithy.NewOperationSchema(schemas.IgnoreQueryParamsInResponse, schemas.IgnoreQueryParamsInResponseOutput, schemas.IgnoreQueryParamsInResponseOutput)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("IgnoreQueryParamsInResponse.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1947,7 +1957,6 @@ func TestUpdateResponseSnapshot_Error_ComplexError(t *testing.T) {
 		}
 		body = b
 	}
-	// Wrap the serialized members in the XML error envelope the deserializer parses.
 	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ComplexError.error", 403, built.Header, body); err != nil {
 		t.Fatal(err)
@@ -1973,7 +1982,6 @@ func TestUpdateResponseSnapshot_Error_InvalidGreeting(t *testing.T) {
 		}
 		body = b
 	}
-	// Wrap the serialized members in the XML error envelope the deserializer parses.
 	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidGreeting.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)

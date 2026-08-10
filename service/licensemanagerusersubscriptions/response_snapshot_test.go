@@ -157,7 +157,43 @@ func TestCheckResponseSnapshot_AssociateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	got, err := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +215,24 @@ func TestCheckResponseSnapshot_CreateLicenseServerEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseServerEndpoint(context.Background(), &CreateLicenseServerEndpointInput{})
+	got, err := svc.CreateLicenseServerEndpoint(context.Background(), &CreateLicenseServerEndpointInput{
+		IdentityProviderArn: ptr.String("__IdentityProviderArn__"),
+		LicenseServerSettings: &types.LicenseServerSettings{
+			ServerType: types.ServerType("RDS_SAL"),
+			ServerSettings: &types.ServerSettingsMemberRdsSalSettings{
+				Value: types.RdsSalSettings{
+					RdsSalCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +278,10 @@ func TestCheckResponseSnapshot_DeleteLicenseServerEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseServerEndpoint(context.Background(), &DeleteLicenseServerEndpointInput{})
+	got, err := svc.DeleteLicenseServerEndpoint(context.Background(), &DeleteLicenseServerEndpointInput{
+		LicenseServerEndpointArn: ptr.String("__LicenseServerEndpointArn__"),
+		ServerType:               types.ServerType("RDS_SAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +344,39 @@ func TestCheckResponseSnapshot_DeregisterIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterIdentityProvider(context.Background(), &DeregisterIdentityProviderInput{})
+	got, err := svc.DeregisterIdentityProvider(context.Background(), &DeregisterIdentityProviderInput{
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Product:             ptr.String("__Product__"),
+		IdentityProviderArn: ptr.String("__IdentityProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +435,41 @@ func TestCheckResponseSnapshot_DisassociateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateUser(context.Background(), &DisassociateUserInput{})
+	got, err := svc.DisassociateUser(context.Background(), &DisassociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		InstanceUserArn: ptr.String("__InstanceUserArn__"),
+		Domain:          ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -456,7 +578,22 @@ func TestCheckResponseSnapshot_ListIdentityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{})
+	got, err := svc.ListIdentityProviders(context.Background(), &ListIdentityProvidersInput{
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +696,22 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +786,22 @@ func TestCheckResponseSnapshot_ListLicenseServerEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseServerEndpoints(context.Background(), &ListLicenseServerEndpointsInput{})
+	got, err := svc.ListLicenseServerEndpoints(context.Background(), &ListLicenseServerEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -735,7 +902,52 @@ func TestCheckResponseSnapshot_ListProductSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProductSubscriptions(context.Background(), &ListProductSubscriptionsInput{})
+	got, err := svc.ListProductSubscriptions(context.Background(), &ListProductSubscriptionsInput{
+		Product: ptr.String("__Product__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +970,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1073,52 @@ func TestCheckResponseSnapshot_ListUserAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserAssociations(context.Background(), &ListUserAssociationsInput{})
+	got, err := svc.ListUserAssociations(context.Background(), &ListUserAssociationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+				Operation: ptr.String("__Operation__"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1181,48 @@ func TestCheckResponseSnapshot_RegisterIdentityProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterIdentityProvider(context.Background(), &RegisterIdentityProviderInput{})
+	got, err := svc.RegisterIdentityProvider(context.Background(), &RegisterIdentityProviderInput{
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Product: ptr.String("__Product__"),
+		Settings: &types.Settings{
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupId: ptr.String("__SecurityGroupId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1281,43 @@ func TestCheckResponseSnapshot_StartProductSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProductSubscription(context.Background(), &StartProductSubscriptionInput{})
+	got, err := svc.StartProductSubscription(context.Background(), &StartProductSubscriptionInput{
+		Username: ptr.String("__Username__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Product: ptr.String("__Product__"),
+		Domain:  ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1040,7 +1376,41 @@ func TestCheckResponseSnapshot_StopProductSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopProductSubscription(context.Background(), &StopProductSubscriptionInput{})
+	got, err := svc.StopProductSubscription(context.Background(), &StopProductSubscriptionInput{
+		Username: ptr.String("__Username__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Product:        ptr.String("__Product__"),
+		ProductUserArn: ptr.String("__ProductUserArn__"),
+		Domain:         ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1059,7 +1429,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1453,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1141,7 +1522,50 @@ func TestCheckResponseSnapshot_UpdateIdentityProviderSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdentityProviderSettings(context.Background(), &UpdateIdentityProviderSettingsInput{})
+	got, err := svc.UpdateIdentityProviderSettings(context.Background(), &UpdateIdentityProviderSettingsInput{
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Product:             ptr.String("__Product__"),
+		IdentityProviderArn: ptr.String("__IdentityProviderArn__"),
+		UpdateSettings: &types.UpdateSettings{
+			AddSubnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoveSubnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupId: ptr.String("__SecurityGroupId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1162,7 +1586,43 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1647,43 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1212,7 +1708,43 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1237,7 +1769,43 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1262,7 +1830,43 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1287,7 +1891,43 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1312,7 +1952,43 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{})
+	_, opErr := svc.AssociateUser(context.Background(), &AssociateUserInput{
+		Username:   ptr.String("__Username__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		IdentityProvider: &types.IdentityProviderMemberActiveDirectoryIdentityProvider{
+			Value: types.ActiveDirectoryIdentityProvider{
+				DirectoryId: ptr.String("__DirectoryId__"),
+				ActiveDirectorySettings: &types.ActiveDirectorySettings{
+					DomainName: ptr.String("__DomainName__"),
+					DomainIpv4List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainIpv6List: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DomainCredentialsProvider: &types.CredentialsProviderMemberSecretsManagerCredentialsProvider{
+						Value: types.SecretsManagerCredentialsProvider{
+							SecretId: ptr.String("__SecretId__"),
+						},
+					},
+					DomainNetworkSettings: &types.DomainNetworkSettings{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ActiveDirectoryType:     types.ActiveDirectoryType("SELF_MANAGED"),
+				IsSharedActiveDirectory: ptr.Bool(true),
+			},
+		},
+		Domain: ptr.String("__Domain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

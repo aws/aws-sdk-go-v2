@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConfigurationPolicyAssociations":[{"AssociationStatus":"PENDING","AssociationStatusMessage":"__AssociationStatusMessage__","AssociationType":"INHERITED","ConfigurationPolicyId":"__ConfigurationPolicyId__","TargetId":"__TargetId__","TargetType":"ACCOUNT","UpdatedAt":"2000-01-01T00:00:00Z"},{"AssociationStatus":"PENDING","AssociationStatusMessage":"__AssociationStatusMessage__","AssociationType":"INHERITED","ConfigurationPolicyId":"__ConfigurationPolicyId__","TargetId":"__TargetId__","TargetType":"ACCOUNT","UpdatedAt":"2000-01-01T00:00:00Z"}],"UnprocessedConfigurationPolicyAssociations":[{"ConfigurationPolicyAssociationIdentifiers":{"Target":{"AccountId":"__TargetMemberAccountId__"}},"ErrorCode":"__ErrorCode__","ErrorReason":"__ErrorReason__"},{"ConfigurationPolicyAssociationIdentifiers":{"Target":{"AccountId":"__TargetMemberAccountId__"}},"ErrorCode":"__ErrorCode__","ErrorReason":"__ErrorReason__"}]}

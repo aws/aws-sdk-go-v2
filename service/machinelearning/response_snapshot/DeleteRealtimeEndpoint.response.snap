@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.DeleteRealtimeEndpoint
+
+{"MLModelId":"__MLModelId__","RealtimeEndpointInfo":{"CreatedAt":946684800,"EndpointStatus":"NONE","EndpointUrl":"__EndpointUrl__","PeakRequestsPerSecond":1}}

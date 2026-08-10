@@ -134,7 +134,14 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +170,14 @@ func TestCheckResponseSnapshot_CreateControlPanel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateControlPanel(context.Background(), &CreateControlPanelInput{})
+	got, err := svc.CreateControlPanel(context.Background(), &CreateControlPanelInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		ClusterArn:       ptr.String("__ClusterArn__"),
+		ControlPanelName: ptr.String("__ControlPanelName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +204,12 @@ func TestCheckResponseSnapshot_CreateRoutingControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoutingControl(context.Background(), &CreateRoutingControlInput{})
+	got, err := svc.CreateRoutingControl(context.Background(), &CreateRoutingControlInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		ControlPanelArn:    ptr.String("__ControlPanelArn__"),
+		RoutingControlName: ptr.String("__RoutingControlName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +267,44 @@ func TestCheckResponseSnapshot_CreateSafetyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSafetyRule(context.Background(), &CreateSafetyRuleInput{})
+	got, err := svc.CreateSafetyRule(context.Background(), &CreateSafetyRuleInput{
+		AssertionRule: &types.NewAssertionRule{
+			AssertedControls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPanelArn: ptr.String("__ControlPanelArn__"),
+			Name:            ptr.String("__Name__"),
+			RuleConfig: &types.RuleConfig{
+				Inverted:  ptr.Bool(true),
+				Threshold: ptr.Int32(1),
+				Type:      types.RuleType("ATLEAST"),
+			},
+			WaitPeriodMs: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		GatingRule: &types.NewGatingRule{
+			ControlPanelArn: ptr.String("__ControlPanelArn__"),
+			GatingControls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Name: ptr.String("__Name__"),
+			RuleConfig: &types.RuleConfig{
+				Inverted:  ptr.Bool(true),
+				Threshold: ptr.Int32(1),
+				Type:      types.RuleType("ATLEAST"),
+			},
+			TargetControls: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WaitPeriodMs: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +323,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +344,9 @@ func TestCheckResponseSnapshot_DeleteControlPanel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteControlPanel(context.Background(), &DeleteControlPanelInput{})
+	got, err := svc.DeleteControlPanel(context.Background(), &DeleteControlPanelInput{
+		ControlPanelArn: ptr.String("__ControlPanelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +365,9 @@ func TestCheckResponseSnapshot_DeleteRoutingControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoutingControl(context.Background(), &DeleteRoutingControlInput{})
+	got, err := svc.DeleteRoutingControl(context.Background(), &DeleteRoutingControlInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +386,9 @@ func TestCheckResponseSnapshot_DeleteSafetyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSafetyRule(context.Background(), &DeleteSafetyRuleInput{})
+	got, err := svc.DeleteSafetyRule(context.Background(), &DeleteSafetyRuleInput{
+		SafetyRuleArn: ptr.String("__SafetyRuleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +425,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{})
+	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +456,9 @@ func TestCheckResponseSnapshot_DescribeControlPanel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeControlPanel(context.Background(), &DescribeControlPanelInput{})
+	got, err := svc.DescribeControlPanel(context.Background(), &DescribeControlPanelInput{
+		ControlPanelArn: ptr.String("__ControlPanelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +485,9 @@ func TestCheckResponseSnapshot_DescribeRoutingControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRoutingControl(context.Background(), &DescribeRoutingControlInput{})
+	got, err := svc.DescribeRoutingControl(context.Background(), &DescribeRoutingControlInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +545,9 @@ func TestCheckResponseSnapshot_DescribeSafetyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSafetyRule(context.Background(), &DescribeSafetyRuleInput{})
+	got, err := svc.DescribeSafetyRule(context.Background(), &DescribeSafetyRuleInput{
+		SafetyRuleArn: ptr.String("__SafetyRuleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +568,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +595,11 @@ func TestCheckResponseSnapshot_ListAssociatedRoute53HealthChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedRoute53HealthChecks(context.Background(), &ListAssociatedRoute53HealthChecksInput{})
+	got, err := svc.ListAssociatedRoute53HealthChecks(context.Background(), &ListAssociatedRoute53HealthChecksInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +656,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +700,11 @@ func TestCheckResponseSnapshot_ListControlPanels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListControlPanels(context.Background(), &ListControlPanelsInput{})
+	got, err := svc.ListControlPanels(context.Background(), &ListControlPanelsInput{
+		ClusterArn: ptr.String("__ClusterArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +741,11 @@ func TestCheckResponseSnapshot_ListRoutingControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingControls(context.Background(), &ListRoutingControlsInput{})
+	got, err := svc.ListRoutingControls(context.Background(), &ListRoutingControlsInput{
+		ControlPanelArn: ptr.String("__ControlPanelArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +848,11 @@ func TestCheckResponseSnapshot_ListSafetyRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSafetyRules(context.Background(), &ListSafetyRulesInput{})
+	got, err := svc.ListSafetyRules(context.Background(), &ListSafetyRulesInput{
+		ControlPanelArn: ptr.String("__ControlPanelArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +875,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +896,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +920,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -857,7 +963,10 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterArn:  ptr.String("__ClusterArn__"),
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -886,7 +995,10 @@ func TestCheckResponseSnapshot_UpdateControlPanel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateControlPanel(context.Background(), &UpdateControlPanelInput{})
+	got, err := svc.UpdateControlPanel(context.Background(), &UpdateControlPanelInput{
+		ControlPanelArn:  ptr.String("__ControlPanelArn__"),
+		ControlPanelName: ptr.String("__ControlPanelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -913,7 +1025,10 @@ func TestCheckResponseSnapshot_UpdateRoutingControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingControl(context.Background(), &UpdateRoutingControlInput{})
+	got, err := svc.UpdateRoutingControl(context.Background(), &UpdateRoutingControlInput{
+		RoutingControlArn:  ptr.String("__RoutingControlArn__"),
+		RoutingControlName: ptr.String("__RoutingControlName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1086,18 @@ func TestCheckResponseSnapshot_UpdateSafetyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSafetyRule(context.Background(), &UpdateSafetyRuleInput{})
+	got, err := svc.UpdateSafetyRule(context.Background(), &UpdateSafetyRuleInput{
+		AssertionRuleUpdate: &types.AssertionRuleUpdate{
+			Name:          ptr.String("__Name__"),
+			SafetyRuleArn: ptr.String("__SafetyRuleArn__"),
+			WaitPeriodMs:  ptr.Int32(1),
+		},
+		GatingRuleUpdate: &types.GatingRuleUpdate{
+			Name:          ptr.String("__Name__"),
+			SafetyRuleArn: ptr.String("__SafetyRuleArn__"),
+			WaitPeriodMs:  ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -992,7 +1118,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1017,7 +1150,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1042,7 +1182,14 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1067,7 +1214,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1092,7 +1246,14 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1117,7 +1278,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1142,7 +1310,14 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ClusterName: ptr.String("__ClusterName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

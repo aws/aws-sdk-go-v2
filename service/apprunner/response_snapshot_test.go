@@ -151,7 +151,11 @@ func TestCheckResponseSnapshot_AssociateCustomDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{})
+	got, err := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{
+		ServiceArn:         ptr.String("__ServiceArn__"),
+		DomainName:         ptr.String("__DomainName__"),
+		EnableWWWSubdomain: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +189,22 @@ func TestCheckResponseSnapshot_CreateAutoScalingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutoScalingConfiguration(context.Background(), &CreateAutoScalingConfigurationInput{})
+	got, err := svc.CreateAutoScalingConfiguration(context.Background(), &CreateAutoScalingConfigurationInput{
+		AutoScalingConfigurationName: ptr.String("__AutoScalingConfigurationName__"),
+		MaxConcurrency:               ptr.Int32(1),
+		MinSize:                      ptr.Int32(1),
+		MaxSize:                      ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +231,20 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ConnectionName: ptr.String("__ConnectionName__"),
+		ProviderType:   types.ProviderType("GITHUB"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +276,22 @@ func TestCheckResponseSnapshot_CreateObservabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateObservabilityConfiguration(context.Background(), &CreateObservabilityConfigurationInput{})
+	got, err := svc.CreateObservabilityConfiguration(context.Background(), &CreateObservabilityConfigurationInput{
+		ObservabilityConfigurationName: ptr.String("__ObservabilityConfigurationName__"),
+		TraceConfiguration: &types.TraceConfiguration{
+			Vendor: types.TracingVendor("AWSXRAY"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +405,94 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		ServiceName: ptr.String("__ServiceName__"),
+		SourceConfiguration: &types.SourceConfiguration{
+			CodeRepository: &types.CodeRepository{
+				RepositoryUrl: ptr.String("__RepositoryUrl__"),
+				SourceCodeVersion: &types.SourceCodeVersion{
+					Type:  types.SourceCodeVersionType("BRANCH"),
+					Value: ptr.String("__Value__"),
+				},
+				CodeConfiguration: &types.CodeConfiguration{
+					ConfigurationSource: types.ConfigurationSource("REPOSITORY"),
+					CodeConfigurationValues: &types.CodeConfigurationValues{
+						Runtime:      types.Runtime("PYTHON_3"),
+						BuildCommand: ptr.String("__BuildCommand__"),
+						StartCommand: ptr.String("__StartCommand__"),
+						Port:         ptr.String("__Port__"),
+						RuntimeEnvironmentVariables: map[string]string{
+							"key0": "__Value__",
+						},
+						RuntimeEnvironmentSecrets: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				SourceDirectory: ptr.String("__SourceDirectory__"),
+			},
+			ImageRepository: &types.ImageRepository{
+				ImageIdentifier: ptr.String("__ImageIdentifier__"),
+				ImageConfiguration: &types.ImageConfiguration{
+					RuntimeEnvironmentVariables: map[string]string{
+						"key0": "__Value__",
+					},
+					StartCommand: ptr.String("__StartCommand__"),
+					Port:         ptr.String("__Port__"),
+					RuntimeEnvironmentSecrets: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ImageRepositoryType: types.ImageRepositoryType("ECR"),
+			},
+			AutoDeploymentsEnabled: ptr.Bool(true),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		InstanceConfiguration: &types.InstanceConfiguration{
+			Cpu:             ptr.String("__Cpu__"),
+			Memory:          ptr.String("__Memory__"),
+			InstanceRoleArn: ptr.String("__InstanceRoleArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKey: ptr.String("__KmsKey__"),
+		},
+		HealthCheckConfiguration: &types.HealthCheckConfiguration{
+			Protocol:           types.HealthCheckProtocol("TCP"),
+			Path:               ptr.String("__Path__"),
+			Interval:           ptr.Int32(1),
+			Timeout:            ptr.Int32(1),
+			HealthyThreshold:   ptr.Int32(1),
+			UnhealthyThreshold: ptr.Int32(1),
+		},
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			EgressConfiguration: &types.EgressConfiguration{
+				EgressType:      types.EgressType("DEFAULT"),
+				VpcConnectorArn: ptr.String("__VpcConnectorArn__"),
+			},
+			IngressConfiguration: &types.IngressConfiguration{
+				IsPubliclyAccessible: true,
+			},
+			IpAddressType: types.IpAddressType("IPV4"),
+		},
+		ObservabilityConfiguration: &types.ServiceObservabilityConfiguration{
+			ObservabilityEnabled:          true,
+			ObservabilityConfigurationArn: ptr.String("__ObservabilityConfigurationArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +528,27 @@ func TestCheckResponseSnapshot_CreateVpcConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcConnector(context.Background(), &CreateVpcConnectorInput{})
+	got, err := svc.CreateVpcConnector(context.Background(), &CreateVpcConnectorInput{
+		VpcConnectorName: ptr.String("__VpcConnectorName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +582,24 @@ func TestCheckResponseSnapshot_CreateVpcIngressConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcIngressConnection(context.Background(), &CreateVpcIngressConnectionInput{})
+	got, err := svc.CreateVpcIngressConnection(context.Background(), &CreateVpcIngressConnectionInput{
+		ServiceArn:               ptr.String("__ServiceArn__"),
+		VpcIngressConnectionName: ptr.String("__VpcIngressConnectionName__"),
+		IngressVpcConfiguration: &types.IngressVpcConfiguration{
+			VpcId:         ptr.String("__VpcId__"),
+			VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +633,10 @@ func TestCheckResponseSnapshot_DeleteAutoScalingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutoScalingConfiguration(context.Background(), &DeleteAutoScalingConfigurationInput{})
+	got, err := svc.DeleteAutoScalingConfiguration(context.Background(), &DeleteAutoScalingConfigurationInput{
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+		DeleteAllRevisions:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +663,9 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionArn: ptr.String("__ConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +697,9 @@ func TestCheckResponseSnapshot_DeleteObservabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObservabilityConfiguration(context.Background(), &DeleteObservabilityConfigurationInput{})
+	got, err := svc.DeleteObservabilityConfiguration(context.Background(), &DeleteObservabilityConfigurationInput{
+		ObservabilityConfigurationArn: ptr.String("__ObservabilityConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -635,7 +813,9 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +851,9 @@ func TestCheckResponseSnapshot_DeleteVpcConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcConnector(context.Background(), &DeleteVpcConnectorInput{})
+	got, err := svc.DeleteVpcConnector(context.Background(), &DeleteVpcConnectorInput{
+		VpcConnectorArn: ptr.String("__VpcConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -705,7 +887,9 @@ func TestCheckResponseSnapshot_DeleteVpcIngressConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcIngressConnection(context.Background(), &DeleteVpcIngressConnectionInput{})
+	got, err := svc.DeleteVpcIngressConnection(context.Background(), &DeleteVpcIngressConnectionInput{
+		VpcIngressConnectionArn: ptr.String("__VpcIngressConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -739,7 +923,9 @@ func TestCheckResponseSnapshot_DescribeAutoScalingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAutoScalingConfiguration(context.Background(), &DescribeAutoScalingConfigurationInput{})
+	got, err := svc.DescribeAutoScalingConfiguration(context.Background(), &DescribeAutoScalingConfigurationInput{
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +1000,11 @@ func TestCheckResponseSnapshot_DescribeCustomDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomDomains(context.Background(), &DescribeCustomDomainsInput{})
+	got, err := svc.DescribeCustomDomains(context.Background(), &DescribeCustomDomainsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -846,7 +1036,9 @@ func TestCheckResponseSnapshot_DescribeObservabilityConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeObservabilityConfiguration(context.Background(), &DescribeObservabilityConfigurationInput{})
+	got, err := svc.DescribeObservabilityConfiguration(context.Background(), &DescribeObservabilityConfigurationInput{
+		ObservabilityConfigurationArn: ptr.String("__ObservabilityConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1151,9 @@ func TestCheckResponseSnapshot_DescribeService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeService(context.Background(), &DescribeServiceInput{})
+	got, err := svc.DescribeService(context.Background(), &DescribeServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -995,7 +1189,9 @@ func TestCheckResponseSnapshot_DescribeVpcConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcConnector(context.Background(), &DescribeVpcConnectorInput{})
+	got, err := svc.DescribeVpcConnector(context.Background(), &DescribeVpcConnectorInput{
+		VpcConnectorArn: ptr.String("__VpcConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1225,9 @@ func TestCheckResponseSnapshot_DescribeVpcIngressConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcIngressConnection(context.Background(), &DescribeVpcIngressConnectionInput{})
+	got, err := svc.DescribeVpcIngressConnection(context.Background(), &DescribeVpcIngressConnectionInput{
+		VpcIngressConnectionArn: ptr.String("__VpcIngressConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1082,7 +1280,10 @@ func TestCheckResponseSnapshot_DisassociateCustomDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateCustomDomain(context.Background(), &DisassociateCustomDomainInput{})
+	got, err := svc.DisassociateCustomDomain(context.Background(), &DisassociateCustomDomainInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1123,7 +1324,12 @@ func TestCheckResponseSnapshot_ListAutoScalingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutoScalingConfigurations(context.Background(), &ListAutoScalingConfigurationsInput{})
+	got, err := svc.ListAutoScalingConfigurations(context.Background(), &ListAutoScalingConfigurationsInput{
+		AutoScalingConfigurationName: ptr.String("__AutoScalingConfigurationName__"),
+		LatestOnly:                   true,
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1160,7 +1366,11 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		ConnectionName: ptr.String("__ConnectionName__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +1403,12 @@ func TestCheckResponseSnapshot_ListObservabilityConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObservabilityConfigurations(context.Background(), &ListObservabilityConfigurationsInput{})
+	got, err := svc.ListObservabilityConfigurations(context.Background(), &ListObservabilityConfigurationsInput{
+		ObservabilityConfigurationName: ptr.String("__ObservabilityConfigurationName__"),
+		LatestOnly:                     true,
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1449,11 @@ func TestCheckResponseSnapshot_ListOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{})
+	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1275,7 +1494,10 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1300,7 +1522,11 @@ func TestCheckResponseSnapshot_ListServicesForAutoScalingConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServicesForAutoScalingConfiguration(context.Background(), &ListServicesForAutoScalingConfigurationInput{})
+	got, err := svc.ListServicesForAutoScalingConfiguration(context.Background(), &ListServicesForAutoScalingConfigurationInput{
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+		MaxResults:                  ptr.Int32(1),
+		NextToken:                   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1330,7 +1556,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1385,7 +1613,10 @@ func TestCheckResponseSnapshot_ListVpcConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcConnectors(context.Background(), &ListVpcConnectorsInput{})
+	got, err := svc.ListVpcConnectors(context.Background(), &ListVpcConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1416,7 +1647,14 @@ func TestCheckResponseSnapshot_ListVpcIngressConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcIngressConnections(context.Background(), &ListVpcIngressConnectionsInput{})
+	got, err := svc.ListVpcIngressConnections(context.Background(), &ListVpcIngressConnectionsInput{
+		Filter: &types.ListVpcIngressConnectionsFilter{
+			ServiceArn:    ptr.String("__ServiceArn__"),
+			VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1530,7 +1768,9 @@ func TestCheckResponseSnapshot_PauseService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PauseService(context.Background(), &PauseServiceInput{})
+	got, err := svc.PauseService(context.Background(), &PauseServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +1884,9 @@ func TestCheckResponseSnapshot_ResumeService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeService(context.Background(), &ResumeServiceInput{})
+	got, err := svc.ResumeService(context.Background(), &ResumeServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1665,7 +1907,9 @@ func TestCheckResponseSnapshot_StartDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{})
+	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1684,7 +1928,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1703,7 +1959,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1737,7 +1999,9 @@ func TestCheckResponseSnapshot_UpdateDefaultAutoScalingConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDefaultAutoScalingConfiguration(context.Background(), &UpdateDefaultAutoScalingConfigurationInput{})
+	got, err := svc.UpdateDefaultAutoScalingConfiguration(context.Background(), &UpdateDefaultAutoScalingConfigurationInput{
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1851,7 +2115,81 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		SourceConfiguration: &types.SourceConfiguration{
+			CodeRepository: &types.CodeRepository{
+				RepositoryUrl: ptr.String("__RepositoryUrl__"),
+				SourceCodeVersion: &types.SourceCodeVersion{
+					Type:  types.SourceCodeVersionType("BRANCH"),
+					Value: ptr.String("__Value__"),
+				},
+				CodeConfiguration: &types.CodeConfiguration{
+					ConfigurationSource: types.ConfigurationSource("REPOSITORY"),
+					CodeConfigurationValues: &types.CodeConfigurationValues{
+						Runtime:      types.Runtime("PYTHON_3"),
+						BuildCommand: ptr.String("__BuildCommand__"),
+						StartCommand: ptr.String("__StartCommand__"),
+						Port:         ptr.String("__Port__"),
+						RuntimeEnvironmentVariables: map[string]string{
+							"key0": "__Value__",
+						},
+						RuntimeEnvironmentSecrets: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				SourceDirectory: ptr.String("__SourceDirectory__"),
+			},
+			ImageRepository: &types.ImageRepository{
+				ImageIdentifier: ptr.String("__ImageIdentifier__"),
+				ImageConfiguration: &types.ImageConfiguration{
+					RuntimeEnvironmentVariables: map[string]string{
+						"key0": "__Value__",
+					},
+					StartCommand: ptr.String("__StartCommand__"),
+					Port:         ptr.String("__Port__"),
+					RuntimeEnvironmentSecrets: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				ImageRepositoryType: types.ImageRepositoryType("ECR"),
+			},
+			AutoDeploymentsEnabled: ptr.Bool(true),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		InstanceConfiguration: &types.InstanceConfiguration{
+			Cpu:             ptr.String("__Cpu__"),
+			Memory:          ptr.String("__Memory__"),
+			InstanceRoleArn: ptr.String("__InstanceRoleArn__"),
+		},
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+		HealthCheckConfiguration: &types.HealthCheckConfiguration{
+			Protocol:           types.HealthCheckProtocol("TCP"),
+			Path:               ptr.String("__Path__"),
+			Interval:           ptr.Int32(1),
+			Timeout:            ptr.Int32(1),
+			HealthyThreshold:   ptr.Int32(1),
+			UnhealthyThreshold: ptr.Int32(1),
+		},
+		NetworkConfiguration: &types.NetworkConfiguration{
+			EgressConfiguration: &types.EgressConfiguration{
+				EgressType:      types.EgressType("DEFAULT"),
+				VpcConnectorArn: ptr.String("__VpcConnectorArn__"),
+			},
+			IngressConfiguration: &types.IngressConfiguration{
+				IsPubliclyAccessible: true,
+			},
+			IpAddressType: types.IpAddressType("IPV4"),
+		},
+		ObservabilityConfiguration: &types.ServiceObservabilityConfiguration{
+			ObservabilityEnabled:          true,
+			ObservabilityConfigurationArn: ptr.String("__ObservabilityConfigurationArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1885,7 +2223,13 @@ func TestCheckResponseSnapshot_UpdateVpcIngressConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcIngressConnection(context.Background(), &UpdateVpcIngressConnectionInput{})
+	got, err := svc.UpdateVpcIngressConnection(context.Background(), &UpdateVpcIngressConnectionInput{
+		VpcIngressConnectionArn: ptr.String("__VpcIngressConnectionArn__"),
+		IngressVpcConfiguration: &types.IngressVpcConfiguration{
+			VpcId:         ptr.String("__VpcId__"),
+			VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1906,7 +2250,11 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{})
+	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{
+		ServiceArn:         ptr.String("__ServiceArn__"),
+		DomainName:         ptr.String("__DomainName__"),
+		EnableWWWSubdomain: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1931,7 +2279,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{})
+	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{
+		ServiceArn:         ptr.String("__ServiceArn__"),
+		DomainName:         ptr.String("__DomainName__"),
+		EnableWWWSubdomain: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1956,7 +2308,11 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{})
+	_, opErr := svc.AssociateCustomDomain(context.Background(), &AssociateCustomDomainInput{
+		ServiceArn:         ptr.String("__ServiceArn__"),
+		DomainName:         ptr.String("__DomainName__"),
+		EnableWWWSubdomain: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1981,7 +2337,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAutoScalingConfiguration(context.Background(), &DeleteAutoScalingConfigurationInput{})
+	_, opErr := svc.DeleteAutoScalingConfiguration(context.Background(), &DeleteAutoScalingConfigurationInput{
+		AutoScalingConfigurationArn: ptr.String("__AutoScalingConfigurationArn__"),
+		DeleteAllRevisions:          true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2006,7 +2365,22 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutoScalingConfiguration(context.Background(), &CreateAutoScalingConfigurationInput{})
+	_, opErr := svc.CreateAutoScalingConfiguration(context.Background(), &CreateAutoScalingConfigurationInput{
+		AutoScalingConfigurationName: ptr.String("__AutoScalingConfigurationName__"),
+		MaxConcurrency:               ptr.Int32(1),
+		MinSize:                      ptr.Int32(1),
+		MaxSize:                      ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

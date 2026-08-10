@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/document"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -128,7 +129,20 @@ func TestCheckResponseSnapshot_AssociateEntitiesToExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	got, err := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +172,20 @@ func TestCheckResponseSnapshot_AssociatePersonasToEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePersonasToEntities(context.Background(), &AssociatePersonasToEntitiesInput{})
+	got, err := svc.AssociatePersonasToEntities(context.Background(), &AssociatePersonasToEntitiesInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		Personas: []types.EntityPersonaConfiguration{
+			{
+				EntityId: ptr.String("__EntityId__"),
+				Persona:  types.Persona("OWNER"),
+			},
+			{
+				EntityId: ptr.String("__EntityId__"),
+				Persona:  types.Persona("OWNER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +219,17 @@ func TestCheckResponseSnapshot_BatchDeleteDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{})
+	got, err := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{
+		IndexId: ptr.String("__IndexId__"),
+		DocumentIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataSourceSyncJobMetricTarget: &types.DataSourceSyncJobMetricTarget{
+			DataSourceId:        ptr.String("__DataSourceId__"),
+			DataSourceSyncJobId: ptr.String("__DataSourceSyncJobId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +261,13 @@ func TestCheckResponseSnapshot_BatchDeleteFeaturedResultsSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteFeaturedResultsSet(context.Background(), &BatchDeleteFeaturedResultsSetInput{})
+	got, err := svc.BatchDeleteFeaturedResultsSet(context.Background(), &BatchDeleteFeaturedResultsSetInput{
+		IndexId: ptr.String("__IndexId__"),
+		FeaturedResultsSetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +315,69 @@ func TestCheckResponseSnapshot_BatchGetDocumentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDocumentStatus(context.Background(), &BatchGetDocumentStatusInput{})
+	got, err := svc.BatchGetDocumentStatus(context.Background(), &BatchGetDocumentStatusInput{
+		IndexId: ptr.String("__IndexId__"),
+		DocumentInfoList: []types.DocumentInfo{
+			{
+				DocumentId: ptr.String("__DocumentId__"),
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+			},
+			{
+				DocumentId: ptr.String("__DocumentId__"),
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +411,279 @@ func TestCheckResponseSnapshot_BatchPutDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{})
+	got, err := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{
+		IndexId: ptr.String("__IndexId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Documents: []types.Document{
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Blob:  []byte("blob"),
+				S3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				AccessControlList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+				HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+				},
+				ContentType:                  types.ContentType("PDF"),
+				AccessControlConfigurationId: ptr.String("__AccessControlConfigurationId__"),
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Blob:  []byte("blob"),
+				S3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				AccessControlList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+				HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+				},
+				ContentType:                  types.ContentType("PDF"),
+				AccessControlConfigurationId: ptr.String("__AccessControlConfigurationId__"),
+			},
+		},
+		CustomDocumentEnrichmentConfiguration: &types.CustomDocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineCustomDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +702,9 @@ func TestCheckResponseSnapshot_ClearQuerySuggestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ClearQuerySuggestions(context.Background(), &ClearQuerySuggestionsInput{})
+	got, err := svc.ClearQuerySuggestions(context.Background(), &ClearQuerySuggestionsInput{
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +725,60 @@ func TestCheckResponseSnapshot_CreateAccessControlConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessControlConfiguration(context.Background(), &CreateAccessControlConfigurationInput{})
+	got, err := svc.CreateAccessControlConfiguration(context.Background(), &CreateAccessControlConfigurationInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		AccessControlList: []types.Principal{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.PrincipalType("USER"),
+				Access:       types.ReadAccessType("ALLOW"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.PrincipalType("USER"),
+				Access:       types.ReadAccessType("ALLOW"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+			},
+		},
+		HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+			{
+				PrincipalList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+			},
+			{
+				PrincipalList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +799,1249 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{})
+	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{
+		Name:    ptr.String("__Name__"),
+		IndexId: ptr.String("__IndexId__"),
+		Type:    types.DataSourceType("S3"),
+		Configuration: &types.DataSourceConfiguration{
+			S3Configuration: &types.S3DataSourceConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+				InclusionPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DocumentsMetadataConfiguration: &types.DocumentsMetadataConfiguration{
+					S3Prefix: ptr.String("__S3Prefix__"),
+				},
+				AccessControlListConfiguration: &types.AccessControlListConfiguration{
+					KeyPath: ptr.String("__KeyPath__"),
+				},
+			},
+			SharePointConfiguration: &types.SharePointConfiguration{
+				SharePointVersion: types.SharePointVersion("SHAREPOINT_2013"),
+				Urls: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecretArn:        ptr.String("__SecretArn__"),
+				CrawlAttachments: true,
+				UseChangeLog:     true,
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+				DisableLocalGroups:     true,
+				SslCertificateS3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				AuthenticationType: types.SharePointOnlineAuthenticationType("HTTP_BASIC"),
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+			},
+			DatabaseConfiguration: &types.DatabaseConfiguration{
+				DatabaseEngineType: types.DatabaseEngineType("RDS_AURORA_MYSQL"),
+				ConnectionConfiguration: &types.ConnectionConfiguration{
+					DatabaseHost: ptr.String("__DatabaseHost__"),
+					DatabasePort: ptr.Int32(1),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					SecretArn:    ptr.String("__SecretArn__"),
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ColumnConfiguration: &types.ColumnConfiguration{
+					DocumentIdColumnName:    ptr.String("__DocumentIdColumnName__"),
+					DocumentDataColumnName:  ptr.String("__DocumentDataColumnName__"),
+					DocumentTitleColumnName: ptr.String("__DocumentTitleColumnName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					ChangeDetectingColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AclConfiguration: &types.AclConfiguration{
+					AllowedGroupsColumnName: ptr.String("__AllowedGroupsColumnName__"),
+				},
+				SqlConfiguration: &types.SqlConfiguration{
+					QueryIdentifiersEnclosingOption: types.QueryIdentifiersEnclosingOption("DOUBLE_QUOTES"),
+				},
+			},
+			SalesforceConfiguration: &types.SalesforceConfiguration{
+				ServerUrl: ptr.String("__ServerUrl__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				StandardObjectConfigurations: []types.SalesforceStandardObjectConfiguration{
+					{
+						Name:                   types.SalesforceStandardObjectName("ACCOUNT"),
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+					{
+						Name:                   types.SalesforceStandardObjectName("ACCOUNT"),
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+				},
+				KnowledgeArticleConfiguration: &types.SalesforceKnowledgeArticleConfiguration{
+					IncludedStates: []types.SalesforceKnowledgeArticleState{
+						types.SalesforceKnowledgeArticleState("DRAFT"),
+						types.SalesforceKnowledgeArticleState("DRAFT"),
+					},
+					StandardKnowledgeArticleTypeConfiguration: &types.SalesforceStandardKnowledgeArticleTypeConfiguration{
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+					CustomKnowledgeArticleTypeConfigurations: []types.SalesforceCustomKnowledgeArticleTypeConfiguration{
+						{
+							Name:                   ptr.String("__Name__"),
+							DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+							DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+							FieldMappings: []types.DataSourceToIndexFieldMapping{
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+							},
+						},
+						{
+							Name:                   ptr.String("__Name__"),
+							DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+							DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+							FieldMappings: []types.DataSourceToIndexFieldMapping{
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+							},
+						},
+					},
+				},
+				ChatterFeedConfiguration: &types.SalesforceChatterFeedConfiguration{
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					IncludeFilterTypes: []types.SalesforceChatterFeedIncludeFilterType{
+						types.SalesforceChatterFeedIncludeFilterType("ACTIVE_USER"),
+						types.SalesforceChatterFeedIncludeFilterType("ACTIVE_USER"),
+					},
+				},
+				CrawlAttachments: true,
+				StandardObjectAttachmentConfiguration: &types.SalesforceStandardObjectAttachmentConfiguration{
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				IncludeAttachmentFilePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeAttachmentFilePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			OneDriveConfiguration: &types.OneDriveConfiguration{
+				TenantDomain: ptr.String("__TenantDomain__"),
+				SecretArn:    ptr.String("__SecretArn__"),
+				OneDriveUsers: &types.OneDriveUsers{
+					OneDriveUserList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					OneDriveUserS3Path: &types.S3Path{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				DisableLocalGroups: true,
+			},
+			ServiceNowConfiguration: &types.ServiceNowConfiguration{
+				HostUrl:                ptr.String("__HostUrl__"),
+				SecretArn:              ptr.String("__SecretArn__"),
+				ServiceNowBuildVersion: types.ServiceNowBuildVersionType("LONDON"),
+				KnowledgeArticleConfiguration: &types.ServiceNowKnowledgeArticleConfiguration{
+					CrawlAttachments: true,
+					IncludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					FilterQuery: ptr.String("__FilterQuery__"),
+				},
+				ServiceCatalogConfiguration: &types.ServiceNowServiceCatalogConfiguration{
+					CrawlAttachments: true,
+					IncludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				AuthenticationType: types.ServiceNowAuthenticationType("HTTP_BASIC"),
+			},
+			ConfluenceConfiguration: &types.ConfluenceConfiguration{
+				ServerUrl: ptr.String("__ServerUrl__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				Version:   types.ConfluenceVersion("CLOUD"),
+				SpaceConfiguration: &types.ConfluenceSpaceConfiguration{
+					CrawlPersonalSpaces: true,
+					CrawlArchivedSpaces: true,
+					IncludeSpaces: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeSpaces: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SpaceFieldMappings: []types.ConfluenceSpaceToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceSpaceFieldName("DISPLAY_URL"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceSpaceFieldName("DISPLAY_URL"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				PageConfiguration: &types.ConfluencePageConfiguration{
+					PageFieldMappings: []types.ConfluencePageToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluencePageFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluencePageFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				BlogConfiguration: &types.ConfluenceBlogConfiguration{
+					BlogFieldMappings: []types.ConfluenceBlogToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceBlogFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceBlogFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				AttachmentConfiguration: &types.ConfluenceAttachmentConfiguration{
+					CrawlAttachments: true,
+					AttachmentFieldMappings: []types.ConfluenceAttachmentToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceAttachmentFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceAttachmentFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+				AuthenticationType: types.ConfluenceAuthenticationType("HTTP_BASIC"),
+			},
+			GoogleDriveConfiguration: &types.GoogleDriveConfiguration{
+				SecretArn: ptr.String("__SecretArn__"),
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				ExcludeMimeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeUserAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeSharedDrives: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			WebCrawlerConfiguration: &types.WebCrawlerConfiguration{
+				Urls: &types.Urls{
+					SeedUrlConfiguration: &types.SeedUrlConfiguration{
+						SeedUrls: []string{
+							"__Member__",
+							"__Member__",
+						},
+						WebCrawlerMode: types.WebCrawlerMode("HOST_ONLY"),
+					},
+					SiteMapsConfiguration: &types.SiteMapsConfiguration{
+						SiteMaps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CrawlDepth:                       ptr.Int32(1),
+				MaxLinksPerPage:                  ptr.Int32(1),
+				MaxContentSizePerPageInMegaBytes: ptr.Float32(1.0),
+				MaxUrlsPerMinuteCrawlRate:        ptr.Int32(1),
+				UrlInclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UrlExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+				AuthenticationConfiguration: &types.AuthenticationConfiguration{
+					BasicAuthentication: []types.BasicAuthenticationConfiguration{
+						{
+							Host:        ptr.String("__Host__"),
+							Port:        ptr.Int32(1),
+							Credentials: ptr.String("__Credentials__"),
+						},
+						{
+							Host:        ptr.String("__Host__"),
+							Port:        ptr.Int32(1),
+							Credentials: ptr.String("__Credentials__"),
+						},
+					},
+				},
+			},
+			WorkDocsConfiguration: &types.WorkDocsConfiguration{
+				OrganizationId: ptr.String("__OrganizationId__"),
+				CrawlComments:  true,
+				UseChangeLog:   true,
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			FsxConfiguration: &types.FsxConfiguration{
+				FileSystemId:   ptr.String("__FileSystemId__"),
+				FileSystemType: types.FsxFileSystemType("WINDOWS"),
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SecretArn: ptr.String("__SecretArn__"),
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			SlackConfiguration: &types.SlackConfiguration{
+				TeamId:    ptr.String("__TeamId__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SlackEntityList: []types.SlackEntity{
+					types.SlackEntity("PUBLIC_CHANNEL"),
+					types.SlackEntity("PUBLIC_CHANNEL"),
+				},
+				UseChangeLog:    true,
+				CrawlBotMessage: true,
+				ExcludeArchived: true,
+				SinceCrawlDate:  ptr.String("__SinceCrawlDate__"),
+				LookBackPeriod:  ptr.Int32(1),
+				PrivateChannelFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PublicChannelFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			BoxConfiguration: &types.BoxConfiguration{
+				EnterpriseId:  ptr.String("__EnterpriseId__"),
+				SecretArn:     ptr.String("__SecretArn__"),
+				UseChangeLog:  true,
+				CrawlComments: true,
+				CrawlTasks:    true,
+				CrawlWebLinks: true,
+				FileFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				TaskFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				CommentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WebLinkFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QuipConfiguration: &types.QuipConfiguration{
+				Domain:            ptr.String("__Domain__"),
+				SecretArn:         ptr.String("__SecretArn__"),
+				CrawlFileComments: true,
+				CrawlChatRooms:    true,
+				CrawlAttachments:  true,
+				FolderIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ThreadFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				MessageFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				AttachmentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			JiraConfiguration: &types.JiraConfiguration{
+				JiraAccountUrl: ptr.String("__JiraAccountUrl__"),
+				SecretArn:      ptr.String("__SecretArn__"),
+				UseChangeLog:   true,
+				Project: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IssueType: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IssueSubEntityFilter: []types.IssueSubEntity{
+					types.IssueSubEntity("COMMENTS"),
+					types.IssueSubEntity("COMMENTS"),
+				},
+				AttachmentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				CommentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				IssueFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				ProjectFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WorkLogFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			GitHubConfiguration: &types.GitHubConfiguration{
+				SaaSConfiguration: &types.SaaSConfiguration{
+					OrganizationName: ptr.String("__OrganizationName__"),
+					HostUrl:          ptr.String("__HostUrl__"),
+				},
+				OnPremiseConfiguration: &types.OnPremiseConfiguration{
+					HostUrl:          ptr.String("__HostUrl__"),
+					OrganizationName: ptr.String("__OrganizationName__"),
+					SslCertificateS3Path: &types.S3Path{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+				},
+				Type:         types.Type("SAAS"),
+				SecretArn:    ptr.String("__SecretArn__"),
+				UseChangeLog: true,
+				GitHubDocumentCrawlProperties: &types.GitHubDocumentCrawlProperties{
+					CrawlRepositoryDocuments:          true,
+					CrawlIssue:                        true,
+					CrawlIssueComment:                 true,
+					CrawlIssueCommentAttachment:       true,
+					CrawlPullRequest:                  true,
+					CrawlPullRequestComment:           true,
+					CrawlPullRequestCommentAttachment: true,
+				},
+				RepositoryFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFolderNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFileTypePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFileNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFolderNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFileTypePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFileNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				GitHubRepositoryConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubCommitConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueDocumentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueCommentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueAttachmentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestCommentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestDocumentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestDocumentAttachmentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			AlfrescoConfiguration: &types.AlfrescoConfiguration{
+				SiteUrl:   ptr.String("__SiteUrl__"),
+				SiteId:    ptr.String("__SiteId__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				SslCertificateS3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				CrawlSystemFolders: true,
+				CrawlComments:      true,
+				EntityFilter: []types.AlfrescoEntity{
+					types.AlfrescoEntity("wiki"),
+					types.AlfrescoEntity("wiki"),
+				},
+				DocumentLibraryFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				BlogFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WikiFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				Template: document.NewLazyDocument("__Document__"),
+			},
+		},
+		VpcConfiguration: &types.DataSourceVpcConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Schedule:    ptr.String("__Schedule__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken:  ptr.String("__ClientToken__"),
+		LanguageCode: ptr.String("__LanguageCode__"),
+		CustomDocumentEnrichmentConfiguration: &types.CustomDocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineCustomDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +2062,29 @@ func TestCheckResponseSnapshot_CreateExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExperience(context.Background(), &CreateExperienceInput{})
+	got, err := svc.CreateExperience(context.Background(), &CreateExperienceInput{
+		Name:    ptr.String("__Name__"),
+		IndexId: ptr.String("__IndexId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Configuration: &types.ExperienceConfiguration{
+			ContentSourceConfiguration: &types.ContentSourceConfiguration{
+				DataSourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FaqIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DirectPutContent: true,
+			},
+			UserIdentityConfiguration: &types.UserIdentityConfiguration{
+				IdentityAttributeName: ptr.String("__IdentityAttributeName__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +2105,29 @@ func TestCheckResponseSnapshot_CreateFaq(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFaq(context.Background(), &CreateFaqInput{})
+	got, err := svc.CreateFaq(context.Background(), &CreateFaqInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		S3Path: &types.S3Path{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileFormat:   types.FaqFileFormat("CSV"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		LanguageCode: ptr.String("__LanguageCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +2167,35 @@ func TestCheckResponseSnapshot_CreateFeaturedResultsSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFeaturedResultsSet(context.Background(), &CreateFeaturedResultsSetInput{})
+	got, err := svc.CreateFeaturedResultsSet(context.Background(), &CreateFeaturedResultsSetInput{
+		IndexId:                ptr.String("__IndexId__"),
+		FeaturedResultsSetName: ptr.String("__FeaturedResultsSetName__"),
+		Description:            ptr.String("__Description__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Status:                 types.FeaturedResultsSetStatus("ACTIVE"),
+		QueryTexts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FeaturedDocuments: []types.FeaturedDocument{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +2216,62 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		Name:    ptr.String("__Name__"),
+		Edition: types.IndexEdition("DEVELOPER_EDITION"),
+		RoleArn: ptr.String("__RoleArn__"),
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UserTokenConfigurations: []types.UserTokenConfiguration{
+			{
+				JwtTokenTypeConfiguration: &types.JwtTokenTypeConfiguration{
+					KeyLocation:            types.KeyLocation("URL"),
+					URL:                    ptr.String("__URL__"),
+					SecretManagerArn:       ptr.String("__SecretManagerArn__"),
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+					Issuer:                 ptr.String("__Issuer__"),
+					ClaimRegex:             ptr.String("__ClaimRegex__"),
+				},
+				JsonTokenTypeConfiguration: &types.JsonTokenTypeConfiguration{
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+				},
+			},
+			{
+				JwtTokenTypeConfiguration: &types.JwtTokenTypeConfiguration{
+					KeyLocation:            types.KeyLocation("URL"),
+					URL:                    ptr.String("__URL__"),
+					SecretManagerArn:       ptr.String("__SecretManagerArn__"),
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+					Issuer:                 ptr.String("__Issuer__"),
+					ClaimRegex:             ptr.String("__ClaimRegex__"),
+				},
+				JsonTokenTypeConfiguration: &types.JsonTokenTypeConfiguration{
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+				},
+			},
+		},
+		UserContextPolicy: types.UserContextPolicy("ATTRIBUTE_FILTER"),
+		UserGroupResolutionConfiguration: &types.UserGroupResolutionConfiguration{
+			UserGroupResolutionMode: types.UserGroupResolutionMode("AWS_SSO"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +2292,27 @@ func TestCheckResponseSnapshot_CreateQuerySuggestionsBlockList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuerySuggestionsBlockList(context.Background(), &CreateQuerySuggestionsBlockListInput{})
+	got, err := svc.CreateQuerySuggestionsBlockList(context.Background(), &CreateQuerySuggestionsBlockListInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SourceS3Path: &types.S3Path{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +2333,27 @@ func TestCheckResponseSnapshot_CreateThesaurus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateThesaurus(context.Background(), &CreateThesaurusInput{})
+	got, err := svc.CreateThesaurus(context.Background(), &CreateThesaurusInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SourceS3Path: &types.S3Path{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +2372,10 @@ func TestCheckResponseSnapshot_DeleteAccessControlConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessControlConfiguration(context.Background(), &DeleteAccessControlConfigurationInput{})
+	got, err := svc.DeleteAccessControlConfiguration(context.Background(), &DeleteAccessControlConfigurationInput{
+		IndexId: ptr.String("__IndexId__"),
+		Id:      ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +2394,10 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -569,7 +2416,10 @@ func TestCheckResponseSnapshot_DeleteExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExperience(context.Background(), &DeleteExperienceInput{})
+	got, err := svc.DeleteExperience(context.Background(), &DeleteExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +2438,10 @@ func TestCheckResponseSnapshot_DeleteFaq(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFaq(context.Background(), &DeleteFaqInput{})
+	got, err := svc.DeleteFaq(context.Background(), &DeleteFaqInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +2460,9 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +2481,12 @@ func TestCheckResponseSnapshot_DeletePrincipalMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrincipalMapping(context.Background(), &DeletePrincipalMappingInput{})
+	got, err := svc.DeletePrincipalMapping(context.Background(), &DeletePrincipalMappingInput{
+		IndexId:      ptr.String("__IndexId__"),
+		DataSourceId: ptr.String("__DataSourceId__"),
+		GroupId:      ptr.String("__GroupId__"),
+		OrderingId:   ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -645,7 +2505,10 @@ func TestCheckResponseSnapshot_DeleteQuerySuggestionsBlockList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuerySuggestionsBlockList(context.Background(), &DeleteQuerySuggestionsBlockListInput{})
+	got, err := svc.DeleteQuerySuggestionsBlockList(context.Background(), &DeleteQuerySuggestionsBlockListInput{
+		IndexId: ptr.String("__IndexId__"),
+		Id:      ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +2527,10 @@ func TestCheckResponseSnapshot_DeleteThesaurus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteThesaurus(context.Background(), &DeleteThesaurusInput{})
+	got, err := svc.DeleteThesaurus(context.Background(), &DeleteThesaurusInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -735,7 +2601,10 @@ func TestCheckResponseSnapshot_DescribeAccessControlConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccessControlConfiguration(context.Background(), &DescribeAccessControlConfigurationInput{})
+	got, err := svc.DescribeAccessControlConfiguration(context.Background(), &DescribeAccessControlConfigurationInput{
+		IndexId: ptr.String("__IndexId__"),
+		Id:      ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1863,7 +3732,7 @@ func TestCheckResponseSnapshot_DescribeDataSource(t *testing.T) {
 				},
 			},
 			TemplateConfiguration: &types.TemplateConfiguration{
-				Template: nil,
+				Template: document.NewLazyDocument("__Document__"),
 			},
 		},
 		VpcConfiguration: &types.DataSourceVpcConfiguration{
@@ -1990,7 +3859,10 @@ func TestCheckResponseSnapshot_DescribeDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataSource(context.Background(), &DescribeDataSourceInput{})
+	got, err := svc.DescribeDataSource(context.Background(), &DescribeDataSourceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2045,7 +3917,10 @@ func TestCheckResponseSnapshot_DescribeExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExperience(context.Background(), &DescribeExperienceInput{})
+	got, err := svc.DescribeExperience(context.Background(), &DescribeExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2080,7 +3955,10 @@ func TestCheckResponseSnapshot_DescribeFaq(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFaq(context.Background(), &DescribeFaqInput{})
+	got, err := svc.DescribeFaq(context.Background(), &DescribeFaqInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2130,7 +4008,10 @@ func TestCheckResponseSnapshot_DescribeFeaturedResultsSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFeaturedResultsSet(context.Background(), &DescribeFeaturedResultsSetInput{})
+	got, err := svc.DescribeFeaturedResultsSet(context.Background(), &DescribeFeaturedResultsSetInput{
+		IndexId:              ptr.String("__IndexId__"),
+		FeaturedResultsSetId: ptr.String("__FeaturedResultsSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2251,7 +4132,9 @@ func TestCheckResponseSnapshot_DescribeIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIndex(context.Background(), &DescribeIndexInput{})
+	got, err := svc.DescribeIndex(context.Background(), &DescribeIndexInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2290,7 +4173,11 @@ func TestCheckResponseSnapshot_DescribePrincipalMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePrincipalMapping(context.Background(), &DescribePrincipalMappingInput{})
+	got, err := svc.DescribePrincipalMapping(context.Background(), &DescribePrincipalMappingInput{
+		IndexId:      ptr.String("__IndexId__"),
+		DataSourceId: ptr.String("__DataSourceId__"),
+		GroupId:      ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2325,7 +4212,10 @@ func TestCheckResponseSnapshot_DescribeQuerySuggestionsBlockList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuerySuggestionsBlockList(context.Background(), &DescribeQuerySuggestionsBlockListInput{})
+	got, err := svc.DescribeQuerySuggestionsBlockList(context.Background(), &DescribeQuerySuggestionsBlockListInput{
+		IndexId: ptr.String("__IndexId__"),
+		Id:      ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2367,7 +4257,9 @@ func TestCheckResponseSnapshot_DescribeQuerySuggestionsConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuerySuggestionsConfig(context.Background(), &DescribeQuerySuggestionsConfigInput{})
+	got, err := svc.DescribeQuerySuggestionsConfig(context.Background(), &DescribeQuerySuggestionsConfigInput{
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2403,7 +4295,10 @@ func TestCheckResponseSnapshot_DescribeThesaurus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeThesaurus(context.Background(), &DescribeThesaurusInput{})
+	got, err := svc.DescribeThesaurus(context.Background(), &DescribeThesaurusInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2433,7 +4328,20 @@ func TestCheckResponseSnapshot_DisassociateEntitiesFromExperience(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateEntitiesFromExperience(context.Background(), &DisassociateEntitiesFromExperienceInput{})
+	got, err := svc.DisassociateEntitiesFromExperience(context.Background(), &DisassociateEntitiesFromExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2463,7 +4371,14 @@ func TestCheckResponseSnapshot_DisassociatePersonasFromEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePersonasFromEntities(context.Background(), &DisassociatePersonasFromEntitiesInput{})
+	got, err := svc.DisassociatePersonasFromEntities(context.Background(), &DisassociatePersonasFromEntitiesInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2658,7 +4573,138 @@ func TestCheckResponseSnapshot_GetQuerySuggestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuerySuggestions(context.Background(), &GetQuerySuggestionsInput{})
+	got, err := svc.GetQuerySuggestions(context.Background(), &GetQuerySuggestionsInput{
+		IndexId:             ptr.String("__IndexId__"),
+		QueryText:           ptr.String("__QueryText__"),
+		MaxSuggestionsCount: ptr.Int32(1),
+		SuggestionTypes: []types.SuggestionType{
+			types.SuggestionType("QUERY"),
+			types.SuggestionType("QUERY"),
+		},
+		AttributeSuggestionsConfig: &types.AttributeSuggestionsGetConfig{
+			SuggestionAttributes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AdditionalResponseAttributes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AttributeFilter: &types.AttributeFilter{
+				AndAllFilters: []types.AttributeFilter{
+					{},
+					{},
+				},
+				OrAllFilters: []types.AttributeFilter{
+					{},
+					{},
+				},
+				NotFilter: nil,
+				EqualsTo: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				ContainsAll: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				ContainsAny: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				GreaterThan: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				GreaterThanOrEquals: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LessThan: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LessThanOrEquals: &types.DocumentAttribute{
+					Key: ptr.String("__Key__"),
+					Value: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			UserContext: &types.UserContext{
+				Token:  ptr.String("__Token__"),
+				UserId: ptr.String("__UserId__"),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DataSourceGroups: []types.DataSourceGroup{
+					{
+						GroupId:      ptr.String("__GroupId__"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						GroupId:      ptr.String("__GroupId__"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2697,7 +4743,13 @@ func TestCheckResponseSnapshot_GetSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSnapshots(context.Background(), &GetSnapshotsInput{})
+	got, err := svc.GetSnapshots(context.Background(), &GetSnapshotsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		Interval:   types.Interval("THIS_MONTH"),
+		MetricType: types.MetricType("QUERIES_BY_COUNT"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2726,7 +4778,11 @@ func TestCheckResponseSnapshot_ListAccessControlConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessControlConfigurations(context.Background(), &ListAccessControlConfigurationsInput{})
+	got, err := svc.ListAccessControlConfigurations(context.Background(), &ListAccessControlConfigurationsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2781,7 +4837,17 @@ func TestCheckResponseSnapshot_ListDataSourceSyncJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSourceSyncJobs(context.Background(), &ListDataSourceSyncJobsInput{})
+	got, err := svc.ListDataSourceSyncJobs(context.Background(), &ListDataSourceSyncJobsInput{
+		Id:         ptr.String("__Id__"),
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		StartTimeFilter: &types.TimeRange{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		StatusFilter: types.DataSourceSyncJobStatus("FAILED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2822,7 +4888,11 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2857,7 +4927,12 @@ func TestCheckResponseSnapshot_ListEntityPersonas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntityPersonas(context.Background(), &ListEntityPersonasInput{})
+	got, err := svc.ListEntityPersonas(context.Background(), &ListEntityPersonasInput{
+		Id:         ptr.String("__Id__"),
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2902,7 +4977,11 @@ func TestCheckResponseSnapshot_ListExperienceEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperienceEntities(context.Background(), &ListExperienceEntitiesInput{})
+	got, err := svc.ListExperienceEntities(context.Background(), &ListExperienceEntitiesInput{
+		Id:        ptr.String("__Id__"),
+		IndexId:   ptr.String("__IndexId__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2957,7 +5036,11 @@ func TestCheckResponseSnapshot_ListExperiences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperiences(context.Background(), &ListExperiencesInput{})
+	got, err := svc.ListExperiences(context.Background(), &ListExperiencesInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2998,7 +5081,11 @@ func TestCheckResponseSnapshot_ListFaqs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFaqs(context.Background(), &ListFaqsInput{})
+	got, err := svc.ListFaqs(context.Background(), &ListFaqsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3035,7 +5122,11 @@ func TestCheckResponseSnapshot_ListFeaturedResultsSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFeaturedResultsSets(context.Background(), &ListFeaturedResultsSetsInput{})
+	got, err := svc.ListFeaturedResultsSets(context.Background(), &ListFeaturedResultsSetsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3066,7 +5157,13 @@ func TestCheckResponseSnapshot_ListGroupsOlderThanOrderingId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupsOlderThanOrderingId(context.Background(), &ListGroupsOlderThanOrderingIdInput{})
+	got, err := svc.ListGroupsOlderThanOrderingId(context.Background(), &ListGroupsOlderThanOrderingIdInput{
+		IndexId:      ptr.String("__IndexId__"),
+		DataSourceId: ptr.String("__DataSourceId__"),
+		OrderingId:   ptr.Int64(1),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3105,7 +5202,10 @@ func TestCheckResponseSnapshot_ListIndices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndices(context.Background(), &ListIndicesInput{})
+	got, err := svc.ListIndices(context.Background(), &ListIndicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3144,7 +5244,11 @@ func TestCheckResponseSnapshot_ListQuerySuggestionsBlockLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuerySuggestionsBlockLists(context.Background(), &ListQuerySuggestionsBlockListsInput{})
+	got, err := svc.ListQuerySuggestionsBlockLists(context.Background(), &ListQuerySuggestionsBlockListsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3174,7 +5278,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3211,7 +5317,11 @@ func TestCheckResponseSnapshot_ListThesauri(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListThesauri(context.Background(), &ListThesauriInput{})
+	got, err := svc.ListThesauri(context.Background(), &ListThesauriInput{
+		IndexId:    ptr.String("__IndexId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3230,7 +5340,37 @@ func TestCheckResponseSnapshot_PutPrincipalMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPrincipalMapping(context.Background(), &PutPrincipalMappingInput{})
+	got, err := svc.PutPrincipalMapping(context.Background(), &PutPrincipalMappingInput{
+		IndexId:      ptr.String("__IndexId__"),
+		DataSourceId: ptr.String("__DataSourceId__"),
+		GroupId:      ptr.String("__GroupId__"),
+		GroupMembers: &types.GroupMembers{
+			MemberGroups: []types.MemberGroup{
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+			},
+			MemberUsers: []types.MemberUser{
+				{
+					UserId: ptr.String("__UserId__"),
+				},
+				{
+					UserId: ptr.String("__UserId__"),
+				},
+			},
+			S3PathforGroupMembers: &types.S3Path{
+				Bucket: ptr.String("__Bucket__"),
+				Key:    ptr.String("__Key__"),
+			},
+		},
+		OrderingId: ptr.Int64(1),
+		RoleArn:    ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4214,7 +6354,211 @@ func TestCheckResponseSnapshot_Query(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Query(context.Background(), &QueryInput{})
+	got, err := svc.Query(context.Background(), &QueryInput{
+		IndexId:   ptr.String("__IndexId__"),
+		QueryText: ptr.String("__QueryText__"),
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		Facets: []types.Facet{
+			{
+				DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+				Facets: []types.Facet{
+					{},
+					{},
+				},
+				MaxResults: 1,
+			},
+			{
+				DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+				Facets: []types.Facet{
+					{},
+					{},
+				},
+				MaxResults: 1,
+			},
+		},
+		RequestedDocumentAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryResultTypeFilter: types.QueryResultType("DOCUMENT"),
+		DocumentRelevanceOverrideConfigurations: []types.DocumentRelevanceConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+			},
+		},
+		PageNumber: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		SortingConfiguration: &types.SortingConfiguration{
+			DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+			SortOrder:            types.SortOrder("DESC"),
+		},
+		SortingConfigurations: []types.SortingConfiguration{
+			{
+				DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+				SortOrder:            types.SortOrder("DESC"),
+			},
+			{
+				DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+				SortOrder:            types.SortOrder("DESC"),
+			},
+		},
+		UserContext: &types.UserContext{
+			Token:  ptr.String("__Token__"),
+			UserId: ptr.String("__UserId__"),
+			Groups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DataSourceGroups: []types.DataSourceGroup{
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+			},
+		},
+		VisitorId: ptr.String("__VisitorId__"),
+		SpellCorrectionConfiguration: &types.SpellCorrectionConfiguration{
+			IncludeQuerySpellCheckSuggestions: true,
+		},
+		CollapseConfiguration: &types.CollapseConfiguration{
+			DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+			SortingConfigurations: []types.SortingConfiguration{
+				{
+					DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+					SortOrder:            types.SortOrder("DESC"),
+				},
+				{
+					DocumentAttributeKey: ptr.String("__DocumentAttributeKey__"),
+					SortOrder:            types.SortOrder("DESC"),
+				},
+			},
+			MissingAttributeKeyStrategy: types.MissingAttributeKeyStrategy("IGNORE"),
+			Expand:                      true,
+			ExpandConfiguration: &types.ExpandConfiguration{
+				MaxResultItemsToExpand:    ptr.Int32(1),
+				MaxExpandedResultsPerItem: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4309,7 +6653,155 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Retrieve(context.Background(), &RetrieveInput{})
+	got, err := svc.Retrieve(context.Background(), &RetrieveInput{
+		IndexId:   ptr.String("__IndexId__"),
+		QueryText: ptr.String("__QueryText__"),
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Key: ptr.String("__Key__"),
+				Value: &types.DocumentAttributeValue{
+					StringValue: ptr.String("__StringValue__"),
+					StringListValue: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LongValue: ptr.Int64(1),
+					DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		RequestedDocumentAttributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DocumentRelevanceOverrideConfigurations: []types.DocumentRelevanceConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+			},
+		},
+		PageNumber: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		UserContext: &types.UserContext{
+			Token:  ptr.String("__Token__"),
+			UserId: ptr.String("__UserId__"),
+			Groups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DataSourceGroups: []types.DataSourceGroup{
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+				{
+					GroupId:      ptr.String("__GroupId__"),
+					DataSourceId: ptr.String("__DataSourceId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4330,7 +6822,10 @@ func TestCheckResponseSnapshot_StartDataSourceSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{})
+	got, err := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4349,7 +6844,10 @@ func TestCheckResponseSnapshot_StopDataSourceSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDataSourceSyncJob(context.Background(), &StopDataSourceSyncJobInput{})
+	got, err := svc.StopDataSourceSyncJob(context.Background(), &StopDataSourceSyncJobInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4368,7 +6866,30 @@ func TestCheckResponseSnapshot_SubmitFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitFeedback(context.Background(), &SubmitFeedbackInput{})
+	got, err := svc.SubmitFeedback(context.Background(), &SubmitFeedbackInput{
+		IndexId: ptr.String("__IndexId__"),
+		QueryId: ptr.String("__QueryId__"),
+		ClickFeedbackItems: []types.ClickFeedback{
+			{
+				ResultId:  ptr.String("__ResultId__"),
+				ClickTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResultId:  ptr.String("__ResultId__"),
+				ClickTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		RelevanceFeedbackItems: []types.RelevanceFeedback{
+			{
+				ResultId:       ptr.String("__ResultId__"),
+				RelevanceValue: types.RelevanceType("RELEVANT"),
+			},
+			{
+				ResultId:       ptr.String("__ResultId__"),
+				RelevanceValue: types.RelevanceType("RELEVANT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4387,7 +6908,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4406,7 +6939,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4425,7 +6964,60 @@ func TestCheckResponseSnapshot_UpdateAccessControlConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessControlConfiguration(context.Background(), &UpdateAccessControlConfigurationInput{})
+	got, err := svc.UpdateAccessControlConfiguration(context.Background(), &UpdateAccessControlConfigurationInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		AccessControlList: []types.Principal{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.PrincipalType("USER"),
+				Access:       types.ReadAccessType("ALLOW"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.PrincipalType("USER"),
+				Access:       types.ReadAccessType("ALLOW"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+			},
+		},
+		HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+			{
+				PrincipalList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+			},
+			{
+				PrincipalList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4444,7 +7036,1238 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		Id:      ptr.String("__Id__"),
+		Name:    ptr.String("__Name__"),
+		IndexId: ptr.String("__IndexId__"),
+		Configuration: &types.DataSourceConfiguration{
+			S3Configuration: &types.S3DataSourceConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+				InclusionPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DocumentsMetadataConfiguration: &types.DocumentsMetadataConfiguration{
+					S3Prefix: ptr.String("__S3Prefix__"),
+				},
+				AccessControlListConfiguration: &types.AccessControlListConfiguration{
+					KeyPath: ptr.String("__KeyPath__"),
+				},
+			},
+			SharePointConfiguration: &types.SharePointConfiguration{
+				SharePointVersion: types.SharePointVersion("SHAREPOINT_2013"),
+				Urls: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecretArn:        ptr.String("__SecretArn__"),
+				CrawlAttachments: true,
+				UseChangeLog:     true,
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+				DisableLocalGroups:     true,
+				SslCertificateS3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				AuthenticationType: types.SharePointOnlineAuthenticationType("HTTP_BASIC"),
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+			},
+			DatabaseConfiguration: &types.DatabaseConfiguration{
+				DatabaseEngineType: types.DatabaseEngineType("RDS_AURORA_MYSQL"),
+				ConnectionConfiguration: &types.ConnectionConfiguration{
+					DatabaseHost: ptr.String("__DatabaseHost__"),
+					DatabasePort: ptr.Int32(1),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					SecretArn:    ptr.String("__SecretArn__"),
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ColumnConfiguration: &types.ColumnConfiguration{
+					DocumentIdColumnName:    ptr.String("__DocumentIdColumnName__"),
+					DocumentDataColumnName:  ptr.String("__DocumentDataColumnName__"),
+					DocumentTitleColumnName: ptr.String("__DocumentTitleColumnName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					ChangeDetectingColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AclConfiguration: &types.AclConfiguration{
+					AllowedGroupsColumnName: ptr.String("__AllowedGroupsColumnName__"),
+				},
+				SqlConfiguration: &types.SqlConfiguration{
+					QueryIdentifiersEnclosingOption: types.QueryIdentifiersEnclosingOption("DOUBLE_QUOTES"),
+				},
+			},
+			SalesforceConfiguration: &types.SalesforceConfiguration{
+				ServerUrl: ptr.String("__ServerUrl__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				StandardObjectConfigurations: []types.SalesforceStandardObjectConfiguration{
+					{
+						Name:                   types.SalesforceStandardObjectName("ACCOUNT"),
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+					{
+						Name:                   types.SalesforceStandardObjectName("ACCOUNT"),
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+				},
+				KnowledgeArticleConfiguration: &types.SalesforceKnowledgeArticleConfiguration{
+					IncludedStates: []types.SalesforceKnowledgeArticleState{
+						types.SalesforceKnowledgeArticleState("DRAFT"),
+						types.SalesforceKnowledgeArticleState("DRAFT"),
+					},
+					StandardKnowledgeArticleTypeConfiguration: &types.SalesforceStandardKnowledgeArticleTypeConfiguration{
+						DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+						DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+						FieldMappings: []types.DataSourceToIndexFieldMapping{
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+							{
+								DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+								DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+								IndexFieldName:      ptr.String("__IndexFieldName__"),
+							},
+						},
+					},
+					CustomKnowledgeArticleTypeConfigurations: []types.SalesforceCustomKnowledgeArticleTypeConfiguration{
+						{
+							Name:                   ptr.String("__Name__"),
+							DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+							DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+							FieldMappings: []types.DataSourceToIndexFieldMapping{
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+							},
+						},
+						{
+							Name:                   ptr.String("__Name__"),
+							DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+							DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+							FieldMappings: []types.DataSourceToIndexFieldMapping{
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+								{
+									DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+									DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+									IndexFieldName:      ptr.String("__IndexFieldName__"),
+								},
+							},
+						},
+					},
+				},
+				ChatterFeedConfiguration: &types.SalesforceChatterFeedConfiguration{
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					IncludeFilterTypes: []types.SalesforceChatterFeedIncludeFilterType{
+						types.SalesforceChatterFeedIncludeFilterType("ACTIVE_USER"),
+						types.SalesforceChatterFeedIncludeFilterType("ACTIVE_USER"),
+					},
+				},
+				CrawlAttachments: true,
+				StandardObjectAttachmentConfiguration: &types.SalesforceStandardObjectAttachmentConfiguration{
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				IncludeAttachmentFilePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeAttachmentFilePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			OneDriveConfiguration: &types.OneDriveConfiguration{
+				TenantDomain: ptr.String("__TenantDomain__"),
+				SecretArn:    ptr.String("__SecretArn__"),
+				OneDriveUsers: &types.OneDriveUsers{
+					OneDriveUserList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					OneDriveUserS3Path: &types.S3Path{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				DisableLocalGroups: true,
+			},
+			ServiceNowConfiguration: &types.ServiceNowConfiguration{
+				HostUrl:                ptr.String("__HostUrl__"),
+				SecretArn:              ptr.String("__SecretArn__"),
+				ServiceNowBuildVersion: types.ServiceNowBuildVersionType("LONDON"),
+				KnowledgeArticleConfiguration: &types.ServiceNowKnowledgeArticleConfiguration{
+					CrawlAttachments: true,
+					IncludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+					FilterQuery: ptr.String("__FilterQuery__"),
+				},
+				ServiceCatalogConfiguration: &types.ServiceNowServiceCatalogConfiguration{
+					CrawlAttachments: true,
+					IncludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeAttachmentFilePatterns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DocumentDataFieldName:  ptr.String("__DocumentDataFieldName__"),
+					DocumentTitleFieldName: ptr.String("__DocumentTitleFieldName__"),
+					FieldMappings: []types.DataSourceToIndexFieldMapping{
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				AuthenticationType: types.ServiceNowAuthenticationType("HTTP_BASIC"),
+			},
+			ConfluenceConfiguration: &types.ConfluenceConfiguration{
+				ServerUrl: ptr.String("__ServerUrl__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				Version:   types.ConfluenceVersion("CLOUD"),
+				SpaceConfiguration: &types.ConfluenceSpaceConfiguration{
+					CrawlPersonalSpaces: true,
+					CrawlArchivedSpaces: true,
+					IncludeSpaces: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludeSpaces: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SpaceFieldMappings: []types.ConfluenceSpaceToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceSpaceFieldName("DISPLAY_URL"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceSpaceFieldName("DISPLAY_URL"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				PageConfiguration: &types.ConfluencePageConfiguration{
+					PageFieldMappings: []types.ConfluencePageToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluencePageFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluencePageFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				BlogConfiguration: &types.ConfluenceBlogConfiguration{
+					BlogFieldMappings: []types.ConfluenceBlogToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceBlogFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceBlogFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				AttachmentConfiguration: &types.ConfluenceAttachmentConfiguration{
+					CrawlAttachments: true,
+					AttachmentFieldMappings: []types.ConfluenceAttachmentToIndexFieldMapping{
+						{
+							DataSourceFieldName: types.ConfluenceAttachmentFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+						{
+							DataSourceFieldName: types.ConfluenceAttachmentFieldName("AUTHOR"),
+							DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+							IndexFieldName:      ptr.String("__IndexFieldName__"),
+						},
+					},
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+				AuthenticationType: types.ConfluenceAuthenticationType("HTTP_BASIC"),
+			},
+			GoogleDriveConfiguration: &types.GoogleDriveConfiguration{
+				SecretArn: ptr.String("__SecretArn__"),
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				ExcludeMimeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeUserAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeSharedDrives: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			WebCrawlerConfiguration: &types.WebCrawlerConfiguration{
+				Urls: &types.Urls{
+					SeedUrlConfiguration: &types.SeedUrlConfiguration{
+						SeedUrls: []string{
+							"__Member__",
+							"__Member__",
+						},
+						WebCrawlerMode: types.WebCrawlerMode("HOST_ONLY"),
+					},
+					SiteMapsConfiguration: &types.SiteMapsConfiguration{
+						SiteMaps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CrawlDepth:                       ptr.Int32(1),
+				MaxLinksPerPage:                  ptr.Int32(1),
+				MaxContentSizePerPageInMegaBytes: ptr.Float32(1.0),
+				MaxUrlsPerMinuteCrawlRate:        ptr.Int32(1),
+				UrlInclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UrlExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProxyConfiguration: &types.ProxyConfiguration{
+					Host:        ptr.String("__Host__"),
+					Port:        ptr.Int32(1),
+					Credentials: ptr.String("__Credentials__"),
+				},
+				AuthenticationConfiguration: &types.AuthenticationConfiguration{
+					BasicAuthentication: []types.BasicAuthenticationConfiguration{
+						{
+							Host:        ptr.String("__Host__"),
+							Port:        ptr.Int32(1),
+							Credentials: ptr.String("__Credentials__"),
+						},
+						{
+							Host:        ptr.String("__Host__"),
+							Port:        ptr.Int32(1),
+							Credentials: ptr.String("__Credentials__"),
+						},
+					},
+				},
+			},
+			WorkDocsConfiguration: &types.WorkDocsConfiguration{
+				OrganizationId: ptr.String("__OrganizationId__"),
+				CrawlComments:  true,
+				UseChangeLog:   true,
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			FsxConfiguration: &types.FsxConfiguration{
+				FileSystemId:   ptr.String("__FileSystemId__"),
+				FileSystemType: types.FsxFileSystemType("WINDOWS"),
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SecretArn: ptr.String("__SecretArn__"),
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			SlackConfiguration: &types.SlackConfiguration{
+				TeamId:    ptr.String("__TeamId__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SlackEntityList: []types.SlackEntity{
+					types.SlackEntity("PUBLIC_CHANNEL"),
+					types.SlackEntity("PUBLIC_CHANNEL"),
+				},
+				UseChangeLog:    true,
+				CrawlBotMessage: true,
+				ExcludeArchived: true,
+				SinceCrawlDate:  ptr.String("__SinceCrawlDate__"),
+				LookBackPeriod:  ptr.Int32(1),
+				PrivateChannelFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PublicChannelFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			BoxConfiguration: &types.BoxConfiguration{
+				EnterpriseId:  ptr.String("__EnterpriseId__"),
+				SecretArn:     ptr.String("__SecretArn__"),
+				UseChangeLog:  true,
+				CrawlComments: true,
+				CrawlTasks:    true,
+				CrawlWebLinks: true,
+				FileFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				TaskFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				CommentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WebLinkFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QuipConfiguration: &types.QuipConfiguration{
+				Domain:            ptr.String("__Domain__"),
+				SecretArn:         ptr.String("__SecretArn__"),
+				CrawlFileComments: true,
+				CrawlChatRooms:    true,
+				CrawlAttachments:  true,
+				FolderIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ThreadFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				MessageFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				AttachmentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			JiraConfiguration: &types.JiraConfiguration{
+				JiraAccountUrl: ptr.String("__JiraAccountUrl__"),
+				SecretArn:      ptr.String("__SecretArn__"),
+				UseChangeLog:   true,
+				Project: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IssueType: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IssueSubEntityFilter: []types.IssueSubEntity{
+					types.IssueSubEntity("COMMENTS"),
+					types.IssueSubEntity("COMMENTS"),
+				},
+				AttachmentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				CommentFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				IssueFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				ProjectFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WorkLogFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			GitHubConfiguration: &types.GitHubConfiguration{
+				SaaSConfiguration: &types.SaaSConfiguration{
+					OrganizationName: ptr.String("__OrganizationName__"),
+					HostUrl:          ptr.String("__HostUrl__"),
+				},
+				OnPremiseConfiguration: &types.OnPremiseConfiguration{
+					HostUrl:          ptr.String("__HostUrl__"),
+					OrganizationName: ptr.String("__OrganizationName__"),
+					SslCertificateS3Path: &types.S3Path{
+						Bucket: ptr.String("__Bucket__"),
+						Key:    ptr.String("__Key__"),
+					},
+				},
+				Type:         types.Type("SAAS"),
+				SecretArn:    ptr.String("__SecretArn__"),
+				UseChangeLog: true,
+				GitHubDocumentCrawlProperties: &types.GitHubDocumentCrawlProperties{
+					CrawlRepositoryDocuments:          true,
+					CrawlIssue:                        true,
+					CrawlIssueComment:                 true,
+					CrawlIssueCommentAttachment:       true,
+					CrawlPullRequest:                  true,
+					CrawlPullRequestComment:           true,
+					CrawlPullRequestCommentAttachment: true,
+				},
+				RepositoryFilter: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFolderNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFileTypePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InclusionFileNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFolderNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFileTypePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionFileNamePatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				GitHubRepositoryConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubCommitConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueDocumentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueCommentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubIssueAttachmentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestCommentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestDocumentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				GitHubPullRequestDocumentAttachmentConfigurationFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+			},
+			AlfrescoConfiguration: &types.AlfrescoConfiguration{
+				SiteUrl:   ptr.String("__SiteUrl__"),
+				SiteId:    ptr.String("__SiteId__"),
+				SecretArn: ptr.String("__SecretArn__"),
+				SslCertificateS3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				CrawlSystemFolders: true,
+				CrawlComments:      true,
+				EntityFilter: []types.AlfrescoEntity{
+					types.AlfrescoEntity("wiki"),
+					types.AlfrescoEntity("wiki"),
+				},
+				DocumentLibraryFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				BlogFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				WikiFieldMappings: []types.DataSourceToIndexFieldMapping{
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+					{
+						DataSourceFieldName: ptr.String("__DataSourceFieldName__"),
+						DateFieldFormat:     ptr.String("__DateFieldFormat__"),
+						IndexFieldName:      ptr.String("__IndexFieldName__"),
+					},
+				},
+				InclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExclusionPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcConfiguration: &types.DataSourceVpcConfiguration{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				Template: document.NewLazyDocument("__Document__"),
+			},
+		},
+		VpcConfiguration: &types.DataSourceVpcConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description:  ptr.String("__Description__"),
+		Schedule:     ptr.String("__Schedule__"),
+		RoleArn:      ptr.String("__RoleArn__"),
+		LanguageCode: ptr.String("__LanguageCode__"),
+		CustomDocumentEnrichmentConfiguration: &types.CustomDocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineCustomDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4463,7 +8286,29 @@ func TestCheckResponseSnapshot_UpdateExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExperience(context.Background(), &UpdateExperienceInput{})
+	got, err := svc.UpdateExperience(context.Background(), &UpdateExperienceInput{
+		Id:      ptr.String("__Id__"),
+		Name:    ptr.String("__Name__"),
+		IndexId: ptr.String("__IndexId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Configuration: &types.ExperienceConfiguration{
+			ContentSourceConfiguration: &types.ContentSourceConfiguration{
+				DataSourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FaqIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DirectPutContent: true,
+			},
+			UserIdentityConfiguration: &types.UserIdentityConfiguration{
+				IdentityAttributeName: ptr.String("__IdentityAttributeName__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4503,7 +8348,25 @@ func TestCheckResponseSnapshot_UpdateFeaturedResultsSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFeaturedResultsSet(context.Background(), &UpdateFeaturedResultsSetInput{})
+	got, err := svc.UpdateFeaturedResultsSet(context.Background(), &UpdateFeaturedResultsSetInput{
+		IndexId:                ptr.String("__IndexId__"),
+		FeaturedResultsSetId:   ptr.String("__FeaturedResultsSetId__"),
+		FeaturedResultsSetName: ptr.String("__FeaturedResultsSetName__"),
+		Description:            ptr.String("__Description__"),
+		Status:                 types.FeaturedResultsSetStatus("ACTIVE"),
+		QueryTexts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FeaturedDocuments: []types.FeaturedDocument{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4522,7 +8385,92 @@ func TestCheckResponseSnapshot_UpdateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{})
+	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		Description: ptr.String("__Description__"),
+		DocumentMetadataConfigurationUpdates: []types.DocumentMetadataConfiguration{
+			{
+				Name: ptr.String("__Name__"),
+				Type: types.DocumentAttributeValueType("STRING_VALUE"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+				Search: &types.Search{
+					Facetable:   true,
+					Searchable:  true,
+					Displayable: true,
+					Sortable:    true,
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: types.DocumentAttributeValueType("STRING_VALUE"),
+				Relevance: &types.Relevance{
+					Freshness:  ptr.Bool(true),
+					Importance: ptr.Int32(1),
+					Duration:   ptr.String("__Duration__"),
+					RankOrder:  types.Order("ASCENDING"),
+					ValueImportanceMap: map[string]int32{
+						"key0": 1,
+					},
+				},
+				Search: &types.Search{
+					Facetable:   true,
+					Searchable:  true,
+					Displayable: true,
+					Sortable:    true,
+				},
+			},
+		},
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			StorageCapacityUnits: ptr.Int32(1),
+			QueryCapacityUnits:   ptr.Int32(1),
+		},
+		UserTokenConfigurations: []types.UserTokenConfiguration{
+			{
+				JwtTokenTypeConfiguration: &types.JwtTokenTypeConfiguration{
+					KeyLocation:            types.KeyLocation("URL"),
+					URL:                    ptr.String("__URL__"),
+					SecretManagerArn:       ptr.String("__SecretManagerArn__"),
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+					Issuer:                 ptr.String("__Issuer__"),
+					ClaimRegex:             ptr.String("__ClaimRegex__"),
+				},
+				JsonTokenTypeConfiguration: &types.JsonTokenTypeConfiguration{
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+				},
+			},
+			{
+				JwtTokenTypeConfiguration: &types.JwtTokenTypeConfiguration{
+					KeyLocation:            types.KeyLocation("URL"),
+					URL:                    ptr.String("__URL__"),
+					SecretManagerArn:       ptr.String("__SecretManagerArn__"),
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+					Issuer:                 ptr.String("__Issuer__"),
+					ClaimRegex:             ptr.String("__ClaimRegex__"),
+				},
+				JsonTokenTypeConfiguration: &types.JsonTokenTypeConfiguration{
+					UserNameAttributeField: ptr.String("__UserNameAttributeField__"),
+					GroupAttributeField:    ptr.String("__GroupAttributeField__"),
+				},
+			},
+		},
+		UserContextPolicy: types.UserContextPolicy("ATTRIBUTE_FILTER"),
+		UserGroupResolutionConfiguration: &types.UserGroupResolutionConfiguration{
+			UserGroupResolutionMode: types.UserGroupResolutionMode("AWS_SSO"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4541,7 +8489,17 @@ func TestCheckResponseSnapshot_UpdateQuerySuggestionsBlockList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuerySuggestionsBlockList(context.Background(), &UpdateQuerySuggestionsBlockListInput{})
+	got, err := svc.UpdateQuerySuggestionsBlockList(context.Background(), &UpdateQuerySuggestionsBlockListInput{
+		IndexId:     ptr.String("__IndexId__"),
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SourceS3Path: &types.S3Path{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4560,7 +8518,27 @@ func TestCheckResponseSnapshot_UpdateQuerySuggestionsConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuerySuggestionsConfig(context.Background(), &UpdateQuerySuggestionsConfigInput{})
+	got, err := svc.UpdateQuerySuggestionsConfig(context.Background(), &UpdateQuerySuggestionsConfigInput{
+		IndexId:                              ptr.String("__IndexId__"),
+		Mode:                                 types.Mode("ENABLED"),
+		QueryLogLookBackWindowInDays:         ptr.Int32(1),
+		IncludeQueriesWithoutUserInformation: ptr.Bool(true),
+		MinimumNumberOfQueryingUsers:         ptr.Int32(1),
+		MinimumQueryCount:                    ptr.Int32(1),
+		AttributeSuggestionsConfig: &types.AttributeSuggestionsUpdateConfig{
+			SuggestableConfigList: []types.SuggestableConfig{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Suggestable:   ptr.Bool(true),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Suggestable:   ptr.Bool(true),
+				},
+			},
+			AttributeSuggestionsMode: types.AttributeSuggestionsMode("ACTIVE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4579,7 +8557,17 @@ func TestCheckResponseSnapshot_UpdateThesaurus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThesaurus(context.Background(), &UpdateThesaurusInput{})
+	got, err := svc.UpdateThesaurus(context.Background(), &UpdateThesaurusInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		IndexId:     ptr.String("__IndexId__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		SourceS3Path: &types.S3Path{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4600,7 +8588,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4625,7 +8626,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{})
+	_, opErr := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{
+		IndexId: ptr.String("__IndexId__"),
+		DocumentIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataSourceSyncJobMetricTarget: &types.DataSourceSyncJobMetricTarget{
+			DataSourceId:        ptr.String("__DataSourceId__"),
+			DataSourceSyncJobId: ptr.String("__DataSourceSyncJobId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4662,7 +8673,35 @@ func TestCheckResponseSnapshot_Error_FeaturedResultsConflictException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFeaturedResultsSet(context.Background(), &CreateFeaturedResultsSetInput{})
+	_, opErr := svc.CreateFeaturedResultsSet(context.Background(), &CreateFeaturedResultsSetInput{
+		IndexId:                ptr.String("__IndexId__"),
+		FeaturedResultsSetName: ptr.String("__FeaturedResultsSetName__"),
+		Description:            ptr.String("__Description__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Status:                 types.FeaturedResultsSetStatus("ACTIVE"),
+		QueryTexts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FeaturedDocuments: []types.FeaturedDocument{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4687,7 +8726,20 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4712,7 +8764,13 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSnapshots(context.Background(), &GetSnapshotsInput{})
+	_, opErr := svc.GetSnapshots(context.Background(), &GetSnapshotsInput{
+		IndexId:    ptr.String("__IndexId__"),
+		Interval:   types.Interval("THIS_MONTH"),
+		MetricType: types.MetricType("QUERIES_BY_COUNT"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4737,7 +8795,20 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4762,7 +8833,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{})
+	_, opErr := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4787,7 +8861,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4812,7 +8899,9 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4837,7 +8926,279 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{})
+	_, opErr := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{
+		IndexId: ptr.String("__IndexId__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Documents: []types.Document{
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Blob:  []byte("blob"),
+				S3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				AccessControlList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+				HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+				},
+				ContentType:                  types.ContentType("PDF"),
+				AccessControlConfigurationId: ptr.String("__AccessControlConfigurationId__"),
+			},
+			{
+				Id:    ptr.String("__Id__"),
+				Title: ptr.String("__Title__"),
+				Blob:  []byte("blob"),
+				S3Path: &types.S3Path{
+					Bucket: ptr.String("__Bucket__"),
+					Key:    ptr.String("__Key__"),
+				},
+				Attributes: []types.DocumentAttribute{
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				AccessControlList: []types.Principal{
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						Type:         types.PrincipalType("USER"),
+						Access:       types.ReadAccessType("ALLOW"),
+						DataSourceId: ptr.String("__DataSourceId__"),
+					},
+				},
+				HierarchicalAccessControlList: []types.HierarchicalPrincipal{
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+					{
+						PrincipalList: []types.Principal{
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+							{
+								Name:         ptr.String("__Name__"),
+								Type:         types.PrincipalType("USER"),
+								Access:       types.ReadAccessType("ALLOW"),
+								DataSourceId: ptr.String("__DataSourceId__"),
+							},
+						},
+					},
+				},
+				ContentType:                  types.ContentType("PDF"),
+				AccessControlConfigurationId: ptr.String("__AccessControlConfigurationId__"),
+			},
+		},
+		CustomDocumentEnrichmentConfiguration: &types.CustomDocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineCustomDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+						Operator:                      types.ConditionOperator("GreaterThan"),
+						ConditionOnValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						TargetDocumentAttributeKey:           ptr.String("__TargetDocumentAttributeKey__"),
+						TargetDocumentAttributeValueDeletion: true,
+						TargetDocumentAttributeValue: &types.DocumentAttributeValue{
+							StringValue: ptr.String("__StringValue__"),
+							StringListValue: []string{
+								"__Member__",
+								"__Member__",
+							},
+							LongValue: ptr.Int64(1),
+							DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+					DocumentContentDeletion: true,
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					ConditionDocumentAttributeKey: ptr.String("__ConditionDocumentAttributeKey__"),
+					Operator:                      types.ConditionOperator("GreaterThan"),
+					ConditionOnValue: &types.DocumentAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+						StringListValue: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LongValue: ptr.Int64(1),
+						DateValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				LambdaArn: ptr.String("__LambdaArn__"),
+				S3Bucket:  ptr.String("__S3Bucket__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4862,7 +9223,20 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4887,7 +9261,20 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{})
+	_, opErr := svc.AssociateEntitiesToExperience(context.Background(), &AssociateEntitiesToExperienceInput{
+		Id:      ptr.String("__Id__"),
+		IndexId: ptr.String("__IndexId__"),
+		EntityList: []types.EntityConfiguration{
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+			{
+				EntityId:   ptr.String("__EntityId__"),
+				EntityType: types.EntityType("USER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

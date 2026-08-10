@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","securityProfileTargetMappings":[{"securityProfileIdentifier":{"arn":"__Arn__","name":"__Name__"},"target":{"arn":"__Arn__"}},{"securityProfileIdentifier":{"arn":"__Arn__","name":"__Name__"},"target":{"arn":"__Arn__"}}]}

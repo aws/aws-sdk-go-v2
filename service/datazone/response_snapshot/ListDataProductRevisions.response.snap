@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","revision":"__Revision__"},{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","revision":"__Revision__"}],"nextToken":"__NextToken__"}

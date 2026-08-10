@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botName":"__BotName__","utterances":[{"botVersion":"__BotVersion__","utterances":[{"count":1,"distinctUsers":1,"firstUtteredDate":946684800,"lastUtteredDate":946684800,"utteranceString":"__UtteranceString__"},{"count":1,"distinctUsers":1,"firstUtteredDate":946684800,"lastUtteredDate":946684800,"utteranceString":"__UtteranceString__"}]},{"botVersion":"__BotVersion__","utterances":[{"count":1,"distinctUsers":1,"firstUtteredDate":946684800,"lastUtteredDate":946684800,"utteranceString":"__UtteranceString__"},{"count":1,"distinctUsers":1,"firstUtteredDate":946684800,"lastUtteredDate":946684800,"utteranceString":"__UtteranceString__"}]}]}

@@ -183,7 +183,11 @@ func TestCheckResponseSnapshot_AssociateLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	got, err := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +272,59 @@ func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		AccountAccessType:    types.AccountAccessType("CURRENT_ACCOUNT"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		OrganizationRoleName: ptr.String("__OrganizationRoleName__"),
+		PermissionType:       types.PermissionType("CUSTOMER_MANAGED"),
+		StackSetName:         ptr.String("__StackSetName__"),
+		WorkspaceDataSources: []types.DataSourceType{
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+		},
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceNotificationDestinations: []types.NotificationDestinationType{
+			types.NotificationDestinationType("SNS"),
+			types.NotificationDestinationType("SNS"),
+		},
+		WorkspaceOrganizationalUnits: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceRoleArn: ptr.String("__WorkspaceRoleArn__"),
+		AuthenticationProviders: []types.AuthenticationProviderTypes{
+			types.AuthenticationProviderTypes("AWS_SSO"),
+			types.AuthenticationProviderTypes("AWS_SSO"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		VpcConfiguration: &types.VpcConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Configuration: ptr.String("__Configuration__"),
+		NetworkAccessControl: &types.NetworkAccessConfiguration{
+			PrefixListIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		GrafanaVersion: ptr.String("__GrafanaVersion__"),
+		IpAddressType:  types.IPAddressType("IPv4"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +347,12 @@ func TestCheckResponseSnapshot_CreateWorkspaceApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceApiKey(context.Background(), &CreateWorkspaceApiKeyInput{})
+	got, err := svc.CreateWorkspaceApiKey(context.Background(), &CreateWorkspaceApiKeyInput{
+		KeyName:       ptr.String("__KeyName__"),
+		KeyRole:       ptr.String("__KeyRole__"),
+		SecondsToLive: ptr.Int32(1),
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +376,11 @@ func TestCheckResponseSnapshot_CreateWorkspaceServiceAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceServiceAccount(context.Background(), &CreateWorkspaceServiceAccountInput{})
+	got, err := svc.CreateWorkspaceServiceAccount(context.Background(), &CreateWorkspaceServiceAccountInput{
+		Name:        ptr.String("__Name__"),
+		GrafanaRole: types.Role("ADMIN"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +407,12 @@ func TestCheckResponseSnapshot_CreateWorkspaceServiceAccountToken(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceServiceAccountToken(context.Background(), &CreateWorkspaceServiceAccountTokenInput{})
+	got, err := svc.CreateWorkspaceServiceAccountToken(context.Background(), &CreateWorkspaceServiceAccountTokenInput{
+		Name:             ptr.String("__Name__"),
+		SecondsToLive:    ptr.Int32(1),
+		ServiceAccountId: ptr.String("__ServiceAccountId__"),
+		WorkspaceId:      ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +497,9 @@ func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +521,10 @@ func TestCheckResponseSnapshot_DeleteWorkspaceApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceApiKey(context.Background(), &DeleteWorkspaceApiKeyInput{})
+	got, err := svc.DeleteWorkspaceApiKey(context.Background(), &DeleteWorkspaceApiKeyInput{
+		KeyName:     ptr.String("__KeyName__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +546,10 @@ func TestCheckResponseSnapshot_DeleteWorkspaceServiceAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceServiceAccount(context.Background(), &DeleteWorkspaceServiceAccountInput{})
+	got, err := svc.DeleteWorkspaceServiceAccount(context.Background(), &DeleteWorkspaceServiceAccountInput{
+		ServiceAccountId: ptr.String("__ServiceAccountId__"),
+		WorkspaceId:      ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +572,11 @@ func TestCheckResponseSnapshot_DeleteWorkspaceServiceAccountToken(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceServiceAccountToken(context.Background(), &DeleteWorkspaceServiceAccountTokenInput{})
+	got, err := svc.DeleteWorkspaceServiceAccountToken(context.Background(), &DeleteWorkspaceServiceAccountTokenInput{
+		TokenId:          ptr.String("__TokenId__"),
+		ServiceAccountId: ptr.String("__ServiceAccountId__"),
+		WorkspaceId:      ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +661,9 @@ func TestCheckResponseSnapshot_DescribeWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{})
+	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +723,9 @@ func TestCheckResponseSnapshot_DescribeWorkspaceAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceAuthentication(context.Background(), &DescribeWorkspaceAuthenticationInput{})
+	got, err := svc.DescribeWorkspaceAuthentication(context.Background(), &DescribeWorkspaceAuthenticationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +747,9 @@ func TestCheckResponseSnapshot_DescribeWorkspaceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceConfiguration(context.Background(), &DescribeWorkspaceConfigurationInput{})
+	got, err := svc.DescribeWorkspaceConfiguration(context.Background(), &DescribeWorkspaceConfigurationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +834,10 @@ func TestCheckResponseSnapshot_DisassociateLicense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLicense(context.Background(), &DisassociateLicenseInput{})
+	got, err := svc.DisassociateLicense(context.Background(), &DisassociateLicenseInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		LicenseType: types.LicenseType("ENTERPRISE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +874,14 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{})
+	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		UserType:    types.UserType("SSO_USER"),
+		UserId:      ptr.String("__UserId__"),
+		GroupId:     ptr.String("__GroupId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +904,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +931,11 @@ func TestCheckResponseSnapshot_ListVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVersions(context.Background(), &ListVersionsInput{})
+	got, err := svc.ListVersions(context.Background(), &ListVersionsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +974,12 @@ func TestCheckResponseSnapshot_ListWorkspaceServiceAccountTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaceServiceAccountTokens(context.Background(), &ListWorkspaceServiceAccountTokensInput{})
+	got, err := svc.ListWorkspaceServiceAccountTokens(context.Background(), &ListWorkspaceServiceAccountTokensInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		ServiceAccountId: ptr.String("__ServiceAccountId__"),
+		WorkspaceId:      ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -906,7 +1015,11 @@ func TestCheckResponseSnapshot_ListWorkspaceServiceAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaceServiceAccounts(context.Background(), &ListWorkspaceServiceAccountsInput{})
+	got, err := svc.ListWorkspaceServiceAccounts(context.Background(), &ListWorkspaceServiceAccountsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1094,10 @@ func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1000,7 +1116,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1140,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1077,7 +1204,39 @@ func TestCheckResponseSnapshot_UpdatePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePermissions(context.Background(), &UpdatePermissionsInput{})
+	got, err := svc.UpdatePermissions(context.Background(), &UpdatePermissionsInput{
+		UpdateInstructionBatch: []types.UpdateInstruction{
+			{
+				Action: types.UpdateAction("ADD"),
+				Role:   types.Role("ADMIN"),
+				Users: []types.User{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.UserType("SSO_USER"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.UserType("SSO_USER"),
+					},
+				},
+			},
+			{
+				Action: types.UpdateAction("ADD"),
+				Role:   types.Role("ADMIN"),
+				Users: []types.User{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.UserType("SSO_USER"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.UserType("SSO_USER"),
+					},
+				},
+			},
+		},
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1162,7 +1321,51 @@ func TestCheckResponseSnapshot_UpdateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{})
+	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{
+		AccountAccessType:    types.AccountAccessType("CURRENT_ACCOUNT"),
+		OrganizationRoleName: ptr.String("__OrganizationRoleName__"),
+		PermissionType:       types.PermissionType("CUSTOMER_MANAGED"),
+		StackSetName:         ptr.String("__StackSetName__"),
+		WorkspaceDataSources: []types.DataSourceType{
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+		},
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		WorkspaceId:          ptr.String("__WorkspaceId__"),
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceNotificationDestinations: []types.NotificationDestinationType{
+			types.NotificationDestinationType("SNS"),
+			types.NotificationDestinationType("SNS"),
+		},
+		WorkspaceOrganizationalUnits: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceRoleArn: ptr.String("__WorkspaceRoleArn__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RemoveVpcConfiguration: ptr.Bool(true),
+		NetworkAccessControl: &types.NetworkAccessConfiguration{
+			PrefixListIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RemoveNetworkAccessConfiguration: ptr.Bool(true),
+		IpAddressType:                    types.IPAddressType("IPv4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1222,7 +1425,41 @@ func TestCheckResponseSnapshot_UpdateWorkspaceAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceAuthentication(context.Background(), &UpdateWorkspaceAuthenticationInput{})
+	got, err := svc.UpdateWorkspaceAuthentication(context.Background(), &UpdateWorkspaceAuthenticationInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		AuthenticationProviders: []types.AuthenticationProviderTypes{
+			types.AuthenticationProviderTypes("AWS_SSO"),
+			types.AuthenticationProviderTypes("AWS_SSO"),
+		},
+		SamlConfiguration: &types.SamlConfiguration{
+			IdpMetadata: &types.IdpMetadataMemberUrl{
+				Value: "__IdpMetadataMemberUrl__",
+			},
+			AssertionAttributes: &types.AssertionAttributes{
+				Name:   ptr.String("__Name__"),
+				Login:  ptr.String("__Login__"),
+				Email:  ptr.String("__Email__"),
+				Groups: ptr.String("__Groups__"),
+				Role:   ptr.String("__Role__"),
+				Org:    ptr.String("__Org__"),
+			},
+			RoleValues: &types.RoleValues{
+				Editor: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Admin: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			AllowedOrganizations: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LoginValidityDuration: 1,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1241,7 +1478,11 @@ func TestCheckResponseSnapshot_UpdateWorkspaceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceConfiguration(context.Background(), &UpdateWorkspaceConfigurationInput{})
+	got, err := svc.UpdateWorkspaceConfiguration(context.Background(), &UpdateWorkspaceConfigurationInput{
+		Configuration:  ptr.String("__Configuration__"),
+		WorkspaceId:    ptr.String("__WorkspaceId__"),
+		GrafanaVersion: ptr.String("__GrafanaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1262,7 +1503,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1289,7 +1534,59 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	_, opErr := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		AccountAccessType:    types.AccountAccessType("CURRENT_ACCOUNT"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		OrganizationRoleName: ptr.String("__OrganizationRoleName__"),
+		PermissionType:       types.PermissionType("CUSTOMER_MANAGED"),
+		StackSetName:         ptr.String("__StackSetName__"),
+		WorkspaceDataSources: []types.DataSourceType{
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+		},
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceNotificationDestinations: []types.NotificationDestinationType{
+			types.NotificationDestinationType("SNS"),
+			types.NotificationDestinationType("SNS"),
+		},
+		WorkspaceOrganizationalUnits: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceRoleArn: ptr.String("__WorkspaceRoleArn__"),
+		AuthenticationProviders: []types.AuthenticationProviderTypes{
+			types.AuthenticationProviderTypes("AWS_SSO"),
+			types.AuthenticationProviderTypes("AWS_SSO"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		VpcConfiguration: &types.VpcConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Configuration: ptr.String("__Configuration__"),
+		NetworkAccessControl: &types.NetworkAccessConfiguration{
+			PrefixListIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		GrafanaVersion: ptr.String("__GrafanaVersion__"),
+		IpAddressType:  types.IPAddressType("IPv4"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1315,7 +1612,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1342,7 +1643,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1371,7 +1676,59 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	_, opErr := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		AccountAccessType:    types.AccountAccessType("CURRENT_ACCOUNT"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		OrganizationRoleName: ptr.String("__OrganizationRoleName__"),
+		PermissionType:       types.PermissionType("CUSTOMER_MANAGED"),
+		StackSetName:         ptr.String("__StackSetName__"),
+		WorkspaceDataSources: []types.DataSourceType{
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+			types.DataSourceType("AMAZON_OPENSEARCH_SERVICE"),
+		},
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceNotificationDestinations: []types.NotificationDestinationType{
+			types.NotificationDestinationType("SNS"),
+			types.NotificationDestinationType("SNS"),
+		},
+		WorkspaceOrganizationalUnits: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceRoleArn: ptr.String("__WorkspaceRoleArn__"),
+		AuthenticationProviders: []types.AuthenticationProviderTypes{
+			types.AuthenticationProviderTypes("AWS_SSO"),
+			types.AuthenticationProviderTypes("AWS_SSO"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		VpcConfiguration: &types.VpcConfiguration{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Configuration: ptr.String("__Configuration__"),
+		NetworkAccessControl: &types.NetworkAccessConfiguration{
+			PrefixListIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		GrafanaVersion: ptr.String("__GrafanaVersion__"),
+		IpAddressType:  types.IPAddressType("IPv4"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1399,7 +1756,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1435,7 +1796,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{})
+	_, opErr := svc.AssociateLicense(context.Background(), &AssociateLicenseInput{
+		WorkspaceId:  ptr.String("__WorkspaceId__"),
+		LicenseType:  types.LicenseType("ENTERPRISE"),
+		GrafanaToken: ptr.String("__GrafanaToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

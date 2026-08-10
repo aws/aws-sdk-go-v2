@@ -17,3 +17,4 @@ X-Amz-Object-If-Match: __ObjectIfMatch__
 X-Amz-Request-Payer: requester
 X-Amz-Sdk-Checksum-Algorithm: CRC32
 
+__AnnotationPayload__

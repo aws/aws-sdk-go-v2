@@ -117,7 +117,17 @@ func TestCheckResponseSnapshot_DeleteRecommendationPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	got, err := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +180,30 @@ func TestCheckResponseSnapshot_DescribeRecommendationExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecommendationExportJobs(context.Background(), &DescribeRecommendationExportJobsInput{})
+	got, err := svc.DescribeRecommendationExportJobs(context.Background(), &DescribeRecommendationExportJobsInput{
+		JobIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.JobFilter{
+			{
+				Name: types.JobFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.JobFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +229,44 @@ func TestCheckResponseSnapshot_ExportAutoScalingGroupRecommendations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportAutoScalingGroupRecommendations(context.Background(), &ExportAutoScalingGroupRecommendationsInput{})
+	got, err := svc.ExportAutoScalingGroupRecommendations(context.Background(), &ExportAutoScalingGroupRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableAutoScalingGroupField{
+			types.ExportableAutoScalingGroupField("AccountId"),
+			types.ExportableAutoScalingGroupField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +292,38 @@ func TestCheckResponseSnapshot_ExportEBSVolumeRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportEBSVolumeRecommendations(context.Background(), &ExportEBSVolumeRecommendationsInput{})
+	got, err := svc.ExportEBSVolumeRecommendations(context.Background(), &ExportEBSVolumeRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.EBSFilter{
+			{
+				Name: types.EBSFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EBSFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableVolumeField{
+			types.ExportableVolumeField("AccountId"),
+			types.ExportableVolumeField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +349,44 @@ func TestCheckResponseSnapshot_ExportEC2InstanceRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportEC2InstanceRecommendations(context.Background(), &ExportEC2InstanceRecommendationsInput{})
+	got, err := svc.ExportEC2InstanceRecommendations(context.Background(), &ExportEC2InstanceRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableInstanceField{
+			types.ExportableInstanceField("AccountId"),
+			types.ExportableInstanceField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +412,38 @@ func TestCheckResponseSnapshot_ExportECSServiceRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportECSServiceRecommendations(context.Background(), &ExportECSServiceRecommendationsInput{})
+	got, err := svc.ExportECSServiceRecommendations(context.Background(), &ExportECSServiceRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.ECSServiceRecommendationFilter{
+			{
+				Name: types.ECSServiceRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ECSServiceRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableECSServiceField{
+			types.ExportableECSServiceField("AccountId"),
+			types.ExportableECSServiceField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +469,38 @@ func TestCheckResponseSnapshot_ExportIdleRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportIdleRecommendations(context.Background(), &ExportIdleRecommendationsInput{})
+	got, err := svc.ExportIdleRecommendations(context.Background(), &ExportIdleRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.IdleRecommendationFilter{
+			{
+				Name: types.IdleRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.IdleRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableIdleField{
+			types.ExportableIdleField("AccountId"),
+			types.ExportableIdleField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +526,38 @@ func TestCheckResponseSnapshot_ExportLambdaFunctionRecommendations(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportLambdaFunctionRecommendations(context.Background(), &ExportLambdaFunctionRecommendationsInput{})
+	got, err := svc.ExportLambdaFunctionRecommendations(context.Background(), &ExportLambdaFunctionRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.LambdaFunctionRecommendationFilter{
+			{
+				Name: types.LambdaFunctionRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.LambdaFunctionRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableLambdaFunctionField{
+			types.ExportableLambdaFunctionField("AccountId"),
+			types.ExportableLambdaFunctionField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +583,38 @@ func TestCheckResponseSnapshot_ExportLicenseRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportLicenseRecommendations(context.Background(), &ExportLicenseRecommendationsInput{})
+	got, err := svc.ExportLicenseRecommendations(context.Background(), &ExportLicenseRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.LicenseRecommendationFilter{
+			{
+				Name: types.LicenseRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.LicenseRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableLicenseField{
+			types.ExportableLicenseField("AccountId"),
+			types.ExportableLicenseField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +640,44 @@ func TestCheckResponseSnapshot_ExportRDSDatabaseRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportRDSDatabaseRecommendations(context.Background(), &ExportRDSDatabaseRecommendationsInput{})
+	got, err := svc.ExportRDSDatabaseRecommendations(context.Background(), &ExportRDSDatabaseRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.RDSDBRecommendationFilter{
+			{
+				Name: types.RDSDBRecommendationFilterName("InstanceFinding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RDSDBRecommendationFilterName("InstanceFinding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableRDSDBField{
+			types.ExportableRDSDBField("ResourceArn"),
+			types.ExportableRDSDBField("ResourceArn"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -867,7 +1166,40 @@ func TestCheckResponseSnapshot_GetAutoScalingGroupRecommendations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutoScalingGroupRecommendations(context.Background(), &GetAutoScalingGroupRecommendationsInput{})
+	got, err := svc.GetAutoScalingGroupRecommendations(context.Background(), &GetAutoScalingGroupRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1104,7 +1436,34 @@ func TestCheckResponseSnapshot_GetEBSVolumeRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEBSVolumeRecommendations(context.Background(), &GetEBSVolumeRecommendationsInput{})
+	got, err := svc.GetEBSVolumeRecommendations(context.Background(), &GetEBSVolumeRecommendationsInput{
+		VolumeArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.EBSFilter{
+			{
+				Name: types.EBSFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EBSFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1597,7 +1956,40 @@ func TestCheckResponseSnapshot_GetEC2InstanceRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEC2InstanceRecommendations(context.Background(), &GetEC2InstanceRecommendationsInput{})
+	got, err := svc.GetEC2InstanceRecommendations(context.Background(), &GetEC2InstanceRecommendationsInput{
+		InstanceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1675,7 +2067,19 @@ func TestCheckResponseSnapshot_GetEC2RecommendationProjectedMetrics(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEC2RecommendationProjectedMetrics(context.Background(), &GetEC2RecommendationProjectedMetricsInput{})
+	got, err := svc.GetEC2RecommendationProjectedMetrics(context.Background(), &GetEC2RecommendationProjectedMetricsInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		Stat:        types.MetricStatistic("Maximum"),
+		Period:      1,
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1769,7 +2173,13 @@ func TestCheckResponseSnapshot_GetECSServiceRecommendationProjectedMetrics(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetECSServiceRecommendationProjectedMetrics(context.Background(), &GetECSServiceRecommendationProjectedMetricsInput{})
+	got, err := svc.GetECSServiceRecommendationProjectedMetrics(context.Background(), &GetECSServiceRecommendationProjectedMetricsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Stat:       types.MetricStatistic("Maximum"),
+		Period:     1,
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2138,7 +2548,34 @@ func TestCheckResponseSnapshot_GetECSServiceRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetECSServiceRecommendations(context.Background(), &GetECSServiceRecommendationsInput{})
+	got, err := svc.GetECSServiceRecommendations(context.Background(), &GetECSServiceRecommendationsInput{
+		ServiceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.ECSServiceRecommendationFilter{
+			{
+				Name: types.ECSServiceRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ECSServiceRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2211,7 +2648,9 @@ func TestCheckResponseSnapshot_GetEffectiveRecommendationPreferences(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEffectiveRecommendationPreferences(context.Background(), &GetEffectiveRecommendationPreferencesInput{})
+	got, err := svc.GetEffectiveRecommendationPreferences(context.Background(), &GetEffectiveRecommendationPreferencesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2271,7 +2710,26 @@ func TestCheckResponseSnapshot_GetEnrollmentStatusesForOrganization(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnrollmentStatusesForOrganization(context.Background(), &GetEnrollmentStatusesForOrganizationInput{})
+	got, err := svc.GetEnrollmentStatusesForOrganization(context.Background(), &GetEnrollmentStatusesForOrganizationInput{
+		Filters: []types.EnrollmentFilter{
+			{
+				Name: types.EnrollmentFilterName("Status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EnrollmentFilterName("Status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2464,7 +2922,38 @@ func TestCheckResponseSnapshot_GetIdleRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdleRecommendations(context.Background(), &GetIdleRecommendationsInput{})
+	got, err := svc.GetIdleRecommendations(context.Background(), &GetIdleRecommendationsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.IdleRecommendationFilter{
+			{
+				Name: types.IdleRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.IdleRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrderBy: &types.OrderBy{
+			Dimension: types.Dimension("SavingsValue"),
+			Order:     types.Order("Asc"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2695,7 +3184,34 @@ func TestCheckResponseSnapshot_GetLambdaFunctionRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLambdaFunctionRecommendations(context.Background(), &GetLambdaFunctionRecommendationsInput{})
+	got, err := svc.GetLambdaFunctionRecommendations(context.Background(), &GetLambdaFunctionRecommendationsInput{
+		FunctionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.LambdaFunctionRecommendationFilter{
+			{
+				Name: types.LambdaFunctionRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.LambdaFunctionRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2866,7 +3382,34 @@ func TestCheckResponseSnapshot_GetLicenseRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseRecommendations(context.Background(), &GetLicenseRecommendationsInput{})
+	got, err := svc.GetLicenseRecommendations(context.Background(), &GetLicenseRecommendationsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.LicenseRecommendationFilter{
+			{
+				Name: types.LicenseRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.LicenseRecommendationFilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2944,7 +3487,19 @@ func TestCheckResponseSnapshot_GetRDSDatabaseRecommendationProjectedMetrics(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRDSDatabaseRecommendationProjectedMetrics(context.Background(), &GetRDSDatabaseRecommendationProjectedMetricsInput{})
+	got, err := svc.GetRDSDatabaseRecommendationProjectedMetrics(context.Background(), &GetRDSDatabaseRecommendationProjectedMetricsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Stat:        types.MetricStatistic("Maximum"),
+		Period:      1,
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3339,7 +3894,40 @@ func TestCheckResponseSnapshot_GetRDSDatabaseRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRDSDatabaseRecommendations(context.Background(), &GetRDSDatabaseRecommendationsInput{})
+	got, err := svc.GetRDSDatabaseRecommendations(context.Background(), &GetRDSDatabaseRecommendationsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.RDSDBRecommendationFilter{
+			{
+				Name: types.RDSDBRecommendationFilterName("InstanceFinding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RDSDBRecommendationFilterName("InstanceFinding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3486,7 +4074,15 @@ func TestCheckResponseSnapshot_GetRecommendationPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendationPreferences(context.Background(), &GetRecommendationPreferencesInput{})
+	got, err := svc.GetRecommendationPreferences(context.Background(), &GetRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3695,7 +4291,14 @@ func TestCheckResponseSnapshot_GetRecommendationSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendationSummaries(context.Background(), &GetRecommendationSummariesInput{})
+	got, err := svc.GetRecommendationSummaries(context.Background(), &GetRecommendationSummariesInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3714,7 +4317,60 @@ func TestCheckResponseSnapshot_PutRecommendationPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecommendationPreferences(context.Background(), &PutRecommendationPreferencesInput{})
+	got, err := svc.PutRecommendationPreferences(context.Background(), &PutRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		EnhancedInfrastructureMetrics: types.EnhancedInfrastructureMetrics("Active"),
+		InferredWorkloadTypes:         types.InferredWorkloadTypesPreference("Active"),
+		ExternalMetricsPreference: &types.ExternalMetricsPreference{
+			Source: types.ExternalMetricsSource("Datadog"),
+		},
+		LookBackPeriod: types.LookBackPeriodPreference("DAYS_14"),
+		UtilizationPreferences: []types.UtilizationPreference{
+			{
+				MetricName: types.CustomizableMetricName("CpuUtilization"),
+				MetricParameters: &types.CustomizableMetricParameters{
+					Threshold: types.CustomizableMetricThreshold("P90"),
+					Headroom:  types.CustomizableMetricHeadroom("PERCENT_30"),
+				},
+			},
+			{
+				MetricName: types.CustomizableMetricName("CpuUtilization"),
+				MetricParameters: &types.CustomizableMetricParameters{
+					Threshold: types.CustomizableMetricThreshold("P90"),
+					Headroom:  types.CustomizableMetricHeadroom("PERCENT_30"),
+				},
+			},
+		},
+		PreferredResources: []types.PreferredResource{
+			{
+				Name: types.PreferredResourceName("Ec2InstanceTypes"),
+				IncludeList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.PreferredResourceName("Ec2InstanceTypes"),
+				IncludeList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SavingsEstimationMode: types.SavingsEstimationMode("AfterDiscounts"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3736,7 +4392,10 @@ func TestCheckResponseSnapshot_UpdateEnrollmentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnrollmentStatus(context.Background(), &UpdateEnrollmentStatusInput{})
+	got, err := svc.UpdateEnrollmentStatus(context.Background(), &UpdateEnrollmentStatusInput{
+		Status:                types.Status("Active"),
+		IncludeMemberAccounts: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3757,7 +4416,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3782,7 +4451,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3807,7 +4486,17 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3832,7 +4521,44 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportAutoScalingGroupRecommendations(context.Background(), &ExportAutoScalingGroupRecommendationsInput{})
+	_, opErr := svc.ExportAutoScalingGroupRecommendations(context.Background(), &ExportAutoScalingGroupRecommendationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("Finding"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FieldsToExport: []types.ExportableAutoScalingGroupField{
+			types.ExportableAutoScalingGroupField("AccountId"),
+			types.ExportableAutoScalingGroupField("AccountId"),
+		},
+		S3DestinationConfig: &types.S3DestinationConfig{
+			Bucket:    ptr.String("__Bucket__"),
+			KeyPrefix: ptr.String("__KeyPrefix__"),
+		},
+		FileFormat:            types.FileFormat("Csv"),
+		IncludeMemberAccounts: true,
+		RecommendationPreferences: &types.RecommendationPreferences{
+			CpuVendorArchitectures: []types.CpuVendorArchitecture{
+				types.CpuVendorArchitecture("AWS_ARM64"),
+				types.CpuVendorArchitecture("AWS_ARM64"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3857,7 +4583,17 @@ func TestCheckResponseSnapshot_Error_MissingAuthenticationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3882,7 +4618,17 @@ func TestCheckResponseSnapshot_Error_OptInRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3907,7 +4653,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3932,7 +4688,17 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3957,7 +4723,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{})
+	_, opErr := svc.DeleteRecommendationPreferences(context.Background(), &DeleteRecommendationPreferencesInput{
+		ResourceType: types.ResourceType("Ec2Instance"),
+		Scope: &types.Scope{
+			Name:  types.ScopeName("Organization"),
+			Value: ptr.String("__Value__"),
+		},
+		RecommendationPreferenceNames: []types.RecommendationPreferenceName{
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+			types.RecommendationPreferenceName("EnhancedInfrastructureMetrics"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

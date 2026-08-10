@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"networkOperations":[{"arn":"__Arn__","error":{"detail":"__Detail__","title":"__Title__"},"id":"__Id__","lcmOperationType":"INSTANTIATE","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z","nsdInfoId":"__NsdInfoId__","vnfInstanceId":"__VnfInstanceId__"},"nsInstanceId":"__NsInstanceId__","operationState":"PROCESSING","updateType":"MODIFY_VNF_INFORMATION"},{"arn":"__Arn__","error":{"detail":"__Detail__","title":"__Title__"},"id":"__Id__","lcmOperationType":"INSTANTIATE","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z","nsdInfoId":"__NsdInfoId__","vnfInstanceId":"__VnfInstanceId__"},"nsInstanceId":"__NsInstanceId__","operationState":"PROCESSING","updateType":"MODIFY_VNF_INFORMATION"}],"nextToken":"__NextToken__"}

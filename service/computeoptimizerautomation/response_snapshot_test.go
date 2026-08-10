@@ -126,7 +126,13 @@ func TestCheckResponseSnapshot_AssociateAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	got, err := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +319,172 @@ func TestCheckResponseSnapshot_CreateAutomationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{})
+	got, err := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RuleType:    types.RuleType("OrganizationRule"),
+		OrganizationConfiguration: &types.OrganizationConfiguration{
+			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Priority: ptr.String("__Priority__"),
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Schedule: &types.Schedule{
+			ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+			ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+			ExecutionWindowInMinutes:   ptr.Int32(1),
+		},
+		Status: types.RuleStatus("Active"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +503,11 @@ func TestCheckResponseSnapshot_DeleteAutomationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutomationRule(context.Background(), &DeleteAutomationRuleInput{})
+	got, err := svc.DeleteAutomationRule(context.Background(), &DeleteAutomationRuleInput{
+		RuleArn:      ptr.String("__RuleArn__"),
+		RuleRevision: ptr.Int64(1),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +535,13 @@ func TestCheckResponseSnapshot_DisassociateAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAccounts(context.Background(), &DisassociateAccountsInput{})
+	got, err := svc.DisassociateAccounts(context.Background(), &DisassociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +581,9 @@ func TestCheckResponseSnapshot_GetAutomationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomationEvent(context.Background(), &GetAutomationEventInput{})
+	got, err := svc.GetAutomationEvent(context.Background(), &GetAutomationEventInput{
+		EventId: ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +772,9 @@ func TestCheckResponseSnapshot_GetAutomationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutomationRule(context.Background(), &GetAutomationRuleInput{})
+	got, err := svc.GetAutomationRule(context.Background(), &GetAutomationRuleInput{
+		RuleArn: ptr.String("__RuleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +835,10 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{})
+	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +891,11 @@ func TestCheckResponseSnapshot_ListAutomationEventSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationEventSteps(context.Background(), &ListAutomationEventStepsInput{})
+	got, err := svc.ListAutomationEventSteps(context.Background(), &ListAutomationEventStepsInput{
+		EventId:    ptr.String("__EventId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -778,7 +970,28 @@ func TestCheckResponseSnapshot_ListAutomationEventSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationEventSummaries(context.Background(), &ListAutomationEventSummariesInput{})
+	got, err := svc.ListAutomationEventSummaries(context.Background(), &ListAutomationEventSummariesInput{
+		Filters: []types.AutomationEventFilter{
+			{
+				Name: types.AutomationEventFilterName("AccountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.AutomationEventFilterName("AccountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		StartDateInclusive: ptr.String("__StartDateInclusive__"),
+		EndDateExclusive:   ptr.String("__EndDateExclusive__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +1058,28 @@ func TestCheckResponseSnapshot_ListAutomationEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationEvents(context.Background(), &ListAutomationEventsInput{})
+	got, err := svc.ListAutomationEvents(context.Background(), &ListAutomationEventsInput{
+		Filters: []types.AutomationEventFilter{
+			{
+				Name: types.AutomationEventFilterName("AccountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.AutomationEventFilterName("AccountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		StartTimeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -966,7 +1200,153 @@ func TestCheckResponseSnapshot_ListAutomationRulePreview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationRulePreview(context.Background(), &ListAutomationRulePreviewInput{})
+	got, err := svc.ListAutomationRulePreview(context.Background(), &ListAutomationRulePreviewInput{
+		RuleType: types.RuleType("OrganizationRule"),
+		OrganizationScope: &types.OrganizationScope{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1013,7 +1393,153 @@ func TestCheckResponseSnapshot_ListAutomationRulePreviewSummaries(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationRulePreviewSummaries(context.Background(), &ListAutomationRulePreviewSummariesInput{})
+	got, err := svc.ListAutomationRulePreviewSummaries(context.Background(), &ListAutomationRulePreviewSummariesInput{
+		RuleType: types.RuleType("OrganizationRule"),
+		OrganizationScope: &types.OrganizationScope{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1620,26 @@ func TestCheckResponseSnapshot_ListAutomationRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomationRules(context.Background(), &ListAutomationRulesInput{})
+	got, err := svc.ListAutomationRules(context.Background(), &ListAutomationRulesInput{
+		Filters: []types.Filter{
+			{
+				Name: types.AutomationRuleFilterName("Name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.AutomationRuleFilterName("Name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1141,7 +1686,26 @@ func TestCheckResponseSnapshot_ListRecommendedActionSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendedActionSummaries(context.Background(), &ListRecommendedActionSummariesInput{})
+	got, err := svc.ListRecommendedActionSummaries(context.Background(), &ListRecommendedActionSummariesInput{
+		Filters: []types.RecommendedActionFilter{
+			{
+				Name: types.RecommendedActionFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RecommendedActionFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1262,7 +1826,26 @@ func TestCheckResponseSnapshot_ListRecommendedActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	got, err := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filters: []types.RecommendedActionFilter{
+			{
+				Name: types.RecommendedActionFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RecommendedActionFilterName("ResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1292,7 +1875,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1314,7 +1899,10 @@ func TestCheckResponseSnapshot_RollbackAutomationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackAutomationEvent(context.Background(), &RollbackAutomationEventInput{})
+	got, err := svc.RollbackAutomationEvent(context.Background(), &RollbackAutomationEventInput{
+		EventId:     ptr.String("__EventId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1337,7 +1925,10 @@ func TestCheckResponseSnapshot_StartAutomationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAutomationEvent(context.Background(), &StartAutomationEventInput{})
+	got, err := svc.StartAutomationEvent(context.Background(), &StartAutomationEventInput{
+		RecommendedActionId: ptr.String("__RecommendedActionId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1356,7 +1947,21 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		RuleRevision: ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1980,15 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		RuleRevision: ptr.Int64(1),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1552,7 +2165,164 @@ func TestCheckResponseSnapshot_UpdateAutomationRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomationRule(context.Background(), &UpdateAutomationRuleInput{})
+	got, err := svc.UpdateAutomationRule(context.Background(), &UpdateAutomationRuleInput{
+		RuleArn:      ptr.String("__RuleArn__"),
+		RuleRevision: ptr.Int64(1),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		RuleType:     types.RuleType("OrganizationRule"),
+		OrganizationConfiguration: &types.OrganizationConfiguration{
+			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Priority: ptr.String("__Priority__"),
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Schedule: &types.Schedule{
+			ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+			ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+			ExecutionWindowInMinutes:   ptr.Int32(1),
+		},
+		Status:      types.RuleStatus("Active"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1575,7 +2345,10 @@ func TestCheckResponseSnapshot_UpdateEnrollmentConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnrollmentConfiguration(context.Background(), &UpdateEnrollmentConfigurationInput{})
+	got, err := svc.UpdateEnrollmentConfiguration(context.Background(), &UpdateEnrollmentConfigurationInput{
+		Status:      types.EnrollmentStatus("Active"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1596,7 +2369,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1621,7 +2400,13 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1646,7 +2431,13 @@ func TestCheckResponseSnapshot_Error_IdempotencyTokenInUseException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1671,7 +2462,13 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1696,7 +2493,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1721,7 +2524,13 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1746,7 +2555,13 @@ func TestCheckResponseSnapshot_Error_NotManagementAccountException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1771,7 +2586,13 @@ func TestCheckResponseSnapshot_Error_OptInRequiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1796,7 +2617,172 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{})
+	_, opErr := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RuleType:    types.RuleType("OrganizationRule"),
+		OrganizationConfiguration: &types.OrganizationConfiguration{
+			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Priority: ptr.String("__Priority__"),
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Schedule: &types.Schedule{
+			ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+			ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+			ExecutionWindowInMinutes:   ptr.Int32(1),
+		},
+		Status: types.RuleStatus("Active"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1821,7 +2807,172 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{})
+	_, opErr := svc.CreateAutomationRule(context.Background(), &CreateAutomationRuleInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RuleType:    types.RuleType("OrganizationRule"),
+		OrganizationConfiguration: &types.OrganizationConfiguration{
+			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Priority: ptr.String("__Priority__"),
+		RecommendedActionTypes: []types.RecommendedActionType{
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
+		},
+		Criteria: &types.Criteria{
+			Region: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ResourceArn: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeType: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EbsVolumeSizeInGib: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			EstimatedMonthlySavings: []types.DoubleCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []float64{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			ResourceTag: []types.ResourceTagsCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Key:        ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			LookBackPeriodInDays: []types.IntegerCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []int32{
+						1,
+						1,
+					},
+				},
+			},
+			RestartNeeded: []types.StringCriteriaCondition{
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparison: types.ComparisonOperator("StringEquals"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Schedule: &types.Schedule{
+			ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+			ScheduleExpressionTimezone: ptr.String("__ScheduleExpressionTimezone__"),
+			ExecutionWindowInMinutes:   ptr.Int32(1),
+		},
+		Status: types.RuleStatus("Active"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1846,7 +2997,13 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1871,7 +3028,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

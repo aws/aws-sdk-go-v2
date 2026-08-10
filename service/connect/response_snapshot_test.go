@@ -121,7 +121,11 @@ func TestCheckResponseSnapshot_ActivateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	got, err := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +149,11 @@ func TestCheckResponseSnapshot_AssociateAnalyticsDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAnalyticsDataSet(context.Background(), &AssociateAnalyticsDataSetInput{})
+	got, err := svc.AssociateAnalyticsDataSet(context.Background(), &AssociateAnalyticsDataSetInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		DataSetId:       ptr.String("__DataSetId__"),
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +172,11 @@ func TestCheckResponseSnapshot_AssociateApprovedOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApprovedOrigin(context.Background(), &AssociateApprovedOriginInput{})
+	got, err := svc.AssociateApprovedOrigin(context.Background(), &AssociateApprovedOriginInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Origin:      ptr.String("__Origin__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +195,17 @@ func TestCheckResponseSnapshot_AssociateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateBot(context.Background(), &AssociateBotInput{})
+	got, err := svc.AssociateBot(context.Background(), &AssociateBotInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		LexBot: &types.LexBot{
+			Name:      ptr.String("__Name__"),
+			LexRegion: ptr.String("__LexRegion__"),
+		},
+		LexV2Bot: &types.LexV2Bot{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +224,11 @@ func TestCheckResponseSnapshot_AssociateContactWithUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateContactWithUser(context.Background(), &AssociateContactWithUserInput{})
+	got, err := svc.AssociateContactWithUser(context.Background(), &AssociateContactWithUserInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		UserId:     ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +247,11 @@ func TestCheckResponseSnapshot_AssociateDefaultVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDefaultVocabulary(context.Background(), &AssociateDefaultVocabularyInput{})
+	got, err := svc.AssociateDefaultVocabulary(context.Background(), &AssociateDefaultVocabularyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		LanguageCode: types.VocabularyLanguageCode("ar-AE"),
+		VocabularyId: ptr.String("__VocabularyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +270,14 @@ func TestCheckResponseSnapshot_AssociateEmailAddressAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEmailAddressAlias(context.Background(), &AssociateEmailAddressAliasInput{})
+	got, err := svc.AssociateEmailAddressAlias(context.Background(), &AssociateEmailAddressAliasInput{
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+		InstanceId:     ptr.String("__InstanceId__"),
+		AliasConfiguration: &types.AliasConfiguration{
+			EmailAddressId: ptr.String("__EmailAddressId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +296,12 @@ func TestCheckResponseSnapshot_AssociateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFlow(context.Background(), &AssociateFlowInput{})
+	got, err := svc.AssociateFlow(context.Background(), &AssociateFlowInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		FlowId:       ptr.String("__FlowId__"),
+		ResourceType: types.FlowAssociationResourceType("SMS_PHONE_NUMBER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +320,18 @@ func TestCheckResponseSnapshot_AssociateHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateHoursOfOperations(context.Background(), &AssociateHoursOfOperationsInput{})
+	got, err := svc.AssociateHoursOfOperations(context.Background(), &AssociateHoursOfOperationsInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		ParentHoursOfOperationConfigs: []types.ParentHoursOfOperationConfig{
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +352,37 @@ func TestCheckResponseSnapshot_AssociateInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateInstanceStorageConfig(context.Background(), &AssociateInstanceStorageConfigInput{})
+	got, err := svc.AssociateInstanceStorageConfig(context.Background(), &AssociateInstanceStorageConfigInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: types.InstanceStorageResourceType("CHAT_TRANSCRIPTS"),
+		StorageConfig: &types.InstanceStorageConfig{
+			AssociationId: ptr.String("__AssociationId__"),
+			StorageType:   types.StorageType("S3"),
+			S3Config: &types.S3Config{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketPrefix: ptr.String("__BucketPrefix__"),
+				EncryptionConfig: &types.EncryptionConfig{
+					EncryptionType: types.EncryptionType("KMS"),
+					KeyId:          ptr.String("__KeyId__"),
+				},
+			},
+			KinesisVideoStreamConfig: &types.KinesisVideoStreamConfig{
+				Prefix:               ptr.String("__Prefix__"),
+				RetentionPeriodHours: 1,
+				EncryptionConfig: &types.EncryptionConfig{
+					EncryptionType: types.EncryptionType("KMS"),
+					KeyId:          ptr.String("__KeyId__"),
+				},
+			},
+			KinesisStreamConfig: &types.KinesisStreamConfig{
+				StreamArn: ptr.String("__StreamArn__"),
+			},
+			KinesisFirehoseConfig: &types.KinesisFirehoseConfig{
+				FirehoseArn: ptr.String("__FirehoseArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +401,11 @@ func TestCheckResponseSnapshot_AssociateLambdaFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLambdaFunction(context.Background(), &AssociateLambdaFunctionInput{})
+	got, err := svc.AssociateLambdaFunction(context.Background(), &AssociateLambdaFunctionInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		FunctionArn: ptr.String("__FunctionArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +424,14 @@ func TestCheckResponseSnapshot_AssociateLexBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLexBot(context.Background(), &AssociateLexBotInput{})
+	got, err := svc.AssociateLexBot(context.Background(), &AssociateLexBotInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		LexBot: &types.LexBot{
+			Name:      ptr.String("__Name__"),
+			LexRegion: ptr.String("__LexRegion__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -356,7 +450,11 @@ func TestCheckResponseSnapshot_AssociatePhoneNumberContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePhoneNumberContactFlow(context.Background(), &AssociatePhoneNumberContactFlowInput{})
+	got, err := svc.AssociatePhoneNumberContactFlow(context.Background(), &AssociatePhoneNumberContactFlowInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +473,19 @@ func TestCheckResponseSnapshot_AssociateQueueEmailAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateQueueEmailAddresses(context.Background(), &AssociateQueueEmailAddressesInput{})
+	got, err := svc.AssociateQueueEmailAddresses(context.Background(), &AssociateQueueEmailAddressesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		EmailAddressesConfig: []types.EmailAddressConfig{
+			{
+				EmailAddressId: ptr.String("__EmailAddressId__"),
+			},
+			{
+				EmailAddressId: ptr.String("__EmailAddressId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +504,14 @@ func TestCheckResponseSnapshot_AssociateQueueQuickConnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateQueueQuickConnects(context.Background(), &AssociateQueueQuickConnectsInput{})
+	got, err := svc.AssociateQueueQuickConnects(context.Background(), &AssociateQueueQuickConnectsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		QuickConnectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +530,42 @@ func TestCheckResponseSnapshot_AssociateRoutingProfileQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateRoutingProfileQueues(context.Background(), &AssociateRoutingProfileQueuesInput{})
+	got, err := svc.AssociateRoutingProfileQueues(context.Background(), &AssociateRoutingProfileQueuesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		QueueConfigs: []types.RoutingProfileQueueConfig{
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+		},
+		ManualAssignmentQueueConfigs: []types.RoutingProfileManualAssignmentQueueConfig{
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+			},
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +586,11 @@ func TestCheckResponseSnapshot_AssociateSecurityKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSecurityKey(context.Background(), &AssociateSecurityKeyInput{})
+	got, err := svc.AssociateSecurityKey(context.Background(), &AssociateSecurityKeyInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Key:         ptr.String("__Key__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +609,19 @@ func TestCheckResponseSnapshot_AssociateSecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSecurityProfiles(context.Background(), &AssociateSecurityProfilesInput{})
+	got, err := svc.AssociateSecurityProfiles(context.Background(), &AssociateSecurityProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SecurityProfiles: []types.SecurityProfileItem{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		EntityType: types.EntityType("USER"),
+		EntityArn:  ptr.String("__EntityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +640,11 @@ func TestCheckResponseSnapshot_AssociateTrafficDistributionGroupUser(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTrafficDistributionGroupUser(context.Background(), &AssociateTrafficDistributionGroupUserInput{})
+	got, err := svc.AssociateTrafficDistributionGroupUser(context.Background(), &AssociateTrafficDistributionGroupUserInput{
+		TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+		UserId:                     ptr.String("__UserId__"),
+		InstanceId:                 ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +663,22 @@ func TestCheckResponseSnapshot_AssociateUserProficiencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateUserProficiencies(context.Background(), &AssociateUserProficienciesInput{})
+	got, err := svc.AssociateUserProficiencies(context.Background(), &AssociateUserProficienciesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		UserId:     ptr.String("__UserId__"),
+		UserProficiencies: []types.UserProficiency{
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+				Level:          ptr.Float32(1.0),
+			},
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+				Level:          ptr.Float32(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +718,14 @@ func TestCheckResponseSnapshot_AssociateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWorkspace(context.Background(), &AssociateWorkspaceInput{})
+	got, err := svc.AssociateWorkspace(context.Background(), &AssociateWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -577,7 +771,14 @@ func TestCheckResponseSnapshot_BatchAssociateAnalyticsDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateAnalyticsDataSet(context.Background(), &BatchAssociateAnalyticsDataSetInput{})
+	got, err := svc.BatchAssociateAnalyticsDataSet(context.Background(), &BatchAssociateAnalyticsDataSetInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		DataSetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +870,56 @@ func TestCheckResponseSnapshot_BatchCreateDataTableValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateDataTableValue(context.Background(), &BatchCreateDataTableValueInput{})
+	got, err := svc.BatchCreateDataTableValue(context.Background(), &BatchCreateDataTableValueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableValue{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +1009,50 @@ func TestCheckResponseSnapshot_BatchDeleteDataTableValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteDataTableValue(context.Background(), &BatchDeleteDataTableValueInput{})
+	got, err := svc.BatchDeleteDataTableValue(context.Background(), &BatchDeleteDataTableValueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableDeleteValueIdentifier{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +1156,38 @@ func TestCheckResponseSnapshot_BatchDescribeDataTableValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDescribeDataTableValue(context.Background(), &BatchDescribeDataTableValueInput{})
+	got, err := svc.BatchDescribeDataTableValue(context.Background(), &BatchDescribeDataTableValueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableValueIdentifier{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1221,14 @@ func TestCheckResponseSnapshot_BatchDisassociateAnalyticsDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateAnalyticsDataSet(context.Background(), &BatchDisassociateAnalyticsDataSetInput{})
+	got, err := svc.BatchDisassociateAnalyticsDataSet(context.Background(), &BatchDisassociateAnalyticsDataSetInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		DataSetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -963,7 +1294,14 @@ func TestCheckResponseSnapshot_BatchGetAttachedFileMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAttachedFileMetadata(context.Background(), &BatchGetAttachedFileMetadataInput{})
+	got, err := svc.BatchGetAttachedFileMetadata(context.Background(), &BatchGetAttachedFileMetadataInput{
+		FileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceId:            ptr.String("__InstanceId__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -995,7 +1333,14 @@ func TestCheckResponseSnapshot_BatchGetFlowAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFlowAssociation(context.Background(), &BatchGetFlowAssociationInput{})
+	got, err := svc.BatchGetFlowAssociation(context.Background(), &BatchGetFlowAssociationInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceType: types.ListFlowAssociationResourceType("WHATSAPP_MESSAGING_PHONE_NUMBER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1037,7 +1382,80 @@ func TestCheckResponseSnapshot_BatchPutContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutContact(context.Background(), &BatchPutContactInput{})
+	got, err := svc.BatchPutContact(context.Background(), &BatchPutContactInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		ContactDataRequestList: []types.ContactDataRequest{
+			{
+				SystemEndpoint: &types.Endpoint{
+					Type:    types.EndpointType("TELEPHONE_NUMBER"),
+					Address: ptr.String("__Address__"),
+				},
+				CustomerEndpoint: &types.Endpoint{
+					Type:    types.EndpointType("TELEPHONE_NUMBER"),
+					Address: ptr.String("__Address__"),
+				},
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				QueueId:           ptr.String("__QueueId__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				Campaign: &types.Campaign{
+					CampaignId: ptr.String("__CampaignId__"),
+				},
+				OutboundStrategy: &types.OutboundStrategy{
+					Type: types.OutboundStrategyType("AGENT_FIRST"),
+					Config: &types.OutboundStrategyConfig{
+						AgentFirst: &types.AgentFirst{
+							Preview: &types.Preview{
+								PostAcceptTimeoutConfig: &types.PostAcceptTimeoutConfig{
+									DurationInSeconds: ptr.Int32(1),
+								},
+								AllowedUserActions: []types.AllowedUserAction{
+									types.AllowedUserAction("CALL"),
+									types.AllowedUserAction("CALL"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				SystemEndpoint: &types.Endpoint{
+					Type:    types.EndpointType("TELEPHONE_NUMBER"),
+					Address: ptr.String("__Address__"),
+				},
+				CustomerEndpoint: &types.Endpoint{
+					Type:    types.EndpointType("TELEPHONE_NUMBER"),
+					Address: ptr.String("__Address__"),
+				},
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				QueueId:           ptr.String("__QueueId__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				Campaign: &types.Campaign{
+					CampaignId: ptr.String("__CampaignId__"),
+				},
+				OutboundStrategy: &types.OutboundStrategy{
+					Type: types.OutboundStrategyType("AGENT_FIRST"),
+					Config: &types.OutboundStrategyConfig{
+						AgentFirst: &types.AgentFirst{
+							Preview: &types.Preview{
+								PostAcceptTimeoutConfig: &types.PostAcceptTimeoutConfig{
+									DurationInSeconds: ptr.Int32(1),
+								},
+								AllowedUserActions: []types.AllowedUserAction{
+									types.AllowedUserAction("CALL"),
+									types.AllowedUserAction("CALL"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1127,7 +1545,56 @@ func TestCheckResponseSnapshot_BatchUpdateDataTableValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateDataTableValue(context.Background(), &BatchUpdateDataTableValueInput{})
+	got, err := svc.BatchUpdateDataTableValue(context.Background(), &BatchUpdateDataTableValueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableValue{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1149,7 +1616,16 @@ func TestCheckResponseSnapshot_ClaimPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ClaimPhoneNumber(context.Background(), &ClaimPhoneNumberInput{})
+	got, err := svc.ClaimPhoneNumber(context.Background(), &ClaimPhoneNumberInput{
+		TargetArn:              ptr.String("__TargetArn__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		PhoneNumber:            ptr.String("__PhoneNumber__"),
+		PhoneNumberDescription: ptr.String("__PhoneNumberDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1644,11 @@ func TestCheckResponseSnapshot_CompleteAttachedFileUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteAttachedFileUpload(context.Background(), &CompleteAttachedFileUploadInput{})
+	got, err := svc.CompleteAttachedFileUpload(context.Background(), &CompleteAttachedFileUploadInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileId:                ptr.String("__FileId__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1670,16 @@ func TestCheckResponseSnapshot_CreateAgentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgentStatus(context.Background(), &CreateAgentStatusInput{})
+	got, err := svc.CreateAgentStatus(context.Background(), &CreateAgentStatusInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		State:        types.AgentStatusState("ENABLED"),
+		DisplayOrder: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1214,7 +1703,16 @@ func TestCheckResponseSnapshot_CreateAttachedFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAttachedFile(context.Background(), &CreateAttachedFileInput{})
+	got, err := svc.CreateAttachedFile(context.Background(), &CreateAttachedFileInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileUseCaseType:       types.FileUseCaseType("CONTACT_ANALYSIS"),
+		FileSourceUri:         ptr.String("__FileSourceUri__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1238,7 +1736,20 @@ func TestCheckResponseSnapshot_CreateAuthCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAuthCode(context.Background(), &CreateAuthCodeInput{})
+	got, err := svc.CreateAuthCode(context.Background(), &CreateAuthCodeInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Scope: &types.AuthScope{
+			SecurityProfileIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EntityType: types.AuthCodeEntityType("CUSTOMER_PROFILE"),
+			EntityId:   ptr.String("__EntityId__"),
+			DomainName: ptr.String("__DomainName__"),
+		},
+		MaxSessionDurationMinutes:        ptr.Int32(1),
+		SessionInactivityDurationMinutes: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1260,7 +1771,47 @@ func TestCheckResponseSnapshot_CreateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContact(context.Background(), &CreateContactInput{})
+	got, err := svc.CreateContact(context.Background(), &CreateContactInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		Channel:                 types.Channel("VOICE"),
+		InitiationMethod:        types.ContactInitiationMethod("INBOUND"),
+		ExpiryDurationInMinutes: ptr.Int32(1),
+		UserInfo: &types.UserInfo{
+			UserId: ptr.String("__UserId__"),
+		},
+		InitiateAs:  types.InitiateAs("CONNECTED_TO_USER"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		PreviousContactId: ptr.String("__PreviousContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1283,7 +1834,17 @@ func TestCheckResponseSnapshot_CreateContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactFlow(context.Background(), &CreateContactFlowInput{})
+	got, err := svc.CreateContactFlow(context.Background(), &CreateContactFlowInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.ContactFlowType("CONTACT_FLOW"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		Status:      types.ContactFlowStatus("PUBLISHED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1305,7 +1866,20 @@ func TestCheckResponseSnapshot_CreateContactFlowModule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactFlowModule(context.Background(), &CreateContactFlowModuleInput{})
+	got, err := svc.CreateContactFlowModule(context.Background(), &CreateContactFlowModuleInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Settings:    ptr.String("__Settings__"),
+		ExternalInvocationConfiguration: &types.ExternalInvocationConfiguration{
+			Enabled: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1327,7 +1901,13 @@ func TestCheckResponseSnapshot_CreateContactFlowModuleAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactFlowModuleAlias(context.Background(), &CreateContactFlowModuleAliasInput{})
+	got, err := svc.CreateContactFlowModuleAlias(context.Background(), &CreateContactFlowModuleAliasInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		Description:              ptr.String("__Description__"),
+		ContactFlowModuleId:      ptr.String("__ContactFlowModuleId__"),
+		ContactFlowModuleVersion: ptr.Int64(1),
+		AliasName:                ptr.String("__AliasName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1349,7 +1929,12 @@ func TestCheckResponseSnapshot_CreateContactFlowModuleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactFlowModuleVersion(context.Background(), &CreateContactFlowModuleVersionInput{})
+	got, err := svc.CreateContactFlowModuleVersion(context.Background(), &CreateContactFlowModuleVersionInput{
+		InstanceId:              ptr.String("__InstanceId__"),
+		Description:             ptr.String("__Description__"),
+		ContactFlowModuleId:     ptr.String("__ContactFlowModuleId__"),
+		FlowModuleContentSha256: ptr.String("__FlowModuleContentSha256__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1371,7 +1956,15 @@ func TestCheckResponseSnapshot_CreateContactFlowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactFlowVersion(context.Background(), &CreateContactFlowVersionInput{})
+	got, err := svc.CreateContactFlowVersion(context.Background(), &CreateContactFlowVersionInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		FlowContentSha256:  ptr.String("__FlowContentSha256__"),
+		ContactFlowVersion: ptr.Int64(1),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1399,7 +1992,17 @@ func TestCheckResponseSnapshot_CreateDataTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataTable(context.Background(), &CreateDataTableInput{})
+	got, err := svc.CreateDataTable(context.Background(), &CreateDataTableInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		TimeZone:       ptr.String("__TimeZone__"),
+		ValueLockLevel: types.DataTableLockLevel("NONE"),
+		Status:         types.DataTableStatus("PUBLISHED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1427,7 +2030,33 @@ func TestCheckResponseSnapshot_CreateDataTableAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataTableAttribute(context.Background(), &CreateDataTableAttributeInput{})
+	got, err := svc.CreateDataTableAttribute(context.Background(), &CreateDataTableAttributeInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Name:        ptr.String("__Name__"),
+		ValueType:   types.DataTableAttributeValueType("TEXT"),
+		Description: ptr.String("__Description__"),
+		Primary:     true,
+		Validation: &types.Validation{
+			MinLength:        1,
+			MaxLength:        1,
+			MinValues:        1,
+			MaxValues:        1,
+			IgnoreCase:       true,
+			Minimum:          1.0,
+			Maximum:          1.0,
+			ExclusiveMinimum: 1.0,
+			ExclusiveMaximum: 1.0,
+			MultipleOf:       1.0,
+			Enum: &types.ValidationEnum{
+				Strict: true,
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +2078,16 @@ func TestCheckResponseSnapshot_CreateEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailAddress(context.Background(), &CreateEmailAddressInput{})
+	got, err := svc.CreateEmailAddress(context.Background(), &CreateEmailAddressInput{
+		Description:  ptr.String("__Description__"),
+		InstanceId:   ptr.String("__InstanceId__"),
+		EmailAddress: ptr.String("__EmailAddress__"),
+		DisplayName:  ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1471,7 +2109,570 @@ func TestCheckResponseSnapshot_CreateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEvaluationForm(context.Background(), &CreateEvaluationFormInput{})
+	got, err := svc.CreateEvaluationForm(context.Background(), &CreateEvaluationFormInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Items: []types.EvaluationFormItem{
+			&types.EvaluationFormItemMemberSection{
+				Value: types.EvaluationFormSection{
+					Title:        ptr.String("__Title__"),
+					RefId:        ptr.String("__RefId__"),
+					Instructions: ptr.String("__Instructions__"),
+					Items: []types.EvaluationFormItem{
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+					},
+					Weight:                1.0,
+					IsExcludedFromScoring: true,
+					ScoreThresholds: []types.EvaluationFormScoreThreshold{
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+					},
+				},
+			},
+			&types.EvaluationFormItemMemberSection{
+				Value: types.EvaluationFormSection{
+					Title:        ptr.String("__Title__"),
+					RefId:        ptr.String("__RefId__"),
+					Instructions: ptr.String("__Instructions__"),
+					Items: []types.EvaluationFormItem{
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+					},
+					Weight:                1.0,
+					IsExcludedFromScoring: true,
+					ScoreThresholds: []types.EvaluationFormScoreThreshold{
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+					},
+				},
+			},
+		},
+		ScoringStrategy: &types.EvaluationFormScoringStrategy{
+			Mode:   types.EvaluationFormScoringMode("QUESTION_ONLY"),
+			Status: types.EvaluationFormScoringStatus("ENABLED"),
+			ScoreThresholds: []types.EvaluationFormScoreThreshold{
+				{
+					PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+					MinScorePercentage:  1.0,
+					MaxScorePercentage:  1.0,
+				},
+				{
+					PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+					MinScorePercentage:  1.0,
+					MaxScorePercentage:  1.0,
+				},
+			},
+		},
+		AutoEvaluationConfiguration: &types.EvaluationFormAutoEvaluationConfiguration{
+			Enabled: true,
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		AsDraft:     true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ReviewConfiguration: &types.EvaluationReviewConfiguration{
+			ReviewNotificationRecipients: []types.EvaluationReviewNotificationRecipient{
+				{
+					Type: types.EvaluationReviewNotificationRecipientType("USER_ID"),
+					Value: &types.EvaluationReviewNotificationRecipientValue{
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+				{
+					Type: types.EvaluationReviewNotificationRecipientType("USER_ID"),
+					Value: &types.EvaluationReviewNotificationRecipientValue{
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+			},
+			EligibilityDays: 1,
+		},
+		TargetConfiguration: &types.EvaluationFormTargetConfiguration{
+			ContactInteractionType: types.ContactInteractionType("AGENT"),
+		},
+		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
+			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1493,7 +2694,47 @@ func TestCheckResponseSnapshot_CreateHoursOfOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHoursOfOperation(context.Background(), &CreateHoursOfOperationInput{})
+	got, err := svc.CreateHoursOfOperation(context.Background(), &CreateHoursOfOperationInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		TimeZone:    ptr.String("__TimeZone__"),
+		Config: []types.HoursOfOperationConfig{
+			{
+				Day: types.HoursOfOperationDays("SUNDAY"),
+				StartTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+			{
+				Day: types.HoursOfOperationDays("SUNDAY"),
+				StartTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+		},
+		ParentHoursOfOperationConfigs: []types.ParentHoursOfOperationConfig{
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1514,7 +2755,57 @@ func TestCheckResponseSnapshot_CreateHoursOfOperationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHoursOfOperationOverride(context.Background(), &CreateHoursOfOperationOverrideInput{})
+	got, err := svc.CreateHoursOfOperationOverride(context.Background(), &CreateHoursOfOperationOverrideInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Config: []types.HoursOfOperationOverrideConfig{
+			{
+				Day: types.OverrideDays("SUNDAY"),
+				StartTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+			{
+				Day: types.OverrideDays("SUNDAY"),
+				StartTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+		},
+		EffectiveFrom: ptr.String("__EffectiveFrom__"),
+		EffectiveTill: ptr.String("__EffectiveTill__"),
+		RecurrenceConfig: &types.RecurrenceConfig{
+			RecurrencePattern: &types.RecurrencePattern{
+				Frequency: types.RecurrenceFrequency("WEEKLY"),
+				Interval:  ptr.Int32(1),
+				ByMonth: []int32{
+					1,
+					1,
+				},
+				ByMonthDay: []int32{
+					1,
+					1,
+				},
+				ByWeekdayOccurrence: []int32{
+					1,
+					1,
+				},
+			},
+		},
+		OverrideType: types.OverrideType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1536,7 +2827,17 @@ func TestCheckResponseSnapshot_CreateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{})
+	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{
+		ClientToken:            ptr.String("__ClientToken__"),
+		IdentityManagementType: types.DirectoryType("SAML"),
+		InstanceAlias:          ptr.String("__InstanceAlias__"),
+		DirectoryId:            ptr.String("__DirectoryId__"),
+		InboundCallsEnabled:    ptr.Bool(true),
+		OutboundCallsEnabled:   ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1558,7 +2859,17 @@ func TestCheckResponseSnapshot_CreateIntegrationAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntegrationAssociation(context.Background(), &CreateIntegrationAssociationInput{})
+	got, err := svc.CreateIntegrationAssociation(context.Background(), &CreateIntegrationAssociationInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		IntegrationType:       types.IntegrationType("EVENT"),
+		IntegrationArn:        ptr.String("__IntegrationArn__"),
+		SourceApplicationUrl:  ptr.String("__SourceApplicationUrl__"),
+		SourceApplicationName: ptr.String("__SourceApplicationName__"),
+		SourceType:            types.SourceType("SALESFORCE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +2891,23 @@ func TestCheckResponseSnapshot_CreateNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotification(context.Background(), &CreateNotificationInput{})
+	got, err := svc.CreateNotification(context.Background(), &CreateNotificationInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ExpiresAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Recipients: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Priority: types.ConfigurableNotificationPriority("HIGH"),
+		Content: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PredefinedNotificationId: ptr.String("__PredefinedNotificationId__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1605,7 +2932,19 @@ func TestCheckResponseSnapshot_CreateParticipant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateParticipant(context.Background(), &CreateParticipantInput{})
+	got, err := svc.CreateParticipant(context.Background(), &CreateParticipantInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ContactId:   ptr.String("__ContactId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ParticipantDetails: &types.ParticipantDetailsToAdd{
+			ParticipantRole: types.ParticipantRole("AGENT"),
+			DisplayName:     ptr.String("__DisplayName__"),
+			ParticipantCapabilities: &types.ParticipantCapabilities{
+				Video:       types.VideoCapability("SEND"),
+				ScreenShare: types.ScreenShareCapability("SEND"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1626,7 +2965,13 @@ func TestCheckResponseSnapshot_CreatePersistentContactAssociation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePersistentContactAssociation(context.Background(), &CreatePersistentContactAssociationInput{})
+	got, err := svc.CreatePersistentContactAssociation(context.Background(), &CreatePersistentContactAssociationInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InitialContactId: ptr.String("__InitialContactId__"),
+		RehydrationType:  types.RehydrationType("ENTIRE_PAST_SESSION"),
+		SourceContactId:  ptr.String("__SourceContactId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1645,7 +2990,23 @@ func TestCheckResponseSnapshot_CreatePredefinedAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePredefinedAttribute(context.Background(), &CreatePredefinedAttributeInput{})
+	got, err := svc.CreatePredefinedAttribute(context.Background(), &CreatePredefinedAttributeInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		Values: &types.PredefinedAttributeValuesMemberStringList{
+			Value: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Purposes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AttributeConfiguration: &types.InputPredefinedAttributeConfiguration{
+			EnableValueValidationOnAssociation: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1667,7 +3028,15 @@ func TestCheckResponseSnapshot_CreatePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrompt(context.Background(), &CreatePromptInput{})
+	got, err := svc.CreatePrompt(context.Background(), &CreatePromptInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		S3Uri:       ptr.String("__S3Uri__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +3057,18 @@ func TestCheckResponseSnapshot_CreatePushNotificationRegistration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePushNotificationRegistration(context.Background(), &CreatePushNotificationRegistrationInput{})
+	got, err := svc.CreatePushNotificationRegistration(context.Background(), &CreatePushNotificationRegistrationInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		PinpointAppArn: ptr.String("__PinpointAppArn__"),
+		DeviceToken:    ptr.String("__DeviceToken__"),
+		DeviceType:     types.DeviceType("GCM"),
+		ContactConfiguration: &types.ContactConfiguration{
+			ContactId:         ptr.String("__ContactId__"),
+			ParticipantRole:   types.ParticipantRole("AGENT"),
+			IncludeRawMessage: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +3090,36 @@ func TestCheckResponseSnapshot_CreateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		OutboundCallerConfig: &types.OutboundCallerConfig{
+			OutboundCallerIdName:     ptr.String("__OutboundCallerIdName__"),
+			OutboundCallerIdNumberId: ptr.String("__OutboundCallerIdNumberId__"),
+			OutboundFlowId:           ptr.String("__OutboundFlowId__"),
+		},
+		OutboundEmailConfig: &types.OutboundEmailConfig{
+			OutboundEmailAddressId: ptr.String("__OutboundEmailAddressId__"),
+		},
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		MaxContacts:        ptr.Int32(1),
+		QuickConnectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EmailAddressesConfig: []types.EmailAddressConfig{
+			{
+				EmailAddressId: ptr.String("__EmailAddressId__"),
+			},
+			{
+				EmailAddressId: ptr.String("__EmailAddressId__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1732,7 +3141,31 @@ func TestCheckResponseSnapshot_CreateQuickConnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuickConnect(context.Background(), &CreateQuickConnectInput{})
+	got, err := svc.CreateQuickConnect(context.Background(), &CreateQuickConnectInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		QuickConnectConfig: &types.QuickConnectConfig{
+			QuickConnectType: types.QuickConnectType("USER"),
+			UserConfig: &types.UserQuickConnectConfig{
+				UserId:        ptr.String("__UserId__"),
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+			QueueConfig: &types.QueueQuickConnectConfig{
+				QueueId:       ptr.String("__QueueId__"),
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+			PhoneConfig: &types.PhoneNumberQuickConnectConfig{
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+			FlowConfig: &types.FlowQuickConnectConfig{
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1754,7 +3187,64 @@ func TestCheckResponseSnapshot_CreateRoutingProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoutingProfile(context.Background(), &CreateRoutingProfileInput{})
+	got, err := svc.CreateRoutingProfile(context.Background(), &CreateRoutingProfileInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		DefaultOutboundQueueId: ptr.String("__DefaultOutboundQueueId__"),
+		QueueConfigs: []types.RoutingProfileQueueConfig{
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+		},
+		ManualAssignmentQueueConfigs: []types.RoutingProfileManualAssignmentQueueConfig{
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+			},
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+			},
+		},
+		MediaConcurrencies: []types.MediaConcurrency{
+			{
+				Channel:     types.Channel("VOICE"),
+				Concurrency: ptr.Int32(1),
+				CrossChannelBehavior: &types.CrossChannelBehavior{
+					BehaviorType: types.BehaviorType("ROUTE_CURRENT_CHANNEL_ONLY"),
+				},
+			},
+			{
+				Channel:     types.Channel("VOICE"),
+				Concurrency: ptr.Int32(1),
+				CrossChannelBehavior: &types.CrossChannelBehavior{
+					BehaviorType: types.BehaviorType("ROUTE_CURRENT_CHANNEL_ONLY"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AgentAvailabilityTimer: types.AgentAvailabilityTimer("TIME_SINCE_LAST_ACTIVITY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1776,7 +3266,253 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		TriggerEventSource: &types.RuleTriggerEventSource{
+			EventSourceName:          types.EventSourceName("OnPostCallAnalysisAvailable"),
+			IntegrationAssociationId: ptr.String("__IntegrationAssociationId__"),
+		},
+		Function: ptr.String("__Function__"),
+		Actions: []types.RuleAction{
+			{
+				ActionType: types.ActionType("CREATE_TASK"),
+				TaskAction: &types.TaskActionDefinition{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					ContactFlowId: ptr.String("__ContactFlowId__"),
+					References: map[string]types.Reference{
+						"key0": {
+							Value:        ptr.String("__Value__"),
+							Type:         types.ReferenceType("URL"),
+							Status:       types.ReferenceStatus("AVAILABLE"),
+							Arn:          ptr.String("__Arn__"),
+							StatusReason: ptr.String("__StatusReason__"),
+						},
+					},
+				},
+				EventBridgeAction: &types.EventBridgeActionDefinition{
+					Name: ptr.String("__Name__"),
+				},
+				AssignContactCategoryAction: &types.AssignContactCategoryActionDefinition{},
+				SendNotificationAction: &types.SendNotificationActionDefinition{
+					DeliveryMethod: types.NotificationDeliveryType("EMAIL"),
+					Subject:        ptr.String("__Subject__"),
+					Content:        ptr.String("__Content__"),
+					ContentType:    types.NotificationContentType("PLAIN_TEXT"),
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CreateCaseAction: &types.CreateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				UpdateCaseAction: &types.UpdateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+				},
+				AssignSlaAction: &types.AssignSlaActionDefinition{
+					SlaAssignmentType: types.SlaAssignmentType("CASES"),
+					CaseSlaConfiguration: &types.CaseSlaConfiguration{
+						Name:    ptr.String("__Name__"),
+						Type:    types.SlaType("CaseField"),
+						FieldId: ptr.String("__FieldId__"),
+						TargetFieldValues: []types.FieldValueUnion{
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						TargetSlaMinutes: ptr.Int64(1),
+					},
+				},
+				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
+					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+			},
+			{
+				ActionType: types.ActionType("CREATE_TASK"),
+				TaskAction: &types.TaskActionDefinition{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					ContactFlowId: ptr.String("__ContactFlowId__"),
+					References: map[string]types.Reference{
+						"key0": {
+							Value:        ptr.String("__Value__"),
+							Type:         types.ReferenceType("URL"),
+							Status:       types.ReferenceStatus("AVAILABLE"),
+							Arn:          ptr.String("__Arn__"),
+							StatusReason: ptr.String("__StatusReason__"),
+						},
+					},
+				},
+				EventBridgeAction: &types.EventBridgeActionDefinition{
+					Name: ptr.String("__Name__"),
+				},
+				AssignContactCategoryAction: &types.AssignContactCategoryActionDefinition{},
+				SendNotificationAction: &types.SendNotificationActionDefinition{
+					DeliveryMethod: types.NotificationDeliveryType("EMAIL"),
+					Subject:        ptr.String("__Subject__"),
+					Content:        ptr.String("__Content__"),
+					ContentType:    types.NotificationContentType("PLAIN_TEXT"),
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CreateCaseAction: &types.CreateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				UpdateCaseAction: &types.UpdateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+				},
+				AssignSlaAction: &types.AssignSlaActionDefinition{
+					SlaAssignmentType: types.SlaAssignmentType("CASES"),
+					CaseSlaConfiguration: &types.CaseSlaConfiguration{
+						Name:    ptr.String("__Name__"),
+						Type:    types.SlaType("CaseField"),
+						FieldId: ptr.String("__FieldId__"),
+						TargetFieldValues: []types.FieldValueUnion{
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						TargetSlaMinutes: ptr.Int64(1),
+					},
+				},
+				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
+					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+			},
+		},
+		PublishStatus: types.RulePublishStatus("DRAFT"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1798,7 +3534,82 @@ func TestCheckResponseSnapshot_CreateSecurityProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityProfile(context.Background(), &CreateSecurityProfileInput{})
+	got, err := svc.CreateSecurityProfile(context.Background(), &CreateSecurityProfileInput{
+		SecurityProfileName: ptr.String("__SecurityProfileName__"),
+		Description:         ptr.String("__Description__"),
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceId: ptr.String("__InstanceId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AllowedAccessControlTags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagRestrictedResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Applications: []types.Application{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				ApplicationPermissions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Type: types.ApplicationType("MCP"),
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				ApplicationPermissions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Type: types.ApplicationType("MCP"),
+			},
+		},
+		HierarchyRestrictedResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedAccessControlHierarchyGroupId: ptr.String("__AllowedAccessControlHierarchyGroupId__"),
+		AllowedFlowModules: []types.FlowModule{
+			{
+				Type:         types.FlowModuleType("MCP"),
+				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+			{
+				Type:         types.FlowModuleType("MCP"),
+				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
+			DataTableAccessControlConfiguration: &types.DataTableAccessControlConfiguration{
+				PrimaryAttributeAccessControlConfiguration: &types.PrimaryAttributeAccessControlConfigurationItem{
+					PrimaryAttributeValues: []types.PrimaryAttributeValue{
+						{
+							AccessType:    types.AccessType("ALLOW"),
+							AttributeName: ptr.String("__AttributeName__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccessType:    types.AccessType("ALLOW"),
+							AttributeName: ptr.String("__AttributeName__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1820,7 +3631,93 @@ func TestCheckResponseSnapshot_CreateTaskTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTaskTemplate(context.Background(), &CreateTaskTemplateInput{})
+	got, err := svc.CreateTaskTemplate(context.Background(), &CreateTaskTemplateInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ContactFlowId:    ptr.String("__ContactFlowId__"),
+		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		Constraints: &types.TaskTemplateConstraints{
+			RequiredFields: []types.RequiredFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			ReadOnlyFields: []types.ReadOnlyFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			InvisibleFields: []types.InvisibleFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		Defaults: &types.TaskTemplateDefaults{
+			DefaultFieldValues: []types.TaskTemplateDefaultFieldValue{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+		},
+		Status: types.TaskTemplateStatus("ACTIVE"),
+		Fields: []types.TaskTemplateField{
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1842,7 +3739,31 @@ func TestCheckResponseSnapshot_CreateTestCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTestCase(context.Background(), &CreateTestCaseInput{})
+	got, err := svc.CreateTestCase(context.Background(), &CreateTestCaseInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		EntryPoint: &types.TestCaseEntryPoint{
+			Type: types.TestCaseEntryPointType("VOICE_CALL"),
+			VoiceCallEntryPointParameters: &types.VoiceCallEntryPointParameters{
+				SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+				DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+				FlowId:                 ptr.String("__FlowId__"),
+			},
+			ChatEntryPointParameters: &types.ChatEntryPointParameters{
+				FlowId: ptr.String("__FlowId__"),
+			},
+		},
+		InitializationData: ptr.String("__InitializationData__"),
+		Status:             types.TestCaseStatus("PUBLISHED"),
+		TestCaseId:         ptr.String("__TestCaseId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1864,7 +3785,15 @@ func TestCheckResponseSnapshot_CreateTrafficDistributionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrafficDistributionGroup(context.Background(), &CreateTrafficDistributionGroupInput{})
+	got, err := svc.CreateTrafficDistributionGroup(context.Background(), &CreateTrafficDistributionGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1886,7 +3815,14 @@ func TestCheckResponseSnapshot_CreateUseCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUseCase(context.Background(), &CreateUseCaseInput{})
+	got, err := svc.CreateUseCase(context.Background(), &CreateUseCaseInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		IntegrationAssociationId: ptr.String("__IntegrationAssociationId__"),
+		UseCaseType:              types.UseCaseType("RULES_EVALUATION"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1908,7 +3844,99 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		Username: ptr.String("__Username__"),
+		Password: ptr.String("__Password__"),
+		IdentityInfo: &types.UserIdentityInfo{
+			FirstName:      ptr.String("__FirstName__"),
+			LastName:       ptr.String("__LastName__"),
+			Email:          ptr.String("__Email__"),
+			SecondaryEmail: ptr.String("__SecondaryEmail__"),
+			Mobile:         ptr.String("__Mobile__"),
+		},
+		PhoneConfig: &types.UserPhoneConfig{
+			PhoneType:                 types.PhoneType("SOFT_PHONE"),
+			AutoAccept:                true,
+			AfterContactWorkTimeLimit: 1,
+			DeskPhoneNumber:           ptr.String("__DeskPhoneNumber__"),
+			PersistentConnection:      ptr.Bool(true),
+		},
+		DirectoryUserId: ptr.String("__DirectoryUserId__"),
+		SecurityProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		HierarchyGroupId: ptr.String("__HierarchyGroupId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+		AutoAcceptConfigs: []types.AutoAcceptConfig{
+			{
+				Channel:                      types.Channel("VOICE"),
+				AutoAccept:                   true,
+				AgentFirstCallbackAutoAccept: ptr.Bool(true),
+			},
+			{
+				Channel:                      types.Channel("VOICE"),
+				AutoAccept:                   true,
+				AgentFirstCallbackAutoAccept: ptr.Bool(true),
+			},
+		},
+		AfterContactWorkConfigs: []types.AfterContactWorkConfigPerChannel{
+			{
+				Channel: types.Channel("VOICE"),
+				AfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+				AgentFirstCallbackAfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+			},
+			{
+				Channel: types.Channel("VOICE"),
+				AfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+				AgentFirstCallbackAfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+			},
+		},
+		PhoneNumberConfigs: []types.PhoneNumberConfig{
+			{
+				Channel:     types.Channel("VOICE"),
+				PhoneType:   types.PhoneType("SOFT_PHONE"),
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+			{
+				Channel:     types.Channel("VOICE"),
+				PhoneType:   types.PhoneType("SOFT_PHONE"),
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+		},
+		PersistentConnectionConfigs: []types.PersistentConnectionConfig{
+			{
+				Channel:              types.Channel("VOICE"),
+				PersistentConnection: ptr.Bool(true),
+			},
+			{
+				Channel:              types.Channel("VOICE"),
+				PersistentConnection: ptr.Bool(true),
+			},
+		},
+		VoiceEnhancementConfigs: []types.VoiceEnhancementConfig{
+			{
+				Channel:              types.Channel("VOICE"),
+				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+			},
+			{
+				Channel:              types.Channel("VOICE"),
+				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1930,7 +3958,14 @@ func TestCheckResponseSnapshot_CreateUserHierarchyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserHierarchyGroup(context.Background(), &CreateUserHierarchyGroupInput{})
+	got, err := svc.CreateUserHierarchyGroup(context.Background(), &CreateUserHierarchyGroupInput{
+		Name:          ptr.String("__Name__"),
+		ParentGroupId: ptr.String("__ParentGroupId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1974,7 +4009,23 @@ func TestCheckResponseSnapshot_CreateView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateView(context.Background(), &CreateViewInput{})
+	got, err := svc.CreateView(context.Background(), &CreateViewInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Status:      types.ViewStatus("PUBLISHED"),
+		Content: &types.ViewInputContent{
+			Template: ptr.String("__Template__"),
+			Actions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2018,7 +4069,12 @@ func TestCheckResponseSnapshot_CreateViewVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateViewVersion(context.Background(), &CreateViewVersionInput{})
+	got, err := svc.CreateViewVersion(context.Background(), &CreateViewVersionInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ViewId:             ptr.String("__ViewId__"),
+		VersionDescription: ptr.String("__VersionDescription__"),
+		ViewContentSha256:  ptr.String("__ViewContentSha256__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2041,7 +4097,16 @@ func TestCheckResponseSnapshot_CreateVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVocabulary(context.Background(), &CreateVocabularyInput{})
+	got, err := svc.CreateVocabulary(context.Background(), &CreateVocabularyInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		InstanceId:     ptr.String("__InstanceId__"),
+		VocabularyName: ptr.String("__VocabularyName__"),
+		LanguageCode:   types.VocabularyLanguageCode("ar-AE"),
+		Content:        ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2063,7 +4128,97 @@ func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Theme: &types.WorkspaceTheme{
+			Light: &types.WorkspaceThemeConfig{
+				Palette: &types.WorkspaceThemePalette{
+					Header: &types.PaletteHeader{
+						Background:          ptr.String("__Background__"),
+						Text:                ptr.String("__Text__"),
+						TextHover:           ptr.String("__TextHover__"),
+						InvertActionsColors: true,
+					},
+					Navigation: &types.PaletteNavigation{
+						Background:           ptr.String("__Background__"),
+						TextBackgroundHover:  ptr.String("__TextBackgroundHover__"),
+						TextBackgroundActive: ptr.String("__TextBackgroundActive__"),
+						Text:                 ptr.String("__Text__"),
+						TextHover:            ptr.String("__TextHover__"),
+						TextActive:           ptr.String("__TextActive__"),
+						InvertActionsColors:  true,
+					},
+					Canvas: &types.PaletteCanvas{
+						ContainerBackground: ptr.String("__ContainerBackground__"),
+						PageBackground:      ptr.String("__PageBackground__"),
+						ActiveBackground:    ptr.String("__ActiveBackground__"),
+					},
+					Primary: &types.PalettePrimary{
+						Default:      ptr.String("__Default__"),
+						Active:       ptr.String("__Active__"),
+						ContrastText: ptr.String("__ContrastText__"),
+					},
+				},
+				Images: &types.WorkspaceThemeImages{
+					Logo: &types.ImagesLogo{
+						Default: ptr.String("__Default__"),
+						Favicon: ptr.String("__Favicon__"),
+					},
+				},
+				Typography: &types.WorkspaceThemeTypography{
+					FontFamily: &types.FontFamily{
+						Default: types.WorkspaceFontFamily("Arial"),
+					},
+				},
+			},
+			Dark: &types.WorkspaceThemeConfig{
+				Palette: &types.WorkspaceThemePalette{
+					Header: &types.PaletteHeader{
+						Background:          ptr.String("__Background__"),
+						Text:                ptr.String("__Text__"),
+						TextHover:           ptr.String("__TextHover__"),
+						InvertActionsColors: true,
+					},
+					Navigation: &types.PaletteNavigation{
+						Background:           ptr.String("__Background__"),
+						TextBackgroundHover:  ptr.String("__TextBackgroundHover__"),
+						TextBackgroundActive: ptr.String("__TextBackgroundActive__"),
+						Text:                 ptr.String("__Text__"),
+						TextHover:            ptr.String("__TextHover__"),
+						TextActive:           ptr.String("__TextActive__"),
+						InvertActionsColors:  true,
+					},
+					Canvas: &types.PaletteCanvas{
+						ContainerBackground: ptr.String("__ContainerBackground__"),
+						PageBackground:      ptr.String("__PageBackground__"),
+						ActiveBackground:    ptr.String("__ActiveBackground__"),
+					},
+					Primary: &types.PalettePrimary{
+						Default:      ptr.String("__Default__"),
+						Active:       ptr.String("__Active__"),
+						ContrastText: ptr.String("__ContrastText__"),
+					},
+				},
+				Images: &types.WorkspaceThemeImages{
+					Logo: &types.ImagesLogo{
+						Default: ptr.String("__Default__"),
+						Favicon: ptr.String("__Favicon__"),
+					},
+				},
+				Typography: &types.WorkspaceThemeTypography{
+					FontFamily: &types.FontFamily{
+						Default: types.WorkspaceFontFamily("Arial"),
+					},
+				},
+			},
+		},
+		Title: ptr.String("__Title__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2082,7 +4237,14 @@ func TestCheckResponseSnapshot_CreateWorkspacePage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspacePage(context.Background(), &CreateWorkspacePageInput{})
+	got, err := svc.CreateWorkspacePage(context.Background(), &CreateWorkspacePageInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Page:        ptr.String("__Page__"),
+		Slug:        ptr.String("__Slug__"),
+		InputData:   ptr.String("__InputData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2105,7 +4267,11 @@ func TestCheckResponseSnapshot_DeactivateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateEvaluationForm(context.Background(), &DeactivateEvaluationFormInput{})
+	got, err := svc.DeactivateEvaluationForm(context.Background(), &DeactivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2124,7 +4290,11 @@ func TestCheckResponseSnapshot_DeleteAttachedFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttachedFile(context.Background(), &DeleteAttachedFileInput{})
+	got, err := svc.DeleteAttachedFile(context.Background(), &DeleteAttachedFileInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileId:                ptr.String("__FileId__"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2143,7 +4313,14 @@ func TestCheckResponseSnapshot_DeleteContactData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactData(context.Background(), &DeleteContactDataInput{})
+	got, err := svc.DeleteContactData(context.Background(), &DeleteContactDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		ContactFields: []types.ContactField{
+			types.ContactField("CUSTOMER_ENDPOINT"),
+			types.ContactField("CUSTOMER_ENDPOINT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2162,7 +4339,10 @@ func TestCheckResponseSnapshot_DeleteContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactEvaluation(context.Background(), &DeleteContactEvaluationInput{})
+	got, err := svc.DeleteContactEvaluation(context.Background(), &DeleteContactEvaluationInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		EvaluationId: ptr.String("__EvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2181,7 +4361,10 @@ func TestCheckResponseSnapshot_DeleteContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactFlow(context.Background(), &DeleteContactFlowInput{})
+	got, err := svc.DeleteContactFlow(context.Background(), &DeleteContactFlowInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2200,7 +4383,10 @@ func TestCheckResponseSnapshot_DeleteContactFlowModule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactFlowModule(context.Background(), &DeleteContactFlowModuleInput{})
+	got, err := svc.DeleteContactFlowModule(context.Background(), &DeleteContactFlowModuleInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2219,7 +4405,11 @@ func TestCheckResponseSnapshot_DeleteContactFlowModuleAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactFlowModuleAlias(context.Background(), &DeleteContactFlowModuleAliasInput{})
+	got, err := svc.DeleteContactFlowModuleAlias(context.Background(), &DeleteContactFlowModuleAliasInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		AliasId:             ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2238,7 +4428,11 @@ func TestCheckResponseSnapshot_DeleteContactFlowModuleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactFlowModuleVersion(context.Background(), &DeleteContactFlowModuleVersionInput{})
+	got, err := svc.DeleteContactFlowModuleVersion(context.Background(), &DeleteContactFlowModuleVersionInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		ContactFlowModuleId:      ptr.String("__ContactFlowModuleId__"),
+		ContactFlowModuleVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2257,7 +4451,11 @@ func TestCheckResponseSnapshot_DeleteContactFlowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactFlowVersion(context.Background(), &DeleteContactFlowVersionInput{})
+	got, err := svc.DeleteContactFlowVersion(context.Background(), &DeleteContactFlowVersionInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2276,7 +4474,10 @@ func TestCheckResponseSnapshot_DeleteDataTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataTable(context.Background(), &DeleteDataTableInput{})
+	got, err := svc.DeleteDataTable(context.Background(), &DeleteDataTableInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2302,7 +4503,11 @@ func TestCheckResponseSnapshot_DeleteDataTableAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataTableAttribute(context.Background(), &DeleteDataTableAttributeInput{})
+	got, err := svc.DeleteDataTableAttribute(context.Background(), &DeleteDataTableAttributeInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		DataTableId:   ptr.String("__DataTableId__"),
+		AttributeName: ptr.String("__AttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2321,7 +4526,10 @@ func TestCheckResponseSnapshot_DeleteEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailAddress(context.Background(), &DeleteEmailAddressInput{})
+	got, err := svc.DeleteEmailAddress(context.Background(), &DeleteEmailAddressInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2340,7 +4548,11 @@ func TestCheckResponseSnapshot_DeleteEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEvaluationForm(context.Background(), &DeleteEvaluationFormInput{})
+	got, err := svc.DeleteEvaluationForm(context.Background(), &DeleteEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2359,7 +4571,10 @@ func TestCheckResponseSnapshot_DeleteHoursOfOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHoursOfOperation(context.Background(), &DeleteHoursOfOperationInput{})
+	got, err := svc.DeleteHoursOfOperation(context.Background(), &DeleteHoursOfOperationInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2378,7 +4593,11 @@ func TestCheckResponseSnapshot_DeleteHoursOfOperationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHoursOfOperationOverride(context.Background(), &DeleteHoursOfOperationOverrideInput{})
+	got, err := svc.DeleteHoursOfOperationOverride(context.Background(), &DeleteHoursOfOperationOverrideInput{
+		InstanceId:                 ptr.String("__InstanceId__"),
+		HoursOfOperationId:         ptr.String("__HoursOfOperationId__"),
+		HoursOfOperationOverrideId: ptr.String("__HoursOfOperationOverrideId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2397,7 +4616,10 @@ func TestCheckResponseSnapshot_DeleteInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{})
+	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2416,7 +4638,10 @@ func TestCheckResponseSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntegrationAssociation(context.Background(), &DeleteIntegrationAssociationInput{})
+	got, err := svc.DeleteIntegrationAssociation(context.Background(), &DeleteIntegrationAssociationInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		IntegrationAssociationId: ptr.String("__IntegrationAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2435,7 +4660,10 @@ func TestCheckResponseSnapshot_DeleteNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotification(context.Background(), &DeleteNotificationInput{})
+	got, err := svc.DeleteNotification(context.Background(), &DeleteNotificationInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		NotificationId: ptr.String("__NotificationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2454,7 +4682,10 @@ func TestCheckResponseSnapshot_DeletePredefinedAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePredefinedAttribute(context.Background(), &DeletePredefinedAttributeInput{})
+	got, err := svc.DeletePredefinedAttribute(context.Background(), &DeletePredefinedAttributeInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2473,7 +4704,10 @@ func TestCheckResponseSnapshot_DeletePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrompt(context.Background(), &DeletePromptInput{})
+	got, err := svc.DeletePrompt(context.Background(), &DeletePromptInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		PromptId:   ptr.String("__PromptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2492,7 +4726,11 @@ func TestCheckResponseSnapshot_DeletePushNotificationRegistration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePushNotificationRegistration(context.Background(), &DeletePushNotificationRegistrationInput{})
+	got, err := svc.DeletePushNotificationRegistration(context.Background(), &DeletePushNotificationRegistrationInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		ContactId:      ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2511,7 +4749,10 @@ func TestCheckResponseSnapshot_DeleteQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{})
+	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2530,7 +4771,10 @@ func TestCheckResponseSnapshot_DeleteQuickConnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuickConnect(context.Background(), &DeleteQuickConnectInput{})
+	got, err := svc.DeleteQuickConnect(context.Background(), &DeleteQuickConnectInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		QuickConnectId: ptr.String("__QuickConnectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2549,7 +4793,10 @@ func TestCheckResponseSnapshot_DeleteRoutingProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoutingProfile(context.Background(), &DeleteRoutingProfileInput{})
+	got, err := svc.DeleteRoutingProfile(context.Background(), &DeleteRoutingProfileInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2568,7 +4815,10 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		RuleId:     ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2587,7 +4837,10 @@ func TestCheckResponseSnapshot_DeleteSecurityProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityProfile(context.Background(), &DeleteSecurityProfileInput{})
+	got, err := svc.DeleteSecurityProfile(context.Background(), &DeleteSecurityProfileInput{
+		InstanceId:        ptr.String("__InstanceId__"),
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2606,7 +4859,10 @@ func TestCheckResponseSnapshot_DeleteSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SessionId:  ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2625,7 +4881,10 @@ func TestCheckResponseSnapshot_DeleteTaskTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTaskTemplate(context.Background(), &DeleteTaskTemplateInput{})
+	got, err := svc.DeleteTaskTemplate(context.Background(), &DeleteTaskTemplateInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		TaskTemplateId: ptr.String("__TaskTemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2644,7 +4903,10 @@ func TestCheckResponseSnapshot_DeleteTestCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTestCase(context.Background(), &DeleteTestCaseInput{})
+	got, err := svc.DeleteTestCase(context.Background(), &DeleteTestCaseInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		TestCaseId: ptr.String("__TestCaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2663,7 +4925,9 @@ func TestCheckResponseSnapshot_DeleteTrafficDistributionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrafficDistributionGroup(context.Background(), &DeleteTrafficDistributionGroupInput{})
+	got, err := svc.DeleteTrafficDistributionGroup(context.Background(), &DeleteTrafficDistributionGroupInput{
+		TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2682,7 +4946,11 @@ func TestCheckResponseSnapshot_DeleteUseCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUseCase(context.Background(), &DeleteUseCaseInput{})
+	got, err := svc.DeleteUseCase(context.Background(), &DeleteUseCaseInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		IntegrationAssociationId: ptr.String("__IntegrationAssociationId__"),
+		UseCaseId:                ptr.String("__UseCaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2701,7 +4969,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		UserId:     ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2720,7 +4991,10 @@ func TestCheckResponseSnapshot_DeleteUserHierarchyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserHierarchyGroup(context.Background(), &DeleteUserHierarchyGroupInput{})
+	got, err := svc.DeleteUserHierarchyGroup(context.Background(), &DeleteUserHierarchyGroupInput{
+		HierarchyGroupId: ptr.String("__HierarchyGroupId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2739,7 +5013,10 @@ func TestCheckResponseSnapshot_DeleteView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteView(context.Background(), &DeleteViewInput{})
+	got, err := svc.DeleteView(context.Background(), &DeleteViewInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ViewId:     ptr.String("__ViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2758,7 +5035,11 @@ func TestCheckResponseSnapshot_DeleteViewVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteViewVersion(context.Background(), &DeleteViewVersionInput{})
+	got, err := svc.DeleteViewVersion(context.Background(), &DeleteViewVersionInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ViewId:      ptr.String("__ViewId__"),
+		ViewVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2781,7 +5062,10 @@ func TestCheckResponseSnapshot_DeleteVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVocabulary(context.Background(), &DeleteVocabularyInput{})
+	got, err := svc.DeleteVocabulary(context.Background(), &DeleteVocabularyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		VocabularyId: ptr.String("__VocabularyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2800,7 +5084,10 @@ func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2819,7 +5106,11 @@ func TestCheckResponseSnapshot_DeleteWorkspaceMedia(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceMedia(context.Background(), &DeleteWorkspaceMediaInput{})
+	got, err := svc.DeleteWorkspaceMedia(context.Background(), &DeleteWorkspaceMediaInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		MediaType:   types.MediaType("IMAGE_LOGO_LIGHT_FAVICON"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2838,7 +5129,11 @@ func TestCheckResponseSnapshot_DeleteWorkspacePage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspacePage(context.Background(), &DeleteWorkspacePageInput{})
+	got, err := svc.DeleteWorkspacePage(context.Background(), &DeleteWorkspacePageInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Page:        ptr.String("__Page__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2872,7 +5167,10 @@ func TestCheckResponseSnapshot_DescribeAgentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAgentStatus(context.Background(), &DescribeAgentStatusInput{})
+	got, err := svc.DescribeAgentStatus(context.Background(), &DescribeAgentStatusInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AgentStatusId: ptr.String("__AgentStatusId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2908,7 +5206,10 @@ func TestCheckResponseSnapshot_DescribeAttachedFilesConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAttachedFilesConfiguration(context.Background(), &DescribeAttachedFilesConfigurationInput{})
+	got, err := svc.DescribeAttachedFilesConfiguration(context.Background(), &DescribeAttachedFilesConfigurationInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		AttachmentScope: types.AttachmentScope("EMAIL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2950,7 +5251,10 @@ func TestCheckResponseSnapshot_DescribeAuthenticationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAuthenticationProfile(context.Background(), &DescribeAuthenticationProfileInput{})
+	got, err := svc.DescribeAuthenticationProfile(context.Background(), &DescribeAuthenticationProfileInput{
+		AuthenticationProfileId: ptr.String("__AuthenticationProfileId__"),
+		InstanceId:              ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3399,7 +5703,10 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContact(context.Background(), &DescribeContactInput{})
+	got, err := svc.DescribeContact(context.Background(), &DescribeContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4125,7 +6432,10 @@ func TestCheckResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContactEvaluation(context.Background(), &DescribeContactEvaluationInput{})
+	got, err := svc.DescribeContactEvaluation(context.Background(), &DescribeContactEvaluationInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		EvaluationId: ptr.String("__EvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4163,7 +6473,10 @@ func TestCheckResponseSnapshot_DescribeContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContactFlow(context.Background(), &DescribeContactFlowInput{})
+	got, err := svc.DescribeContactFlow(context.Background(), &DescribeContactFlowInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4202,7 +6515,10 @@ func TestCheckResponseSnapshot_DescribeContactFlowModule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContactFlowModule(context.Background(), &DescribeContactFlowModuleInput{})
+	got, err := svc.DescribeContactFlowModule(context.Background(), &DescribeContactFlowModuleInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4232,7 +6548,11 @@ func TestCheckResponseSnapshot_DescribeContactFlowModuleAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContactFlowModuleAlias(context.Background(), &DescribeContactFlowModuleAliasInput{})
+	got, err := svc.DescribeContactFlowModuleAlias(context.Background(), &DescribeContactFlowModuleAliasInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		AliasId:             ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4275,7 +6595,10 @@ func TestCheckResponseSnapshot_DescribeDataTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataTable(context.Background(), &DescribeDataTableInput{})
+	got, err := svc.DescribeDataTable(context.Background(), &DescribeDataTableInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4332,7 +6655,11 @@ func TestCheckResponseSnapshot_DescribeDataTableAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataTableAttribute(context.Background(), &DescribeDataTableAttributeInput{})
+	got, err := svc.DescribeDataTableAttribute(context.Background(), &DescribeDataTableAttributeInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		DataTableId:   ptr.String("__DataTableId__"),
+		AttributeName: ptr.String("__AttributeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4370,7 +6697,10 @@ func TestCheckResponseSnapshot_DescribeEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEmailAddress(context.Background(), &DescribeEmailAddressInput{})
+	got, err := svc.DescribeEmailAddress(context.Background(), &DescribeEmailAddressInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4962,7 +7292,11 @@ func TestCheckResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvaluationForm(context.Background(), &DescribeEvaluationFormInput{})
+	got, err := svc.DescribeEvaluationForm(context.Background(), &DescribeEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5030,7 +7364,10 @@ func TestCheckResponseSnapshot_DescribeHoursOfOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHoursOfOperation(context.Background(), &DescribeHoursOfOperationInput{})
+	got, err := svc.DescribeHoursOfOperation(context.Background(), &DescribeHoursOfOperationInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5102,7 +7439,11 @@ func TestCheckResponseSnapshot_DescribeHoursOfOperationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHoursOfOperationOverride(context.Background(), &DescribeHoursOfOperationOverrideInput{})
+	got, err := svc.DescribeHoursOfOperationOverride(context.Background(), &DescribeHoursOfOperationOverrideInput{
+		InstanceId:                 ptr.String("__InstanceId__"),
+		HoursOfOperationId:         ptr.String("__HoursOfOperationId__"),
+		HoursOfOperationOverrideId: ptr.String("__HoursOfOperationOverrideId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5156,7 +7497,9 @@ func TestCheckResponseSnapshot_DescribeInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstance(context.Background(), &DescribeInstanceInput{})
+	got, err := svc.DescribeInstance(context.Background(), &DescribeInstanceInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5180,7 +7523,10 @@ func TestCheckResponseSnapshot_DescribeInstanceAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceAttribute(context.Background(), &DescribeInstanceAttributeInput{})
+	got, err := svc.DescribeInstanceAttribute(context.Background(), &DescribeInstanceAttributeInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AttributeType: types.InstanceAttributeType("INBOUND_CALLS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5226,7 +7572,11 @@ func TestCheckResponseSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceStorageConfig(context.Background(), &DescribeInstanceStorageConfigInput{})
+	got, err := svc.DescribeInstanceStorageConfig(context.Background(), &DescribeInstanceStorageConfigInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		ResourceType:  types.InstanceStorageResourceType("CHAT_TRANSCRIPTS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5265,7 +7615,10 @@ func TestCheckResponseSnapshot_DescribeNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotification(context.Background(), &DescribeNotificationInput{})
+	got, err := svc.DescribeNotification(context.Background(), &DescribeNotificationInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		NotificationId: ptr.String("__NotificationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5303,7 +7656,9 @@ func TestCheckResponseSnapshot_DescribePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePhoneNumber(context.Background(), &DescribePhoneNumberInput{})
+	got, err := svc.DescribePhoneNumber(context.Background(), &DescribePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5342,7 +7697,10 @@ func TestCheckResponseSnapshot_DescribePredefinedAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePredefinedAttribute(context.Background(), &DescribePredefinedAttributeInput{})
+	got, err := svc.DescribePredefinedAttribute(context.Background(), &DescribePredefinedAttributeInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5373,7 +7731,10 @@ func TestCheckResponseSnapshot_DescribePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePrompt(context.Background(), &DescribePromptInput{})
+	got, err := svc.DescribePrompt(context.Background(), &DescribePromptInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		PromptId:   ptr.String("__PromptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5415,7 +7776,10 @@ func TestCheckResponseSnapshot_DescribeQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQueue(context.Background(), &DescribeQueueInput{})
+	got, err := svc.DescribeQueue(context.Background(), &DescribeQueueInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5463,7 +7827,10 @@ func TestCheckResponseSnapshot_DescribeQuickConnect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuickConnect(context.Background(), &DescribeQuickConnectInput{})
+	got, err := svc.DescribeQuickConnect(context.Background(), &DescribeQuickConnectInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		QuickConnectId: ptr.String("__QuickConnectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5525,7 +7892,10 @@ func TestCheckResponseSnapshot_DescribeRoutingProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRoutingProfile(context.Background(), &DescribeRoutingProfileInput{})
+	got, err := svc.DescribeRoutingProfile(context.Background(), &DescribeRoutingProfileInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5802,7 +8172,10 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRule(context.Background(), &DescribeRuleInput{})
+	got, err := svc.DescribeRule(context.Background(), &DescribeRuleInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		RuleId:     ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5870,7 +8243,10 @@ func TestCheckResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSecurityProfile(context.Background(), &DescribeSecurityProfileInput{})
+	got, err := svc.DescribeSecurityProfile(context.Background(), &DescribeSecurityProfileInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5916,7 +8292,11 @@ func TestCheckResponseSnapshot_DescribeTestCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestCase(context.Background(), &DescribeTestCaseInput{})
+	got, err := svc.DescribeTestCase(context.Background(), &DescribeTestCaseInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		TestCaseId: ptr.String("__TestCaseId__"),
+		Status:     types.TestCaseStatus("PUBLISHED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5948,7 +8328,9 @@ func TestCheckResponseSnapshot_DescribeTrafficDistributionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrafficDistributionGroup(context.Background(), &DescribeTrafficDistributionGroupInput{})
+	got, err := svc.DescribeTrafficDistributionGroup(context.Background(), &DescribeTrafficDistributionGroupInput{
+		TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6063,7 +8445,10 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{})
+	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6131,7 +8516,10 @@ func TestCheckResponseSnapshot_DescribeUserHierarchyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserHierarchyGroup(context.Background(), &DescribeUserHierarchyGroupInput{})
+	got, err := svc.DescribeUserHierarchyGroup(context.Background(), &DescribeUserHierarchyGroupInput{
+		HierarchyGroupId: ptr.String("__HierarchyGroupId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6188,7 +8576,9 @@ func TestCheckResponseSnapshot_DescribeUserHierarchyStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserHierarchyStructure(context.Background(), &DescribeUserHierarchyStructureInput{})
+	got, err := svc.DescribeUserHierarchyStructure(context.Background(), &DescribeUserHierarchyStructureInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6232,7 +8622,10 @@ func TestCheckResponseSnapshot_DescribeView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeView(context.Background(), &DescribeViewInput{})
+	got, err := svc.DescribeView(context.Background(), &DescribeViewInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ViewId:     ptr.String("__ViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6265,7 +8658,10 @@ func TestCheckResponseSnapshot_DescribeVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVocabulary(context.Background(), &DescribeVocabularyInput{})
+	got, err := svc.DescribeVocabulary(context.Background(), &DescribeVocabularyInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		VocabularyId: ptr.String("__VocabularyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6380,7 +8776,10 @@ func TestCheckResponseSnapshot_DescribeWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{})
+	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6399,7 +8798,11 @@ func TestCheckResponseSnapshot_DisassociateAnalyticsDataSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAnalyticsDataSet(context.Background(), &DisassociateAnalyticsDataSetInput{})
+	got, err := svc.DisassociateAnalyticsDataSet(context.Background(), &DisassociateAnalyticsDataSetInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		DataSetId:       ptr.String("__DataSetId__"),
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6418,7 +8821,11 @@ func TestCheckResponseSnapshot_DisassociateApprovedOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApprovedOrigin(context.Background(), &DisassociateApprovedOriginInput{})
+	got, err := svc.DisassociateApprovedOrigin(context.Background(), &DisassociateApprovedOriginInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Origin:      ptr.String("__Origin__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6437,7 +8844,17 @@ func TestCheckResponseSnapshot_DisassociateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateBot(context.Background(), &DisassociateBotInput{})
+	got, err := svc.DisassociateBot(context.Background(), &DisassociateBotInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		LexBot: &types.LexBot{
+			Name:      ptr.String("__Name__"),
+			LexRegion: ptr.String("__LexRegion__"),
+		},
+		LexV2Bot: &types.LexV2Bot{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6456,7 +8873,14 @@ func TestCheckResponseSnapshot_DisassociateEmailAddressAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateEmailAddressAlias(context.Background(), &DisassociateEmailAddressAliasInput{})
+	got, err := svc.DisassociateEmailAddressAlias(context.Background(), &DisassociateEmailAddressAliasInput{
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+		InstanceId:     ptr.String("__InstanceId__"),
+		AliasConfiguration: &types.AliasConfiguration{
+			EmailAddressId: ptr.String("__EmailAddressId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6475,7 +8899,11 @@ func TestCheckResponseSnapshot_DisassociateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFlow(context.Background(), &DisassociateFlowInput{})
+	got, err := svc.DisassociateFlow(context.Background(), &DisassociateFlowInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.FlowAssociationResourceType("SMS_PHONE_NUMBER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6494,7 +8922,14 @@ func TestCheckResponseSnapshot_DisassociateHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateHoursOfOperations(context.Background(), &DisassociateHoursOfOperationsInput{})
+	got, err := svc.DisassociateHoursOfOperations(context.Background(), &DisassociateHoursOfOperationsInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		ParentHoursOfOperationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6513,7 +8948,12 @@ func TestCheckResponseSnapshot_DisassociateInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateInstanceStorageConfig(context.Background(), &DisassociateInstanceStorageConfigInput{})
+	got, err := svc.DisassociateInstanceStorageConfig(context.Background(), &DisassociateInstanceStorageConfigInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		ResourceType:  types.InstanceStorageResourceType("CHAT_TRANSCRIPTS"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6532,7 +8972,11 @@ func TestCheckResponseSnapshot_DisassociateLambdaFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLambdaFunction(context.Background(), &DisassociateLambdaFunctionInput{})
+	got, err := svc.DisassociateLambdaFunction(context.Background(), &DisassociateLambdaFunctionInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		FunctionArn: ptr.String("__FunctionArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6551,7 +8995,12 @@ func TestCheckResponseSnapshot_DisassociateLexBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLexBot(context.Background(), &DisassociateLexBotInput{})
+	got, err := svc.DisassociateLexBot(context.Background(), &DisassociateLexBotInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		BotName:     ptr.String("__BotName__"),
+		LexRegion:   ptr.String("__LexRegion__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6570,7 +9019,10 @@ func TestCheckResponseSnapshot_DisassociatePhoneNumberContactFlow(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePhoneNumberContactFlow(context.Background(), &DisassociatePhoneNumberContactFlowInput{})
+	got, err := svc.DisassociatePhoneNumberContactFlow(context.Background(), &DisassociatePhoneNumberContactFlowInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6589,7 +9041,15 @@ func TestCheckResponseSnapshot_DisassociateQueueEmailAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateQueueEmailAddresses(context.Background(), &DisassociateQueueEmailAddressesInput{})
+	got, err := svc.DisassociateQueueEmailAddresses(context.Background(), &DisassociateQueueEmailAddressesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		EmailAddressesId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6608,7 +9068,14 @@ func TestCheckResponseSnapshot_DisassociateQueueQuickConnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateQueueQuickConnects(context.Background(), &DisassociateQueueQuickConnectsInput{})
+	got, err := svc.DisassociateQueueQuickConnects(context.Background(), &DisassociateQueueQuickConnectsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		QuickConnectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6627,7 +9094,30 @@ func TestCheckResponseSnapshot_DisassociateRoutingProfileQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateRoutingProfileQueues(context.Background(), &DisassociateRoutingProfileQueuesInput{})
+	got, err := svc.DisassociateRoutingProfileQueues(context.Background(), &DisassociateRoutingProfileQueuesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		QueueReferences: []types.RoutingProfileQueueReference{
+			{
+				QueueId: ptr.String("__QueueId__"),
+				Channel: types.Channel("VOICE"),
+			},
+			{
+				QueueId: ptr.String("__QueueId__"),
+				Channel: types.Channel("VOICE"),
+			},
+		},
+		ManualAssignmentQueueReferences: []types.RoutingProfileQueueReference{
+			{
+				QueueId: ptr.String("__QueueId__"),
+				Channel: types.Channel("VOICE"),
+			},
+			{
+				QueueId: ptr.String("__QueueId__"),
+				Channel: types.Channel("VOICE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6646,7 +9136,11 @@ func TestCheckResponseSnapshot_DisassociateSecurityKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSecurityKey(context.Background(), &DisassociateSecurityKeyInput{})
+	got, err := svc.DisassociateSecurityKey(context.Background(), &DisassociateSecurityKeyInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6665,7 +9159,19 @@ func TestCheckResponseSnapshot_DisassociateSecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSecurityProfiles(context.Background(), &DisassociateSecurityProfilesInput{})
+	got, err := svc.DisassociateSecurityProfiles(context.Background(), &DisassociateSecurityProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		SecurityProfiles: []types.SecurityProfileItem{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		EntityType: types.EntityType("USER"),
+		EntityArn:  ptr.String("__EntityArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6684,7 +9190,11 @@ func TestCheckResponseSnapshot_DisassociateTrafficDistributionGroupUser(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTrafficDistributionGroupUser(context.Background(), &DisassociateTrafficDistributionGroupUserInput{})
+	got, err := svc.DisassociateTrafficDistributionGroupUser(context.Background(), &DisassociateTrafficDistributionGroupUserInput{
+		TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+		UserId:                     ptr.String("__UserId__"),
+		InstanceId:                 ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6703,7 +9213,20 @@ func TestCheckResponseSnapshot_DisassociateUserProficiencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateUserProficiencies(context.Background(), &DisassociateUserProficienciesInput{})
+	got, err := svc.DisassociateUserProficiencies(context.Background(), &DisassociateUserProficienciesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		UserId:     ptr.String("__UserId__"),
+		UserProficiencies: []types.UserProficiencyDisassociate{
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6743,7 +9266,14 @@ func TestCheckResponseSnapshot_DisassociateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWorkspace(context.Background(), &DisassociateWorkspaceInput{})
+	got, err := svc.DisassociateWorkspace(context.Background(), &DisassociateWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6762,7 +9292,11 @@ func TestCheckResponseSnapshot_DismissUserContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DismissUserContact(context.Background(), &DismissUserContactInput{})
+	got, err := svc.DismissUserContact(context.Background(), &DismissUserContactInput{
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6821,7 +9355,47 @@ func TestCheckResponseSnapshot_EvaluateDataTableValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluateDataTableValues(context.Background(), &EvaluateDataTableValuesInput{})
+	got, err := svc.EvaluateDataTableValues(context.Background(), &EvaluateDataTableValuesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableValueEvaluationSet{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TimeZone:   ptr.String("__TimeZone__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6859,7 +9433,12 @@ func TestCheckResponseSnapshot_GetAttachedFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAttachedFile(context.Background(), &GetAttachedFileInput{})
+	got, err := svc.GetAttachedFile(context.Background(), &GetAttachedFileInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileId:                ptr.String("__FileId__"),
+		UrlExpiryInSeconds:    ptr.Int32(1),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6882,7 +9461,10 @@ func TestCheckResponseSnapshot_GetContactAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactAttributes(context.Background(), &GetContactAttributesInput{})
+	got, err := svc.GetContactAttributes(context.Background(), &GetContactAttributesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		InitialContactId: ptr.String("__InitialContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6918,7 +9500,18 @@ func TestCheckResponseSnapshot_GetContactMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactMetrics(context.Background(), &GetContactMetricsInput{})
+	got, err := svc.GetContactMetrics(context.Background(), &GetContactMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		Metrics: []types.ContactMetricInfo{
+			{
+				Name: types.ContactMetricName("ESTIMATED_WAIT_TIME"),
+			},
+			{
+				Name: types.ContactMetricName("ESTIMATED_WAIT_TIME"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7019,7 +9612,67 @@ func TestCheckResponseSnapshot_GetCurrentMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCurrentMetricData(context.Background(), &GetCurrentMetricDataInput{})
+	got, err := svc.GetCurrentMetricData(context.Background(), &GetCurrentMetricDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Filters: &types.Filters{
+			Queues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Channels: []types.Channel{
+				types.Channel("VOICE"),
+				types.Channel("VOICE"),
+			},
+			RoutingProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoutingStepExpressions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AgentStatuses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subtypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ValidationTestTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Groupings: []types.Grouping{
+			types.Grouping("QUEUE"),
+			types.Grouping("QUEUE"),
+		},
+		CurrentMetrics: []types.CurrentMetric{
+			{
+				Name:     types.CurrentMetricName("AGENTS_ONLINE"),
+				MetricId: ptr.String("__MetricId__"),
+				Unit:     types.Unit("SECONDS"),
+			},
+			{
+				Name:     types.CurrentMetricName("AGENTS_ONLINE"),
+				MetricId: ptr.String("__MetricId__"),
+				Unit:     types.Unit("SECONDS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SortCriteria: []types.CurrentMetricSortCriteria{
+			{
+				SortByMetric: types.CurrentMetricName("AGENTS_ONLINE"),
+				SortOrder:    types.SortOrder("ASCENDING"),
+			},
+			{
+				SortByMetric: types.CurrentMetricName("AGENTS_ONLINE"),
+				SortOrder:    types.SortOrder("ASCENDING"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7189,7 +9842,35 @@ func TestCheckResponseSnapshot_GetCurrentUserData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCurrentUserData(context.Background(), &GetCurrentUserDataInput{})
+	got, err := svc.GetCurrentUserData(context.Background(), &GetCurrentUserDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Filters: &types.UserDataFilters{
+			Queues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ContactFilter: &types.ContactFilter{
+				ContactStates: []types.ContactState{
+					types.ContactState("INCOMING"),
+					types.ContactState("INCOMING"),
+				},
+			},
+			RoutingProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Agents: []string{
+				"__Member__",
+				"__Member__",
+			},
+			UserHierarchyGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7322,7 +10003,12 @@ func TestCheckResponseSnapshot_GetEffectiveHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEffectiveHoursOfOperations(context.Background(), &GetEffectiveHoursOfOperationsInput{})
+	got, err := svc.GetEffectiveHoursOfOperations(context.Background(), &GetEffectiveHoursOfOperationsInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		FromDate:           ptr.String("__FromDate__"),
+		ToDate:             ptr.String("__ToDate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7381,7 +10067,11 @@ func TestCheckResponseSnapshot_GetEvaluationFormValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEvaluationFormValidation(context.Background(), &GetEvaluationFormValidationInput{})
+	got, err := svc.GetEvaluationFormValidation(context.Background(), &GetEvaluationFormValidationInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7410,7 +10100,9 @@ func TestCheckResponseSnapshot_GetFederationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{})
+	got, err := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7433,7 +10125,11 @@ func TestCheckResponseSnapshot_GetFlowAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowAssociation(context.Background(), &GetFlowAssociationInput{})
+	got, err := svc.GetFlowAssociation(context.Background(), &GetFlowAssociationInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.FlowAssociationResourceType("SMS_PHONE_NUMBER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7548,7 +10244,67 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{})
+	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Filters: &types.Filters{
+			Queues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Channels: []types.Channel{
+				types.Channel("VOICE"),
+				types.Channel("VOICE"),
+			},
+			RoutingProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoutingStepExpressions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AgentStatuses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subtypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ValidationTestTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Groupings: []types.Grouping{
+			types.Grouping("QUEUE"),
+			types.Grouping("QUEUE"),
+		},
+		HistoricalMetrics: []types.HistoricalMetric{
+			{
+				Name: types.HistoricalMetricName("CONTACTS_QUEUED"),
+				Threshold: &types.Threshold{
+					Comparison:     types.Comparison("LT"),
+					ThresholdValue: ptr.Float64(1.0),
+				},
+				Statistic: types.Statistic("SUM"),
+				Unit:      types.Unit("SECONDS"),
+			},
+			{
+				Name: types.HistoricalMetricName("CONTACTS_QUEUED"),
+				Threshold: &types.Threshold{
+					Comparison:     types.Comparison("LT"),
+					ThresholdValue: ptr.Float64(1.0),
+				},
+				Statistic: types.Statistic("SUM"),
+				Unit:      types.Unit("SECONDS"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7735,7 +10491,109 @@ func TestCheckResponseSnapshot_GetMetricDataV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricDataV2(context.Background(), &GetMetricDataV2Input{})
+	got, err := svc.GetMetricDataV2(context.Background(), &GetMetricDataV2Input{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Interval: &types.IntervalDetails{
+			TimeZone:       ptr.String("__TimeZone__"),
+			IntervalPeriod: types.IntervalPeriod("FIFTEEN_MIN"),
+		},
+		Filters: []types.FilterV2{
+			{
+				FilterKey: ptr.String("__FilterKey__"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StringCondition: &types.FilterV2StringCondition{
+					Comparison: types.FilterV2StringConditionComparisonOperator("NOT_EXISTS"),
+				},
+			},
+			{
+				FilterKey: ptr.String("__FilterKey__"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StringCondition: &types.FilterV2StringCondition{
+					Comparison: types.FilterV2StringConditionComparisonOperator("NOT_EXISTS"),
+				},
+			},
+		},
+		Groupings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Metrics: []types.MetricV2{
+			{
+				Name: ptr.String("__Name__"),
+				Threshold: []types.ThresholdV2{
+					{
+						Comparison:     ptr.String("__Comparison__"),
+						ThresholdValue: ptr.Float64(1.0),
+					},
+					{
+						Comparison:     ptr.String("__Comparison__"),
+						ThresholdValue: ptr.Float64(1.0),
+					},
+				},
+				MetricId: ptr.String("__MetricId__"),
+				MetricFilters: []types.MetricFilterV2{
+					{
+						MetricFilterKey: ptr.String("__MetricFilterKey__"),
+						MetricFilterValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					{
+						MetricFilterKey: ptr.String("__MetricFilterKey__"),
+						MetricFilterValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Threshold: []types.ThresholdV2{
+					{
+						Comparison:     ptr.String("__Comparison__"),
+						ThresholdValue: ptr.Float64(1.0),
+					},
+					{
+						Comparison:     ptr.String("__Comparison__"),
+						ThresholdValue: ptr.Float64(1.0),
+					},
+				},
+				MetricId: ptr.String("__MetricId__"),
+				MetricFilters: []types.MetricFilterV2{
+					{
+						MetricFilterKey: ptr.String("__MetricFilterKey__"),
+						MetricFilterValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					{
+						MetricFilterKey: ptr.String("__MetricFilterKey__"),
+						MetricFilterValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7758,7 +10616,10 @@ func TestCheckResponseSnapshot_GetPromptFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPromptFile(context.Background(), &GetPromptFileInput{})
+	got, err := svc.GetPromptFile(context.Background(), &GetPromptFileInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		PromptId:   ptr.String("__PromptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7869,7 +10730,11 @@ func TestCheckResponseSnapshot_GetTaskTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTaskTemplate(context.Background(), &GetTaskTemplateInput{})
+	got, err := svc.GetTaskTemplate(context.Background(), &GetTaskTemplateInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		TaskTemplateId:  ptr.String("__TaskTemplateId__"),
+		SnapshotVersion: ptr.String("__SnapshotVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7897,7 +10762,11 @@ func TestCheckResponseSnapshot_GetTestCaseExecutionSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTestCaseExecutionSummary(context.Background(), &GetTestCaseExecutionSummaryInput{})
+	got, err := svc.GetTestCaseExecutionSummary(context.Background(), &GetTestCaseExecutionSummaryInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		TestCaseId:          ptr.String("__TestCaseId__"),
+		TestCaseExecutionId: ptr.String("__TestCaseExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7955,7 +10824,9 @@ func TestCheckResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrafficDistribution(context.Background(), &GetTrafficDistributionInput{})
+	got, err := svc.GetTrafficDistribution(context.Background(), &GetTrafficDistributionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7977,7 +10848,15 @@ func TestCheckResponseSnapshot_ImportPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportPhoneNumber(context.Background(), &ImportPhoneNumberInput{})
+	got, err := svc.ImportPhoneNumber(context.Background(), &ImportPhoneNumberInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		SourcePhoneNumberArn:   ptr.String("__SourcePhoneNumberArn__"),
+		PhoneNumberDescription: ptr.String("__PhoneNumberDescription__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7996,7 +10875,12 @@ func TestCheckResponseSnapshot_ImportWorkspaceMedia(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportWorkspaceMedia(context.Background(), &ImportWorkspaceMediaInput{})
+	got, err := svc.ImportWorkspaceMedia(context.Background(), &ImportWorkspaceMediaInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		MediaType:   types.MediaType("IMAGE_LOGO_LIGHT_FAVICON"),
+		MediaSource: ptr.String("__MediaSource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8035,7 +10919,15 @@ func TestCheckResponseSnapshot_ListAgentStatuses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgentStatuses(context.Background(), &ListAgentStatusesInput{})
+	got, err := svc.ListAgentStatuses(context.Background(), &ListAgentStatusesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		AgentStatusTypes: []types.AgentStatusType{
+			types.AgentStatusType("ROUTABLE"),
+			types.AgentStatusType("ROUTABLE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8072,7 +10964,12 @@ func TestCheckResponseSnapshot_ListAnalyticsDataAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalyticsDataAssociations(context.Background(), &ListAnalyticsDataAssociationsInput{})
+	got, err := svc.ListAnalyticsDataAssociations(context.Background(), &ListAnalyticsDataAssociationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		DataSetId:  ptr.String("__DataSetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8103,7 +11000,11 @@ func TestCheckResponseSnapshot_ListAnalyticsDataLakeDataSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalyticsDataLakeDataSets(context.Background(), &ListAnalyticsDataLakeDataSetsInput{})
+	got, err := svc.ListAnalyticsDataLakeDataSets(context.Background(), &ListAnalyticsDataLakeDataSetsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8128,7 +11029,11 @@ func TestCheckResponseSnapshot_ListApprovedOrigins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApprovedOrigins(context.Background(), &ListApprovedOriginsInput{})
+	got, err := svc.ListApprovedOrigins(context.Background(), &ListApprovedOriginsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8173,7 +11078,12 @@ func TestCheckResponseSnapshot_ListAssociatedContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedContacts(context.Background(), &ListAssociatedContactsInput{})
+	got, err := svc.ListAssociatedContacts(context.Background(), &ListAssociatedContactsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8226,7 +11136,11 @@ func TestCheckResponseSnapshot_ListAttachedFilesConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachedFilesConfigurations(context.Background(), &ListAttachedFilesConfigurationsInput{})
+	got, err := svc.ListAttachedFilesConfigurations(context.Background(), &ListAttachedFilesConfigurationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8265,7 +11179,11 @@ func TestCheckResponseSnapshot_ListAuthenticationProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAuthenticationProfiles(context.Background(), &ListAuthenticationProfilesInput{})
+	got, err := svc.ListAuthenticationProfiles(context.Background(), &ListAuthenticationProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8306,7 +11224,12 @@ func TestCheckResponseSnapshot_ListBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBots(context.Background(), &ListBotsInput{})
+	got, err := svc.ListBots(context.Background(), &ListBotsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		LexVersion: types.LexVersion("V1"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8341,7 +11264,12 @@ func TestCheckResponseSnapshot_ListChildHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChildHoursOfOperations(context.Background(), &ListChildHoursOfOperationsInput{})
+	got, err := svc.ListChildHoursOfOperations(context.Background(), &ListChildHoursOfOperationsInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8428,7 +11356,11 @@ func TestCheckResponseSnapshot_ListContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactEvaluations(context.Background(), &ListContactEvaluationsInput{})
+	got, err := svc.ListContactEvaluations(context.Background(), &ListContactEvaluationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8467,7 +11399,12 @@ func TestCheckResponseSnapshot_ListContactFlowModuleAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactFlowModuleAliases(context.Background(), &ListContactFlowModuleAliasesInput{})
+	got, err := svc.ListContactFlowModuleAliases(context.Background(), &ListContactFlowModuleAliasesInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8500,7 +11437,12 @@ func TestCheckResponseSnapshot_ListContactFlowModuleVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactFlowModuleVersions(context.Background(), &ListContactFlowModuleVersionsInput{})
+	got, err := svc.ListContactFlowModuleVersions(context.Background(), &ListContactFlowModuleVersionsInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8535,7 +11477,12 @@ func TestCheckResponseSnapshot_ListContactFlowModules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactFlowModules(context.Background(), &ListContactFlowModulesInput{})
+	got, err := svc.ListContactFlowModules(context.Background(), &ListContactFlowModulesInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		ContactFlowModuleState: types.ContactFlowModuleState("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8568,7 +11515,12 @@ func TestCheckResponseSnapshot_ListContactFlowVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactFlowVersions(context.Background(), &ListContactFlowVersionsInput{})
+	got, err := svc.ListContactFlowVersions(context.Background(), &ListContactFlowVersionsInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8607,7 +11559,15 @@ func TestCheckResponseSnapshot_ListContactFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactFlows(context.Background(), &ListContactFlowsInput{})
+	got, err := svc.ListContactFlows(context.Background(), &ListContactFlowsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactFlowTypes: []types.ContactFlowType{
+			types.ContactFlowType("CONTACT_FLOW"),
+			types.ContactFlowType("CONTACT_FLOW"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8642,7 +11602,15 @@ func TestCheckResponseSnapshot_ListContactReferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactReferences(context.Background(), &ListContactReferencesInput{})
+	got, err := svc.ListContactReferences(context.Background(), &ListContactReferencesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		ReferenceTypes: []types.ReferenceType{
+			types.ReferenceType("URL"),
+			types.ReferenceType("URL"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8739,7 +11707,16 @@ func TestCheckResponseSnapshot_ListDataTableAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTableAttributes(context.Background(), &ListDataTableAttributesInput{})
+	got, err := svc.ListDataTableAttributes(context.Background(), &ListDataTableAttributesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		AttributeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8796,7 +11773,32 @@ func TestCheckResponseSnapshot_ListDataTablePrimaryValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTablePrimaryValues(context.Background(), &ListDataTablePrimaryValuesInput{})
+	got, err := svc.ListDataTablePrimaryValues(context.Background(), &ListDataTablePrimaryValuesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		RecordIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PrimaryAttributeValues: []types.PrimaryAttributeValueFilter{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8873,7 +11875,32 @@ func TestCheckResponseSnapshot_ListDataTableValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTableValues(context.Background(), &ListDataTableValuesInput{})
+	got, err := svc.ListDataTableValues(context.Background(), &ListDataTableValuesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		RecordIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PrimaryAttributeValues: []types.PrimaryAttributeValueFilter{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8910,7 +11937,11 @@ func TestCheckResponseSnapshot_ListDataTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTables(context.Background(), &ListDataTablesInput{})
+	got, err := svc.ListDataTables(context.Background(), &ListDataTablesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8945,7 +11976,12 @@ func TestCheckResponseSnapshot_ListDefaultVocabularies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDefaultVocabularies(context.Background(), &ListDefaultVocabulariesInput{})
+	got, err := svc.ListDefaultVocabularies(context.Background(), &ListDefaultVocabulariesInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		LanguageCode: types.VocabularyLanguageCode("ar-AE"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8974,7 +12010,13 @@ func TestCheckResponseSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntitySecurityProfiles(context.Background(), &ListEntitySecurityProfilesInput{})
+	got, err := svc.ListEntitySecurityProfiles(context.Background(), &ListEntitySecurityProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EntityType: types.EntityType("USER"),
+		EntityArn:  ptr.String("__EntityArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9019,7 +12061,12 @@ func TestCheckResponseSnapshot_ListEvaluationFormVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEvaluationFormVersions(context.Background(), &ListEvaluationFormVersionsInput{})
+	got, err := svc.ListEvaluationFormVersions(context.Background(), &ListEvaluationFormVersionsInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		EvaluationFormId: ptr.String("__EvaluationFormId__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9068,7 +12115,11 @@ func TestCheckResponseSnapshot_ListEvaluationForms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEvaluationForms(context.Background(), &ListEvaluationFormsInput{})
+	got, err := svc.ListEvaluationForms(context.Background(), &ListEvaluationFormsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9101,7 +12152,12 @@ func TestCheckResponseSnapshot_ListFlowAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowAssociations(context.Background(), &ListFlowAssociationsInput{})
+	got, err := svc.ListFlowAssociations(context.Background(), &ListFlowAssociationsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: types.ListFlowAssociationResourceType("WHATSAPP_MESSAGING_PHONE_NUMBER"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9230,7 +12286,12 @@ func TestCheckResponseSnapshot_ListHoursOfOperationOverrides(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHoursOfOperationOverrides(context.Background(), &ListHoursOfOperationOverridesInput{})
+	got, err := svc.ListHoursOfOperationOverrides(context.Background(), &ListHoursOfOperationOverridesInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9267,7 +12328,11 @@ func TestCheckResponseSnapshot_ListHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHoursOfOperations(context.Background(), &ListHoursOfOperationsInput{})
+	got, err := svc.ListHoursOfOperations(context.Background(), &ListHoursOfOperationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9298,7 +12363,11 @@ func TestCheckResponseSnapshot_ListInstanceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceAttributes(context.Background(), &ListInstanceAttributesInput{})
+	got, err := svc.ListInstanceAttributes(context.Background(), &ListInstanceAttributesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9373,7 +12442,12 @@ func TestCheckResponseSnapshot_ListInstanceStorageConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceStorageConfigs(context.Background(), &ListInstanceStorageConfigsInput{})
+	got, err := svc.ListInstanceStorageConfigs(context.Background(), &ListInstanceStorageConfigsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: types.InstanceStorageResourceType("CHAT_TRANSCRIPTS"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9420,7 +12494,10 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9463,7 +12540,13 @@ func TestCheckResponseSnapshot_ListIntegrationAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntegrationAssociations(context.Background(), &ListIntegrationAssociationsInput{})
+	got, err := svc.ListIntegrationAssociations(context.Background(), &ListIntegrationAssociationsInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		IntegrationType: types.IntegrationType("EVENT"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		IntegrationArn:  ptr.String("__IntegrationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9488,7 +12571,11 @@ func TestCheckResponseSnapshot_ListLambdaFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLambdaFunctions(context.Background(), &ListLambdaFunctionsInput{})
+	got, err := svc.ListLambdaFunctions(context.Background(), &ListLambdaFunctionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9519,7 +12606,11 @@ func TestCheckResponseSnapshot_ListLexBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLexBots(context.Background(), &ListLexBotsInput{})
+	got, err := svc.ListLexBots(context.Background(), &ListLexBotsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9580,7 +12671,11 @@ func TestCheckResponseSnapshot_ListNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{})
+	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9617,7 +12712,19 @@ func TestCheckResponseSnapshot_ListPhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{})
+	got, err := svc.ListPhoneNumbers(context.Background(), &ListPhoneNumbersInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		PhoneNumberTypes: []types.PhoneNumberType{
+			types.PhoneNumberType("TOLL_FREE"),
+			types.PhoneNumberType("TOLL_FREE"),
+		},
+		PhoneNumberCountryCodes: []types.PhoneNumberCountryCode{
+			types.PhoneNumberCountryCode("AF"),
+			types.PhoneNumberCountryCode("AF"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9662,7 +12769,21 @@ func TestCheckResponseSnapshot_ListPhoneNumbersV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumbersV2(context.Background(), &ListPhoneNumbersV2Input{})
+	got, err := svc.ListPhoneNumbersV2(context.Background(), &ListPhoneNumbersV2Input{
+		TargetArn:  ptr.String("__TargetArn__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		PhoneNumberCountryCodes: []types.PhoneNumberCountryCode{
+			types.PhoneNumberCountryCode("AF"),
+			types.PhoneNumberCountryCode("AF"),
+		},
+		PhoneNumberTypes: []types.PhoneNumberType{
+			types.PhoneNumberType("TOLL_FREE"),
+			types.PhoneNumberType("TOLL_FREE"),
+		},
+		PhoneNumberPrefix: ptr.String("__PhoneNumberPrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9695,7 +12816,11 @@ func TestCheckResponseSnapshot_ListPredefinedAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPredefinedAttributes(context.Background(), &ListPredefinedAttributesInput{})
+	got, err := svc.ListPredefinedAttributes(context.Background(), &ListPredefinedAttributesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9732,7 +12857,11 @@ func TestCheckResponseSnapshot_ListPrompts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrompts(context.Background(), &ListPromptsInput{})
+	got, err := svc.ListPrompts(context.Background(), &ListPromptsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9767,7 +12896,12 @@ func TestCheckResponseSnapshot_ListQueueEmailAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueEmailAddresses(context.Background(), &ListQueueEmailAddressesInput{})
+	got, err := svc.ListQueueEmailAddresses(context.Background(), &ListQueueEmailAddressesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9808,7 +12942,12 @@ func TestCheckResponseSnapshot_ListQueueQuickConnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueQuickConnects(context.Background(), &ListQueueQuickConnectsInput{})
+	got, err := svc.ListQueueQuickConnects(context.Background(), &ListQueueQuickConnectsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9847,7 +12986,15 @@ func TestCheckResponseSnapshot_ListQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{})
+	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueTypes: []types.QueueType{
+			types.QueueType("STANDARD"),
+			types.QueueType("STANDARD"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9886,7 +13033,15 @@ func TestCheckResponseSnapshot_ListQuickConnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuickConnects(context.Background(), &ListQuickConnectsInput{})
+	got, err := svc.ListQuickConnects(context.Background(), &ListQuickConnectsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		QuickConnectTypes: []types.QuickConnectType{
+			types.QuickConnectType("USER"),
+			types.QuickConnectType("USER"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9963,7 +13118,17 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), &ListRealtimeContactAnalysisSegmentsV2Input{})
+	got, err := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), &ListRealtimeContactAnalysisSegmentsV2Input{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		OutputType: types.RealTimeContactAnalysisOutputType("Raw"),
+		SegmentTypes: []types.RealTimeContactAnalysisSegmentType{
+			types.RealTimeContactAnalysisSegmentType("Transcript"),
+			types.RealTimeContactAnalysisSegmentType("Transcript"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10000,7 +13165,12 @@ func TestCheckResponseSnapshot_ListRoutingProfileManualAssignmentQueues(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingProfileManualAssignmentQueues(context.Background(), &ListRoutingProfileManualAssignmentQueuesInput{})
+	got, err := svc.ListRoutingProfileManualAssignmentQueues(context.Background(), &ListRoutingProfileManualAssignmentQueuesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10041,7 +13211,12 @@ func TestCheckResponseSnapshot_ListRoutingProfileQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingProfileQueues(context.Background(), &ListRoutingProfileQueuesInput{})
+	got, err := svc.ListRoutingProfileQueues(context.Background(), &ListRoutingProfileQueuesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10078,7 +13253,11 @@ func TestCheckResponseSnapshot_ListRoutingProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingProfiles(context.Background(), &ListRoutingProfilesInput{})
+	got, err := svc.ListRoutingProfiles(context.Background(), &ListRoutingProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10143,7 +13322,13 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		PublishStatus:   types.RulePublishStatus("DRAFT"),
+		EventSourceName: types.EventSourceName("OnPostCallAnalysisAvailable"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10176,7 +13361,11 @@ func TestCheckResponseSnapshot_ListSecurityKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityKeys(context.Background(), &ListSecurityKeysInput{})
+	got, err := svc.ListSecurityKeys(context.Background(), &ListSecurityKeysInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10217,7 +13406,12 @@ func TestCheckResponseSnapshot_ListSecurityProfileApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityProfileApplications(context.Background(), &ListSecurityProfileApplicationsInput{})
+	got, err := svc.ListSecurityProfileApplications(context.Background(), &ListSecurityProfileApplicationsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10250,7 +13444,12 @@ func TestCheckResponseSnapshot_ListSecurityProfileFlowModules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityProfileFlowModules(context.Background(), &ListSecurityProfileFlowModulesInput{})
+	got, err := svc.ListSecurityProfileFlowModules(context.Background(), &ListSecurityProfileFlowModulesInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10277,7 +13476,12 @@ func TestCheckResponseSnapshot_ListSecurityProfilePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityProfilePermissions(context.Background(), &ListSecurityProfilePermissionsInput{})
+	got, err := svc.ListSecurityProfilePermissions(context.Background(), &ListSecurityProfilePermissionsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10314,7 +13518,11 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityProfiles(context.Background(), &ListSecurityProfilesInput{})
+	got, err := svc.ListSecurityProfiles(context.Background(), &ListSecurityProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10337,7 +13545,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10378,7 +13588,13 @@ func TestCheckResponseSnapshot_ListTaskTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaskTemplates(context.Background(), &ListTaskTemplatesInput{})
+	got, err := svc.ListTaskTemplates(context.Background(), &ListTaskTemplatesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.TaskTemplateStatus("ACTIVE"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10413,7 +13629,14 @@ func TestCheckResponseSnapshot_ListTestCaseExecutionRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestCaseExecutionRecords(context.Background(), &ListTestCaseExecutionRecordsInput{})
+	got, err := svc.ListTestCaseExecutionRecords(context.Background(), &ListTestCaseExecutionRecordsInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		TestCaseId:          ptr.String("__TestCaseId__"),
+		TestCaseExecutionId: ptr.String("__TestCaseExecutionId__"),
+		Status:              types.TestCaseExecutionStatus("INITIATED"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10456,7 +13679,16 @@ func TestCheckResponseSnapshot_ListTestCaseExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestCaseExecutions(context.Background(), &ListTestCaseExecutionsInput{})
+	got, err := svc.ListTestCaseExecutions(context.Background(), &ListTestCaseExecutionsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		TestCaseId:   ptr.String("__TestCaseId__"),
+		TestCaseName: ptr.String("__TestCaseName__"),
+		StartTime:    ptr.Int64(1),
+		EndTime:      ptr.Int64(1),
+		Status:       types.TestCaseExecutionStatus("INITIATED"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10495,7 +13727,11 @@ func TestCheckResponseSnapshot_ListTestCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestCases(context.Background(), &ListTestCasesInput{})
+	got, err := svc.ListTestCases(context.Background(), &ListTestCasesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10524,7 +13760,11 @@ func TestCheckResponseSnapshot_ListTrafficDistributionGroupUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficDistributionGroupUsers(context.Background(), &ListTrafficDistributionGroupUsersInput{})
+	got, err := svc.ListTrafficDistributionGroupUsers(context.Background(), &ListTrafficDistributionGroupUsersInput{
+		TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10563,7 +13803,11 @@ func TestCheckResponseSnapshot_ListTrafficDistributionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrafficDistributionGroups(context.Background(), &ListTrafficDistributionGroupsInput{})
+	got, err := svc.ListTrafficDistributionGroups(context.Background(), &ListTrafficDistributionGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10596,7 +13840,12 @@ func TestCheckResponseSnapshot_ListUseCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUseCases(context.Background(), &ListUseCasesInput{})
+	got, err := svc.ListUseCases(context.Background(), &ListUseCasesInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		IntegrationAssociationId: ptr.String("__IntegrationAssociationId__"),
+		NextToken:                ptr.String("__NextToken__"),
+		MaxResults:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10633,7 +13882,11 @@ func TestCheckResponseSnapshot_ListUserHierarchyGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserHierarchyGroups(context.Background(), &ListUserHierarchyGroupsInput{})
+	got, err := svc.ListUserHierarchyGroups(context.Background(), &ListUserHierarchyGroupsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10682,7 +13935,12 @@ func TestCheckResponseSnapshot_ListUserNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserNotifications(context.Background(), &ListUserNotificationsInput{})
+	got, err := svc.ListUserNotifications(context.Background(), &ListUserNotificationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		UserId:     ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10717,7 +13975,12 @@ func TestCheckResponseSnapshot_ListUserProficiencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserProficiencies(context.Background(), &ListUserProficienciesInput{})
+	got, err := svc.ListUserProficiencies(context.Background(), &ListUserProficienciesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		UserId:     ptr.String("__UserId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10754,7 +14017,11 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10795,7 +14062,12 @@ func TestCheckResponseSnapshot_ListViewVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListViewVersions(context.Background(), &ListViewVersionsInput{})
+	got, err := svc.ListViewVersions(context.Background(), &ListViewVersionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ViewId:     ptr.String("__ViewId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10834,7 +14106,12 @@ func TestCheckResponseSnapshot_ListViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListViews(context.Background(), &ListViewsInput{})
+	got, err := svc.ListViews(context.Background(), &ListViewsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Type:       types.ViewType("CUSTOMER_MANAGED"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10864,7 +14141,10 @@ func TestCheckResponseSnapshot_ListWorkspaceMedia(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaceMedia(context.Background(), &ListWorkspaceMediaInput{})
+	got, err := svc.ListWorkspaceMedia(context.Background(), &ListWorkspaceMediaInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10899,7 +14179,12 @@ func TestCheckResponseSnapshot_ListWorkspacePages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspacePages(context.Background(), &ListWorkspacePagesInput{})
+	got, err := svc.ListWorkspacePages(context.Background(), &ListWorkspacePagesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10936,7 +14221,11 @@ func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10958,7 +14247,16 @@ func TestCheckResponseSnapshot_MonitorContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MonitorContact(context.Background(), &MonitorContactInput{})
+	got, err := svc.MonitorContact(context.Background(), &MonitorContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		UserId:     ptr.String("__UserId__"),
+		AllowedMonitorCapabilities: []types.MonitorCapability{
+			types.MonitorCapability("SILENT_MONITOR"),
+			types.MonitorCapability("SILENT_MONITOR"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10977,7 +14275,11 @@ func TestCheckResponseSnapshot_PauseContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PauseContact(context.Background(), &PauseContactInput{})
+	got, err := svc.PauseContact(context.Background(), &PauseContactInput{
+		ContactId:     ptr.String("__ContactId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10996,7 +14298,11 @@ func TestCheckResponseSnapshot_PutUserStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutUserStatus(context.Background(), &PutUserStatusInput{})
+	got, err := svc.PutUserStatus(context.Background(), &PutUserStatusInput{
+		UserId:        ptr.String("__UserId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		AgentStatusId: ptr.String("__AgentStatusId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11015,7 +14321,10 @@ func TestCheckResponseSnapshot_ReleasePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReleasePhoneNumber(context.Background(), &ReleasePhoneNumberInput{})
+	got, err := svc.ReleasePhoneNumber(context.Background(), &ReleasePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11037,7 +14346,12 @@ func TestCheckResponseSnapshot_ReplicateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReplicateInstance(context.Background(), &ReplicateInstanceInput{})
+	got, err := svc.ReplicateInstance(context.Background(), &ReplicateInstanceInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		ReplicaAlias:  ptr.String("__ReplicaAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11056,7 +14370,11 @@ func TestCheckResponseSnapshot_ResumeContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeContact(context.Background(), &ResumeContactInput{})
+	got, err := svc.ResumeContact(context.Background(), &ResumeContactInput{
+		ContactId:     ptr.String("__ContactId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11075,7 +14393,12 @@ func TestCheckResponseSnapshot_ResumeContactRecording(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeContactRecording(context.Background(), &ResumeContactRecordingInput{})
+	got, err := svc.ResumeContactRecording(context.Background(), &ResumeContactRecordingInput{
+		InstanceId:           ptr.String("__InstanceId__"),
+		ContactId:            ptr.String("__ContactId__"),
+		InitialContactId:     ptr.String("__InitialContactId__"),
+		ContactRecordingType: types.ContactRecordingType("AGENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11127,7 +14450,72 @@ func TestCheckResponseSnapshot_SearchAgentStatuses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAgentStatuses(context.Background(), &SearchAgentStatusesInput{})
+	got, err := svc.SearchAgentStatuses(context.Background(), &SearchAgentStatusesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.AgentStatusSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.AgentStatusSearchCriteria{
+			OrConditions: []types.AgentStatusSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.AgentStatusSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11160,7 +14548,15 @@ func TestCheckResponseSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{})
+	got, err := svc.SearchAvailablePhoneNumbers(context.Background(), &SearchAvailablePhoneNumbersInput{
+		TargetArn:              ptr.String("__TargetArn__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		PhoneNumberCountryCode: types.PhoneNumberCountryCode("AF"),
+		PhoneNumberType:        types.PhoneNumberType("TOLL_FREE"),
+		PhoneNumberPrefix:      ptr.String("__PhoneNumberPrefix__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11254,7 +14650,193 @@ func TestCheckResponseSnapshot_SearchContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContactEvaluations(context.Background(), &SearchContactEvaluationsInput{})
+	got, err := svc.SearchContactEvaluations(context.Background(), &SearchContactEvaluationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.EvaluationSearchCriteria{
+			OrConditions: []types.EvaluationSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.EvaluationSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			NumberCondition: &types.NumberCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				MinValue:       ptr.Int32(1),
+				MaxValue:       ptr.Int32(1),
+				ComparisonType: types.NumberComparisonType("GREATER_OR_EQUAL"),
+			},
+			BooleanCondition: &types.BooleanCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				ComparisonType: types.BooleanComparisonType("IS_TRUE"),
+			},
+			DateTimeCondition: &types.DateTimeCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				MinValue:       ptr.String("__MinValue__"),
+				MaxValue:       ptr.String("__MaxValue__"),
+				ComparisonType: types.DateTimeComparisonType("GREATER_THAN"),
+			},
+			DecimalCondition: &types.DecimalCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				MinValue:       ptr.Float64(1.0),
+				MaxValue:       ptr.Float64(1.0),
+				ComparisonType: types.DecimalComparisonType("GREATER_OR_EQUAL"),
+			},
+		},
+		SearchFilter: &types.EvaluationSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+			ContactEvaluationAttributeFilter: &types.ContactEvaluationAttributeFilter{
+				OrConditions: []types.ContactEvaluationAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						AttributeConditions: []types.ContactEvaluationAttributeCondition{
+							{
+								AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+								AttributeValue: &types.ContactEvaluationAttributeValue{
+									StringValue: ptr.String("__StringValue__"),
+								},
+								ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+							},
+							{
+								AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+								AttributeValue: &types.ContactEvaluationAttributeValue{
+									StringValue: ptr.String("__StringValue__"),
+								},
+								ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						AttributeConditions: []types.ContactEvaluationAttributeCondition{
+							{
+								AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+								AttributeValue: &types.ContactEvaluationAttributeValue{
+									StringValue: ptr.String("__StringValue__"),
+								},
+								ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+							},
+							{
+								AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+								AttributeValue: &types.ContactEvaluationAttributeValue{
+									StringValue: ptr.String("__StringValue__"),
+								},
+								ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.ContactEvaluationAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					AttributeConditions: []types.ContactEvaluationAttributeCondition{
+						{
+							AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+							AttributeValue: &types.ContactEvaluationAttributeValue{
+								StringValue: ptr.String("__StringValue__"),
+							},
+							ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+						},
+						{
+							AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+							AttributeValue: &types.ContactEvaluationAttributeValue{
+								StringValue: ptr.String("__StringValue__"),
+							},
+							ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+				ContactEvaluationAttributeCondition: &types.ContactEvaluationAttributeCondition{
+					AttributeKey: types.ContactEvaluationAttributeKey("ContactAgentId"),
+					AttributeValue: &types.ContactEvaluationAttributeValue{
+						StringValue: ptr.String("__StringValue__"),
+					},
+					ComparisonType: types.ContactEvaluationAttributeComparisonType("EXACT"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11316,7 +14898,68 @@ func TestCheckResponseSnapshot_SearchContactFlowModules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContactFlowModules(context.Background(), &SearchContactFlowModulesInput{})
+	got, err := svc.SearchContactFlowModules(context.Background(), &SearchContactFlowModulesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.ContactFlowModuleSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.ContactFlowModuleSearchCriteria{
+			OrConditions: []types.ContactFlowModuleSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.ContactFlowModuleSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			StateCondition:  types.ContactFlowModuleState("ACTIVE"),
+			StatusCondition: types.ContactFlowModuleStatus("PUBLISHED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11376,7 +15019,125 @@ func TestCheckResponseSnapshot_SearchContactFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContactFlows(context.Background(), &SearchContactFlowsInput{})
+	got, err := svc.SearchContactFlows(context.Background(), &SearchContactFlowsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.ContactFlowSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+			FlowAttributeFilter: &types.ContactFlowAttributeFilter{
+				OrConditions: []types.ContactFlowAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						ContactFlowTypeCondition: &types.ContactFlowTypeCondition{
+							ContactFlowType: types.ContactFlowType("CONTACT_FLOW"),
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						ContactFlowTypeCondition: &types.ContactFlowTypeCondition{
+							ContactFlowType: types.ContactFlowType("CONTACT_FLOW"),
+						},
+					},
+				},
+				AndCondition: &types.ContactFlowAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					ContactFlowTypeCondition: &types.ContactFlowTypeCondition{
+						ContactFlowType: types.ContactFlowType("CONTACT_FLOW"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+				ContactFlowTypeCondition: &types.ContactFlowTypeCondition{
+					ContactFlowType: types.ContactFlowType("CONTACT_FLOW"),
+				},
+			},
+		},
+		SearchCriteria: &types.ContactFlowSearchCriteria{
+			OrConditions: []types.ContactFlowSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.ContactFlowSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			TypeCondition:   types.ContactFlowType("CONTACT_FLOW"),
+			StateCondition:  types.ContactFlowState("ACTIVE"),
+			StatusCondition: types.ContactFlowStatus("PUBLISHED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11742,7 +15503,235 @@ func TestCheckResponseSnapshot_SearchContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContacts(context.Background(), &SearchContactsInput{})
+	got, err := svc.SearchContacts(context.Background(), &SearchContactsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		TimeRange: &types.SearchContactsTimeRange{
+			Type:      types.SearchContactsTimeRangeType("INITIATION_TIMESTAMP"),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SearchCriteria: &types.SearchCriteria{
+			Name: &types.NameCriteria{
+				SearchText: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+			},
+			AgentIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AgentHierarchyGroups: &types.AgentHierarchyGroups{
+				L1Ids: []string{
+					"__Member__",
+					"__Member__",
+				},
+				L2Ids: []string{
+					"__Member__",
+					"__Member__",
+				},
+				L3Ids: []string{
+					"__Member__",
+					"__Member__",
+				},
+				L4Ids: []string{
+					"__Member__",
+					"__Member__",
+				},
+				L5Ids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Channels: []types.Channel{
+				types.Channel("VOICE"),
+				types.Channel("VOICE"),
+			},
+			ContactAnalysis: &types.ContactAnalysis{
+				Transcript: &types.Transcript{
+					Criteria: []types.TranscriptCriteria{
+						{
+							ParticipantRole: types.ParticipantRole("AGENT"),
+							SearchText: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+						},
+						{
+							ParticipantRole: types.ParticipantRole("AGENT"),
+							SearchText: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+						},
+					},
+					MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+				},
+			},
+			InitiationMethods: []types.ContactInitiationMethod{
+				types.ContactInitiationMethod("INBOUND"),
+				types.ContactInitiationMethod("INBOUND"),
+			},
+			QueueIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoutingCriteria: &types.SearchableRoutingCriteria{
+				Steps: []types.SearchableRoutingCriteriaStep{
+					{
+						AgentCriteria: &types.SearchableAgentCriteriaStep{
+							AgentIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+						},
+					},
+					{
+						AgentCriteria: &types.SearchableAgentCriteriaStep{
+							AgentIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+						},
+					},
+				},
+			},
+			AdditionalTimeRange: &types.SearchContactsAdditionalTimeRange{
+				Criteria: []types.SearchContactsAdditionalTimeRangeCriteria{
+					{
+						TimeRange: &types.SearchContactsTimeRange{
+							Type:      types.SearchContactsTimeRangeType("INITIATION_TIMESTAMP"),
+							StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						TimestampCondition: &types.SearchContactsTimestampCondition{
+							Type:          types.SearchContactsTimeRangeType("INITIATION_TIMESTAMP"),
+							ConditionType: types.SearchContactsTimeRangeConditionType("NOT_EXISTS"),
+						},
+					},
+					{
+						TimeRange: &types.SearchContactsTimeRange{
+							Type:      types.SearchContactsTimeRangeType("INITIATION_TIMESTAMP"),
+							StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						TimestampCondition: &types.SearchContactsTimestampCondition{
+							Type:          types.SearchContactsTimeRangeType("INITIATION_TIMESTAMP"),
+							ConditionType: types.SearchContactsTimeRangeConditionType("NOT_EXISTS"),
+						},
+					},
+				},
+				MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+			},
+			SearchableContactAttributes: &types.SearchableContactAttributes{
+				Criteria: []types.SearchableContactAttributesCriteria{
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+			},
+			SearchableSegmentAttributes: &types.SearchableSegmentAttributes{
+				Criteria: []types.SearchableSegmentAttributesCriteria{
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MatchType: types.SearchContactsMatchType("MATCH_ALL"),
+			},
+			ActiveRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ContactTags: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+			AiAgents: &types.AiAgentsCriteria{
+				Criteria: []types.AiAgentSearchCriteria{
+					{
+						Id:               ptr.String("__Id__"),
+						VersionNumber:    ptr.Int32(1),
+						AiAgentEscalated: ptr.Bool(true),
+						AiUseCase:        types.AiUseCase("AgentAssistance"),
+					},
+					{
+						Id:               ptr.String("__Id__"),
+						VersionNumber:    ptr.Int32(1),
+						AiAgentEscalated: ptr.Bool(true),
+						AiUseCase:        types.AiUseCase("AgentAssistance"),
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.Sort{
+			FieldName: types.SortableFieldName("INITIATION_TIMESTAMP"),
+			Order:     types.SortOrder("ASCENDING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11812,7 +15801,72 @@ func TestCheckResponseSnapshot_SearchDataTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchDataTables(context.Background(), &SearchDataTablesInput{})
+	got, err := svc.SearchDataTables(context.Background(), &SearchDataTablesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.DataTableSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.DataTableSearchCriteria{
+			OrConditions: []types.DataTableSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.DataTableSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11866,7 +15920,66 @@ func TestCheckResponseSnapshot_SearchEmailAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchEmailAddresses(context.Background(), &SearchEmailAddressesInput{})
+	got, err := svc.SearchEmailAddresses(context.Background(), &SearchEmailAddressesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SearchCriteria: &types.EmailAddressSearchCriteria{
+			OrConditions: []types.EmailAddressSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.EmailAddressSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+		SearchFilter: &types.EmailAddressSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11932,7 +16045,88 @@ func TestCheckResponseSnapshot_SearchEvaluationForms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchEvaluationForms(context.Background(), &SearchEvaluationFormsInput{})
+	got, err := svc.SearchEvaluationForms(context.Background(), &SearchEvaluationFormsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.EvaluationFormSearchCriteria{
+			OrConditions: []types.EvaluationFormSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.EvaluationFormSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			NumberCondition: &types.NumberCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				MinValue:       ptr.Int32(1),
+				MaxValue:       ptr.Int32(1),
+				ComparisonType: types.NumberComparisonType("GREATER_OR_EQUAL"),
+			},
+			BooleanCondition: &types.BooleanCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				ComparisonType: types.BooleanComparisonType("IS_TRUE"),
+			},
+			DateTimeCondition: &types.DateTimeCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				MinValue:       ptr.String("__MinValue__"),
+				MaxValue:       ptr.String("__MaxValue__"),
+				ComparisonType: types.DateTimeComparisonType("GREATER_THAN"),
+			},
+		},
+		SearchFilter: &types.EvaluationFormSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12060,7 +16254,71 @@ func TestCheckResponseSnapshot_SearchHoursOfOperationOverrides(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchHoursOfOperationOverrides(context.Background(), &SearchHoursOfOperationOverridesInput{})
+	got, err := svc.SearchHoursOfOperationOverrides(context.Background(), &SearchHoursOfOperationOverridesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.HoursOfOperationSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.HoursOfOperationOverrideSearchCriteria{
+			OrConditions: []types.HoursOfOperationOverrideSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.HoursOfOperationOverrideSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			DateCondition: &types.DateCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.DateComparisonType("GREATER_THAN"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12180,7 +16438,66 @@ func TestCheckResponseSnapshot_SearchHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchHoursOfOperations(context.Background(), &SearchHoursOfOperationsInput{})
+	got, err := svc.SearchHoursOfOperations(context.Background(), &SearchHoursOfOperationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.HoursOfOperationSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.HoursOfOperationSearchCriteria{
+			OrConditions: []types.HoursOfOperationSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.HoursOfOperationSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12244,7 +16561,72 @@ func TestCheckResponseSnapshot_SearchNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchNotifications(context.Background(), &SearchNotificationsInput{})
+	got, err := svc.SearchNotifications(context.Background(), &SearchNotificationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.NotificationSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.NotificationSearchCriteria{
+			OrConditions: []types.NotificationSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.NotificationSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12306,7 +16688,26 @@ func TestCheckResponseSnapshot_SearchPredefinedAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchPredefinedAttributes(context.Background(), &SearchPredefinedAttributesInput{})
+	got, err := svc.SearchPredefinedAttributes(context.Background(), &SearchPredefinedAttributesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.PredefinedAttributeSearchCriteria{
+			OrConditions: []types.PredefinedAttributeSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.PredefinedAttributeSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12352,7 +16753,66 @@ func TestCheckResponseSnapshot_SearchPrompts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchPrompts(context.Background(), &SearchPromptsInput{})
+	got, err := svc.SearchPrompts(context.Background(), &SearchPromptsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.PromptSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.PromptSearchCriteria{
+			OrConditions: []types.PromptSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.PromptSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12420,7 +16880,67 @@ func TestCheckResponseSnapshot_SearchQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchQueues(context.Background(), &SearchQueuesInput{})
+	got, err := svc.SearchQueues(context.Background(), &SearchQueuesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.QueueSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.QueueSearchCriteria{
+			OrConditions: []types.QueueSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.QueueSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			QueueTypeCondition: types.SearchableQueueType("STANDARD"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12500,7 +17020,66 @@ func TestCheckResponseSnapshot_SearchQuickConnects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchQuickConnects(context.Background(), &SearchQuickConnectsInput{})
+	got, err := svc.SearchQuickConnects(context.Background(), &SearchQuickConnectsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.QuickConnectSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.QuickConnectSearchCriteria{
+			OrConditions: []types.QuickConnectSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.QuickConnectSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12531,7 +17110,23 @@ func TestCheckResponseSnapshot_SearchResourceTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchResourceTags(context.Background(), &SearchResourceTagsInput{})
+	got, err := svc.SearchResourceTags(context.Background(), &SearchResourceTagsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.ResourceTagsSearchCriteria{
+			TagSearchCondition: &types.TagSearchCondition{
+				TagKey:                 ptr.String("__TagKey__"),
+				TagValue:               ptr.String("__TagValue__"),
+				TagKeyComparisonType:   types.StringComparisonType("STARTS_WITH"),
+				TagValueComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12639,7 +17234,66 @@ func TestCheckResponseSnapshot_SearchRoutingProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRoutingProfiles(context.Background(), &SearchRoutingProfilesInput{})
+	got, err := svc.SearchRoutingProfiles(context.Background(), &SearchRoutingProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.RoutingProfileSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.RoutingProfileSearchCriteria{
+			OrConditions: []types.RoutingProfileSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.RoutingProfileSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12719,7 +17373,72 @@ func TestCheckResponseSnapshot_SearchRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRules(context.Background(), &SearchRulesInput{})
+	got, err := svc.SearchRules(context.Background(), &SearchRulesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SearchCriteria: &types.RulesSearchCriteria{
+			OrConditions: []types.RulesSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.RulesSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+		SearchFilter: &types.RulesSearchFilter{
+			AttributeFilter: &types.RuleAttributeFilter{
+				OrConditions: []types.RuleAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.RuleAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12763,7 +17482,66 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSecurityProfiles(context.Background(), &SearchSecurityProfilesInput{})
+	got, err := svc.SearchSecurityProfiles(context.Background(), &SearchSecurityProfilesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.SecurityProfileSearchCriteria{
+			OrConditions: []types.SecurityProfileSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.SecurityProfileSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+		SearchFilter: &types.SecurityProfilesSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12839,7 +17617,67 @@ func TestCheckResponseSnapshot_SearchTestCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchTestCases(context.Background(), &SearchTestCasesInput{})
+	got, err := svc.SearchTestCases(context.Background(), &SearchTestCasesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.TestCaseSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.TestCaseSearchCriteria{
+			OrConditions: []types.TestCaseSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.TestCaseSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			StatusCondition: types.TestCaseStatus("PUBLISHED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12959,7 +17797,72 @@ func TestCheckResponseSnapshot_SearchUserHierarchyGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUserHierarchyGroups(context.Background(), &SearchUserHierarchyGroupsInput{})
+	got, err := svc.SearchUserHierarchyGroups(context.Background(), &SearchUserHierarchyGroupsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.UserHierarchyGroupSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.UserHierarchyGroupSearchCriteria{
+			OrConditions: []types.UserHierarchyGroupSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.UserHierarchyGroupSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13163,7 +18066,161 @@ func TestCheckResponseSnapshot_SearchUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{})
+	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.UserSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+			UserAttributeFilter: &types.ControlPlaneUserAttributeFilter{
+				OrConditions: []types.AttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						HierarchyGroupCondition: &types.HierarchyGroupCondition{
+							Value:                   ptr.String("__Value__"),
+							HierarchyGroupMatchType: types.HierarchyGroupMatchType("EXACT"),
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+						HierarchyGroupCondition: &types.HierarchyGroupCondition{
+							Value:                   ptr.String("__Value__"),
+							HierarchyGroupMatchType: types.HierarchyGroupMatchType("EXACT"),
+						},
+					},
+				},
+				AndCondition: &types.AttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					HierarchyGroupCondition: &types.HierarchyGroupCondition{
+						Value:                   ptr.String("__Value__"),
+						HierarchyGroupMatchType: types.HierarchyGroupMatchType("EXACT"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+				HierarchyGroupCondition: &types.HierarchyGroupCondition{
+					Value:                   ptr.String("__Value__"),
+					HierarchyGroupMatchType: types.HierarchyGroupMatchType("EXACT"),
+				},
+			},
+		},
+		SearchCriteria: &types.UserSearchCriteria{
+			OrConditions: []types.UserSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.UserSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			ListCondition: &types.ListCondition{
+				TargetListType: types.TargetListType("PROFICIENCIES"),
+				Conditions: []types.Condition{
+					{
+						StringCondition: &types.StringCondition{
+							FieldName:      ptr.String("__FieldName__"),
+							Value:          ptr.String("__Value__"),
+							ComparisonType: types.StringComparisonType("STARTS_WITH"),
+						},
+						NumberCondition: &types.NumberCondition{
+							FieldName:      ptr.String("__FieldName__"),
+							MinValue:       ptr.Int32(1),
+							MaxValue:       ptr.Int32(1),
+							ComparisonType: types.NumberComparisonType("GREATER_OR_EQUAL"),
+						},
+					},
+					{
+						StringCondition: &types.StringCondition{
+							FieldName:      ptr.String("__FieldName__"),
+							Value:          ptr.String("__Value__"),
+							ComparisonType: types.StringComparisonType("STARTS_WITH"),
+						},
+						NumberCondition: &types.NumberCondition{
+							FieldName:      ptr.String("__FieldName__"),
+							MinValue:       ptr.Int32(1),
+							MaxValue:       ptr.Int32(1),
+							ComparisonType: types.NumberComparisonType("GREATER_OR_EQUAL"),
+						},
+					},
+				},
+			},
+			HierarchyGroupCondition: &types.HierarchyGroupCondition{
+				Value:                   ptr.String("__Value__"),
+				HierarchyGroupMatchType: types.HierarchyGroupMatchType("EXACT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13235,7 +18292,74 @@ func TestCheckResponseSnapshot_SearchViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchViews(context.Background(), &SearchViewsInput{})
+	got, err := svc.SearchViews(context.Background(), &SearchViewsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.ViewSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.ViewSearchCriteria{
+			OrConditions: []types.ViewSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.ViewSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			ViewTypeCondition:   types.ViewType("CUSTOMER_MANAGED"),
+			ViewStatusCondition: types.ViewStatus("PUBLISHED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13276,7 +18400,14 @@ func TestCheckResponseSnapshot_SearchVocabularies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchVocabularies(context.Background(), &SearchVocabulariesInput{})
+	got, err := svc.SearchVocabularies(context.Background(), &SearchVocabulariesInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		State:          types.VocabularyState("CREATION_IN_PROGRESS"),
+		NameStartsWith: ptr.String("__NameStartsWith__"),
+		LanguageCode:   types.VocabularyLanguageCode("ar-AE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13316,7 +18447,72 @@ func TestCheckResponseSnapshot_SearchWorkspaceAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchWorkspaceAssociations(context.Background(), &SearchWorkspaceAssociationsInput{})
+	got, err := svc.SearchWorkspaceAssociations(context.Background(), &SearchWorkspaceAssociationsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.WorkspaceAssociationSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.WorkspaceAssociationSearchCriteria{
+			OrConditions: []types.WorkspaceAssociationSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.WorkspaceAssociationSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13364,7 +18560,72 @@ func TestCheckResponseSnapshot_SearchWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchWorkspaces(context.Background(), &SearchWorkspacesInput{})
+	got, err := svc.SearchWorkspaces(context.Background(), &SearchWorkspacesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.WorkspaceSearchFilter{
+			AttributeFilter: &types.ControlPlaneAttributeFilter{
+				OrConditions: []types.CommonAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CommonAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.WorkspaceSearchCriteria{
+			OrConditions: []types.WorkspaceSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.WorkspaceSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13386,7 +18647,31 @@ func TestCheckResponseSnapshot_SendChatIntegrationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendChatIntegrationEvent(context.Background(), &SendChatIntegrationEventInput{})
+	got, err := svc.SendChatIntegrationEvent(context.Background(), &SendChatIntegrationEventInput{
+		SourceId:      ptr.String("__SourceId__"),
+		DestinationId: ptr.String("__DestinationId__"),
+		Subtype:       ptr.String("__Subtype__"),
+		Event: &types.ChatEvent{
+			Type:        types.ChatEventType("DISCONNECT"),
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		NewSessionDetails: &types.NewSessionDetails{
+			SupportedMessagingContentTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ParticipantDetails: &types.ParticipantDetails{
+				DisplayName: ptr.String("__DisplayName__"),
+			},
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			StreamingConfiguration: &types.ChatStreamingConfiguration{
+				StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13405,7 +18690,53 @@ func TestCheckResponseSnapshot_SendOutboundEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendOutboundEmail(context.Background(), &SendOutboundEmailInput{})
+	got, err := svc.SendOutboundEmail(context.Background(), &SendOutboundEmailInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		FromEmailAddress: &types.EmailAddressInfo{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+		},
+		DestinationEmailAddress: &types.EmailAddressInfo{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+		},
+		AdditionalRecipients: &types.OutboundAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
+		EmailMessage: &types.OutboundEmailContent{
+			MessageSourceType: types.OutboundMessageSourceType("TEMPLATE"),
+			TemplatedMessageConfig: &types.TemplatedMessageConfig{
+				KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+				MessageTemplateId: ptr.String("__MessageTemplateId__"),
+				TemplateAttributes: &types.TemplateAttributes{
+					CustomAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					CustomerProfileAttributes: ptr.String("__CustomerProfileAttributes__"),
+				},
+			},
+			RawMessage: &types.OutboundRawMessage{
+				Subject:     ptr.String("__Subject__"),
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+		TrafficType: types.TrafficType("GENERAL"),
+		SourceCampaign: &types.SourceCampaign{
+			CampaignId:        ptr.String("__CampaignId__"),
+			OutboundRequestId: ptr.String("__OutboundRequestId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13424,7 +18755,36 @@ func TestCheckResponseSnapshot_SendOutboundWebNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendOutboundWebNotification(context.Background(), &SendOutboundWebNotificationInput{})
+	got, err := svc.SendOutboundWebNotification(context.Background(), &SendOutboundWebNotificationInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		BrowserId:   ptr.String("__BrowserId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Source: &types.WebNotificationSource{
+			SourceCampaign: &types.SourceCampaign{
+				CampaignId:        ptr.String("__CampaignId__"),
+				OutboundRequestId: ptr.String("__OutboundRequestId__"),
+			},
+		},
+		Destination: &types.WidgetDestination{
+			WidgetId:  ptr.String("__WidgetId__"),
+			ProfileId: ptr.String("__ProfileId__"),
+		},
+		Content: &types.WebNotificationContent{
+			Type:    types.NotificationType("WIDGET_VIEW"),
+			ViewArn: ptr.String("__ViewArn__"),
+			Attributes: &types.ContentAttributes{
+				RecommenderConfig: &types.RecommenderConfig{
+					DomainName:      ptr.String("__DomainName__"),
+					RecommenderName: ptr.String("__RecommenderName__"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13458,7 +18818,21 @@ func TestCheckResponseSnapshot_StartAttachedFileUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAttachedFileUpload(context.Background(), &StartAttachedFileUploadInput{})
+	got, err := svc.StartAttachedFileUpload(context.Background(), &StartAttachedFileUploadInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		InstanceId:            ptr.String("__InstanceId__"),
+		FileName:              ptr.String("__FileName__"),
+		FileSizeInBytes:       ptr.Int64(1),
+		UrlExpiryInSeconds:    ptr.Int32(1),
+		FileUseCaseType:       types.FileUseCaseType("CONTACT_ANALYSIS"),
+		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		CreatedBy: &types.CreatedByInfoMemberConnectUserArn{
+			Value: "__CreatedByInfoMemberConnectUserArn__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13482,7 +18856,53 @@ func TestCheckResponseSnapshot_StartChatContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartChatContact(context.Background(), &StartChatContactInput{})
+	got, err := svc.StartChatContact(context.Background(), &StartChatContactInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		ParticipantConfiguration: &types.ParticipantConfiguration{
+			ResponseMode: types.ResponseMode("INCREMENTAL"),
+		},
+		InitialMessage: &types.ChatMessage{
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		ClientToken:           ptr.String("__ClientToken__"),
+		ChatDurationInMinutes: ptr.Int32(1),
+		SupportedMessagingContentTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PersistentChat: &types.PersistentChat{
+			RehydrationType: types.RehydrationType("ENTIRE_PAST_SESSION"),
+			SourceContactId: ptr.String("__SourceContactId__"),
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		CustomerId: ptr.String("__CustomerId__"),
+		DisconnectOnCustomerExit: []types.DisconnectOnCustomerExitParticipantType{
+			types.DisconnectOnCustomerExitParticipantType("AGENT"),
+			types.DisconnectOnCustomerExitParticipantType("AGENT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13504,7 +18924,41 @@ func TestCheckResponseSnapshot_StartContactConversationalAnalyticsJob(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContactConversationalAnalyticsJob(context.Background(), &StartContactConversationalAnalyticsJobInput{})
+	got, err := svc.StartContactConversationalAnalyticsJob(context.Background(), &StartContactConversationalAnalyticsJobInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		AnalyticsModes: []types.AnalyticsMode{
+			types.AnalyticsMode("PostContact"),
+			types.AnalyticsMode("PostContact"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			LanguageConfiguration: &types.LanguageConfiguration{
+				LanguageLocale: ptr.String("__LanguageLocale__"),
+			},
+			RedactionConfiguration: &types.RedactionConfiguration{
+				Behavior: types.Behavior("Enable"),
+				Policy:   types.Policy("None"),
+				Entities: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaskMode: types.MaskMode("PII"),
+			},
+			SentimentConfiguration: &types.SentimentConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+			SummaryConfiguration: &types.SummaryConfiguration{
+				SummaryModes: []types.SummaryMode{
+					types.SummaryMode("PostContact"),
+					types.SummaryMode("PostContact"),
+				},
+			},
+			RulesConfiguration: &types.RulesConfiguration{
+				Behavior: types.Behavior("Enable"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13526,7 +18980,18 @@ func TestCheckResponseSnapshot_StartContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContactEvaluation(context.Background(), &StartContactEvaluationInput{})
+	got, err := svc.StartContactEvaluation(context.Background(), &StartContactEvaluationInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		ContactId:        ptr.String("__ContactId__"),
+		EvaluationFormId: ptr.String("__EvaluationFormId__"),
+		AutoEvaluationConfiguration: &types.AutoEvaluationConfiguration{
+			Enabled: true,
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13545,7 +19010,12 @@ func TestCheckResponseSnapshot_StartContactMediaProcessing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContactMediaProcessing(context.Background(), &StartContactMediaProcessingInput{})
+	got, err := svc.StartContactMediaProcessing(context.Background(), &StartContactMediaProcessingInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ContactId:    ptr.String("__ContactId__"),
+		ProcessorArn: ptr.String("__ProcessorArn__"),
+		FailureMode:  types.ContactMediaProcessingFailureMode("DELIVER_UNPROCESSED_MESSAGE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13564,7 +19034,15 @@ func TestCheckResponseSnapshot_StartContactRecording(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContactRecording(context.Background(), &StartContactRecordingInput{})
+	got, err := svc.StartContactRecording(context.Background(), &StartContactRecordingInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		ContactId:        ptr.String("__ContactId__"),
+		InitialContactId: ptr.String("__InitialContactId__"),
+		VoiceRecordingConfiguration: &types.VoiceRecordingConfiguration{
+			VoiceRecordingTrack: types.VoiceRecordingTrack("FROM_AGENT"),
+			IvrRecordingTrack:   types.IvrRecordingTrack("ALL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13585,7 +19063,14 @@ func TestCheckResponseSnapshot_StartContactStreaming(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContactStreaming(context.Background(), &StartContactStreamingInput{})
+	got, err := svc.StartContactStreaming(context.Background(), &StartContactStreamingInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13606,7 +19091,88 @@ func TestCheckResponseSnapshot_StartEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEmailContact(context.Background(), &StartEmailContactInput{})
+	got, err := svc.StartEmailContact(context.Background(), &StartEmailContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		FromEmailAddress: &types.EmailAddressInfo{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+		},
+		DestinationEmailAddress: ptr.String("__DestinationEmailAddress__"),
+		Description:             ptr.String("__Description__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		EmailMessage: &types.InboundEmailContent{
+			MessageSourceType: types.InboundMessageSourceType("RAW"),
+			RawMessage: &types.InboundRawMessage{
+				Subject:     ptr.String("__Subject__"),
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+				Headers: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AdditionalRecipients: &types.InboundAdditionalRecipients{
+			ToAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+			CcAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
+		Attachments: []types.EmailAttachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				S3Url:    ptr.String("__S3Url__"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				S3Url:    ptr.String("__S3Url__"),
+			},
+		},
+		ContactFlowId:    ptr.String("__ContactFlowId__"),
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13629,7 +19195,11 @@ func TestCheckResponseSnapshot_StartEvaluationFormValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEvaluationFormValidation(context.Background(), &StartEvaluationFormValidationInput{})
+	got, err := svc.StartEvaluationFormValidation(context.Background(), &StartEvaluationFormValidationInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13650,7 +19220,59 @@ func TestCheckResponseSnapshot_StartOutboundChatContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOutboundChatContact(context.Background(), &StartOutboundChatContactInput{})
+	got, err := svc.StartOutboundChatContact(context.Background(), &StartOutboundChatContactInput{
+		SourceEndpoint: &types.Endpoint{
+			Type:    types.EndpointType("TELEPHONE_NUMBER"),
+			Address: ptr.String("__Address__"),
+		},
+		DestinationEndpoint: &types.Endpoint{
+			Type:    types.EndpointType("TELEPHONE_NUMBER"),
+			Address: ptr.String("__Address__"),
+		},
+		InstanceId: ptr.String("__InstanceId__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ContactFlowId:         ptr.String("__ContactFlowId__"),
+		ChatDurationInMinutes: ptr.Int32(1),
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		InitialSystemMessage: &types.ChatMessage{
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		InitialTemplatedSystemMessage: &types.TemplatedMessageConfig{
+			KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+			MessageTemplateId: ptr.String("__MessageTemplateId__"),
+			TemplateAttributes: &types.TemplateAttributes{
+				CustomAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+				CustomerProfileAttributes: ptr.String("__CustomerProfileAttributes__"),
+			},
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		SupportedMessagingContentTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13671,7 +19293,49 @@ func TestCheckResponseSnapshot_StartOutboundEmailContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOutboundEmailContact(context.Background(), &StartOutboundEmailContactInput{})
+	got, err := svc.StartOutboundEmailContact(context.Background(), &StartOutboundEmailContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		FromEmailAddress: &types.EmailAddressInfo{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+		},
+		DestinationEmailAddress: &types.EmailAddressInfo{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+		},
+		AdditionalRecipients: &types.OutboundAdditionalRecipients{
+			CcEmailAddresses: []types.EmailAddressInfo{
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+				{
+					EmailAddress: ptr.String("__EmailAddress__"),
+					DisplayName:  ptr.String("__DisplayName__"),
+				},
+			},
+		},
+		EmailMessage: &types.OutboundEmailContent{
+			MessageSourceType: types.OutboundMessageSourceType("TEMPLATE"),
+			TemplatedMessageConfig: &types.TemplatedMessageConfig{
+				KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+				MessageTemplateId: ptr.String("__MessageTemplateId__"),
+				TemplateAttributes: &types.TemplateAttributes{
+					CustomAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					CustomerProfileAttributes: ptr.String("__CustomerProfileAttributes__"),
+				},
+			},
+			RawMessage: &types.OutboundRawMessage{
+				Subject:     ptr.String("__Subject__"),
+				Body:        ptr.String("__Body__"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13692,7 +19356,52 @@ func TestCheckResponseSnapshot_StartOutboundVoiceContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{})
+	got, err := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		RelatedContactId:       ptr.String("__RelatedContactId__"),
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		ContactFlowId:          ptr.String("__ContactFlowId__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+		QueueId:                ptr.String("__QueueId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+			EnableAnswerMachineDetection: true,
+			AwaitAnswerMachinePrompt:     true,
+		},
+		CampaignId:  ptr.String("__CampaignId__"),
+		TrafficType: types.TrafficType("GENERAL"),
+		OutboundStrategy: &types.OutboundStrategy{
+			Type: types.OutboundStrategyType("AGENT_FIRST"),
+			Config: &types.OutboundStrategyConfig{
+				AgentFirst: &types.AgentFirst{
+					Preview: &types.Preview{
+						PostAcceptTimeoutConfig: &types.PostAcceptTimeoutConfig{
+							DurationInSeconds: ptr.Int32(1),
+						},
+						AllowedUserActions: []types.AllowedUserAction{
+							types.AllowedUserAction("CALL"),
+							types.AllowedUserAction("CALL"),
+						},
+					},
+				},
+			},
+		},
+		RingTimeoutInSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13711,7 +19420,11 @@ func TestCheckResponseSnapshot_StartScreenSharing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartScreenSharing(context.Background(), &StartScreenSharingInput{})
+	got, err := svc.StartScreenSharing(context.Background(), &StartScreenSharingInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		ContactId:   ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13732,7 +19445,54 @@ func TestCheckResponseSnapshot_StartTaskContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTaskContact(context.Background(), &StartTaskContactInput{})
+	got, err := svc.StartTaskContact(context.Background(), &StartTaskContactInput{
+		InstanceId:        ptr.String("__InstanceId__"),
+		PreviousContactId: ptr.String("__PreviousContactId__"),
+		ContactFlowId:     ptr.String("__ContactFlowId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Name: ptr.String("__Name__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		Description:      ptr.String("__Description__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ScheduledTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TaskTemplateId:   ptr.String("__TaskTemplateId__"),
+		QuickConnectId:   ptr.String("__QuickConnectId__"),
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		Attachments: []types.TaskAttachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				S3Url:    ptr.String("__S3Url__"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				S3Url:    ptr.String("__S3Url__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13755,7 +19515,11 @@ func TestCheckResponseSnapshot_StartTestCaseExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTestCaseExecution(context.Background(), &StartTestCaseExecutionInput{})
+	got, err := svc.StartTestCaseExecution(context.Background(), &StartTestCaseExecutionInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		TestCaseId:  ptr.String("__TestCaseId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13800,7 +19564,38 @@ func TestCheckResponseSnapshot_StartWebRTCContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWebRTCContact(context.Background(), &StartWebRTCContactInput{})
+	got, err := svc.StartWebRTCContact(context.Background(), &StartWebRTCContactInput{
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken:   ptr.String("__ClientToken__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		AllowedCapabilities: &types.AllowedCapabilities{
+			Customer: &types.ParticipantCapabilities{
+				Video:       types.VideoCapability("SEND"),
+				ScreenShare: types.ScreenShareCapability("SEND"),
+			},
+			Agent: &types.ParticipantCapabilities{
+				Video:       types.VideoCapability("SEND"),
+				ScreenShare: types.ScreenShareCapability("SEND"),
+			},
+		},
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13819,7 +19614,13 @@ func TestCheckResponseSnapshot_StopContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopContact(context.Background(), &StopContactInput{})
+	got, err := svc.StopContact(context.Background(), &StopContactInput{
+		ContactId:  ptr.String("__ContactId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		DisconnectReason: &types.DisconnectReason{
+			Code: ptr.String("__Code__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13838,7 +19639,10 @@ func TestCheckResponseSnapshot_StopContactMediaProcessing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopContactMediaProcessing(context.Background(), &StopContactMediaProcessingInput{})
+	got, err := svc.StopContactMediaProcessing(context.Background(), &StopContactMediaProcessingInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13857,7 +19661,12 @@ func TestCheckResponseSnapshot_StopContactRecording(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopContactRecording(context.Background(), &StopContactRecordingInput{})
+	got, err := svc.StopContactRecording(context.Background(), &StopContactRecordingInput{
+		InstanceId:           ptr.String("__InstanceId__"),
+		ContactId:            ptr.String("__ContactId__"),
+		InitialContactId:     ptr.String("__InitialContactId__"),
+		ContactRecordingType: types.ContactRecordingType("AGENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13876,7 +19685,11 @@ func TestCheckResponseSnapshot_StopContactStreaming(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopContactStreaming(context.Background(), &StopContactStreamingInput{})
+	got, err := svc.StopContactStreaming(context.Background(), &StopContactStreamingInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ContactId:   ptr.String("__ContactId__"),
+		StreamingId: ptr.String("__StreamingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13895,7 +19708,12 @@ func TestCheckResponseSnapshot_StopTestCaseExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTestCaseExecution(context.Background(), &StopTestCaseExecutionInput{})
+	got, err := svc.StopTestCaseExecution(context.Background(), &StopTestCaseExecutionInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		TestCaseExecutionId: ptr.String("__TestCaseExecutionId__"),
+		TestCaseId:          ptr.String("__TestCaseId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13917,7 +19735,25 @@ func TestCheckResponseSnapshot_SubmitContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitContactEvaluation(context.Background(), &SubmitContactEvaluationInput{})
+	got, err := svc.SubmitContactEvaluation(context.Background(), &SubmitContactEvaluationInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		EvaluationId: ptr.String("__EvaluationId__"),
+		Answers: map[string]types.EvaluationAnswerInput{
+			"key0": {
+				Value: &types.EvaluationAnswerDataMemberStringValue{
+					Value: "__EvaluationAnswerDataMemberStringValue__",
+				},
+			},
+		},
+		Notes: map[string]types.EvaluationNote{
+			"key0": {
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SubmittedBy: &types.EvaluatorUserUnionMemberConnectUserArn{
+			Value: "__EvaluatorUserUnionMemberConnectUserArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13936,7 +19772,12 @@ func TestCheckResponseSnapshot_SuspendContactRecording(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SuspendContactRecording(context.Background(), &SuspendContactRecordingInput{})
+	got, err := svc.SuspendContactRecording(context.Background(), &SuspendContactRecordingInput{
+		InstanceId:           ptr.String("__InstanceId__"),
+		ContactId:            ptr.String("__ContactId__"),
+		InitialContactId:     ptr.String("__InitialContactId__"),
+		ContactRecordingType: types.ContactRecordingType("AGENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13955,7 +19796,13 @@ func TestCheckResponseSnapshot_TagContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagContact(context.Background(), &TagContactInput{})
+	got, err := svc.TagContact(context.Background(), &TagContactInput{
+		ContactId:  ptr.String("__ContactId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13974,7 +19821,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13996,7 +19848,14 @@ func TestCheckResponseSnapshot_TransferContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransferContact(context.Background(), &TransferContactInput{})
+	got, err := svc.TransferContact(context.Background(), &TransferContactInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactId:     ptr.String("__ContactId__"),
+		QueueId:       ptr.String("__QueueId__"),
+		UserId:        ptr.String("__UserId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14015,7 +19874,14 @@ func TestCheckResponseSnapshot_UntagContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagContact(context.Background(), &UntagContactInput{})
+	got, err := svc.UntagContact(context.Background(), &UntagContactInput{
+		ContactId:  ptr.String("__ContactId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14034,7 +19900,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14053,7 +19925,15 @@ func TestCheckResponseSnapshot_UpdateAgentStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgentStatus(context.Background(), &UpdateAgentStatusInput{})
+	got, err := svc.UpdateAgentStatus(context.Background(), &UpdateAgentStatusInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		AgentStatusId:    ptr.String("__AgentStatusId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		State:            types.AgentStatusState("ENABLED"),
+		DisplayOrder:     ptr.Int32(1),
+		ResetOrderNumber: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14087,7 +19967,21 @@ func TestCheckResponseSnapshot_UpdateAttachedFilesConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAttachedFilesConfiguration(context.Background(), &UpdateAttachedFilesConfigurationInput{})
+	got, err := svc.UpdateAttachedFilesConfiguration(context.Background(), &UpdateAttachedFilesConfigurationInput{
+		InstanceId:              ptr.String("__InstanceId__"),
+		AttachmentScope:         types.AttachmentScope("EMAIL"),
+		MaximumSizeLimitInBytes: ptr.Int64(1),
+		ExtensionConfiguration: &types.ExtensionConfiguration{
+			AllowedExtensions: []types.AllowedExtension{
+				{
+					Extension: ptr.String("__Extension__"),
+				},
+				{
+					Extension: ptr.String("__Extension__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14106,7 +20000,23 @@ func TestCheckResponseSnapshot_UpdateAuthenticationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAuthenticationProfile(context.Background(), &UpdateAuthenticationProfileInput{})
+	got, err := svc.UpdateAuthenticationProfile(context.Background(), &UpdateAuthenticationProfileInput{
+		AuthenticationProfileId: ptr.String("__AuthenticationProfileId__"),
+		InstanceId:              ptr.String("__InstanceId__"),
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		AllowedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlockedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeriodicSessionDuration:          ptr.Int32(1),
+		SessionInactivityDuration:        ptr.Int32(1),
+		SessionInactivityHandlingEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14125,7 +20035,49 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{})
+	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ContactId:   ptr.String("__ContactId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
+		QueueInfo: &types.QueueInfoInput{
+			Id: ptr.String("__Id__"),
+		},
+		UserInfo: &types.UserInfo{
+			UserId: ptr.String("__UserId__"),
+		},
+		CustomerEndpoint: &types.Endpoint{
+			Type:    types.EndpointType("TELEPHONE_NUMBER"),
+			Address: ptr.String("__Address__"),
+		},
+		SystemEndpoint: &types.Endpoint{
+			Type:    types.EndpointType("TELEPHONE_NUMBER"),
+			Address: ptr.String("__Address__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14144,7 +20096,13 @@ func TestCheckResponseSnapshot_UpdateContactAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactAttributes(context.Background(), &UpdateContactAttributesInput{})
+	got, err := svc.UpdateContactAttributes(context.Background(), &UpdateContactAttributesInput{
+		InitialContactId: ptr.String("__InitialContactId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14166,7 +20124,25 @@ func TestCheckResponseSnapshot_UpdateContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactEvaluation(context.Background(), &UpdateContactEvaluationInput{})
+	got, err := svc.UpdateContactEvaluation(context.Background(), &UpdateContactEvaluationInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		EvaluationId: ptr.String("__EvaluationId__"),
+		Answers: map[string]types.EvaluationAnswerInput{
+			"key0": {
+				Value: &types.EvaluationAnswerDataMemberStringValue{
+					Value: "__EvaluationAnswerDataMemberStringValue__",
+				},
+			},
+		},
+		Notes: map[string]types.EvaluationNote{
+			"key0": {
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UpdatedBy: &types.EvaluatorUserUnionMemberConnectUserArn{
+			Value: "__EvaluatorUserUnionMemberConnectUserArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14185,7 +20161,11 @@ func TestCheckResponseSnapshot_UpdateContactFlowContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowContent(context.Background(), &UpdateContactFlowContentInput{})
+	got, err := svc.UpdateContactFlowContent(context.Background(), &UpdateContactFlowContentInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		Content:       ptr.String("__Content__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14204,7 +20184,13 @@ func TestCheckResponseSnapshot_UpdateContactFlowMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowMetadata(context.Background(), &UpdateContactFlowMetadataInput{})
+	got, err := svc.UpdateContactFlowMetadata(context.Background(), &UpdateContactFlowMetadataInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		ContactFlowId:    ptr.String("__ContactFlowId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ContactFlowState: types.ContactFlowState("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14223,7 +20209,14 @@ func TestCheckResponseSnapshot_UpdateContactFlowModuleAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowModuleAlias(context.Background(), &UpdateContactFlowModuleAliasInput{})
+	got, err := svc.UpdateContactFlowModuleAlias(context.Background(), &UpdateContactFlowModuleAliasInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		ContactFlowModuleId:      ptr.String("__ContactFlowModuleId__"),
+		AliasId:                  ptr.String("__AliasId__"),
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		ContactFlowModuleVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14242,7 +20235,12 @@ func TestCheckResponseSnapshot_UpdateContactFlowModuleContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowModuleContent(context.Background(), &UpdateContactFlowModuleContentInput{})
+	got, err := svc.UpdateContactFlowModuleContent(context.Background(), &UpdateContactFlowModuleContentInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		Content:             ptr.String("__Content__"),
+		Settings:            ptr.String("__Settings__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14261,7 +20259,13 @@ func TestCheckResponseSnapshot_UpdateContactFlowModuleMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowModuleMetadata(context.Background(), &UpdateContactFlowModuleMetadataInput{})
+	got, err := svc.UpdateContactFlowModuleMetadata(context.Background(), &UpdateContactFlowModuleMetadataInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		ContactFlowModuleId: ptr.String("__ContactFlowModuleId__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		State:               types.ContactFlowModuleState("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14280,7 +20284,12 @@ func TestCheckResponseSnapshot_UpdateContactFlowName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactFlowName(context.Background(), &UpdateContactFlowNameInput{})
+	got, err := svc.UpdateContactFlowName(context.Background(), &UpdateContactFlowNameInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14299,7 +20308,118 @@ func TestCheckResponseSnapshot_UpdateContactRoutingData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactRoutingData(context.Background(), &UpdateContactRoutingDataInput{})
+	got, err := svc.UpdateContactRoutingData(context.Background(), &UpdateContactRoutingDataInput{
+		InstanceId:                 ptr.String("__InstanceId__"),
+		ContactId:                  ptr.String("__ContactId__"),
+		QueueTimeAdjustmentSeconds: ptr.Int32(1),
+		QueuePriority:              ptr.Int64(1),
+		RoutingCriteria: &types.RoutingCriteriaInput{
+			Steps: []types.RoutingCriteriaInputStep{
+				{
+					Expiry: &types.RoutingCriteriaInputStepExpiry{
+						DurationInSeconds: ptr.Int32(1),
+					},
+					Expression: &types.Expression{
+						AttributeCondition: &types.AttributeCondition{
+							Name:             ptr.String("__Name__"),
+							Value:            ptr.String("__Value__"),
+							ProficiencyLevel: ptr.Float32(1.0),
+							Range: &types.Range{
+								MinProficiencyLevel: ptr.Float32(1.0),
+								MaxProficiencyLevel: ptr.Float32(1.0),
+							},
+							MatchCriteria: &types.MatchCriteria{
+								AgentsCriteria: &types.AgentsCriteria{
+									AgentIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						},
+						AndExpression: []types.Expression{
+							{},
+							{},
+						},
+						OrExpression: []types.Expression{
+							{},
+							{},
+						},
+						NotAttributeCondition: &types.AttributeCondition{
+							Name:             ptr.String("__Name__"),
+							Value:            ptr.String("__Value__"),
+							ProficiencyLevel: ptr.Float32(1.0),
+							Range: &types.Range{
+								MinProficiencyLevel: ptr.Float32(1.0),
+								MaxProficiencyLevel: ptr.Float32(1.0),
+							},
+							MatchCriteria: &types.MatchCriteria{
+								AgentsCriteria: &types.AgentsCriteria{
+									AgentIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						},
+					},
+				},
+				{
+					Expiry: &types.RoutingCriteriaInputStepExpiry{
+						DurationInSeconds: ptr.Int32(1),
+					},
+					Expression: &types.Expression{
+						AttributeCondition: &types.AttributeCondition{
+							Name:             ptr.String("__Name__"),
+							Value:            ptr.String("__Value__"),
+							ProficiencyLevel: ptr.Float32(1.0),
+							Range: &types.Range{
+								MinProficiencyLevel: ptr.Float32(1.0),
+								MaxProficiencyLevel: ptr.Float32(1.0),
+							},
+							MatchCriteria: &types.MatchCriteria{
+								AgentsCriteria: &types.AgentsCriteria{
+									AgentIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						},
+						AndExpression: []types.Expression{
+							{},
+							{},
+						},
+						OrExpression: []types.Expression{
+							{},
+							{},
+						},
+						NotAttributeCondition: &types.AttributeCondition{
+							Name:             ptr.String("__Name__"),
+							Value:            ptr.String("__Value__"),
+							ProficiencyLevel: ptr.Float32(1.0),
+							Range: &types.Range{
+								MinProficiencyLevel: ptr.Float32(1.0),
+								MaxProficiencyLevel: ptr.Float32(1.0),
+							},
+							MatchCriteria: &types.MatchCriteria{
+								AgentsCriteria: &types.AgentsCriteria{
+									AgentIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14318,7 +20438,11 @@ func TestCheckResponseSnapshot_UpdateContactSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactSchedule(context.Background(), &UpdateContactScheduleInput{})
+	got, err := svc.UpdateContactSchedule(context.Background(), &UpdateContactScheduleInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactId:     ptr.String("__ContactId__"),
+		ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14337,7 +20461,11 @@ func TestCheckResponseSnapshot_UpdateContactTaskTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactTaskTemplate(context.Background(), &UpdateContactTaskTemplateInput{})
+	got, err := svc.UpdateContactTaskTemplate(context.Background(), &UpdateContactTaskTemplateInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		TaskTemplateId: ptr.String("__TaskTemplateId__"),
+		ContactId:      ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14364,7 +20492,34 @@ func TestCheckResponseSnapshot_UpdateDataTableAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataTableAttribute(context.Background(), &UpdateDataTableAttributeInput{})
+	got, err := svc.UpdateDataTableAttribute(context.Background(), &UpdateDataTableAttributeInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		DataTableId:   ptr.String("__DataTableId__"),
+		AttributeName: ptr.String("__AttributeName__"),
+		Name:          ptr.String("__Name__"),
+		ValueType:     types.DataTableAttributeValueType("TEXT"),
+		Description:   ptr.String("__Description__"),
+		Primary:       true,
+		Validation: &types.Validation{
+			MinLength:        1,
+			MaxLength:        1,
+			MinValues:        1,
+			MaxValues:        1,
+			IgnoreCase:       true,
+			Minimum:          1.0,
+			Maximum:          1.0,
+			ExclusiveMinimum: 1.0,
+			ExclusiveMaximum: 1.0,
+			MultipleOf:       1.0,
+			Enum: &types.ValidationEnum{
+				Strict: true,
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14390,7 +20545,14 @@ func TestCheckResponseSnapshot_UpdateDataTableMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataTableMetadata(context.Background(), &UpdateDataTableMetadataInput{})
+	got, err := svc.UpdateDataTableMetadata(context.Background(), &UpdateDataTableMetadataInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		DataTableId:    ptr.String("__DataTableId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		ValueLockLevel: types.DataTableLockLevel("NONE"),
+		TimeZone:       ptr.String("__TimeZone__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14416,7 +20578,36 @@ func TestCheckResponseSnapshot_UpdateDataTablePrimaryValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataTablePrimaryValues(context.Background(), &UpdateDataTablePrimaryValuesInput{})
+	got, err := svc.UpdateDataTablePrimaryValues(context.Background(), &UpdateDataTablePrimaryValuesInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		PrimaryValues: []types.PrimaryValue{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+			},
+		},
+		NewPrimaryValues: []types.PrimaryValue{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+			},
+		},
+		LockVersion: &types.DataTableLockVersion{
+			DataTable:     ptr.String("__DataTable__"),
+			Attribute:     ptr.String("__Attribute__"),
+			PrimaryValues: ptr.String("__PrimaryValues__"),
+			Value:         ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14438,7 +20629,13 @@ func TestCheckResponseSnapshot_UpdateEmailAddressMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmailAddressMetadata(context.Background(), &UpdateEmailAddressMetadataInput{})
+	got, err := svc.UpdateEmailAddressMetadata(context.Background(), &UpdateEmailAddressMetadataInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+		Description:    ptr.String("__Description__"),
+		DisplayName:    ptr.String("__DisplayName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14461,7 +20658,570 @@ func TestCheckResponseSnapshot_UpdateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEvaluationForm(context.Background(), &UpdateEvaluationFormInput{})
+	got, err := svc.UpdateEvaluationForm(context.Background(), &UpdateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+		CreateNewVersion:      ptr.Bool(true),
+		Title:                 ptr.String("__Title__"),
+		Description:           ptr.String("__Description__"),
+		Items: []types.EvaluationFormItem{
+			&types.EvaluationFormItemMemberSection{
+				Value: types.EvaluationFormSection{
+					Title:        ptr.String("__Title__"),
+					RefId:        ptr.String("__RefId__"),
+					Instructions: ptr.String("__Instructions__"),
+					Items: []types.EvaluationFormItem{
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+					},
+					Weight:                1.0,
+					IsExcludedFromScoring: true,
+					ScoreThresholds: []types.EvaluationFormScoreThreshold{
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+					},
+				},
+			},
+			&types.EvaluationFormItemMemberSection{
+				Value: types.EvaluationFormSection{
+					Title:        ptr.String("__Title__"),
+					RefId:        ptr.String("__RefId__"),
+					Instructions: ptr.String("__Instructions__"),
+					Items: []types.EvaluationFormItem{
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+						&types.EvaluationFormItemMemberQuestion{
+							Value: types.EvaluationFormQuestion{
+								Title:                ptr.String("__Title__"),
+								Instructions:         ptr.String("__Instructions__"),
+								RefId:                ptr.String("__RefId__"),
+								NotApplicableEnabled: true,
+								QuestionType:         types.EvaluationFormQuestionType("TEXT"),
+								QuestionTypeProperties: &types.EvaluationFormQuestionTypePropertiesMemberNumeric{
+									Value: types.EvaluationFormNumericQuestionProperties{
+										MinValue: 1,
+										MaxValue: 1,
+										Options: []types.EvaluationFormNumericQuestionOption{
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+											{
+												MinValue:      1,
+												MaxValue:      1,
+												Score:         1,
+												AutomaticFail: true,
+												AutomaticFailConfiguration: &types.AutomaticFailConfiguration{
+													TargetSection: ptr.String("__TargetSection__"),
+												},
+												PointsConfiguration: &types.QuestionOptionPointsConfiguration{
+													PointValue: 1,
+													IsBonus:    true,
+												},
+											},
+										},
+										Automation: &types.EvaluationFormNumericQuestionAutomationMemberPropertyValue{
+											Value: types.NumericQuestionPropertyValueAutomation{
+												Label: types.NumericQuestionPropertyAutomationLabel("OVERALL_CUSTOMER_SENTIMENT_SCORE"),
+											},
+										},
+									},
+								},
+								Enablement: &types.EvaluationFormItemEnablementConfiguration{
+									Condition: &types.EvaluationFormItemEnablementCondition{
+										Operands: []types.EvaluationFormItemEnablementConditionOperand{
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+												Value: types.EvaluationFormItemEnablementExpression{
+													Source: &types.EvaluationFormItemEnablementSource{
+														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId: ptr.String("__RefId__"),
+													},
+													Values: []types.EvaluationFormItemEnablementSourceValue{
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+														{
+															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId: ptr.String("__RefId__"),
+														},
+													},
+													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+												},
+											},
+										},
+										Operator: types.EvaluationFormItemEnablementOperator("OR"),
+									},
+									Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+									DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
+								},
+								Weight: 1.0,
+								ScoringConfiguration: &types.EvaluationFormQuestionScoringConfiguration{
+									PointsConfiguration: &types.QuestionPointsConfiguration{
+										MaxPointValue: 1,
+										MinPointValue: 1,
+										IsBonus:       true,
+									},
+									IsExcludedFromScoring: true,
+									ScoreThresholds: []types.EvaluationFormScoreThreshold{
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+										{
+											PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+											MinScorePercentage:  1.0,
+											MaxScorePercentage:  1.0,
+										},
+									},
+								},
+							},
+						},
+					},
+					Weight:                1.0,
+					IsExcludedFromScoring: true,
+					ScoreThresholds: []types.EvaluationFormScoreThreshold{
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+						{
+							PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+							MinScorePercentage:  1.0,
+							MaxScorePercentage:  1.0,
+						},
+					},
+				},
+			},
+		},
+		ScoringStrategy: &types.EvaluationFormScoringStrategy{
+			Mode:   types.EvaluationFormScoringMode("QUESTION_ONLY"),
+			Status: types.EvaluationFormScoringStatus("ENABLED"),
+			ScoreThresholds: []types.EvaluationFormScoreThreshold{
+				{
+					PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+					MinScorePercentage:  1.0,
+					MaxScorePercentage:  1.0,
+				},
+				{
+					PerformanceCategory: types.PerformanceCategoryName("NEEDS_IMPROVEMENT"),
+					MinScorePercentage:  1.0,
+					MaxScorePercentage:  1.0,
+				},
+			},
+		},
+		AutoEvaluationConfiguration: &types.EvaluationFormAutoEvaluationConfiguration{
+			Enabled: true,
+		},
+		ReviewConfiguration: &types.EvaluationReviewConfiguration{
+			ReviewNotificationRecipients: []types.EvaluationReviewNotificationRecipient{
+				{
+					Type: types.EvaluationReviewNotificationRecipientType("USER_ID"),
+					Value: &types.EvaluationReviewNotificationRecipientValue{
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+				{
+					Type: types.EvaluationReviewNotificationRecipientType("USER_ID"),
+					Value: &types.EvaluationReviewNotificationRecipientValue{
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+			},
+			EligibilityDays: 1,
+		},
+		AsDraft:     true,
+		ClientToken: ptr.String("__ClientToken__"),
+		TargetConfiguration: &types.EvaluationFormTargetConfiguration{
+			ContactInteractionType: types.ContactInteractionType("AGENT"),
+		},
+		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
+			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14480,7 +21240,37 @@ func TestCheckResponseSnapshot_UpdateHoursOfOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHoursOfOperation(context.Background(), &UpdateHoursOfOperationInput{})
+	got, err := svc.UpdateHoursOfOperation(context.Background(), &UpdateHoursOfOperationInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		TimeZone:           ptr.String("__TimeZone__"),
+		Config: []types.HoursOfOperationConfig{
+			{
+				Day: types.HoursOfOperationDays("SUNDAY"),
+				StartTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+			{
+				Day: types.HoursOfOperationDays("SUNDAY"),
+				StartTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.HoursOfOperationTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14499,7 +21289,58 @@ func TestCheckResponseSnapshot_UpdateHoursOfOperationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHoursOfOperationOverride(context.Background(), &UpdateHoursOfOperationOverrideInput{})
+	got, err := svc.UpdateHoursOfOperationOverride(context.Background(), &UpdateHoursOfOperationOverrideInput{
+		InstanceId:                 ptr.String("__InstanceId__"),
+		HoursOfOperationId:         ptr.String("__HoursOfOperationId__"),
+		HoursOfOperationOverrideId: ptr.String("__HoursOfOperationOverrideId__"),
+		Name:                       ptr.String("__Name__"),
+		Description:                ptr.String("__Description__"),
+		Config: []types.HoursOfOperationOverrideConfig{
+			{
+				Day: types.OverrideDays("SUNDAY"),
+				StartTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+			{
+				Day: types.OverrideDays("SUNDAY"),
+				StartTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+				EndTime: &types.OverrideTimeSlice{
+					Hours:   ptr.Int32(1),
+					Minutes: ptr.Int32(1),
+				},
+			},
+		},
+		EffectiveFrom: ptr.String("__EffectiveFrom__"),
+		EffectiveTill: ptr.String("__EffectiveTill__"),
+		RecurrenceConfig: &types.RecurrenceConfig{
+			RecurrencePattern: &types.RecurrencePattern{
+				Frequency: types.RecurrenceFrequency("WEEKLY"),
+				Interval:  ptr.Int32(1),
+				ByMonth: []int32{
+					1,
+					1,
+				},
+				ByMonthDay: []int32{
+					1,
+					1,
+				},
+				ByWeekdayOccurrence: []int32{
+					1,
+					1,
+				},
+			},
+		},
+		OverrideType: types.OverrideType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14518,7 +21359,12 @@ func TestCheckResponseSnapshot_UpdateInstanceAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstanceAttribute(context.Background(), &UpdateInstanceAttributeInput{})
+	got, err := svc.UpdateInstanceAttribute(context.Background(), &UpdateInstanceAttributeInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AttributeType: types.InstanceAttributeType("INBOUND_CALLS"),
+		Value:         ptr.String("__Value__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14537,7 +21383,38 @@ func TestCheckResponseSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstanceStorageConfig(context.Background(), &UpdateInstanceStorageConfigInput{})
+	got, err := svc.UpdateInstanceStorageConfig(context.Background(), &UpdateInstanceStorageConfigInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		ResourceType:  types.InstanceStorageResourceType("CHAT_TRANSCRIPTS"),
+		StorageConfig: &types.InstanceStorageConfig{
+			AssociationId: ptr.String("__AssociationId__"),
+			StorageType:   types.StorageType("S3"),
+			S3Config: &types.S3Config{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketPrefix: ptr.String("__BucketPrefix__"),
+				EncryptionConfig: &types.EncryptionConfig{
+					EncryptionType: types.EncryptionType("KMS"),
+					KeyId:          ptr.String("__KeyId__"),
+				},
+			},
+			KinesisVideoStreamConfig: &types.KinesisVideoStreamConfig{
+				Prefix:               ptr.String("__Prefix__"),
+				RetentionPeriodHours: 1,
+				EncryptionConfig: &types.EncryptionConfig{
+					EncryptionType: types.EncryptionType("KMS"),
+					KeyId:          ptr.String("__KeyId__"),
+				},
+			},
+			KinesisStreamConfig: &types.KinesisStreamConfig{
+				StreamArn: ptr.String("__StreamArn__"),
+			},
+			KinesisFirehoseConfig: &types.KinesisFirehoseConfig{
+				FirehoseArn: ptr.String("__FirehoseArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14556,7 +21433,13 @@ func TestCheckResponseSnapshot_UpdateNotificationContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotificationContent(context.Background(), &UpdateNotificationContentInput{})
+	got, err := svc.UpdateNotificationContent(context.Background(), &UpdateNotificationContentInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		NotificationId: ptr.String("__NotificationId__"),
+		Content: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14575,7 +21458,13 @@ func TestCheckResponseSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateParticipantAuthentication(context.Background(), &UpdateParticipantAuthenticationInput{})
+	got, err := svc.UpdateParticipantAuthentication(context.Background(), &UpdateParticipantAuthenticationInput{
+		State:            ptr.String("__State__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+		Code:             ptr.String("__Code__"),
+		Error:            ptr.String("__Error__"),
+		ErrorDescription: ptr.String("__ErrorDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14594,7 +21483,30 @@ func TestCheckResponseSnapshot_UpdateParticipantRoleConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateParticipantRoleConfig(context.Background(), &UpdateParticipantRoleConfigInput{})
+	got, err := svc.UpdateParticipantRoleConfig(context.Background(), &UpdateParticipantRoleConfigInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		ChannelConfiguration: &types.UpdateParticipantRoleConfigChannelInfoMemberChat{
+			Value: types.ChatParticipantRoleConfig{
+				ParticipantTimerConfigList: []types.ParticipantTimerConfiguration{
+					{
+						ParticipantRole: types.TimerEligibleParticipantRoles("CUSTOMER"),
+						TimerType:       types.ParticipantTimerType("IDLE"),
+						TimerValue: &types.ParticipantTimerValueMemberParticipantTimerAction{
+							Value: types.ParticipantTimerAction("Unset"),
+						},
+					},
+					{
+						ParticipantRole: types.TimerEligibleParticipantRoles("CUSTOMER"),
+						TimerType:       types.ParticipantTimerType("IDLE"),
+						TimerValue: &types.ParticipantTimerValueMemberParticipantTimerAction{
+							Value: types.ParticipantTimerAction("Unset"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14616,7 +21528,12 @@ func TestCheckResponseSnapshot_UpdatePhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{})
+	got, err := svc.UpdatePhoneNumber(context.Background(), &UpdatePhoneNumberInput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+		TargetArn:     ptr.String("__TargetArn__"),
+		InstanceId:    ptr.String("__InstanceId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14635,7 +21552,11 @@ func TestCheckResponseSnapshot_UpdatePhoneNumberMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePhoneNumberMetadata(context.Background(), &UpdatePhoneNumberMetadataInput{})
+	got, err := svc.UpdatePhoneNumberMetadata(context.Background(), &UpdatePhoneNumberMetadataInput{
+		PhoneNumberId:          ptr.String("__PhoneNumberId__"),
+		PhoneNumberDescription: ptr.String("__PhoneNumberDescription__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14654,7 +21575,23 @@ func TestCheckResponseSnapshot_UpdatePredefinedAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePredefinedAttribute(context.Background(), &UpdatePredefinedAttributeInput{})
+	got, err := svc.UpdatePredefinedAttribute(context.Background(), &UpdatePredefinedAttributeInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		Values: &types.PredefinedAttributeValuesMemberStringList{
+			Value: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Purposes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AttributeConfiguration: &types.InputPredefinedAttributeConfiguration{
+			EnableValueValidationOnAssociation: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14676,7 +21613,13 @@ func TestCheckResponseSnapshot_UpdatePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrompt(context.Background(), &UpdatePromptInput{})
+	got, err := svc.UpdatePrompt(context.Background(), &UpdatePromptInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		PromptId:    ptr.String("__PromptId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		S3Uri:       ptr.String("__S3Uri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14695,7 +21638,11 @@ func TestCheckResponseSnapshot_UpdateQueueHoursOfOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueHoursOfOperation(context.Background(), &UpdateQueueHoursOfOperationInput{})
+	got, err := svc.UpdateQueueHoursOfOperation(context.Background(), &UpdateQueueHoursOfOperationInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		QueueId:            ptr.String("__QueueId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14714,7 +21661,11 @@ func TestCheckResponseSnapshot_UpdateQueueMaxContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueMaxContacts(context.Background(), &UpdateQueueMaxContactsInput{})
+	got, err := svc.UpdateQueueMaxContacts(context.Background(), &UpdateQueueMaxContactsInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		QueueId:     ptr.String("__QueueId__"),
+		MaxContacts: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14733,7 +21684,12 @@ func TestCheckResponseSnapshot_UpdateQueueName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueName(context.Background(), &UpdateQueueNameInput{})
+	got, err := svc.UpdateQueueName(context.Background(), &UpdateQueueNameInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		QueueId:     ptr.String("__QueueId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14752,7 +21708,15 @@ func TestCheckResponseSnapshot_UpdateQueueOutboundCallerConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueOutboundCallerConfig(context.Background(), &UpdateQueueOutboundCallerConfigInput{})
+	got, err := svc.UpdateQueueOutboundCallerConfig(context.Background(), &UpdateQueueOutboundCallerConfigInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		OutboundCallerConfig: &types.OutboundCallerConfig{
+			OutboundCallerIdName:     ptr.String("__OutboundCallerIdName__"),
+			OutboundCallerIdNumberId: ptr.String("__OutboundCallerIdNumberId__"),
+			OutboundFlowId:           ptr.String("__OutboundFlowId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14771,7 +21735,13 @@ func TestCheckResponseSnapshot_UpdateQueueOutboundEmailConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueOutboundEmailConfig(context.Background(), &UpdateQueueOutboundEmailConfigInput{})
+	got, err := svc.UpdateQueueOutboundEmailConfig(context.Background(), &UpdateQueueOutboundEmailConfigInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		OutboundEmailConfig: &types.OutboundEmailConfig{
+			OutboundEmailAddressId: ptr.String("__OutboundEmailAddressId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14790,7 +21760,11 @@ func TestCheckResponseSnapshot_UpdateQueueStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueStatus(context.Background(), &UpdateQueueStatusInput{})
+	got, err := svc.UpdateQueueStatus(context.Background(), &UpdateQueueStatusInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		Status:     types.QueueStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14809,7 +21783,27 @@ func TestCheckResponseSnapshot_UpdateQuickConnectConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuickConnectConfig(context.Background(), &UpdateQuickConnectConfigInput{})
+	got, err := svc.UpdateQuickConnectConfig(context.Background(), &UpdateQuickConnectConfigInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		QuickConnectId: ptr.String("__QuickConnectId__"),
+		QuickConnectConfig: &types.QuickConnectConfig{
+			QuickConnectType: types.QuickConnectType("USER"),
+			UserConfig: &types.UserQuickConnectConfig{
+				UserId:        ptr.String("__UserId__"),
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+			QueueConfig: &types.QueueQuickConnectConfig{
+				QueueId:       ptr.String("__QueueId__"),
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+			PhoneConfig: &types.PhoneNumberQuickConnectConfig{
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+			FlowConfig: &types.FlowQuickConnectConfig{
+				ContactFlowId: ptr.String("__ContactFlowId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14828,7 +21822,12 @@ func TestCheckResponseSnapshot_UpdateQuickConnectName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuickConnectName(context.Background(), &UpdateQuickConnectNameInput{})
+	got, err := svc.UpdateQuickConnectName(context.Background(), &UpdateQuickConnectNameInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		QuickConnectId: ptr.String("__QuickConnectId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14847,7 +21846,11 @@ func TestCheckResponseSnapshot_UpdateRoutingProfileAgentAvailabilityTimer(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingProfileAgentAvailabilityTimer(context.Background(), &UpdateRoutingProfileAgentAvailabilityTimerInput{})
+	got, err := svc.UpdateRoutingProfileAgentAvailabilityTimer(context.Background(), &UpdateRoutingProfileAgentAvailabilityTimerInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		RoutingProfileId:       ptr.String("__RoutingProfileId__"),
+		AgentAvailabilityTimer: types.AgentAvailabilityTimer("TIME_SINCE_LAST_ACTIVITY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14866,7 +21869,26 @@ func TestCheckResponseSnapshot_UpdateRoutingProfileConcurrency(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingProfileConcurrency(context.Background(), &UpdateRoutingProfileConcurrencyInput{})
+	got, err := svc.UpdateRoutingProfileConcurrency(context.Background(), &UpdateRoutingProfileConcurrencyInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		MediaConcurrencies: []types.MediaConcurrency{
+			{
+				Channel:     types.Channel("VOICE"),
+				Concurrency: ptr.Int32(1),
+				CrossChannelBehavior: &types.CrossChannelBehavior{
+					BehaviorType: types.BehaviorType("ROUTE_CURRENT_CHANNEL_ONLY"),
+				},
+			},
+			{
+				Channel:     types.Channel("VOICE"),
+				Concurrency: ptr.Int32(1),
+				CrossChannelBehavior: &types.CrossChannelBehavior{
+					BehaviorType: types.BehaviorType("ROUTE_CURRENT_CHANNEL_ONLY"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14885,7 +21907,11 @@ func TestCheckResponseSnapshot_UpdateRoutingProfileDefaultOutboundQueue(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingProfileDefaultOutboundQueue(context.Background(), &UpdateRoutingProfileDefaultOutboundQueueInput{})
+	got, err := svc.UpdateRoutingProfileDefaultOutboundQueue(context.Background(), &UpdateRoutingProfileDefaultOutboundQueueInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		RoutingProfileId:       ptr.String("__RoutingProfileId__"),
+		DefaultOutboundQueueId: ptr.String("__DefaultOutboundQueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14904,7 +21930,12 @@ func TestCheckResponseSnapshot_UpdateRoutingProfileName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingProfileName(context.Background(), &UpdateRoutingProfileNameInput{})
+	got, err := svc.UpdateRoutingProfileName(context.Background(), &UpdateRoutingProfileNameInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14923,7 +21954,28 @@ func TestCheckResponseSnapshot_UpdateRoutingProfileQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingProfileQueues(context.Background(), &UpdateRoutingProfileQueuesInput{})
+	got, err := svc.UpdateRoutingProfileQueues(context.Background(), &UpdateRoutingProfileQueuesInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		QueueConfigs: []types.RoutingProfileQueueConfig{
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+			{
+				QueueReference: &types.RoutingProfileQueueReference{
+					QueueId: ptr.String("__QueueId__"),
+					Channel: types.Channel("VOICE"),
+				},
+				Priority: ptr.Int32(1),
+				Delay:    ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14942,7 +21994,249 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{})
+	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{
+		RuleId:     ptr.String("__RuleId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		Function:   ptr.String("__Function__"),
+		Actions: []types.RuleAction{
+			{
+				ActionType: types.ActionType("CREATE_TASK"),
+				TaskAction: &types.TaskActionDefinition{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					ContactFlowId: ptr.String("__ContactFlowId__"),
+					References: map[string]types.Reference{
+						"key0": {
+							Value:        ptr.String("__Value__"),
+							Type:         types.ReferenceType("URL"),
+							Status:       types.ReferenceStatus("AVAILABLE"),
+							Arn:          ptr.String("__Arn__"),
+							StatusReason: ptr.String("__StatusReason__"),
+						},
+					},
+				},
+				EventBridgeAction: &types.EventBridgeActionDefinition{
+					Name: ptr.String("__Name__"),
+				},
+				AssignContactCategoryAction: &types.AssignContactCategoryActionDefinition{},
+				SendNotificationAction: &types.SendNotificationActionDefinition{
+					DeliveryMethod: types.NotificationDeliveryType("EMAIL"),
+					Subject:        ptr.String("__Subject__"),
+					Content:        ptr.String("__Content__"),
+					ContentType:    types.NotificationContentType("PLAIN_TEXT"),
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CreateCaseAction: &types.CreateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				UpdateCaseAction: &types.UpdateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+				},
+				AssignSlaAction: &types.AssignSlaActionDefinition{
+					SlaAssignmentType: types.SlaAssignmentType("CASES"),
+					CaseSlaConfiguration: &types.CaseSlaConfiguration{
+						Name:    ptr.String("__Name__"),
+						Type:    types.SlaType("CaseField"),
+						FieldId: ptr.String("__FieldId__"),
+						TargetFieldValues: []types.FieldValueUnion{
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						TargetSlaMinutes: ptr.Int64(1),
+					},
+				},
+				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
+					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+			},
+			{
+				ActionType: types.ActionType("CREATE_TASK"),
+				TaskAction: &types.TaskActionDefinition{
+					Name:          ptr.String("__Name__"),
+					Description:   ptr.String("__Description__"),
+					ContactFlowId: ptr.String("__ContactFlowId__"),
+					References: map[string]types.Reference{
+						"key0": {
+							Value:        ptr.String("__Value__"),
+							Type:         types.ReferenceType("URL"),
+							Status:       types.ReferenceStatus("AVAILABLE"),
+							Arn:          ptr.String("__Arn__"),
+							StatusReason: ptr.String("__StatusReason__"),
+						},
+					},
+				},
+				EventBridgeAction: &types.EventBridgeActionDefinition{
+					Name: ptr.String("__Name__"),
+				},
+				AssignContactCategoryAction: &types.AssignContactCategoryActionDefinition{},
+				SendNotificationAction: &types.SendNotificationActionDefinition{
+					DeliveryMethod: types.NotificationDeliveryType("EMAIL"),
+					Subject:        ptr.String("__Subject__"),
+					Content:        ptr.String("__Content__"),
+					ContentType:    types.NotificationContentType("PLAIN_TEXT"),
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CreateCaseAction: &types.CreateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				UpdateCaseAction: &types.UpdateCaseActionDefinition{
+					Fields: []types.FieldValue{
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						{
+							Id: ptr.String("__Id__"),
+							Value: &types.FieldValueUnion{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+					},
+				},
+				AssignSlaAction: &types.AssignSlaActionDefinition{
+					SlaAssignmentType: types.SlaAssignmentType("CASES"),
+					CaseSlaConfiguration: &types.CaseSlaConfiguration{
+						Name:    ptr.String("__Name__"),
+						Type:    types.SlaType("CaseField"),
+						FieldId: ptr.String("__FieldId__"),
+						TargetFieldValues: []types.FieldValueUnion{
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+							{
+								BooleanValue: true,
+								DoubleValue:  ptr.Float64(1.0),
+								EmptyValue:   &types.EmptyFieldValue{},
+								StringValue:  ptr.String("__StringValue__"),
+							},
+						},
+						TargetSlaMinutes: ptr.Int64(1),
+					},
+				},
+				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
+					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+			},
+		},
+		PublishStatus: types.RulePublishStatus("DRAFT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14961,7 +22255,79 @@ func TestCheckResponseSnapshot_UpdateSecurityProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecurityProfile(context.Background(), &UpdateSecurityProfileInput{})
+	got, err := svc.UpdateSecurityProfile(context.Background(), &UpdateSecurityProfileInput{
+		Description: ptr.String("__Description__"),
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		AllowedAccessControlTags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagRestrictedResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Applications: []types.Application{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				ApplicationPermissions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Type: types.ApplicationType("MCP"),
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				ApplicationPermissions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Type: types.ApplicationType("MCP"),
+			},
+		},
+		HierarchyRestrictedResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedAccessControlHierarchyGroupId: ptr.String("__AllowedAccessControlHierarchyGroupId__"),
+		AllowedFlowModules: []types.FlowModule{
+			{
+				Type:         types.FlowModuleType("MCP"),
+				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+			{
+				Type:         types.FlowModuleType("MCP"),
+				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
+			DataTableAccessControlConfiguration: &types.DataTableAccessControlConfiguration{
+				PrimaryAttributeAccessControlConfiguration: &types.PrimaryAttributeAccessControlConfigurationItem{
+					PrimaryAttributeValues: []types.PrimaryAttributeValue{
+						{
+							AccessType:    types.AccessType("ALLOW"),
+							AttributeName: ptr.String("__AttributeName__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccessType:    types.AccessType("ALLOW"),
+							AttributeName: ptr.String("__AttributeName__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15069,7 +22435,93 @@ func TestCheckResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTaskTemplate(context.Background(), &UpdateTaskTemplateInput{})
+	got, err := svc.UpdateTaskTemplate(context.Background(), &UpdateTaskTemplateInput{
+		TaskTemplateId:   ptr.String("__TaskTemplateId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ContactFlowId:    ptr.String("__ContactFlowId__"),
+		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		Constraints: &types.TaskTemplateConstraints{
+			RequiredFields: []types.RequiredFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			ReadOnlyFields: []types.ReadOnlyFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			InvisibleFields: []types.InvisibleFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		Defaults: &types.TaskTemplateDefaults{
+			DefaultFieldValues: []types.TaskTemplateDefaultFieldValue{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+		},
+		Status: types.TaskTemplateStatus("ACTIVE"),
+		Fields: []types.TaskTemplateField{
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15088,7 +22540,28 @@ func TestCheckResponseSnapshot_UpdateTestCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTestCase(context.Background(), &UpdateTestCaseInput{})
+	got, err := svc.UpdateTestCase(context.Background(), &UpdateTestCaseInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		TestCaseId: ptr.String("__TestCaseId__"),
+		Content:    ptr.String("__Content__"),
+		EntryPoint: &types.TestCaseEntryPoint{
+			Type: types.TestCaseEntryPointType("VOICE_CALL"),
+			VoiceCallEntryPointParameters: &types.VoiceCallEntryPointParameters{
+				SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+				DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+				FlowId:                 ptr.String("__FlowId__"),
+			},
+			ChatEntryPointParameters: &types.ChatEntryPointParameters{
+				FlowId: ptr.String("__FlowId__"),
+			},
+		},
+		InitializationData: ptr.String("__InitializationData__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Status:             types.TestCaseStatus("PUBLISHED"),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15107,7 +22580,45 @@ func TestCheckResponseSnapshot_UpdateTrafficDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrafficDistribution(context.Background(), &UpdateTrafficDistributionInput{})
+	got, err := svc.UpdateTrafficDistribution(context.Background(), &UpdateTrafficDistributionInput{
+		Id: ptr.String("__Id__"),
+		TelephonyConfig: &types.TelephonyConfig{
+			Distributions: []types.Distribution{
+				{
+					Region:     ptr.String("__Region__"),
+					Percentage: 1,
+				},
+				{
+					Region:     ptr.String("__Region__"),
+					Percentage: 1,
+				},
+			},
+		},
+		SignInConfig: &types.SignInConfig{
+			Distributions: []types.SignInDistribution{
+				{
+					Region:  ptr.String("__Region__"),
+					Enabled: true,
+				},
+				{
+					Region:  ptr.String("__Region__"),
+					Enabled: true,
+				},
+			},
+		},
+		AgentConfig: &types.AgentConfig{
+			Distributions: []types.Distribution{
+				{
+					Region:     ptr.String("__Region__"),
+					Percentage: 1,
+				},
+				{
+					Region:     ptr.String("__Region__"),
+					Percentage: 1,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15126,7 +22637,74 @@ func TestCheckResponseSnapshot_UpdateUserConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserConfig(context.Background(), &UpdateUserConfigInput{})
+	got, err := svc.UpdateUserConfig(context.Background(), &UpdateUserConfigInput{
+		AutoAcceptConfigs: []types.AutoAcceptConfig{
+			{
+				Channel:                      types.Channel("VOICE"),
+				AutoAccept:                   true,
+				AgentFirstCallbackAutoAccept: ptr.Bool(true),
+			},
+			{
+				Channel:                      types.Channel("VOICE"),
+				AutoAccept:                   true,
+				AgentFirstCallbackAutoAccept: ptr.Bool(true),
+			},
+		},
+		AfterContactWorkConfigs: []types.AfterContactWorkConfigPerChannel{
+			{
+				Channel: types.Channel("VOICE"),
+				AfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+				AgentFirstCallbackAfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+			},
+			{
+				Channel: types.Channel("VOICE"),
+				AfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+				AgentFirstCallbackAfterContactWorkConfig: &types.AfterContactWorkConfig{
+					AfterContactWorkTimeLimit: 1,
+				},
+			},
+		},
+		PhoneNumberConfigs: []types.PhoneNumberConfig{
+			{
+				Channel:     types.Channel("VOICE"),
+				PhoneType:   types.PhoneType("SOFT_PHONE"),
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+			{
+				Channel:     types.Channel("VOICE"),
+				PhoneType:   types.PhoneType("SOFT_PHONE"),
+				PhoneNumber: ptr.String("__PhoneNumber__"),
+			},
+		},
+		PersistentConnectionConfigs: []types.PersistentConnectionConfig{
+			{
+				Channel:              types.Channel("VOICE"),
+				PersistentConnection: ptr.Bool(true),
+			},
+			{
+				Channel:              types.Channel("VOICE"),
+				PersistentConnection: ptr.Bool(true),
+			},
+		},
+		VoiceEnhancementConfigs: []types.VoiceEnhancementConfig{
+			{
+				Channel:              types.Channel("VOICE"),
+				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+			},
+			{
+				Channel:              types.Channel("VOICE"),
+				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+			},
+		},
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15145,7 +22723,11 @@ func TestCheckResponseSnapshot_UpdateUserHierarchy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserHierarchy(context.Background(), &UpdateUserHierarchyInput{})
+	got, err := svc.UpdateUserHierarchy(context.Background(), &UpdateUserHierarchyInput{
+		HierarchyGroupId: ptr.String("__HierarchyGroupId__"),
+		UserId:           ptr.String("__UserId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15164,7 +22746,11 @@ func TestCheckResponseSnapshot_UpdateUserHierarchyGroupName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserHierarchyGroupName(context.Background(), &UpdateUserHierarchyGroupNameInput{})
+	got, err := svc.UpdateUserHierarchyGroupName(context.Background(), &UpdateUserHierarchyGroupNameInput{
+		Name:             ptr.String("__Name__"),
+		HierarchyGroupId: ptr.String("__HierarchyGroupId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15183,7 +22769,26 @@ func TestCheckResponseSnapshot_UpdateUserHierarchyStructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserHierarchyStructure(context.Background(), &UpdateUserHierarchyStructureInput{})
+	got, err := svc.UpdateUserHierarchyStructure(context.Background(), &UpdateUserHierarchyStructureInput{
+		HierarchyStructure: &types.HierarchyStructureUpdate{
+			LevelOne: &types.HierarchyLevelUpdate{
+				Name: ptr.String("__Name__"),
+			},
+			LevelTwo: &types.HierarchyLevelUpdate{
+				Name: ptr.String("__Name__"),
+			},
+			LevelThree: &types.HierarchyLevelUpdate{
+				Name: ptr.String("__Name__"),
+			},
+			LevelFour: &types.HierarchyLevelUpdate{
+				Name: ptr.String("__Name__"),
+			},
+			LevelFive: &types.HierarchyLevelUpdate{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15202,7 +22807,17 @@ func TestCheckResponseSnapshot_UpdateUserIdentityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserIdentityInfo(context.Background(), &UpdateUserIdentityInfoInput{})
+	got, err := svc.UpdateUserIdentityInfo(context.Background(), &UpdateUserIdentityInfoInput{
+		IdentityInfo: &types.UserIdentityInfo{
+			FirstName:      ptr.String("__FirstName__"),
+			LastName:       ptr.String("__LastName__"),
+			Email:          ptr.String("__Email__"),
+			SecondaryEmail: ptr.String("__SecondaryEmail__"),
+			Mobile:         ptr.String("__Mobile__"),
+		},
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15221,7 +22836,14 @@ func TestCheckResponseSnapshot_UpdateUserNotificationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserNotificationStatus(context.Background(), &UpdateUserNotificationStatusInput{})
+	got, err := svc.UpdateUserNotificationStatus(context.Background(), &UpdateUserNotificationStatusInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		NotificationId:     ptr.String("__NotificationId__"),
+		UserId:             ptr.String("__UserId__"),
+		Status:             types.NotificationStatus("READ"),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15240,7 +22862,17 @@ func TestCheckResponseSnapshot_UpdateUserPhoneConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserPhoneConfig(context.Background(), &UpdateUserPhoneConfigInput{})
+	got, err := svc.UpdateUserPhoneConfig(context.Background(), &UpdateUserPhoneConfigInput{
+		PhoneConfig: &types.UserPhoneConfig{
+			PhoneType:                 types.PhoneType("SOFT_PHONE"),
+			AutoAccept:                true,
+			AfterContactWorkTimeLimit: 1,
+			DeskPhoneNumber:           ptr.String("__DeskPhoneNumber__"),
+			PersistentConnection:      ptr.Bool(true),
+		},
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15259,7 +22891,22 @@ func TestCheckResponseSnapshot_UpdateUserProficiencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserProficiencies(context.Background(), &UpdateUserProficienciesInput{})
+	got, err := svc.UpdateUserProficiencies(context.Background(), &UpdateUserProficienciesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		UserId:     ptr.String("__UserId__"),
+		UserProficiencies: []types.UserProficiency{
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+				Level:          ptr.Float32(1.0),
+			},
+			{
+				AttributeName:  ptr.String("__AttributeName__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+				Level:          ptr.Float32(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15278,7 +22925,11 @@ func TestCheckResponseSnapshot_UpdateUserRoutingProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserRoutingProfile(context.Background(), &UpdateUserRoutingProfileInput{})
+	got, err := svc.UpdateUserRoutingProfile(context.Background(), &UpdateUserRoutingProfileInput{
+		RoutingProfileId: ptr.String("__RoutingProfileId__"),
+		UserId:           ptr.String("__UserId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15297,7 +22948,14 @@ func TestCheckResponseSnapshot_UpdateUserSecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserSecurityProfiles(context.Background(), &UpdateUserSecurityProfilesInput{})
+	got, err := svc.UpdateUserSecurityProfiles(context.Background(), &UpdateUserSecurityProfilesInput{
+		SecurityProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserId:     ptr.String("__UserId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15341,7 +22999,18 @@ func TestCheckResponseSnapshot_UpdateViewContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateViewContent(context.Background(), &UpdateViewContentInput{})
+	got, err := svc.UpdateViewContent(context.Background(), &UpdateViewContentInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ViewId:     ptr.String("__ViewId__"),
+		Status:     types.ViewStatus("PUBLISHED"),
+		Content: &types.ViewInputContent{
+			Template: ptr.String("__Template__"),
+			Actions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15360,7 +23029,12 @@ func TestCheckResponseSnapshot_UpdateViewMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateViewMetadata(context.Background(), &UpdateViewMetadataInput{})
+	got, err := svc.UpdateViewMetadata(context.Background(), &UpdateViewMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ViewId:      ptr.String("__ViewId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15379,7 +23053,13 @@ func TestCheckResponseSnapshot_UpdateWorkspaceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceMetadata(context.Background(), &UpdateWorkspaceMetadataInput{})
+	got, err := svc.UpdateWorkspaceMetadata(context.Background(), &UpdateWorkspaceMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Title:       ptr.String("__Title__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15398,7 +23078,15 @@ func TestCheckResponseSnapshot_UpdateWorkspacePage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspacePage(context.Background(), &UpdateWorkspacePageInput{})
+	got, err := svc.UpdateWorkspacePage(context.Background(), &UpdateWorkspacePageInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Page:        ptr.String("__Page__"),
+		NewPage:     ptr.String("__NewPage__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Slug:        ptr.String("__Slug__"),
+		InputData:   ptr.String("__InputData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15417,7 +23105,92 @@ func TestCheckResponseSnapshot_UpdateWorkspaceTheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceTheme(context.Background(), &UpdateWorkspaceThemeInput{})
+	got, err := svc.UpdateWorkspaceTheme(context.Background(), &UpdateWorkspaceThemeInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Theme: &types.WorkspaceTheme{
+			Light: &types.WorkspaceThemeConfig{
+				Palette: &types.WorkspaceThemePalette{
+					Header: &types.PaletteHeader{
+						Background:          ptr.String("__Background__"),
+						Text:                ptr.String("__Text__"),
+						TextHover:           ptr.String("__TextHover__"),
+						InvertActionsColors: true,
+					},
+					Navigation: &types.PaletteNavigation{
+						Background:           ptr.String("__Background__"),
+						TextBackgroundHover:  ptr.String("__TextBackgroundHover__"),
+						TextBackgroundActive: ptr.String("__TextBackgroundActive__"),
+						Text:                 ptr.String("__Text__"),
+						TextHover:            ptr.String("__TextHover__"),
+						TextActive:           ptr.String("__TextActive__"),
+						InvertActionsColors:  true,
+					},
+					Canvas: &types.PaletteCanvas{
+						ContainerBackground: ptr.String("__ContainerBackground__"),
+						PageBackground:      ptr.String("__PageBackground__"),
+						ActiveBackground:    ptr.String("__ActiveBackground__"),
+					},
+					Primary: &types.PalettePrimary{
+						Default:      ptr.String("__Default__"),
+						Active:       ptr.String("__Active__"),
+						ContrastText: ptr.String("__ContrastText__"),
+					},
+				},
+				Images: &types.WorkspaceThemeImages{
+					Logo: &types.ImagesLogo{
+						Default: ptr.String("__Default__"),
+						Favicon: ptr.String("__Favicon__"),
+					},
+				},
+				Typography: &types.WorkspaceThemeTypography{
+					FontFamily: &types.FontFamily{
+						Default: types.WorkspaceFontFamily("Arial"),
+					},
+				},
+			},
+			Dark: &types.WorkspaceThemeConfig{
+				Palette: &types.WorkspaceThemePalette{
+					Header: &types.PaletteHeader{
+						Background:          ptr.String("__Background__"),
+						Text:                ptr.String("__Text__"),
+						TextHover:           ptr.String("__TextHover__"),
+						InvertActionsColors: true,
+					},
+					Navigation: &types.PaletteNavigation{
+						Background:           ptr.String("__Background__"),
+						TextBackgroundHover:  ptr.String("__TextBackgroundHover__"),
+						TextBackgroundActive: ptr.String("__TextBackgroundActive__"),
+						Text:                 ptr.String("__Text__"),
+						TextHover:            ptr.String("__TextHover__"),
+						TextActive:           ptr.String("__TextActive__"),
+						InvertActionsColors:  true,
+					},
+					Canvas: &types.PaletteCanvas{
+						ContainerBackground: ptr.String("__ContainerBackground__"),
+						PageBackground:      ptr.String("__PageBackground__"),
+						ActiveBackground:    ptr.String("__ActiveBackground__"),
+					},
+					Primary: &types.PalettePrimary{
+						Default:      ptr.String("__Default__"),
+						Active:       ptr.String("__Active__"),
+						ContrastText: ptr.String("__ContrastText__"),
+					},
+				},
+				Images: &types.WorkspaceThemeImages{
+					Logo: &types.ImagesLogo{
+						Default: ptr.String("__Default__"),
+						Favicon: ptr.String("__Favicon__"),
+					},
+				},
+				Typography: &types.WorkspaceThemeTypography{
+					FontFamily: &types.FontFamily{
+						Default: types.WorkspaceFontFamily("Arial"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15436,7 +23209,11 @@ func TestCheckResponseSnapshot_UpdateWorkspaceVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceVisibility(context.Background(), &UpdateWorkspaceVisibilityInput{})
+	got, err := svc.UpdateWorkspaceVisibility(context.Background(), &UpdateWorkspaceVisibilityInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Visibility:  types.Visibility("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15457,7 +23234,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateContactWithUser(context.Background(), &AssociateContactWithUserInput{})
+	_, opErr := svc.AssociateContactWithUser(context.Background(), &AssociateContactWithUserInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		UserId:     ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15482,7 +23263,18 @@ func TestCheckResponseSnapshot_Error_ConditionalOperationFailedException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHoursOfOperations(context.Background(), &AssociateHoursOfOperationsInput{})
+	_, opErr := svc.AssociateHoursOfOperations(context.Background(), &AssociateHoursOfOperationsInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+		ParentHoursOfOperationConfigs: []types.ParentHoursOfOperationConfig{
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+			{
+				HoursOfOperationId: ptr.String("__HoursOfOperationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15507,7 +23299,56 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateDataTableValue(context.Background(), &BatchCreateDataTableValueInput{})
+	_, opErr := svc.BatchCreateDataTableValue(context.Background(), &BatchCreateDataTableValueInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		DataTableId: ptr.String("__DataTableId__"),
+		Values: []types.DataTableValue{
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				PrimaryValues: []types.PrimaryValue{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						Value:         ptr.String("__Value__"),
+					},
+				},
+				AttributeName: ptr.String("__AttributeName__"),
+				Value:         ptr.String("__Value__"),
+				LockVersion: &types.DataTableLockVersion{
+					DataTable:     ptr.String("__DataTable__"),
+					Attribute:     ptr.String("__Attribute__"),
+					PrimaryValues: ptr.String("__PrimaryValues__"),
+					Value:         ptr.String("__Value__"),
+				},
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15532,7 +23373,10 @@ func TestCheckResponseSnapshot_Error_ContactFlowNotPublishedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeContactFlow(context.Background(), &DescribeContactFlowInput{})
+	_, opErr := svc.DescribeContactFlow(context.Background(), &DescribeContactFlowInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15557,7 +23401,13 @@ func TestCheckResponseSnapshot_Error_ContactNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StopContact(context.Background(), &StopContactInput{})
+	_, opErr := svc.StopContact(context.Background(), &StopContactInput{
+		ContactId:  ptr.String("__ContactId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		DisconnectReason: &types.DisconnectReason{
+			Code: ptr.String("__Code__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15582,7 +23432,14 @@ func TestCheckResponseSnapshot_Error_ContactNotTerminatedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteContactData(context.Background(), &DeleteContactDataInput{})
+	_, opErr := svc.DeleteContactData(context.Background(), &DeleteContactDataInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		ContactFields: []types.ContactField{
+			types.ContactField("CUSTOMER_ENDPOINT"),
+			types.ContactField("CUSTOMER_ENDPOINT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15607,7 +23464,52 @@ func TestCheckResponseSnapshot_Error_DestinationNotAllowedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{})
+	_, opErr := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		RelatedContactId:       ptr.String("__RelatedContactId__"),
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		ContactFlowId:          ptr.String("__ContactFlowId__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+		QueueId:                ptr.String("__QueueId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+			EnableAnswerMachineDetection: true,
+			AwaitAnswerMachinePrompt:     true,
+		},
+		CampaignId:  ptr.String("__CampaignId__"),
+		TrafficType: types.TrafficType("GENERAL"),
+		OutboundStrategy: &types.OutboundStrategy{
+			Type: types.OutboundStrategyType("AGENT_FIRST"),
+			Config: &types.OutboundStrategyConfig{
+				AgentFirst: &types.AgentFirst{
+					Preview: &types.Preview{
+						PostAcceptTimeoutConfig: &types.PostAcceptTimeoutConfig{
+							DurationInSeconds: ptr.Int32(1),
+						},
+						AllowedUserActions: []types.AllowedUserAction{
+							types.AllowedUserAction("CALL"),
+							types.AllowedUserAction("CALL"),
+						},
+					},
+				},
+			},
+		},
+		RingTimeoutInSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15632,7 +23534,14 @@ func TestCheckResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspace(context.Background(), &AssociateWorkspaceInput{})
+	_, opErr := svc.AssociateWorkspace(context.Background(), &AssociateWorkspaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15657,7 +23566,14 @@ func TestCheckResponseSnapshot_Error_IdempotencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEmailAddressAlias(context.Background(), &AssociateEmailAddressAliasInput{})
+	_, opErr := svc.AssociateEmailAddressAlias(context.Background(), &AssociateEmailAddressAliasInput{
+		EmailAddressId: ptr.String("__EmailAddressId__"),
+		InstanceId:     ptr.String("__InstanceId__"),
+		AliasConfiguration: &types.AliasConfiguration{
+			EmailAddressId: ptr.String("__EmailAddressId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15682,7 +23598,11 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15707,7 +23627,12 @@ func TestCheckResponseSnapshot_Error_InvalidActiveRegionException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResumeContactRecording(context.Background(), &ResumeContactRecordingInput{})
+	_, opErr := svc.ResumeContactRecording(context.Background(), &ResumeContactRecordingInput{
+		InstanceId:           ptr.String("__InstanceId__"),
+		ContactId:            ptr.String("__ContactId__"),
+		InitialContactId:     ptr.String("__InitialContactId__"),
+		ContactRecordingType: types.ContactRecordingType("AGENT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15739,7 +23664,17 @@ func TestCheckResponseSnapshot_Error_InvalidContactFlowException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContactFlow(context.Background(), &CreateContactFlowInput{})
+	_, opErr := svc.CreateContactFlow(context.Background(), &CreateContactFlowInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.ContactFlowType("CONTACT_FLOW"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		Status:      types.ContactFlowStatus("PUBLISHED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15771,7 +23706,20 @@ func TestCheckResponseSnapshot_Error_InvalidContactFlowModuleException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContactFlowModule(context.Background(), &CreateContactFlowModuleInput{})
+	_, opErr := svc.CreateContactFlowModule(context.Background(), &CreateContactFlowModuleInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Settings:    ptr.String("__Settings__"),
+		ExternalInvocationConfiguration: &types.ExternalInvocationConfiguration{
+			Enabled: true,
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15796,7 +23744,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15824,7 +23776,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAnalyticsDataSet(context.Background(), &AssociateAnalyticsDataSetInput{})
+	_, opErr := svc.AssociateAnalyticsDataSet(context.Background(), &AssociateAnalyticsDataSetInput{
+		InstanceId:      ptr.String("__InstanceId__"),
+		DataSetId:       ptr.String("__DataSetId__"),
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15856,7 +23812,31 @@ func TestCheckResponseSnapshot_Error_InvalidTestCaseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTestCase(context.Background(), &CreateTestCaseInput{})
+	_, opErr := svc.CreateTestCase(context.Background(), &CreateTestCaseInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Content:     ptr.String("__Content__"),
+		EntryPoint: &types.TestCaseEntryPoint{
+			Type: types.TestCaseEntryPointType("VOICE_CALL"),
+			VoiceCallEntryPointParameters: &types.VoiceCallEntryPointParameters{
+				SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+				DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+				FlowId:                 ptr.String("__FlowId__"),
+			},
+			ChatEntryPointParameters: &types.ChatEntryPointParameters{
+				FlowId: ptr.String("__FlowId__"),
+			},
+		},
+		InitializationData: ptr.String("__InitializationData__"),
+		Status:             types.TestCaseStatus("PUBLISHED"),
+		TestCaseId:         ptr.String("__TestCaseId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15881,7 +23861,17 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBot(context.Background(), &AssociateBotInput{})
+	_, opErr := svc.AssociateBot(context.Background(), &AssociateBotInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		LexBot: &types.LexBot{
+			Name:      ptr.String("__Name__"),
+			LexRegion: ptr.String("__LexRegion__"),
+		},
+		LexV2Bot: &types.LexV2Bot{
+			AliasArn: ptr.String("__AliasArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15906,7 +23896,23 @@ func TestCheckResponseSnapshot_Error_MaximumResultReturnedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SearchResourceTags(context.Background(), &SearchResourceTagsInput{})
+	_, opErr := svc.SearchResourceTags(context.Background(), &SearchResourceTagsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchCriteria: &types.ResourceTagsSearchCriteria{
+			TagSearchCondition: &types.TagSearchCondition{
+				TagKey:                 ptr.String("__TagKey__"),
+				TagValue:               ptr.String("__TagValue__"),
+				TagKeyComparisonType:   types.StringComparisonType("STARTS_WITH"),
+				TagValueComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15931,7 +23937,52 @@ func TestCheckResponseSnapshot_Error_OutboundContactNotPermittedException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{})
+	_, opErr := svc.StartOutboundVoiceContact(context.Background(), &StartOutboundVoiceContactInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		References: map[string]types.Reference{
+			"key0": {
+				Value:        ptr.String("__Value__"),
+				Type:         types.ReferenceType("URL"),
+				Status:       types.ReferenceStatus("AVAILABLE"),
+				Arn:          ptr.String("__Arn__"),
+				StatusReason: ptr.String("__StatusReason__"),
+			},
+		},
+		RelatedContactId:       ptr.String("__RelatedContactId__"),
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		ContactFlowId:          ptr.String("__ContactFlowId__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		SourcePhoneNumber:      ptr.String("__SourcePhoneNumber__"),
+		QueueId:                ptr.String("__QueueId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+			EnableAnswerMachineDetection: true,
+			AwaitAnswerMachinePrompt:     true,
+		},
+		CampaignId:  ptr.String("__CampaignId__"),
+		TrafficType: types.TrafficType("GENERAL"),
+		OutboundStrategy: &types.OutboundStrategy{
+			Type: types.OutboundStrategyType("AGENT_FIRST"),
+			Config: &types.OutboundStrategyConfig{
+				AgentFirst: &types.AgentFirst{
+					Preview: &types.Preview{
+						PostAcceptTimeoutConfig: &types.PostAcceptTimeoutConfig{
+							DurationInSeconds: ptr.Int32(1),
+						},
+						AllowedUserActions: []types.AllowedUserAction{
+							types.AllowedUserAction("CALL"),
+							types.AllowedUserAction("CALL"),
+						},
+					},
+				},
+			},
+		},
+		RingTimeoutInSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15956,7 +24007,17 @@ func TestCheckResponseSnapshot_Error_OutputTypeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), &ListRealtimeContactAnalysisSegmentsV2Input{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), &ListRealtimeContactAnalysisSegmentsV2Input{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		OutputType: types.RealTimeContactAnalysisOutputType("Raw"),
+		SegmentTypes: []types.RealTimeContactAnalysisSegmentType{
+			types.RealTimeContactAnalysisSegmentType("Transcript"),
+			types.RealTimeContactAnalysisSegmentType("Transcript"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -15993,7 +24054,93 @@ func TestCheckResponseSnapshot_Error_PropertyValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTaskTemplate(context.Background(), &CreateTaskTemplateInput{})
+	_, opErr := svc.CreateTaskTemplate(context.Background(), &CreateTaskTemplateInput{
+		InstanceId:       ptr.String("__InstanceId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ContactFlowId:    ptr.String("__ContactFlowId__"),
+		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		Constraints: &types.TaskTemplateConstraints{
+			RequiredFields: []types.RequiredFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			ReadOnlyFields: []types.ReadOnlyFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			InvisibleFields: []types.InvisibleFieldInfo{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		Defaults: &types.TaskTemplateDefaults{
+			DefaultFieldValues: []types.TaskTemplateDefaultFieldValue{
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+				{
+					Id: &types.TaskTemplateFieldIdentifier{
+						Name: ptr.String("__Name__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+		},
+		Status: types.TaskTemplateStatus("ACTIVE"),
+		Fields: []types.TaskTemplateField{
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Id: &types.TaskTemplateFieldIdentifier{
+					Name: ptr.String("__Name__"),
+				},
+				Description: ptr.String("__Description__"),
+				Type:        types.TaskTemplateFieldType("NAME"),
+				SingleSelectOptions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16018,7 +24165,11 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16045,7 +24196,23 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{})
+	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Status:      types.ViewStatus("PUBLISHED"),
+		Content: &types.ViewInputContent{
+			Template: ptr.String("__Template__"),
+			Actions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16070,7 +24237,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16095,7 +24266,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrafficDistributionGroup(context.Background(), &CreateTrafficDistributionGroupInput{})
+	_, opErr := svc.CreateTrafficDistributionGroup(context.Background(), &CreateTrafficDistributionGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16123,7 +24302,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApprovedOrigin(context.Background(), &AssociateApprovedOriginInput{})
+	_, opErr := svc.AssociateApprovedOrigin(context.Background(), &AssociateApprovedOriginInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Origin:      ptr.String("__Origin__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16148,7 +24331,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{})
+	_, opErr := svc.ActivateEvaluationForm(context.Background(), &ActivateEvaluationFormInput{
+		InstanceId:            ptr.String("__InstanceId__"),
+		EvaluationFormId:      ptr.String("__EvaluationFormId__"),
+		EvaluationFormVersion: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16173,7 +24360,23 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{})
+	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Status:      types.ViewStatus("PUBLISHED"),
+		Content: &types.ViewInputContent{
+			Template: ptr.String("__Template__"),
+			Actions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -16198,7 +24401,9 @@ func TestCheckResponseSnapshot_Error_UserNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{})
+	_, opErr := svc.GetFederationToken(context.Background(), &GetFederationTokenInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

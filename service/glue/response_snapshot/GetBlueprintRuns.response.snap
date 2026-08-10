@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetBlueprintRuns
+
+{"BlueprintRuns":[{"BlueprintName":"__BlueprintName__","CompletedOn":946684800,"ErrorMessage":"__ErrorMessage__","Parameters":"__Parameters__","RoleArn":"__RoleArn__","RollbackErrorMessage":"__RollbackErrorMessage__","RunId":"__RunId__","StartedOn":946684800,"State":"RUNNING","WorkflowName":"__WorkflowName__"},{"BlueprintName":"__BlueprintName__","CompletedOn":946684800,"ErrorMessage":"__ErrorMessage__","Parameters":"__Parameters__","RoleArn":"__RoleArn__","RollbackErrorMessage":"__RollbackErrorMessage__","RunId":"__RunId__","StartedOn":946684800,"State":"RUNNING","WorkflowName":"__WorkflowName__"}],"NextToken":"__NextToken__"}

@@ -143,7 +143,10 @@ func TestCheckResponseSnapshot_CreateByteMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	got, err := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +181,10 @@ func TestCheckResponseSnapshot_CreateGeoMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGeoMatchSet(context.Background(), &CreateGeoMatchSetInput{})
+	got, err := svc.CreateGeoMatchSet(context.Background(), &CreateGeoMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +219,10 @@ func TestCheckResponseSnapshot_CreateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +262,23 @@ func TestCheckResponseSnapshot_CreateRateBasedRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{})
+	got, err := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		RateKey:     types.RateKey("IP"),
+		RateLimit:   ptr.Int64(1),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +321,10 @@ func TestCheckResponseSnapshot_CreateRegexMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegexMatchSet(context.Background(), &CreateRegexMatchSetInput{})
+	got, err := svc.CreateRegexMatchSet(context.Background(), &CreateRegexMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +353,10 @@ func TestCheckResponseSnapshot_CreateRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegexPatternSet(context.Background(), &CreateRegexPatternSetInput{})
+	got, err := svc.CreateRegexPatternSet(context.Background(), &CreateRegexPatternSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +394,21 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +434,21 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{})
+	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +493,10 @@ func TestCheckResponseSnapshot_CreateSizeConstraintSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSizeConstraintSet(context.Background(), &CreateSizeConstraintSetInput{})
+	got, err := svc.CreateSizeConstraintSet(context.Background(), &CreateSizeConstraintSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +537,10 @@ func TestCheckResponseSnapshot_CreateSqlInjectionMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSqlInjectionMatchSet(context.Background(), &CreateSqlInjectionMatchSetInput{})
+	got, err := svc.CreateSqlInjectionMatchSet(context.Background(), &CreateSqlInjectionMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +610,24 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebACL(context.Background(), &CreateWebACLInput{})
+	got, err := svc.CreateWebACL(context.Background(), &CreateWebACLInput{
+		Name:       ptr.String("__Name__"),
+		MetricName: ptr.String("__MetricName__"),
+		DefaultAction: &types.WafAction{
+			Type: types.WafActionType("BLOCK"),
+		},
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -566,7 +648,11 @@ func TestCheckResponseSnapshot_CreateWebACLMigrationStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{})
+	got, err := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{
+		WebACLId:              ptr.String("__WebACLId__"),
+		S3BucketName:          ptr.String("__S3BucketName__"),
+		IgnoreUnsupportedType: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +693,10 @@ func TestCheckResponseSnapshot_CreateXssMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateXssMatchSet(context.Background(), &CreateXssMatchSetInput{})
+	got, err := svc.CreateXssMatchSet(context.Background(), &CreateXssMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +717,10 @@ func TestCheckResponseSnapshot_DeleteByteMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{})
+	got, err := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+		ChangeToken:    ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +741,10 @@ func TestCheckResponseSnapshot_DeleteGeoMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGeoMatchSet(context.Background(), &DeleteGeoMatchSetInput{})
+	got, err := svc.DeleteGeoMatchSet(context.Background(), &DeleteGeoMatchSetInput{
+		GeoMatchSetId: ptr.String("__GeoMatchSetId__"),
+		ChangeToken:   ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -670,7 +765,10 @@ func TestCheckResponseSnapshot_DeleteIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{})
+	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{
+		IPSetId:     ptr.String("__IPSetId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +787,9 @@ func TestCheckResponseSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{})
+	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +808,9 @@ func TestCheckResponseSnapshot_DeletePermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionPolicy(context.Background(), &DeletePermissionPolicyInput{})
+	got, err := svc.DeletePermissionPolicy(context.Background(), &DeletePermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +831,10 @@ func TestCheckResponseSnapshot_DeleteRateBasedRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRateBasedRule(context.Background(), &DeleteRateBasedRuleInput{})
+	got, err := svc.DeleteRateBasedRule(context.Background(), &DeleteRateBasedRuleInput{
+		RuleId:      ptr.String("__RuleId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +855,10 @@ func TestCheckResponseSnapshot_DeleteRegexMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegexMatchSet(context.Background(), &DeleteRegexMatchSetInput{})
+	got, err := svc.DeleteRegexMatchSet(context.Background(), &DeleteRegexMatchSetInput{
+		RegexMatchSetId: ptr.String("__RegexMatchSetId__"),
+		ChangeToken:     ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +879,10 @@ func TestCheckResponseSnapshot_DeleteRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegexPatternSet(context.Background(), &DeleteRegexPatternSetInput{})
+	got, err := svc.DeleteRegexPatternSet(context.Background(), &DeleteRegexPatternSetInput{
+		RegexPatternSetId: ptr.String("__RegexPatternSetId__"),
+		ChangeToken:       ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +903,10 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		RuleId:      ptr.String("__RuleId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +927,10 @@ func TestCheckResponseSnapshot_DeleteRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{})
+	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{
+		RuleGroupId: ptr.String("__RuleGroupId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +951,10 @@ func TestCheckResponseSnapshot_DeleteSizeConstraintSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSizeConstraintSet(context.Background(), &DeleteSizeConstraintSetInput{})
+	got, err := svc.DeleteSizeConstraintSet(context.Background(), &DeleteSizeConstraintSetInput{
+		SizeConstraintSetId: ptr.String("__SizeConstraintSetId__"),
+		ChangeToken:         ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -855,7 +975,10 @@ func TestCheckResponseSnapshot_DeleteSqlInjectionMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSqlInjectionMatchSet(context.Background(), &DeleteSqlInjectionMatchSetInput{})
+	got, err := svc.DeleteSqlInjectionMatchSet(context.Background(), &DeleteSqlInjectionMatchSetInput{
+		SqlInjectionMatchSetId: ptr.String("__SqlInjectionMatchSetId__"),
+		ChangeToken:            ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -876,7 +999,10 @@ func TestCheckResponseSnapshot_DeleteWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebACL(context.Background(), &DeleteWebACLInput{})
+	got, err := svc.DeleteWebACL(context.Background(), &DeleteWebACLInput{
+		WebACLId:    ptr.String("__WebACLId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1023,10 @@ func TestCheckResponseSnapshot_DeleteXssMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteXssMatchSet(context.Background(), &DeleteXssMatchSetInput{})
+	got, err := svc.DeleteXssMatchSet(context.Background(), &DeleteXssMatchSetInput{
+		XssMatchSetId: ptr.String("__XssMatchSetId__"),
+		ChangeToken:   ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1070,9 @@ func TestCheckResponseSnapshot_GetByteMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetByteMatchSet(context.Background(), &GetByteMatchSetInput{})
+	got, err := svc.GetByteMatchSet(context.Background(), &GetByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1114,9 @@ func TestCheckResponseSnapshot_GetChangeTokenStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChangeTokenStatus(context.Background(), &GetChangeTokenStatusInput{})
+	got, err := svc.GetChangeTokenStatus(context.Background(), &GetChangeTokenStatusInput{
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1017,7 +1150,9 @@ func TestCheckResponseSnapshot_GetGeoMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGeoMatchSet(context.Background(), &GetGeoMatchSetInput{})
+	got, err := svc.GetGeoMatchSet(context.Background(), &GetGeoMatchSetInput{
+		GeoMatchSetId: ptr.String("__GeoMatchSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1186,9 @@ func TestCheckResponseSnapshot_GetIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{})
+	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{
+		IPSetId: ptr.String("__IPSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1088,7 +1225,9 @@ func TestCheckResponseSnapshot_GetLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{})
+	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1109,7 +1248,9 @@ func TestCheckResponseSnapshot_GetPermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPermissionPolicy(context.Background(), &GetPermissionPolicyInput{})
+	got, err := svc.GetPermissionPolicy(context.Background(), &GetPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1148,7 +1289,9 @@ func TestCheckResponseSnapshot_GetRateBasedRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRateBasedRule(context.Background(), &GetRateBasedRuleInput{})
+	got, err := svc.GetRateBasedRule(context.Background(), &GetRateBasedRuleInput{
+		RuleId: ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1173,7 +1316,10 @@ func TestCheckResponseSnapshot_GetRateBasedRuleManagedKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRateBasedRuleManagedKeys(context.Background(), &GetRateBasedRuleManagedKeysInput{})
+	got, err := svc.GetRateBasedRuleManagedKeys(context.Background(), &GetRateBasedRuleManagedKeysInput{
+		RuleId:     ptr.String("__RuleId__"),
+		NextMarker: ptr.String("__NextMarker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1361,9 @@ func TestCheckResponseSnapshot_GetRegexMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegexMatchSet(context.Background(), &GetRegexMatchSetInput{})
+	got, err := svc.GetRegexMatchSet(context.Background(), &GetRegexMatchSetInput{
+		RegexMatchSetId: ptr.String("__RegexMatchSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1243,7 +1391,9 @@ func TestCheckResponseSnapshot_GetRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegexPatternSet(context.Background(), &GetRegexPatternSetInput{})
+	got, err := svc.GetRegexPatternSet(context.Background(), &GetRegexPatternSetInput{
+		RegexPatternSetId: ptr.String("__RegexPatternSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +1430,9 @@ func TestCheckResponseSnapshot_GetRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRule(context.Background(), &GetRuleInput{})
+	got, err := svc.GetRule(context.Background(), &GetRuleInput{
+		RuleId: ptr.String("__RuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1305,7 +1457,9 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRuleGroup(context.Background(), &GetRuleGroupInput{})
+	got, err := svc.GetRuleGroup(context.Background(), &GetRuleGroupInput{
+		RuleGroupId: ptr.String("__RuleGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1378,7 +1532,15 @@ func TestCheckResponseSnapshot_GetSampledRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSampledRequests(context.Background(), &GetSampledRequestsInput{})
+	got, err := svc.GetSampledRequests(context.Background(), &GetSampledRequestsInput{
+		WebAclId: ptr.String("__WebAclId__"),
+		RuleId:   ptr.String("__RuleId__"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxItems: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1422,7 +1584,9 @@ func TestCheckResponseSnapshot_GetSizeConstraintSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSizeConstraintSet(context.Background(), &GetSizeConstraintSetInput{})
+	got, err := svc.GetSizeConstraintSet(context.Background(), &GetSizeConstraintSetInput{
+		SizeConstraintSetId: ptr.String("__SizeConstraintSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1462,7 +1626,9 @@ func TestCheckResponseSnapshot_GetSqlInjectionMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSqlInjectionMatchSet(context.Background(), &GetSqlInjectionMatchSetInput{})
+	got, err := svc.GetSqlInjectionMatchSet(context.Background(), &GetSqlInjectionMatchSetInput{
+		SqlInjectionMatchSetId: ptr.String("__SqlInjectionMatchSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1531,7 +1697,9 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebACL(context.Background(), &GetWebACLInput{})
+	got, err := svc.GetWebACL(context.Background(), &GetWebACLInput{
+		WebACLId: ptr.String("__WebACLId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1571,7 +1739,9 @@ func TestCheckResponseSnapshot_GetXssMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetXssMatchSet(context.Background(), &GetXssMatchSetInput{})
+	got, err := svc.GetXssMatchSet(context.Background(), &GetXssMatchSetInput{
+		XssMatchSetId: ptr.String("__XssMatchSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1632,7 +1802,11 @@ func TestCheckResponseSnapshot_ListActivatedRulesInRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActivatedRulesInRuleGroup(context.Background(), &ListActivatedRulesInRuleGroupInput{})
+	got, err := svc.ListActivatedRulesInRuleGroup(context.Background(), &ListActivatedRulesInRuleGroupInput{
+		RuleGroupId: ptr.String("__RuleGroupId__"),
+		NextMarker:  ptr.String("__NextMarker__"),
+		Limit:       1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1663,7 +1837,10 @@ func TestCheckResponseSnapshot_ListByteMatchSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListByteMatchSets(context.Background(), &ListByteMatchSetsInput{})
+	got, err := svc.ListByteMatchSets(context.Background(), &ListByteMatchSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1694,7 +1871,10 @@ func TestCheckResponseSnapshot_ListGeoMatchSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGeoMatchSets(context.Background(), &ListGeoMatchSetsInput{})
+	got, err := svc.ListGeoMatchSets(context.Background(), &ListGeoMatchSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1725,7 +1905,10 @@ func TestCheckResponseSnapshot_ListIPSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{})
+	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1782,7 +1965,10 @@ func TestCheckResponseSnapshot_ListLoggingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{})
+	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1813,7 +1999,10 @@ func TestCheckResponseSnapshot_ListRateBasedRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRateBasedRules(context.Background(), &ListRateBasedRulesInput{})
+	got, err := svc.ListRateBasedRules(context.Background(), &ListRateBasedRulesInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1844,7 +2033,10 @@ func TestCheckResponseSnapshot_ListRegexMatchSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegexMatchSets(context.Background(), &ListRegexMatchSetsInput{})
+	got, err := svc.ListRegexMatchSets(context.Background(), &ListRegexMatchSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1875,7 +2067,10 @@ func TestCheckResponseSnapshot_ListRegexPatternSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegexPatternSets(context.Background(), &ListRegexPatternSetsInput{})
+	got, err := svc.ListRegexPatternSets(context.Background(), &ListRegexPatternSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1906,7 +2101,10 @@ func TestCheckResponseSnapshot_ListRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{})
+	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1937,7 +2135,10 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1968,7 +2169,10 @@ func TestCheckResponseSnapshot_ListSizeConstraintSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSizeConstraintSets(context.Background(), &ListSizeConstraintSetsInput{})
+	got, err := svc.ListSizeConstraintSets(context.Background(), &ListSizeConstraintSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1999,7 +2203,10 @@ func TestCheckResponseSnapshot_ListSqlInjectionMatchSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSqlInjectionMatchSets(context.Background(), &ListSqlInjectionMatchSetsInput{})
+	got, err := svc.ListSqlInjectionMatchSets(context.Background(), &ListSqlInjectionMatchSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2032,7 +2239,10 @@ func TestCheckResponseSnapshot_ListSubscribedRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscribedRuleGroups(context.Background(), &ListSubscribedRuleGroupsInput{})
+	got, err := svc.ListSubscribedRuleGroups(context.Background(), &ListSubscribedRuleGroupsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2066,7 +2276,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		NextMarker:  ptr.String("__NextMarker__"),
+		Limit:       1,
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2097,7 +2311,10 @@ func TestCheckResponseSnapshot_ListWebACLs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebACLs(context.Background(), &ListWebACLsInput{})
+	got, err := svc.ListWebACLs(context.Background(), &ListWebACLsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2128,7 +2345,10 @@ func TestCheckResponseSnapshot_ListXssMatchSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListXssMatchSets(context.Background(), &ListXssMatchSetsInput{})
+	got, err := svc.ListXssMatchSets(context.Background(), &ListXssMatchSetsInput{
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2165,7 +2385,25 @@ func TestCheckResponseSnapshot_PutLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{})
+	got, err := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{
+		LoggingConfiguration: &types.LoggingConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			LogDestinationConfigs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RedactedFields: []types.FieldToMatch{
+				{
+					Type: types.MatchFieldType("URI"),
+					Data: ptr.String("__Data__"),
+				},
+				{
+					Type: types.MatchFieldType("URI"),
+					Data: ptr.String("__Data__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2184,7 +2422,10 @@ func TestCheckResponseSnapshot_PutPermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{})
+	got, err := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2203,7 +2444,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2222,7 +2475,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2243,7 +2502,36 @@ func TestCheckResponseSnapshot_UpdateByteMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateByteMatchSet(context.Background(), &UpdateByteMatchSetInput{})
+	got, err := svc.UpdateByteMatchSet(context.Background(), &UpdateByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+		ChangeToken:    ptr.String("__ChangeToken__"),
+		Updates: []types.ByteMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				ByteMatchTuple: &types.ByteMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TargetString:         []byte("blob"),
+					TextTransformation:   types.TextTransformation("NONE"),
+					PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				ByteMatchTuple: &types.ByteMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TargetString:         []byte("blob"),
+					TextTransformation:   types.TextTransformation("NONE"),
+					PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +2552,26 @@ func TestCheckResponseSnapshot_UpdateGeoMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGeoMatchSet(context.Background(), &UpdateGeoMatchSetInput{})
+	got, err := svc.UpdateGeoMatchSet(context.Background(), &UpdateGeoMatchSetInput{
+		GeoMatchSetId: ptr.String("__GeoMatchSetId__"),
+		ChangeToken:   ptr.String("__ChangeToken__"),
+		Updates: []types.GeoMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				GeoMatchConstraint: &types.GeoMatchConstraint{
+					Type:  types.GeoMatchConstraintType("Country"),
+					Value: types.GeoMatchConstraintValue("AF"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				GeoMatchConstraint: &types.GeoMatchConstraint{
+					Type:  types.GeoMatchConstraintType("Country"),
+					Value: types.GeoMatchConstraintValue("AF"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2285,7 +2592,26 @@ func TestCheckResponseSnapshot_UpdateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{})
+	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{
+		IPSetId:     ptr.String("__IPSetId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Updates: []types.IPSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				IPSetDescriptor: &types.IPSetDescriptor{
+					Type:  types.IPSetDescriptorType("IPV4"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				IPSetDescriptor: &types.IPSetDescriptor{
+					Type:  types.IPSetDescriptorType("IPV4"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2306,7 +2632,29 @@ func TestCheckResponseSnapshot_UpdateRateBasedRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRateBasedRule(context.Background(), &UpdateRateBasedRuleInput{})
+	got, err := svc.UpdateRateBasedRule(context.Background(), &UpdateRateBasedRuleInput{
+		RuleId:      ptr.String("__RuleId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Updates: []types.RuleUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				Predicate: &types.Predicate{
+					Negated: ptr.Bool(true),
+					Type:    types.PredicateType("IPMatch"),
+					DataId:  ptr.String("__DataId__"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				Predicate: &types.Predicate{
+					Negated: ptr.Bool(true),
+					Type:    types.PredicateType("IPMatch"),
+					DataId:  ptr.String("__DataId__"),
+				},
+			},
+		},
+		RateLimit: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2327,7 +2675,34 @@ func TestCheckResponseSnapshot_UpdateRegexMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegexMatchSet(context.Background(), &UpdateRegexMatchSetInput{})
+	got, err := svc.UpdateRegexMatchSet(context.Background(), &UpdateRegexMatchSetInput{
+		RegexMatchSetId: ptr.String("__RegexMatchSetId__"),
+		Updates: []types.RegexMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				RegexMatchTuple: &types.RegexMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+					RegexPatternSetId:  ptr.String("__RegexPatternSetId__"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				RegexMatchTuple: &types.RegexMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+					RegexPatternSetId:  ptr.String("__RegexPatternSetId__"),
+				},
+			},
+		},
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2348,7 +2723,20 @@ func TestCheckResponseSnapshot_UpdateRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{})
+	got, err := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{
+		RegexPatternSetId: ptr.String("__RegexPatternSetId__"),
+		Updates: []types.RegexPatternSetUpdate{
+			{
+				Action:             types.ChangeAction("INSERT"),
+				RegexPatternString: ptr.String("__RegexPatternString__"),
+			},
+			{
+				Action:             types.ChangeAction("INSERT"),
+				RegexPatternString: ptr.String("__RegexPatternString__"),
+			},
+		},
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2369,7 +2757,28 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{})
+	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{
+		RuleId:      ptr.String("__RuleId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Updates: []types.RuleUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				Predicate: &types.Predicate{
+					Negated: ptr.Bool(true),
+					Type:    types.PredicateType("IPMatch"),
+					DataId:  ptr.String("__DataId__"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				Predicate: &types.Predicate{
+					Negated: ptr.Bool(true),
+					Type:    types.PredicateType("IPMatch"),
+					DataId:  ptr.String("__DataId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2390,7 +2799,56 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{})
+	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{
+		RuleGroupId: ptr.String("__RuleGroupId__"),
+		Updates: []types.RuleGroupUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+		},
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2411,7 +2869,36 @@ func TestCheckResponseSnapshot_UpdateSizeConstraintSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSizeConstraintSet(context.Background(), &UpdateSizeConstraintSetInput{})
+	got, err := svc.UpdateSizeConstraintSet(context.Background(), &UpdateSizeConstraintSetInput{
+		SizeConstraintSetId: ptr.String("__SizeConstraintSetId__"),
+		ChangeToken:         ptr.String("__ChangeToken__"),
+		Updates: []types.SizeConstraintSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				SizeConstraint: &types.SizeConstraint{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+					ComparisonOperator: types.ComparisonOperator("EQ"),
+					Size:               1,
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				SizeConstraint: &types.SizeConstraint{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+					ComparisonOperator: types.ComparisonOperator("EQ"),
+					Size:               1,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2432,7 +2919,32 @@ func TestCheckResponseSnapshot_UpdateSqlInjectionMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSqlInjectionMatchSet(context.Background(), &UpdateSqlInjectionMatchSetInput{})
+	got, err := svc.UpdateSqlInjectionMatchSet(context.Background(), &UpdateSqlInjectionMatchSetInput{
+		SqlInjectionMatchSetId: ptr.String("__SqlInjectionMatchSetId__"),
+		ChangeToken:            ptr.String("__ChangeToken__"),
+		Updates: []types.SqlInjectionMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				SqlInjectionMatchTuple: &types.SqlInjectionMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				SqlInjectionMatchTuple: &types.SqlInjectionMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2453,7 +2965,59 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{})
+	got, err := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{
+		WebACLId:    ptr.String("__WebACLId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Updates: []types.WebACLUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+		},
+		DefaultAction: &types.WafAction{
+			Type: types.WafActionType("BLOCK"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2474,7 +3038,32 @@ func TestCheckResponseSnapshot_UpdateXssMatchSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateXssMatchSet(context.Background(), &UpdateXssMatchSetInput{})
+	got, err := svc.UpdateXssMatchSet(context.Background(), &UpdateXssMatchSetInput{
+		XssMatchSetId: ptr.String("__XssMatchSetId__"),
+		ChangeToken:   ptr.String("__ChangeToken__"),
+		Updates: []types.XssMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				XssMatchTuple: &types.XssMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				XssMatchTuple: &types.XssMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TextTransformation: types.TextTransformation("NONE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2495,7 +3084,23 @@ func TestCheckResponseSnapshot_Error_WAFBadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{})
+	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		RateKey:     types.RateKey("IP"),
+		RateLimit:   ptr.Int64(1),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2520,7 +3125,10 @@ func TestCheckResponseSnapshot_Error_WAFDisallowedNameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2547,7 +3155,11 @@ func TestCheckResponseSnapshot_Error_WAFEntityMigrationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{})
+	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{
+		WebACLId:              ptr.String("__WebACLId__"),
+		S3BucketName:          ptr.String("__S3BucketName__"),
+		IgnoreUnsupportedType: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2572,7 +3184,10 @@ func TestCheckResponseSnapshot_Error_WAFInternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2595,7 +3210,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidAccountException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2620,7 +3238,11 @@ func TestCheckResponseSnapshot_Error_WAFInvalidOperationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{})
+	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{
+		WebACLId:              ptr.String("__WebACLId__"),
+		S3BucketName:          ptr.String("__S3BucketName__"),
+		IgnoreUnsupportedType: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2647,7 +3269,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidParameterException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2672,7 +3297,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidPermissionPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{})
+	_, opErr := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2697,7 +3325,20 @@ func TestCheckResponseSnapshot_Error_WAFInvalidRegexPatternException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{})
+	_, opErr := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{
+		RegexPatternSetId: ptr.String("__RegexPatternSetId__"),
+		Updates: []types.RegexPatternSetUpdate{
+			{
+				Action:             types.ChangeAction("INSERT"),
+				RegexPatternString: ptr.String("__RegexPatternString__"),
+			},
+			{
+				Action:             types.ChangeAction("INSERT"),
+				RegexPatternString: ptr.String("__RegexPatternString__"),
+			},
+		},
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2722,7 +3363,10 @@ func TestCheckResponseSnapshot_Error_WAFLimitsExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2747,7 +3391,10 @@ func TestCheckResponseSnapshot_Error_WAFNonEmptyEntityException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{})
+	_, opErr := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+		ChangeToken:    ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2772,7 +3419,36 @@ func TestCheckResponseSnapshot_Error_WAFNonexistentContainerException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateByteMatchSet(context.Background(), &UpdateByteMatchSetInput{})
+	_, opErr := svc.UpdateByteMatchSet(context.Background(), &UpdateByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+		ChangeToken:    ptr.String("__ChangeToken__"),
+		Updates: []types.ByteMatchSetUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				ByteMatchTuple: &types.ByteMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TargetString:         []byte("blob"),
+					TextTransformation:   types.TextTransformation("NONE"),
+					PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				ByteMatchTuple: &types.ByteMatchTuple{
+					FieldToMatch: &types.FieldToMatch{
+						Type: types.MatchFieldType("URI"),
+						Data: ptr.String("__Data__"),
+					},
+					TargetString:         []byte("blob"),
+					TextTransformation:   types.TextTransformation("NONE"),
+					PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2797,7 +3473,11 @@ func TestCheckResponseSnapshot_Error_WAFNonexistentItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{})
+	_, opErr := svc.CreateWebACLMigrationStack(context.Background(), &CreateWebACLMigrationStackInput{
+		WebACLId:              ptr.String("__WebACLId__"),
+		S3BucketName:          ptr.String("__S3BucketName__"),
+		IgnoreUnsupportedType: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2822,7 +3502,10 @@ func TestCheckResponseSnapshot_Error_WAFReferencedItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{})
+	_, opErr := svc.DeleteByteMatchSet(context.Background(), &DeleteByteMatchSetInput{
+		ByteMatchSetId: ptr.String("__ByteMatchSetId__"),
+		ChangeToken:    ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2847,7 +3530,25 @@ func TestCheckResponseSnapshot_Error_WAFServiceLinkedRoleErrorException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{})
+	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{
+		LoggingConfiguration: &types.LoggingConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			LogDestinationConfigs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RedactedFields: []types.FieldToMatch{
+				{
+					Type: types.MatchFieldType("URI"),
+					Data: ptr.String("__Data__"),
+				},
+				{
+					Type: types.MatchFieldType("URI"),
+					Data: ptr.String("__Data__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2872,7 +3573,10 @@ func TestCheckResponseSnapshot_Error_WAFStaleDataException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{})
+	_, opErr := svc.CreateByteMatchSet(context.Background(), &CreateByteMatchSetInput{
+		Name:        ptr.String("__Name__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2897,7 +3601,59 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{})
+	_, opErr := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{
+		WebACLId:    ptr.String("__WebACLId__"),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Updates: []types.WebACLUpdate{
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+			{
+				Action: types.ChangeAction("INSERT"),
+				ActivatedRule: &types.ActivatedRule{
+					Priority: ptr.Int32(1),
+					RuleId:   ptr.String("__RuleId__"),
+					Action: &types.WafAction{
+						Type: types.WafActionType("BLOCK"),
+					},
+					OverrideAction: &types.WafOverrideAction{
+						Type: types.WafOverrideActionType("NONE"),
+					},
+					Type: types.WafRuleType("REGULAR"),
+					ExcludedRules: []types.ExcludedRule{
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+						{
+							RuleId: ptr.String("__RuleId__"),
+						},
+					},
+				},
+			},
+		},
+		DefaultAction: &types.WafAction{
+			Type: types.WafActionType("BLOCK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2922,7 +3678,23 @@ func TestCheckResponseSnapshot_Error_WAFTagOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{})
+	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		RateKey:     types.RateKey("IP"),
+		RateLimit:   ptr.Int64(1),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2947,7 +3719,23 @@ func TestCheckResponseSnapshot_Error_WAFTagOperationInternalErrorException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{})
+	_, opErr := svc.CreateRateBasedRule(context.Background(), &CreateRateBasedRuleInput{
+		Name:        ptr.String("__Name__"),
+		MetricName:  ptr.String("__MetricName__"),
+		RateKey:     types.RateKey("IP"),
+		RateLimit:   ptr.Int64(1),
+		ChangeToken: ptr.String("__ChangeToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

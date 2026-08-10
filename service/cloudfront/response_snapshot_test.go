@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	got, err := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +143,11 @@ func TestCheckResponseSnapshot_AssociateDistributionTenantWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{})
+	got, err := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +170,11 @@ func TestCheckResponseSnapshot_AssociateDistributionWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDistributionWebACL(context.Background(), &AssociateDistributionWebACLInput{})
+	got, err := svc.AssociateDistributionWebACL(context.Background(), &AssociateDistributionWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +846,13 @@ func TestCheckResponseSnapshot_CopyDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	got, err := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -886,7 +903,37 @@ func TestCheckResponseSnapshot_CreateAnycastIpList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{})
+	got, err := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{
+		Name:    ptr.String("__Name__"),
+		IpCount: ptr.Int32(1),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		IpAddressType: types.IpAddressType("ipv4"),
+		IpamCidrConfigs: []types.IpamCidrConfig{
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -953,7 +1000,49 @@ func TestCheckResponseSnapshot_CreateCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	got, err := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1072,12 @@ func TestCheckResponseSnapshot_CreateCloudFrontOriginAccessIdentity(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{})
+	got, err := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{
+		CloudFrontOriginAccessIdentityConfig: &types.CloudFrontOriginAccessIdentityConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1123,37 @@ func TestCheckResponseSnapshot_CreateConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectionFunction(context.Background(), &CreateConnectionFunctionInput{})
+	got, err := svc.CreateConnectionFunction(context.Background(), &CreateConnectionFunctionInput{
+		Name: ptr.String("__Name__"),
+		ConnectionFunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		ConnectionFunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1075,7 +1199,24 @@ func TestCheckResponseSnapshot_CreateConnectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectionGroup(context.Background(), &CreateConnectionGroupInput{})
+	got, err := svc.CreateConnectionGroup(context.Background(), &CreateConnectionGroupInput{
+		Name:        ptr.String("__Name__"),
+		Ipv6Enabled: ptr.Bool(true),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		AnycastIpListId: ptr.String("__AnycastIpListId__"),
+		Enabled:         ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1266,32 @@ func TestCheckResponseSnapshot_CreateContinuousDeploymentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{})
+	got, err := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{
+		ContinuousDeploymentPolicyConfig: &types.ContinuousDeploymentPolicyConfig{
+			StagingDistributionDnsNames: &types.StagingDistributionDnsNames{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Enabled: ptr.Bool(true),
+			TrafficConfig: &types.TrafficConfig{
+				SingleWeightConfig: &types.ContinuousDeploymentSingleWeightConfig{
+					Weight: ptr.Float32(1.0),
+					SessionStickinessConfig: &types.SessionStickinessConfig{
+						IdleTTL:    ptr.Int32(1),
+						MaximumTTL: ptr.Int32(1),
+					},
+				},
+				SingleHeaderConfig: &types.ContinuousDeploymentSingleHeaderConfig{
+					Header: ptr.String("__Header__"),
+					Value:  ptr.String("__Value__"),
+				},
+				Type: types.ContinuousDeploymentPolicyType("SingleWeight"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1797,7 +1963,588 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDistribution(context.Background(), &CreateDistributionInput{})
+	got, err := svc.CreateDistribution(context.Background(), &CreateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1877,7 +2624,63 @@ func TestCheckResponseSnapshot_CreateDistributionTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDistributionTenant(context.Background(), &CreateDistributionTenantInput{})
+	got, err := svc.CreateDistributionTenant(context.Background(), &CreateDistributionTenantInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Name:           ptr.String("__Name__"),
+		Domains: []types.DomainItem{
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+		},
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Customizations: &types.Customizations{
+			WebAcl: &types.WebAclCustomization{
+				Action: types.CustomizationActionType("override"),
+				Arn:    ptr.String("__Arn__"),
+			},
+			Certificate: &types.Certificate{
+				Arn: ptr.String("__Arn__"),
+			},
+			GeoRestrictions: &types.GeoRestrictionCustomization{
+				RestrictionType: types.GeoRestrictionType("blacklist"),
+				Locations: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Parameters: []types.Parameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
+		ManagedCertificateRequest: &types.ManagedCertificateRequest{
+			ValidationTokenHost:                      types.ValidationTokenHost("cloudfront"),
+			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2549,7 +3352,602 @@ func TestCheckResponseSnapshot_CreateDistributionWithTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDistributionWithTags(context.Background(), &CreateDistributionWithTagsInput{})
+	got, err := svc.CreateDistributionWithTags(context.Background(), &CreateDistributionWithTagsInput{
+		DistributionConfigWithTags: &types.DistributionConfigWithTags{
+			DistributionConfig: &types.DistributionConfig{
+				CallerReference: ptr.String("__CallerReference__"),
+				Aliases: &types.Aliases{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				DefaultRootObject: ptr.String("__DefaultRootObject__"),
+				Origins: &types.Origins{
+					Quantity: ptr.Int32(1),
+					Items: []types.Origin{
+						{
+							Id:         ptr.String("__Id__"),
+							DomainName: ptr.String("__DomainName__"),
+							OriginPath: ptr.String("__OriginPath__"),
+							CustomHeaders: &types.CustomHeaders{
+								Quantity: ptr.Int32(1),
+								Items: []types.OriginCustomHeader{
+									{
+										HeaderName:  ptr.String("__HeaderName__"),
+										HeaderValue: ptr.String("__HeaderValue__"),
+									},
+									{
+										HeaderName:  ptr.String("__HeaderName__"),
+										HeaderValue: ptr.String("__HeaderValue__"),
+									},
+								},
+							},
+							S3OriginConfig: &types.S3OriginConfig{
+								OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+								OriginReadTimeout:    ptr.Int32(1),
+							},
+							CustomOriginConfig: &types.CustomOriginConfig{
+								HTTPPort:             ptr.Int32(1),
+								HTTPSPort:            ptr.Int32(1),
+								OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+								OriginSslProtocols: &types.OriginSslProtocols{
+									Quantity: ptr.Int32(1),
+									Items: []types.SslProtocol{
+										types.SslProtocol("SSLv3"),
+										types.SslProtocol("SSLv3"),
+									},
+								},
+								OriginReadTimeout:      ptr.Int32(1),
+								OriginKeepaliveTimeout: ptr.Int32(1),
+								IpAddressType:          types.IpAddressType("ipv4"),
+								OriginMtlsConfig: &types.OriginMtlsConfig{
+									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+								},
+							},
+							VpcOriginConfig: &types.VpcOriginConfig{
+								VpcOriginId:            ptr.String("__VpcOriginId__"),
+								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+								OriginReadTimeout:      ptr.Int32(1),
+								OriginKeepaliveTimeout: ptr.Int32(1),
+							},
+							ConnectionAttempts:        ptr.Int32(1),
+							ConnectionTimeout:         ptr.Int32(1),
+							ResponseCompletionTimeout: ptr.Int32(1),
+							OriginShield: &types.OriginShield{
+								Enabled:            ptr.Bool(true),
+								OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+							},
+							OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+						},
+						{
+							Id:         ptr.String("__Id__"),
+							DomainName: ptr.String("__DomainName__"),
+							OriginPath: ptr.String("__OriginPath__"),
+							CustomHeaders: &types.CustomHeaders{
+								Quantity: ptr.Int32(1),
+								Items: []types.OriginCustomHeader{
+									{
+										HeaderName:  ptr.String("__HeaderName__"),
+										HeaderValue: ptr.String("__HeaderValue__"),
+									},
+									{
+										HeaderName:  ptr.String("__HeaderName__"),
+										HeaderValue: ptr.String("__HeaderValue__"),
+									},
+								},
+							},
+							S3OriginConfig: &types.S3OriginConfig{
+								OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+								OriginReadTimeout:    ptr.Int32(1),
+							},
+							CustomOriginConfig: &types.CustomOriginConfig{
+								HTTPPort:             ptr.Int32(1),
+								HTTPSPort:            ptr.Int32(1),
+								OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+								OriginSslProtocols: &types.OriginSslProtocols{
+									Quantity: ptr.Int32(1),
+									Items: []types.SslProtocol{
+										types.SslProtocol("SSLv3"),
+										types.SslProtocol("SSLv3"),
+									},
+								},
+								OriginReadTimeout:      ptr.Int32(1),
+								OriginKeepaliveTimeout: ptr.Int32(1),
+								IpAddressType:          types.IpAddressType("ipv4"),
+								OriginMtlsConfig: &types.OriginMtlsConfig{
+									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+								},
+							},
+							VpcOriginConfig: &types.VpcOriginConfig{
+								VpcOriginId:            ptr.String("__VpcOriginId__"),
+								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+								OriginReadTimeout:      ptr.Int32(1),
+								OriginKeepaliveTimeout: ptr.Int32(1),
+							},
+							ConnectionAttempts:        ptr.Int32(1),
+							ConnectionTimeout:         ptr.Int32(1),
+							ResponseCompletionTimeout: ptr.Int32(1),
+							OriginShield: &types.OriginShield{
+								Enabled:            ptr.Bool(true),
+								OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+							},
+							OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+						},
+					},
+				},
+				OriginGroups: &types.OriginGroups{
+					Quantity: ptr.Int32(1),
+					Items: []types.OriginGroup{
+						{
+							Id: ptr.String("__Id__"),
+							FailoverCriteria: &types.OriginGroupFailoverCriteria{
+								StatusCodes: &types.StatusCodes{
+									Quantity: ptr.Int32(1),
+									Items: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							Members: &types.OriginGroupMembers{
+								Quantity: ptr.Int32(1),
+								Items: []types.OriginGroupMember{
+									{
+										OriginId: ptr.String("__OriginId__"),
+									},
+									{
+										OriginId: ptr.String("__OriginId__"),
+									},
+								},
+							},
+							SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+						},
+						{
+							Id: ptr.String("__Id__"),
+							FailoverCriteria: &types.OriginGroupFailoverCriteria{
+								StatusCodes: &types.StatusCodes{
+									Quantity: ptr.Int32(1),
+									Items: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							Members: &types.OriginGroupMembers{
+								Quantity: ptr.Int32(1),
+								Items: []types.OriginGroupMember{
+									{
+										OriginId: ptr.String("__OriginId__"),
+									},
+									{
+										OriginId: ptr.String("__OriginId__"),
+									},
+								},
+							},
+							SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+						},
+					},
+				},
+				DefaultCacheBehavior: &types.DefaultCacheBehavior{
+					TargetOriginId: ptr.String("__TargetOriginId__"),
+					TrustedSigners: &types.TrustedSigners{
+						Enabled:  ptr.Bool(true),
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TrustedKeyGroups: &types.TrustedKeyGroups{
+						Enabled:  ptr.Bool(true),
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+					AllowedMethods: &types.AllowedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+						CachedMethods: &types.CachedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+						},
+					},
+					SmoothStreaming: ptr.Bool(true),
+					Compress:        ptr.Bool(true),
+					LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+						Quantity: ptr.Int32(1),
+						Items: []types.LambdaFunctionAssociation{
+							{
+								LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+								EventType:         types.EventType("viewer-request"),
+								IncludeBody:       ptr.Bool(true),
+							},
+							{
+								LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+								EventType:         types.EventType("viewer-request"),
+								IncludeBody:       ptr.Bool(true),
+							},
+						},
+					},
+					FunctionAssociations: &types.FunctionAssociations{
+						Quantity: ptr.Int32(1),
+						Items: []types.FunctionAssociation{
+							{
+								FunctionARN: ptr.String("__FunctionARN__"),
+								EventType:   types.EventType("viewer-request"),
+							},
+							{
+								FunctionARN: ptr.String("__FunctionARN__"),
+								EventType:   types.EventType("viewer-request"),
+							},
+						},
+					},
+					FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+					RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+					CachePolicyId:           ptr.String("__CachePolicyId__"),
+					OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+					ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+					GrpcConfig: &types.GrpcConfig{
+						Enabled: ptr.Bool(true),
+					},
+					ForwardedValues: &types.ForwardedValues{
+						QueryString: ptr.Bool(true),
+						Cookies: &types.CookiePreference{
+							Forward: types.ItemSelection("none"),
+							WhitelistedNames: &types.CookieNames{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						Headers: &types.Headers{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						QueryStringCacheKeys: &types.QueryStringCacheKeys{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MinTTL:     ptr.Int64(1),
+					DefaultTTL: ptr.Int64(1),
+					MaxTTL:     ptr.Int64(1),
+				},
+				CacheBehaviors: &types.CacheBehaviors{
+					Quantity: ptr.Int32(1),
+					Items: []types.CacheBehavior{
+						{
+							PathPattern:    ptr.String("__PathPattern__"),
+							TargetOriginId: ptr.String("__TargetOriginId__"),
+							TrustedSigners: &types.TrustedSigners{
+								Enabled:  ptr.Bool(true),
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TrustedKeyGroups: &types.TrustedKeyGroups{
+								Enabled:  ptr.Bool(true),
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+							AllowedMethods: &types.AllowedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+								CachedMethods: &types.CachedMethods{
+									Quantity: ptr.Int32(1),
+									Items: []types.Method{
+										types.Method("GET"),
+										types.Method("GET"),
+									},
+								},
+							},
+							SmoothStreaming: ptr.Bool(true),
+							Compress:        ptr.Bool(true),
+							LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+								Quantity: ptr.Int32(1),
+								Items: []types.LambdaFunctionAssociation{
+									{
+										LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+										EventType:         types.EventType("viewer-request"),
+										IncludeBody:       ptr.Bool(true),
+									},
+									{
+										LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+										EventType:         types.EventType("viewer-request"),
+										IncludeBody:       ptr.Bool(true),
+									},
+								},
+							},
+							FunctionAssociations: &types.FunctionAssociations{
+								Quantity: ptr.Int32(1),
+								Items: []types.FunctionAssociation{
+									{
+										FunctionARN: ptr.String("__FunctionARN__"),
+										EventType:   types.EventType("viewer-request"),
+									},
+									{
+										FunctionARN: ptr.String("__FunctionARN__"),
+										EventType:   types.EventType("viewer-request"),
+									},
+								},
+							},
+							FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+							RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+							CachePolicyId:           ptr.String("__CachePolicyId__"),
+							OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+							ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+							GrpcConfig: &types.GrpcConfig{
+								Enabled: ptr.Bool(true),
+							},
+							ForwardedValues: &types.ForwardedValues{
+								QueryString: ptr.Bool(true),
+								Cookies: &types.CookiePreference{
+									Forward: types.ItemSelection("none"),
+									WhitelistedNames: &types.CookieNames{
+										Quantity: ptr.Int32(1),
+										Items: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Headers: &types.Headers{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								QueryStringCacheKeys: &types.QueryStringCacheKeys{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							MinTTL:     ptr.Int64(1),
+							DefaultTTL: ptr.Int64(1),
+							MaxTTL:     ptr.Int64(1),
+						},
+						{
+							PathPattern:    ptr.String("__PathPattern__"),
+							TargetOriginId: ptr.String("__TargetOriginId__"),
+							TrustedSigners: &types.TrustedSigners{
+								Enabled:  ptr.Bool(true),
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TrustedKeyGroups: &types.TrustedKeyGroups{
+								Enabled:  ptr.Bool(true),
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+							AllowedMethods: &types.AllowedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+								CachedMethods: &types.CachedMethods{
+									Quantity: ptr.Int32(1),
+									Items: []types.Method{
+										types.Method("GET"),
+										types.Method("GET"),
+									},
+								},
+							},
+							SmoothStreaming: ptr.Bool(true),
+							Compress:        ptr.Bool(true),
+							LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+								Quantity: ptr.Int32(1),
+								Items: []types.LambdaFunctionAssociation{
+									{
+										LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+										EventType:         types.EventType("viewer-request"),
+										IncludeBody:       ptr.Bool(true),
+									},
+									{
+										LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+										EventType:         types.EventType("viewer-request"),
+										IncludeBody:       ptr.Bool(true),
+									},
+								},
+							},
+							FunctionAssociations: &types.FunctionAssociations{
+								Quantity: ptr.Int32(1),
+								Items: []types.FunctionAssociation{
+									{
+										FunctionARN: ptr.String("__FunctionARN__"),
+										EventType:   types.EventType("viewer-request"),
+									},
+									{
+										FunctionARN: ptr.String("__FunctionARN__"),
+										EventType:   types.EventType("viewer-request"),
+									},
+								},
+							},
+							FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+							RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+							CachePolicyId:           ptr.String("__CachePolicyId__"),
+							OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+							ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+							GrpcConfig: &types.GrpcConfig{
+								Enabled: ptr.Bool(true),
+							},
+							ForwardedValues: &types.ForwardedValues{
+								QueryString: ptr.Bool(true),
+								Cookies: &types.CookiePreference{
+									Forward: types.ItemSelection("none"),
+									WhitelistedNames: &types.CookieNames{
+										Quantity: ptr.Int32(1),
+										Items: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Headers: &types.Headers{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								QueryStringCacheKeys: &types.QueryStringCacheKeys{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							MinTTL:     ptr.Int64(1),
+							DefaultTTL: ptr.Int64(1),
+							MaxTTL:     ptr.Int64(1),
+						},
+					},
+				},
+				CustomErrorResponses: &types.CustomErrorResponses{
+					Quantity: ptr.Int32(1),
+					Items: []types.CustomErrorResponse{
+						{
+							ErrorCode:          ptr.Int32(1),
+							ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+							ResponseCode:       ptr.String("__ResponseCode__"),
+							ErrorCachingMinTTL: ptr.Int64(1),
+						},
+						{
+							ErrorCode:          ptr.Int32(1),
+							ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+							ResponseCode:       ptr.String("__ResponseCode__"),
+							ErrorCachingMinTTL: ptr.Int64(1),
+						},
+					},
+				},
+				Comment: ptr.String("__Comment__"),
+				Logging: &types.LoggingConfig{
+					Enabled:        ptr.Bool(true),
+					IncludeCookies: ptr.Bool(true),
+					Bucket:         ptr.String("__Bucket__"),
+					Prefix:         ptr.String("__Prefix__"),
+				},
+				PriceClass: types.PriceClass("PriceClass_100"),
+				Enabled:    ptr.Bool(true),
+				ViewerCertificate: &types.ViewerCertificate{
+					CloudFrontDefaultCertificate: ptr.Bool(true),
+					IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+					ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+					SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+					MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+					Certificate:                  ptr.String("__Certificate__"),
+					CertificateSource:            types.CertificateSource("cloudfront"),
+				},
+				Restrictions: &types.Restrictions{
+					GeoRestriction: &types.GeoRestriction{
+						RestrictionType: types.GeoRestrictionType("blacklist"),
+						Quantity:        ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				WebACLId:                     ptr.String("__WebACLId__"),
+				HttpVersion:                  types.HttpVersion("http1.1"),
+				IsIPV6Enabled:                ptr.Bool(true),
+				ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+				Staging:                      ptr.Bool(true),
+				AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+				TenantConfig: &types.TenantConfig{
+					ParameterDefinitions: []types.ParameterDefinition{
+						{
+							Name: ptr.String("__Name__"),
+							Definition: &types.ParameterDefinitionSchema{
+								StringSchema: &types.StringSchemaConfig{
+									Comment:      ptr.String("__Comment__"),
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Required:     ptr.Bool(true),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Definition: &types.ParameterDefinitionSchema{
+								StringSchema: &types.StringSchemaConfig{
+									Comment:      ptr.String("__Comment__"),
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Required:     ptr.Bool(true),
+								},
+							},
+						},
+					},
+				},
+				ConnectionMode: types.ConnectionMode("direct"),
+				ViewerMtlsConfig: &types.ViewerMtlsConfig{
+					Mode: types.ViewerMtlsMode("required"),
+					TrustStoreConfig: &types.TrustStoreConfig{
+						TrustStoreId:               ptr.String("__TrustStoreId__"),
+						AdvertiseTrustStoreCaNames: ptr.Bool(true),
+						IgnoreCertificateExpiry:    ptr.Bool(true),
+					},
+				},
+				ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+					Id: ptr.String("__Id__"),
+				},
+				CacheTagConfig: &types.CacheTagConfig{
+					HeaderName: ptr.String("__HeaderName__"),
+				},
+			},
+			Tags: &types.Tags{
+				Items: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2613,7 +4011,46 @@ func TestCheckResponseSnapshot_CreateFieldLevelEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	got, err := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2671,7 +4108,40 @@ func TestCheckResponseSnapshot_CreateFieldLevelEncryptionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	got, err := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2718,7 +4188,37 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		FunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		FunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2754,7 +4254,19 @@ func TestCheckResponseSnapshot_CreateInvalidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{})
+	got, err := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		InvalidationBatch: &types.InvalidationBatch{
+			Paths: &types.Paths{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CallerReference: ptr.String("__CallerReference__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2790,7 +4302,19 @@ func TestCheckResponseSnapshot_CreateInvalidationForDistributionTenant(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvalidationForDistributionTenant(context.Background(), &CreateInvalidationForDistributionTenantInput{})
+	got, err := svc.CreateInvalidationForDistributionTenant(context.Background(), &CreateInvalidationForDistributionTenantInput{
+		Id: ptr.String("__Id__"),
+		InvalidationBatch: &types.InvalidationBatch{
+			Paths: &types.Paths{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CallerReference: ptr.String("__CallerReference__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2824,7 +4348,16 @@ func TestCheckResponseSnapshot_CreateKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{})
+	got, err := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{
+		KeyGroupConfig: &types.KeyGroupConfig{
+			Name: ptr.String("__Name__"),
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Comment: ptr.String("__Comment__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2854,7 +4387,26 @@ func TestCheckResponseSnapshot_CreateKeyValueStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKeyValueStore(context.Background(), &CreateKeyValueStoreInput{})
+	got, err := svc.CreateKeyValueStore(context.Background(), &CreateKeyValueStoreInput{
+		Name:    ptr.String("__Name__"),
+		Comment: ptr.String("__Comment__"),
+		ImportSource: &types.ImportSource{
+			SourceType: types.ImportSourceType("S3"),
+			SourceARN:  ptr.String("__SourceARN__"),
+		},
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2879,7 +4431,14 @@ func TestCheckResponseSnapshot_CreateMonitoringSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitoringSubscription(context.Background(), &CreateMonitoringSubscriptionInput{})
+	got, err := svc.CreateMonitoringSubscription(context.Background(), &CreateMonitoringSubscriptionInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		MonitoringSubscription: &types.MonitoringSubscription{
+			RealtimeMetricsSubscriptionConfig: &types.RealtimeMetricsSubscriptionConfig{
+				RealtimeMetricsSubscriptionStatus: types.RealtimeMetricsSubscriptionStatus("Enabled"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2911,7 +4470,15 @@ func TestCheckResponseSnapshot_CreateOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{})
+	got, err := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{
+		OriginAccessControlConfig: &types.OriginAccessControlConfig{
+			Name:                          ptr.String("__Name__"),
+			Description:                   ptr.String("__Description__"),
+			SigningProtocol:               types.OriginAccessControlSigningProtocols("sigv4"),
+			SigningBehavior:               types.OriginAccessControlSigningBehaviors("never"),
+			OriginAccessControlOriginType: types.OriginAccessControlOriginTypes("s3"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2971,7 +4538,42 @@ func TestCheckResponseSnapshot_CreateOriginRequestPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	got, err := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3003,7 +4605,14 @@ func TestCheckResponseSnapshot_CreatePublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{})
+	got, err := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{
+		PublicKeyConfig: &types.PublicKeyConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Name:            ptr.String("__Name__"),
+			EncodedKey:      ptr.String("__EncodedKey__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3048,7 +4657,30 @@ func TestCheckResponseSnapshot_CreateRealtimeLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{})
+	got, err := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{
+		EndPoints: []types.EndPoint{
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+		},
+		Fields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:         ptr.String("__Name__"),
+		SamplingRate: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3170,7 +4802,104 @@ func TestCheckResponseSnapshot_CreateResponseHeadersPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	got, err := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3255,7 +4984,38 @@ func TestCheckResponseSnapshot_CreateStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{})
+	got, err := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{
+		StreamingDistributionConfig: &types.StreamingDistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			S3Origin: &types.S3Origin{
+				DomainName:           ptr.String("__DomainName__"),
+				OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+			},
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.StreamingLoggingConfig{
+				Enabled: ptr.Bool(true),
+				Bucket:  ptr.String("__Bucket__"),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+			TrustedSigners: &types.TrustedSigners{
+				Enabled:  ptr.Bool(true),
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3340,7 +5100,52 @@ func TestCheckResponseSnapshot_CreateStreamingDistributionWithTags(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamingDistributionWithTags(context.Background(), &CreateStreamingDistributionWithTagsInput{})
+	got, err := svc.CreateStreamingDistributionWithTags(context.Background(), &CreateStreamingDistributionWithTagsInput{
+		StreamingDistributionConfigWithTags: &types.StreamingDistributionConfigWithTags{
+			StreamingDistributionConfig: &types.StreamingDistributionConfig{
+				CallerReference: ptr.String("__CallerReference__"),
+				S3Origin: &types.S3Origin{
+					DomainName:           ptr.String("__DomainName__"),
+					OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+				},
+				Aliases: &types.Aliases{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Comment: ptr.String("__Comment__"),
+				Logging: &types.StreamingLoggingConfig{
+					Enabled: ptr.Bool(true),
+					Bucket:  ptr.String("__Bucket__"),
+					Prefix:  ptr.String("__Prefix__"),
+				},
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PriceClass: types.PriceClass("PriceClass_100"),
+				Enabled:    ptr.Bool(true),
+			},
+			Tags: &types.Tags{
+				Items: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3371,7 +5176,30 @@ func TestCheckResponseSnapshot_CreateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name: ptr.String("__Name__"),
+		CaCertificatesBundleSource: &types.CaCertificatesBundleSourceMemberCaCertificatesBundleS3Location{
+			Value: types.CaCertificatesBundleS3Location{
+				Bucket:  ptr.String("__Bucket__"),
+				Key:     ptr.String("__Key__"),
+				Region:  ptr.String("__Region__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		UseClientCertificateOCSPEndpoint: ptr.Bool(true),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3415,7 +5243,34 @@ func TestCheckResponseSnapshot_CreateVpcOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcOrigin(context.Background(), &CreateVpcOriginInput{})
+	got, err := svc.CreateVpcOrigin(context.Background(), &CreateVpcOriginInput{
+		VpcOriginEndpointConfig: &types.VpcOriginEndpointConfig{
+			Name:                 ptr.String("__Name__"),
+			Arn:                  ptr.String("__Arn__"),
+			HTTPPort:             ptr.Int32(1),
+			HTTPSPort:            ptr.Int32(1),
+			OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+			OriginSslProtocols: &types.OriginSslProtocols{
+				Quantity: ptr.Int32(1),
+				Items: []types.SslProtocol{
+					types.SslProtocol("SSLv3"),
+					types.SslProtocol("SSLv3"),
+				},
+			},
+		},
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3434,7 +5289,10 @@ func TestCheckResponseSnapshot_DeleteAnycastIpList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{})
+	got, err := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3453,7 +5311,10 @@ func TestCheckResponseSnapshot_DeleteCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCachePolicy(context.Background(), &DeleteCachePolicyInput{})
+	got, err := svc.DeleteCachePolicy(context.Background(), &DeleteCachePolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3472,7 +5333,10 @@ func TestCheckResponseSnapshot_DeleteCloudFrontOriginAccessIdentity(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{})
+	got, err := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3491,7 +5355,10 @@ func TestCheckResponseSnapshot_DeleteConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectionFunction(context.Background(), &DeleteConnectionFunctionInput{})
+	got, err := svc.DeleteConnectionFunction(context.Background(), &DeleteConnectionFunctionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3510,7 +5377,10 @@ func TestCheckResponseSnapshot_DeleteConnectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectionGroup(context.Background(), &DeleteConnectionGroupInput{})
+	got, err := svc.DeleteConnectionGroup(context.Background(), &DeleteConnectionGroupInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3529,7 +5399,10 @@ func TestCheckResponseSnapshot_DeleteContinuousDeploymentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContinuousDeploymentPolicy(context.Background(), &DeleteContinuousDeploymentPolicyInput{})
+	got, err := svc.DeleteContinuousDeploymentPolicy(context.Background(), &DeleteContinuousDeploymentPolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3548,7 +5421,10 @@ func TestCheckResponseSnapshot_DeleteDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{})
+	got, err := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3567,7 +5443,10 @@ func TestCheckResponseSnapshot_DeleteDistributionTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDistributionTenant(context.Background(), &DeleteDistributionTenantInput{})
+	got, err := svc.DeleteDistributionTenant(context.Background(), &DeleteDistributionTenantInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3586,7 +5465,10 @@ func TestCheckResponseSnapshot_DeleteFieldLevelEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFieldLevelEncryptionConfig(context.Background(), &DeleteFieldLevelEncryptionConfigInput{})
+	got, err := svc.DeleteFieldLevelEncryptionConfig(context.Background(), &DeleteFieldLevelEncryptionConfigInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3605,7 +5487,10 @@ func TestCheckResponseSnapshot_DeleteFieldLevelEncryptionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFieldLevelEncryptionProfile(context.Background(), &DeleteFieldLevelEncryptionProfileInput{})
+	got, err := svc.DeleteFieldLevelEncryptionProfile(context.Background(), &DeleteFieldLevelEncryptionProfileInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3624,7 +5509,10 @@ func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3643,7 +5531,10 @@ func TestCheckResponseSnapshot_DeleteKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKeyGroup(context.Background(), &DeleteKeyGroupInput{})
+	got, err := svc.DeleteKeyGroup(context.Background(), &DeleteKeyGroupInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3662,7 +5553,10 @@ func TestCheckResponseSnapshot_DeleteKeyValueStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKeyValueStore(context.Background(), &DeleteKeyValueStoreInput{})
+	got, err := svc.DeleteKeyValueStore(context.Background(), &DeleteKeyValueStoreInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3681,7 +5575,9 @@ func TestCheckResponseSnapshot_DeleteMonitoringSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitoringSubscription(context.Background(), &DeleteMonitoringSubscriptionInput{})
+	got, err := svc.DeleteMonitoringSubscription(context.Background(), &DeleteMonitoringSubscriptionInput{
+		DistributionId: ptr.String("__DistributionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3700,7 +5596,10 @@ func TestCheckResponseSnapshot_DeleteOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{})
+	got, err := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3719,7 +5618,10 @@ func TestCheckResponseSnapshot_DeleteOriginRequestPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOriginRequestPolicy(context.Background(), &DeleteOriginRequestPolicyInput{})
+	got, err := svc.DeleteOriginRequestPolicy(context.Background(), &DeleteOriginRequestPolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3738,7 +5640,10 @@ func TestCheckResponseSnapshot_DeletePublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{})
+	got, err := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3757,7 +5662,10 @@ func TestCheckResponseSnapshot_DeleteRealtimeLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRealtimeLogConfig(context.Background(), &DeleteRealtimeLogConfigInput{})
+	got, err := svc.DeleteRealtimeLogConfig(context.Background(), &DeleteRealtimeLogConfigInput{
+		Name: ptr.String("__Name__"),
+		ARN:  ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3776,7 +5684,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3795,7 +5705,10 @@ func TestCheckResponseSnapshot_DeleteResponseHeadersPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResponseHeadersPolicy(context.Background(), &DeleteResponseHeadersPolicyInput{})
+	got, err := svc.DeleteResponseHeadersPolicy(context.Background(), &DeleteResponseHeadersPolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3814,7 +5727,10 @@ func TestCheckResponseSnapshot_DeleteStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{})
+	got, err := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3833,7 +5749,10 @@ func TestCheckResponseSnapshot_DeleteTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{})
+	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3876,7 +5795,10 @@ func TestCheckResponseSnapshot_DeleteVpcOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcOrigin(context.Background(), &DeleteVpcOriginInput{})
+	got, err := svc.DeleteVpcOrigin(context.Background(), &DeleteVpcOriginInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3921,7 +5843,10 @@ func TestCheckResponseSnapshot_DescribeConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionFunction(context.Background(), &DescribeConnectionFunctionInput{})
+	got, err := svc.DescribeConnectionFunction(context.Background(), &DescribeConnectionFunctionInput{
+		Identifier: ptr.String("__Identifier__"),
+		Stage:      types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3967,7 +5892,10 @@ func TestCheckResponseSnapshot_DescribeFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFunction(context.Background(), &DescribeFunctionInput{})
+	got, err := svc.DescribeFunction(context.Background(), &DescribeFunctionInput{
+		Name:  ptr.String("__Name__"),
+		Stage: types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3996,7 +5924,9 @@ func TestCheckResponseSnapshot_DescribeKeyValueStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKeyValueStore(context.Background(), &DescribeKeyValueStoreInput{})
+	got, err := svc.DescribeKeyValueStore(context.Background(), &DescribeKeyValueStoreInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4018,7 +5948,10 @@ func TestCheckResponseSnapshot_DisassociateDistributionTenantWebACL(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDistributionTenantWebACL(context.Background(), &DisassociateDistributionTenantWebACLInput{})
+	got, err := svc.DisassociateDistributionTenantWebACL(context.Background(), &DisassociateDistributionTenantWebACLInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4040,7 +5973,10 @@ func TestCheckResponseSnapshot_DisassociateDistributionWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDistributionWebACL(context.Background(), &DisassociateDistributionWebACLInput{})
+	got, err := svc.DisassociateDistributionWebACL(context.Background(), &DisassociateDistributionWebACLInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4091,7 +6027,9 @@ func TestCheckResponseSnapshot_GetAnycastIpList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnycastIpList(context.Background(), &GetAnycastIpListInput{})
+	got, err := svc.GetAnycastIpList(context.Background(), &GetAnycastIpListInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4157,7 +6095,9 @@ func TestCheckResponseSnapshot_GetCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCachePolicy(context.Background(), &GetCachePolicyInput{})
+	got, err := svc.GetCachePolicy(context.Background(), &GetCachePolicyInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4219,7 +6159,9 @@ func TestCheckResponseSnapshot_GetCachePolicyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCachePolicyConfig(context.Background(), &GetCachePolicyConfigInput{})
+	got, err := svc.GetCachePolicyConfig(context.Background(), &GetCachePolicyConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4248,7 +6190,9 @@ func TestCheckResponseSnapshot_GetCloudFrontOriginAccessIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudFrontOriginAccessIdentity(context.Background(), &GetCloudFrontOriginAccessIdentityInput{})
+	got, err := svc.GetCloudFrontOriginAccessIdentity(context.Background(), &GetCloudFrontOriginAccessIdentityInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4273,7 +6217,9 @@ func TestCheckResponseSnapshot_GetCloudFrontOriginAccessIdentityConfig(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudFrontOriginAccessIdentityConfig(context.Background(), &GetCloudFrontOriginAccessIdentityConfigInput{})
+	got, err := svc.GetCloudFrontOriginAccessIdentityConfig(context.Background(), &GetCloudFrontOriginAccessIdentityConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4296,7 +6242,10 @@ func TestCheckResponseSnapshot_GetConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectionFunction(context.Background(), &GetConnectionFunctionInput{})
+	got, err := svc.GetConnectionFunction(context.Background(), &GetConnectionFunctionInput{
+		Identifier: ptr.String("__Identifier__"),
+		Stage:      types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4342,7 +6291,9 @@ func TestCheckResponseSnapshot_GetConnectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectionGroup(context.Background(), &GetConnectionGroupInput{})
+	got, err := svc.GetConnectionGroup(context.Background(), &GetConnectionGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4388,7 +6339,9 @@ func TestCheckResponseSnapshot_GetConnectionGroupByRoutingEndpoint(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectionGroupByRoutingEndpoint(context.Background(), &GetConnectionGroupByRoutingEndpointInput{})
+	got, err := svc.GetConnectionGroupByRoutingEndpoint(context.Background(), &GetConnectionGroupByRoutingEndpointInput{
+		RoutingEndpoint: ptr.String("__RoutingEndpoint__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4437,7 +6390,9 @@ func TestCheckResponseSnapshot_GetContinuousDeploymentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContinuousDeploymentPolicy(context.Background(), &GetContinuousDeploymentPolicyInput{})
+	got, err := svc.GetContinuousDeploymentPolicy(context.Background(), &GetContinuousDeploymentPolicyInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4482,7 +6437,9 @@ func TestCheckResponseSnapshot_GetContinuousDeploymentPolicyConfig(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContinuousDeploymentPolicyConfig(context.Background(), &GetContinuousDeploymentPolicyConfigInput{})
+	got, err := svc.GetContinuousDeploymentPolicyConfig(context.Background(), &GetContinuousDeploymentPolicyConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5153,7 +7110,9 @@ func TestCheckResponseSnapshot_GetDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDistribution(context.Background(), &GetDistributionInput{})
+	got, err := svc.GetDistribution(context.Background(), &GetDistributionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5754,7 +7713,9 @@ func TestCheckResponseSnapshot_GetDistributionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDistributionConfig(context.Background(), &GetDistributionConfigInput{})
+	got, err := svc.GetDistributionConfig(context.Background(), &GetDistributionConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5834,7 +7795,9 @@ func TestCheckResponseSnapshot_GetDistributionTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDistributionTenant(context.Background(), &GetDistributionTenantInput{})
+	got, err := svc.GetDistributionTenant(context.Background(), &GetDistributionTenantInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5914,7 +7877,9 @@ func TestCheckResponseSnapshot_GetDistributionTenantByDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDistributionTenantByDomain(context.Background(), &GetDistributionTenantByDomainInput{})
+	got, err := svc.GetDistributionTenantByDomain(context.Background(), &GetDistributionTenantByDomainInput{
+		Domain: ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5977,7 +7942,9 @@ func TestCheckResponseSnapshot_GetFieldLevelEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFieldLevelEncryption(context.Background(), &GetFieldLevelEncryptionInput{})
+	got, err := svc.GetFieldLevelEncryption(context.Background(), &GetFieldLevelEncryptionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6036,7 +8003,9 @@ func TestCheckResponseSnapshot_GetFieldLevelEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFieldLevelEncryptionConfig(context.Background(), &GetFieldLevelEncryptionConfigInput{})
+	got, err := svc.GetFieldLevelEncryptionConfig(context.Background(), &GetFieldLevelEncryptionConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6093,7 +8062,9 @@ func TestCheckResponseSnapshot_GetFieldLevelEncryptionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFieldLevelEncryptionProfile(context.Background(), &GetFieldLevelEncryptionProfileInput{})
+	got, err := svc.GetFieldLevelEncryptionProfile(context.Background(), &GetFieldLevelEncryptionProfileInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6146,7 +8117,9 @@ func TestCheckResponseSnapshot_GetFieldLevelEncryptionProfileConfig(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFieldLevelEncryptionProfileConfig(context.Background(), &GetFieldLevelEncryptionProfileConfigInput{})
+	got, err := svc.GetFieldLevelEncryptionProfileConfig(context.Background(), &GetFieldLevelEncryptionProfileConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6169,7 +8142,10 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{})
+	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{
+		Name:  ptr.String("__Name__"),
+		Stage: types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6204,7 +8180,10 @@ func TestCheckResponseSnapshot_GetInvalidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvalidation(context.Background(), &GetInvalidationInput{})
+	got, err := svc.GetInvalidation(context.Background(), &GetInvalidationInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6239,7 +8218,10 @@ func TestCheckResponseSnapshot_GetInvalidationForDistributionTenant(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvalidationForDistributionTenant(context.Background(), &GetInvalidationForDistributionTenantInput{})
+	got, err := svc.GetInvalidationForDistributionTenant(context.Background(), &GetInvalidationForDistributionTenantInput{
+		DistributionTenantId: ptr.String("__DistributionTenantId__"),
+		Id:                   ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6272,7 +8254,9 @@ func TestCheckResponseSnapshot_GetKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyGroup(context.Background(), &GetKeyGroupInput{})
+	got, err := svc.GetKeyGroup(context.Background(), &GetKeyGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6301,7 +8285,9 @@ func TestCheckResponseSnapshot_GetKeyGroupConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyGroupConfig(context.Background(), &GetKeyGroupConfigInput{})
+	got, err := svc.GetKeyGroupConfig(context.Background(), &GetKeyGroupConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6338,7 +8324,9 @@ func TestCheckResponseSnapshot_GetManagedCertificateDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedCertificateDetails(context.Background(), &GetManagedCertificateDetailsInput{})
+	got, err := svc.GetManagedCertificateDetails(context.Background(), &GetManagedCertificateDetailsInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6363,7 +8351,9 @@ func TestCheckResponseSnapshot_GetMonitoringSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitoringSubscription(context.Background(), &GetMonitoringSubscriptionInput{})
+	got, err := svc.GetMonitoringSubscription(context.Background(), &GetMonitoringSubscriptionInput{
+		DistributionId: ptr.String("__DistributionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6394,7 +8384,9 @@ func TestCheckResponseSnapshot_GetOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginAccessControl(context.Background(), &GetOriginAccessControlInput{})
+	got, err := svc.GetOriginAccessControl(context.Background(), &GetOriginAccessControlInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6422,7 +8414,9 @@ func TestCheckResponseSnapshot_GetOriginAccessControlConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginAccessControlConfig(context.Background(), &GetOriginAccessControlConfigInput{})
+	got, err := svc.GetOriginAccessControlConfig(context.Background(), &GetOriginAccessControlConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6481,7 +8475,9 @@ func TestCheckResponseSnapshot_GetOriginRequestPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginRequestPolicy(context.Background(), &GetOriginRequestPolicyInput{})
+	got, err := svc.GetOriginRequestPolicy(context.Background(), &GetOriginRequestPolicyInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6536,7 +8532,9 @@ func TestCheckResponseSnapshot_GetOriginRequestPolicyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginRequestPolicyConfig(context.Background(), &GetOriginRequestPolicyConfigInput{})
+	got, err := svc.GetOriginRequestPolicyConfig(context.Background(), &GetOriginRequestPolicyConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6567,7 +8565,9 @@ func TestCheckResponseSnapshot_GetPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{})
+	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6594,7 +8594,9 @@ func TestCheckResponseSnapshot_GetPublicKeyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicKeyConfig(context.Background(), &GetPublicKeyConfigInput{})
+	got, err := svc.GetPublicKeyConfig(context.Background(), &GetPublicKeyConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6639,7 +8641,10 @@ func TestCheckResponseSnapshot_GetRealtimeLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRealtimeLogConfig(context.Background(), &GetRealtimeLogConfigInput{})
+	got, err := svc.GetRealtimeLogConfig(context.Background(), &GetRealtimeLogConfigInput{
+		Name: ptr.String("__Name__"),
+		ARN:  ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6661,7 +8666,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6782,7 +8789,9 @@ func TestCheckResponseSnapshot_GetResponseHeadersPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResponseHeadersPolicy(context.Background(), &GetResponseHeadersPolicyInput{})
+	got, err := svc.GetResponseHeadersPolicy(context.Background(), &GetResponseHeadersPolicyInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6899,7 +8908,9 @@ func TestCheckResponseSnapshot_GetResponseHeadersPolicyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResponseHeadersPolicyConfig(context.Background(), &GetResponseHeadersPolicyConfigInput{})
+	got, err := svc.GetResponseHeadersPolicyConfig(context.Background(), &GetResponseHeadersPolicyConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6983,7 +8994,9 @@ func TestCheckResponseSnapshot_GetStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamingDistribution(context.Background(), &GetStreamingDistributionInput{})
+	got, err := svc.GetStreamingDistribution(context.Background(), &GetStreamingDistributionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7034,7 +9047,9 @@ func TestCheckResponseSnapshot_GetStreamingDistributionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamingDistributionConfig(context.Background(), &GetStreamingDistributionConfigInput{})
+	got, err := svc.GetStreamingDistributionConfig(context.Background(), &GetStreamingDistributionConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7065,7 +9080,9 @@ func TestCheckResponseSnapshot_GetTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustStore(context.Background(), &GetTrustStoreInput{})
+	got, err := svc.GetTrustStore(context.Background(), &GetTrustStoreInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7108,7 +9125,9 @@ func TestCheckResponseSnapshot_GetVpcOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVpcOrigin(context.Background(), &GetVpcOriginInput{})
+	got, err := svc.GetVpcOrigin(context.Background(), &GetVpcOriginInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7191,7 +9210,10 @@ func TestCheckResponseSnapshot_ListAnycastIpLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnycastIpLists(context.Background(), &ListAnycastIpListsInput{})
+	got, err := svc.ListAnycastIpLists(context.Background(), &ListAnycastIpListsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7314,7 +9336,11 @@ func TestCheckResponseSnapshot_ListCachePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCachePolicies(context.Background(), &ListCachePoliciesInput{})
+	got, err := svc.ListCachePolicies(context.Background(), &ListCachePoliciesInput{
+		Type:     types.CachePolicyType("managed"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7353,7 +9379,10 @@ func TestCheckResponseSnapshot_ListCloudFrontOriginAccessIdentities(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudFrontOriginAccessIdentities(context.Background(), &ListCloudFrontOriginAccessIdentitiesInput{})
+	got, err := svc.ListCloudFrontOriginAccessIdentities(context.Background(), &ListCloudFrontOriginAccessIdentitiesInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7390,7 +9419,12 @@ func TestCheckResponseSnapshot_ListConflictingAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConflictingAliases(context.Background(), &ListConflictingAliasesInput{})
+	got, err := svc.ListConflictingAliases(context.Background(), &ListConflictingAliasesInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Alias:          ptr.String("__Alias__"),
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7461,7 +9495,11 @@ func TestCheckResponseSnapshot_ListConnectionFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectionFunctions(context.Background(), &ListConnectionFunctionsInput{})
+	got, err := svc.ListConnectionFunctions(context.Background(), &ListConnectionFunctionsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+		Stage:    types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7510,7 +9548,13 @@ func TestCheckResponseSnapshot_ListConnectionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectionGroups(context.Background(), &ListConnectionGroupsInput{})
+	got, err := svc.ListConnectionGroups(context.Background(), &ListConnectionGroupsInput{
+		AssociationFilter: &types.ConnectionGroupAssociationFilter{
+			AnycastIpListId: ptr.String("__AnycastIpListId__"),
+		},
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7597,7 +9641,10 @@ func TestCheckResponseSnapshot_ListContinuousDeploymentPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContinuousDeploymentPolicies(context.Background(), &ListContinuousDeploymentPoliciesInput{})
+	got, err := svc.ListContinuousDeploymentPolicies(context.Background(), &ListContinuousDeploymentPoliciesInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7696,7 +9743,14 @@ func TestCheckResponseSnapshot_ListDistributionTenants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionTenants(context.Background(), &ListDistributionTenantsInput{})
+	got, err := svc.ListDistributionTenants(context.Background(), &ListDistributionTenantsInput{
+		AssociationFilter: &types.DistributionTenantAssociationFilter{
+			DistributionId:    ptr.String("__DistributionId__"),
+			ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
+		},
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7795,7 +9849,12 @@ func TestCheckResponseSnapshot_ListDistributionTenantsByCustomization(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionTenantsByCustomization(context.Background(), &ListDistributionTenantsByCustomizationInput{})
+	got, err := svc.ListDistributionTenantsByCustomization(context.Background(), &ListDistributionTenantsByCustomizationInput{
+		WebACLArn:      ptr.String("__WebACLArn__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8944,7 +11003,10 @@ func TestCheckResponseSnapshot_ListDistributions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributions(context.Background(), &ListDistributionsInput{})
+	got, err := svc.ListDistributions(context.Background(), &ListDistributionsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10093,7 +12155,11 @@ func TestCheckResponseSnapshot_ListDistributionsByAnycastIpListId(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByAnycastIpListId(context.Background(), &ListDistributionsByAnycastIpListIdInput{})
+	got, err := svc.ListDistributionsByAnycastIpListId(context.Background(), &ListDistributionsByAnycastIpListIdInput{
+		Marker:          ptr.String("__Marker__"),
+		MaxItems:        ptr.Int32(1),
+		AnycastIpListId: ptr.String("__AnycastIpListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10124,7 +12190,11 @@ func TestCheckResponseSnapshot_ListDistributionsByCachePolicyId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByCachePolicyId(context.Background(), &ListDistributionsByCachePolicyIdInput{})
+	got, err := svc.ListDistributionsByCachePolicyId(context.Background(), &ListDistributionsByCachePolicyIdInput{
+		Marker:        ptr.String("__Marker__"),
+		MaxItems:      ptr.Int32(1),
+		CachePolicyId: ptr.String("__CachePolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11273,7 +13343,11 @@ func TestCheckResponseSnapshot_ListDistributionsByConnectionFunction(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByConnectionFunction(context.Background(), &ListDistributionsByConnectionFunctionInput{})
+	got, err := svc.ListDistributionsByConnectionFunction(context.Background(), &ListDistributionsByConnectionFunctionInput{
+		Marker:                       ptr.String("__Marker__"),
+		MaxItems:                     ptr.Int32(1),
+		ConnectionFunctionIdentifier: ptr.String("__ConnectionFunctionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12422,7 +14496,11 @@ func TestCheckResponseSnapshot_ListDistributionsByConnectionMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByConnectionMode(context.Background(), &ListDistributionsByConnectionModeInput{})
+	got, err := svc.ListDistributionsByConnectionMode(context.Background(), &ListDistributionsByConnectionModeInput{
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+		ConnectionMode: types.ConnectionMode("direct"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12453,7 +14531,11 @@ func TestCheckResponseSnapshot_ListDistributionsByKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByKeyGroup(context.Background(), &ListDistributionsByKeyGroupInput{})
+	got, err := svc.ListDistributionsByKeyGroup(context.Background(), &ListDistributionsByKeyGroupInput{
+		Marker:     ptr.String("__Marker__"),
+		MaxItems:   ptr.Int32(1),
+		KeyGroupId: ptr.String("__KeyGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12484,7 +14566,11 @@ func TestCheckResponseSnapshot_ListDistributionsByOriginRequestPolicyId(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByOriginRequestPolicyId(context.Background(), &ListDistributionsByOriginRequestPolicyIdInput{})
+	got, err := svc.ListDistributionsByOriginRequestPolicyId(context.Background(), &ListDistributionsByOriginRequestPolicyIdInput{
+		Marker:                ptr.String("__Marker__"),
+		MaxItems:              ptr.Int32(1),
+		OriginRequestPolicyId: ptr.String("__OriginRequestPolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12521,7 +14607,11 @@ func TestCheckResponseSnapshot_ListDistributionsByOwnedResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByOwnedResource(context.Background(), &ListDistributionsByOwnedResourceInput{})
+	got, err := svc.ListDistributionsByOwnedResource(context.Background(), &ListDistributionsByOwnedResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Marker:      ptr.String("__Marker__"),
+		MaxItems:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13670,7 +15760,12 @@ func TestCheckResponseSnapshot_ListDistributionsByRealtimeLogConfig(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByRealtimeLogConfig(context.Background(), &ListDistributionsByRealtimeLogConfigInput{})
+	got, err := svc.ListDistributionsByRealtimeLogConfig(context.Background(), &ListDistributionsByRealtimeLogConfigInput{
+		Marker:                ptr.String("__Marker__"),
+		MaxItems:              ptr.Int32(1),
+		RealtimeLogConfigName: ptr.String("__RealtimeLogConfigName__"),
+		RealtimeLogConfigArn:  ptr.String("__RealtimeLogConfigArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13701,7 +15796,11 @@ func TestCheckResponseSnapshot_ListDistributionsByResponseHeadersPolicyId(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByResponseHeadersPolicyId(context.Background(), &ListDistributionsByResponseHeadersPolicyIdInput{})
+	got, err := svc.ListDistributionsByResponseHeadersPolicyId(context.Background(), &ListDistributionsByResponseHeadersPolicyIdInput{
+		Marker:                  ptr.String("__Marker__"),
+		MaxItems:                ptr.Int32(1),
+		ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14850,7 +16949,11 @@ func TestCheckResponseSnapshot_ListDistributionsByTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByTrustStore(context.Background(), &ListDistributionsByTrustStoreInput{})
+	got, err := svc.ListDistributionsByTrustStore(context.Background(), &ListDistributionsByTrustStoreInput{
+		TrustStoreIdentifier: ptr.String("__TrustStoreIdentifier__"),
+		Marker:               ptr.String("__Marker__"),
+		MaxItems:             ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14881,7 +16984,11 @@ func TestCheckResponseSnapshot_ListDistributionsByVpcOriginId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByVpcOriginId(context.Background(), &ListDistributionsByVpcOriginIdInput{})
+	got, err := svc.ListDistributionsByVpcOriginId(context.Background(), &ListDistributionsByVpcOriginIdInput{
+		Marker:      ptr.String("__Marker__"),
+		MaxItems:    ptr.Int32(1),
+		VpcOriginId: ptr.String("__VpcOriginId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16030,7 +18137,11 @@ func TestCheckResponseSnapshot_ListDistributionsByWebACLId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionsByWebACLId(context.Background(), &ListDistributionsByWebACLIdInput{})
+	got, err := svc.ListDistributionsByWebACLId(context.Background(), &ListDistributionsByWebACLIdInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+		WebACLId: ptr.String("__WebACLId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16065,7 +18176,15 @@ func TestCheckResponseSnapshot_ListDomainConflicts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainConflicts(context.Background(), &ListDomainConflictsInput{})
+	got, err := svc.ListDomainConflicts(context.Background(), &ListDomainConflictsInput{
+		Domain: ptr.String("__Domain__"),
+		DomainControlValidationResource: &types.DistributionResourceId{
+			DistributionId:       ptr.String("__DistributionId__"),
+			DistributionTenantId: ptr.String("__DistributionTenantId__"),
+		},
+		MaxItems: ptr.Int32(1),
+		Marker:   ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16170,7 +18289,10 @@ func TestCheckResponseSnapshot_ListFieldLevelEncryptionConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFieldLevelEncryptionConfigs(context.Background(), &ListFieldLevelEncryptionConfigsInput{})
+	got, err := svc.ListFieldLevelEncryptionConfigs(context.Background(), &ListFieldLevelEncryptionConfigsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16263,7 +18385,10 @@ func TestCheckResponseSnapshot_ListFieldLevelEncryptionProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFieldLevelEncryptionProfiles(context.Background(), &ListFieldLevelEncryptionProfilesInput{})
+	got, err := svc.ListFieldLevelEncryptionProfiles(context.Background(), &ListFieldLevelEncryptionProfilesInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16340,7 +18465,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{})
+	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+		Stage:    types.FunctionStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16379,7 +18508,11 @@ func TestCheckResponseSnapshot_ListInvalidations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvalidations(context.Background(), &ListInvalidationsInput{})
+	got, err := svc.ListInvalidations(context.Background(), &ListInvalidationsInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Marker:         ptr.String("__Marker__"),
+		MaxItems:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16418,7 +18551,11 @@ func TestCheckResponseSnapshot_ListInvalidationsForDistributionTenant(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvalidationsForDistributionTenant(context.Background(), &ListInvalidationsForDistributionTenantInput{})
+	got, err := svc.ListInvalidationsForDistributionTenant(context.Background(), &ListInvalidationsForDistributionTenantInput{
+		Id:       ptr.String("__Id__"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16473,7 +18610,10 @@ func TestCheckResponseSnapshot_ListKeyGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyGroups(context.Background(), &ListKeyGroupsInput{})
+	got, err := svc.ListKeyGroups(context.Background(), &ListKeyGroupsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16516,7 +18656,11 @@ func TestCheckResponseSnapshot_ListKeyValueStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyValueStores(context.Background(), &ListKeyValueStoresInput{})
+	got, err := svc.ListKeyValueStores(context.Background(), &ListKeyValueStoresInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+		Status:   ptr.String("__Status__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16561,7 +18705,10 @@ func TestCheckResponseSnapshot_ListOriginAccessControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOriginAccessControls(context.Background(), &ListOriginAccessControlsInput{})
+	got, err := svc.ListOriginAccessControls(context.Background(), &ListOriginAccessControlsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16670,7 +18817,11 @@ func TestCheckResponseSnapshot_ListOriginRequestPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOriginRequestPolicies(context.Background(), &ListOriginRequestPoliciesInput{})
+	got, err := svc.ListOriginRequestPolicies(context.Background(), &ListOriginRequestPoliciesInput{
+		Type:     types.OriginRequestPolicyType("managed"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16711,7 +18862,10 @@ func TestCheckResponseSnapshot_ListPublicKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{})
+	got, err := svc.ListPublicKeys(context.Background(), &ListPublicKeysInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16789,7 +18943,10 @@ func TestCheckResponseSnapshot_ListRealtimeLogConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRealtimeLogConfigs(context.Background(), &ListRealtimeLogConfigsInput{})
+	got, err := svc.ListRealtimeLogConfigs(context.Background(), &ListRealtimeLogConfigsInput{
+		MaxItems: ptr.Int32(1),
+		Marker:   ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17022,7 +19179,11 @@ func TestCheckResponseSnapshot_ListResponseHeadersPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResponseHeadersPolicies(context.Background(), &ListResponseHeadersPoliciesInput{})
+	got, err := svc.ListResponseHeadersPolicies(context.Background(), &ListResponseHeadersPoliciesInput{
+		Type:     types.ResponseHeadersPolicyType("managed"),
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17109,7 +19270,10 @@ func TestCheckResponseSnapshot_ListStreamingDistributions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamingDistributions(context.Background(), &ListStreamingDistributionsInput{})
+	got, err := svc.ListStreamingDistributions(context.Background(), &ListStreamingDistributionsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17141,7 +19305,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17184,7 +19350,10 @@ func TestCheckResponseSnapshot_ListTrustStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustStores(context.Background(), &ListTrustStoresInput{})
+	got, err := svc.ListTrustStores(context.Background(), &ListTrustStoresInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17233,7 +19402,10 @@ func TestCheckResponseSnapshot_ListVpcOrigins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcOrigins(context.Background(), &ListVpcOriginsInput{})
+	got, err := svc.ListVpcOrigins(context.Background(), &ListVpcOriginsInput{
+		Marker:   ptr.String("__Marker__"),
+		MaxItems: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17277,7 +19449,10 @@ func TestCheckResponseSnapshot_PublishConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishConnectionFunction(context.Background(), &PublishConnectionFunctionInput{})
+	got, err := svc.PublishConnectionFunction(context.Background(), &PublishConnectionFunctionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17322,7 +19497,10 @@ func TestCheckResponseSnapshot_PublishFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishFunction(context.Background(), &PublishFunctionInput{})
+	got, err := svc.PublishFunction(context.Background(), &PublishFunctionInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17343,7 +19521,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:    ptr.String("__ResourceArn__"),
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17362,7 +19543,21 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17415,7 +19610,12 @@ func TestCheckResponseSnapshot_TestConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestConnectionFunction(context.Background(), &TestConnectionFunctionInput{})
+	got, err := svc.TestConnectionFunction(context.Background(), &TestConnectionFunctionInput{
+		Id:               ptr.String("__Id__"),
+		IfMatch:          ptr.String("__IfMatch__"),
+		Stage:            types.FunctionStage("DEVELOPMENT"),
+		ConnectionObject: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17469,7 +19669,12 @@ func TestCheckResponseSnapshot_TestFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestFunction(context.Background(), &TestFunctionInput{})
+	got, err := svc.TestFunction(context.Background(), &TestFunctionInput{
+		Name:        ptr.String("__Name__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		Stage:       types.FunctionStage("DEVELOPMENT"),
+		EventObject: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17488,7 +19693,15 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		TagKeys: &types.TagKeys{
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17539,7 +19752,25 @@ func TestCheckResponseSnapshot_UpdateAnycastIpList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnycastIpList(context.Background(), &UpdateAnycastIpListInput{})
+	got, err := svc.UpdateAnycastIpList(context.Background(), &UpdateAnycastIpListInput{
+		Id:            ptr.String("__Id__"),
+		IpAddressType: types.IpAddressType("ipv4"),
+		IpamCidrConfigs: []types.IpamCidrConfig{
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+		},
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17605,7 +19836,51 @@ func TestCheckResponseSnapshot_UpdateCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCachePolicy(context.Background(), &UpdateCachePolicyInput{})
+	got, err := svc.UpdateCachePolicy(context.Background(), &UpdateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17634,7 +19909,14 @@ func TestCheckResponseSnapshot_UpdateCloudFrontOriginAccessIdentity(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCloudFrontOriginAccessIdentity(context.Background(), &UpdateCloudFrontOriginAccessIdentityInput{})
+	got, err := svc.UpdateCloudFrontOriginAccessIdentity(context.Background(), &UpdateCloudFrontOriginAccessIdentityInput{
+		CloudFrontOriginAccessIdentityConfig: &types.CloudFrontOriginAccessIdentityConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17679,7 +19961,26 @@ func TestCheckResponseSnapshot_UpdateConnectionFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectionFunction(context.Background(), &UpdateConnectionFunctionInput{})
+	got, err := svc.UpdateConnectionFunction(context.Background(), &UpdateConnectionFunctionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+		ConnectionFunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		ConnectionFunctionCode: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17725,7 +20026,13 @@ func TestCheckResponseSnapshot_UpdateConnectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectionGroup(context.Background(), &UpdateConnectionGroupInput{})
+	got, err := svc.UpdateConnectionGroup(context.Background(), &UpdateConnectionGroupInput{
+		Id:              ptr.String("__Id__"),
+		Ipv6Enabled:     ptr.Bool(true),
+		IfMatch:         ptr.String("__IfMatch__"),
+		AnycastIpListId: ptr.String("__AnycastIpListId__"),
+		Enabled:         ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17774,7 +20081,34 @@ func TestCheckResponseSnapshot_UpdateContinuousDeploymentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContinuousDeploymentPolicy(context.Background(), &UpdateContinuousDeploymentPolicyInput{})
+	got, err := svc.UpdateContinuousDeploymentPolicy(context.Background(), &UpdateContinuousDeploymentPolicyInput{
+		ContinuousDeploymentPolicyConfig: &types.ContinuousDeploymentPolicyConfig{
+			StagingDistributionDnsNames: &types.StagingDistributionDnsNames{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Enabled: ptr.Bool(true),
+			TrafficConfig: &types.TrafficConfig{
+				SingleWeightConfig: &types.ContinuousDeploymentSingleWeightConfig{
+					Weight: ptr.Float32(1.0),
+					SessionStickinessConfig: &types.SessionStickinessConfig{
+						IdleTTL:    ptr.Int32(1),
+						MaximumTTL: ptr.Int32(1),
+					},
+				},
+				SingleHeaderConfig: &types.ContinuousDeploymentSingleHeaderConfig{
+					Header: ptr.String("__Header__"),
+					Value:  ptr.String("__Value__"),
+				},
+				Type: types.ContinuousDeploymentPolicyType("SingleWeight"),
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18445,7 +20779,590 @@ func TestCheckResponseSnapshot_UpdateDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDistribution(context.Background(), &UpdateDistributionInput{})
+	got, err := svc.UpdateDistribution(context.Background(), &UpdateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18525,7 +21442,52 @@ func TestCheckResponseSnapshot_UpdateDistributionTenant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDistributionTenant(context.Background(), &UpdateDistributionTenantInput{})
+	got, err := svc.UpdateDistributionTenant(context.Background(), &UpdateDistributionTenantInput{
+		Id:             ptr.String("__Id__"),
+		DistributionId: ptr.String("__DistributionId__"),
+		Domains: []types.DomainItem{
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+		},
+		Customizations: &types.Customizations{
+			WebAcl: &types.WebAclCustomization{
+				Action: types.CustomizationActionType("override"),
+				Arn:    ptr.String("__Arn__"),
+			},
+			Certificate: &types.Certificate{
+				Arn: ptr.String("__Arn__"),
+			},
+			GeoRestrictions: &types.GeoRestrictionCustomization{
+				RestrictionType: types.GeoRestrictionType("blacklist"),
+				Locations: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Parameters: []types.Parameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
+		IfMatch:           ptr.String("__IfMatch__"),
+		ManagedCertificateRequest: &types.ManagedCertificateRequest{
+			ValidationTokenHost:                      types.ValidationTokenHost("cloudfront"),
+			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19196,7 +22158,11 @@ func TestCheckResponseSnapshot_UpdateDistributionWithStagingConfig(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDistributionWithStagingConfig(context.Background(), &UpdateDistributionWithStagingConfigInput{})
+	got, err := svc.UpdateDistributionWithStagingConfig(context.Background(), &UpdateDistributionWithStagingConfigInput{
+		Id:                    ptr.String("__Id__"),
+		StagingDistributionId: ptr.String("__StagingDistributionId__"),
+		IfMatch:               ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19219,7 +22185,14 @@ func TestCheckResponseSnapshot_UpdateDomainAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainAssociation(context.Background(), &UpdateDomainAssociationInput{})
+	got, err := svc.UpdateDomainAssociation(context.Background(), &UpdateDomainAssociationInput{
+		Domain: ptr.String("__Domain__"),
+		TargetResource: &types.DistributionResourceId{
+			DistributionId:       ptr.String("__DistributionId__"),
+			DistributionTenantId: ptr.String("__DistributionTenantId__"),
+		},
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19282,7 +22255,48 @@ func TestCheckResponseSnapshot_UpdateFieldLevelEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFieldLevelEncryptionConfig(context.Background(), &UpdateFieldLevelEncryptionConfigInput{})
+	got, err := svc.UpdateFieldLevelEncryptionConfig(context.Background(), &UpdateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19339,7 +22353,42 @@ func TestCheckResponseSnapshot_UpdateFieldLevelEncryptionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFieldLevelEncryptionProfile(context.Background(), &UpdateFieldLevelEncryptionProfileInput{})
+	got, err := svc.UpdateFieldLevelEncryptionProfile(context.Background(), &UpdateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19385,7 +22434,26 @@ func TestCheckResponseSnapshot_UpdateFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFunction(context.Background(), &UpdateFunctionInput{})
+	got, err := svc.UpdateFunction(context.Background(), &UpdateFunctionInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+		FunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		FunctionCode: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19418,7 +22486,18 @@ func TestCheckResponseSnapshot_UpdateKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKeyGroup(context.Background(), &UpdateKeyGroupInput{})
+	got, err := svc.UpdateKeyGroup(context.Background(), &UpdateKeyGroupInput{
+		KeyGroupConfig: &types.KeyGroupConfig{
+			Name: ptr.String("__Name__"),
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Comment: ptr.String("__Comment__"),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19447,7 +22526,11 @@ func TestCheckResponseSnapshot_UpdateKeyValueStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKeyValueStore(context.Background(), &UpdateKeyValueStoreInput{})
+	got, err := svc.UpdateKeyValueStore(context.Background(), &UpdateKeyValueStoreInput{
+		Name:    ptr.String("__Name__"),
+		Comment: ptr.String("__Comment__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19478,7 +22561,17 @@ func TestCheckResponseSnapshot_UpdateOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOriginAccessControl(context.Background(), &UpdateOriginAccessControlInput{})
+	got, err := svc.UpdateOriginAccessControl(context.Background(), &UpdateOriginAccessControlInput{
+		OriginAccessControlConfig: &types.OriginAccessControlConfig{
+			Name:                          ptr.String("__Name__"),
+			Description:                   ptr.String("__Description__"),
+			SigningProtocol:               types.OriginAccessControlSigningProtocols("sigv4"),
+			SigningBehavior:               types.OriginAccessControlSigningBehaviors("never"),
+			OriginAccessControlOriginType: types.OriginAccessControlOriginTypes("s3"),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19537,7 +22630,44 @@ func TestCheckResponseSnapshot_UpdateOriginRequestPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOriginRequestPolicy(context.Background(), &UpdateOriginRequestPolicyInput{})
+	got, err := svc.UpdateOriginRequestPolicy(context.Background(), &UpdateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19568,7 +22698,16 @@ func TestCheckResponseSnapshot_UpdatePublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePublicKey(context.Background(), &UpdatePublicKeyInput{})
+	got, err := svc.UpdatePublicKey(context.Background(), &UpdatePublicKeyInput{
+		PublicKeyConfig: &types.PublicKeyConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Name:            ptr.String("__Name__"),
+			EncodedKey:      ptr.String("__EncodedKey__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19613,7 +22752,31 @@ func TestCheckResponseSnapshot_UpdateRealtimeLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRealtimeLogConfig(context.Background(), &UpdateRealtimeLogConfigInput{})
+	got, err := svc.UpdateRealtimeLogConfig(context.Background(), &UpdateRealtimeLogConfigInput{
+		EndPoints: []types.EndPoint{
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+		},
+		Fields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:         ptr.String("__Name__"),
+		ARN:          ptr.String("__ARN__"),
+		SamplingRate: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19734,7 +22897,106 @@ func TestCheckResponseSnapshot_UpdateResponseHeadersPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResponseHeadersPolicy(context.Background(), &UpdateResponseHeadersPolicyInput{})
+	got, err := svc.UpdateResponseHeadersPolicy(context.Background(), &UpdateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19818,7 +23080,40 @@ func TestCheckResponseSnapshot_UpdateStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamingDistribution(context.Background(), &UpdateStreamingDistributionInput{})
+	got, err := svc.UpdateStreamingDistribution(context.Background(), &UpdateStreamingDistributionInput{
+		StreamingDistributionConfig: &types.StreamingDistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			S3Origin: &types.S3Origin{
+				DomainName:           ptr.String("__DomainName__"),
+				OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+			},
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.StreamingLoggingConfig{
+				Enabled: ptr.Bool(true),
+				Bucket:  ptr.String("__Bucket__"),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+			TrustedSigners: &types.TrustedSigners{
+				Enabled:  ptr.Bool(true),
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19849,7 +23144,19 @@ func TestCheckResponseSnapshot_UpdateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrustStore(context.Background(), &UpdateTrustStoreInput{})
+	got, err := svc.UpdateTrustStore(context.Background(), &UpdateTrustStoreInput{
+		Id: ptr.String("__Id__"),
+		CaCertificatesBundleSource: &types.CaCertificatesBundleSourceMemberCaCertificatesBundleS3Location{
+			Value: types.CaCertificatesBundleS3Location{
+				Bucket:  ptr.String("__Bucket__"),
+				Key:     ptr.String("__Key__"),
+				Region:  ptr.String("__Region__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		UseClientCertificateOCSPEndpoint: ptr.Bool(true),
+		IfMatch:                          ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19892,7 +23199,24 @@ func TestCheckResponseSnapshot_UpdateVpcOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcOrigin(context.Background(), &UpdateVpcOriginInput{})
+	got, err := svc.UpdateVpcOrigin(context.Background(), &UpdateVpcOriginInput{
+		VpcOriginEndpointConfig: &types.VpcOriginEndpointConfig{
+			Name:                 ptr.String("__Name__"),
+			Arn:                  ptr.String("__Arn__"),
+			HTTPPort:             ptr.Int32(1),
+			HTTPSPort:            ptr.Int32(1),
+			OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+			OriginSslProtocols: &types.OriginSslProtocols{
+				Quantity: ptr.Int32(1),
+				Items: []types.SslProtocol{
+					types.SslProtocol("SSLv3"),
+					types.SslProtocol("SSLv3"),
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19924,7 +23248,10 @@ func TestCheckResponseSnapshot_VerifyDnsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyDnsConfiguration(context.Background(), &VerifyDnsConfigurationInput{})
+	got, err := svc.VerifyDnsConfiguration(context.Background(), &VerifyDnsConfigurationInput{
+		Domain:     ptr.String("__Domain__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19945,7 +23272,10 @@ func TestCheckResponseSnapshot_Error_AccessDenied(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19970,7 +23300,19 @@ func TestCheckResponseSnapshot_Error_BatchTooLarge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{})
+	_, opErr := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		InvalidationBatch: &types.InvalidationBatch{
+			Paths: &types.Paths{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CallerReference: ptr.String("__CallerReference__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19995,7 +23337,13 @@ func TestCheckResponseSnapshot_Error_CNAMEAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20020,7 +23368,49 @@ func TestCheckResponseSnapshot_Error_CachePolicyAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20045,7 +23435,10 @@ func TestCheckResponseSnapshot_Error_CachePolicyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCachePolicy(context.Background(), &DeleteCachePolicyInput{})
+	_, opErr := svc.DeleteCachePolicy(context.Background(), &DeleteCachePolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20070,7 +23463,16 @@ func TestCheckResponseSnapshot_Error_CannotChangeImmutablePublicKeyFields(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdatePublicKey(context.Background(), &UpdatePublicKeyInput{})
+	_, opErr := svc.UpdatePublicKey(context.Background(), &UpdatePublicKeyInput{
+		PublicKeyConfig: &types.PublicKeyConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Name:            ptr.String("__Name__"),
+			EncodedKey:      ptr.String("__EncodedKey__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20095,7 +23497,10 @@ func TestCheckResponseSnapshot_Error_CannotDeleteEntityWhileInUse(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{})
+	_, opErr := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20120,7 +23525,24 @@ func TestCheckResponseSnapshot_Error_CannotUpdateEntityWhileInUse(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateVpcOrigin(context.Background(), &UpdateVpcOriginInput{})
+	_, opErr := svc.UpdateVpcOrigin(context.Background(), &UpdateVpcOriginInput{
+		VpcOriginEndpointConfig: &types.VpcOriginEndpointConfig{
+			Name:                 ptr.String("__Name__"),
+			Arn:                  ptr.String("__Arn__"),
+			HTTPPort:             ptr.Int32(1),
+			HTTPSPort:            ptr.Int32(1),
+			OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+			OriginSslProtocols: &types.OriginSslProtocols{
+				Quantity: ptr.Int32(1),
+				Items: []types.SslProtocol{
+					types.SslProtocol("SSLv3"),
+					types.SslProtocol("SSLv3"),
+				},
+			},
+		},
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20145,7 +23567,12 @@ func TestCheckResponseSnapshot_Error_CloudFrontOriginAccessIdentityAlreadyExists
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{})
+	_, opErr := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{
+		CloudFrontOriginAccessIdentityConfig: &types.CloudFrontOriginAccessIdentityConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20170,7 +23597,10 @@ func TestCheckResponseSnapshot_Error_CloudFrontOriginAccessIdentityInUse(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{})
+	_, opErr := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20195,7 +23625,32 @@ func TestCheckResponseSnapshot_Error_ContinuousDeploymentPolicyAlreadyExists(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{})
+	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{
+		ContinuousDeploymentPolicyConfig: &types.ContinuousDeploymentPolicyConfig{
+			StagingDistributionDnsNames: &types.StagingDistributionDnsNames{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Enabled: ptr.Bool(true),
+			TrafficConfig: &types.TrafficConfig{
+				SingleWeightConfig: &types.ContinuousDeploymentSingleWeightConfig{
+					Weight: ptr.Float32(1.0),
+					SessionStickinessConfig: &types.SessionStickinessConfig{
+						IdleTTL:    ptr.Int32(1),
+						MaximumTTL: ptr.Int32(1),
+					},
+				},
+				SingleHeaderConfig: &types.ContinuousDeploymentSingleHeaderConfig{
+					Header: ptr.String("__Header__"),
+					Value:  ptr.String("__Value__"),
+				},
+				Type: types.ContinuousDeploymentPolicyType("SingleWeight"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20220,7 +23675,588 @@ func TestCheckResponseSnapshot_Error_ContinuousDeploymentPolicyInUse(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{})
+	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20245,7 +24281,13 @@ func TestCheckResponseSnapshot_Error_DistributionAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20270,7 +24312,10 @@ func TestCheckResponseSnapshot_Error_DistributionNotDisabled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{})
+	_, opErr := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20295,7 +24340,37 @@ func TestCheckResponseSnapshot_Error_EntityAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{})
+	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{
+		Name:    ptr.String("__Name__"),
+		IpCount: ptr.Int32(1),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		IpAddressType: types.IpAddressType("ipv4"),
+		IpamCidrConfigs: []types.IpamCidrConfig{
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20320,7 +24395,11 @@ func TestCheckResponseSnapshot_Error_EntityLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{})
+	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20345,7 +24424,11 @@ func TestCheckResponseSnapshot_Error_EntityNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{})
+	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20370,7 +24453,37 @@ func TestCheckResponseSnapshot_Error_EntitySizeLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnectionFunction(context.Background(), &CreateConnectionFunctionInput{})
+	_, opErr := svc.CreateConnectionFunction(context.Background(), &CreateConnectionFunctionInput{
+		Name: ptr.String("__Name__"),
+		ConnectionFunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		ConnectionFunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20395,7 +24508,46 @@ func TestCheckResponseSnapshot_Error_FieldLevelEncryptionConfigAlreadyExists(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20420,7 +24572,10 @@ func TestCheckResponseSnapshot_Error_FieldLevelEncryptionConfigInUse(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFieldLevelEncryptionConfig(context.Background(), &DeleteFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.DeleteFieldLevelEncryptionConfig(context.Background(), &DeleteFieldLevelEncryptionConfigInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20445,7 +24600,40 @@ func TestCheckResponseSnapshot_Error_FieldLevelEncryptionProfileAlreadyExists(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20470,7 +24658,10 @@ func TestCheckResponseSnapshot_Error_FieldLevelEncryptionProfileInUse(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFieldLevelEncryptionProfile(context.Background(), &DeleteFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.DeleteFieldLevelEncryptionProfile(context.Background(), &DeleteFieldLevelEncryptionProfileInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20495,7 +24686,40 @@ func TestCheckResponseSnapshot_Error_FieldLevelEncryptionProfileSizeExceeded(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20520,7 +24744,37 @@ func TestCheckResponseSnapshot_Error_FunctionAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		FunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		FunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20545,7 +24799,10 @@ func TestCheckResponseSnapshot_Error_FunctionInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	_, opErr := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20570,7 +24827,37 @@ func TestCheckResponseSnapshot_Error_FunctionSizeLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		FunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		FunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20595,7 +24882,10 @@ func TestCheckResponseSnapshot_Error_IllegalDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{})
+	_, opErr := svc.DeleteAnycastIpList(context.Background(), &DeleteAnycastIpListInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20620,7 +24910,13 @@ func TestCheckResponseSnapshot_Error_IllegalFieldLevelEncryptionConfigAssociatio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20645,7 +24941,588 @@ func TestCheckResponseSnapshot_Error_IllegalOriginAccessConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{})
+	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20670,7 +25547,10 @@ func TestCheckResponseSnapshot_Error_IllegalUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20695,7 +25575,13 @@ func TestCheckResponseSnapshot_Error_InconsistentQuantities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20720,7 +25606,10 @@ func TestCheckResponseSnapshot_Error_InvalidArgument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20745,7 +25634,63 @@ func TestCheckResponseSnapshot_Error_InvalidAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDistributionTenant(context.Background(), &CreateDistributionTenantInput{})
+	_, opErr := svc.CreateDistributionTenant(context.Background(), &CreateDistributionTenantInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Name:           ptr.String("__Name__"),
+		Domains: []types.DomainItem{
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+			{
+				Domain: ptr.String("__Domain__"),
+			},
+		},
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Customizations: &types.Customizations{
+			WebAcl: &types.WebAclCustomization{
+				Action: types.CustomizationActionType("override"),
+				Arn:    ptr.String("__Arn__"),
+			},
+			Certificate: &types.Certificate{
+				Arn: ptr.String("__Arn__"),
+			},
+			GeoRestrictions: &types.GeoRestrictionCustomization{
+				RestrictionType: types.GeoRestrictionType("blacklist"),
+				Locations: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Parameters: []types.Parameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
+		ManagedCertificateRequest: &types.ManagedCertificateRequest{
+			ValidationTokenHost:                      types.ValidationTokenHost("cloudfront"),
+			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20770,7 +25715,13 @@ func TestCheckResponseSnapshot_Error_InvalidDefaultRootObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20795,7 +25746,588 @@ func TestCheckResponseSnapshot_Error_InvalidDomainNameForOriginAccessControl(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{})
+	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20820,7 +26352,13 @@ func TestCheckResponseSnapshot_Error_InvalidErrorCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20845,7 +26383,13 @@ func TestCheckResponseSnapshot_Error_InvalidForwardCookies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20870,7 +26414,13 @@ func TestCheckResponseSnapshot_Error_InvalidFunctionAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20895,7 +26445,13 @@ func TestCheckResponseSnapshot_Error_InvalidGeoRestrictionParameter(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20920,7 +26476,13 @@ func TestCheckResponseSnapshot_Error_InvalidHeadersForS3Origin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20945,7 +26507,11 @@ func TestCheckResponseSnapshot_Error_InvalidIfMatchVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{})
+	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20970,7 +26536,13 @@ func TestCheckResponseSnapshot_Error_InvalidLambdaFunctionAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -20995,7 +26567,13 @@ func TestCheckResponseSnapshot_Error_InvalidLocationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21020,7 +26598,13 @@ func TestCheckResponseSnapshot_Error_InvalidMinimumProtocolVersion(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21045,7 +26629,13 @@ func TestCheckResponseSnapshot_Error_InvalidOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21070,7 +26660,13 @@ func TestCheckResponseSnapshot_Error_InvalidOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21095,7 +26691,13 @@ func TestCheckResponseSnapshot_Error_InvalidOriginAccessIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21120,7 +26722,13 @@ func TestCheckResponseSnapshot_Error_InvalidOriginKeepaliveTimeout(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21145,7 +26753,13 @@ func TestCheckResponseSnapshot_Error_InvalidOriginReadTimeout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21170,7 +26784,13 @@ func TestCheckResponseSnapshot_Error_InvalidProtocolSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21195,7 +26815,13 @@ func TestCheckResponseSnapshot_Error_InvalidQueryStringParameters(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21220,7 +26846,13 @@ func TestCheckResponseSnapshot_Error_InvalidRelativePath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21245,7 +26877,13 @@ func TestCheckResponseSnapshot_Error_InvalidRequiredProtocol(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21270,7 +26908,13 @@ func TestCheckResponseSnapshot_Error_InvalidResponseCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21295,7 +26939,13 @@ func TestCheckResponseSnapshot_Error_InvalidTTLOrder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21320,7 +26970,37 @@ func TestCheckResponseSnapshot_Error_InvalidTagging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{})
+	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{
+		Name:    ptr.String("__Name__"),
+		IpCount: ptr.Int32(1),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		IpAddressType: types.IpAddressType("ipv4"),
+		IpamCidrConfigs: []types.IpamCidrConfig{
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21345,7 +27025,13 @@ func TestCheckResponseSnapshot_Error_InvalidViewerCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21370,7 +27056,13 @@ func TestCheckResponseSnapshot_Error_InvalidWebACLId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21395,7 +27087,16 @@ func TestCheckResponseSnapshot_Error_KeyGroupAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{})
+	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{
+		KeyGroupConfig: &types.KeyGroupConfig{
+			Name: ptr.String("__Name__"),
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Comment: ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21420,7 +27121,13 @@ func TestCheckResponseSnapshot_Error_MissingBody(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21445,7 +27152,14 @@ func TestCheckResponseSnapshot_Error_MonitoringSubscriptionAlreadyExists(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitoringSubscription(context.Background(), &CreateMonitoringSubscriptionInput{})
+	_, opErr := svc.CreateMonitoringSubscription(context.Background(), &CreateMonitoringSubscriptionInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		MonitoringSubscription: &types.MonitoringSubscription{
+			RealtimeMetricsSubscriptionConfig: &types.RealtimeMetricsSubscriptionConfig{
+				RealtimeMetricsSubscriptionStatus: types.RealtimeMetricsSubscriptionStatus("Enabled"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21470,7 +27184,13 @@ func TestCheckResponseSnapshot_Error_NoSuchCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21495,7 +27215,10 @@ func TestCheckResponseSnapshot_Error_NoSuchCloudFrontOriginAccessIdentity(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{})
+	_, opErr := svc.DeleteCloudFrontOriginAccessIdentity(context.Background(), &DeleteCloudFrontOriginAccessIdentityInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21520,7 +27243,588 @@ func TestCheckResponseSnapshot_Error_NoSuchContinuousDeploymentPolicy(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{})
+	_, opErr := svc.CreateDistribution(context.Background(), &CreateDistributionInput{
+		DistributionConfig: &types.DistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DefaultRootObject: ptr.String("__DefaultRootObject__"),
+			Origins: &types.Origins{
+				Quantity: ptr.Int32(1),
+				Items: []types.Origin{
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						DomainName: ptr.String("__DomainName__"),
+						OriginPath: ptr.String("__OriginPath__"),
+						CustomHeaders: &types.CustomHeaders{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginCustomHeader{
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+								{
+									HeaderName:  ptr.String("__HeaderName__"),
+									HeaderValue: ptr.String("__HeaderValue__"),
+								},
+							},
+						},
+						S3OriginConfig: &types.S3OriginConfig{
+							OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+							OriginReadTimeout:    ptr.Int32(1),
+						},
+						CustomOriginConfig: &types.CustomOriginConfig{
+							HTTPPort:             ptr.Int32(1),
+							HTTPSPort:            ptr.Int32(1),
+							OriginProtocolPolicy: types.OriginProtocolPolicy("http-only"),
+							OriginSslProtocols: &types.OriginSslProtocols{
+								Quantity: ptr.Int32(1),
+								Items: []types.SslProtocol{
+									types.SslProtocol("SSLv3"),
+									types.SslProtocol("SSLv3"),
+								},
+							},
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+							IpAddressType:          types.IpAddressType("ipv4"),
+							OriginMtlsConfig: &types.OriginMtlsConfig{
+								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
+							},
+						},
+						VpcOriginConfig: &types.VpcOriginConfig{
+							VpcOriginId:            ptr.String("__VpcOriginId__"),
+							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
+							OriginReadTimeout:      ptr.Int32(1),
+							OriginKeepaliveTimeout: ptr.Int32(1),
+						},
+						ConnectionAttempts:        ptr.Int32(1),
+						ConnectionTimeout:         ptr.Int32(1),
+						ResponseCompletionTimeout: ptr.Int32(1),
+						OriginShield: &types.OriginShield{
+							Enabled:            ptr.Bool(true),
+							OriginShieldRegion: ptr.String("__OriginShieldRegion__"),
+						},
+						OriginAccessControlId: ptr.String("__OriginAccessControlId__"),
+					},
+				},
+			},
+			OriginGroups: &types.OriginGroups{
+				Quantity: ptr.Int32(1),
+				Items: []types.OriginGroup{
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+					{
+						Id: ptr.String("__Id__"),
+						FailoverCriteria: &types.OriginGroupFailoverCriteria{
+							StatusCodes: &types.StatusCodes{
+								Quantity: ptr.Int32(1),
+								Items: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						Members: &types.OriginGroupMembers{
+							Quantity: ptr.Int32(1),
+							Items: []types.OriginGroupMember{
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+								{
+									OriginId: ptr.String("__OriginId__"),
+								},
+							},
+						},
+						SelectionCriteria: types.OriginGroupSelectionCriteria("default"),
+					},
+				},
+			},
+			DefaultCacheBehavior: &types.DefaultCacheBehavior{
+				TargetOriginId: ptr.String("__TargetOriginId__"),
+				TrustedSigners: &types.TrustedSigners{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TrustedKeyGroups: &types.TrustedKeyGroups{
+					Enabled:  ptr.Bool(true),
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+				AllowedMethods: &types.AllowedMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.Method{
+						types.Method("GET"),
+						types.Method("GET"),
+					},
+					CachedMethods: &types.CachedMethods{
+						Quantity: ptr.Int32(1),
+						Items: []types.Method{
+							types.Method("GET"),
+							types.Method("GET"),
+						},
+					},
+				},
+				SmoothStreaming: ptr.Bool(true),
+				Compress:        ptr.Bool(true),
+				LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.LambdaFunctionAssociation{
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+						{
+							LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+							EventType:         types.EventType("viewer-request"),
+							IncludeBody:       ptr.Bool(true),
+						},
+					},
+				},
+				FunctionAssociations: &types.FunctionAssociations{
+					Quantity: ptr.Int32(1),
+					Items: []types.FunctionAssociation{
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+						{
+							FunctionARN: ptr.String("__FunctionARN__"),
+							EventType:   types.EventType("viewer-request"),
+						},
+					},
+				},
+				FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+				RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+				CachePolicyId:           ptr.String("__CachePolicyId__"),
+				OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+				ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+				GrpcConfig: &types.GrpcConfig{
+					Enabled: ptr.Bool(true),
+				},
+				ForwardedValues: &types.ForwardedValues{
+					QueryString: ptr.Bool(true),
+					Cookies: &types.CookiePreference{
+						Forward: types.ItemSelection("none"),
+						WhitelistedNames: &types.CookieNames{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					QueryStringCacheKeys: &types.QueryStringCacheKeys{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				MinTTL:     ptr.Int64(1),
+				DefaultTTL: ptr.Int64(1),
+				MaxTTL:     ptr.Int64(1),
+			},
+			CacheBehaviors: &types.CacheBehaviors{
+				Quantity: ptr.Int32(1),
+				Items: []types.CacheBehavior{
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+					{
+						PathPattern:    ptr.String("__PathPattern__"),
+						TargetOriginId: ptr.String("__TargetOriginId__"),
+						TrustedSigners: &types.TrustedSigners{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TrustedKeyGroups: &types.TrustedKeyGroups{
+							Enabled:  ptr.Bool(true),
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ViewerProtocolPolicy: types.ViewerProtocolPolicy("allow-all"),
+						AllowedMethods: &types.AllowedMethods{
+							Quantity: ptr.Int32(1),
+							Items: []types.Method{
+								types.Method("GET"),
+								types.Method("GET"),
+							},
+							CachedMethods: &types.CachedMethods{
+								Quantity: ptr.Int32(1),
+								Items: []types.Method{
+									types.Method("GET"),
+									types.Method("GET"),
+								},
+							},
+						},
+						SmoothStreaming: ptr.Bool(true),
+						Compress:        ptr.Bool(true),
+						LambdaFunctionAssociations: &types.LambdaFunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.LambdaFunctionAssociation{
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+								{
+									LambdaFunctionARN: ptr.String("__LambdaFunctionARN__"),
+									EventType:         types.EventType("viewer-request"),
+									IncludeBody:       ptr.Bool(true),
+								},
+							},
+						},
+						FunctionAssociations: &types.FunctionAssociations{
+							Quantity: ptr.Int32(1),
+							Items: []types.FunctionAssociation{
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+								{
+									FunctionARN: ptr.String("__FunctionARN__"),
+									EventType:   types.EventType("viewer-request"),
+								},
+							},
+						},
+						FieldLevelEncryptionId:  ptr.String("__FieldLevelEncryptionId__"),
+						RealtimeLogConfigArn:    ptr.String("__RealtimeLogConfigArn__"),
+						CachePolicyId:           ptr.String("__CachePolicyId__"),
+						OriginRequestPolicyId:   ptr.String("__OriginRequestPolicyId__"),
+						ResponseHeadersPolicyId: ptr.String("__ResponseHeadersPolicyId__"),
+						GrpcConfig: &types.GrpcConfig{
+							Enabled: ptr.Bool(true),
+						},
+						ForwardedValues: &types.ForwardedValues{
+							QueryString: ptr.Bool(true),
+							Cookies: &types.CookiePreference{
+								Forward: types.ItemSelection("none"),
+								WhitelistedNames: &types.CookieNames{
+									Quantity: ptr.Int32(1),
+									Items: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Headers: &types.Headers{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							QueryStringCacheKeys: &types.QueryStringCacheKeys{
+								Quantity: ptr.Int32(1),
+								Items: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						MinTTL:     ptr.Int64(1),
+						DefaultTTL: ptr.Int64(1),
+						MaxTTL:     ptr.Int64(1),
+					},
+				},
+			},
+			CustomErrorResponses: &types.CustomErrorResponses{
+				Quantity: ptr.Int32(1),
+				Items: []types.CustomErrorResponse{
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+					{
+						ErrorCode:          ptr.Int32(1),
+						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+						ResponseCode:       ptr.String("__ResponseCode__"),
+						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.LoggingConfig{
+				Enabled:        ptr.Bool(true),
+				IncludeCookies: ptr.Bool(true),
+				Bucket:         ptr.String("__Bucket__"),
+				Prefix:         ptr.String("__Prefix__"),
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+			ViewerCertificate: &types.ViewerCertificate{
+				CloudFrontDefaultCertificate: ptr.Bool(true),
+				IAMCertificateId:             ptr.String("__IAMCertificateId__"),
+				ACMCertificateArn:            ptr.String("__ACMCertificateArn__"),
+				SSLSupportMethod:             types.SSLSupportMethod("sni-only"),
+				MinimumProtocolVersion:       types.MinimumProtocolVersion("SSLv3"),
+				Certificate:                  ptr.String("__Certificate__"),
+				CertificateSource:            types.CertificateSource("cloudfront"),
+			},
+			Restrictions: &types.Restrictions{
+				GeoRestriction: &types.GeoRestriction{
+					RestrictionType: types.GeoRestrictionType("blacklist"),
+					Quantity:        ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			WebACLId:                     ptr.String("__WebACLId__"),
+			HttpVersion:                  types.HttpVersion("http1.1"),
+			IsIPV6Enabled:                ptr.Bool(true),
+			ContinuousDeploymentPolicyId: ptr.String("__ContinuousDeploymentPolicyId__"),
+			Staging:                      ptr.Bool(true),
+			AnycastIpListId:              ptr.String("__AnycastIpListId__"),
+			TenantConfig: &types.TenantConfig{
+				ParameterDefinitions: []types.ParameterDefinition{
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Definition: &types.ParameterDefinitionSchema{
+							StringSchema: &types.StringSchemaConfig{
+								Comment:      ptr.String("__Comment__"),
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Required:     ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			ConnectionMode: types.ConnectionMode("direct"),
+			ViewerMtlsConfig: &types.ViewerMtlsConfig{
+				Mode: types.ViewerMtlsMode("required"),
+				TrustStoreConfig: &types.TrustStoreConfig{
+					TrustStoreId:               ptr.String("__TrustStoreId__"),
+					AdvertiseTrustStoreCaNames: ptr.Bool(true),
+					IgnoreCertificateExpiry:    ptr.Bool(true),
+				},
+			},
+			ConnectionFunctionAssociation: &types.ConnectionFunctionAssociation{
+				Id: ptr.String("__Id__"),
+			},
+			CacheTagConfig: &types.CacheTagConfig{
+				HeaderName: ptr.String("__HeaderName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21545,7 +27849,10 @@ func TestCheckResponseSnapshot_Error_NoSuchDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21570,7 +27877,13 @@ func TestCheckResponseSnapshot_Error_NoSuchFieldLevelEncryptionConfig(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21595,7 +27908,46 @@ func TestCheckResponseSnapshot_Error_NoSuchFieldLevelEncryptionProfile(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21620,7 +27972,10 @@ func TestCheckResponseSnapshot_Error_NoSuchFunctionExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{})
+	_, opErr := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		Name:    ptr.String("__Name__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21645,7 +28000,10 @@ func TestCheckResponseSnapshot_Error_NoSuchInvalidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetInvalidation(context.Background(), &GetInvalidationInput{})
+	_, opErr := svc.GetInvalidation(context.Background(), &GetInvalidationInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21670,7 +28028,9 @@ func TestCheckResponseSnapshot_Error_NoSuchMonitoringSubscription(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMonitoringSubscription(context.Background(), &DeleteMonitoringSubscriptionInput{})
+	_, opErr := svc.DeleteMonitoringSubscription(context.Background(), &DeleteMonitoringSubscriptionInput{
+		DistributionId: ptr.String("__DistributionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21695,7 +28055,13 @@ func TestCheckResponseSnapshot_Error_NoSuchOrigin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21720,7 +28086,10 @@ func TestCheckResponseSnapshot_Error_NoSuchOriginAccessControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{})
+	_, opErr := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21745,7 +28114,13 @@ func TestCheckResponseSnapshot_Error_NoSuchOriginRequestPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21770,7 +28145,40 @@ func TestCheckResponseSnapshot_Error_NoSuchPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21795,7 +28203,13 @@ func TestCheckResponseSnapshot_Error_NoSuchRealtimeLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21820,7 +28234,10 @@ func TestCheckResponseSnapshot_Error_NoSuchResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteKeyGroup(context.Background(), &DeleteKeyGroupInput{})
+	_, opErr := svc.DeleteKeyGroup(context.Background(), &DeleteKeyGroupInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21845,7 +28262,13 @@ func TestCheckResponseSnapshot_Error_NoSuchResponseHeadersPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21870,7 +28293,10 @@ func TestCheckResponseSnapshot_Error_NoSuchStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{})
+	_, opErr := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21895,7 +28321,15 @@ func TestCheckResponseSnapshot_Error_OriginAccessControlAlreadyExists(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{})
+	_, opErr := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{
+		OriginAccessControlConfig: &types.OriginAccessControlConfig{
+			Name:                          ptr.String("__Name__"),
+			Description:                   ptr.String("__Description__"),
+			SigningProtocol:               types.OriginAccessControlSigningProtocols("sigv4"),
+			SigningBehavior:               types.OriginAccessControlSigningBehaviors("never"),
+			OriginAccessControlOriginType: types.OriginAccessControlOriginTypes("s3"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21920,7 +28354,10 @@ func TestCheckResponseSnapshot_Error_OriginAccessControlInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{})
+	_, opErr := svc.DeleteOriginAccessControl(context.Background(), &DeleteOriginAccessControlInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21945,7 +28382,42 @@ func TestCheckResponseSnapshot_Error_OriginRequestPolicyAlreadyExists(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21970,7 +28442,10 @@ func TestCheckResponseSnapshot_Error_OriginRequestPolicyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOriginRequestPolicy(context.Background(), &DeleteOriginRequestPolicyInput{})
+	_, opErr := svc.DeleteOriginRequestPolicy(context.Background(), &DeleteOriginRequestPolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -21995,7 +28470,11 @@ func TestCheckResponseSnapshot_Error_PreconditionFailed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{})
+	_, opErr := svc.AssociateDistributionTenantWebACL(context.Background(), &AssociateDistributionTenantWebACLInput{
+		Id:        ptr.String("__Id__"),
+		WebACLArn: ptr.String("__WebACLArn__"),
+		IfMatch:   ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22020,7 +28499,14 @@ func TestCheckResponseSnapshot_Error_PublicKeyAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{})
+	_, opErr := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{
+		PublicKeyConfig: &types.PublicKeyConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Name:            ptr.String("__Name__"),
+			EncodedKey:      ptr.String("__EncodedKey__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22045,7 +28531,10 @@ func TestCheckResponseSnapshot_Error_PublicKeyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{})
+	_, opErr := svc.DeletePublicKey(context.Background(), &DeletePublicKeyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22070,7 +28559,46 @@ func TestCheckResponseSnapshot_Error_QueryArgProfileEmpty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22095,7 +28623,30 @@ func TestCheckResponseSnapshot_Error_RealtimeLogConfigAlreadyExists(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{})
+	_, opErr := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{
+		EndPoints: []types.EndPoint{
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+		},
+		Fields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:         ptr.String("__Name__"),
+		SamplingRate: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22120,7 +28671,10 @@ func TestCheckResponseSnapshot_Error_RealtimeLogConfigInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRealtimeLogConfig(context.Background(), &DeleteRealtimeLogConfigInput{})
+	_, opErr := svc.DeleteRealtimeLogConfig(context.Background(), &DeleteRealtimeLogConfigInput{
+		Name: ptr.String("__Name__"),
+		ARN:  ptr.String("__ARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22145,7 +28699,13 @@ func TestCheckResponseSnapshot_Error_RealtimeLogConfigOwnerMismatch(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22170,7 +28730,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{})
+	_, opErr := svc.DeleteDistribution(context.Background(), &DeleteDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22195,7 +28758,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotDisabled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionGroup(context.Background(), &DeleteConnectionGroupInput{})
+	_, opErr := svc.DeleteConnectionGroup(context.Background(), &DeleteConnectionGroupInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22220,7 +28786,104 @@ func TestCheckResponseSnapshot_Error_ResponseHeadersPolicyAlreadyExists(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22245,7 +28908,10 @@ func TestCheckResponseSnapshot_Error_ResponseHeadersPolicyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResponseHeadersPolicy(context.Background(), &DeleteResponseHeadersPolicyInput{})
+	_, opErr := svc.DeleteResponseHeadersPolicy(context.Background(), &DeleteResponseHeadersPolicyInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22270,7 +28936,32 @@ func TestCheckResponseSnapshot_Error_StagingDistributionInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{})
+	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{
+		ContinuousDeploymentPolicyConfig: &types.ContinuousDeploymentPolicyConfig{
+			StagingDistributionDnsNames: &types.StagingDistributionDnsNames{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Enabled: ptr.Bool(true),
+			TrafficConfig: &types.TrafficConfig{
+				SingleWeightConfig: &types.ContinuousDeploymentSingleWeightConfig{
+					Weight: ptr.Float32(1.0),
+					SessionStickinessConfig: &types.SessionStickinessConfig{
+						IdleTTL:    ptr.Int32(1),
+						MaximumTTL: ptr.Int32(1),
+					},
+				},
+				SingleHeaderConfig: &types.ContinuousDeploymentSingleHeaderConfig{
+					Header: ptr.String("__Header__"),
+					Value:  ptr.String("__Value__"),
+				},
+				Type: types.ContinuousDeploymentPolicyType("SingleWeight"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22295,7 +28986,38 @@ func TestCheckResponseSnapshot_Error_StreamingDistributionAlreadyExists(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{})
+	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{
+		StreamingDistributionConfig: &types.StreamingDistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			S3Origin: &types.S3Origin{
+				DomainName:           ptr.String("__DomainName__"),
+				OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+			},
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.StreamingLoggingConfig{
+				Enabled: ptr.Bool(true),
+				Bucket:  ptr.String("__Bucket__"),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+			TrustedSigners: &types.TrustedSigners{
+				Enabled:  ptr.Bool(true),
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22320,7 +29042,10 @@ func TestCheckResponseSnapshot_Error_StreamingDistributionNotDisabled(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{})
+	_, opErr := svc.DeleteStreamingDistribution(context.Background(), &DeleteStreamingDistributionInput{
+		Id:      ptr.String("__Id__"),
+		IfMatch: ptr.String("__IfMatch__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22345,7 +29070,12 @@ func TestCheckResponseSnapshot_Error_TestFunctionFailed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestConnectionFunction(context.Background(), &TestConnectionFunctionInput{})
+	_, opErr := svc.TestConnectionFunction(context.Background(), &TestConnectionFunctionInput{
+		Id:               ptr.String("__Id__"),
+		IfMatch:          ptr.String("__IfMatch__"),
+		Stage:            types.FunctionStage("DEVELOPMENT"),
+		ConnectionObject: []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22370,7 +29100,104 @@ func TestCheckResponseSnapshot_Error_TooLongCSPInResponseHeadersPolicy(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22395,7 +29222,13 @@ func TestCheckResponseSnapshot_Error_TooManyCacheBehaviors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22420,7 +29253,49 @@ func TestCheckResponseSnapshot_Error_TooManyCachePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22445,7 +29320,13 @@ func TestCheckResponseSnapshot_Error_TooManyCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22470,7 +29351,12 @@ func TestCheckResponseSnapshot_Error_TooManyCloudFrontOriginAccessIdentities(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{})
+	_, opErr := svc.CreateCloudFrontOriginAccessIdentity(context.Background(), &CreateCloudFrontOriginAccessIdentityInput{
+		CloudFrontOriginAccessIdentityConfig: &types.CloudFrontOriginAccessIdentityConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22495,7 +29381,32 @@ func TestCheckResponseSnapshot_Error_TooManyContinuousDeploymentPolicies(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{})
+	_, opErr := svc.CreateContinuousDeploymentPolicy(context.Background(), &CreateContinuousDeploymentPolicyInput{
+		ContinuousDeploymentPolicyConfig: &types.ContinuousDeploymentPolicyConfig{
+			StagingDistributionDnsNames: &types.StagingDistributionDnsNames{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Enabled: ptr.Bool(true),
+			TrafficConfig: &types.TrafficConfig{
+				SingleWeightConfig: &types.ContinuousDeploymentSingleWeightConfig{
+					Weight: ptr.Float32(1.0),
+					SessionStickinessConfig: &types.SessionStickinessConfig{
+						IdleTTL:    ptr.Int32(1),
+						MaximumTTL: ptr.Int32(1),
+					},
+				},
+				SingleHeaderConfig: &types.ContinuousDeploymentSingleHeaderConfig{
+					Header: ptr.String("__Header__"),
+					Value:  ptr.String("__Value__"),
+				},
+				Type: types.ContinuousDeploymentPolicyType("SingleWeight"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22520,7 +29431,13 @@ func TestCheckResponseSnapshot_Error_TooManyCookieNamesInWhiteList(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22545,7 +29462,49 @@ func TestCheckResponseSnapshot_Error_TooManyCookiesInCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22570,7 +29529,42 @@ func TestCheckResponseSnapshot_Error_TooManyCookiesInOriginRequestPolicy(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22595,7 +29589,104 @@ func TestCheckResponseSnapshot_Error_TooManyCustomHeadersInResponseHeadersPolicy
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22620,7 +29711,10 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionCNAMEs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{})
+	_, opErr := svc.AssociateAlias(context.Background(), &AssociateAliasInput{
+		TargetDistributionId: ptr.String("__TargetDistributionId__"),
+		Alias:                ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22645,7 +29739,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22670,7 +29770,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToCachePolicy
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22695,7 +29801,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToFieldLevelE
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22720,7 +29832,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToKeyGroup(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22745,7 +29863,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToOriginAcces
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22770,7 +29894,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToOriginReque
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22795,7 +29925,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsAssociatedToResponseHea
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22820,7 +29956,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsWithFunctionAssociation
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22845,7 +29987,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsWithLambdaAssociations(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22870,7 +30018,13 @@ func TestCheckResponseSnapshot_Error_TooManyDistributionsWithSingleFunctionARN(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22895,7 +30049,46 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionConfigs(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22920,7 +30113,46 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionContentTypeProfi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22945,7 +30177,40 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionEncryptionEntiti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22970,7 +30235,40 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionFieldPatterns(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22995,7 +30293,40 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionProfiles(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionProfile(context.Background(), &CreateFieldLevelEncryptionProfileInput{
+		FieldLevelEncryptionProfileConfig: &types.FieldLevelEncryptionProfileConfig{
+			Name:            ptr.String("__Name__"),
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			EncryptionEntities: &types.EncryptionEntities{
+				Quantity: ptr.Int32(1),
+				Items: []types.EncryptionEntity{
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						PublicKeyId: ptr.String("__PublicKeyId__"),
+						ProviderId:  ptr.String("__ProviderId__"),
+						FieldPatterns: &types.FieldPatterns{
+							Quantity: ptr.Int32(1),
+							Items: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23020,7 +30351,46 @@ func TestCheckResponseSnapshot_Error_TooManyFieldLevelEncryptionQueryArgProfiles
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{})
+	_, opErr := svc.CreateFieldLevelEncryptionConfig(context.Background(), &CreateFieldLevelEncryptionConfigInput{
+		FieldLevelEncryptionConfig: &types.FieldLevelEncryptionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Comment:         ptr.String("__Comment__"),
+			QueryArgProfileConfig: &types.QueryArgProfileConfig{
+				ForwardWhenQueryArgProfileIsUnknown: ptr.Bool(true),
+				QueryArgProfiles: &types.QueryArgProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.QueryArgProfile{
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+						{
+							QueryArg:  ptr.String("__QueryArg__"),
+							ProfileId: ptr.String("__ProfileId__"),
+						},
+					},
+				},
+			},
+			ContentTypeProfileConfig: &types.ContentTypeProfileConfig{
+				ForwardWhenContentTypeIsUnknown: ptr.Bool(true),
+				ContentTypeProfiles: &types.ContentTypeProfiles{
+					Quantity: ptr.Int32(1),
+					Items: []types.ContentTypeProfile{
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+						{
+							Format:      types.Format("URLEncoded"),
+							ProfileId:   ptr.String("__ProfileId__"),
+							ContentType: ptr.String("__ContentType__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23045,7 +30415,13 @@ func TestCheckResponseSnapshot_Error_TooManyFunctionAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23070,7 +30446,37 @@ func TestCheckResponseSnapshot_Error_TooManyFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{})
+	_, opErr := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		FunctionConfig: &types.FunctionConfig{
+			Comment: ptr.String("__Comment__"),
+			Runtime: types.FunctionRuntime("cloudfront-js-1.0"),
+			KeyValueStoreAssociations: &types.KeyValueStoreAssociations{
+				Quantity: ptr.Int32(1),
+				Items: []types.KeyValueStoreAssociation{
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+					{
+						KeyValueStoreARN: ptr.String("__KeyValueStoreARN__"),
+					},
+				},
+			},
+		},
+		FunctionCode: []byte("blob"),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23095,7 +30501,49 @@ func TestCheckResponseSnapshot_Error_TooManyHeadersInCachePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23120,7 +30568,13 @@ func TestCheckResponseSnapshot_Error_TooManyHeadersInForwardedValues(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23145,7 +30599,42 @@ func TestCheckResponseSnapshot_Error_TooManyHeadersInOriginRequestPolicy(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23170,7 +30659,19 @@ func TestCheckResponseSnapshot_Error_TooManyInvalidationsInProgress(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{})
+	_, opErr := svc.CreateInvalidation(context.Background(), &CreateInvalidationInput{
+		DistributionId: ptr.String("__DistributionId__"),
+		InvalidationBatch: &types.InvalidationBatch{
+			Paths: &types.Paths{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			CallerReference: ptr.String("__CallerReference__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23195,7 +30696,16 @@ func TestCheckResponseSnapshot_Error_TooManyKeyGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{})
+	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{
+		KeyGroupConfig: &types.KeyGroupConfig{
+			Name: ptr.String("__Name__"),
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Comment: ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23220,7 +30730,13 @@ func TestCheckResponseSnapshot_Error_TooManyKeyGroupsAssociatedToDistribution(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23245,7 +30761,13 @@ func TestCheckResponseSnapshot_Error_TooManyLambdaFunctionAssociations(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23270,7 +30792,15 @@ func TestCheckResponseSnapshot_Error_TooManyOriginAccessControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{})
+	_, opErr := svc.CreateOriginAccessControl(context.Background(), &CreateOriginAccessControlInput{
+		OriginAccessControlConfig: &types.OriginAccessControlConfig{
+			Name:                          ptr.String("__Name__"),
+			Description:                   ptr.String("__Description__"),
+			SigningProtocol:               types.OriginAccessControlSigningProtocols("sigv4"),
+			SigningBehavior:               types.OriginAccessControlSigningBehaviors("never"),
+			OriginAccessControlOriginType: types.OriginAccessControlOriginTypes("s3"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23295,7 +30825,13 @@ func TestCheckResponseSnapshot_Error_TooManyOriginCustomHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23320,7 +30856,13 @@ func TestCheckResponseSnapshot_Error_TooManyOriginGroupsPerDistribution(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23345,7 +30887,42 @@ func TestCheckResponseSnapshot_Error_TooManyOriginRequestPolicies(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23370,7 +30947,13 @@ func TestCheckResponseSnapshot_Error_TooManyOrigins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23395,7 +30978,14 @@ func TestCheckResponseSnapshot_Error_TooManyPublicKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{})
+	_, opErr := svc.CreatePublicKey(context.Background(), &CreatePublicKeyInput{
+		PublicKeyConfig: &types.PublicKeyConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			Name:            ptr.String("__Name__"),
+			EncodedKey:      ptr.String("__EncodedKey__"),
+			Comment:         ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23420,7 +31010,16 @@ func TestCheckResponseSnapshot_Error_TooManyPublicKeysInKeyGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{})
+	_, opErr := svc.CreateKeyGroup(context.Background(), &CreateKeyGroupInput{
+		KeyGroupConfig: &types.KeyGroupConfig{
+			Name: ptr.String("__Name__"),
+			Items: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Comment: ptr.String("__Comment__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23445,7 +31044,13 @@ func TestCheckResponseSnapshot_Error_TooManyQueryStringParameters(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23470,7 +31075,49 @@ func TestCheckResponseSnapshot_Error_TooManyQueryStringsInCachePolicy(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{})
+	_, opErr := svc.CreateCachePolicy(context.Background(), &CreateCachePolicyInput{
+		CachePolicyConfig: &types.CachePolicyConfig{
+			Comment:    ptr.String("__Comment__"),
+			Name:       ptr.String("__Name__"),
+			DefaultTTL: ptr.Int64(1),
+			MaxTTL:     ptr.Int64(1),
+			MinTTL:     ptr.Int64(1),
+			ParametersInCacheKeyAndForwardedToOrigin: &types.ParametersInCacheKeyAndForwardedToOrigin{
+				EnableAcceptEncodingGzip:   ptr.Bool(true),
+				EnableAcceptEncodingBrotli: ptr.Bool(true),
+				HeadersConfig: &types.CachePolicyHeadersConfig{
+					HeaderBehavior: types.CachePolicyHeaderBehavior("none"),
+					Headers: &types.Headers{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				CookiesConfig: &types.CachePolicyCookiesConfig{
+					CookieBehavior: types.CachePolicyCookieBehavior("none"),
+					Cookies: &types.CookieNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				QueryStringsConfig: &types.CachePolicyQueryStringsConfig{
+					QueryStringBehavior: types.CachePolicyQueryStringBehavior("none"),
+					QueryStrings: &types.QueryStringNames{
+						Quantity: ptr.Int32(1),
+						Items: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23495,7 +31142,42 @@ func TestCheckResponseSnapshot_Error_TooManyQueryStringsInOriginRequestPolicy(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{})
+	_, opErr := svc.CreateOriginRequestPolicy(context.Background(), &CreateOriginRequestPolicyInput{
+		OriginRequestPolicyConfig: &types.OriginRequestPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			HeadersConfig: &types.OriginRequestPolicyHeadersConfig{
+				HeaderBehavior: types.OriginRequestPolicyHeaderBehavior("none"),
+				Headers: &types.Headers{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			CookiesConfig: &types.OriginRequestPolicyCookiesConfig{
+				CookieBehavior: types.OriginRequestPolicyCookieBehavior("none"),
+				Cookies: &types.CookieNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			QueryStringsConfig: &types.OriginRequestPolicyQueryStringsConfig{
+				QueryStringBehavior: types.OriginRequestPolicyQueryStringBehavior("none"),
+				QueryStrings: &types.QueryStringNames{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23520,7 +31202,30 @@ func TestCheckResponseSnapshot_Error_TooManyRealtimeLogConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{})
+	_, opErr := svc.CreateRealtimeLogConfig(context.Background(), &CreateRealtimeLogConfigInput{
+		EndPoints: []types.EndPoint{
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+			{
+				StreamType: ptr.String("__StreamType__"),
+				KinesisStreamConfig: &types.KinesisStreamConfig{
+					RoleARN:   ptr.String("__RoleARN__"),
+					StreamARN: ptr.String("__StreamARN__"),
+				},
+			},
+		},
+		Fields: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:         ptr.String("__Name__"),
+		SamplingRate: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23545,7 +31250,104 @@ func TestCheckResponseSnapshot_Error_TooManyRemoveHeadersInResponseHeadersPolicy
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23570,7 +31372,104 @@ func TestCheckResponseSnapshot_Error_TooManyResponseHeadersPolicies(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{})
+	_, opErr := svc.CreateResponseHeadersPolicy(context.Background(), &CreateResponseHeadersPolicyInput{
+		ResponseHeadersPolicyConfig: &types.ResponseHeadersPolicyConfig{
+			Comment: ptr.String("__Comment__"),
+			Name:    ptr.String("__Name__"),
+			CorsConfig: &types.ResponseHeadersPolicyCorsConfig{
+				AccessControlAllowOrigins: &types.ResponseHeadersPolicyAccessControlAllowOrigins{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowHeaders: &types.ResponseHeadersPolicyAccessControlAllowHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlAllowMethods: &types.ResponseHeadersPolicyAccessControlAllowMethods{
+					Quantity: ptr.Int32(1),
+					Items: []types.ResponseHeadersPolicyAccessControlAllowMethodsValues{
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+						types.ResponseHeadersPolicyAccessControlAllowMethodsValues("GET"),
+					},
+				},
+				AccessControlAllowCredentials: ptr.Bool(true),
+				AccessControlExposeHeaders: &types.ResponseHeadersPolicyAccessControlExposeHeaders{
+					Quantity: ptr.Int32(1),
+					Items: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AccessControlMaxAgeSec: ptr.Int32(1),
+				OriginOverride:         ptr.Bool(true),
+			},
+			SecurityHeadersConfig: &types.ResponseHeadersPolicySecurityHeadersConfig{
+				XSSProtection: &types.ResponseHeadersPolicyXSSProtection{
+					Override:   ptr.Bool(true),
+					Protection: ptr.Bool(true),
+					ModeBlock:  ptr.Bool(true),
+					ReportUri:  ptr.String("__ReportUri__"),
+				},
+				FrameOptions: &types.ResponseHeadersPolicyFrameOptions{
+					Override:    ptr.Bool(true),
+					FrameOption: types.FrameOptionsList("DENY"),
+				},
+				ReferrerPolicy: &types.ResponseHeadersPolicyReferrerPolicy{
+					Override:       ptr.Bool(true),
+					ReferrerPolicy: types.ReferrerPolicyList("no-referrer"),
+				},
+				ContentSecurityPolicy: &types.ResponseHeadersPolicyContentSecurityPolicy{
+					Override:              ptr.Bool(true),
+					ContentSecurityPolicy: ptr.String("__ContentSecurityPolicy__"),
+				},
+				ContentTypeOptions: &types.ResponseHeadersPolicyContentTypeOptions{
+					Override: ptr.Bool(true),
+				},
+				StrictTransportSecurity: &types.ResponseHeadersPolicyStrictTransportSecurity{
+					Override:               ptr.Bool(true),
+					IncludeSubdomains:      ptr.Bool(true),
+					Preload:                ptr.Bool(true),
+					AccessControlMaxAgeSec: ptr.Int32(1),
+				},
+			},
+			ServerTimingHeadersConfig: &types.ResponseHeadersPolicyServerTimingHeadersConfig{
+				Enabled:      ptr.Bool(true),
+				SamplingRate: ptr.Float64(1.0),
+			},
+			CustomHeadersConfig: &types.ResponseHeadersPolicyCustomHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyCustomHeader{
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+					{
+						Header:   ptr.String("__Header__"),
+						Value:    ptr.String("__Value__"),
+						Override: ptr.Bool(true),
+					},
+				},
+			},
+			RemoveHeadersConfig: &types.ResponseHeadersPolicyRemoveHeadersConfig{
+				Quantity: ptr.Int32(1),
+				Items: []types.ResponseHeadersPolicyRemoveHeader{
+					{
+						Header: ptr.String("__Header__"),
+					},
+					{
+						Header: ptr.String("__Header__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23595,7 +31494,38 @@ func TestCheckResponseSnapshot_Error_TooManyStreamingDistributionCNAMEs(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{})
+	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{
+		StreamingDistributionConfig: &types.StreamingDistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			S3Origin: &types.S3Origin{
+				DomainName:           ptr.String("__DomainName__"),
+				OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+			},
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.StreamingLoggingConfig{
+				Enabled: ptr.Bool(true),
+				Bucket:  ptr.String("__Bucket__"),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+			TrustedSigners: &types.TrustedSigners{
+				Enabled:  ptr.Bool(true),
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23620,7 +31550,38 @@ func TestCheckResponseSnapshot_Error_TooManyStreamingDistributions(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{})
+	_, opErr := svc.CreateStreamingDistribution(context.Background(), &CreateStreamingDistributionInput{
+		StreamingDistributionConfig: &types.StreamingDistributionConfig{
+			CallerReference: ptr.String("__CallerReference__"),
+			S3Origin: &types.S3Origin{
+				DomainName:           ptr.String("__DomainName__"),
+				OriginAccessIdentity: ptr.String("__OriginAccessIdentity__"),
+			},
+			Aliases: &types.Aliases{
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Comment: ptr.String("__Comment__"),
+			Logging: &types.StreamingLoggingConfig{
+				Enabled: ptr.Bool(true),
+				Bucket:  ptr.String("__Bucket__"),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+			TrustedSigners: &types.TrustedSigners{
+				Enabled:  ptr.Bool(true),
+				Quantity: ptr.Int32(1),
+				Items: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PriceClass: types.PriceClass("PriceClass_100"),
+			Enabled:    ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23645,7 +31606,13 @@ func TestCheckResponseSnapshot_Error_TooManyTrustedSigners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23670,7 +31637,13 @@ func TestCheckResponseSnapshot_Error_TrustedKeyGroupDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23695,7 +31668,13 @@ func TestCheckResponseSnapshot_Error_TrustedSignerDoesNotExist(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{})
+	_, opErr := svc.CopyDistribution(context.Background(), &CopyDistributionInput{
+		PrimaryDistributionId: ptr.String("__PrimaryDistributionId__"),
+		Staging:               ptr.Bool(true),
+		IfMatch:               ptr.String("__IfMatch__"),
+		CallerReference:       ptr.String("__CallerReference__"),
+		Enabled:               ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -23720,7 +31699,37 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{})
+	_, opErr := svc.CreateAnycastIpList(context.Background(), &CreateAnycastIpListInput{
+		Name:    ptr.String("__Name__"),
+		IpCount: ptr.Int32(1),
+		Tags: &types.Tags{
+			Items: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		IpAddressType: types.IpAddressType("ipv4"),
+		IpamCidrConfigs: []types.IpamCidrConfig{
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+			{
+				Cidr:        ptr.String("__Cidr__"),
+				IpamPoolArn: ptr.String("__IpamPoolArn__"),
+				AnycastIp:   ptr.String("__AnycastIp__"),
+				Status:      types.IpamCidrStatus("provisioned"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

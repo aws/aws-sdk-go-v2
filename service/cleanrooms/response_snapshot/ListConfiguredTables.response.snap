@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuredTableSummaries":[{"analysisMethod":"DIRECT_QUERY","analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","createTime":946684800,"id":"__Id__","name":"__Name__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"updateTime":946684800},{"analysisMethod":"DIRECT_QUERY","analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","createTime":946684800,"id":"__Id__","name":"__Name__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"updateTime":946684800}],"nextToken":"__NextToken__"}

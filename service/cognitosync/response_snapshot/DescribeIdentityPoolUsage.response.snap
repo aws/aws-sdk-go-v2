@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IdentityPoolUsage":{"DataStorage":1,"IdentityPoolId":"__IdentityPoolId__","LastModifiedDate":946684800,"SyncSessionsCount":1}}

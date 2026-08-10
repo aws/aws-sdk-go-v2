@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationDate":946684800,"defaultVersionName":"__DefaultVersionName__","description":"__Description__","lastModifiedDate":946684800,"packageArn":"__PackageArn__","packageName":"__PackageName__"}

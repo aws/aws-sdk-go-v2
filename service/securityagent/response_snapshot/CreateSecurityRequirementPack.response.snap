@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"kmsKeyId":"__KmsKeyId__","packId":"__PackId__","status":"ENABLED"}

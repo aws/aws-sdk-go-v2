@@ -148,7 +148,100 @@ func TestCheckResponseSnapshot_AddLFTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	got, err := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +265,12 @@ func TestCheckResponseSnapshot_AssumeDecoratedRoleWithSAML(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeDecoratedRoleWithSAML(context.Background(), &AssumeDecoratedRoleWithSAMLInput{})
+	got, err := svc.AssumeDecoratedRoleWithSAML(context.Background(), &AssumeDecoratedRoleWithSAMLInput{
+		SAMLAssertion:   ptr.String("__SAMLAssertion__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		PrincipalArn:    ptr.String("__PrincipalArn__"),
+		DurationSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -386,7 +484,191 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGrantPermissions(context.Background(), &BatchGrantPermissionsInput{})
+	got, err := svc.BatchGrantPermissions(context.Background(), &BatchGrantPermissionsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Entries: []types.BatchPermissionsRequestEntry{
+			{
+				Id: ptr.String("__Id__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Permissions: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				PermissionsWithGrantOption: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Permissions: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				PermissionsWithGrantOption: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -600,7 +882,191 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchRevokePermissions(context.Background(), &BatchRevokePermissionsInput{})
+	got, err := svc.BatchRevokePermissions(context.Background(), &BatchRevokePermissionsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Entries: []types.BatchPermissionsRequestEntry{
+			{
+				Id: ptr.String("__Id__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Permissions: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				PermissionsWithGrantOption: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Principal: &types.DataLakePrincipal{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				Resource: &types.Resource{
+					Catalog: &types.CatalogResource{
+						Id: ptr.String("__Id__"),
+					},
+					Database: &types.DatabaseResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+					Table: &types.TableResource{
+						CatalogId:     ptr.String("__CatalogId__"),
+						DatabaseName:  ptr.String("__DatabaseName__"),
+						Name:          ptr.String("__Name__"),
+						TableWildcard: &types.TableWildcard{},
+					},
+					TableWithColumns: &types.TableWithColumnsResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						DatabaseName: ptr.String("__DatabaseName__"),
+						Name:         ptr.String("__Name__"),
+						ColumnNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ColumnWildcard: &types.ColumnWildcard{
+							ExcludedColumnNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					DataLocation: &types.DataLocationResource{
+						CatalogId:   ptr.String("__CatalogId__"),
+						ResourceArn: ptr.String("__ResourceArn__"),
+					},
+					DataCellsFilter: &types.DataCellsFilterResource{
+						TableCatalogId: ptr.String("__TableCatalogId__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Name:           ptr.String("__Name__"),
+					},
+					LFTag: &types.LFTagKeyResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						TagKey:    ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					LFTagPolicy: &types.LFTagPolicyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.ResourceType("DATABASE"),
+						Expression: []types.LFTag{
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								TagKey: ptr.String("__TagKey__"),
+								TagValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ExpressionName: ptr.String("__ExpressionName__"),
+					},
+					LFTagExpression: &types.LFTagExpressionResource{
+						CatalogId: ptr.String("__CatalogId__"),
+						Name:      ptr.String("__Name__"),
+					},
+				},
+				Permissions: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+				Condition: &types.Condition{
+					Expression: ptr.String("__Expression__"),
+				},
+				PermissionsWithGrantOption: []types.Permission{
+					types.Permission("ALL"),
+					types.Permission("ALL"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +1085,9 @@ func TestCheckResponseSnapshot_CancelTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTransaction(context.Background(), &CancelTransactionInput{})
+	got, err := svc.CancelTransaction(context.Background(), &CancelTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +1108,9 @@ func TestCheckResponseSnapshot_CommitTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CommitTransaction(context.Background(), &CommitTransactionInput{})
+	got, err := svc.CommitTransaction(context.Background(), &CommitTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +1129,29 @@ func TestCheckResponseSnapshot_CreateDataCellsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{})
+	got, err := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{
+		TableData: &types.DataCellsFilter{
+			TableCatalogId: ptr.String("__TableCatalogId__"),
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			TableName:      ptr.String("__TableName__"),
+			Name:           ptr.String("__Name__"),
+			RowFilter: &types.RowFilter{
+				FilterExpression: ptr.String("__FilterExpression__"),
+				AllRowsWildcard:  &types.AllRowsWildcard{},
+			},
+			ColumnNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ColumnWildcard: &types.ColumnWildcard{
+				ExcludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			VersionId: ptr.String("__VersionId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +1170,14 @@ func TestCheckResponseSnapshot_CreateLFTag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLFTag(context.Background(), &CreateLFTagInput{})
+	got, err := svc.CreateLFTag(context.Background(), &CreateLFTagInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		TagKey:    ptr.String("__TagKey__"),
+		TagValues: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +1196,27 @@ func TestCheckResponseSnapshot_CreateLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLFTagExpression(context.Background(), &CreateLFTagExpressionInput{})
+	got, err := svc.CreateLFTagExpression(context.Background(), &CreateLFTagExpressionInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CatalogId:   ptr.String("__CatalogId__"),
+		Expression: []types.LFTag{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +1237,55 @@ func TestCheckResponseSnapshot_CreateLakeFormationIdentityCenterConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLakeFormationIdentityCenterConfiguration(context.Background(), &CreateLakeFormationIdentityCenterConfigurationInput{})
+	got, err := svc.CreateLakeFormationIdentityCenterConfiguration(context.Background(), &CreateLakeFormationIdentityCenterConfigurationInput{
+		CatalogId:   ptr.String("__CatalogId__"),
+		InstanceArn: ptr.String("__InstanceArn__"),
+		ExternalFiltering: &types.ExternalFilteringConfiguration{
+			Status: types.EnableStatus("ENABLED"),
+			AuthorizedTargets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ShareRecipients: []types.DataLakePrincipal{
+			{
+				DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+			},
+			{
+				DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+			},
+		},
+		ServiceIntegrations: []types.ServiceIntegrationUnion{
+			&types.ServiceIntegrationUnionMemberRedshift{
+				Value: []types.RedshiftScopeUnion{
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+				},
+			},
+			&types.ServiceIntegrationUnionMemberRedshift{
+				Value: []types.RedshiftScopeUnion{
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +1304,87 @@ func TestCheckResponseSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLakeFormationOptIn(context.Background(), &CreateLakeFormationOptInInput{})
+	got, err := svc.CreateLakeFormationOptIn(context.Background(), &CreateLakeFormationOptInInput{
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -756,7 +1403,12 @@ func TestCheckResponseSnapshot_DeleteDataCellsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataCellsFilter(context.Background(), &DeleteDataCellsFilterInput{})
+	got, err := svc.DeleteDataCellsFilter(context.Background(), &DeleteDataCellsFilterInput{
+		TableCatalogId: ptr.String("__TableCatalogId__"),
+		DatabaseName:   ptr.String("__DatabaseName__"),
+		TableName:      ptr.String("__TableName__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +1427,10 @@ func TestCheckResponseSnapshot_DeleteLFTag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLFTag(context.Background(), &DeleteLFTagInput{})
+	got, err := svc.DeleteLFTag(context.Background(), &DeleteLFTagInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		TagKey:    ptr.String("__TagKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +1449,10 @@ func TestCheckResponseSnapshot_DeleteLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLFTagExpression(context.Background(), &DeleteLFTagExpressionInput{})
+	got, err := svc.DeleteLFTagExpression(context.Background(), &DeleteLFTagExpressionInput{
+		Name:      ptr.String("__Name__"),
+		CatalogId: ptr.String("__CatalogId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +1471,9 @@ func TestCheckResponseSnapshot_DeleteLakeFormationIdentityCenterConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLakeFormationIdentityCenterConfiguration(context.Background(), &DeleteLakeFormationIdentityCenterConfigurationInput{})
+	got, err := svc.DeleteLakeFormationIdentityCenterConfiguration(context.Background(), &DeleteLakeFormationIdentityCenterConfigurationInput{
+		CatalogId: ptr.String("__CatalogId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1492,87 @@ func TestCheckResponseSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLakeFormationOptIn(context.Background(), &DeleteLakeFormationOptInInput{})
+	got, err := svc.DeleteLakeFormationOptIn(context.Background(), &DeleteLakeFormationOptInInput{
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +1591,22 @@ func TestCheckResponseSnapshot_DeleteObjectsOnCancel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObjectsOnCancel(context.Background(), &DeleteObjectsOnCancelInput{})
+	got, err := svc.DeleteObjectsOnCancel(context.Background(), &DeleteObjectsOnCancelInput{
+		CatalogId:     ptr.String("__CatalogId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		TableName:     ptr.String("__TableName__"),
+		TransactionId: ptr.String("__TransactionId__"),
+		Objects: []types.VirtualObject{
+			{
+				Uri:  ptr.String("__Uri__"),
+				ETag: ptr.String("__ETag__"),
+			},
+			{
+				Uri:  ptr.String("__Uri__"),
+				ETag: ptr.String("__ETag__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1625,9 @@ func TestCheckResponseSnapshot_DeregisterResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterResource(context.Background(), &DeregisterResourceInput{})
+	got, err := svc.DeregisterResource(context.Background(), &DeregisterResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1696,9 @@ func TestCheckResponseSnapshot_DescribeLakeFormationIdentityCenterConfiguration(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLakeFormationIdentityCenterConfiguration(context.Background(), &DescribeLakeFormationIdentityCenterConfigurationInput{})
+	got, err := svc.DescribeLakeFormationIdentityCenterConfiguration(context.Background(), &DescribeLakeFormationIdentityCenterConfigurationInput{
+		CatalogId: ptr.String("__CatalogId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -969,7 +1728,9 @@ func TestCheckResponseSnapshot_DescribeResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResource(context.Background(), &DescribeResourceInput{})
+	got, err := svc.DescribeResource(context.Background(), &DescribeResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -995,7 +1756,9 @@ func TestCheckResponseSnapshot_DescribeTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTransaction(context.Background(), &DescribeTransactionInput{})
+	got, err := svc.DescribeTransaction(context.Background(), &DescribeTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1777,9 @@ func TestCheckResponseSnapshot_ExtendTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExtendTransaction(context.Background(), &ExtendTransactionInput{})
+	got, err := svc.ExtendTransaction(context.Background(), &ExtendTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1055,7 +1820,12 @@ func TestCheckResponseSnapshot_GetDataCellsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataCellsFilter(context.Background(), &GetDataCellsFilterInput{})
+	got, err := svc.GetDataCellsFilter(context.Background(), &GetDataCellsFilterInput{
+		TableCatalogId: ptr.String("__TableCatalogId__"),
+		DatabaseName:   ptr.String("__DatabaseName__"),
+		TableName:      ptr.String("__TableName__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1945,9 @@ func TestCheckResponseSnapshot_GetDataLakeSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataLakeSettings(context.Background(), &GetDataLakeSettingsInput{})
+	got, err := svc.GetDataLakeSettings(context.Background(), &GetDataLakeSettingsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1392,7 +2164,12 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEffectivePermissionsForPath(context.Background(), &GetEffectivePermissionsForPathInput{})
+	got, err := svc.GetEffectivePermissionsForPath(context.Background(), &GetEffectivePermissionsForPathInput{
+		CatalogId:   ptr.String("__CatalogId__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +2195,10 @@ func TestCheckResponseSnapshot_GetLFTag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLFTag(context.Background(), &GetLFTagInput{})
+	got, err := svc.GetLFTag(context.Background(), &GetLFTagInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		TagKey:    ptr.String("__TagKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1457,7 +2237,10 @@ func TestCheckResponseSnapshot_GetLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLFTagExpression(context.Background(), &GetLFTagExpressionInput{})
+	got, err := svc.GetLFTagExpression(context.Background(), &GetLFTagExpressionInput{
+		Name:      ptr.String("__Name__"),
+		CatalogId: ptr.String("__CatalogId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +2262,9 @@ func TestCheckResponseSnapshot_GetQueryState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryState(context.Background(), &GetQueryStateInput{})
+	got, err := svc.GetQueryState(context.Background(), &GetQueryStateInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1511,7 +2296,9 @@ func TestCheckResponseSnapshot_GetQueryStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{})
+	got, err := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1611,7 +2398,83 @@ func TestCheckResponseSnapshot_GetResourceLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{})
+	got, err := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		ShowAssignedLFTags: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1670,7 +2533,16 @@ func TestCheckResponseSnapshot_GetTableObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableObjects(context.Background(), &GetTableObjectsInput{})
+	got, err := svc.GetTableObjects(context.Background(), &GetTableObjectsInput{
+		CatalogId:          ptr.String("__CatalogId__"),
+		DatabaseName:       ptr.String("__DatabaseName__"),
+		TableName:          ptr.String("__TableName__"),
+		TransactionId:      ptr.String("__TransactionId__"),
+		QueryAsOfTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PartitionPredicate: ptr.String("__PartitionPredicate__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1701,7 +2573,17 @@ func TestCheckResponseSnapshot_GetTemporaryDataLocationCredentials(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemporaryDataLocationCredentials(context.Background(), &GetTemporaryDataLocationCredentialsInput{})
+	got, err := svc.GetTemporaryDataLocationCredentials(context.Background(), &GetTemporaryDataLocationCredentialsInput{
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+		DataLocations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CredentialsScope: types.CredentialsScope("READ"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1725,7 +2607,27 @@ func TestCheckResponseSnapshot_GetTemporaryGluePartitionCredentials(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemporaryGluePartitionCredentials(context.Background(), &GetTemporaryGluePartitionCredentialsInput{})
+	got, err := svc.GetTemporaryGluePartitionCredentials(context.Background(), &GetTemporaryGluePartitionCredentialsInput{
+		TableArn: ptr.String("__TableArn__"),
+		Partition: &types.PartitionValueList{
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Permissions: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+		SupportedPermissionTypes: []types.PermissionType{
+			types.PermissionType("COLUMN_PERMISSION"),
+			types.PermissionType("COLUMN_PERMISSION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1753,7 +2655,31 @@ func TestCheckResponseSnapshot_GetTemporaryGlueTableCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemporaryGlueTableCredentials(context.Background(), &GetTemporaryGlueTableCredentialsInput{})
+	got, err := svc.GetTemporaryGlueTableCredentials(context.Background(), &GetTemporaryGlueTableCredentialsInput{
+		TableArn: ptr.String("__TableArn__"),
+		Permissions: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+		SupportedPermissionTypes: []types.PermissionType{
+			types.PermissionType("COLUMN_PERMISSION"),
+			types.PermissionType("COLUMN_PERMISSION"),
+		},
+		S3Path: ptr.String("__S3Path__"),
+		QuerySessionContext: &types.QuerySessionContext{
+			QueryId:              ptr.String("__QueryId__"),
+			QueryStartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ClusterId:            ptr.String("__ClusterId__"),
+			QueryAuthorizationId: ptr.String("__QueryAuthorizationId__"),
+			AdditionalContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +2689,9 @@ func TestCheckResponseSnapshot_GetTemporaryGlueTableCredentials(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetWorkUnitResults(t *testing.T) {
-	want := &GetWorkUnitResultsOutput{}
+	want := &GetWorkUnitResultsOutput{
+		ResultStream: io.NopCloser(bytes.NewReader([]byte("__ResultStream__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetWorkUnitResults.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -1772,7 +2700,11 @@ func TestCheckResponseSnapshot_GetWorkUnitResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkUnitResults(context.Background(), &GetWorkUnitResultsInput{})
+	got, err := svc.GetWorkUnitResults(context.Background(), &GetWorkUnitResultsInput{
+		QueryId:       ptr.String("__QueryId__"),
+		WorkUnitId:    1,
+		WorkUnitToken: ptr.String("__WorkUnitToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1806,7 +2738,11 @@ func TestCheckResponseSnapshot_GetWorkUnits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkUnits(context.Background(), &GetWorkUnitsInput{})
+	got, err := svc.GetWorkUnits(context.Background(), &GetWorkUnitsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+		QueryId:   ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1825,7 +2761,96 @@ func TestCheckResponseSnapshot_GrantPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GrantPermissions(context.Background(), &GrantPermissionsInput{})
+	got, err := svc.GrantPermissions(context.Background(), &GrantPermissionsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Permissions: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		PermissionsWithGrantOption: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1890,7 +2915,16 @@ func TestCheckResponseSnapshot_ListDataCellsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataCellsFilter(context.Background(), &ListDataCellsFilterInput{})
+	got, err := svc.ListDataCellsFilter(context.Background(), &ListDataCellsFilterInput{
+		Table: &types.TableResource{
+			CatalogId:     ptr.String("__CatalogId__"),
+			DatabaseName:  ptr.String("__DatabaseName__"),
+			Name:          ptr.String("__Name__"),
+			TableWildcard: &types.TableWildcard{},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1955,7 +2989,11 @@ func TestCheckResponseSnapshot_ListLFTagExpressions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLFTagExpressions(context.Background(), &ListLFTagExpressionsInput{})
+	got, err := svc.ListLFTagExpressions(context.Background(), &ListLFTagExpressionsInput{
+		CatalogId:  ptr.String("__CatalogId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1994,7 +3032,12 @@ func TestCheckResponseSnapshot_ListLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLFTags(context.Background(), &ListLFTagsInput{})
+	got, err := svc.ListLFTags(context.Background(), &ListLFTagsInput{
+		CatalogId:         ptr.String("__CatalogId__"),
+		ResourceShareType: types.ResourceShareType("FOREIGN"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2183,7 +3226,86 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLakeFormationOptIns(context.Background(), &ListLakeFormationOptInsInput{})
+	got, err := svc.ListLakeFormationOptIns(context.Background(), &ListLakeFormationOptInsInput{
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2400,7 +3522,89 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{})
+	got, err := svc.ListPermissions(context.Background(), &ListPermissionsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		ResourceType: types.DataLakeResourceType("CATALOG"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		IncludeRelated: ptr.String("__IncludeRelated__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2443,7 +3647,28 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		FilterConditionList: []types.FilterCondition{
+			{
+				Field:              types.FieldNameString("RESOURCE_ARN"),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				StringValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field:              types.FieldNameString("RESOURCE_ARN"),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				StringValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2484,7 +3709,14 @@ func TestCheckResponseSnapshot_ListTableStorageOptimizers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTableStorageOptimizers(context.Background(), &ListTableStorageOptimizersInput{})
+	got, err := svc.ListTableStorageOptimizers(context.Background(), &ListTableStorageOptimizersInput{
+		CatalogId:            ptr.String("__CatalogId__"),
+		DatabaseName:         ptr.String("__DatabaseName__"),
+		TableName:            ptr.String("__TableName__"),
+		StorageOptimizerType: types.OptimizerType("COMPACTION"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2519,7 +3751,12 @@ func TestCheckResponseSnapshot_ListTransactions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTransactions(context.Background(), &ListTransactionsInput{})
+	got, err := svc.ListTransactions(context.Background(), &ListTransactionsInput{
+		CatalogId:    ptr.String("__CatalogId__"),
+		StatusFilter: types.TransactionStatusFilter("ALL"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2538,7 +3775,88 @@ func TestCheckResponseSnapshot_PutDataLakeSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDataLakeSettings(context.Background(), &PutDataLakeSettingsInput{})
+	got, err := svc.PutDataLakeSettings(context.Background(), &PutDataLakeSettingsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		DataLakeSettings: &types.DataLakeSettings{
+			DataLakeAdmins: []types.DataLakePrincipal{
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+			},
+			ReadOnlyAdmins: []types.DataLakePrincipal{
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+			},
+			CreateDatabaseDefaultPermissions: []types.PrincipalPermissions{
+				{
+					Principal: &types.DataLakePrincipal{
+						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+					},
+					Permissions: []types.Permission{
+						types.Permission("ALL"),
+						types.Permission("ALL"),
+					},
+				},
+				{
+					Principal: &types.DataLakePrincipal{
+						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+					},
+					Permissions: []types.Permission{
+						types.Permission("ALL"),
+						types.Permission("ALL"),
+					},
+				},
+			},
+			CreateTableDefaultPermissions: []types.PrincipalPermissions{
+				{
+					Principal: &types.DataLakePrincipal{
+						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+					},
+					Permissions: []types.Permission{
+						types.Permission("ALL"),
+						types.Permission("ALL"),
+					},
+				},
+				{
+					Principal: &types.DataLakePrincipal{
+						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+					},
+					Permissions: []types.Permission{
+						types.Permission("ALL"),
+						types.Permission("ALL"),
+					},
+				},
+			},
+			Parameters: map[string]string{
+				"key0": "__Value__",
+			},
+			TrustedResourceOwners: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowExternalDataFiltering:       ptr.Bool(true),
+			AllowFullTableExternalDataAccess: ptr.Bool(true),
+			ExternalDataFilteringAllowList: []types.DataLakePrincipal{
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+				{
+					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+				},
+			},
+			AuthorizedSessionTagValueList: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2557,7 +3875,15 @@ func TestCheckResponseSnapshot_RegisterResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterResource(context.Background(), &RegisterResourceInput{})
+	got, err := svc.RegisterResource(context.Background(), &RegisterResourceInput{
+		ResourceArn:                  ptr.String("__ResourceArn__"),
+		UseServiceLinkedRole:         ptr.Bool(true),
+		RoleArn:                      ptr.String("__RoleArn__"),
+		WithFederation:               ptr.Bool(true),
+		HybridAccessEnabled:          ptr.Bool(true),
+		WithPrivilegedAccess:         true,
+		ExpectedResourceOwnerAccount: ptr.String("__ExpectedResourceOwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2607,7 +3933,100 @@ func TestCheckResponseSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveLFTagsFromResource(context.Background(), &RemoveLFTagsFromResourceInput{})
+	got, err := svc.RemoveLFTagsFromResource(context.Background(), &RemoveLFTagsFromResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2626,7 +4045,96 @@ func TestCheckResponseSnapshot_RevokePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokePermissions(context.Background(), &RevokePermissionsInput{})
+	got, err := svc.RevokePermissions(context.Background(), &RevokePermissionsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Principal: &types.DataLakePrincipal{
+			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+		},
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		Permissions: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+		Condition: &types.Condition{
+			Expression: ptr.String("__Expression__"),
+		},
+		PermissionsWithGrantOption: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2697,7 +4205,27 @@ func TestCheckResponseSnapshot_SearchDatabasesByLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchDatabasesByLFTags(context.Background(), &SearchDatabasesByLFTagsInput{})
+	got, err := svc.SearchDatabasesByLFTags(context.Background(), &SearchDatabasesByLFTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		CatalogId:  ptr.String("__CatalogId__"),
+		Expression: []types.LFTag{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2896,7 +4424,27 @@ func TestCheckResponseSnapshot_SearchTablesByLFTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchTablesByLFTags(context.Background(), &SearchTablesByLFTagsInput{})
+	got, err := svc.SearchTablesByLFTags(context.Background(), &SearchTablesByLFTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		CatalogId:  ptr.String("__CatalogId__"),
+		Expression: []types.LFTag{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2917,7 +4465,18 @@ func TestCheckResponseSnapshot_StartQueryPlanning(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQueryPlanning(context.Background(), &StartQueryPlanningInput{})
+	got, err := svc.StartQueryPlanning(context.Background(), &StartQueryPlanningInput{
+		QueryPlanningContext: &types.QueryPlanningContext{
+			CatalogId:     ptr.String("__CatalogId__"),
+			DatabaseName:  ptr.String("__DatabaseName__"),
+			QueryAsOfTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			QueryParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			TransactionId: ptr.String("__TransactionId__"),
+		},
+		QueryString: ptr.String("__QueryString__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2938,7 +4497,9 @@ func TestCheckResponseSnapshot_StartTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTransaction(context.Background(), &StartTransactionInput{})
+	got, err := svc.StartTransaction(context.Background(), &StartTransactionInput{
+		TransactionType: types.TransactionType("READ_AND_WRITE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2957,7 +4518,29 @@ func TestCheckResponseSnapshot_UpdateDataCellsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataCellsFilter(context.Background(), &UpdateDataCellsFilterInput{})
+	got, err := svc.UpdateDataCellsFilter(context.Background(), &UpdateDataCellsFilterInput{
+		TableData: &types.DataCellsFilter{
+			TableCatalogId: ptr.String("__TableCatalogId__"),
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			TableName:      ptr.String("__TableName__"),
+			Name:           ptr.String("__Name__"),
+			RowFilter: &types.RowFilter{
+				FilterExpression: ptr.String("__FilterExpression__"),
+				AllRowsWildcard:  &types.AllRowsWildcard{},
+			},
+			ColumnNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ColumnWildcard: &types.ColumnWildcard{
+				ExcludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			VersionId: ptr.String("__VersionId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2976,7 +4559,18 @@ func TestCheckResponseSnapshot_UpdateLFTag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLFTag(context.Background(), &UpdateLFTagInput{})
+	got, err := svc.UpdateLFTag(context.Background(), &UpdateLFTagInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		TagKey:    ptr.String("__TagKey__"),
+		TagValuesToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagValuesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2995,7 +4589,27 @@ func TestCheckResponseSnapshot_UpdateLFTagExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLFTagExpression(context.Background(), &UpdateLFTagExpressionInput{})
+	got, err := svc.UpdateLFTagExpression(context.Background(), &UpdateLFTagExpressionInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CatalogId:   ptr.String("__CatalogId__"),
+		Expression: []types.LFTag{
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				TagKey: ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3014,7 +4628,55 @@ func TestCheckResponseSnapshot_UpdateLakeFormationIdentityCenterConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLakeFormationIdentityCenterConfiguration(context.Background(), &UpdateLakeFormationIdentityCenterConfigurationInput{})
+	got, err := svc.UpdateLakeFormationIdentityCenterConfiguration(context.Background(), &UpdateLakeFormationIdentityCenterConfigurationInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		ShareRecipients: []types.DataLakePrincipal{
+			{
+				DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+			},
+			{
+				DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
+			},
+		},
+		ServiceIntegrations: []types.ServiceIntegrationUnion{
+			&types.ServiceIntegrationUnionMemberRedshift{
+				Value: []types.RedshiftScopeUnion{
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+				},
+			},
+			&types.ServiceIntegrationUnionMemberRedshift{
+				Value: []types.RedshiftScopeUnion{
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+					&types.RedshiftScopeUnionMemberRedshiftConnect{
+						Value: types.RedshiftConnect{
+							Authorization: types.ServiceAuthorization("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		ApplicationStatus: types.ApplicationStatus("ENABLED"),
+		ExternalFiltering: &types.ExternalFilteringConfiguration{
+			Status: types.EnableStatus("ENABLED"),
+			AuthorizedTargets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3033,7 +4695,13 @@ func TestCheckResponseSnapshot_UpdateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{})
+	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{
+		RoleArn:                      ptr.String("__RoleArn__"),
+		ResourceArn:                  ptr.String("__ResourceArn__"),
+		WithFederation:               ptr.Bool(true),
+		HybridAccessEnabled:          ptr.Bool(true),
+		ExpectedResourceOwnerAccount: ptr.String("__ExpectedResourceOwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3052,7 +4720,52 @@ func TestCheckResponseSnapshot_UpdateTableObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTableObjects(context.Background(), &UpdateTableObjectsInput{})
+	got, err := svc.UpdateTableObjects(context.Background(), &UpdateTableObjectsInput{
+		CatalogId:     ptr.String("__CatalogId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		TableName:     ptr.String("__TableName__"),
+		TransactionId: ptr.String("__TransactionId__"),
+		WriteOperations: []types.WriteOperation{
+			{
+				AddObject: &types.AddObjectInput{
+					Uri:  ptr.String("__Uri__"),
+					ETag: ptr.String("__ETag__"),
+					Size: 1,
+					PartitionValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				DeleteObject: &types.DeleteObjectInput{
+					Uri:  ptr.String("__Uri__"),
+					ETag: ptr.String("__ETag__"),
+					PartitionValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				AddObject: &types.AddObjectInput{
+					Uri:  ptr.String("__Uri__"),
+					ETag: ptr.String("__ETag__"),
+					Size: 1,
+					PartitionValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				DeleteObject: &types.DeleteObjectInput{
+					Uri:  ptr.String("__Uri__"),
+					ETag: ptr.String("__ETag__"),
+					PartitionValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3073,7 +4786,16 @@ func TestCheckResponseSnapshot_UpdateTableStorageOptimizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTableStorageOptimizer(context.Background(), &UpdateTableStorageOptimizerInput{})
+	got, err := svc.UpdateTableStorageOptimizer(context.Background(), &UpdateTableStorageOptimizerInput{
+		CatalogId:    ptr.String("__CatalogId__"),
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		StorageOptimizerConfig: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3094,7 +4816,100 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3119,7 +4934,29 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{})
+	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{
+		TableData: &types.DataCellsFilter{
+			TableCatalogId: ptr.String("__TableCatalogId__"),
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			TableName:      ptr.String("__TableName__"),
+			Name:           ptr.String("__Name__"),
+			RowFilter: &types.RowFilter{
+				FilterExpression: ptr.String("__FilterExpression__"),
+				AllRowsWildcard:  &types.AllRowsWildcard{},
+			},
+			ColumnNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ColumnWildcard: &types.ColumnWildcard{
+				ExcludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			VersionId: ptr.String("__VersionId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3144,7 +4981,100 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3169,7 +5099,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTemporaryDataLocationCredentials(context.Background(), &GetTemporaryDataLocationCredentialsInput{})
+	_, opErr := svc.GetTemporaryDataLocationCredentials(context.Background(), &GetTemporaryDataLocationCredentialsInput{
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+		DataLocations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CredentialsScope: types.CredentialsScope("READ"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3194,7 +5134,100 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3219,7 +5252,9 @@ func TestCheckResponseSnapshot_Error_ExpiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{})
+	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3244,7 +5279,83 @@ func TestCheckResponseSnapshot_Error_GlueEncryptionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{})
+	_, opErr := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		ShowAssignedLFTags: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3269,7 +5380,100 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3294,7 +5498,100 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3319,7 +5616,100 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{})
+	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
+		CatalogId: ptr.String("__CatalogId__"),
+		Resource: &types.Resource{
+			Catalog: &types.CatalogResource{
+				Id: ptr.String("__Id__"),
+			},
+			Database: &types.DatabaseResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+			Table: &types.TableResource{
+				CatalogId:     ptr.String("__CatalogId__"),
+				DatabaseName:  ptr.String("__DatabaseName__"),
+				Name:          ptr.String("__Name__"),
+				TableWildcard: &types.TableWildcard{},
+			},
+			TableWithColumns: &types.TableWithColumnsResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				Name:         ptr.String("__Name__"),
+				ColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ColumnWildcard: &types.ColumnWildcard{
+					ExcludedColumnNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			DataLocation: &types.DataLocationResource{
+				CatalogId:   ptr.String("__CatalogId__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			DataCellsFilter: &types.DataCellsFilterResource{
+				TableCatalogId: ptr.String("__TableCatalogId__"),
+				DatabaseName:   ptr.String("__DatabaseName__"),
+				TableName:      ptr.String("__TableName__"),
+				Name:           ptr.String("__Name__"),
+			},
+			LFTag: &types.LFTagKeyResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			LFTagPolicy: &types.LFTagPolicyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.ResourceType("DATABASE"),
+				Expression: []types.LFTag{
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						TagKey: ptr.String("__TagKey__"),
+						TagValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ExpressionName: ptr.String("__ExpressionName__"),
+			},
+			LFTagExpression: &types.LFTagExpressionResource{
+				CatalogId: ptr.String("__CatalogId__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		LFTags: []types.LFTagPair{
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				CatalogId: ptr.String("__CatalogId__"),
+				TagKey:    ptr.String("__TagKey__"),
+				TagValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3344,7 +5734,27 @@ func TestCheckResponseSnapshot_Error_PermissionTypeMismatchException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTemporaryGluePartitionCredentials(context.Background(), &GetTemporaryGluePartitionCredentialsInput{})
+	_, opErr := svc.GetTemporaryGluePartitionCredentials(context.Background(), &GetTemporaryGluePartitionCredentialsInput{
+		TableArn: ptr.String("__TableArn__"),
+		Partition: &types.PartitionValueList{
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Permissions: []types.Permission{
+			types.Permission("ALL"),
+			types.Permission("ALL"),
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+		SupportedPermissionTypes: []types.PermissionType{
+			types.PermissionType("COLUMN_PERMISSION"),
+			types.PermissionType("COLUMN_PERMISSION"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3369,7 +5779,22 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObjectsOnCancel(context.Background(), &DeleteObjectsOnCancelInput{})
+	_, opErr := svc.DeleteObjectsOnCancel(context.Background(), &DeleteObjectsOnCancelInput{
+		CatalogId:     ptr.String("__CatalogId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		TableName:     ptr.String("__TableName__"),
+		TransactionId: ptr.String("__TransactionId__"),
+		Objects: []types.VirtualObject{
+			{
+				Uri:  ptr.String("__Uri__"),
+				ETag: ptr.String("__ETag__"),
+			},
+			{
+				Uri:  ptr.String("__Uri__"),
+				ETag: ptr.String("__ETag__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3394,7 +5819,29 @@ func TestCheckResponseSnapshot_Error_ResourceNumberLimitExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{})
+	_, opErr := svc.CreateDataCellsFilter(context.Background(), &CreateDataCellsFilterInput{
+		TableData: &types.DataCellsFilter{
+			TableCatalogId: ptr.String("__TableCatalogId__"),
+			DatabaseName:   ptr.String("__DatabaseName__"),
+			TableName:      ptr.String("__TableName__"),
+			Name:           ptr.String("__Name__"),
+			RowFilter: &types.RowFilter{
+				FilterExpression: ptr.String("__FilterExpression__"),
+				AllRowsWildcard:  &types.AllRowsWildcard{},
+			},
+			ColumnNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ColumnWildcard: &types.ColumnWildcard{
+				ExcludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			VersionId: ptr.String("__VersionId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3419,7 +5866,9 @@ func TestCheckResponseSnapshot_Error_StatisticsNotReadyYetException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{})
+	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3444,7 +5893,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{})
+	_, opErr := svc.GetQueryStatistics(context.Background(), &GetQueryStatisticsInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3469,7 +5920,9 @@ func TestCheckResponseSnapshot_Error_TransactionCanceledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CommitTransaction(context.Background(), &CommitTransactionInput{})
+	_, opErr := svc.CommitTransaction(context.Background(), &CommitTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3494,7 +5947,9 @@ func TestCheckResponseSnapshot_Error_TransactionCommitInProgressException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTransaction(context.Background(), &CancelTransactionInput{})
+	_, opErr := svc.CancelTransaction(context.Background(), &CancelTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3519,7 +5974,9 @@ func TestCheckResponseSnapshot_Error_TransactionCommittedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTransaction(context.Background(), &CancelTransactionInput{})
+	_, opErr := svc.CancelTransaction(context.Background(), &CancelTransactionInput{
+		TransactionId: ptr.String("__TransactionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3544,7 +6001,11 @@ func TestCheckResponseSnapshot_Error_WorkUnitsNotReadyYetException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetWorkUnits(context.Background(), &GetWorkUnitsInput{})
+	_, opErr := svc.GetWorkUnits(context.Background(), &GetWorkUnitsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+		QueryId:   ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

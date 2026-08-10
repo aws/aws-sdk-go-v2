@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LFTagOnDatabase":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"LFTagsOnColumns":[{"LFTags":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"Name":"__Name__"},{"LFTags":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"Name":"__Name__"}],"LFTagsOnTable":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}]}

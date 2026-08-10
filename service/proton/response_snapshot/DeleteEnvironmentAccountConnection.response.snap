@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.DeleteEnvironmentAccountConnection
+
+{"environmentAccountConnection":{"arn":"__Arn__","codebuildRoleArn":"__CodebuildRoleArn__","componentRoleArn":"__ComponentRoleArn__","environmentAccountId":"__EnvironmentAccountId__","environmentName":"__EnvironmentName__","id":"__Id__","lastModifiedAt":946684800,"managementAccountId":"__ManagementAccountId__","requestedAt":946684800,"roleArn":"__RoleArn__","status":"PENDING"}}

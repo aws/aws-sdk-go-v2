@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"activity":"MAPPING","createdAt":946684800,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","stage":"MAPPING","status":"PENDING","tags":{"key0":"__Value__"},"updatedAt":946684800},{"activity":"MAPPING","createdAt":946684800,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","stage":"MAPPING","status":"PENDING","tags":{"key0":"__Value__"},"updatedAt":946684800}],"nextToken":"__NextToken__"}

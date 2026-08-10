@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"events":[{"actor":{"accountId":"__AccountId__","principalId":"__PrincipalId__","type":"USER","userName":"__UserName__"},"eventDetails":{"description":"__Description__","eventMetadata":{"serviceCreated":{}},"title":"__Title__"},"eventId":"__EventId__","eventType":"SERVICE_CREATED","serviceArn":"__ServiceArn__","timestamp":946684800},{"actor":{"accountId":"__AccountId__","principalId":"__PrincipalId__","type":"USER","userName":"__UserName__"},"eventDetails":{"description":"__Description__","eventMetadata":{"serviceCreated":{}},"title":"__Title__"},"eventId":"__EventId__","eventType":"SERVICE_CREATED","serviceArn":"__ServiceArn__","timestamp":946684800}],"nextToken":"__NextToken__"}

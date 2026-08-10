@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesService.GetType
+
+{"directParentTypes":["__Member__","__Member__"],"directReferringTables":["__Member__","__Member__"],"fieldDefinitions":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"keyspaceArn":"__KeyspaceArn__","keyspaceName":"__KeyspaceName__","lastModifiedTimestamp":946684800,"maxNestingDepth":1,"status":"ACTIVE","typeName":"__TypeName__"}

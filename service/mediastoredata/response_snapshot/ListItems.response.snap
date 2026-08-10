@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"ContentLength":1,"ContentType":"__ContentType__","ETag":"__ETag__","LastModified":946684800,"Name":"__Name__","Type":"OBJECT"},{"ContentLength":1,"ContentType":"__ContentType__","ETag":"__ETag__","LastModified":946684800,"Name":"__Name__","Type":"OBJECT"}],"NextToken":"__NextToken__"}

@@ -172,7 +172,58 @@ func TestCheckResponseSnapshot_CreateCallAnalyticsCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{})
+	got, err := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +252,26 @@ func TestCheckResponseSnapshot_CreateLanguageModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLanguageModel(context.Background(), &CreateLanguageModelInput{})
+	got, err := svc.CreateLanguageModel(context.Background(), &CreateLanguageModelInput{
+		LanguageCode:  types.CLMLanguageCode("en-US"),
+		BaseModelName: types.BaseModelName("NarrowBand"),
+		ModelName:     ptr.String("__ModelName__"),
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:             ptr.String("__S3Uri__"),
+			TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
+			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +296,21 @@ func TestCheckResponseSnapshot_CreateMedicalVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMedicalVocabulary(context.Background(), &CreateMedicalVocabularyInput{})
+	got, err := svc.CreateMedicalVocabulary(context.Background(), &CreateMedicalVocabularyInput{
+		VocabularyName:    ptr.String("__VocabularyName__"),
+		LanguageCode:      types.LanguageCode("af-ZA"),
+		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +335,26 @@ func TestCheckResponseSnapshot_CreateVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVocabulary(context.Background(), &CreateVocabularyInput{})
+	got, err := svc.CreateVocabulary(context.Background(), &CreateVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+		LanguageCode:   types.LanguageCode("af-ZA"),
+		Phrases: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +377,26 @@ func TestCheckResponseSnapshot_CreateVocabularyFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVocabularyFilter(context.Background(), &CreateVocabularyFilterInput{})
+	got, err := svc.CreateVocabularyFilter(context.Background(), &CreateVocabularyFilterInput{
+		VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+		LanguageCode:         types.LanguageCode("af-ZA"),
+		Words: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VocabularyFilterFileUri: ptr.String("__VocabularyFilterFileUri__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +415,9 @@ func TestCheckResponseSnapshot_DeleteCallAnalyticsCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCallAnalyticsCategory(context.Background(), &DeleteCallAnalyticsCategoryInput{})
+	got, err := svc.DeleteCallAnalyticsCategory(context.Background(), &DeleteCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +436,9 @@ func TestCheckResponseSnapshot_DeleteCallAnalyticsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCallAnalyticsJob(context.Background(), &DeleteCallAnalyticsJobInput{})
+	got, err := svc.DeleteCallAnalyticsJob(context.Background(), &DeleteCallAnalyticsJobInput{
+		CallAnalyticsJobName: ptr.String("__CallAnalyticsJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +457,9 @@ func TestCheckResponseSnapshot_DeleteLanguageModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLanguageModel(context.Background(), &DeleteLanguageModelInput{})
+	got, err := svc.DeleteLanguageModel(context.Background(), &DeleteLanguageModelInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +478,9 @@ func TestCheckResponseSnapshot_DeleteMedicalScribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMedicalScribeJob(context.Background(), &DeleteMedicalScribeJobInput{})
+	got, err := svc.DeleteMedicalScribeJob(context.Background(), &DeleteMedicalScribeJobInput{
+		MedicalScribeJobName: ptr.String("__MedicalScribeJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +499,9 @@ func TestCheckResponseSnapshot_DeleteMedicalTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMedicalTranscriptionJob(context.Background(), &DeleteMedicalTranscriptionJobInput{})
+	got, err := svc.DeleteMedicalTranscriptionJob(context.Background(), &DeleteMedicalTranscriptionJobInput{
+		MedicalTranscriptionJobName: ptr.String("__MedicalTranscriptionJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +520,9 @@ func TestCheckResponseSnapshot_DeleteMedicalVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMedicalVocabulary(context.Background(), &DeleteMedicalVocabularyInput{})
+	got, err := svc.DeleteMedicalVocabulary(context.Background(), &DeleteMedicalVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +541,9 @@ func TestCheckResponseSnapshot_DeleteTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTranscriptionJob(context.Background(), &DeleteTranscriptionJobInput{})
+	got, err := svc.DeleteTranscriptionJob(context.Background(), &DeleteTranscriptionJobInput{
+		TranscriptionJobName: ptr.String("__TranscriptionJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +562,9 @@ func TestCheckResponseSnapshot_DeleteVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVocabulary(context.Background(), &DeleteVocabularyInput{})
+	got, err := svc.DeleteVocabulary(context.Background(), &DeleteVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +583,9 @@ func TestCheckResponseSnapshot_DeleteVocabularyFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVocabularyFilter(context.Background(), &DeleteVocabularyFilterInput{})
+	got, err := svc.DeleteVocabularyFilter(context.Background(), &DeleteVocabularyFilterInput{
+		VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -480,7 +620,9 @@ func TestCheckResponseSnapshot_DescribeLanguageModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLanguageModel(context.Background(), &DescribeLanguageModelInput{})
+	got, err := svc.DescribeLanguageModel(context.Background(), &DescribeLanguageModelInput{
+		ModelName: ptr.String("__ModelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +696,9 @@ func TestCheckResponseSnapshot_GetCallAnalyticsCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCallAnalyticsCategory(context.Background(), &GetCallAnalyticsCategoryInput{})
+	got, err := svc.GetCallAnalyticsCategory(context.Background(), &GetCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +801,9 @@ func TestCheckResponseSnapshot_GetCallAnalyticsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCallAnalyticsJob(context.Background(), &GetCallAnalyticsJobInput{})
+	got, err := svc.GetCallAnalyticsJob(context.Background(), &GetCallAnalyticsJobInput{
+		CallAnalyticsJobName: ptr.String("__CallAnalyticsJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -727,7 +873,9 @@ func TestCheckResponseSnapshot_GetMedicalScribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedicalScribeJob(context.Background(), &GetMedicalScribeJobInput{})
+	got, err := svc.GetMedicalScribeJob(context.Background(), &GetMedicalScribeJobInput{
+		MedicalScribeJobName: ptr.String("__MedicalScribeJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +934,9 @@ func TestCheckResponseSnapshot_GetMedicalTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedicalTranscriptionJob(context.Background(), &GetMedicalTranscriptionJobInput{})
+	got, err := svc.GetMedicalTranscriptionJob(context.Background(), &GetMedicalTranscriptionJobInput{
+		MedicalTranscriptionJobName: ptr.String("__MedicalTranscriptionJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -812,7 +962,9 @@ func TestCheckResponseSnapshot_GetMedicalVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedicalVocabulary(context.Background(), &GetMedicalVocabularyInput{})
+	got, err := svc.GetMedicalVocabulary(context.Background(), &GetMedicalVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1087,9 @@ func TestCheckResponseSnapshot_GetTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTranscriptionJob(context.Background(), &GetTranscriptionJobInput{})
+	got, err := svc.GetTranscriptionJob(context.Background(), &GetTranscriptionJobInput{
+		TranscriptionJobName: ptr.String("__TranscriptionJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -961,7 +1115,9 @@ func TestCheckResponseSnapshot_GetVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVocabulary(context.Background(), &GetVocabularyInput{})
+	got, err := svc.GetVocabulary(context.Background(), &GetVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -985,7 +1141,9 @@ func TestCheckResponseSnapshot_GetVocabularyFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVocabularyFilter(context.Background(), &GetVocabularyFilterInput{})
+	got, err := svc.GetVocabularyFilter(context.Background(), &GetVocabularyFilterInput{
+		VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1274,10 @@ func TestCheckResponseSnapshot_ListCallAnalyticsCategories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCallAnalyticsCategories(context.Background(), &ListCallAnalyticsCategoriesInput{})
+	got, err := svc.ListCallAnalyticsCategories(context.Background(), &ListCallAnalyticsCategoriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1186,7 +1347,12 @@ func TestCheckResponseSnapshot_ListCallAnalyticsJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCallAnalyticsJobs(context.Background(), &ListCallAnalyticsJobsInput{})
+	got, err := svc.ListCallAnalyticsJobs(context.Background(), &ListCallAnalyticsJobsInput{
+		Status:          types.CallAnalyticsJobStatus("QUEUED"),
+		JobNameContains: ptr.String("__JobNameContains__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1239,7 +1405,12 @@ func TestCheckResponseSnapshot_ListLanguageModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLanguageModels(context.Background(), &ListLanguageModelsInput{})
+	got, err := svc.ListLanguageModels(context.Background(), &ListLanguageModelsInput{
+		StatusEquals: types.ModelStatus("IN_PROGRESS"),
+		NameContains: ptr.String("__NameContains__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1281,7 +1452,12 @@ func TestCheckResponseSnapshot_ListMedicalScribeJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMedicalScribeJobs(context.Background(), &ListMedicalScribeJobsInput{})
+	got, err := svc.ListMedicalScribeJobs(context.Background(), &ListMedicalScribeJobsInput{
+		Status:          types.MedicalScribeJobStatus("QUEUED"),
+		JobNameContains: ptr.String("__JobNameContains__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1331,7 +1507,12 @@ func TestCheckResponseSnapshot_ListMedicalTranscriptionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMedicalTranscriptionJobs(context.Background(), &ListMedicalTranscriptionJobsInput{})
+	got, err := svc.ListMedicalTranscriptionJobs(context.Background(), &ListMedicalTranscriptionJobsInput{
+		Status:          types.TranscriptionJobStatus("QUEUED"),
+		JobNameContains: ptr.String("__JobNameContains__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1367,7 +1548,12 @@ func TestCheckResponseSnapshot_ListMedicalVocabularies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMedicalVocabularies(context.Background(), &ListMedicalVocabulariesInput{})
+	got, err := svc.ListMedicalVocabularies(context.Background(), &ListMedicalVocabulariesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StateEquals:  types.VocabularyState("PENDING"),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1398,7 +1584,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1518,7 +1706,12 @@ func TestCheckResponseSnapshot_ListTranscriptionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTranscriptionJobs(context.Background(), &ListTranscriptionJobsInput{})
+	got, err := svc.ListTranscriptionJobs(context.Background(), &ListTranscriptionJobsInput{
+		Status:          types.TranscriptionJobStatus("QUEUED"),
+		JobNameContains: ptr.String("__JobNameContains__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1554,7 +1747,12 @@ func TestCheckResponseSnapshot_ListVocabularies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVocabularies(context.Background(), &ListVocabulariesInput{})
+	got, err := svc.ListVocabularies(context.Background(), &ListVocabulariesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StateEquals:  types.VocabularyState("PENDING"),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1587,7 +1785,11 @@ func TestCheckResponseSnapshot_ListVocabularyFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVocabularyFilters(context.Background(), &ListVocabularyFiltersInput{})
+	got, err := svc.ListVocabularyFilters(context.Background(), &ListVocabularyFiltersInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NameContains: ptr.String("__NameContains__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1690,7 +1892,64 @@ func TestCheckResponseSnapshot_StartCallAnalyticsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCallAnalyticsJob(context.Background(), &StartCallAnalyticsJobInput{})
+	got, err := svc.StartCallAnalyticsJob(context.Background(), &StartCallAnalyticsJobInput{
+		CallAnalyticsJobName: ptr.String("__CallAnalyticsJobName__"),
+		Media: &types.Media{
+			MediaFileUri:         ptr.String("__MediaFileUri__"),
+			RedactedMediaFileUri: ptr.String("__RedactedMediaFileUri__"),
+		},
+		OutputLocation:           ptr.String("__OutputLocation__"),
+		OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+		DataAccessRoleArn:        ptr.String("__DataAccessRoleArn__"),
+		Settings: &types.CallAnalyticsJobSettings{
+			VocabularyName:         ptr.String("__VocabularyName__"),
+			VocabularyFilterName:   ptr.String("__VocabularyFilterName__"),
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+			LanguageModelName:      ptr.String("__LanguageModelName__"),
+			ContentRedaction: &types.ContentRedaction{
+				RedactionType:   types.RedactionType("PII"),
+				RedactionOutput: types.RedactionOutput("redacted"),
+				PiiEntityTypes: []types.PiiEntityType{
+					types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+					types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				},
+			},
+			LanguageOptions: []types.LanguageCode{
+				types.LanguageCode("af-ZA"),
+				types.LanguageCode("af-ZA"),
+			},
+			LanguageIdSettings: map[string]types.LanguageIdSettings{
+				"key0": {
+					VocabularyName:       ptr.String("__VocabularyName__"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					LanguageModelName:    ptr.String("__LanguageModelName__"),
+				},
+			},
+			Summarization: &types.Summarization{
+				GenerateAbstractiveSummary: ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChannelDefinitions: []types.ChannelDefinition{
+			{
+				ChannelId:       1,
+				ParticipantRole: types.ParticipantRole("AGENT"),
+			},
+			{
+				ChannelId:       1,
+				ParticipantRole: types.ParticipantRole("AGENT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1760,7 +2019,55 @@ func TestCheckResponseSnapshot_StartMedicalScribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMedicalScribeJob(context.Background(), &StartMedicalScribeJobInput{})
+	got, err := svc.StartMedicalScribeJob(context.Background(), &StartMedicalScribeJobInput{
+		MedicalScribeJobName: ptr.String("__MedicalScribeJobName__"),
+		Media: &types.Media{
+			MediaFileUri:         ptr.String("__MediaFileUri__"),
+			RedactedMediaFileUri: ptr.String("__RedactedMediaFileUri__"),
+		},
+		OutputBucketName:         ptr.String("__OutputBucketName__"),
+		OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+		KMSEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		Settings: &types.MedicalScribeSettings{
+			ShowSpeakerLabels:      ptr.Bool(true),
+			MaxSpeakerLabels:       ptr.Int32(1),
+			ChannelIdentification:  ptr.Bool(true),
+			VocabularyName:         ptr.String("__VocabularyName__"),
+			VocabularyFilterName:   ptr.String("__VocabularyFilterName__"),
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+			ClinicalNoteGenerationSettings: &types.ClinicalNoteGenerationSettings{
+				NoteTemplate: types.MedicalScribeNoteTemplate("HISTORY_AND_PHYSICAL"),
+			},
+		},
+		ChannelDefinitions: []types.MedicalScribeChannelDefinition{
+			{
+				ChannelId:       1,
+				ParticipantRole: types.MedicalScribeParticipantRole("PATIENT"),
+			},
+			{
+				ChannelId:       1,
+				ParticipantRole: types.MedicalScribeParticipantRole("PATIENT"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MedicalScribeContext: &types.MedicalScribeContext{
+			PatientContext: &types.MedicalScribePatientContext{
+				Pronouns: types.Pronouns("HE_HIM"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1819,7 +2126,43 @@ func TestCheckResponseSnapshot_StartMedicalTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMedicalTranscriptionJob(context.Background(), &StartMedicalTranscriptionJobInput{})
+	got, err := svc.StartMedicalTranscriptionJob(context.Background(), &StartMedicalTranscriptionJobInput{
+		MedicalTranscriptionJobName: ptr.String("__MedicalTranscriptionJobName__"),
+		LanguageCode:                types.LanguageCode("af-ZA"),
+		MediaSampleRateHertz:        ptr.Int32(1),
+		MediaFormat:                 types.MediaFormat("mp3"),
+		Media: &types.Media{
+			MediaFileUri:         ptr.String("__MediaFileUri__"),
+			RedactedMediaFileUri: ptr.String("__RedactedMediaFileUri__"),
+		},
+		OutputBucketName:         ptr.String("__OutputBucketName__"),
+		OutputKey:                ptr.String("__OutputKey__"),
+		OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+		KMSEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		Settings: &types.MedicalTranscriptionSetting{
+			ShowSpeakerLabels:     ptr.Bool(true),
+			MaxSpeakerLabels:      ptr.Int32(1),
+			ChannelIdentification: ptr.Bool(true),
+			ShowAlternatives:      ptr.Bool(true),
+			MaxAlternatives:       ptr.Int32(1),
+			VocabularyName:        ptr.String("__VocabularyName__"),
+		},
+		ContentIdentificationType: types.MedicalContentIdentificationType("PHI"),
+		Specialty:                 types.Specialty("PRIMARYCARE"),
+		Type:                      types.Type("CONVERSATION"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1942,7 +2285,91 @@ func TestCheckResponseSnapshot_StartTranscriptionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTranscriptionJob(context.Background(), &StartTranscriptionJobInput{})
+	got, err := svc.StartTranscriptionJob(context.Background(), &StartTranscriptionJobInput{
+		TranscriptionJobName: ptr.String("__TranscriptionJobName__"),
+		LanguageCode:         types.LanguageCode("af-ZA"),
+		MediaSampleRateHertz: ptr.Int32(1),
+		MediaFormat:          types.MediaFormat("mp3"),
+		Media: &types.Media{
+			MediaFileUri:         ptr.String("__MediaFileUri__"),
+			RedactedMediaFileUri: ptr.String("__RedactedMediaFileUri__"),
+		},
+		OutputBucketName:         ptr.String("__OutputBucketName__"),
+		OutputKey:                ptr.String("__OutputKey__"),
+		OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+		KMSEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		Settings: &types.Settings{
+			VocabularyName:         ptr.String("__VocabularyName__"),
+			ShowSpeakerLabels:      ptr.Bool(true),
+			MaxSpeakerLabels:       ptr.Int32(1),
+			ChannelIdentification:  ptr.Bool(true),
+			ShowAlternatives:       ptr.Bool(true),
+			MaxAlternatives:        ptr.Int32(1),
+			VocabularyFilterName:   ptr.String("__VocabularyFilterName__"),
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+		},
+		ModelSettings: &types.ModelSettings{
+			LanguageModelName: ptr.String("__LanguageModelName__"),
+		},
+		JobExecutionSettings: &types.JobExecutionSettings{
+			AllowDeferredExecution: ptr.Bool(true),
+			DataAccessRoleArn:      ptr.String("__DataAccessRoleArn__"),
+		},
+		ContentRedaction: &types.ContentRedaction{
+			RedactionType:   types.RedactionType("PII"),
+			RedactionOutput: types.RedactionOutput("redacted"),
+			PiiEntityTypes: []types.PiiEntityType{
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+			},
+		},
+		IdentifyLanguage:          ptr.Bool(true),
+		IdentifyMultipleLanguages: ptr.Bool(true),
+		LanguageOptions: []types.LanguageCode{
+			types.LanguageCode("af-ZA"),
+			types.LanguageCode("af-ZA"),
+		},
+		Subtitles: &types.Subtitles{
+			Formats: []types.SubtitleFormat{
+				types.SubtitleFormat("vtt"),
+				types.SubtitleFormat("vtt"),
+			},
+			OutputStartIndex: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		LanguageIdSettings: map[string]types.LanguageIdSettings{
+			"key0": {
+				VocabularyName:       ptr.String("__VocabularyName__"),
+				VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+				LanguageModelName:    ptr.String("__LanguageModelName__"),
+			},
+		},
+		ToxicityDetection: []types.ToxicityDetectionSettings{
+			{
+				ToxicityCategories: []types.ToxicityCategory{
+					types.ToxicityCategory("ALL"),
+					types.ToxicityCategory("ALL"),
+				},
+			},
+			{
+				ToxicityCategories: []types.ToxicityCategory{
+					types.ToxicityCategory("ALL"),
+					types.ToxicityCategory("ALL"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1961,7 +2388,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1980,7 +2419,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2054,7 +2499,48 @@ func TestCheckResponseSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCallAnalyticsCategory(context.Background(), &UpdateCallAnalyticsCategoryInput{})
+	got, err := svc.UpdateCallAnalyticsCategory(context.Background(), &UpdateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2078,7 +2564,11 @@ func TestCheckResponseSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMedicalVocabulary(context.Background(), &UpdateMedicalVocabularyInput{})
+	got, err := svc.UpdateMedicalVocabulary(context.Background(), &UpdateMedicalVocabularyInput{
+		VocabularyName:    ptr.String("__VocabularyName__"),
+		LanguageCode:      types.LanguageCode("af-ZA"),
+		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2102,7 +2592,16 @@ func TestCheckResponseSnapshot_UpdateVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVocabulary(context.Background(), &UpdateVocabularyInput{})
+	got, err := svc.UpdateVocabulary(context.Background(), &UpdateVocabularyInput{
+		VocabularyName: ptr.String("__VocabularyName__"),
+		LanguageCode:   types.LanguageCode("af-ZA"),
+		Phrases: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +2624,15 @@ func TestCheckResponseSnapshot_UpdateVocabularyFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVocabularyFilter(context.Background(), &UpdateVocabularyFilterInput{})
+	got, err := svc.UpdateVocabularyFilter(context.Background(), &UpdateVocabularyFilterInput{
+		VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+		Words: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VocabularyFilterFileUri: ptr.String("__VocabularyFilterFileUri__"),
+		DataAccessRoleArn:       ptr.String("__DataAccessRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2146,7 +2653,58 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{})
+	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2171,7 +2729,58 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{})
+	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2196,7 +2805,58 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{})
+	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2221,7 +2881,58 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{})
+	_, opErr := svc.CreateCallAnalyticsCategory(context.Background(), &CreateCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+		Rules: []types.Rule{
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+			&types.RuleMemberNonTalkTimeFilter{
+				Value: types.NonTalkTimeFilter{
+					Threshold: ptr.Int64(1),
+					AbsoluteTimeRange: &types.AbsoluteTimeRange{
+						StartTime: ptr.Int64(1),
+						EndTime:   ptr.Int64(1),
+						First:     ptr.Int64(1),
+						Last:      ptr.Int64(1),
+					},
+					RelativeTimeRange: &types.RelativeTimeRange{
+						StartPercentage: ptr.Int32(1),
+						EndPercentage:   ptr.Int32(1),
+						First:           ptr.Int32(1),
+						Last:            ptr.Int32(1),
+					},
+					Negate: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputType: types.InputType("REAL_TIME"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2246,7 +2957,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCallAnalyticsCategory(context.Background(), &DeleteCallAnalyticsCategoryInput{})
+	_, opErr := svc.DeleteCallAnalyticsCategory(context.Background(), &DeleteCallAnalyticsCategoryInput{
+		CategoryName: ptr.String("__CategoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

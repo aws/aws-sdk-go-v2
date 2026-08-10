@@ -1,5 +1,0 @@
-PUT /SparseJsonLists
-
-Content-Type: application/json
-
-{"sparseShortList":[1,1],"sparseStringList":["__Member__","__Member__"]}

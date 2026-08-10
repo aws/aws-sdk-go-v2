@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetContactMethods
+
+{"contactMethods":[{"arn":"__Arn__","contactEndpoint":"__ContactEndpoint__","createdAt":946684800,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","protocol":"Email","resourceType":"ContainerService","status":"PendingVerification","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},{"arn":"__Arn__","contactEndpoint":"__ContactEndpoint__","createdAt":946684800,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","protocol":"Email","resourceType":"ContainerService","status":"PendingVerification","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}]}

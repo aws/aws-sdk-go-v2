@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+
+<KeyValueStore xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ARN>__ARN__</ARN><Comment>__Comment__</Comment><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><Status>__Status__</Status></KeyValueStore>

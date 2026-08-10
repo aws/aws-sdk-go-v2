@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationTime":"2000-01-01T00:00:00Z","customModelUnits":{"customModelUnitsPerModelCopy":1,"customModelUnitsVersion":"__CustomModelUnitsVersion__"},"instructSupported":true,"jobArn":"__JobArn__","jobName":"__JobName__","modelArchitecture":"__ModelArchitecture__","modelArn":"__ModelArn__","modelDataSource":{"s3DataSource":{"s3Uri":"__S3Uri__"}},"modelKmsKeyArn":"__ModelKmsKeyArn__","modelName":"__ModelName__"}

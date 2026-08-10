@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","targetDomainSummaries":[{"domainName":"__DomainName__","targetDomainId":"__TargetDomainId__","verificationStatus":"PENDING"},{"domainName":"__DomainName__","targetDomainId":"__TargetDomainId__","verificationStatus":"PENDING"}]}

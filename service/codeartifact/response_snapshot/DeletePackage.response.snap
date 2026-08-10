@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deletedPackage":{"format":"npm","namespace":"__Namespace__","originConfiguration":{"restrictions":{"publish":"ALLOW","upstream":"ALLOW"}},"package":"__Package__"}}

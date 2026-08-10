@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","SignupResponse":{"IAMUser":true,"accountName":"__AccountName__","directoryType":"__DirectoryType__","userLoginName":"__UserLoginName__"},"Status":200}

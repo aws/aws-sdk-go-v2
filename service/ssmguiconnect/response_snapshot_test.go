@@ -118,7 +118,9 @@ func TestCheckResponseSnapshot_DeleteConnectionRecordingPreferences(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	got, err := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +192,24 @@ func TestCheckResponseSnapshot_UpdateConnectionRecordingPreferences(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectionRecordingPreferences(context.Background(), &UpdateConnectionRecordingPreferencesInput{})
+	got, err := svc.UpdateConnectionRecordingPreferences(context.Background(), &UpdateConnectionRecordingPreferencesInput{
+		ConnectionRecordingPreferences: &types.ConnectionRecordingPreferences{
+			RecordingDestinations: &types.RecordingDestinations{
+				S3Buckets: []types.S3Bucket{
+					{
+						BucketOwner: ptr.String("__BucketOwner__"),
+						BucketName:  ptr.String("__BucketName__"),
+					},
+					{
+						BucketOwner: ptr.String("__BucketOwner__"),
+						BucketName:  ptr.String("__BucketName__"),
+					},
+				},
+			},
+			KMSKeyArn: ptr.String("__KMSKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +230,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -236,7 +257,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -261,7 +284,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -286,7 +311,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -311,7 +338,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -336,7 +365,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -361,7 +392,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{})
+	_, opErr := svc.DeleteConnectionRecordingPreferences(context.Background(), &DeleteConnectionRecordingPreferencesInput{
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

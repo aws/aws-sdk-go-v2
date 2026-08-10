@@ -1,0 +1,4 @@
+409
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>CachePolicyAlreadyExists</Code><Message>__Message__</Message></Error></ErrorResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EntityDetails":{"key0":{"DetailsDocument":"__Document__","EntityArn":"__EntityArn__","EntityIdentifier":"__EntityIdentifier__","EntityType":"__EntityType__","LastModifiedDate":"__LastModifiedDate__"}},"Errors":{"key0":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}}}

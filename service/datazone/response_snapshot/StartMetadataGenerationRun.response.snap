@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","owningProjectId":"__OwningProjectId__","status":"SUBMITTED","type":"BUSINESS_DESCRIPTIONS","types":["BUSINESS_DESCRIPTIONS","BUSINESS_DESCRIPTIONS"]}

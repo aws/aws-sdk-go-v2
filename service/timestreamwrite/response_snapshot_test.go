@@ -119,7 +119,108 @@ func TestCheckResponseSnapshot_CreateBatchLoadTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	got, err := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -147,7 +248,20 @@ func TestCheckResponseSnapshot_CreateDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatabase(context.Background(), &CreateDatabaseInput{})
+	got, err := svc.CreateDatabase(context.Background(), &CreateDatabaseInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		KmsKeyId:     ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +318,49 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTable(context.Background(), &CreateTableInput{})
+	got, err := svc.CreateTable(context.Background(), &CreateTableInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		RetentionProperties: &types.RetentionProperties{
+			MemoryStoreRetentionPeriodInHours:  ptr.Int64(1),
+			MagneticStoreRetentionPeriodInDays: ptr.Int64(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MagneticStoreWriteProperties: &types.MagneticStoreWriteProperties{
+			EnableMagneticStoreWrites: ptr.Bool(true),
+			MagneticStoreRejectedDataLocation: &types.MagneticStoreRejectedDataLocation{
+				S3Configuration: &types.S3Configuration{
+					BucketName:       ptr.String("__BucketName__"),
+					ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+					EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+					KmsKeyId:         ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		Schema: &types.Schema{
+			CompositePartitionKey: []types.PartitionKey{
+				{
+					Type:                types.PartitionKeyType("DIMENSION"),
+					Name:                ptr.String("__Name__"),
+					EnforcementInRecord: types.PartitionKeyEnforcementLevel("REQUIRED"),
+				},
+				{
+					Type:                types.PartitionKeyType("DIMENSION"),
+					Name:                ptr.String("__Name__"),
+					EnforcementInRecord: types.PartitionKeyEnforcementLevel("REQUIRED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +379,9 @@ func TestCheckResponseSnapshot_DeleteDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDatabase(context.Background(), &DeleteDatabaseInput{})
+	got, err := svc.DeleteDatabase(context.Background(), &DeleteDatabaseInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +400,10 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{})
+	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +538,9 @@ func TestCheckResponseSnapshot_DescribeBatchLoadTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBatchLoadTask(context.Background(), &DescribeBatchLoadTaskInput{})
+	got, err := svc.DescribeBatchLoadTask(context.Background(), &DescribeBatchLoadTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +568,9 @@ func TestCheckResponseSnapshot_DescribeDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatabase(context.Background(), &DescribeDatabaseInput{})
+	got, err := svc.DescribeDatabase(context.Background(), &DescribeDatabaseInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +657,10 @@ func TestCheckResponseSnapshot_DescribeTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{})
+	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +701,11 @@ func TestCheckResponseSnapshot_ListBatchLoadTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBatchLoadTasks(context.Background(), &ListBatchLoadTasksInput{})
+	got, err := svc.ListBatchLoadTasks(context.Background(), &ListBatchLoadTasksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		TaskStatus: types.BatchLoadStatus("CREATED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +744,10 @@ func TestCheckResponseSnapshot_ListDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{})
+	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +844,11 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +878,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +899,9 @@ func TestCheckResponseSnapshot_ResumeBatchLoadTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeBatchLoadTask(context.Background(), &ResumeBatchLoadTaskInput{})
+	got, err := svc.ResumeBatchLoadTask(context.Background(), &ResumeBatchLoadTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +920,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -756,7 +951,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -784,7 +985,10 @@ func TestCheckResponseSnapshot_UpdateDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDatabase(context.Background(), &UpdateDatabaseInput{})
+	got, err := svc.UpdateDatabase(context.Background(), &UpdateDatabaseInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		KmsKeyId:     ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +1045,39 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{})
+	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		RetentionProperties: &types.RetentionProperties{
+			MemoryStoreRetentionPeriodInHours:  ptr.Int64(1),
+			MagneticStoreRetentionPeriodInDays: ptr.Int64(1),
+		},
+		MagneticStoreWriteProperties: &types.MagneticStoreWriteProperties{
+			EnableMagneticStoreWrites: ptr.Bool(true),
+			MagneticStoreRejectedDataLocation: &types.MagneticStoreRejectedDataLocation{
+				S3Configuration: &types.S3Configuration{
+					BucketName:       ptr.String("__BucketName__"),
+					ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+					EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+					KmsKeyId:         ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		Schema: &types.Schema{
+			CompositePartitionKey: []types.PartitionKey{
+				{
+					Type:                types.PartitionKeyType("DIMENSION"),
+					Name:                ptr.String("__Name__"),
+					EnforcementInRecord: types.PartitionKeyEnforcementLevel("REQUIRED"),
+				},
+				{
+					Type:                types.PartitionKeyType("DIMENSION"),
+					Name:                ptr.String("__Name__"),
+					EnforcementInRecord: types.PartitionKeyEnforcementLevel("REQUIRED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +1102,108 @@ func TestCheckResponseSnapshot_WriteRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.WriteRecords(context.Background(), &WriteRecordsInput{})
+	got, err := svc.WriteRecords(context.Background(), &WriteRecordsInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		CommonAttributes: &types.Record{
+			Dimensions: []types.Dimension{
+				{
+					Name:               ptr.String("__Name__"),
+					Value:              ptr.String("__Value__"),
+					DimensionValueType: types.DimensionValueType("VARCHAR"),
+				},
+				{
+					Name:               ptr.String("__Name__"),
+					Value:              ptr.String("__Value__"),
+					DimensionValueType: types.DimensionValueType("VARCHAR"),
+				},
+			},
+			MeasureName:      ptr.String("__MeasureName__"),
+			MeasureValue:     ptr.String("__MeasureValue__"),
+			MeasureValueType: types.MeasureValueType("DOUBLE"),
+			Time:             ptr.String("__Time__"),
+			TimeUnit:         types.TimeUnit("MILLISECONDS"),
+			Version:          ptr.Int64(1),
+			MeasureValues: []types.MeasureValue{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.MeasureValueType("DOUBLE"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.MeasureValueType("DOUBLE"),
+				},
+			},
+		},
+		Records: []types.Record{
+			{
+				Dimensions: []types.Dimension{
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MeasureName:      ptr.String("__MeasureName__"),
+				MeasureValue:     ptr.String("__MeasureValue__"),
+				MeasureValueType: types.MeasureValueType("DOUBLE"),
+				Time:             ptr.String("__Time__"),
+				TimeUnit:         types.TimeUnit("MILLISECONDS"),
+				Version:          ptr.Int64(1),
+				MeasureValues: []types.MeasureValue{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+				},
+			},
+			{
+				Dimensions: []types.Dimension{
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MeasureName:      ptr.String("__MeasureName__"),
+				MeasureValue:     ptr.String("__MeasureValue__"),
+				MeasureValueType: types.MeasureValueType("DOUBLE"),
+				Time:             ptr.String("__Time__"),
+				TimeUnit:         types.TimeUnit("MILLISECONDS"),
+				Version:          ptr.Int64(1),
+				MeasureValues: []types.MeasureValue{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +1224,108 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -912,7 +1350,108 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -937,7 +1476,108 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -962,7 +1602,108 @@ func TestCheckResponseSnapshot_Error_InvalidEndpointException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -999,7 +1740,108 @@ func TestCheckResponseSnapshot_Error_RejectedRecordsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.WriteRecords(context.Background(), &WriteRecordsInput{})
+	_, opErr := svc.WriteRecords(context.Background(), &WriteRecordsInput{
+		DatabaseName: ptr.String("__DatabaseName__"),
+		TableName:    ptr.String("__TableName__"),
+		CommonAttributes: &types.Record{
+			Dimensions: []types.Dimension{
+				{
+					Name:               ptr.String("__Name__"),
+					Value:              ptr.String("__Value__"),
+					DimensionValueType: types.DimensionValueType("VARCHAR"),
+				},
+				{
+					Name:               ptr.String("__Name__"),
+					Value:              ptr.String("__Value__"),
+					DimensionValueType: types.DimensionValueType("VARCHAR"),
+				},
+			},
+			MeasureName:      ptr.String("__MeasureName__"),
+			MeasureValue:     ptr.String("__MeasureValue__"),
+			MeasureValueType: types.MeasureValueType("DOUBLE"),
+			Time:             ptr.String("__Time__"),
+			TimeUnit:         types.TimeUnit("MILLISECONDS"),
+			Version:          ptr.Int64(1),
+			MeasureValues: []types.MeasureValue{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.MeasureValueType("DOUBLE"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.MeasureValueType("DOUBLE"),
+				},
+			},
+		},
+		Records: []types.Record{
+			{
+				Dimensions: []types.Dimension{
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MeasureName:      ptr.String("__MeasureName__"),
+				MeasureValue:     ptr.String("__MeasureValue__"),
+				MeasureValueType: types.MeasureValueType("DOUBLE"),
+				Time:             ptr.String("__Time__"),
+				TimeUnit:         types.TimeUnit("MILLISECONDS"),
+				Version:          ptr.Int64(1),
+				MeasureValues: []types.MeasureValue{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+				},
+			},
+			{
+				Dimensions: []types.Dimension{
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+					{
+						Name:               ptr.String("__Name__"),
+						Value:              ptr.String("__Value__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+					},
+				},
+				MeasureName:      ptr.String("__MeasureName__"),
+				MeasureValue:     ptr.String("__MeasureValue__"),
+				MeasureValueType: types.MeasureValueType("DOUBLE"),
+				Time:             ptr.String("__Time__"),
+				TimeUnit:         types.TimeUnit("MILLISECONDS"),
+				Version:          ptr.Int64(1),
+				MeasureValues: []types.MeasureValue{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+						Type:  types.MeasureValueType("DOUBLE"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1024,7 +1866,108 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1049,7 +1992,108 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1074,7 +2118,108 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1099,7 +2244,108 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{})
+	_, opErr := svc.CreateBatchLoadTask(context.Background(), &CreateBatchLoadTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DataModelConfiguration: &types.DataModelConfiguration{
+			DataModel: &types.DataModel{
+				TimeColumn: ptr.String("__TimeColumn__"),
+				TimeUnit:   types.TimeUnit("MILLISECONDS"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+					{
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						DestinationColumn: ptr.String("__DestinationColumn__"),
+					},
+				},
+				MultiMeasureMappings: &types.MultiMeasureMappings{
+					TargetMultiMeasureName: ptr.String("__TargetMultiMeasureName__"),
+					MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+						{
+							SourceColumn:                    ptr.String("__SourceColumn__"),
+							TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+							MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+						},
+					},
+				},
+				MixedMeasureMappings: []types.MixedMeasureMapping{
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+					{
+						MeasureName:       ptr.String("__MeasureName__"),
+						SourceColumn:      ptr.String("__SourceColumn__"),
+						TargetMeasureName: ptr.String("__TargetMeasureName__"),
+						MeasureValueType:  types.MeasureValueType("DOUBLE"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+							{
+								SourceColumn:                    ptr.String("__SourceColumn__"),
+								TargetMultiMeasureAttributeName: ptr.String("__TargetMultiMeasureAttributeName__"),
+								MeasureValueType:                types.ScalarMeasureValueType("DOUBLE"),
+							},
+						},
+					},
+				},
+				MeasureNameColumn: ptr.String("__MeasureNameColumn__"),
+			},
+			DataModelS3Configuration: &types.DataModelS3Configuration{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			DataSourceS3Configuration: &types.DataSourceS3Configuration{
+				BucketName:      ptr.String("__BucketName__"),
+				ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+			},
+			CsvConfiguration: &types.CsvConfiguration{
+				ColumnSeparator: ptr.String("__ColumnSeparator__"),
+				EscapeChar:      ptr.String("__EscapeChar__"),
+				QuoteChar:       ptr.String("__QuoteChar__"),
+				NullValue:       ptr.String("__NullValue__"),
+				TrimWhiteSpace:  ptr.Bool(true),
+			},
+			DataFormat: types.BatchLoadDataFormat("CSV"),
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportS3Configuration: &types.ReportS3Configuration{
+				BucketName:       ptr.String("__BucketName__"),
+				ObjectKeyPrefix:  ptr.String("__ObjectKeyPrefix__"),
+				EncryptionOption: types.S3EncryptionOption("SSE_S3"),
+				KmsKeyId:         ptr.String("__KmsKeyId__"),
+			},
+		},
+		TargetDatabaseName: ptr.String("__TargetDatabaseName__"),
+		TargetTableName:    ptr.String("__TargetTableName__"),
+		RecordVersion:      ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

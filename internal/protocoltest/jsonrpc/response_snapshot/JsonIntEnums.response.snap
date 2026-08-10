@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: JsonProtocol.JsonIntEnums
-
-{"intEnum1":1,"intEnum2":1,"intEnum3":1,"intEnumList":[1,1],"intEnumMap":{"key0":1},"intEnumSet":[1,1]}

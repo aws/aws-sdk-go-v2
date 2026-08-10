@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PipelineEndpointConnections":[{"EndpointId":"__EndpointId__","PipelineArn":"__PipelineArn__","Status":"CREATING","VpcEndpointOwner":"__VpcEndpointOwner__"},{"EndpointId":"__EndpointId__","PipelineArn":"__PipelineArn__","Status":"CREATING","VpcEndpointOwner":"__VpcEndpointOwner__"}]}

@@ -121,7 +121,11 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +147,13 @@ func TestCheckResponseSnapshot_CreateGroupMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroupMembership(context.Background(), &CreateGroupMembershipInput{})
+	got, err := svc.CreateGroupMembership(context.Background(), &CreateGroupMembershipInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		MemberId: &types.MemberIdMemberUserId{
+			Value: "__MemberIdMemberUserId__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +175,103 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserName:        ptr.String("__UserName__"),
+		Name: &types.Name{
+			Formatted:       ptr.String("__Formatted__"),
+			FamilyName:      ptr.String("__FamilyName__"),
+			GivenName:       ptr.String("__GivenName__"),
+			MiddleName:      ptr.String("__MiddleName__"),
+			HonorificPrefix: ptr.String("__HonorificPrefix__"),
+			HonorificSuffix: ptr.String("__HonorificSuffix__"),
+		},
+		DisplayName: ptr.String("__DisplayName__"),
+		NickName:    ptr.String("__NickName__"),
+		ProfileUrl:  ptr.String("__ProfileUrl__"),
+		Emails: []types.Email{
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+		},
+		Addresses: []types.Address{
+			{
+				StreetAddress: ptr.String("__StreetAddress__"),
+				Locality:      ptr.String("__Locality__"),
+				Region:        ptr.String("__Region__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				Country:       ptr.String("__Country__"),
+				Formatted:     ptr.String("__Formatted__"),
+				Type:          ptr.String("__Type__"),
+				Primary:       true,
+			},
+			{
+				StreetAddress: ptr.String("__StreetAddress__"),
+				Locality:      ptr.String("__Locality__"),
+				Region:        ptr.String("__Region__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				Country:       ptr.String("__Country__"),
+				Formatted:     ptr.String("__Formatted__"),
+				Type:          ptr.String("__Type__"),
+				Primary:       true,
+			},
+		},
+		PhoneNumbers: []types.PhoneNumber{
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+		},
+		UserType:          ptr.String("__UserType__"),
+		Title:             ptr.String("__Title__"),
+		PreferredLanguage: ptr.String("__PreferredLanguage__"),
+		Locale:            ptr.String("__Locale__"),
+		Timezone:          ptr.String("__Timezone__"),
+		Photos: []types.Photo{
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Display: ptr.String("__Display__"),
+				Primary: true,
+			},
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Display: ptr.String("__Display__"),
+				Primary: true,
+			},
+		},
+		Website:   ptr.String("__Website__"),
+		Birthdate: ptr.String("__Birthdate__"),
+		Roles: []types.Role{
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+			{
+				Value:   ptr.String("__Value__"),
+				Type:    ptr.String("__Type__"),
+				Primary: true,
+			},
+		},
+		Extensions: map[string]document.Interface{
+			"key0": document.NewLazyDocument("__Document__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +290,10 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +312,10 @@ func TestCheckResponseSnapshot_DeleteGroupMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroupMembership(context.Background(), &DeleteGroupMembershipInput{})
+	got, err := svc.DeleteGroupMembership(context.Background(), &DeleteGroupMembershipInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +334,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserId:          ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +375,10 @@ func TestCheckResponseSnapshot_DescribeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{})
+	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +408,10 @@ func TestCheckResponseSnapshot_DescribeGroupMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGroupMembership(context.Background(), &DescribeGroupMembershipInput{})
+	got, err := svc.DescribeGroupMembership(context.Background(), &DescribeGroupMembershipInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +531,7 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedBy: ptr.String("__UpdatedBy__"),
 		Extensions: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeUser.response")
@@ -421,7 +542,14 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{})
+	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserId:          ptr.String("__UserId__"),
+		Extensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +571,15 @@ func TestCheckResponseSnapshot_GetGroupId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupId(context.Background(), &GetGroupIdInput{})
+	got, err := svc.GetGroupId(context.Background(), &GetGroupIdInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		AlternateIdentifier: &types.AlternateIdentifierMemberExternalId{
+			Value: types.ExternalId{
+				Issuer: ptr.String("__Issuer__"),
+				Id:     ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +601,13 @@ func TestCheckResponseSnapshot_GetGroupMembershipId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupMembershipId(context.Background(), &GetGroupMembershipIdInput{})
+	got, err := svc.GetGroupMembershipId(context.Background(), &GetGroupMembershipIdInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		MemberId: &types.MemberIdMemberUserId{
+			Value: "__MemberIdMemberUserId__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +629,15 @@ func TestCheckResponseSnapshot_GetUserId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserId(context.Background(), &GetUserIdInput{})
+	got, err := svc.GetUserId(context.Background(), &GetUserIdInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		AlternateIdentifier: &types.AlternateIdentifierMemberExternalId{
+			Value: types.ExternalId{
+				Issuer: ptr.String("__Issuer__"),
+				Id:     ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +673,16 @@ func TestCheckResponseSnapshot_IsMemberInGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IsMemberInGroups(context.Background(), &IsMemberInGroupsInput{})
+	got, err := svc.IsMemberInGroups(context.Background(), &IsMemberInGroupsInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MemberId: &types.MemberIdMemberUserId{
+			Value: "__MemberIdMemberUserId__",
+		},
+		GroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +729,12 @@ func TestCheckResponseSnapshot_ListGroupMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupMemberships(context.Background(), &ListGroupMembershipsInput{})
+	got, err := svc.ListGroupMemberships(context.Background(), &ListGroupMembershipsInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +781,14 @@ func TestCheckResponseSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupMembershipsForMember(context.Background(), &ListGroupMembershipsForMemberInput{})
+	got, err := svc.ListGroupMembershipsForMember(context.Background(), &ListGroupMembershipsForMemberInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MemberId: &types.MemberIdMemberUserId{
+			Value: "__MemberIdMemberUserId__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +851,21 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +987,7 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedBy: ptr.String("__UpdatedBy__"),
 				Extensions: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -915,7 +1100,7 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedBy: ptr.String("__UpdatedBy__"),
 				Extensions: map[string]document.Interface{
-					"key0": nil,
+					"key0": document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -929,7 +1114,25 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		Extensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: ptr.String("__AttributeValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -948,7 +1151,20 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		Operations: []types.AttributeOperation{
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: document.NewLazyDocument("__Document__"),
+			},
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: document.NewLazyDocument("__Document__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1183,20 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserId:          ptr.String("__UserId__"),
+		Operations: []types.AttributeOperation{
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: document.NewLazyDocument("__Document__"),
+			},
+			{
+				AttributePath:  ptr.String("__AttributePath__"),
+				AttributeValue: document.NewLazyDocument("__Document__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1219,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1017,7 +1250,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1044,7 +1281,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1073,7 +1314,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1099,7 +1344,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1127,7 +1376,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1154,7 +1407,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

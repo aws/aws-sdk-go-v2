@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppMonitorSummaries":[{"Created":"__Created__","Id":"__Id__","LastModified":"__LastModified__","Name":"__Name__","Platform":"Web","State":"CREATED"},{"Created":"__Created__","Id":"__Id__","LastModified":"__LastModified__","Name":"__Name__","Platform":"Web","State":"CREATED"}],"NextToken":"__NextToken__"}

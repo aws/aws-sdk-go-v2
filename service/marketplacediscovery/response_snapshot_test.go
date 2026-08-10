@@ -297,7 +297,9 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetListing(context.Background(), &GetListingInput{})
+	got, err := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +380,9 @@ func TestCheckResponseSnapshot_GetOffer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOffer(context.Background(), &GetOfferInput{})
+	got, err := svc.GetOffer(context.Background(), &GetOfferInput{
+		OfferId: ptr.String("__OfferId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -456,7 +460,9 @@ func TestCheckResponseSnapshot_GetOfferSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOfferSet(context.Background(), &GetOfferSetInput{})
+	got, err := svc.GetOfferSet(context.Background(), &GetOfferSetInput{
+		OfferSetId: ptr.String("__OfferSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +497,11 @@ func TestCheckResponseSnapshot_GetOfferTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOfferTerms(context.Background(), &GetOfferTermsInput{})
+	got, err := svc.GetOfferTerms(context.Background(), &GetOfferTermsInput{
+		OfferId:    ptr.String("__OfferId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +598,9 @@ func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProduct(context.Background(), &GetProductInput{})
+	got, err := svc.GetProduct(context.Background(), &GetProductInput{
+		ProductId: ptr.String("__ProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,7 +675,11 @@ func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFulfillmentOptions(context.Background(), &ListFulfillmentOptionsInput{})
+	got, err := svc.ListFulfillmentOptions(context.Background(), &ListFulfillmentOptionsInput{
+		ProductId:  ptr.String("__ProductId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +850,26 @@ func TestCheckResponseSnapshot_ListPurchaseOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPurchaseOptions(context.Background(), &ListPurchaseOptionsInput{})
+	got, err := svc.ListPurchaseOptions(context.Background(), &ListPurchaseOptionsInput{
+		Filters: []types.PurchaseOptionFilter{
+			{
+				FilterType: types.PurchaseOptionFilterType("PRODUCT_ID"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FilterType: types.PurchaseOptionFilterType("PRODUCT_ID"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -872,7 +907,30 @@ func TestCheckResponseSnapshot_SearchFacets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchFacets(context.Background(), &SearchFacetsInput{})
+	got, err := svc.SearchFacets(context.Background(), &SearchFacetsInput{
+		SearchText: ptr.String("__SearchText__"),
+		Filters: []types.SearchFilter{
+			{
+				FilterType: types.SearchFilterType("MIN_AVERAGE_CUSTOMER_RATING"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FilterType: types.SearchFilterType("MIN_AVERAGE_CUSTOMER_RATING"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FacetTypes: []types.SearchFacetType{
+			types.SearchFacetType("AVERAGE_CUSTOMER_RATING"),
+			types.SearchFacetType("AVERAGE_CUSTOMER_RATING"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1098,7 +1156,29 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchListings(context.Background(), &SearchListingsInput{})
+	got, err := svc.SearchListings(context.Background(), &SearchListingsInput{
+		SearchText: ptr.String("__SearchText__"),
+		Filters: []types.SearchFilter{
+			{
+				FilterType: types.SearchFilterType("MIN_AVERAGE_CUSTOMER_RATING"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FilterType: types.SearchFilterType("MIN_AVERAGE_CUSTOMER_RATING"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		SortBy:     types.SearchListingsSortBy("RELEVANCE"),
+		SortOrder:  types.SearchListingsSortOrder("DESCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1199,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetListing(context.Background(), &GetListingInput{})
+	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1144,7 +1226,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetListing(context.Background(), &GetListingInput{})
+	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1169,7 +1253,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetListing(context.Background(), &GetListingInput{})
+	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1194,7 +1280,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetListing(context.Background(), &GetListingInput{})
+	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1220,7 +1308,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetListing(context.Background(), &GetListingInput{})
+	_, opErr := svc.GetListing(context.Background(), &GetListingInput{
+		ListingId: ptr.String("__ListingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

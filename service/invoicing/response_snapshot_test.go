@@ -156,7 +156,12 @@ func TestCheckResponseSnapshot_BatchGetInvoiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	got, err := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +182,33 @@ func TestCheckResponseSnapshot_CreateInvoiceUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvoiceUnit(context.Background(), &CreateInvoiceUnitInput{})
+	got, err := svc.CreateInvoiceUnit(context.Background(), &CreateInvoiceUnitInput{
+		Name:                   ptr.String("__Name__"),
+		InvoiceReceiver:        ptr.String("__InvoiceReceiver__"),
+		Description:            ptr.String("__Description__"),
+		TaxInheritanceDisabled: true,
+		Rule: &types.InvoiceUnitRule{
+			LinkedAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BillSourceAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +229,79 @@ func TestCheckResponseSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{})
+	got, err := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{
+		ProcurementPortalName: types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+		BuyerDomain:           types.BuyerDomain("NetworkID"),
+		BuyerIdentifier:       ptr.String("__BuyerIdentifier__"),
+		SupplierDomain:        types.SupplierDomain("NetworkID"),
+		SupplierIdentifier:    ptr.String("__SupplierIdentifier__"),
+		Selector: &types.ProcurementPortalPreferenceSelector{
+			InvoiceUnitArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SellerOfRecords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+		ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		TestEnvPreference: &types.TestEnvPreferenceInput{
+			BuyerDomain:                       types.BuyerDomain("NetworkID"),
+			BuyerIdentifier:                   ptr.String("__BuyerIdentifier__"),
+			SupplierDomain:                    types.SupplierDomain("NetworkID"),
+			SupplierIdentifier:                ptr.String("__SupplierIdentifier__"),
+			ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+			ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		},
+		EinvoiceDeliveryEnabled: ptr.Bool(true),
+		EinvoiceDeliveryPreference: &types.EinvoiceDeliveryPreference{
+			EinvoiceDeliveryDocumentTypes: []types.EinvoiceDeliveryDocumentType{
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+			},
+			EinvoiceDeliveryAttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+			},
+			Protocol: types.Protocol("CXML"),
+			PurchaseOrderDataSources: []types.PurchaseOrderDataSource{
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+			},
+			ConnectionTestingMethod:        types.ConnectionTestingMethod("PROD_ENV_DOLLAR_TEST"),
+			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		Contacts: []types.Contact{
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +322,10 @@ func TestCheckResponseSnapshot_DeleteInvoiceUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInvoiceUnit(context.Background(), &DeleteInvoiceUnitInput{})
+	got, err := svc.DeleteInvoiceUnit(context.Background(), &DeleteInvoiceUnitInput{
+		InvoiceUnitArn: ptr.String("__InvoiceUnitArn__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +346,10 @@ func TestCheckResponseSnapshot_DeleteProcurementPortalPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProcurementPortalPreference(context.Background(), &DeleteProcurementPortalPreferenceInput{})
+	got, err := svc.DeleteProcurementPortalPreference(context.Background(), &DeleteProcurementPortalPreferenceInput{
+		ProcurementPortalPreferenceArn: ptr.String("__ProcurementPortalPreferenceArn__"),
+		ClientToken:                    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +388,9 @@ func TestCheckResponseSnapshot_GetInvoicePDF(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvoicePDF(context.Background(), &GetInvoicePDFInput{})
+	got, err := svc.GetInvoicePDF(context.Background(), &GetInvoicePDFInput{
+		InvoiceId: ptr.String("__InvoiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +426,10 @@ func TestCheckResponseSnapshot_GetInvoiceUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvoiceUnit(context.Background(), &GetInvoiceUnitInput{})
+	got, err := svc.GetInvoiceUnit(context.Background(), &GetInvoiceUnitInput{
+		InvoiceUnitArn: ptr.String("__InvoiceUnitArn__"),
+		AsOf:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -408,7 +522,9 @@ func TestCheckResponseSnapshot_GetProcurementPortalPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProcurementPortalPreference(context.Background(), &GetProcurementPortalPreferenceInput{})
+	got, err := svc.GetProcurementPortalPreference(context.Background(), &GetProcurementPortalPreferenceInput{
+		ProcurementPortalPreferenceArn: ptr.String("__ProcurementPortalPreferenceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +951,26 @@ func TestCheckResponseSnapshot_ListInvoiceSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvoiceSummaries(context.Background(), &ListInvoiceSummariesInput{})
+	got, err := svc.ListInvoiceSummaries(context.Background(), &ListInvoiceSummariesInput{
+		Selector: &types.InvoiceSummariesSelector{
+			ResourceType: types.ListInvoiceSummariesResourceType("ACCOUNT_ID"),
+			Value:        ptr.String("__Value__"),
+		},
+		Filter: &types.InvoiceSummariesFilter{
+			TimeInterval: &types.DateInterval{
+				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			BillingPeriod: &types.BillingPeriod{
+				Month: ptr.Int32(1),
+				Year:  ptr.Int32(1),
+			},
+			InvoicingEntity: ptr.String("__InvoicingEntity__"),
+			ReceiverRole:    types.ReceiverRole("SELLER"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -894,7 +1029,29 @@ func TestCheckResponseSnapshot_ListInvoiceUnits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvoiceUnits(context.Background(), &ListInvoiceUnitsInput{})
+	got, err := svc.ListInvoiceUnits(context.Background(), &ListInvoiceUnitsInput{
+		Filters: &types.Filters{
+			Names: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InvoiceReceivers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BillSourceAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		AsOf:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1130,10 @@ func TestCheckResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProcurementPortalPreferences(context.Background(), &ListProcurementPortalPreferencesInput{})
+	got, err := svc.ListProcurementPortalPreferences(context.Background(), &ListProcurementPortalPreferencesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1003,7 +1163,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1186,65 @@ func TestCheckResponseSnapshot_PutProcurementPortalPreference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProcurementPortalPreference(context.Background(), &PutProcurementPortalPreferenceInput{})
+	got, err := svc.PutProcurementPortalPreference(context.Background(), &PutProcurementPortalPreferenceInput{
+		ProcurementPortalPreferenceArn: ptr.String("__ProcurementPortalPreferenceArn__"),
+		Selector: &types.ProcurementPortalPreferenceSelector{
+			InvoiceUnitArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SellerOfRecords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+		ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		TestEnvPreference: &types.TestEnvPreferenceInput{
+			BuyerDomain:                       types.BuyerDomain("NetworkID"),
+			BuyerIdentifier:                   ptr.String("__BuyerIdentifier__"),
+			SupplierDomain:                    types.SupplierDomain("NetworkID"),
+			SupplierIdentifier:                ptr.String("__SupplierIdentifier__"),
+			ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+			ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		},
+		EinvoiceDeliveryEnabled: ptr.Bool(true),
+		EinvoiceDeliveryPreference: &types.EinvoiceDeliveryPreference{
+			EinvoiceDeliveryDocumentTypes: []types.EinvoiceDeliveryDocumentType{
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+			},
+			EinvoiceDeliveryAttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+			},
+			Protocol: types.Protocol("CXML"),
+			PurchaseOrderDataSources: []types.PurchaseOrderDataSource{
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+			},
+			ConnectionTestingMethod:        types.ConnectionTestingMethod("PROD_ENV_DOLLAR_TEST"),
+			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		Contacts: []types.Contact{
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1045,7 +1265,10 @@ func TestCheckResponseSnapshot_SendProcurementPortalValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendProcurementPortalValidation(context.Background(), &SendProcurementPortalValidationInput{})
+	got, err := svc.SendProcurementPortalValidation(context.Background(), &SendProcurementPortalValidationInput{
+		ProcurementPortalPreferenceArn: ptr.String("__ProcurementPortalPreferenceArn__"),
+		ClientToken:                    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1287,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1318,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1104,7 +1345,22 @@ func TestCheckResponseSnapshot_UpdateInvoiceUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInvoiceUnit(context.Background(), &UpdateInvoiceUnitInput{})
+	got, err := svc.UpdateInvoiceUnit(context.Background(), &UpdateInvoiceUnitInput{
+		InvoiceUnitArn:         ptr.String("__InvoiceUnitArn__"),
+		Description:            ptr.String("__Description__"),
+		TaxInheritanceDisabled: ptr.Bool(true),
+		Rule: &types.InvoiceUnitRule{
+			LinkedAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BillSourceAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1381,14 @@ func TestCheckResponseSnapshot_UpdateProcurementPortalPreferenceStatus(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProcurementPortalPreferenceStatus(context.Background(), &UpdateProcurementPortalPreferenceStatusInput{})
+	got, err := svc.UpdateProcurementPortalPreferenceStatus(context.Background(), &UpdateProcurementPortalPreferenceStatusInput{
+		ProcurementPortalPreferenceArn:               ptr.String("__ProcurementPortalPreferenceArn__"),
+		EinvoiceDeliveryPreferenceStatus:             types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
+		EinvoiceDeliveryPreferenceStatusReason:       ptr.String("__EinvoiceDeliveryPreferenceStatusReason__"),
+		PurchaseOrderRetrievalPreferenceStatus:       types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
+		PurchaseOrderRetrievalPreferenceStatusReason: ptr.String("__PurchaseOrderRetrievalPreferenceStatusReason__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1146,7 +1409,11 @@ func TestCheckResponseSnapshot_VerifyProcurementPortalValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyProcurementPortalValidation(context.Background(), &VerifyProcurementPortalValidationInput{})
+	got, err := svc.VerifyProcurementPortalValidation(context.Background(), &VerifyProcurementPortalValidationInput{
+		ProcurementPortalPreferenceArn: ptr.String("__ProcurementPortalPreferenceArn__"),
+		Code:                           ptr.String("__Code__"),
+		ClientToken:                    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1435,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1195,7 +1467,79 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{})
+	_, opErr := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{
+		ProcurementPortalName: types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+		BuyerDomain:           types.BuyerDomain("NetworkID"),
+		BuyerIdentifier:       ptr.String("__BuyerIdentifier__"),
+		SupplierDomain:        types.SupplierDomain("NetworkID"),
+		SupplierIdentifier:    ptr.String("__SupplierIdentifier__"),
+		Selector: &types.ProcurementPortalPreferenceSelector{
+			InvoiceUnitArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SellerOfRecords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+		ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		TestEnvPreference: &types.TestEnvPreferenceInput{
+			BuyerDomain:                       types.BuyerDomain("NetworkID"),
+			BuyerIdentifier:                   ptr.String("__BuyerIdentifier__"),
+			SupplierDomain:                    types.SupplierDomain("NetworkID"),
+			SupplierIdentifier:                ptr.String("__SupplierIdentifier__"),
+			ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+			ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		},
+		EinvoiceDeliveryEnabled: ptr.Bool(true),
+		EinvoiceDeliveryPreference: &types.EinvoiceDeliveryPreference{
+			EinvoiceDeliveryDocumentTypes: []types.EinvoiceDeliveryDocumentType{
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+			},
+			EinvoiceDeliveryAttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+			},
+			Protocol: types.Protocol("CXML"),
+			PurchaseOrderDataSources: []types.PurchaseOrderDataSource{
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+			},
+			ConnectionTestingMethod:        types.ConnectionTestingMethod("PROD_ENV_DOLLAR_TEST"),
+			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		Contacts: []types.Contact{
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1221,7 +1565,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1247,7 +1596,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1272,7 +1626,79 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{})
+	_, opErr := svc.CreateProcurementPortalPreference(context.Background(), &CreateProcurementPortalPreferenceInput{
+		ProcurementPortalName: types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+		BuyerDomain:           types.BuyerDomain("NetworkID"),
+		BuyerIdentifier:       ptr.String("__BuyerIdentifier__"),
+		SupplierDomain:        types.SupplierDomain("NetworkID"),
+		SupplierIdentifier:    ptr.String("__SupplierIdentifier__"),
+		Selector: &types.ProcurementPortalPreferenceSelector{
+			InvoiceUnitArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SellerOfRecords: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+		ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		TestEnvPreference: &types.TestEnvPreferenceInput{
+			BuyerDomain:                       types.BuyerDomain("NetworkID"),
+			BuyerIdentifier:                   ptr.String("__BuyerIdentifier__"),
+			SupplierDomain:                    types.SupplierDomain("NetworkID"),
+			SupplierIdentifier:                ptr.String("__SupplierIdentifier__"),
+			ProcurementPortalSharedSecret:     ptr.String("__ProcurementPortalSharedSecret__"),
+			ProcurementPortalInstanceEndpoint: ptr.String("__ProcurementPortalInstanceEndpoint__"),
+		},
+		EinvoiceDeliveryEnabled: ptr.Bool(true),
+		EinvoiceDeliveryPreference: &types.EinvoiceDeliveryPreference{
+			EinvoiceDeliveryDocumentTypes: []types.EinvoiceDeliveryDocumentType{
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+				types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+			},
+			EinvoiceDeliveryAttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+				types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+			},
+			Protocol: types.Protocol("CXML"),
+			PurchaseOrderDataSources: []types.PurchaseOrderDataSource{
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+				{
+					EinvoiceDeliveryDocumentType: types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+					PurchaseOrderDataSourceType:  types.PurchaseOrderDataSourceType("ASSOCIATED_PURCHASE_ORDER_REQUIRED"),
+				},
+			},
+			ConnectionTestingMethod:        types.ConnectionTestingMethod("PROD_ENV_DOLLAR_TEST"),
+			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		Contacts: []types.Contact{
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1297,7 +1723,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1334,7 +1765,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{})
+	_, opErr := svc.BatchGetInvoiceProfile(context.Background(), &BatchGetInvoiceProfileInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

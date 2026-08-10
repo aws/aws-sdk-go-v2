@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SipMediaApplicationAlexaSkillConfiguration":{"AlexaSkillIds":["__Member__","__Member__"],"AlexaSkillStatus":"ACTIVE"}}

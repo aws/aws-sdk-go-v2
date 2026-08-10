@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"User":{"AccountId":"__AccountId__","AlexaForBusinessMetadata":{"AlexaForBusinessRoomArn":"__AlexaForBusinessRoomArn__","IsAlexaForBusinessEnabled":true},"DisplayName":"__DisplayName__","InvitedOn":"2000-01-01T00:00:00Z","LicenseType":"Basic","PersonalPIN":"__PersonalPIN__","PrimaryEmail":"__PrimaryEmail__","PrimaryProvisionedNumber":"__PrimaryProvisionedNumber__","RegisteredOn":"2000-01-01T00:00:00Z","UserId":"__UserId__","UserInvitationStatus":"Pending","UserRegistrationStatus":"Unregistered","UserType":"PrivateUser"}}

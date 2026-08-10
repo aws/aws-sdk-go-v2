@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListLineageGroups
+
+{"LineageGroupSummaries":[{"CreationTime":946684800,"DisplayName":"__DisplayName__","LastModifiedTime":946684800,"LineageGroupArn":"__LineageGroupArn__","LineageGroupName":"__LineageGroupName__"},{"CreationTime":946684800,"DisplayName":"__DisplayName__","LastModifiedTime":946684800,"LineageGroupArn":"__LineageGroupArn__","LineageGroupName":"__LineageGroupName__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConfidenceScore":1,"MatchId":"__MatchId__","MatchType":"RULE_BASED_MATCHING","NextToken":"__NextToken__","ProfileIds":["__Member__","__Member__"],"RuleLevel":1}

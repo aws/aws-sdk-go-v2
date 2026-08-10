@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.GetRelationship
+
+{"relationshipDetail":{"arn":"__Arn__","associatedAccountId":"__AssociatedAccountId__","associationType":"DOWNSTREAM_SELLER","catalog":"__Catalog__","createdAt":"2000-01-01T00:00:00Z","displayName":"__DisplayName__","id":"__Id__","programManagementAccountId":"__ProgramManagementAccountId__","resaleAccountModel":"DISTRIBUTOR","revision":"__Revision__","sector":"COMMERCIAL","startDate":"2000-01-01T00:00:00Z","updatedAt":"2000-01-01T00:00:00Z"}}

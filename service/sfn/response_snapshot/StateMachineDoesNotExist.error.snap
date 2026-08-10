@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.DescribeStateMachine
+
+{"__type":"StateMachineDoesNotExist","message":"__Message__"}

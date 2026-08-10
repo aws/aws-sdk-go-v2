@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowTargets
+
+{"NextToken":"__NextToken__","Targets":[{"Description":"__Description__","Name":"__Name__","OwnerInformation":"__OwnerInformation__","ResourceType":"INSTANCE","Targets":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"WindowId":"__WindowId__","WindowTargetId":"__WindowTargetId__"},{"Description":"__Description__","Name":"__Name__","OwnerInformation":"__OwnerInformation__","ResourceType":"INSTANCE","Targets":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"WindowId":"__WindowId__","WindowTargetId":"__WindowTargetId__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelFlows":[{"ChannelFlowArn":"__ChannelFlowArn__","Name":"__Name__","Processors":[{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"},{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"}]},{"ChannelFlowArn":"__ChannelFlowArn__","Name":"__Name__","Processors":[{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"},{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"}]}],"NextToken":"__NextToken__"}

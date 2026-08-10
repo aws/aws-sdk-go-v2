@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListServiceActionsForProvisioningArtifact
+
+{"NextPageToken":"__NextPageToken__","ServiceActionSummaries":[{"DefinitionType":"SSM_AUTOMATION","Description":"__Description__","Id":"__Id__","Name":"__Name__"},{"DefinitionType":"SSM_AUTOMATION","Description":"__Description__","Id":"__Id__","Name":"__Name__"}]}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.GetOciOnboardingStatus
+
+{"autonomousDatabaseOciIntegrationIamRoles":[{"awsIntegration":"KmsTde","iamRoleArn":"__IamRoleArn__","status":"PROVISIONING","statusReason":"__StatusReason__"},{"awsIntegration":"KmsTde","iamRoleArn":"__IamRoleArn__","status":"PROVISIONING","statusReason":"__StatusReason__"}],"existingTenancyActivationLink":"__ExistingTenancyActivationLink__","linkedOciCompartmentId":"__LinkedOciCompartmentId__","linkedOciTenancyId":"__LinkedOciTenancyId__","newTenancyActivationLink":"__NewTenancyActivationLink__","ociIdentityDomain":{"accountSetupCloudFormationUrl":"__AccountSetupCloudFormationUrl__","ociIdentityDomainId":"__OciIdentityDomainId__","ociIdentityDomainResourceUrl":"__OciIdentityDomainResourceUrl__","ociIdentityDomainUrl":"__OciIdentityDomainUrl__","status":"AVAILABLE","statusReason":"__StatusReason__"},"status":"NOT_STARTED","subscriptionErrors":[{"errorMessage":"__ErrorMessage__"},{"errorMessage":"__ErrorMessage__"}]}

@@ -1,0 +1,4 @@
+401
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>RealtimeLogConfigOwnerMismatch</Code><Message>__Message__</Message></Error></ErrorResponse>

@@ -126,7 +126,11 @@ func TestCheckResponseSnapshot_AssociateHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	got, err := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +254,42 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateFirewallRule(context.Background(), &BatchCreateFirewallRuleInput{})
+	got, err := svc.BatchCreateFirewallRule(context.Background(), &BatchCreateFirewallRuleInput{
+		FirewallRules: []types.BatchCreateFirewallRuleInputItem{
+			{
+				Action:                types.FirewallRuleAction("ALLOW"),
+				BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+				BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideTtl:      ptr.Int32(1),
+				BlockResponse:         types.FirewallBlockResponse("NODATA"),
+				ClientToken:           ptr.String("__ClientToken__"),
+				ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+				Description:           ptr.String("__Description__"),
+				DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+				FirewallDomainListId:  ptr.String("__FirewallDomainListId__"),
+				Name:                  ptr.String("__Name__"),
+				Priority:              ptr.Int64(1),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				QType:                 ptr.String("__QType__"),
+			},
+			{
+				Action:                types.FirewallRuleAction("ALLOW"),
+				BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+				BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideTtl:      ptr.Int32(1),
+				BlockResponse:         types.FirewallBlockResponse("NODATA"),
+				ClientToken:           ptr.String("__ClientToken__"),
+				ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+				Description:           ptr.String("__Description__"),
+				DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+				FirewallDomainListId:  ptr.String("__FirewallDomainListId__"),
+				Name:                  ptr.String("__Name__"),
+				Priority:              ptr.Int64(1),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				QType:                 ptr.String("__QType__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -314,7 +353,16 @@ func TestCheckResponseSnapshot_BatchDeleteFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteFirewallRule(context.Background(), &BatchDeleteFirewallRuleInput{})
+	got, err := svc.BatchDeleteFirewallRule(context.Background(), &BatchDeleteFirewallRuleInput{
+		FirewallRules: []types.BatchDeleteFirewallRuleInputItem{
+			{
+				FirewallRuleId: ptr.String("__FirewallRuleId__"),
+			},
+			{
+				FirewallRuleId: ptr.String("__FirewallRuleId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +482,36 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateFirewallRule(context.Background(), &BatchUpdateFirewallRuleInput{})
+	got, err := svc.BatchUpdateFirewallRule(context.Background(), &BatchUpdateFirewallRuleInput{
+		FirewallRules: []types.BatchUpdateFirewallRuleInputItem{
+			{
+				Action:                types.FirewallRuleAction("ALLOW"),
+				BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+				BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideTtl:      ptr.Int32(1),
+				BlockResponse:         types.FirewallBlockResponse("NODATA"),
+				ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+				Description:           ptr.String("__Description__"),
+				DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+				FirewallRuleId:        ptr.String("__FirewallRuleId__"),
+				Name:                  ptr.String("__Name__"),
+				Priority:              ptr.Int64(1),
+			},
+			{
+				Action:                types.FirewallRuleAction("ALLOW"),
+				BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+				BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideTtl:      ptr.Int32(1),
+				BlockResponse:         types.FirewallBlockResponse("NODATA"),
+				ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+				Description:           ptr.String("__Description__"),
+				DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+				FirewallRuleId:        ptr.String("__FirewallRuleId__"),
+				Name:                  ptr.String("__Name__"),
+				Priority:              ptr.Int64(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +541,17 @@ func TestCheckResponseSnapshot_CreateAccessSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessSource(context.Background(), &CreateAccessSourceInput{})
+	got, err := svc.CreateAccessSource(context.Background(), &CreateAccessSourceInput{
+		Cidr:          ptr.String("__Cidr__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		IpAddressType: types.IpAddressType("IPV4"),
+		Name:          ptr.String("__Name__"),
+		DnsViewId:     ptr.String("__DnsViewId__"),
+		Protocol:      types.DnsProtocol("DO53"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +580,15 @@ func TestCheckResponseSnapshot_CreateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	got, err := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DnsViewId:   ptr.String("__DnsViewId__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +620,18 @@ func TestCheckResponseSnapshot_CreateDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDNSView(context.Background(), &CreateDNSViewInput{})
+	got, err := svc.CreateDNSView(context.Background(), &CreateDNSViewInput{
+		GlobalResolverId:      ptr.String("__GlobalResolverId__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Name:                  ptr.String("__Name__"),
+		DnssecValidation:      types.DnsSecValidationType("ENABLED"),
+		EdnsClientSubnet:      types.EdnsClientSubnetType("ENABLED"),
+		FirewallRulesFailOpen: types.FirewallRulesFailOpenType("ENABLED"),
+		Description:           ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +660,15 @@ func TestCheckResponseSnapshot_CreateFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallDomainList(context.Background(), &CreateFirewallDomainListInput{})
+	got, err := svc.CreateFirewallDomainList(context.Background(), &CreateFirewallDomainListInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Description:      ptr.String("__Description__"),
+		Name:             ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +705,22 @@ func TestCheckResponseSnapshot_CreateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallRule(context.Background(), &CreateFirewallRuleInput{})
+	got, err := svc.CreateFirewallRule(context.Background(), &CreateFirewallRuleInput{
+		Action:                types.FirewallRuleAction("ALLOW"),
+		BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+		BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+		BlockOverrideTtl:      ptr.Int32(1),
+		BlockResponse:         types.FirewallBlockResponse("NODATA"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+		Description:           ptr.String("__Description__"),
+		DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+		FirewallDomainListId:  ptr.String("__FirewallDomainListId__"),
+		Name:                  ptr.String("__Name__"),
+		Priority:              ptr.Int64(1),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		QType:                 ptr.String("__QType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +763,20 @@ func TestCheckResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlobalResolver(context.Background(), &CreateGlobalResolverInput{})
+	got, err := svc.CreateGlobalResolver(context.Background(), &CreateGlobalResolverInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		Description:         ptr.String("__Description__"),
+		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		Name:                ptr.String("__Name__"),
+		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +806,9 @@ func TestCheckResponseSnapshot_DeleteAccessSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessSource(context.Background(), &DeleteAccessSourceInput{})
+	got, err := svc.DeleteAccessSource(context.Background(), &DeleteAccessSourceInput{
+		AccessSourceId: ptr.String("__AccessSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +831,9 @@ func TestCheckResponseSnapshot_DeleteAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessToken(context.Background(), &DeleteAccessTokenInput{})
+	got, err := svc.DeleteAccessToken(context.Background(), &DeleteAccessTokenInput{
+		AccessTokenId: ptr.String("__AccessTokenId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +865,9 @@ func TestCheckResponseSnapshot_DeleteDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDNSView(context.Background(), &DeleteDNSViewInput{})
+	got, err := svc.DeleteDNSView(context.Background(), &DeleteDNSViewInput{
+		DnsViewId: ptr.String("__DnsViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -743,7 +891,9 @@ func TestCheckResponseSnapshot_DeleteFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallDomainList(context.Background(), &DeleteFirewallDomainListInput{})
+	got, err := svc.DeleteFirewallDomainList(context.Background(), &DeleteFirewallDomainListInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +930,9 @@ func TestCheckResponseSnapshot_DeleteFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallRule(context.Background(), &DeleteFirewallRuleInput{})
+	got, err := svc.DeleteFirewallRule(context.Background(), &DeleteFirewallRuleInput{
+		FirewallRuleId: ptr.String("__FirewallRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +975,9 @@ func TestCheckResponseSnapshot_DeleteGlobalResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGlobalResolver(context.Background(), &DeleteGlobalResolverInput{})
+	got, err := svc.DeleteGlobalResolver(context.Background(), &DeleteGlobalResolverInput{
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -855,7 +1009,9 @@ func TestCheckResponseSnapshot_DisableDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDNSView(context.Background(), &DisableDNSViewInput{})
+	got, err := svc.DisableDNSView(context.Background(), &DisableDNSViewInput{
+		DnsViewId: ptr.String("__DnsViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +1039,10 @@ func TestCheckResponseSnapshot_DisassociateHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateHostedZone(context.Background(), &DisassociateHostedZoneInput{})
+	got, err := svc.DisassociateHostedZone(context.Background(), &DisassociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -915,7 +1074,9 @@ func TestCheckResponseSnapshot_EnableDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDNSView(context.Background(), &EnableDNSViewInput{})
+	got, err := svc.EnableDNSView(context.Background(), &EnableDNSViewInput{
+		DnsViewId: ptr.String("__DnsViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -945,7 +1106,9 @@ func TestCheckResponseSnapshot_GetAccessSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessSource(context.Background(), &GetAccessSourceInput{})
+	got, err := svc.GetAccessSource(context.Background(), &GetAccessSourceInput{
+		AccessSourceId: ptr.String("__AccessSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -976,7 +1139,9 @@ func TestCheckResponseSnapshot_GetAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessToken(context.Background(), &GetAccessTokenInput{})
+	got, err := svc.GetAccessToken(context.Background(), &GetAccessTokenInput{
+		AccessTokenId: ptr.String("__AccessTokenId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1173,9 @@ func TestCheckResponseSnapshot_GetDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDNSView(context.Background(), &GetDNSViewInput{})
+	got, err := svc.GetDNSView(context.Background(), &GetDNSViewInput{
+		DnsViewId: ptr.String("__DnsViewId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1039,7 +1206,9 @@ func TestCheckResponseSnapshot_GetFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallDomainList(context.Background(), &GetFirewallDomainListInput{})
+	got, err := svc.GetFirewallDomainList(context.Background(), &GetFirewallDomainListInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1245,9 @@ func TestCheckResponseSnapshot_GetFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallRule(context.Background(), &GetFirewallRuleInput{})
+	got, err := svc.GetFirewallRule(context.Background(), &GetFirewallRuleInput{
+		FirewallRuleId: ptr.String("__FirewallRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1119,7 +1290,9 @@ func TestCheckResponseSnapshot_GetGlobalResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGlobalResolver(context.Background(), &GetGlobalResolverInput{})
+	got, err := svc.GetGlobalResolver(context.Background(), &GetGlobalResolverInput{
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1320,9 @@ func TestCheckResponseSnapshot_GetHostedZoneAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHostedZoneAssociation(context.Background(), &GetHostedZoneAssociationInput{})
+	got, err := svc.GetHostedZoneAssociation(context.Background(), &GetHostedZoneAssociationInput{
+		HostedZoneAssociationId: ptr.String("__HostedZoneAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1171,7 +1346,9 @@ func TestCheckResponseSnapshot_GetManagedFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedFirewallDomainList(context.Background(), &GetManagedFirewallDomainListInput{})
+	got, err := svc.GetManagedFirewallDomainList(context.Background(), &GetManagedFirewallDomainListInput{
+		ManagedFirewallDomainListId: ptr.String("__ManagedFirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1194,7 +1371,11 @@ func TestCheckResponseSnapshot_ImportFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportFirewallDomains(context.Background(), &ImportFirewallDomainsInput{})
+	got, err := svc.ImportFirewallDomains(context.Background(), &ImportFirewallDomainsInput{
+		DomainFileUrl:        ptr.String("__DomainFileUrl__"),
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+		Operation:            ptr.String("__Operation__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1241,7 +1422,16 @@ func TestCheckResponseSnapshot_ListAccessSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessSources(context.Background(), &ListAccessSourcesInput{})
+	got, err := svc.ListAccessSources(context.Background(), &ListAccessSourcesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1286,7 +1476,17 @@ func TestCheckResponseSnapshot_ListAccessTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessTokens(context.Background(), &ListAccessTokensInput{})
+	got, err := svc.ListAccessTokens(context.Background(), &ListAccessTokensInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DnsViewId:  ptr.String("__DnsViewId__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1337,7 +1537,11 @@ func TestCheckResponseSnapshot_ListDNSViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDNSViews(context.Background(), &ListDNSViewsInput{})
+	got, err := svc.ListDNSViews(context.Background(), &ListDNSViewsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1380,7 +1584,11 @@ func TestCheckResponseSnapshot_ListFirewallDomainLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallDomainLists(context.Background(), &ListFirewallDomainListsInput{})
+	got, err := svc.ListFirewallDomainLists(context.Background(), &ListFirewallDomainListsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1613,11 @@ func TestCheckResponseSnapshot_ListFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallDomains(context.Background(), &ListFirewallDomainsInput{})
+	got, err := svc.ListFirewallDomains(context.Background(), &ListFirewallDomainsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1466,7 +1678,17 @@ func TestCheckResponseSnapshot_ListFirewallRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallRules(context.Background(), &ListFirewallRulesInput{})
+	got, err := svc.ListFirewallRules(context.Background(), &ListFirewallRulesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DnsViewId:  ptr.String("__DnsViewId__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1539,7 +1761,10 @@ func TestCheckResponseSnapshot_ListGlobalResolvers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGlobalResolvers(context.Background(), &ListGlobalResolversInput{})
+	got, err := svc.ListGlobalResolvers(context.Background(), &ListGlobalResolversInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1582,7 +1807,11 @@ func TestCheckResponseSnapshot_ListHostedZoneAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHostedZoneAssociations(context.Background(), &ListHostedZoneAssociationsInput{})
+	got, err := svc.ListHostedZoneAssociations(context.Background(), &ListHostedZoneAssociationsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1617,7 +1846,11 @@ func TestCheckResponseSnapshot_ListManagedFirewallDomainLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedFirewallDomainLists(context.Background(), &ListManagedFirewallDomainListsInput{})
+	got, err := svc.ListManagedFirewallDomainLists(context.Background(), &ListManagedFirewallDomainListsInput{
+		MaxResults:                    ptr.Int32(1),
+		NextToken:                     ptr.String("__NextToken__"),
+		ManagedFirewallDomainListType: ptr.String("__ManagedFirewallDomainListType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1670,7 +1903,10 @@ func TestCheckResponseSnapshot_ListSharedDNSViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSharedDNSViews(context.Background(), &ListSharedDNSViewsInput{})
+	got, err := svc.ListSharedDNSViews(context.Background(), &ListSharedDNSViewsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1693,7 +1929,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1712,7 +1950,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1731,7 +1974,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1761,7 +2010,13 @@ func TestCheckResponseSnapshot_UpdateAccessSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessSource(context.Background(), &UpdateAccessSourceInput{})
+	got, err := svc.UpdateAccessSource(context.Background(), &UpdateAccessSourceInput{
+		AccessSourceId: ptr.String("__AccessSourceId__"),
+		Cidr:           ptr.String("__Cidr__"),
+		IpAddressType:  types.IpAddressType("IPV4"),
+		Name:           ptr.String("__Name__"),
+		Protocol:       types.DnsProtocol("DO53"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1783,7 +2038,10 @@ func TestCheckResponseSnapshot_UpdateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessToken(context.Background(), &UpdateAccessTokenInput{})
+	got, err := svc.UpdateAccessToken(context.Background(), &UpdateAccessTokenInput{
+		AccessTokenId: ptr.String("__AccessTokenId__"),
+		Name:          ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1815,7 +2073,14 @@ func TestCheckResponseSnapshot_UpdateDNSView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDNSView(context.Background(), &UpdateDNSViewInput{})
+	got, err := svc.UpdateDNSView(context.Background(), &UpdateDNSViewInput{
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		DnssecValidation:      types.DnsSecValidationType("ENABLED"),
+		EdnsClientSubnet:      types.EdnsClientSubnetType("ENABLED"),
+		FirewallRulesFailOpen: types.FirewallRulesFailOpenType("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1838,7 +2103,14 @@ func TestCheckResponseSnapshot_UpdateFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallDomains(context.Background(), &UpdateFirewallDomainsInput{})
+	got, err := svc.UpdateFirewallDomains(context.Background(), &UpdateFirewallDomainsInput{
+		Domains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+		Operation:            ptr.String("__Operation__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1875,7 +2147,20 @@ func TestCheckResponseSnapshot_UpdateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallRule(context.Background(), &UpdateFirewallRuleInput{})
+	got, err := svc.UpdateFirewallRule(context.Background(), &UpdateFirewallRuleInput{
+		Action:                types.FirewallRuleAction("ALLOW"),
+		BlockOverrideDnsType:  types.BlockOverrideDnsQueryType("CNAME"),
+		BlockOverrideDomain:   ptr.String("__BlockOverrideDomain__"),
+		BlockOverrideTtl:      ptr.Int32(1),
+		BlockResponse:         types.FirewallBlockResponse("NODATA"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		ConfidenceThreshold:   types.ConfidenceThreshold("LOW"),
+		Description:           ptr.String("__Description__"),
+		DnsAdvancedProtection: types.DnsAdvancedProtection("DGA"),
+		FirewallRuleId:        ptr.String("__FirewallRuleId__"),
+		Name:                  ptr.String("__Name__"),
+		Priority:              ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1918,7 +2203,17 @@ func TestCheckResponseSnapshot_UpdateGlobalResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalResolver(context.Background(), &UpdateGlobalResolverInput{})
+	got, err := svc.UpdateGlobalResolver(context.Background(), &UpdateGlobalResolverInput{
+		GlobalResolverId:    ptr.String("__GlobalResolverId__"),
+		Name:                ptr.String("__Name__"),
+		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
+		Description:         ptr.String("__Description__"),
+		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1946,7 +2241,10 @@ func TestCheckResponseSnapshot_UpdateHostedZoneAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHostedZoneAssociation(context.Background(), &UpdateHostedZoneAssociationInput{})
+	got, err := svc.UpdateHostedZoneAssociation(context.Background(), &UpdateHostedZoneAssociationInput{
+		HostedZoneAssociationId: ptr.String("__HostedZoneAssociationId__"),
+		Name:                    ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1967,7 +2265,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1994,7 +2296,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2020,7 +2326,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2047,7 +2357,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2076,7 +2390,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2104,7 +2422,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2140,7 +2462,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{})
+	_, opErr := svc.AssociateHostedZone(context.Background(), &AssociateHostedZoneInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		Name:         ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

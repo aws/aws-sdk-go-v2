@@ -137,7 +137,12 @@ func TestCheckResponseSnapshot_GetIceServerConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	got, err := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +163,11 @@ func TestCheckResponseSnapshot_SendAlexaOfferToMaster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendAlexaOfferToMaster(context.Background(), &SendAlexaOfferToMasterInput{})
+	got, err := svc.SendAlexaOfferToMaster(context.Background(), &SendAlexaOfferToMasterInput{
+		ChannelARN:     ptr.String("__ChannelARN__"),
+		SenderClientId: ptr.String("__SenderClientId__"),
+		MessagePayload: ptr.String("__MessagePayload__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +188,12 @@ func TestCheckResponseSnapshot_Error_ClientLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -204,7 +218,12 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -229,7 +248,12 @@ func TestCheckResponseSnapshot_Error_InvalidClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -254,7 +278,12 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -279,7 +308,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -304,7 +338,12 @@ func TestCheckResponseSnapshot_Error_SessionExpiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{})
+	_, opErr := svc.GetIceServerConfig(context.Background(), &GetIceServerConfigInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		ClientId:   ptr.String("__ClientId__"),
+		Service:    types.Service("TURN"),
+		Username:   ptr.String("__Username__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

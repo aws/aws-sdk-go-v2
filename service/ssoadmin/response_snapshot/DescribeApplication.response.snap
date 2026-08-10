@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.DescribeApplication
+
+{"ApplicationAccount":"__ApplicationAccount__","ApplicationArn":"__ApplicationArn__","ApplicationProviderArn":"__ApplicationProviderArn__","CreatedDate":946684800,"CreatedFrom":"__CreatedFrom__","Description":"__Description__","IdentityStoreArn":"__IdentityStoreArn__","InstanceArn":"__InstanceArn__","Name":"__Name__","PortalOptions":{"SignInOptions":{"ApplicationUrl":"__ApplicationUrl__","Origin":"IDENTITY_CENTER"},"Visibility":"ENABLED"},"Status":"ENABLED"}

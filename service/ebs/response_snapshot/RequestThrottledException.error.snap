@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"RequestThrottledException","Message":"__Message__","Reason":"ACCOUNT_THROTTLED"}

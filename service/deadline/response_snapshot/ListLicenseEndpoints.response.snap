@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"licenseEndpoints":[{"licenseEndpointId":"__LicenseEndpointId__","status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","vpcId":"__VpcId__"},{"licenseEndpointId":"__LicenseEndpointId__","status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","vpcId":"__VpcId__"}],"nextToken":"__NextToken__"}

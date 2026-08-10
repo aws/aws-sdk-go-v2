@@ -139,7 +139,11 @@ func TestCheckResponseSnapshot_ApprovePaidSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	got, err := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +184,15 @@ func TestCheckResponseSnapshot_AssociateResourcesToSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResourcesToSubscription(context.Background(), &AssociateResourcesToSubscriptionInput{})
+	got, err := svc.AssociateResourcesToSubscription(context.Background(), &AssociateResourcesToSubscriptionInput{
+		Arn: ptr.String("__Arn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +233,11 @@ func TestCheckResponseSnapshot_CancelSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{})
+	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +278,11 @@ func TestCheckResponseSnapshot_CancelSubscriptionChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSubscriptionChange(context.Background(), &CancelSubscriptionChangeInput{})
+	got, err := svc.CancelSubscriptionChange(context.Background(), &CancelSubscriptionChangeInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +323,17 @@ func TestCheckResponseSnapshot_CreateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{})
+	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{
+		PlanFamily: ptr.String("__PlanFamily__"),
+		PlanTier:   ptr.String("__PlanTier__"),
+		UsageLevel: ptr.String("__UsageLevel__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApprovalMode: types.ApprovalMode("MANUAL"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +374,15 @@ func TestCheckResponseSnapshot_DisassociateResourcesFromSubscription(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResourcesFromSubscription(context.Background(), &DisassociateResourcesFromSubscriptionInput{})
+	got, err := svc.DisassociateResourcesFromSubscription(context.Background(), &DisassociateResourcesFromSubscriptionInput{
+		Arn: ptr.String("__Arn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -385,7 +423,9 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{})
+	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +490,9 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +533,13 @@ func TestCheckResponseSnapshot_UpdateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{})
+	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		PlanTier:    ptr.String("__PlanTier__"),
+		UsageLevel:  ptr.String("__UsageLevel__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +560,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -538,7 +590,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -563,7 +619,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -589,7 +649,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -614,7 +678,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{})
+	_, opErr := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{
+		PlanFamily: ptr.String("__PlanFamily__"),
+		PlanTier:   ptr.String("__PlanTier__"),
+		UsageLevel: ptr.String("__UsageLevel__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApprovalMode: types.ApprovalMode("MANUAL"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -639,7 +713,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -665,7 +743,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{})
+	_, opErr := svc.ApprovePaidSubscription(context.Background(), &ApprovePaidSubscriptionInput{
+		Arn:         ptr.String("__Arn__"),
+		IfMatch:     ptr.String("__IfMatch__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

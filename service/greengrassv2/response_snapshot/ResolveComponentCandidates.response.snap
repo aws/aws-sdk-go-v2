@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"resolvedComponentVersions":[{"arn":"__Arn__","componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","message":"__Message__","recipe":"YmxvYg==","vendorGuidance":"ACTIVE"},{"arn":"__Arn__","componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","message":"__Message__","recipe":"YmxvYg==","vendorGuidance":"ACTIVE"}]}

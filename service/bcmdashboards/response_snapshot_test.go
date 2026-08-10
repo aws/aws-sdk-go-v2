@@ -119,7 +119,370 @@ func TestCheckResponseSnapshot_CreateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +503,48 @@ func TestCheckResponseSnapshot_CreateScheduledReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScheduledReport(context.Background(), &CreateScheduledReportInput{})
+	got, err := svc.CreateScheduledReport(context.Background(), &CreateScheduledReportInput{
+		ScheduledReport: &types.ScheduledReportInput{
+			Name:                            ptr.String("__Name__"),
+			DashboardArn:                    ptr.String("__DashboardArn__"),
+			ScheduledReportExecutionRoleArn: ptr.String("__ScheduledReportExecutionRoleArn__"),
+			ScheduleConfig: &types.ScheduleConfig{
+				ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+				ScheduleExpressionTimeZone: ptr.String("__ScheduleExpressionTimeZone__"),
+				SchedulePeriod: &types.SchedulePeriod{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				State: types.ScheduleState("ENABLED"),
+			},
+			Description: ptr.String("__Description__"),
+			WidgetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WidgetDateRangeOverride: &types.DateTimeRange{
+				StartTime: &types.DateTimeValue{
+					Type:  types.DateTimeType("ABSOLUTE"),
+					Value: ptr.String("__Value__"),
+				},
+				EndTime: &types.DateTimeValue{
+					Type:  types.DateTimeType("ABSOLUTE"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +565,9 @@ func TestCheckResponseSnapshot_DeleteDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{})
+	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +588,9 @@ func TestCheckResponseSnapshot_DeleteScheduledReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduledReport(context.Background(), &DeleteScheduledReportInput{})
+	got, err := svc.DeleteScheduledReport(context.Background(), &DeleteScheduledReportInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +619,11 @@ func TestCheckResponseSnapshot_ExecuteScheduledReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteScheduledReport(context.Background(), &ExecuteScheduledReportInput{})
+	got, err := svc.ExecuteScheduledReport(context.Background(), &ExecuteScheduledReportInput{
+		Arn:         ptr.String("__Arn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +999,9 @@ func TestCheckResponseSnapshot_GetDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{})
+	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +1023,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -670,7 +1086,9 @@ func TestCheckResponseSnapshot_GetScheduledReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScheduledReport(context.Background(), &GetScheduledReportInput{})
+	got, err := svc.GetScheduledReport(context.Background(), &GetScheduledReportInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +1127,10 @@ func TestCheckResponseSnapshot_ListDashboards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{})
+	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +1193,10 @@ func TestCheckResponseSnapshot_ListScheduledReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScheduledReports(context.Background(), &ListScheduledReportsInput{})
+	got, err := svc.ListScheduledReports(context.Background(), &ListScheduledReportsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +1226,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +1247,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -840,7 +1278,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +1305,361 @@ func TestCheckResponseSnapshot_UpdateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{})
+	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +1680,38 @@ func TestCheckResponseSnapshot_UpdateScheduledReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScheduledReport(context.Background(), &UpdateScheduledReportInput{})
+	got, err := svc.UpdateScheduledReport(context.Background(), &UpdateScheduledReportInput{
+		Arn:                             ptr.String("__Arn__"),
+		Name:                            ptr.String("__Name__"),
+		Description:                     ptr.String("__Description__"),
+		DashboardArn:                    ptr.String("__DashboardArn__"),
+		ScheduledReportExecutionRoleArn: ptr.String("__ScheduledReportExecutionRoleArn__"),
+		ScheduleConfig: &types.ScheduleConfig{
+			ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+			ScheduleExpressionTimeZone: ptr.String("__ScheduleExpressionTimeZone__"),
+			SchedulePeriod: &types.SchedulePeriod{
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			State: types.ScheduleState("ENABLED"),
+		},
+		WidgetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WidgetDateRangeOverride: &types.DateTimeRange{
+			StartTime: &types.DateTimeValue{
+				Type:  types.DateTimeType("ABSOLUTE"),
+				Value: ptr.String("__Value__"),
+			},
+			EndTime: &types.DateTimeValue{
+				Type:  types.DateTimeType("ABSOLUTE"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClearWidgetIds:               true,
+		ClearWidgetDateRangeOverride: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1732,370 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -928,7 +2120,48 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScheduledReport(context.Background(), &CreateScheduledReportInput{})
+	_, opErr := svc.CreateScheduledReport(context.Background(), &CreateScheduledReportInput{
+		ScheduledReport: &types.ScheduledReportInput{
+			Name:                            ptr.String("__Name__"),
+			DashboardArn:                    ptr.String("__DashboardArn__"),
+			ScheduledReportExecutionRoleArn: ptr.String("__ScheduledReportExecutionRoleArn__"),
+			ScheduleConfig: &types.ScheduleConfig{
+				ScheduleExpression:         ptr.String("__ScheduleExpression__"),
+				ScheduleExpressionTimeZone: ptr.String("__ScheduleExpressionTimeZone__"),
+				SchedulePeriod: &types.SchedulePeriod{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				State: types.ScheduleState("ENABLED"),
+			},
+			Description: ptr.String("__Description__"),
+			WidgetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			WidgetDateRangeOverride: &types.DateTimeRange{
+				StartTime: &types.DateTimeValue{
+					Type:  types.DateTimeType("ABSOLUTE"),
+					Value: ptr.String("__Value__"),
+				},
+				EndTime: &types.DateTimeValue{
+					Type:  types.DateTimeType("ABSOLUTE"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -953,7 +2186,370 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -978,7 +2574,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScheduledReport(context.Background(), &DeleteScheduledReportInput{})
+	_, opErr := svc.DeleteScheduledReport(context.Background(), &DeleteScheduledReportInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1003,7 +2601,370 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1028,7 +2989,370 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1053,7 +3377,370 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	_, opErr := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Widgets: []types.Widget{
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Title:            ptr.String("__Title__"),
+				Description:      ptr.String("__Description__"),
+				Width:            ptr.Int32(1),
+				Height:           ptr.Int32(1),
+				HorizontalOffset: 1,
+				Configs: []types.WidgetConfig{
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+					{
+						QueryParameters: &types.QueryParametersMemberCostAndUsage{
+							Value: types.CostAndUsageQuery{
+								Metrics: []types.MetricName{
+									types.MetricName("AmortizedCost"),
+									types.MetricName("AmortizedCost"),
+								},
+								TimeRange: &types.DateTimeRange{
+									StartTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+									EndTime: &types.DateTimeValue{
+										Type:  types.DateTimeType("ABSOLUTE"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Granularity: types.Granularity("HOURLY"),
+								GroupBy: []types.GroupDefinition{
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+									{
+										Key:  ptr.String("__Key__"),
+										Type: types.GroupDefinitionType("DIMENSION"),
+									},
+								},
+								Filter: &types.Expression{
+									Or: []types.Expression{
+										{},
+										{},
+									},
+									And: []types.Expression{
+										{},
+										{},
+									},
+									Not: nil,
+									Dimensions: &types.DimensionValues{
+										Key: types.Dimension("AZ"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									Tags: &types.TagValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+									CostCategories: &types.CostCategoryValues{
+										Key: ptr.String("__Key__"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchOptions: []types.MatchOption{
+											types.MatchOption("EQUALS"),
+											types.MatchOption("EQUALS"),
+										},
+									},
+								},
+							},
+						},
+						DisplayConfig: &types.DisplayConfigMemberGraph{
+							Value: map[string]types.GraphDisplayConfig{
+								"key0": {
+									VisualType: types.VisualType("LINE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ResourceTags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

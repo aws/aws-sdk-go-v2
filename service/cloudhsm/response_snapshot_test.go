@@ -118,7 +118,19 @@ func TestCheckResponseSnapshot_AddTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +151,9 @@ func TestCheckResponseSnapshot_CreateHapg(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHapg(context.Background(), &CreateHapgInput{})
+	got, err := svc.CreateHapg(context.Background(), &CreateHapgInput{
+		Label: ptr.String("__Label__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +174,16 @@ func TestCheckResponseSnapshot_CreateHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHsm(context.Background(), &CreateHsmInput{})
+	got, err := svc.CreateHsm(context.Background(), &CreateHsmInput{
+		SubnetId:         ptr.String("__SubnetId__"),
+		SshKey:           ptr.String("__SshKey__"),
+		EniIp:            ptr.String("__EniIp__"),
+		IamRoleArn:       ptr.String("__IamRoleArn__"),
+		ExternalId:       ptr.String("__ExternalId__"),
+		SubscriptionType: types.SubscriptionType("PRODUCTION"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		SyslogIp:         ptr.String("__SyslogIp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +204,10 @@ func TestCheckResponseSnapshot_CreateLunaClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLunaClient(context.Background(), &CreateLunaClientInput{})
+	got, err := svc.CreateLunaClient(context.Background(), &CreateLunaClientInput{
+		Label:       ptr.String("__Label__"),
+		Certificate: ptr.String("__Certificate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +228,9 @@ func TestCheckResponseSnapshot_DeleteHapg(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHapg(context.Background(), &DeleteHapgInput{})
+	got, err := svc.DeleteHapg(context.Background(), &DeleteHapgInput{
+		HapgArn: ptr.String("__HapgArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +251,9 @@ func TestCheckResponseSnapshot_DeleteHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHsm(context.Background(), &DeleteHsmInput{})
+	got, err := svc.DeleteHsm(context.Background(), &DeleteHsmInput{
+		HsmArn: ptr.String("__HsmArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +274,9 @@ func TestCheckResponseSnapshot_DeleteLunaClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLunaClient(context.Background(), &DeleteLunaClientInput{})
+	got, err := svc.DeleteLunaClient(context.Background(), &DeleteLunaClientInput{
+		ClientArn: ptr.String("__ClientArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +317,9 @@ func TestCheckResponseSnapshot_DescribeHapg(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHapg(context.Background(), &DescribeHapgInput{})
+	got, err := svc.DescribeHapg(context.Background(), &DescribeHapgInput{
+		HapgArn: ptr.String("__HapgArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +363,10 @@ func TestCheckResponseSnapshot_DescribeHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHsm(context.Background(), &DescribeHsmInput{})
+	got, err := svc.DescribeHsm(context.Background(), &DescribeHsmInput{
+		HsmArn:          ptr.String("__HsmArn__"),
+		HsmSerialNumber: ptr.String("__HsmSerialNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +391,10 @@ func TestCheckResponseSnapshot_DescribeLunaClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLunaClient(context.Background(), &DescribeLunaClientInput{})
+	got, err := svc.DescribeLunaClient(context.Background(), &DescribeLunaClientInput{
+		ClientArn:              ptr.String("__ClientArn__"),
+		CertificateFingerprint: ptr.String("__CertificateFingerprint__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +417,14 @@ func TestCheckResponseSnapshot_GetConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfig(context.Background(), &GetConfigInput{})
+	got, err := svc.GetConfig(context.Background(), &GetConfigInput{
+		ClientArn:     ptr.String("__ClientArn__"),
+		ClientVersion: types.ClientVersion("5.1"),
+		HapgList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +473,9 @@ func TestCheckResponseSnapshot_ListHapgs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHapgs(context.Background(), &ListHapgsInput{})
+	got, err := svc.ListHapgs(context.Background(), &ListHapgsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +500,9 @@ func TestCheckResponseSnapshot_ListHsms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHsms(context.Background(), &ListHsmsInput{})
+	got, err := svc.ListHsms(context.Background(), &ListHsmsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -476,7 +527,9 @@ func TestCheckResponseSnapshot_ListLunaClients(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLunaClients(context.Background(), &ListLunaClientsInput{})
+	got, err := svc.ListLunaClients(context.Background(), &ListLunaClientsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +559,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +582,14 @@ func TestCheckResponseSnapshot_ModifyHapg(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyHapg(context.Background(), &ModifyHapgInput{})
+	got, err := svc.ModifyHapg(context.Background(), &ModifyHapgInput{
+		HapgArn: ptr.String("__HapgArn__"),
+		Label:   ptr.String("__Label__"),
+		PartitionSerialList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +610,14 @@ func TestCheckResponseSnapshot_ModifyHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyHsm(context.Background(), &ModifyHsmInput{})
+	got, err := svc.ModifyHsm(context.Background(), &ModifyHsmInput{
+		HsmArn:     ptr.String("__HsmArn__"),
+		SubnetId:   ptr.String("__SubnetId__"),
+		EniIp:      ptr.String("__EniIp__"),
+		IamRoleArn: ptr.String("__IamRoleArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+		SyslogIp:   ptr.String("__SyslogIp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -569,7 +638,10 @@ func TestCheckResponseSnapshot_ModifyLunaClient(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyLunaClient(context.Background(), &ModifyLunaClientInput{})
+	got, err := svc.ModifyLunaClient(context.Background(), &ModifyLunaClientInput{
+		ClientArn:   ptr.String("__ClientArn__"),
+		Certificate: ptr.String("__Certificate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +662,13 @@ func TestCheckResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeyList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +690,19 @@ func TestCheckResponseSnapshot_Error_CloudHsmInternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -638,7 +728,19 @@ func TestCheckResponseSnapshot_Error_CloudHsmServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -664,7 +766,19 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

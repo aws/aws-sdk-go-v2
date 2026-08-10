@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.DescribeNamespace
+
+{"namespaceArn":"__NamespaceArn__","namespaceName":"__NamespaceName__","namespaceVersion":1,"trackingNamespaceName":"__TrackingNamespaceName__","trackingNamespaceVersion":1}

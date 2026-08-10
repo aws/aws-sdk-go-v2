@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"asOfTimestamp":1,"autoUpdate":true,"createTime":1,"dataViewArn":"__DataViewArn__","dataViewId":"__DataViewId__","datasetId":"__DatasetId__","destinationTypeParams":{"destinationType":"__DestinationType__","s3DestinationExportFileFormat":"PARQUET","s3DestinationExportFileFormatOptions":{"key0":"__Value__"}},"errorInfo":{"errorCategory":"VALIDATION","errorMessage":"__ErrorMessage__"},"lastModifiedTime":1,"partitionColumns":["__Member__","__Member__"],"sortColumns":["__Member__","__Member__"],"status":"RUNNING"}

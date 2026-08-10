@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","targetAccountConfigurations":[{"accountId":"__AccountId__","description":"__Description__","roleArn":"__RoleArn__"},{"accountId":"__AccountId__","description":"__Description__","roleArn":"__RoleArn__"}]}

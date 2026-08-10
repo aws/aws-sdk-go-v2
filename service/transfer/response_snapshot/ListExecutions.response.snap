@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ListExecutions
+
+{"Executions":[{"ExecutionId":"__ExecutionId__","InitialFileLocation":{"EfsFileLocation":{"FileSystemId":"__FileSystemId__","Path":"__Path__"},"S3FileLocation":{"Bucket":"__Bucket__","Etag":"__Etag__","Key":"__Key__","VersionId":"__VersionId__"}},"ServiceMetadata":{"UserDetails":{"ServerId":"__ServerId__","SessionId":"__SessionId__","UserName":"__UserName__"}},"Status":"IN_PROGRESS"},{"ExecutionId":"__ExecutionId__","InitialFileLocation":{"EfsFileLocation":{"FileSystemId":"__FileSystemId__","Path":"__Path__"},"S3FileLocation":{"Bucket":"__Bucket__","Etag":"__Etag__","Key":"__Key__","VersionId":"__VersionId__"}},"ServiceMetadata":{"UserDetails":{"ServerId":"__ServerId__","SessionId":"__SessionId__","UserName":"__UserName__"}},"Status":"IN_PROGRESS"}],"NextToken":"__NextToken__","WorkflowId":"__WorkflowId__"}

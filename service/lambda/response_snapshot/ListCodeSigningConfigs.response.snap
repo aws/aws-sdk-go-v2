@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CodeSigningConfigs":[{"AllowedPublishers":{"SigningProfileVersionArns":["__Member__","__Member__"]},"CodeSigningConfigArn":"__CodeSigningConfigArn__","CodeSigningConfigId":"__CodeSigningConfigId__","CodeSigningPolicies":{"UntrustedArtifactOnDeployment":"Warn"},"Description":"__Description__","LastModified":"__LastModified__"},{"AllowedPublishers":{"SigningProfileVersionArns":["__Member__","__Member__"]},"CodeSigningConfigArn":"__CodeSigningConfigArn__","CodeSigningConfigId":"__CodeSigningConfigId__","CodeSigningPolicies":{"UntrustedArtifactOnDeployment":"Warn"},"Description":"__Description__","LastModified":"__LastModified__"}],"NextMarker":"__NextMarker__"}

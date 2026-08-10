@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CommonControls":[{"Arn":"__Arn__","CreateTime":946684800,"Description":"__Description__","Domain":{"Arn":"__Arn__","Name":"__Name__"},"LastUpdateTime":946684800,"Name":"__Name__","Objective":{"Arn":"__Arn__","Name":"__Name__"}},{"Arn":"__Arn__","CreateTime":946684800,"Description":"__Description__","Domain":{"Arn":"__Arn__","Name":"__Name__"},"LastUpdateTime":946684800,"Name":"__Name__","Objective":{"Arn":"__Arn__","Name":"__Name__"}}],"NextToken":"__NextToken__"}

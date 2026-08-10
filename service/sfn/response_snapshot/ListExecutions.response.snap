@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.ListExecutions
+
+{"executions":[{"executionArn":"__ExecutionArn__","itemCount":1,"mapRunArn":"__MapRunArn__","name":"__Name__","redriveCount":1,"redriveDate":946684800,"startDate":946684800,"stateMachineAliasArn":"__StateMachineAliasArn__","stateMachineArn":"__StateMachineArn__","stateMachineVersionArn":"__StateMachineVersionArn__","status":"RUNNING","stopDate":946684800},{"executionArn":"__ExecutionArn__","itemCount":1,"mapRunArn":"__MapRunArn__","name":"__Name__","redriveCount":1,"redriveDate":946684800,"startDate":946684800,"stateMachineAliasArn":"__StateMachineAliasArn__","stateMachineArn":"__StateMachineArn__","stateMachineVersionArn":"__StateMachineVersionArn__","status":"RUNNING","stopDate":946684800}],"nextToken":"__NextToken__"}

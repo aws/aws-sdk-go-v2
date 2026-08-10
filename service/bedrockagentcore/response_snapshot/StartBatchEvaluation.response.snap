@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"batchEvaluationArn":"__BatchEvaluationArn__","batchEvaluationId":"__BatchEvaluationId__","batchEvaluationName":"__BatchEvaluationName__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","evaluators":[{"evaluatorId":"__EvaluatorId__"},{"evaluatorId":"__EvaluatorId__"}],"insights":[{"insightId":"__InsightId__"},{"insightId":"__InsightId__"}],"kmsKeyArn":"__KmsKeyArn__","outputConfig":{"cloudWatchConfig":{"logGroupName":"__LogGroupName__","logStreamName":"__LogStreamName__"}},"status":"PENDING","tags":{"key0":"__Value__"}}

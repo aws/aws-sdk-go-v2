@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.UpdateKinesisStreamingDestination
+
+{"DestinationStatus":"ENABLING","StreamArn":"__StreamArn__","TableName":"__TableName__","UpdateKinesisStreamingConfiguration":{"ApproximateCreationDateTimePrecision":"MILLISECOND"}}

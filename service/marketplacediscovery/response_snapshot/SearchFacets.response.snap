@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"listingFacets":{"key0":[{"count":1,"displayName":"__DisplayName__","parent":"__Parent__","value":"__Value__"},{"count":1,"displayName":"__DisplayName__","parent":"__Parent__","value":"__Value__"}]},"nextToken":"__NextToken__","totalResults":1}

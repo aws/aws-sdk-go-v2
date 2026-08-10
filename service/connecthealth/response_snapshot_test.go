@@ -128,7 +128,10 @@ func TestCheckResponseSnapshot_ActivateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{})
+	got, err := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +167,18 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Name:      ptr.String("__Name__"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		WebAppSetupConfiguration: &types.CreateWebAppConfiguration{
+			EhrRole:       ptr.String("__EhrRole__"),
+			IdcInstanceId: ptr.String("__IdcInstanceId__"),
+			IdcRegion:     ptr.String("__IdcRegion__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +206,9 @@ func TestCheckResponseSnapshot_CreateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{})
+	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +238,10 @@ func TestCheckResponseSnapshot_DeactivateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateSubscription(context.Background(), &DeactivateSubscriptionInput{})
+	got, err := svc.DeactivateSubscription(context.Background(), &DeactivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +264,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +305,9 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomain(context.Background(), &GetDomainInput{})
+	got, err := svc.GetDomain(context.Background(), &GetDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -355,7 +378,11 @@ func TestCheckResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedicalScribeListeningSession(context.Background(), &GetMedicalScribeListeningSessionInput{})
+	got, err := svc.GetMedicalScribeListeningSession(context.Background(), &GetMedicalScribeListeningSessionInput{
+		SessionId:      ptr.String("__SessionId__"),
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +444,10 @@ func TestCheckResponseSnapshot_GetPatientInsightsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPatientInsightsJob(context.Background(), &GetPatientInsightsJobInput{})
+	got, err := svc.GetPatientInsightsJob(context.Background(), &GetPatientInsightsJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +477,10 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{})
+	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -484,7 +517,11 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		Status:     types.DomainStatus("ACTIVE"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +564,11 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,13 +591,19 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_StartMedicalScribeListeningSession(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_StartPatientInsightsJob(t *testing.T) {
@@ -573,7 +620,43 @@ func TestCheckResponseSnapshot_StartPatientInsightsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPatientInsightsJob(context.Background(), &StartPatientInsightsJobInput{})
+	got, err := svc.StartPatientInsightsJob(context.Background(), &StartPatientInsightsJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		PatientContext: &types.PatientInsightsPatientContext{
+			PatientId:   ptr.String("__PatientId__"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Pronouns:    types.Pronouns("HE_HIM"),
+		},
+		InsightsContext: &types.InsightsContext{
+			InsightsType: types.InsightsType("PRE_VISIT"),
+		},
+		EncounterContext: &types.PatientInsightsEncounterContext{
+			EncounterReason: ptr.String("__EncounterReason__"),
+		},
+		UserContext: &types.UserContext{
+			Role:      types.ProviderRole("CLINICIAN"),
+			UserId:    ptr.String("__UserId__"),
+			Specialty: types.Specialty("PRIMARY_CARE"),
+		},
+		InputDataConfig: &types.InputDataConfig{
+			FhirServer: &types.FHIRServer{
+				FhirEndpoint: ptr.String("__FhirEndpoint__"),
+				OauthToken:   ptr.String("__OauthToken__"),
+			},
+			S3Sources: []types.S3Source{
+				{
+					Uri: ptr.String("__Uri__"),
+				},
+				{
+					Uri: ptr.String("__Uri__"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +675,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +699,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -632,7 +726,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{})
+	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -657,7 +754,43 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartPatientInsightsJob(context.Background(), &StartPatientInsightsJobInput{})
+	_, opErr := svc.StartPatientInsightsJob(context.Background(), &StartPatientInsightsJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		PatientContext: &types.PatientInsightsPatientContext{
+			PatientId:   ptr.String("__PatientId__"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Pronouns:    types.Pronouns("HE_HIM"),
+		},
+		InsightsContext: &types.InsightsContext{
+			InsightsType: types.InsightsType("PRE_VISIT"),
+		},
+		EncounterContext: &types.PatientInsightsEncounterContext{
+			EncounterReason: ptr.String("__EncounterReason__"),
+		},
+		UserContext: &types.UserContext{
+			Role:      types.ProviderRole("CLINICIAN"),
+			UserId:    ptr.String("__UserId__"),
+			Specialty: types.Specialty("PRIMARY_CARE"),
+		},
+		InputDataConfig: &types.InputDataConfig{
+			FhirServer: &types.FHIRServer{
+				FhirEndpoint: ptr.String("__FhirEndpoint__"),
+				OauthToken:   ptr.String("__OauthToken__"),
+			},
+			S3Sources: []types.S3Source{
+				{
+					Uri: ptr.String("__Uri__"),
+				},
+				{
+					Uri: ptr.String("__Uri__"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -682,7 +815,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{})
+	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -707,7 +843,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{})
+	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -732,7 +871,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Name:      ptr.String("__Name__"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		WebAppSetupConfiguration: &types.CreateWebAppConfiguration{
+			EhrRole:       ptr.String("__EhrRole__"),
+			IdcInstanceId: ptr.String("__IdcInstanceId__"),
+			IdcRegion:     ptr.String("__IdcRegion__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -757,7 +907,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeListeningSession(context.Background(), &GetMedicalScribeListeningSessionInput{})
+	_, opErr := svc.GetMedicalScribeListeningSession(context.Background(), &GetMedicalScribeListeningSessionInput{
+		SessionId:      ptr.String("__SessionId__"),
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -782,7 +936,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{})
+	_, opErr := svc.ActivateSubscription(context.Background(), &ActivateSubscriptionInput{
+		DomainId:       ptr.String("__DomainId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

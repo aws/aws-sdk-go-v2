@@ -163,7 +163,39 @@ func TestCheckResponseSnapshot_AddStreamGroupLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	got, err := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +220,13 @@ func TestCheckResponseSnapshot_AssociateApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApplications(context.Background(), &AssociateApplicationsInput{})
+	got, err := svc.AssociateApplications(context.Background(), &AssociateApplicationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		ApplicationIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +278,24 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Description: ptr.String("__Description__"),
+		RuntimeEnvironment: &types.RuntimeEnvironment{
+			Type:    types.RuntimeEnvironmentType("PROTON"),
+			Version: ptr.String("__Version__"),
+		},
+		ExecutablePath:       ptr.String("__ExecutablePath__"),
+		ApplicationSourceUri: ptr.String("__ApplicationSourceUri__"),
+		ApplicationLogPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplicationLogOutputUri: ptr.String("__ApplicationLogOutputUri__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +376,45 @@ func TestCheckResponseSnapshot_CreateStreamGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamGroup(context.Background(), &CreateStreamGroupInput{})
+	got, err := svc.CreateStreamGroup(context.Background(), &CreateStreamGroupInput{
+		Description:                  ptr.String("__Description__"),
+		StreamClass:                  types.StreamClass("gen4n_high"),
+		DefaultApplicationIdentifier: ptr.String("__DefaultApplicationIdentifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +437,10 @@ func TestCheckResponseSnapshot_CreateStreamSessionAdminShell(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamSessionAdminShell(context.Background(), &CreateStreamSessionAdminShellInput{})
+	got, err := svc.CreateStreamSessionAdminShell(context.Background(), &CreateStreamSessionAdminShellInput{
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +461,12 @@ func TestCheckResponseSnapshot_CreateStreamSessionConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamSessionConnection(context.Background(), &CreateStreamSessionConnectionInput{})
+	got, err := svc.CreateStreamSessionConnection(context.Background(), &CreateStreamSessionConnectionInput{
+		ClientToken:             ptr.String("__ClientToken__"),
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+		SignalRequest:           ptr.String("__SignalRequest__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +518,34 @@ func TestCheckResponseSnapshot_CreateStreamUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamUrl(context.Background(), &CreateStreamUrlInput{})
+	got, err := svc.CreateStreamUrl(context.Background(), &CreateStreamUrlInput{
+		Identifier:             ptr.String("__Identifier__"),
+		ApplicationIdentifier:  ptr.String("__ApplicationIdentifier__"),
+		Protocol:               types.Protocol("WebRTC"),
+		UrlExpiresAfterMinutes: ptr.Int32(1),
+		UsageLimit:             ptr.Int32(1),
+		Description:            ptr.String("__Description__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionLengthSeconds: ptr.Int32(1),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +564,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +585,9 @@ func TestCheckResponseSnapshot_DeleteStreamGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStreamGroup(context.Background(), &DeleteStreamGroupInput{})
+	got, err := svc.DeleteStreamGroup(context.Background(), &DeleteStreamGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -480,7 +612,13 @@ func TestCheckResponseSnapshot_DisassociateApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApplications(context.Background(), &DisassociateApplicationsInput{})
+	got, err := svc.DisassociateApplications(context.Background(), &DisassociateApplicationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		ApplicationIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -499,7 +637,11 @@ func TestCheckResponseSnapshot_ExportStreamSessionFiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportStreamSessionFiles(context.Background(), &ExportStreamSessionFilesInput{})
+	got, err := svc.ExportStreamSessionFiles(context.Background(), &ExportStreamSessionFilesInput{
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+		OutputUri:               ptr.String("__OutputUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -551,7 +693,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -632,7 +776,9 @@ func TestCheckResponseSnapshot_GetStreamGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamGroup(context.Background(), &GetStreamGroupInput{})
+	got, err := svc.GetStreamGroup(context.Background(), &GetStreamGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -691,7 +837,10 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamSession(context.Background(), &GetStreamSessionInput{})
+	got, err := svc.GetStreamSession(context.Background(), &GetStreamSessionInput{
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -779,7 +928,10 @@ func TestCheckResponseSnapshot_GetStreamUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamUrl(context.Background(), &GetStreamUrlInput{})
+	got, err := svc.GetStreamUrl(context.Background(), &GetStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +975,9 @@ func TestCheckResponseSnapshot_ListApplicationShaderCaches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationShaderCaches(context.Background(), &ListApplicationShaderCachesInput{})
+	got, err := svc.ListApplicationShaderCaches(context.Background(), &ListApplicationShaderCachesInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1024,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1078,10 @@ func TestCheckResponseSnapshot_ListStreamGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamGroups(context.Background(), &ListStreamGroupsInput{})
+	got, err := svc.ListStreamGroups(context.Background(), &ListStreamGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1138,13 @@ func TestCheckResponseSnapshot_ListStreamSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamSessions(context.Background(), &ListStreamSessionsInput{})
+	got, err := svc.ListStreamSessions(context.Background(), &ListStreamSessionsInput{
+		Status:            types.StreamSessionStatus("ACTIVATING"),
+		ExportFilesStatus: types.ExportFilesStatus("SUCCEEDED"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		Identifier:        ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1035,7 +1201,12 @@ func TestCheckResponseSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamSessionsByAccount(context.Background(), &ListStreamSessionsByAccountInput{})
+	got, err := svc.ListStreamSessionsByAccount(context.Background(), &ListStreamSessionsByAccountInput{
+		Status:            types.StreamSessionStatus("ACTIVATING"),
+		ExportFilesStatus: types.ExportFilesStatus("SUCCEEDED"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1088,7 +1259,12 @@ func TestCheckResponseSnapshot_ListStreamUrls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamUrls(context.Background(), &ListStreamUrlsInput{})
+	got, err := svc.ListStreamUrls(context.Background(), &ListStreamUrlsInput{
+		Status:                types.StreamUrlStatus("ACTIVE"),
+		StreamGroupIdentifier: ptr.String("__StreamGroupIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1287,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1130,7 +1308,13 @@ func TestCheckResponseSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveStreamGroupLocations(context.Background(), &RemoveStreamGroupLocationsInput{})
+	got, err := svc.RemoveStreamGroupLocations(context.Background(), &RemoveStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1149,7 +1333,11 @@ func TestCheckResponseSnapshot_RevokeStreamUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeStreamUrl(context.Background(), &RevokeStreamUrlInput{})
+	got, err := svc.RevokeStreamUrl(context.Background(), &RevokeStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+		RevocationMode:      types.RevocationMode("REVOKE_URL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1208,7 +1396,38 @@ func TestCheckResponseSnapshot_StartStreamSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartStreamSession(context.Background(), &StartStreamSessionInput{})
+	got, err := svc.StartStreamSession(context.Background(), &StartStreamSessionInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		Description:           ptr.String("__Description__"),
+		Identifier:            ptr.String("__Identifier__"),
+		Protocol:              types.Protocol("WebRTC"),
+		SignalRequest:         ptr.String("__SignalRequest__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		UserId:                ptr.String("__UserId__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConnectionTimeoutSeconds: ptr.Int32(1),
+		SessionLengthSeconds:     ptr.Int32(1),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		PerformanceStatsConfiguration: &types.PerformanceStatsConfiguration{
+			SharedWithClient: ptr.Bool(true),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1227,7 +1446,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1246,7 +1470,10 @@ func TestCheckResponseSnapshot_TerminateStreamSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateStreamSession(context.Background(), &TerminateStreamSessionInput{})
+	got, err := svc.TerminateStreamSession(context.Background(), &TerminateStreamSessionInput{
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1265,7 +1492,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1317,7 +1550,15 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Identifier:  ptr.String("__Identifier__"),
+		Description: ptr.String("__Description__"),
+		ApplicationLogPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplicationLogOutputUri: ptr.String("__ApplicationLogOutputUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1398,7 +1639,41 @@ func TestCheckResponseSnapshot_UpdateStreamGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamGroup(context.Background(), &UpdateStreamGroupInput{})
+	got, err := svc.UpdateStreamGroup(context.Background(), &UpdateStreamGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Description:                  ptr.String("__Description__"),
+		DefaultApplicationIdentifier: ptr.String("__DefaultApplicationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1419,7 +1694,39 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1444,7 +1751,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Description: ptr.String("__Description__"),
+		RuntimeEnvironment: &types.RuntimeEnvironment{
+			Type:    types.RuntimeEnvironmentType("PROTON"),
+			Version: ptr.String("__Version__"),
+		},
+		ExecutablePath:       ptr.String("__ExecutablePath__"),
+		ApplicationSourceUri: ptr.String("__ApplicationSourceUri__"),
+		ApplicationLogPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplicationLogOutputUri: ptr.String("__ApplicationLogOutputUri__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1469,7 +1793,39 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1494,7 +1850,39 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1519,7 +1907,39 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1544,7 +1964,10 @@ func TestCheckResponseSnapshot_Error_StreamSessionAccessNotReadyException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStreamSessionAdminShell(context.Background(), &CreateStreamSessionAdminShellInput{})
+	_, opErr := svc.CreateStreamSessionAdminShell(context.Background(), &CreateStreamSessionAdminShellInput{
+		Identifier:              ptr.String("__Identifier__"),
+		StreamSessionIdentifier: ptr.String("__StreamSessionIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1569,7 +1992,39 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1594,7 +2049,39 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{})
+	_, opErr := svc.AddStreamGroupLocations(context.Background(), &AddStreamGroupLocationsInput{
+		Identifier: ptr.String("__Identifier__"),
+		LocationConfigurations: []types.LocationConfiguration{
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				LocationName:       ptr.String("__LocationName__"),
+				AlwaysOnCapacity:   ptr.Int32(1),
+				OnDemandCapacity:   ptr.Int32(1),
+				TargetIdleCapacity: ptr.Int32(1),
+				MaximumCapacity:    ptr.Int32(1),
+				VpcTransitConfiguration: &types.VpcTransitConfiguration{
+					VpcId: ptr.String("__VpcId__"),
+					Ipv4CidrBlocks: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

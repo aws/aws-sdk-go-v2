@@ -228,7 +228,102 @@ func TestCheckResponseSnapshot_BatchUpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	got, err := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +349,15 @@ func TestCheckResponseSnapshot_CreateAccessLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessLogSubscription(context.Background(), &CreateAccessLogSubscriptionInput{})
+	got, err := svc.CreateAccessLogSubscription(context.Background(), &CreateAccessLogSubscriptionInput{
+		ClientToken:           ptr.String("__ClientToken__"),
+		ResourceIdentifier:    ptr.String("__ResourceIdentifier__"),
+		DestinationArn:        ptr.String("__DestinationArn__"),
+		ServiceNetworkLogType: types.ServiceNetworkLogType("SERVICE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +398,30 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{
+		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
+		Name:              ptr.String("__Name__"),
+		Protocol:          types.ListenerProtocol("HTTP"),
+		Port:              ptr.Int32(1),
+		DefaultAction: &types.RuleActionMemberForward{
+			Value: types.ForwardAction{
+				TargetGroups: []types.WeightedTargetGroup{
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +466,31 @@ func TestCheckResponseSnapshot_CreateResourceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceConfiguration(context.Background(), &CreateResourceConfigurationInput{})
+	got, err := svc.CreateResourceConfiguration(context.Background(), &CreateResourceConfigurationInput{
+		Name: ptr.String("__Name__"),
+		Type: types.ResourceConfigurationType("GROUP"),
+		PortRanges: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Protocol:                             types.ProtocolType("TCP"),
+		ResourceGatewayIdentifier:            ptr.String("__ResourceGatewayIdentifier__"),
+		ResourceConfigurationGroupIdentifier: ptr.String("__ResourceConfigurationGroupIdentifier__"),
+		ResourceConfigurationDefinition: &types.ResourceConfigurationDefinitionMemberDnsResource{
+			Value: types.DnsResource{
+				DomainName:    ptr.String("__DomainName__"),
+				IpAddressType: types.ResourceConfigurationIpAddressType("IPV4"),
+			},
+		},
+		AllowAssociationToShareableServiceNetwork: ptr.Bool(true),
+		CustomDomainName:             ptr.String("__CustomDomainName__"),
+		GroupDomain:                  ptr.String("__GroupDomain__"),
+		DomainVerificationIdentifier: ptr.String("__DomainVerificationIdentifier__"),
+		ClientToken:                  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +526,25 @@ func TestCheckResponseSnapshot_CreateResourceGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceGateway(context.Background(), &CreateResourceGatewayInput{})
+	got, err := svc.CreateResourceGateway(context.Background(), &CreateResourceGatewayInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		Name:          ptr.String("__Name__"),
+		VpcIdentifier: ptr.String("__VpcIdentifier__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IpAddressType:               types.ResourceGatewayIpAddressType("IPV4"),
+		Ipv4AddressesPerEni:         ptr.Int32(1),
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +609,57 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Match: &types.RuleMatchMemberHttpMatch{
+			Value: types.HttpMatch{
+				Method: ptr.String("__Method__"),
+				PathMatch: &types.PathMatch{
+					Match: &types.PathMatchTypeMemberExact{
+						Value: "__PathMatchTypeMemberExact__",
+					},
+					CaseSensitive: ptr.Bool(true),
+				},
+				HeaderMatches: []types.HeaderMatch{
+					{
+						Name: ptr.String("__Name__"),
+						Match: &types.HeaderMatchTypeMemberExact{
+							Value: "__HeaderMatchTypeMemberExact__",
+						},
+						CaseSensitive: ptr.Bool(true),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Match: &types.HeaderMatchTypeMemberExact{
+							Value: "__HeaderMatchTypeMemberExact__",
+						},
+						CaseSensitive: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Action: &types.RuleActionMemberForward{
+			Value: types.ForwardAction{
+				TargetGroups: []types.WeightedTargetGroup{
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -473,7 +691,17 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CustomDomainName:   ptr.String("__CustomDomainName__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +728,17 @@ func TestCheckResponseSnapshot_CreateServiceNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceNetwork(context.Background(), &CreateServiceNetworkInput{})
+	got, err := svc.CreateServiceNetwork(context.Background(), &CreateServiceNetworkInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		AuthType:    types.AuthType("NONE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SharingConfig: &types.SharingConfig{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +763,15 @@ func TestCheckResponseSnapshot_CreateServiceNetworkResourceAssociation(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceNetworkResourceAssociation(context.Background(), &CreateServiceNetworkResourceAssociationInput{})
+	got, err := svc.CreateServiceNetworkResourceAssociation(context.Background(), &CreateServiceNetworkResourceAssociationInput{
+		ClientToken:                     ptr.String("__ClientToken__"),
+		ResourceConfigurationIdentifier: ptr.String("__ResourceConfigurationIdentifier__"),
+		ServiceNetworkIdentifier:        ptr.String("__ServiceNetworkIdentifier__"),
+		PrivateDnsEnabled:               ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +800,14 @@ func TestCheckResponseSnapshot_CreateServiceNetworkServiceAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceNetworkServiceAssociation(context.Background(), &CreateServiceNetworkServiceAssociationInput{})
+	got, err := svc.CreateServiceNetworkServiceAssociation(context.Background(), &CreateServiceNetworkServiceAssociationInput{
+		ClientToken:              ptr.String("__ClientToken__"),
+		ServiceIdentifier:        ptr.String("__ServiceIdentifier__"),
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +843,26 @@ func TestCheckResponseSnapshot_CreateServiceNetworkVpcAssociation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceNetworkVpcAssociation(context.Background(), &CreateServiceNetworkVpcAssociationInput{})
+	got, err := svc.CreateServiceNetworkVpcAssociation(context.Background(), &CreateServiceNetworkVpcAssociationInput{
+		ClientToken:              ptr.String("__ClientToken__"),
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		VpcIdentifier:            ptr.String("__VpcIdentifier__"),
+		PrivateDnsEnabled:        ptr.Bool(true),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DnsOptions: &types.DnsOptions{
+			PrivateDnsPreference: types.PrivateDnsPreference("VERIFIED_DOMAINS_ONLY"),
+			PrivateDnsSpecifiedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -637,7 +909,36 @@ func TestCheckResponseSnapshot_CreateTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{})
+	got, err := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{
+		Name: ptr.String("__Name__"),
+		Type: types.TargetGroupType("IP"),
+		Config: &types.TargetGroupConfig{
+			Port:            ptr.Int32(1),
+			Protocol:        types.TargetGroupProtocol("HTTP"),
+			ProtocolVersion: types.TargetGroupProtocolVersion("HTTP1"),
+			IpAddressType:   types.IpAddressType("IPV4"),
+			VpcIdentifier:   ptr.String("__VpcIdentifier__"),
+			HealthCheck: &types.HealthCheckConfig{
+				Enabled:                    ptr.Bool(true),
+				Protocol:                   types.TargetGroupProtocol("HTTP"),
+				ProtocolVersion:            types.HealthCheckProtocolVersion("HTTP1"),
+				Port:                       ptr.Int32(1),
+				Path:                       ptr.String("__Path__"),
+				HealthCheckIntervalSeconds: ptr.Int32(1),
+				HealthCheckTimeoutSeconds:  ptr.Int32(1),
+				HealthyThresholdCount:      ptr.Int32(1),
+				UnhealthyThresholdCount:    ptr.Int32(1),
+				Matcher: &types.MatcherMemberHttpCode{
+					Value: "__MatcherMemberHttpCode__",
+				},
+			},
+			LambdaEventStructureVersion: types.LambdaEventStructureVersion("V1"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +957,9 @@ func TestCheckResponseSnapshot_DeleteAccessLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessLogSubscription(context.Background(), &DeleteAccessLogSubscriptionInput{})
+	got, err := svc.DeleteAccessLogSubscription(context.Background(), &DeleteAccessLogSubscriptionInput{
+		AccessLogSubscriptionIdentifier: ptr.String("__AccessLogSubscriptionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -675,7 +978,9 @@ func TestCheckResponseSnapshot_DeleteAuthPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAuthPolicy(context.Background(), &DeleteAuthPolicyInput{})
+	got, err := svc.DeleteAuthPolicy(context.Background(), &DeleteAuthPolicyInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +999,9 @@ func TestCheckResponseSnapshot_DeleteDomainVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainVerification(context.Background(), &DeleteDomainVerificationInput{})
+	got, err := svc.DeleteDomainVerification(context.Background(), &DeleteDomainVerificationInput{
+		DomainVerificationIdentifier: ptr.String("__DomainVerificationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +1020,10 @@ func TestCheckResponseSnapshot_DeleteListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{})
+	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +1042,9 @@ func TestCheckResponseSnapshot_DeleteResourceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceConfiguration(context.Background(), &DeleteResourceConfigurationInput{})
+	got, err := svc.DeleteResourceConfiguration(context.Background(), &DeleteResourceConfigurationInput{
+		ResourceConfigurationIdentifier: ptr.String("__ResourceConfigurationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -757,7 +1069,9 @@ func TestCheckResponseSnapshot_DeleteResourceEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceEndpointAssociation(context.Background(), &DeleteResourceEndpointAssociationInput{})
+	got, err := svc.DeleteResourceEndpointAssociation(context.Background(), &DeleteResourceEndpointAssociationInput{
+		ResourceEndpointAssociationIdentifier: ptr.String("__ResourceEndpointAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -781,7 +1095,9 @@ func TestCheckResponseSnapshot_DeleteResourceGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceGateway(context.Background(), &DeleteResourceGatewayInput{})
+	got, err := svc.DeleteResourceGateway(context.Background(), &DeleteResourceGatewayInput{
+		ResourceGatewayIdentifier: ptr.String("__ResourceGatewayIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,7 +1116,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -819,7 +1137,11 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		RuleIdentifier:     ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -843,7 +1165,9 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -862,7 +1186,9 @@ func TestCheckResponseSnapshot_DeleteServiceNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceNetwork(context.Background(), &DeleteServiceNetworkInput{})
+	got, err := svc.DeleteServiceNetwork(context.Background(), &DeleteServiceNetworkInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -885,7 +1211,9 @@ func TestCheckResponseSnapshot_DeleteServiceNetworkResourceAssociation(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceNetworkResourceAssociation(context.Background(), &DeleteServiceNetworkResourceAssociationInput{})
+	got, err := svc.DeleteServiceNetworkResourceAssociation(context.Background(), &DeleteServiceNetworkResourceAssociationInput{
+		ServiceNetworkResourceAssociationIdentifier: ptr.String("__ServiceNetworkResourceAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1236,9 @@ func TestCheckResponseSnapshot_DeleteServiceNetworkServiceAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceNetworkServiceAssociation(context.Background(), &DeleteServiceNetworkServiceAssociationInput{})
+	got, err := svc.DeleteServiceNetworkServiceAssociation(context.Background(), &DeleteServiceNetworkServiceAssociationInput{
+		ServiceNetworkServiceAssociationIdentifier: ptr.String("__ServiceNetworkServiceAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -931,7 +1261,9 @@ func TestCheckResponseSnapshot_DeleteServiceNetworkVpcAssociation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceNetworkVpcAssociation(context.Background(), &DeleteServiceNetworkVpcAssociationInput{})
+	got, err := svc.DeleteServiceNetworkVpcAssociation(context.Background(), &DeleteServiceNetworkVpcAssociationInput{
+		ServiceNetworkVpcAssociationIdentifier: ptr.String("__ServiceNetworkVpcAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1286,9 @@ func TestCheckResponseSnapshot_DeleteTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTargetGroup(context.Background(), &DeleteTargetGroupInput{})
+	got, err := svc.DeleteTargetGroup(context.Background(), &DeleteTargetGroupInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1332,19 @@ func TestCheckResponseSnapshot_DeregisterTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{})
+	got, err := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+		Targets: []types.Target{
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1026,7 +1372,9 @@ func TestCheckResponseSnapshot_GetAccessLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessLogSubscription(context.Background(), &GetAccessLogSubscriptionInput{})
+	got, err := svc.GetAccessLogSubscription(context.Background(), &GetAccessLogSubscriptionInput{
+		AccessLogSubscriptionIdentifier: ptr.String("__AccessLogSubscriptionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1050,7 +1398,9 @@ func TestCheckResponseSnapshot_GetAuthPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthPolicy(context.Background(), &GetAuthPolicyInput{})
+	got, err := svc.GetAuthPolicy(context.Background(), &GetAuthPolicyInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1433,9 @@ func TestCheckResponseSnapshot_GetDomainVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainVerification(context.Background(), &GetDomainVerificationInput{})
+	got, err := svc.GetDomainVerification(context.Background(), &GetDomainVerificationInput{
+		DomainVerificationIdentifier: ptr.String("__DomainVerificationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1478,10 @@ func TestCheckResponseSnapshot_GetListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetListener(context.Background(), &GetListenerInput{})
+	got, err := svc.GetListener(context.Background(), &GetListenerInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1174,7 +1529,9 @@ func TestCheckResponseSnapshot_GetResourceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceConfiguration(context.Background(), &GetResourceConfigurationInput{})
+	got, err := svc.GetResourceConfiguration(context.Background(), &GetResourceConfigurationInput{
+		ResourceConfigurationIdentifier: ptr.String("__ResourceConfigurationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1214,7 +1571,9 @@ func TestCheckResponseSnapshot_GetResourceGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceGateway(context.Background(), &GetResourceGatewayInput{})
+	got, err := svc.GetResourceGateway(context.Background(), &GetResourceGatewayInput{
+		ResourceGatewayIdentifier: ptr.String("__ResourceGatewayIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1235,7 +1594,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1303,7 +1664,11 @@ func TestCheckResponseSnapshot_GetRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRule(context.Background(), &GetRuleInput{})
+	got, err := svc.GetRule(context.Background(), &GetRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		RuleIdentifier:     ptr.String("__RuleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1339,7 +1704,9 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +1737,9 @@ func TestCheckResponseSnapshot_GetServiceNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceNetwork(context.Background(), &GetServiceNetworkInput{})
+	got, err := svc.GetServiceNetwork(context.Background(), &GetServiceNetworkInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1415,7 +1784,9 @@ func TestCheckResponseSnapshot_GetServiceNetworkResourceAssociation(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceNetworkResourceAssociation(context.Background(), &GetServiceNetworkResourceAssociationInput{})
+	got, err := svc.GetServiceNetworkResourceAssociation(context.Background(), &GetServiceNetworkResourceAssociationInput{
+		ServiceNetworkResourceAssociationIdentifier: ptr.String("__ServiceNetworkResourceAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1824,9 @@ func TestCheckResponseSnapshot_GetServiceNetworkServiceAssociation(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceNetworkServiceAssociation(context.Background(), &GetServiceNetworkServiceAssociationInput{})
+	got, err := svc.GetServiceNetworkServiceAssociation(context.Background(), &GetServiceNetworkServiceAssociationInput{
+		ServiceNetworkServiceAssociationIdentifier: ptr.String("__ServiceNetworkServiceAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1497,7 +1870,9 @@ func TestCheckResponseSnapshot_GetServiceNetworkVpcAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceNetworkVpcAssociation(context.Background(), &GetServiceNetworkVpcAssociationInput{})
+	got, err := svc.GetServiceNetworkVpcAssociation(context.Background(), &GetServiceNetworkVpcAssociationInput{
+		ServiceNetworkVpcAssociationIdentifier: ptr.String("__ServiceNetworkVpcAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1552,7 +1927,9 @@ func TestCheckResponseSnapshot_GetTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTargetGroup(context.Background(), &GetTargetGroupInput{})
+	got, err := svc.GetTargetGroup(context.Background(), &GetTargetGroupInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1595,7 +1972,11 @@ func TestCheckResponseSnapshot_ListAccessLogSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessLogSubscriptions(context.Background(), &ListAccessLogSubscriptionsInput{})
+	got, err := svc.ListAccessLogSubscriptions(context.Background(), &ListAccessLogSubscriptionsInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1648,7 +2029,10 @@ func TestCheckResponseSnapshot_ListDomainVerifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainVerifications(context.Background(), &ListDomainVerificationsInput{})
+	got, err := svc.ListDomainVerifications(context.Background(), &ListDomainVerificationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1689,7 +2073,11 @@ func TestCheckResponseSnapshot_ListListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListListeners(context.Background(), &ListListenersInput{})
+	got, err := svc.ListListeners(context.Background(), &ListListenersInput{
+		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1742,7 +2130,13 @@ func TestCheckResponseSnapshot_ListResourceConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceConfigurations(context.Background(), &ListResourceConfigurationsInput{})
+	got, err := svc.ListResourceConfigurations(context.Background(), &ListResourceConfigurationsInput{
+		ResourceGatewayIdentifier:            ptr.String("__ResourceGatewayIdentifier__"),
+		ResourceConfigurationGroupIdentifier: ptr.String("__ResourceConfigurationGroupIdentifier__"),
+		DomainVerificationIdentifier:         ptr.String("__DomainVerificationIdentifier__"),
+		MaxResults:                           ptr.Int32(1),
+		NextToken:                            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1787,7 +2181,14 @@ func TestCheckResponseSnapshot_ListResourceEndpointAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceEndpointAssociations(context.Background(), &ListResourceEndpointAssociationsInput{})
+	got, err := svc.ListResourceEndpointAssociations(context.Background(), &ListResourceEndpointAssociationsInput{
+		ResourceConfigurationIdentifier:       ptr.String("__ResourceConfigurationIdentifier__"),
+		ResourceEndpointAssociationIdentifier: ptr.String("__ResourceEndpointAssociationIdentifier__"),
+		VpcEndpointId:                         ptr.String("__VpcEndpointId__"),
+		VpcEndpointOwner:                      ptr.String("__VpcEndpointOwner__"),
+		MaxResults:                            ptr.Int32(1),
+		NextToken:                             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1850,7 +2251,10 @@ func TestCheckResponseSnapshot_ListResourceGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceGateways(context.Background(), &ListResourceGatewaysInput{})
+	got, err := svc.ListResourceGateways(context.Background(), &ListResourceGatewaysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2295,12 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1962,7 +2371,13 @@ func TestCheckResponseSnapshot_ListServiceNetworkResourceAssociations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceNetworkResourceAssociations(context.Background(), &ListServiceNetworkResourceAssociationsInput{})
+	got, err := svc.ListServiceNetworkResourceAssociations(context.Background(), &ListServiceNetworkResourceAssociationsInput{
+		ServiceNetworkIdentifier:        ptr.String("__ServiceNetworkIdentifier__"),
+		ResourceConfigurationIdentifier: ptr.String("__ResourceConfigurationIdentifier__"),
+		MaxResults:                      ptr.Int32(1),
+		NextToken:                       ptr.String("__NextToken__"),
+		IncludeChildren:                 ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2021,7 +2436,12 @@ func TestCheckResponseSnapshot_ListServiceNetworkServiceAssociations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceNetworkServiceAssociations(context.Background(), &ListServiceNetworkServiceAssociationsInput{})
+	got, err := svc.ListServiceNetworkServiceAssociations(context.Background(), &ListServiceNetworkServiceAssociationsInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		ServiceIdentifier:        ptr.String("__ServiceIdentifier__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2084,7 +2504,12 @@ func TestCheckResponseSnapshot_ListServiceNetworkVpcAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceNetworkVpcAssociations(context.Background(), &ListServiceNetworkVpcAssociationsInput{})
+	got, err := svc.ListServiceNetworkVpcAssociations(context.Background(), &ListServiceNetworkVpcAssociationsInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		VpcIdentifier:            ptr.String("__VpcIdentifier__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +2550,11 @@ func TestCheckResponseSnapshot_ListServiceNetworkVpcEndpointAssociations(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceNetworkVpcEndpointAssociations(context.Background(), &ListServiceNetworkVpcEndpointAssociationsInput{})
+	got, err := svc.ListServiceNetworkVpcEndpointAssociations(context.Background(), &ListServiceNetworkVpcEndpointAssociationsInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2168,7 +2597,10 @@ func TestCheckResponseSnapshot_ListServiceNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceNetworks(context.Background(), &ListServiceNetworksInput{})
+	got, err := svc.ListServiceNetworks(context.Background(), &ListServiceNetworksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2217,7 +2649,10 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2240,7 +2675,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2299,7 +2736,12 @@ func TestCheckResponseSnapshot_ListTargetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetGroups(context.Background(), &ListTargetGroupsInput{})
+	got, err := svc.ListTargetGroups(context.Background(), &ListTargetGroupsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		VpcIdentifier:   ptr.String("__VpcIdentifier__"),
+		TargetGroupType: types.TargetGroupType("IP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2334,7 +2776,21 @@ func TestCheckResponseSnapshot_ListTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargets(context.Background(), &ListTargetsInput{})
+	got, err := svc.ListTargets(context.Background(), &ListTargetsInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		Targets: []types.Target{
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2356,7 +2812,10 @@ func TestCheckResponseSnapshot_PutAuthPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAuthPolicy(context.Background(), &PutAuthPolicyInput{})
+	got, err := svc.PutAuthPolicy(context.Background(), &PutAuthPolicyInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		Policy:             ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2375,7 +2834,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2419,7 +2881,19 @@ func TestCheckResponseSnapshot_RegisterTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterTargets(context.Background(), &RegisterTargetsInput{})
+	got, err := svc.RegisterTargets(context.Background(), &RegisterTargetsInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+		Targets: []types.Target{
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Port: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2447,7 +2921,13 @@ func TestCheckResponseSnapshot_StartDomainVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDomainVerification(context.Background(), &StartDomainVerificationInput{})
+	got, err := svc.StartDomainVerification(context.Background(), &StartDomainVerificationInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DomainName:  ptr.String("__DomainName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2466,7 +2946,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2485,7 +2970,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2510,7 +3001,10 @@ func TestCheckResponseSnapshot_UpdateAccessLogSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessLogSubscription(context.Background(), &UpdateAccessLogSubscriptionInput{})
+	got, err := svc.UpdateAccessLogSubscription(context.Background(), &UpdateAccessLogSubscriptionInput{
+		AccessLogSubscriptionIdentifier: ptr.String("__AccessLogSubscriptionIdentifier__"),
+		DestinationArn:                  ptr.String("__DestinationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2551,7 +3045,24 @@ func TestCheckResponseSnapshot_UpdateListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateListener(context.Background(), &UpdateListenerInput{})
+	got, err := svc.UpdateListener(context.Background(), &UpdateListenerInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		DefaultAction: &types.RuleActionMemberForward{
+			Value: types.ForwardAction{
+				TargetGroups: []types.WeightedTargetGroup{
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2590,7 +3101,20 @@ func TestCheckResponseSnapshot_UpdateResourceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceConfiguration(context.Background(), &UpdateResourceConfigurationInput{})
+	got, err := svc.UpdateResourceConfiguration(context.Background(), &UpdateResourceConfigurationInput{
+		ResourceConfigurationIdentifier: ptr.String("__ResourceConfigurationIdentifier__"),
+		ResourceConfigurationDefinition: &types.ResourceConfigurationDefinitionMemberDnsResource{
+			Value: types.DnsResource{
+				DomainName:    ptr.String("__DomainName__"),
+				IpAddressType: types.ResourceConfigurationIpAddressType("IPV4"),
+			},
+		},
+		AllowAssociationToShareableServiceNetwork: ptr.Bool(true),
+		PortRanges: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2624,7 +3148,13 @@ func TestCheckResponseSnapshot_UpdateResourceGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceGateway(context.Background(), &UpdateResourceGatewayInput{})
+	got, err := svc.UpdateResourceGateway(context.Background(), &UpdateResourceGatewayInput{
+		ResourceGatewayIdentifier: ptr.String("__ResourceGatewayIdentifier__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2690,7 +3220,53 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{})
+	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		RuleIdentifier:     ptr.String("__RuleIdentifier__"),
+		Match: &types.RuleMatchMemberHttpMatch{
+			Value: types.HttpMatch{
+				Method: ptr.String("__Method__"),
+				PathMatch: &types.PathMatch{
+					Match: &types.PathMatchTypeMemberExact{
+						Value: "__PathMatchTypeMemberExact__",
+					},
+					CaseSensitive: ptr.Bool(true),
+				},
+				HeaderMatches: []types.HeaderMatch{
+					{
+						Name: ptr.String("__Name__"),
+						Match: &types.HeaderMatchTypeMemberExact{
+							Value: "__HeaderMatchTypeMemberExact__",
+						},
+						CaseSensitive: ptr.Bool(true),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Match: &types.HeaderMatchTypeMemberExact{
+							Value: "__HeaderMatchTypeMemberExact__",
+						},
+						CaseSensitive: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Action: &types.RuleActionMemberForward{
+			Value: types.ForwardAction{
+				TargetGroups: []types.WeightedTargetGroup{
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2717,7 +3293,12 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		CertificateArn:     ptr.String("__CertificateArn__"),
+		AuthType:           types.AuthType("NONE"),
+		IdleTimeoutSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2741,7 +3322,10 @@ func TestCheckResponseSnapshot_UpdateServiceNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceNetwork(context.Background(), &UpdateServiceNetworkInput{})
+	got, err := svc.UpdateServiceNetwork(context.Background(), &UpdateServiceNetworkInput{
+		ServiceNetworkIdentifier: ptr.String("__ServiceNetworkIdentifier__"),
+		AuthType:                 types.AuthType("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2769,7 +3353,13 @@ func TestCheckResponseSnapshot_UpdateServiceNetworkVpcAssociation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceNetworkVpcAssociation(context.Background(), &UpdateServiceNetworkVpcAssociationInput{})
+	got, err := svc.UpdateServiceNetworkVpcAssociation(context.Background(), &UpdateServiceNetworkVpcAssociationInput{
+		ServiceNetworkVpcAssociationIdentifier: ptr.String("__ServiceNetworkVpcAssociationIdentifier__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2816,7 +3406,23 @@ func TestCheckResponseSnapshot_UpdateTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTargetGroup(context.Background(), &UpdateTargetGroupInput{})
+	got, err := svc.UpdateTargetGroup(context.Background(), &UpdateTargetGroupInput{
+		TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+		HealthCheck: &types.HealthCheckConfig{
+			Enabled:                    ptr.Bool(true),
+			Protocol:                   types.TargetGroupProtocol("HTTP"),
+			ProtocolVersion:            types.HealthCheckProtocolVersion("HTTP1"),
+			Port:                       ptr.Int32(1),
+			Path:                       ptr.String("__Path__"),
+			HealthCheckIntervalSeconds: ptr.Int32(1),
+			HealthCheckTimeoutSeconds:  ptr.Int32(1),
+			HealthyThresholdCount:      ptr.Int32(1),
+			UnhealthyThresholdCount:    ptr.Int32(1),
+			Matcher: &types.MatcherMemberHttpCode{
+				Value: "__MatcherMemberHttpCode__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2837,7 +3443,102 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2864,7 +3565,102 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2890,7 +3686,102 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2917,7 +3808,102 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2946,7 +3932,30 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		ServiceIdentifier: ptr.String("__ServiceIdentifier__"),
+		Name:              ptr.String("__Name__"),
+		Protocol:          types.ListenerProtocol("HTTP"),
+		Port:              ptr.Int32(1),
+		DefaultAction: &types.RuleActionMemberForward{
+			Value: types.ForwardAction{
+				TargetGroups: []types.WeightedTargetGroup{
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+					{
+						TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+						Weight:                ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2974,7 +3983,102 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3010,7 +4114,102 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{})
+	_, opErr := svc.BatchUpdateRule(context.Background(), &BatchUpdateRuleInput{
+		ServiceIdentifier:  ptr.String("__ServiceIdentifier__"),
+		ListenerIdentifier: ptr.String("__ListenerIdentifier__"),
+		Rules: []types.RuleUpdate{
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			{
+				RuleIdentifier: ptr.String("__RuleIdentifier__"),
+				Match: &types.RuleMatchMemberHttpMatch{
+					Value: types.HttpMatch{
+						Method: ptr.String("__Method__"),
+						PathMatch: &types.PathMatch{
+							Match: &types.PathMatchTypeMemberExact{
+								Value: "__PathMatchTypeMemberExact__",
+							},
+							CaseSensitive: ptr.Bool(true),
+						},
+						HeaderMatches: []types.HeaderMatch{
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Match: &types.HeaderMatchTypeMemberExact{
+									Value: "__HeaderMatchTypeMemberExact__",
+								},
+								CaseSensitive: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				Priority: ptr.Int32(1),
+				Action: &types.RuleActionMemberForward{
+					Value: types.ForwardAction{
+						TargetGroups: []types.WeightedTargetGroup{
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+							{
+								TargetGroupIdentifier: ptr.String("__TargetGroupIdentifier__"),
+								Weight:                ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

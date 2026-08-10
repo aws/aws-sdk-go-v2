@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"networkSettings":[{"networkSettingsArn":"__NetworkSettingsArn__","vpcId":"__VpcId__"},{"networkSettingsArn":"__NetworkSettingsArn__","vpcId":"__VpcId__"}],"nextToken":"__NextToken__"}

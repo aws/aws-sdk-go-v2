@@ -133,7 +133,35 @@ func TestCheckResponseSnapshot_BatchExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +182,9 @@ func TestCheckResponseSnapshot_CancelStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelStatement(context.Background(), &CancelStatementInput{})
+	got, err := svc.CancelStatement(context.Background(), &CancelStatementInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +262,10 @@ func TestCheckResponseSnapshot_DescribeStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStatement(context.Background(), &DescribeStatementInput{})
+	got, err := svc.DescribeStatement(context.Background(), &DescribeStatementInput{
+		Id:              ptr.String("__Id__"),
+		WaitTimeSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +319,18 @@ func TestCheckResponseSnapshot_DescribeTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{})
+	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		ConnectedDatabase: ptr.String("__ConnectedDatabase__"),
+		Schema:            ptr.String("__Schema__"),
+		Table:             ptr.String("__Table__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +365,31 @@ func TestCheckResponseSnapshot_ExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		Sql:               ptr.String("__Sql__"),
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +461,11 @@ func TestCheckResponseSnapshot_GetStatementResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStatementResult(context.Background(), &GetStatementResultInput{})
+	got, err := svc.GetStatementResult(context.Background(), &GetStatementResultInput{
+		Id:              ptr.String("__Id__"),
+		NextToken:       ptr.String("__NextToken__"),
+		WaitTimeSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -456,7 +528,11 @@ func TestCheckResponseSnapshot_GetStatementResultV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStatementResultV2(context.Background(), &GetStatementResultV2Input{})
+	got, err := svc.GetStatementResultV2(context.Background(), &GetStatementResultV2Input{
+		Id:              ptr.String("__Id__"),
+		NextToken:       ptr.String("__NextToken__"),
+		WaitTimeSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +557,15 @@ func TestCheckResponseSnapshot_ListDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{})
+	got, err := svc.ListDatabases(context.Background(), &ListDatabasesInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		Database:          ptr.String("__Database__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +590,17 @@ func TestCheckResponseSnapshot_ListSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{})
+	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		ConnectedDatabase: ptr.String("__ConnectedDatabase__"),
+		SchemaPattern:     ptr.String("__SchemaPattern__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +649,16 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		SessionId:         ptr.String("__SessionId__"),
+		Status:            types.SessionStatusString("AVAILABLE"),
+		RoleLevel:         ptr.Bool(true),
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+		Database:          ptr.String("__Database__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +733,16 @@ func TestCheckResponseSnapshot_ListStatements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStatements(context.Background(), &ListStatementsInput{})
+	got, err := svc.ListStatements(context.Background(), &ListStatementsInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		StatementName:     ptr.String("__StatementName__"),
+		Status:            types.StatusString("SUBMITTED"),
+		RoleLevel:         ptr.Bool(true),
+		Database:          ptr.String("__Database__"),
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -663,7 +775,18 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		ConnectedDatabase: ptr.String("__ConnectedDatabase__"),
+		SchemaPattern:     ptr.String("__SchemaPattern__"),
+		TablePattern:      ptr.String("__TablePattern__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		WorkgroupName:     ptr.String("__WorkgroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -684,7 +807,35 @@ func TestCheckResponseSnapshot_Error_ActiveSessionsExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -709,7 +860,35 @@ func TestCheckResponseSnapshot_Error_ActiveStatementsExceededException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -734,7 +913,10 @@ func TestCheckResponseSnapshot_Error_ActiveWaitingRequestsExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStatement(context.Background(), &DescribeStatementInput{})
+	_, opErr := svc.DescribeStatement(context.Background(), &DescribeStatementInput{
+		Id:              ptr.String("__Id__"),
+		WaitTimeSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -760,7 +942,35 @@ func TestCheckResponseSnapshot_Error_BatchExecuteStatementException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -785,7 +995,9 @@ func TestCheckResponseSnapshot_Error_DatabaseConnectionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelStatement(context.Background(), &CancelStatementInput{})
+	_, opErr := svc.CancelStatement(context.Background(), &CancelStatementInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -811,7 +1023,31 @@ func TestCheckResponseSnapshot_Error_ExecuteStatementException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		Sql:               ptr.String("__Sql__"),
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -836,7 +1072,35 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -861,7 +1125,9 @@ func TestCheckResponseSnapshot_Error_QueryTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelStatement(context.Background(), &CancelStatementInput{})
+	_, opErr := svc.CancelStatement(context.Background(), &CancelStatementInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -887,7 +1153,35 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -912,7 +1206,35 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Sqls: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		SecretArn:         ptr.String("__SecretArn__"),
+		DbUser:            ptr.String("__DbUser__"),
+		Database:          ptr.String("__Database__"),
+		WithEvent:         ptr.Bool(true),
+		StatementName:     ptr.String("__StatementName__"),
+		Parameters: []types.SqlParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkgroupName:           ptr.String("__WorkgroupName__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		ResultFormat:            types.ResultFormatString("JSON"),
+		SessionKeepAliveSeconds: ptr.Int32(1),
+		SessionId:               ptr.String("__SessionId__"),
+		ExecutionMode:           types.ExecutionMode("TRANSACTION"),
+		WaitTimeSeconds:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

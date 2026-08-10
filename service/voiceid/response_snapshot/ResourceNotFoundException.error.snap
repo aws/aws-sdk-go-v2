@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.AssociateFraudster
+
+{"__type":"ResourceNotFoundException","Message":"__Message__","ResourceType":"BATCH_JOB"}

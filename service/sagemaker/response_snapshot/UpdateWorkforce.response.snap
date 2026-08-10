@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateWorkforce
+
+{"Workforce":{"CognitoConfig":{"ClientId":"__ClientId__","UserPool":"__UserPool__"},"CreateDate":946684800,"FailureReason":"__FailureReason__","IpAddressType":"ipv4","LastUpdatedDate":946684800,"OidcConfig":{"AuthenticationRequestExtraParams":{"key0":"__Value__"},"AuthorizationEndpoint":"__AuthorizationEndpoint__","ClientId":"__ClientId__","Issuer":"__Issuer__","JwksUri":"__JwksUri__","LogoutEndpoint":"__LogoutEndpoint__","Scope":"__Scope__","TokenEndpoint":"__TokenEndpoint__","UserInfoEndpoint":"__UserInfoEndpoint__"},"SourceIpConfig":{"Cidrs":["__Member__","__Member__"]},"Status":"Initializing","SubDomain":"__SubDomain__","WorkforceArn":"__WorkforceArn__","WorkforceName":"__WorkforceName__","WorkforceVpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"}}}

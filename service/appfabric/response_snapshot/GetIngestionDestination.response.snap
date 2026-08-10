@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ingestionDestination":{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","destinationConfiguration":{"auditLog":{"destination":{"s3Bucket":{"bucketName":"__BucketName__","prefix":"__Prefix__"}}}},"ingestionArn":"__IngestionArn__","processingConfiguration":{"auditLog":{"format":"json","schema":"ocsf"}},"status":"Active","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z"}}

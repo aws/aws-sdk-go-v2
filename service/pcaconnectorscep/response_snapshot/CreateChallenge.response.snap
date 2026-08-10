@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Challenge":{"Arn":"__Arn__","ConnectorArn":"__ConnectorArn__","CreatedAt":946684800,"Password":"__Password__","UpdatedAt":946684800}}

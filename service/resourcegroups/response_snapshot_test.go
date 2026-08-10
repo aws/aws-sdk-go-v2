@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_CancelTagSyncTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	got, err := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +241,60 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ResourceQuery: &types.ResourceQuery{
+			Type:  types.QueryType("TAG_FILTERS_1_0"),
+			Query: ptr.String("__Query__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Configuration: []types.GroupConfigurationItem{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: []types.GroupConfigurationParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: []types.GroupConfigurationParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Criticality: ptr.Int32(1),
+		Owner:       ptr.String("__Owner__"),
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +325,10 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +384,10 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +491,9 @@ func TestCheckResponseSnapshot_GetGroupConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupConfiguration(context.Background(), &GetGroupConfigurationInput{})
+	got, err := svc.GetGroupConfiguration(context.Background(), &GetGroupConfigurationInput{
+		Group: ptr.String("__Group__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +520,10 @@ func TestCheckResponseSnapshot_GetGroupQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupQuery(context.Background(), &GetGroupQueryInput{})
+	got, err := svc.GetGroupQuery(context.Background(), &GetGroupQueryInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +556,9 @@ func TestCheckResponseSnapshot_GetTagSyncTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTagSyncTask(context.Background(), &GetTagSyncTaskInput{})
+	got, err := svc.GetTagSyncTask(context.Background(), &GetTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +582,9 @@ func TestCheckResponseSnapshot_GetTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTags(context.Background(), &GetTagsInput{})
+	got, err := svc.GetTags(context.Background(), &GetTagsInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -558,7 +628,13 @@ func TestCheckResponseSnapshot_GroupResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GroupResources(context.Background(), &GroupResourcesInput{})
+	got, err := svc.GroupResources(context.Background(), &GroupResourcesInput{
+		Group: ptr.String("__Group__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +695,28 @@ func TestCheckResponseSnapshot_ListGroupResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupResources(context.Background(), &ListGroupResourcesInput{})
+	got, err := svc.ListGroupResources(context.Background(), &ListGroupResourcesInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+		Filters: []types.ResourceFilter{
+			{
+				Name: types.ResourceFilterName("resource-type"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ResourceFilterName("resource-type"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +756,27 @@ func TestCheckResponseSnapshot_ListGroupingStatuses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupingStatuses(context.Background(), &ListGroupingStatusesInput{})
+	got, err := svc.ListGroupingStatuses(context.Background(), &ListGroupingStatusesInput{
+		Group:      ptr.String("__Group__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.ListGroupingStatusesFilter{
+			{
+				Name: types.ListGroupingStatusesFilterName("status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ListGroupingStatusesFilterName("status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -722,7 +839,26 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		Filters: []types.GroupFilter{
+			{
+				Name: types.GroupFilterName("resource-type"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.GroupFilterName("resource-type"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +911,20 @@ func TestCheckResponseSnapshot_ListTagSyncTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagSyncTasks(context.Background(), &ListTagSyncTasksInput{})
+	got, err := svc.ListTagSyncTasks(context.Background(), &ListTagSyncTasksInput{
+		Filters: []types.ListTagSyncTasksFilter{
+			{
+				GroupArn:  ptr.String("__GroupArn__"),
+				GroupName: ptr.String("__GroupName__"),
+			},
+			{
+				GroupArn:  ptr.String("__GroupArn__"),
+				GroupName: ptr.String("__GroupName__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +943,49 @@ func TestCheckResponseSnapshot_PutGroupConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGroupConfiguration(context.Background(), &PutGroupConfigurationInput{})
+	got, err := svc.PutGroupConfiguration(context.Background(), &PutGroupConfigurationInput{
+		Group: ptr.String("__Group__"),
+		Configuration: []types.GroupConfigurationItem{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: []types.GroupConfigurationParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: []types.GroupConfigurationParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +1026,14 @@ func TestCheckResponseSnapshot_SearchResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{})
+	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{
+		ResourceQuery: &types.ResourceQuery{
+			Type:  types.QueryType("TAG_FILTERS_1_0"),
+			Query: ptr.String("__Query__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1063,16 @@ func TestCheckResponseSnapshot_StartTagSyncTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTagSyncTask(context.Background(), &StartTagSyncTaskInput{})
+	got, err := svc.StartTagSyncTask(context.Background(), &StartTagSyncTaskInput{
+		Group:    ptr.String("__Group__"),
+		TagKey:   ptr.String("__TagKey__"),
+		TagValue: ptr.String("__TagValue__"),
+		ResourceQuery: &types.ResourceQuery{
+			Type:  types.QueryType("TAG_FILTERS_1_0"),
+			Query: ptr.String("__Query__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1096,12 @@ func TestCheckResponseSnapshot_Tag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Tag(context.Background(), &TagInput{})
+	got, err := svc.Tag(context.Background(), &TagInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -933,7 +1145,13 @@ func TestCheckResponseSnapshot_UngroupResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UngroupResources(context.Background(), &UngroupResourcesInput{})
+	got, err := svc.UngroupResources(context.Background(), &UngroupResourcesInput{
+		Group: ptr.String("__Group__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1176,13 @@ func TestCheckResponseSnapshot_Untag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Untag(context.Background(), &UntagInput{})
+	got, err := svc.Untag(context.Background(), &UntagInput{
+		Arn: ptr.String("__Arn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1207,9 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		GroupLifecycleEventsDesiredStatus: types.GroupLifecycleEventsDesiredStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1240,14 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		GroupName:   ptr.String("__GroupName__"),
+		Group:       ptr.String("__Group__"),
+		Description: ptr.String("__Description__"),
+		Criticality: ptr.Int32(1),
+		Owner:       ptr.String("__Owner__"),
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1041,7 +1274,14 @@ func TestCheckResponseSnapshot_UpdateGroupQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroupQuery(context.Background(), &UpdateGroupQueryInput{})
+	got, err := svc.UpdateGroupQuery(context.Background(), &UpdateGroupQueryInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+		ResourceQuery: &types.ResourceQuery{
+			Type:  types.QueryType("TAG_FILTERS_1_0"),
+			Query: ptr.String("__Query__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1302,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1087,7 +1329,9 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1112,7 +1356,9 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1137,7 +1383,9 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1162,7 +1410,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	_, opErr := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		Group:     ptr.String("__Group__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1438,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1212,7 +1465,9 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{})
+	_, opErr := svc.CancelTagSyncTask(context.Background(), &CancelTagSyncTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

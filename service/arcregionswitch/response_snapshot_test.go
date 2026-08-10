@@ -117,7 +117,13 @@ func TestCheckResponseSnapshot_ApprovePlanExecutionStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{})
+	got, err := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		StepName:    ptr.String("__StepName__"),
+		Approval:    types.Approval("approve"),
+		Comment:     ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +142,11 @@ func TestCheckResponseSnapshot_CancelPlanExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelPlanExecution(context.Background(), &CancelPlanExecutionInput{})
+	got, err := svc.CancelPlanExecution(context.Background(), &CancelPlanExecutionInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		Comment:     ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +364,203 @@ func TestCheckResponseSnapshot_CreatePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlan(context.Background(), &CreatePlanInput{})
+	got, err := svc.CreatePlan(context.Background(), &CreatePlanInput{
+		Description: ptr.String("__Description__"),
+		Workflows: []types.Workflow{
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+		},
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		RecoveryTimeObjectiveMinutes: ptr.Int32(1),
+		AssociatedAlarms: map[string]types.AssociatedAlarm{
+			"key0": {
+				CrossAccountRole:   ptr.String("__CrossAccountRole__"),
+				ExternalId:         ptr.String("__ExternalId__"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				AlarmType:          types.AlarmType("applicationHealth"),
+			},
+		},
+		Triggers: []types.Trigger{
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportOutput: []types.ReportOutputConfiguration{
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecoveryApproach: types.RecoveryApproach("activeActive"),
+		PrimaryRegion:    ptr.String("__PrimaryRegion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +579,9 @@ func TestCheckResponseSnapshot_DeletePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlan(context.Background(), &DeletePlanInput{})
+	got, err := svc.DeletePlan(context.Background(), &DeletePlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +799,9 @@ func TestCheckResponseSnapshot_GetPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlan(context.Background(), &GetPlanInput{})
+	got, err := svc.GetPlan(context.Background(), &GetPlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +853,11 @@ func TestCheckResponseSnapshot_GetPlanEvaluationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlanEvaluationStatus(context.Background(), &GetPlanEvaluationStatusInput{})
+	got, err := svc.GetPlanEvaluationStatus(context.Background(), &GetPlanEvaluationStatusInput{
+		PlanArn:    ptr.String("__PlanArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1123,12 @@ func TestCheckResponseSnapshot_GetPlanExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlanExecution(context.Background(), &GetPlanExecutionInput{})
+	got, err := svc.GetPlanExecution(context.Background(), &GetPlanExecutionInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1127,7 +1346,9 @@ func TestCheckResponseSnapshot_GetPlanInRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlanInRegion(context.Background(), &GetPlanInRegionInput{})
+	got, err := svc.GetPlanInRegion(context.Background(), &GetPlanInRegionInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1399,13 @@ func TestCheckResponseSnapshot_ListPlanExecutionEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlanExecutionEvents(context.Background(), &ListPlanExecutionEventsInput{})
+	got, err := svc.ListPlanExecutionEvents(context.Background(), &ListPlanExecutionEventsInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1231,7 +1458,12 @@ func TestCheckResponseSnapshot_ListPlanExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlanExecutions(context.Background(), &ListPlanExecutionsInput{})
+	got, err := svc.ListPlanExecutions(context.Background(), &ListPlanExecutionsInput{
+		PlanArn:    ptr.String("__PlanArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		State:      types.ExecutionState("inProgress"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1288,7 +1520,10 @@ func TestCheckResponseSnapshot_ListPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlans(context.Background(), &ListPlansInput{})
+	got, err := svc.ListPlans(context.Background(), &ListPlansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1345,7 +1580,10 @@ func TestCheckResponseSnapshot_ListPlansInRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlansInRegion(context.Background(), &ListPlansInRegionInput{})
+	got, err := svc.ListPlansInRegion(context.Background(), &ListPlansInRegionInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +1620,13 @@ func TestCheckResponseSnapshot_ListRoute53HealthChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{})
+	got, err := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{
+		Arn:          ptr.String("__Arn__"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		RecordName:   ptr.String("__RecordName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1419,7 +1663,13 @@ func TestCheckResponseSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoute53HealthChecksInRegion(context.Background(), &ListRoute53HealthChecksInRegionInput{})
+	got, err := svc.ListRoute53HealthChecksInRegion(context.Background(), &ListRoute53HealthChecksInRegionInput{
+		Arn:          ptr.String("__Arn__"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		RecordName:   ptr.String("__RecordName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1442,7 +1692,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1467,7 +1719,16 @@ func TestCheckResponseSnapshot_StartPlanExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPlanExecution(context.Background(), &StartPlanExecutionInput{})
+	got, err := svc.StartPlanExecution(context.Background(), &StartPlanExecutionInput{
+		PlanArn:             ptr.String("__PlanArn__"),
+		TargetRegion:        ptr.String("__TargetRegion__"),
+		Action:              types.ExecutionAction("activate"),
+		Mode:                types.ExecutionMode("graceful"),
+		Comment:             ptr.String("__Comment__"),
+		LatestVersion:       ptr.String("__LatestVersion__"),
+		RecoveryExecutionId: ptr.String("__RecoveryExecutionId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1486,7 +1747,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1505,7 +1771,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		ResourceTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1723,7 +1995,194 @@ func TestCheckResponseSnapshot_UpdatePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlan(context.Background(), &UpdatePlanInput{})
+	got, err := svc.UpdatePlan(context.Background(), &UpdatePlanInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Workflows: []types.Workflow{
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+		},
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		RecoveryTimeObjectiveMinutes: ptr.Int32(1),
+		AssociatedAlarms: map[string]types.AssociatedAlarm{
+			"key0": {
+				CrossAccountRole:   ptr.String("__CrossAccountRole__"),
+				ExternalId:         ptr.String("__ExternalId__"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				AlarmType:          types.AlarmType("applicationHealth"),
+			},
+		},
+		Triggers: []types.Trigger{
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportOutput: []types.ReportOutputConfiguration{
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1742,7 +2201,12 @@ func TestCheckResponseSnapshot_UpdatePlanExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlanExecution(context.Background(), &UpdatePlanExecutionInput{})
+	got, err := svc.UpdatePlanExecution(context.Background(), &UpdatePlanExecutionInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		Action:      types.UpdatePlanExecutionAction("switchToGraceful"),
+		Comment:     ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1761,7 +2225,13 @@ func TestCheckResponseSnapshot_UpdatePlanExecutionStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlanExecutionStep(context.Background(), &UpdatePlanExecutionStepInput{})
+	got, err := svc.UpdatePlanExecutionStep(context.Background(), &UpdatePlanExecutionStepInput{
+		PlanArn:      ptr.String("__PlanArn__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+		Comment:      ptr.String("__Comment__"),
+		StepName:     ptr.String("__StepName__"),
+		ActionToTake: types.UpdatePlanExecutionStepAction("switchToUngraceful"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1782,7 +2252,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{})
+	_, opErr := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		StepName:    ptr.String("__StepName__"),
+		Approval:    types.Approval("approve"),
+		Comment:     ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1809,7 +2285,16 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartPlanExecution(context.Background(), &StartPlanExecutionInput{})
+	_, opErr := svc.StartPlanExecution(context.Background(), &StartPlanExecutionInput{
+		PlanArn:             ptr.String("__PlanArn__"),
+		TargetRegion:        ptr.String("__TargetRegion__"),
+		Action:              types.ExecutionAction("activate"),
+		Mode:                types.ExecutionMode("graceful"),
+		Comment:             ptr.String("__Comment__"),
+		LatestVersion:       ptr.String("__LatestVersion__"),
+		RecoveryExecutionId: ptr.String("__RecoveryExecutionId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1834,7 +2319,13 @@ func TestCheckResponseSnapshot_Error_IllegalArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{})
+	_, opErr := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{
+		Arn:          ptr.String("__Arn__"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		RecordName:   ptr.String("__RecordName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1859,7 +2350,9 @@ func TestCheckResponseSnapshot_Error_IllegalStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePlan(context.Background(), &DeletePlanInput{})
+	_, opErr := svc.DeletePlan(context.Background(), &DeletePlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1884,7 +2377,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{})
+	_, opErr := svc.ListRoute53HealthChecks(context.Background(), &ListRoute53HealthChecksInput{
+		Arn:          ptr.String("__Arn__"),
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		RecordName:   ptr.String("__RecordName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1909,7 +2408,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{})
+	_, opErr := svc.ApprovePlanExecutionStep(context.Background(), &ApprovePlanExecutionStepInput{
+		PlanArn:     ptr.String("__PlanArn__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+		StepName:    ptr.String("__StepName__"),
+		Approval:    types.Approval("approve"),
+		Comment:     ptr.String("__Comment__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

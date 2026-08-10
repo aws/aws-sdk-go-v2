@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.ListImageReferrers
+
+{"nextToken":"__NextToken__","referrers":[{"annotations":{"key0":"__Value__"},"artifactStatus":"ACTIVE","artifactType":"__ArtifactType__","digest":"__Digest__","mediaType":"__MediaType__","size":1},{"annotations":{"key0":"__Value__"},"artifactStatus":"ACTIVE","artifactType":"__ArtifactType__","digest":"__Digest__","mediaType":"__MediaType__","size":1}]}

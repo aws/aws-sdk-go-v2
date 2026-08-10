@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.StartContinuousExport
+
+{"dataSource":"AGENT","exportId":"__ExportId__","s3Bucket":"__S3Bucket__","schemaStorageConfig":{"key0":"__Value__"},"startTime":946684800}

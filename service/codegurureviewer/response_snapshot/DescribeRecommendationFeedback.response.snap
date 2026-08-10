@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RecommendationFeedback":{"CodeReviewArn":"__CodeReviewArn__","CreatedTimeStamp":946684800,"LastUpdatedTimeStamp":946684800,"Reactions":["ThumbsUp","ThumbsUp"],"RecommendationId":"__RecommendationId__","UserId":"__UserId__"}}

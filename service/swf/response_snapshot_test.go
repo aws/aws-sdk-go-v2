@@ -120,7 +120,30 @@ func TestCheckResponseSnapshot_CountClosedWorkflowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{})
+	got, err := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		CloseTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		CloseStatusFilter: &types.CloseStatusFilter{
+			Status: types.CloseStatus("COMPLETED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +165,23 @@ func TestCheckResponseSnapshot_CountOpenWorkflowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CountOpenWorkflowExecutions(context.Background(), &CountOpenWorkflowExecutionsInput{})
+	got, err := svc.CountOpenWorkflowExecutions(context.Background(), &CountOpenWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +203,12 @@ func TestCheckResponseSnapshot_CountPendingActivityTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CountPendingActivityTasks(context.Background(), &CountPendingActivityTasksInput{})
+	got, err := svc.CountPendingActivityTasks(context.Background(), &CountPendingActivityTasksInput{
+		Domain: ptr.String("__Domain__"),
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +230,12 @@ func TestCheckResponseSnapshot_CountPendingDecisionTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CountPendingDecisionTasks(context.Background(), &CountPendingDecisionTasksInput{})
+	got, err := svc.CountPendingDecisionTasks(context.Background(), &CountPendingDecisionTasksInput{
+		Domain: ptr.String("__Domain__"),
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +254,13 @@ func TestCheckResponseSnapshot_DeleteActivityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteActivityType(context.Background(), &DeleteActivityTypeInput{})
+	got, err := svc.DeleteActivityType(context.Background(), &DeleteActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +279,13 @@ func TestCheckResponseSnapshot_DeleteWorkflowType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowType(context.Background(), &DeleteWorkflowTypeInput{})
+	got, err := svc.DeleteWorkflowType(context.Background(), &DeleteWorkflowTypeInput{
+		Domain: ptr.String("__Domain__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +304,13 @@ func TestCheckResponseSnapshot_DeprecateActivityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprecateActivityType(context.Background(), &DeprecateActivityTypeInput{})
+	got, err := svc.DeprecateActivityType(context.Background(), &DeprecateActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +329,9 @@ func TestCheckResponseSnapshot_DeprecateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprecateDomain(context.Background(), &DeprecateDomainInput{})
+	got, err := svc.DeprecateDomain(context.Background(), &DeprecateDomainInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -281,7 +350,13 @@ func TestCheckResponseSnapshot_DeprecateWorkflowType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprecateWorkflowType(context.Background(), &DeprecateWorkflowTypeInput{})
+	got, err := svc.DeprecateWorkflowType(context.Background(), &DeprecateWorkflowTypeInput{
+		Domain: ptr.String("__Domain__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +396,13 @@ func TestCheckResponseSnapshot_DescribeActivityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeActivityType(context.Background(), &DescribeActivityTypeInput{})
+	got, err := svc.DescribeActivityType(context.Background(), &DescribeActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +431,9 @@ func TestCheckResponseSnapshot_DescribeDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{})
+	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +495,13 @@ func TestCheckResponseSnapshot_DescribeWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkflowExecution(context.Background(), &DescribeWorkflowExecutionInput{})
+	got, err := svc.DescribeWorkflowExecution(context.Background(), &DescribeWorkflowExecutionInput{
+		Domain: ptr.String("__Domain__"),
+		Execution: &types.WorkflowExecution{
+			WorkflowId: ptr.String("__WorkflowId__"),
+			RunId:      ptr.String("__RunId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +541,13 @@ func TestCheckResponseSnapshot_DescribeWorkflowType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkflowType(context.Background(), &DescribeWorkflowTypeInput{})
+	got, err := svc.DescribeWorkflowType(context.Background(), &DescribeWorkflowTypeInput{
+		Domain: ptr.String("__Domain__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +1414,16 @@ func TestCheckResponseSnapshot_GetWorkflowExecutionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowExecutionHistory(context.Background(), &GetWorkflowExecutionHistoryInput{})
+	got, err := svc.GetWorkflowExecutionHistory(context.Background(), &GetWorkflowExecutionHistoryInput{
+		Domain: ptr.String("__Domain__"),
+		Execution: &types.WorkflowExecution{
+			WorkflowId: ptr.String("__WorkflowId__"),
+			RunId:      ptr.String("__RunId__"),
+		},
+		NextPageToken:   ptr.String("__NextPageToken__"),
+		MaximumPageSize: 1,
+		ReverseOrder:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1362,7 +1466,14 @@ func TestCheckResponseSnapshot_ListActivityTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActivityTypes(context.Background(), &ListActivityTypesInput{})
+	got, err := svc.ListActivityTypes(context.Background(), &ListActivityTypesInput{
+		Domain:             ptr.String("__Domain__"),
+		Name:               ptr.String("__Name__"),
+		RegistrationStatus: types.RegistrationStatus("REGISTERED"),
+		NextPageToken:      ptr.String("__NextPageToken__"),
+		MaximumPageSize:    1,
+		ReverseOrder:       true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1431,7 +1542,33 @@ func TestCheckResponseSnapshot_ListClosedWorkflowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClosedWorkflowExecutions(context.Background(), &ListClosedWorkflowExecutionsInput{})
+	got, err := svc.ListClosedWorkflowExecutions(context.Background(), &ListClosedWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		CloseTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+		CloseStatusFilter: &types.CloseStatusFilter{
+			Status: types.CloseStatus("COMPLETED"),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		NextPageToken:   ptr.String("__NextPageToken__"),
+		MaximumPageSize: 1,
+		ReverseOrder:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1466,7 +1603,12 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		NextPageToken:      ptr.String("__NextPageToken__"),
+		RegistrationStatus: types.RegistrationStatus("REGISTERED"),
+		MaximumPageSize:    1,
+		ReverseOrder:       true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1535,7 +1677,26 @@ func TestCheckResponseSnapshot_ListOpenWorkflowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOpenWorkflowExecutions(context.Background(), &ListOpenWorkflowExecutionsInput{})
+	got, err := svc.ListOpenWorkflowExecutions(context.Background(), &ListOpenWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		NextPageToken:   ptr.String("__NextPageToken__"),
+		MaximumPageSize: 1,
+		ReverseOrder:    true,
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1565,7 +1726,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1608,7 +1771,14 @@ func TestCheckResponseSnapshot_ListWorkflowTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowTypes(context.Background(), &ListWorkflowTypesInput{})
+	got, err := svc.ListWorkflowTypes(context.Background(), &ListWorkflowTypesInput{
+		Domain:             ptr.String("__Domain__"),
+		Name:               ptr.String("__Name__"),
+		RegistrationStatus: types.RegistrationStatus("REGISTERED"),
+		NextPageToken:      ptr.String("__NextPageToken__"),
+		MaximumPageSize:    1,
+		ReverseOrder:       true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1640,7 +1810,13 @@ func TestCheckResponseSnapshot_PollForActivityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PollForActivityTask(context.Background(), &PollForActivityTaskInput{})
+	got, err := svc.PollForActivityTask(context.Background(), &PollForActivityTaskInput{
+		Domain: ptr.String("__Domain__"),
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		Identity: ptr.String("__Identity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2518,7 +2694,17 @@ func TestCheckResponseSnapshot_PollForDecisionTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PollForDecisionTask(context.Background(), &PollForDecisionTaskInput{})
+	got, err := svc.PollForDecisionTask(context.Background(), &PollForDecisionTaskInput{
+		Domain: ptr.String("__Domain__"),
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		Identity:                    ptr.String("__Identity__"),
+		NextPageToken:               ptr.String("__NextPageToken__"),
+		MaximumPageSize:             1,
+		ReverseOrder:                true,
+		StartAtPreviousStartedEvent: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2539,7 +2725,10 @@ func TestCheckResponseSnapshot_RecordActivityTaskHeartbeat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecordActivityTaskHeartbeat(context.Background(), &RecordActivityTaskHeartbeatInput{})
+	got, err := svc.RecordActivityTaskHeartbeat(context.Background(), &RecordActivityTaskHeartbeatInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Details:   ptr.String("__Details__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2558,7 +2747,20 @@ func TestCheckResponseSnapshot_RegisterActivityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterActivityType(context.Background(), &RegisterActivityTypeInput{})
+	got, err := svc.RegisterActivityType(context.Background(), &RegisterActivityTypeInput{
+		Domain:                         ptr.String("__Domain__"),
+		Name:                           ptr.String("__Name__"),
+		Version:                        ptr.String("__Version__"),
+		Description:                    ptr.String("__Description__"),
+		DefaultTaskStartToCloseTimeout: ptr.String("__DefaultTaskStartToCloseTimeout__"),
+		DefaultTaskHeartbeatTimeout:    ptr.String("__DefaultTaskHeartbeatTimeout__"),
+		DefaultTaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		DefaultTaskPriority:               ptr.String("__DefaultTaskPriority__"),
+		DefaultTaskScheduleToStartTimeout: ptr.String("__DefaultTaskScheduleToStartTimeout__"),
+		DefaultTaskScheduleToCloseTimeout: ptr.String("__DefaultTaskScheduleToCloseTimeout__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2577,7 +2779,21 @@ func TestCheckResponseSnapshot_RegisterDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDomain(context.Background(), &RegisterDomainInput{})
+	got, err := svc.RegisterDomain(context.Background(), &RegisterDomainInput{
+		Name:                                   ptr.String("__Name__"),
+		Description:                            ptr.String("__Description__"),
+		WorkflowExecutionRetentionPeriodInDays: ptr.String("__WorkflowExecutionRetentionPeriodInDays__"),
+		Tags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2596,7 +2812,20 @@ func TestCheckResponseSnapshot_RegisterWorkflowType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterWorkflowType(context.Background(), &RegisterWorkflowTypeInput{})
+	got, err := svc.RegisterWorkflowType(context.Background(), &RegisterWorkflowTypeInput{
+		Domain:                              ptr.String("__Domain__"),
+		Name:                                ptr.String("__Name__"),
+		Version:                             ptr.String("__Version__"),
+		Description:                         ptr.String("__Description__"),
+		DefaultTaskStartToCloseTimeout:      ptr.String("__DefaultTaskStartToCloseTimeout__"),
+		DefaultExecutionStartToCloseTimeout: ptr.String("__DefaultExecutionStartToCloseTimeout__"),
+		DefaultTaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		DefaultTaskPriority: ptr.String("__DefaultTaskPriority__"),
+		DefaultChildPolicy:  types.ChildPolicy("TERMINATE"),
+		DefaultLambdaRole:   ptr.String("__DefaultLambdaRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2615,7 +2844,11 @@ func TestCheckResponseSnapshot_RequestCancelWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RequestCancelWorkflowExecution(context.Background(), &RequestCancelWorkflowExecutionInput{})
+	got, err := svc.RequestCancelWorkflowExecution(context.Background(), &RequestCancelWorkflowExecutionInput{
+		Domain:     ptr.String("__Domain__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		RunId:      ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2634,7 +2867,10 @@ func TestCheckResponseSnapshot_RespondActivityTaskCanceled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RespondActivityTaskCanceled(context.Background(), &RespondActivityTaskCanceledInput{})
+	got, err := svc.RespondActivityTaskCanceled(context.Background(), &RespondActivityTaskCanceledInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Details:   ptr.String("__Details__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2653,7 +2889,10 @@ func TestCheckResponseSnapshot_RespondActivityTaskCompleted(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RespondActivityTaskCompleted(context.Background(), &RespondActivityTaskCompletedInput{})
+	got, err := svc.RespondActivityTaskCompleted(context.Background(), &RespondActivityTaskCompletedInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Result:    ptr.String("__Result__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2672,7 +2911,11 @@ func TestCheckResponseSnapshot_RespondActivityTaskFailed(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RespondActivityTaskFailed(context.Background(), &RespondActivityTaskFailedInput{})
+	got, err := svc.RespondActivityTaskFailed(context.Background(), &RespondActivityTaskFailedInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Reason:    ptr.String("__Reason__"),
+		Details:   ptr.String("__Details__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2691,7 +2934,218 @@ func TestCheckResponseSnapshot_RespondDecisionTaskCompleted(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RespondDecisionTaskCompleted(context.Background(), &RespondDecisionTaskCompletedInput{})
+	got, err := svc.RespondDecisionTaskCompleted(context.Background(), &RespondDecisionTaskCompletedInput{
+		TaskToken: ptr.String("__TaskToken__"),
+		Decisions: []types.Decision{
+			{
+				DecisionType: types.DecisionType("ScheduleActivityTask"),
+				ScheduleActivityTaskDecisionAttributes: &types.ScheduleActivityTaskDecisionAttributes{
+					ActivityType: &types.ActivityType{
+						Name:    ptr.String("__Name__"),
+						Version: ptr.String("__Version__"),
+					},
+					ActivityId:             ptr.String("__ActivityId__"),
+					Control:                ptr.String("__Control__"),
+					Input:                  ptr.String("__Input__"),
+					ScheduleToCloseTimeout: ptr.String("__ScheduleToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:           ptr.String("__TaskPriority__"),
+					ScheduleToStartTimeout: ptr.String("__ScheduleToStartTimeout__"),
+					StartToCloseTimeout:    ptr.String("__StartToCloseTimeout__"),
+					HeartbeatTimeout:       ptr.String("__HeartbeatTimeout__"),
+				},
+				RequestCancelActivityTaskDecisionAttributes: &types.RequestCancelActivityTaskDecisionAttributes{
+					ActivityId: ptr.String("__ActivityId__"),
+				},
+				CompleteWorkflowExecutionDecisionAttributes: &types.CompleteWorkflowExecutionDecisionAttributes{
+					Result: ptr.String("__Result__"),
+				},
+				FailWorkflowExecutionDecisionAttributes: &types.FailWorkflowExecutionDecisionAttributes{
+					Reason:  ptr.String("__Reason__"),
+					Details: ptr.String("__Details__"),
+				},
+				CancelWorkflowExecutionDecisionAttributes: &types.CancelWorkflowExecutionDecisionAttributes{
+					Details: ptr.String("__Details__"),
+				},
+				ContinueAsNewWorkflowExecutionDecisionAttributes: &types.ContinueAsNewWorkflowExecutionDecisionAttributes{
+					Input:                        ptr.String("__Input__"),
+					ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:            ptr.String("__TaskPriority__"),
+					TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+					ChildPolicy:             types.ChildPolicy("TERMINATE"),
+					TagList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					WorkflowTypeVersion: ptr.String("__WorkflowTypeVersion__"),
+					LambdaRole:          ptr.String("__LambdaRole__"),
+				},
+				RecordMarkerDecisionAttributes: &types.RecordMarkerDecisionAttributes{
+					MarkerName: ptr.String("__MarkerName__"),
+					Details:    ptr.String("__Details__"),
+				},
+				StartTimerDecisionAttributes: &types.StartTimerDecisionAttributes{
+					TimerId:            ptr.String("__TimerId__"),
+					Control:            ptr.String("__Control__"),
+					StartToFireTimeout: ptr.String("__StartToFireTimeout__"),
+				},
+				CancelTimerDecisionAttributes: &types.CancelTimerDecisionAttributes{
+					TimerId: ptr.String("__TimerId__"),
+				},
+				SignalExternalWorkflowExecutionDecisionAttributes: &types.SignalExternalWorkflowExecutionDecisionAttributes{
+					WorkflowId: ptr.String("__WorkflowId__"),
+					RunId:      ptr.String("__RunId__"),
+					SignalName: ptr.String("__SignalName__"),
+					Input:      ptr.String("__Input__"),
+					Control:    ptr.String("__Control__"),
+				},
+				RequestCancelExternalWorkflowExecutionDecisionAttributes: &types.RequestCancelExternalWorkflowExecutionDecisionAttributes{
+					WorkflowId: ptr.String("__WorkflowId__"),
+					RunId:      ptr.String("__RunId__"),
+					Control:    ptr.String("__Control__"),
+				},
+				StartChildWorkflowExecutionDecisionAttributes: &types.StartChildWorkflowExecutionDecisionAttributes{
+					WorkflowType: &types.WorkflowType{
+						Name:    ptr.String("__Name__"),
+						Version: ptr.String("__Version__"),
+					},
+					WorkflowId:                   ptr.String("__WorkflowId__"),
+					Control:                      ptr.String("__Control__"),
+					Input:                        ptr.String("__Input__"),
+					ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:            ptr.String("__TaskPriority__"),
+					TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+					ChildPolicy:             types.ChildPolicy("TERMINATE"),
+					TagList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LambdaRole: ptr.String("__LambdaRole__"),
+				},
+				ScheduleLambdaFunctionDecisionAttributes: &types.ScheduleLambdaFunctionDecisionAttributes{
+					Id:                  ptr.String("__Id__"),
+					Name:                ptr.String("__Name__"),
+					Control:             ptr.String("__Control__"),
+					Input:               ptr.String("__Input__"),
+					StartToCloseTimeout: ptr.String("__StartToCloseTimeout__"),
+				},
+			},
+			{
+				DecisionType: types.DecisionType("ScheduleActivityTask"),
+				ScheduleActivityTaskDecisionAttributes: &types.ScheduleActivityTaskDecisionAttributes{
+					ActivityType: &types.ActivityType{
+						Name:    ptr.String("__Name__"),
+						Version: ptr.String("__Version__"),
+					},
+					ActivityId:             ptr.String("__ActivityId__"),
+					Control:                ptr.String("__Control__"),
+					Input:                  ptr.String("__Input__"),
+					ScheduleToCloseTimeout: ptr.String("__ScheduleToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:           ptr.String("__TaskPriority__"),
+					ScheduleToStartTimeout: ptr.String("__ScheduleToStartTimeout__"),
+					StartToCloseTimeout:    ptr.String("__StartToCloseTimeout__"),
+					HeartbeatTimeout:       ptr.String("__HeartbeatTimeout__"),
+				},
+				RequestCancelActivityTaskDecisionAttributes: &types.RequestCancelActivityTaskDecisionAttributes{
+					ActivityId: ptr.String("__ActivityId__"),
+				},
+				CompleteWorkflowExecutionDecisionAttributes: &types.CompleteWorkflowExecutionDecisionAttributes{
+					Result: ptr.String("__Result__"),
+				},
+				FailWorkflowExecutionDecisionAttributes: &types.FailWorkflowExecutionDecisionAttributes{
+					Reason:  ptr.String("__Reason__"),
+					Details: ptr.String("__Details__"),
+				},
+				CancelWorkflowExecutionDecisionAttributes: &types.CancelWorkflowExecutionDecisionAttributes{
+					Details: ptr.String("__Details__"),
+				},
+				ContinueAsNewWorkflowExecutionDecisionAttributes: &types.ContinueAsNewWorkflowExecutionDecisionAttributes{
+					Input:                        ptr.String("__Input__"),
+					ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:            ptr.String("__TaskPriority__"),
+					TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+					ChildPolicy:             types.ChildPolicy("TERMINATE"),
+					TagList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					WorkflowTypeVersion: ptr.String("__WorkflowTypeVersion__"),
+					LambdaRole:          ptr.String("__LambdaRole__"),
+				},
+				RecordMarkerDecisionAttributes: &types.RecordMarkerDecisionAttributes{
+					MarkerName: ptr.String("__MarkerName__"),
+					Details:    ptr.String("__Details__"),
+				},
+				StartTimerDecisionAttributes: &types.StartTimerDecisionAttributes{
+					TimerId:            ptr.String("__TimerId__"),
+					Control:            ptr.String("__Control__"),
+					StartToFireTimeout: ptr.String("__StartToFireTimeout__"),
+				},
+				CancelTimerDecisionAttributes: &types.CancelTimerDecisionAttributes{
+					TimerId: ptr.String("__TimerId__"),
+				},
+				SignalExternalWorkflowExecutionDecisionAttributes: &types.SignalExternalWorkflowExecutionDecisionAttributes{
+					WorkflowId: ptr.String("__WorkflowId__"),
+					RunId:      ptr.String("__RunId__"),
+					SignalName: ptr.String("__SignalName__"),
+					Input:      ptr.String("__Input__"),
+					Control:    ptr.String("__Control__"),
+				},
+				RequestCancelExternalWorkflowExecutionDecisionAttributes: &types.RequestCancelExternalWorkflowExecutionDecisionAttributes{
+					WorkflowId: ptr.String("__WorkflowId__"),
+					RunId:      ptr.String("__RunId__"),
+					Control:    ptr.String("__Control__"),
+				},
+				StartChildWorkflowExecutionDecisionAttributes: &types.StartChildWorkflowExecutionDecisionAttributes{
+					WorkflowType: &types.WorkflowType{
+						Name:    ptr.String("__Name__"),
+						Version: ptr.String("__Version__"),
+					},
+					WorkflowId:                   ptr.String("__WorkflowId__"),
+					Control:                      ptr.String("__Control__"),
+					Input:                        ptr.String("__Input__"),
+					ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+					TaskList: &types.TaskList{
+						Name: ptr.String("__Name__"),
+					},
+					TaskPriority:            ptr.String("__TaskPriority__"),
+					TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+					ChildPolicy:             types.ChildPolicy("TERMINATE"),
+					TagList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					LambdaRole: ptr.String("__LambdaRole__"),
+				},
+				ScheduleLambdaFunctionDecisionAttributes: &types.ScheduleLambdaFunctionDecisionAttributes{
+					Id:                  ptr.String("__Id__"),
+					Name:                ptr.String("__Name__"),
+					Control:             ptr.String("__Control__"),
+					Input:               ptr.String("__Input__"),
+					StartToCloseTimeout: ptr.String("__StartToCloseTimeout__"),
+				},
+			},
+		},
+		ExecutionContext: ptr.String("__ExecutionContext__"),
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		TaskListScheduleToStartTimeout: ptr.String("__TaskListScheduleToStartTimeout__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2710,7 +3164,13 @@ func TestCheckResponseSnapshot_SignalWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SignalWorkflowExecution(context.Background(), &SignalWorkflowExecutionInput{})
+	got, err := svc.SignalWorkflowExecution(context.Background(), &SignalWorkflowExecutionInput{
+		Domain:     ptr.String("__Domain__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		RunId:      ptr.String("__RunId__"),
+		SignalName: ptr.String("__SignalName__"),
+		Input:      ptr.String("__Input__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2731,7 +3191,27 @@ func TestCheckResponseSnapshot_StartWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{})
+	got, err := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{
+		Domain:     ptr.String("__Domain__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		TaskPriority:                 ptr.String("__TaskPriority__"),
+		Input:                        ptr.String("__Input__"),
+		ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+		TagList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+		ChildPolicy:             types.ChildPolicy("TERMINATE"),
+		LambdaRole:              ptr.String("__LambdaRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2750,7 +3230,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2769,7 +3261,14 @@ func TestCheckResponseSnapshot_TerminateWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateWorkflowExecution(context.Background(), &TerminateWorkflowExecutionInput{})
+	got, err := svc.TerminateWorkflowExecution(context.Background(), &TerminateWorkflowExecutionInput{
+		Domain:      ptr.String("__Domain__"),
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		RunId:       ptr.String("__RunId__"),
+		Reason:      ptr.String("__Reason__"),
+		Details:     ptr.String("__Details__"),
+		ChildPolicy: types.ChildPolicy("TERMINATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2788,7 +3287,13 @@ func TestCheckResponseSnapshot_UndeprecateActivityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UndeprecateActivityType(context.Background(), &UndeprecateActivityTypeInput{})
+	got, err := svc.UndeprecateActivityType(context.Background(), &UndeprecateActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2807,7 +3312,9 @@ func TestCheckResponseSnapshot_UndeprecateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UndeprecateDomain(context.Background(), &UndeprecateDomainInput{})
+	got, err := svc.UndeprecateDomain(context.Background(), &UndeprecateDomainInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2826,7 +3333,13 @@ func TestCheckResponseSnapshot_UndeprecateWorkflowType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UndeprecateWorkflowType(context.Background(), &UndeprecateWorkflowTypeInput{})
+	got, err := svc.UndeprecateWorkflowType(context.Background(), &UndeprecateWorkflowTypeInput{
+		Domain: ptr.String("__Domain__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2845,7 +3358,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2866,7 +3385,27 @@ func TestCheckResponseSnapshot_Error_DefaultUndefinedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{})
+	_, opErr := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{
+		Domain:     ptr.String("__Domain__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		TaskPriority:                 ptr.String("__TaskPriority__"),
+		Input:                        ptr.String("__Input__"),
+		ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+		TagList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+		ChildPolicy:             types.ChildPolicy("TERMINATE"),
+		LambdaRole:              ptr.String("__LambdaRole__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2891,7 +3430,21 @@ func TestCheckResponseSnapshot_Error_DomainAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterDomain(context.Background(), &RegisterDomainInput{})
+	_, opErr := svc.RegisterDomain(context.Background(), &RegisterDomainInput{
+		Name:                                   ptr.String("__Name__"),
+		Description:                            ptr.String("__Description__"),
+		WorkflowExecutionRetentionPeriodInDays: ptr.String("__WorkflowExecutionRetentionPeriodInDays__"),
+		Tags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2916,7 +3469,9 @@ func TestCheckResponseSnapshot_Error_DomainDeprecatedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeprecateDomain(context.Background(), &DeprecateDomainInput{})
+	_, opErr := svc.DeprecateDomain(context.Background(), &DeprecateDomainInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2941,7 +3496,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2966,7 +3523,30 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{})
+	_, opErr := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		CloseTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		CloseStatusFilter: &types.CloseStatusFilter{
+			Status: types.CloseStatus("COMPLETED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2991,7 +3571,21 @@ func TestCheckResponseSnapshot_Error_TooManyTagsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterDomain(context.Background(), &RegisterDomainInput{})
+	_, opErr := svc.RegisterDomain(context.Background(), &RegisterDomainInput{
+		Name:                                   ptr.String("__Name__"),
+		Description:                            ptr.String("__Description__"),
+		WorkflowExecutionRetentionPeriodInDays: ptr.String("__WorkflowExecutionRetentionPeriodInDays__"),
+		Tags: []types.ResourceTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3016,7 +3610,20 @@ func TestCheckResponseSnapshot_Error_TypeAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterActivityType(context.Background(), &RegisterActivityTypeInput{})
+	_, opErr := svc.RegisterActivityType(context.Background(), &RegisterActivityTypeInput{
+		Domain:                         ptr.String("__Domain__"),
+		Name:                           ptr.String("__Name__"),
+		Version:                        ptr.String("__Version__"),
+		Description:                    ptr.String("__Description__"),
+		DefaultTaskStartToCloseTimeout: ptr.String("__DefaultTaskStartToCloseTimeout__"),
+		DefaultTaskHeartbeatTimeout:    ptr.String("__DefaultTaskHeartbeatTimeout__"),
+		DefaultTaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		DefaultTaskPriority:               ptr.String("__DefaultTaskPriority__"),
+		DefaultTaskScheduleToStartTimeout: ptr.String("__DefaultTaskScheduleToStartTimeout__"),
+		DefaultTaskScheduleToCloseTimeout: ptr.String("__DefaultTaskScheduleToCloseTimeout__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3041,7 +3648,13 @@ func TestCheckResponseSnapshot_Error_TypeDeprecatedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeprecateActivityType(context.Background(), &DeprecateActivityTypeInput{})
+	_, opErr := svc.DeprecateActivityType(context.Background(), &DeprecateActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3066,7 +3679,13 @@ func TestCheckResponseSnapshot_Error_TypeNotDeprecatedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteActivityType(context.Background(), &DeleteActivityTypeInput{})
+	_, opErr := svc.DeleteActivityType(context.Background(), &DeleteActivityTypeInput{
+		Domain: ptr.String("__Domain__"),
+		ActivityType: &types.ActivityType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3091,7 +3710,30 @@ func TestCheckResponseSnapshot_Error_UnknownResourceFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{})
+	_, opErr := svc.CountClosedWorkflowExecutions(context.Background(), &CountClosedWorkflowExecutionsInput{
+		Domain: ptr.String("__Domain__"),
+		StartTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		CloseTimeFilter: &types.ExecutionTimeFilter{
+			OldestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LatestDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ExecutionFilter: &types.WorkflowExecutionFilter{
+			WorkflowId: ptr.String("__WorkflowId__"),
+		},
+		TypeFilter: &types.WorkflowTypeFilter{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TagFilter: &types.TagFilter{
+			Tag: ptr.String("__Tag__"),
+		},
+		CloseStatusFilter: &types.CloseStatusFilter{
+			Status: types.CloseStatus("COMPLETED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3116,7 +3758,27 @@ func TestCheckResponseSnapshot_Error_WorkflowExecutionAlreadyStartedFault(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{})
+	_, opErr := svc.StartWorkflowExecution(context.Background(), &StartWorkflowExecutionInput{
+		Domain:     ptr.String("__Domain__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+		WorkflowType: &types.WorkflowType{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+		},
+		TaskList: &types.TaskList{
+			Name: ptr.String("__Name__"),
+		},
+		TaskPriority:                 ptr.String("__TaskPriority__"),
+		Input:                        ptr.String("__Input__"),
+		ExecutionStartToCloseTimeout: ptr.String("__ExecutionStartToCloseTimeout__"),
+		TagList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskStartToCloseTimeout: ptr.String("__TaskStartToCloseTimeout__"),
+		ChildPolicy:             types.ChildPolicy("TERMINATE"),
+		LambdaRole:              ptr.String("__LambdaRole__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

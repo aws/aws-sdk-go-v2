@@ -117,7 +117,14 @@ func TestCheckResponseSnapshot_AcceptMatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptMatch(context.Background(), &AcceptMatchInput{})
+	got, err := svc.AcceptMatch(context.Background(), &AcceptMatchInput{
+		TicketId: ptr.String("__TicketId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AcceptanceType: types.AcceptanceType("ACCEPT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +157,17 @@ func TestCheckResponseSnapshot_ClaimGameServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{})
+	got, err := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+		FilterOption: &types.ClaimFilterOption{
+			InstanceStatuses: []types.FilterInstanceStatus{
+				types.FilterInstanceStatus("ACTIVE"),
+				types.FilterInstanceStatus("ACTIVE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +200,25 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingStrategy: &types.RoutingStrategy{
+			Type:    types.RoutingStrategyType("SIMPLE"),
+			FleetId: ptr.String("__FleetId__"),
+			Message: ptr.String("__Message__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +260,28 @@ func TestCheckResponseSnapshot_CreateBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBuild(context.Background(), &CreateBuildInput{})
+	got, err := svc.CreateBuild(context.Background(), &CreateBuildInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+		StorageLocation: &types.S3Location{
+			Bucket:        ptr.String("__Bucket__"),
+			Key:           ptr.String("__Key__"),
+			RoleArn:       ptr.String("__RoleArn__"),
+			ObjectVersion: ptr.String("__ObjectVersion__"),
+		},
+		OperatingSystem: types.OperatingSystem("WINDOWS_2012"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ServerSdkVersion: ptr.String("__ServerSdkVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +365,66 @@ func TestCheckResponseSnapshot_CreateContainerFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContainerFleet(context.Background(), &CreateContainerFleetInput{})
+	got, err := svc.CreateContainerFleet(context.Background(), &CreateContainerFleetInput{
+		FleetRoleArn:                            ptr.String("__FleetRoleArn__"),
+		Description:                             ptr.String("__Description__"),
+		GameServerContainerGroupDefinitionName:  ptr.String("__GameServerContainerGroupDefinitionName__"),
+		PerInstanceContainerGroupDefinitionName: ptr.String("__PerInstanceContainerGroupDefinitionName__"),
+		InstanceConnectionPortRange: &types.ConnectionPortRange{
+			FromPort: ptr.Int32(1),
+			ToPort:   ptr.Int32(1),
+		},
+		InstanceInboundPermissions: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		GameServerContainerGroupsPerInstance: ptr.Int32(1),
+		InstanceType:                         ptr.String("__InstanceType__"),
+		BillingType:                          types.ContainerFleetBillingType("ON_DEMAND"),
+		Locations: []types.LocationConfiguration{
+			{
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+			},
+		},
+		MetricGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NewGameSessionProtectionPolicy: types.ProtectionPolicy("NoProtection"),
+		GameSessionCreationLimitPolicy: &types.GameSessionCreationLimitPolicy{
+			NewGameSessionsPerCreator: ptr.Int32(1),
+			PolicyPeriodInMinutes:     ptr.Int32(1),
+		},
+		LogConfiguration: &types.LogConfiguration{
+			LogDestination: types.LogDestination("NONE"),
+			S3BucketName:   ptr.String("__S3BucketName__"),
+			LogGroupArn:    ptr.String("__LogGroupArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PlayerGatewayMode: types.PlayerGatewayMode("DISABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -542,7 +657,221 @@ func TestCheckResponseSnapshot_CreateContainerGroupDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContainerGroupDefinition(context.Background(), &CreateContainerGroupDefinitionInput{})
+	got, err := svc.CreateContainerGroupDefinition(context.Background(), &CreateContainerGroupDefinitionInput{
+		Name:                      ptr.String("__Name__"),
+		ContainerGroupType:        types.ContainerGroupType("GAME_SERVER"),
+		TotalMemoryLimitMebibytes: ptr.Int32(1),
+		TotalVcpuLimit:            ptr.Float64(1.0),
+		GameServerContainerDefinition: &types.GameServerContainerDefinitionInput{
+			ContainerName: ptr.String("__ContainerName__"),
+			DependsOn: []types.ContainerDependency{
+				{
+					ContainerName: ptr.String("__ContainerName__"),
+					Condition:     types.ContainerDependencyCondition("START"),
+				},
+				{
+					ContainerName: ptr.String("__ContainerName__"),
+					Condition:     types.ContainerDependencyCondition("START"),
+				},
+			},
+			MountPoints: []types.ContainerMountPoint{
+				{
+					InstancePath:  ptr.String("__InstancePath__"),
+					ContainerPath: ptr.String("__ContainerPath__"),
+					AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+				},
+				{
+					InstancePath:  ptr.String("__InstancePath__"),
+					ContainerPath: ptr.String("__ContainerPath__"),
+					AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+				},
+			},
+			EnvironmentOverride: []types.ContainerEnvironment{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ImageUri: ptr.String("__ImageUri__"),
+			PortConfiguration: &types.ContainerPortConfiguration{
+				ContainerPortRanges: []types.ContainerPortRange{
+					{
+						FromPort: ptr.Int32(1),
+						ToPort:   ptr.Int32(1),
+						Protocol: types.IpProtocol("TCP"),
+					},
+					{
+						FromPort: ptr.Int32(1),
+						ToPort:   ptr.Int32(1),
+						Protocol: types.IpProtocol("TCP"),
+					},
+				},
+			},
+			ServerSdkVersion: ptr.String("__ServerSdkVersion__"),
+			LinuxCapabilities: &types.LinuxCapabilities{
+				Include: []types.LinuxCapability{
+					types.LinuxCapability("AUDIT_CONTROL"),
+					types.LinuxCapability("AUDIT_CONTROL"),
+				},
+			},
+		},
+		SupportContainerDefinitions: []types.SupportContainerDefinitionInput{
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+				},
+				MountPoints: []types.ContainerMountPoint{
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+				},
+				EnvironmentOverride: []types.ContainerEnvironment{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				HealthCheck: &types.ContainerHealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+				},
+				ImageUri:                 ptr.String("__ImageUri__"),
+				MemoryHardLimitMebibytes: ptr.Int32(1),
+				PortConfiguration: &types.ContainerPortConfiguration{
+					ContainerPortRanges: []types.ContainerPortRange{
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+					},
+				},
+				Vcpu: ptr.Float64(1.0),
+				LinuxCapabilities: &types.LinuxCapabilities{
+					Include: []types.LinuxCapability{
+						types.LinuxCapability("AUDIT_CONTROL"),
+						types.LinuxCapability("AUDIT_CONTROL"),
+					},
+				},
+			},
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+				},
+				MountPoints: []types.ContainerMountPoint{
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+				},
+				EnvironmentOverride: []types.ContainerEnvironment{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				HealthCheck: &types.ContainerHealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+				},
+				ImageUri:                 ptr.String("__ImageUri__"),
+				MemoryHardLimitMebibytes: ptr.Int32(1),
+				PortConfiguration: &types.ContainerPortConfiguration{
+					ContainerPortRanges: []types.ContainerPortRange{
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+					},
+				},
+				Vcpu: ptr.Float64(1.0),
+				LinuxCapabilities: &types.LinuxCapabilities{
+					Include: []types.LinuxCapability{
+						types.LinuxCapability("AUDIT_CONTROL"),
+						types.LinuxCapability("AUDIT_CONTROL"),
+					},
+				},
+			},
+		},
+		OperatingSystem:    types.ContainerOperatingSystem("AMAZON_LINUX_2023"),
+		VersionDescription: ptr.String("__VersionDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +951,92 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		BuildId:                ptr.String("__BuildId__"),
+		ScriptId:               ptr.String("__ScriptId__"),
+		ServerLaunchPath:       ptr.String("__ServerLaunchPath__"),
+		ServerLaunchParameters: ptr.String("__ServerLaunchParameters__"),
+		LogPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EC2InstanceType: types.EC2InstanceType("t2.micro"),
+		EC2InboundPermissions: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		NewGameSessionProtectionPolicy: types.ProtectionPolicy("NoProtection"),
+		RuntimeConfiguration: &types.RuntimeConfiguration{
+			ServerProcesses: []types.ServerProcess{
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+			},
+			MaxConcurrentGameSessionActivations: ptr.Int32(1),
+			GameSessionActivationTimeoutSeconds: ptr.Int32(1),
+		},
+		ResourceCreationLimitPolicy: &types.ResourceCreationLimitPolicy{
+			NewGameSessionsPerCreator: ptr.Int32(1),
+			PolicyPeriodInMinutes:     ptr.Int32(1),
+		},
+		MetricGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeerVpcAwsAccountId: ptr.String("__PeerVpcAwsAccountId__"),
+		PeerVpcId:           ptr.String("__PeerVpcId__"),
+		FleetType:           types.FleetType("ON_DEMAND"),
+		InstanceRoleArn:     ptr.String("__InstanceRoleArn__"),
+		CertificateConfiguration: &types.CertificateConfiguration{
+			CertificateType: types.CertificateType("DISABLED"),
+		},
+		Locations: []types.LocationConfiguration{
+			{
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ComputeType: types.ComputeType("EC2"),
+		AnywhereConfiguration: &types.AnywhereConfiguration{
+			Cost: ptr.String("__Cost__"),
+		},
+		InstanceRoleCredentialsProvider: types.InstanceRoleCredentialsProvider("SHARED_CREDENTIAL_FILE"),
+		PlayerGatewayMode:               types.PlayerGatewayMode("DISABLED"),
+		PlayerGatewayConfiguration: &types.PlayerGatewayConfiguration{
+			GameServerIpProtocolSupported: types.GameServerIpProtocolSupported("IPv4"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +1070,17 @@ func TestCheckResponseSnapshot_CreateFleetLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleetLocations(context.Background(), &CreateFleetLocationsInput{})
+	got, err := svc.CreateFleetLocations(context.Background(), &CreateFleetLocationsInput{
+		FleetId: ptr.String("__FleetId__"),
+		Locations: []types.LocationConfiguration{
+			{
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +1126,49 @@ func TestCheckResponseSnapshot_CreateGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGameServerGroup(context.Background(), &CreateGameServerGroupInput{})
+	got, err := svc.CreateGameServerGroup(context.Background(), &CreateGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		RoleArn:             ptr.String("__RoleArn__"),
+		MinSize:             ptr.Int32(1),
+		MaxSize:             ptr.Int32(1),
+		LaunchTemplate: &types.LaunchTemplateSpecification{
+			LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+			LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+			Version:            ptr.String("__Version__"),
+		},
+		InstanceDefinitions: []types.InstanceDefinition{
+			{
+				InstanceType:     types.GameServerGroupInstanceType("c4.large"),
+				WeightedCapacity: ptr.String("__WeightedCapacity__"),
+			},
+			{
+				InstanceType:     types.GameServerGroupInstanceType("c4.large"),
+				WeightedCapacity: ptr.String("__WeightedCapacity__"),
+			},
+		},
+		AutoScalingPolicy: &types.GameServerGroupAutoScalingPolicy{
+			EstimatedInstanceWarmup: ptr.Int32(1),
+			TargetTrackingConfiguration: &types.TargetTrackingConfiguration{
+				TargetValue: ptr.Float64(1.0),
+			},
+		},
+		BalancingStrategy:          types.BalancingStrategy("SPOT_ONLY"),
+		GameServerProtectionPolicy: types.GameServerProtectionPolicy("NO_PROTECTION"),
+		VpcSubnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -754,7 +1220,27 @@ func TestCheckResponseSnapshot_CreateGameSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{})
+	got, err := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{
+		FleetId:                   ptr.String("__FleetId__"),
+		AliasId:                   ptr.String("__AliasId__"),
+		MaximumPlayerSessionCount: ptr.Int32(1),
+		Name:                      ptr.String("__Name__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatorId:        ptr.String("__CreatorId__"),
+		GameSessionId:    ptr.String("__GameSessionId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		GameSessionData:  ptr.String("__GameSessionData__"),
+		Location:         ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -815,7 +1301,56 @@ func TestCheckResponseSnapshot_CreateGameSessionQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGameSessionQueue(context.Background(), &CreateGameSessionQueueInput{})
+	got, err := svc.CreateGameSessionQueue(context.Background(), &CreateGameSessionQueueInput{
+		Name:             ptr.String("__Name__"),
+		TimeoutInSeconds: ptr.Int32(1),
+		PlayerLatencyPolicies: []types.PlayerLatencyPolicy{
+			{
+				MaximumIndividualPlayerLatencyMilliseconds: ptr.Int32(1),
+				PolicyDurationSeconds:                      ptr.Int32(1),
+			},
+			{
+				MaximumIndividualPlayerLatencyMilliseconds: ptr.Int32(1),
+				PolicyDurationSeconds:                      ptr.Int32(1),
+			},
+		},
+		Destinations: []types.GameSessionQueueDestination{
+			{
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
+		FilterConfiguration: &types.FilterConfiguration{
+			AllowedLocations: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PriorityConfiguration: &types.PriorityConfiguration{
+			PriorityOrder: []types.PriorityType{
+				types.PriorityType("LATENCY"),
+				types.PriorityType("LATENCY"),
+			},
+			LocationOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CustomEventData:    ptr.String("__CustomEventData__"),
+		NotificationTarget: ptr.String("__NotificationTarget__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +1380,19 @@ func TestCheckResponseSnapshot_CreateLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocation(context.Background(), &CreateLocationInput{})
+	got, err := svc.CreateLocation(context.Background(), &CreateLocationInput{
+		LocationName: ptr.String("__LocationName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1443,44 @@ func TestCheckResponseSnapshot_CreateMatchmakingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMatchmakingConfiguration(context.Background(), &CreateMatchmakingConfigurationInput{})
+	got, err := svc.CreateMatchmakingConfiguration(context.Background(), &CreateMatchmakingConfigurationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		GameSessionQueueArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestTimeoutSeconds:    ptr.Int32(1),
+		AcceptanceTimeoutSeconds: ptr.Int32(1),
+		AcceptanceRequired:       ptr.Bool(true),
+		RuleSetName:              ptr.String("__RuleSetName__"),
+		NotificationTarget:       ptr.String("__NotificationTarget__"),
+		AdditionalPlayerCount:    ptr.Int32(1),
+		CustomEventData:          ptr.String("__CustomEventData__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		GameSessionData: ptr.String("__GameSessionData__"),
+		BackfillMode:    types.BackfillMode("AUTOMATIC"),
+		FlexMatchMode:   types.FlexMatchMode("STANDALONE"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1506,20 @@ func TestCheckResponseSnapshot_CreateMatchmakingRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMatchmakingRuleSet(context.Background(), &CreateMatchmakingRuleSetInput{})
+	got, err := svc.CreateMatchmakingRuleSet(context.Background(), &CreateMatchmakingRuleSetInput{
+		Name:        ptr.String("__Name__"),
+		RuleSetBody: ptr.String("__RuleSetBody__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -956,7 +1553,11 @@ func TestCheckResponseSnapshot_CreatePlayerSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{})
+	got, err := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+		PlayerId:      ptr.String("__PlayerId__"),
+		PlayerData:    ptr.String("__PlayerData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1006,7 +1607,16 @@ func TestCheckResponseSnapshot_CreatePlayerSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlayerSessions(context.Background(), &CreatePlayerSessionsInput{})
+	got, err := svc.CreatePlayerSessions(context.Background(), &CreatePlayerSessionsInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PlayerDataMap: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1041,7 +1651,28 @@ func TestCheckResponseSnapshot_CreateScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScript(context.Background(), &CreateScriptInput{})
+	got, err := svc.CreateScript(context.Background(), &CreateScriptInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+		StorageLocation: &types.S3Location{
+			Bucket:        ptr.String("__Bucket__"),
+			Key:           ptr.String("__Key__"),
+			RoleArn:       ptr.String("__RoleArn__"),
+			ObjectVersion: ptr.String("__ObjectVersion__"),
+		},
+		ZipFile: []byte("blob"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NodeJsVersion: ptr.String("__NodeJsVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1068,7 +1699,10 @@ func TestCheckResponseSnapshot_CreateVpcPeeringAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcPeeringAuthorization(context.Background(), &CreateVpcPeeringAuthorizationInput{})
+	got, err := svc.CreateVpcPeeringAuthorization(context.Background(), &CreateVpcPeeringAuthorizationInput{
+		GameLiftAwsAccountId: ptr.String("__GameLiftAwsAccountId__"),
+		PeerVpcId:            ptr.String("__PeerVpcId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1087,7 +1721,11 @@ func TestCheckResponseSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcPeeringConnection(context.Background(), &CreateVpcPeeringConnectionInput{})
+	got, err := svc.CreateVpcPeeringConnection(context.Background(), &CreateVpcPeeringConnectionInput{
+		FleetId:             ptr.String("__FleetId__"),
+		PeerVpcAwsAccountId: ptr.String("__PeerVpcAwsAccountId__"),
+		PeerVpcId:           ptr.String("__PeerVpcId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1106,7 +1744,9 @@ func TestCheckResponseSnapshot_DeleteAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{})
+	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{
+		AliasId: ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1765,9 @@ func TestCheckResponseSnapshot_DeleteBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBuild(context.Background(), &DeleteBuildInput{})
+	got, err := svc.DeleteBuild(context.Background(), &DeleteBuildInput{
+		BuildId: ptr.String("__BuildId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1786,9 @@ func TestCheckResponseSnapshot_DeleteContainerFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainerFleet(context.Background(), &DeleteContainerFleetInput{})
+	got, err := svc.DeleteContainerFleet(context.Background(), &DeleteContainerFleetInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1163,7 +1807,11 @@ func TestCheckResponseSnapshot_DeleteContainerGroupDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainerGroupDefinition(context.Background(), &DeleteContainerGroupDefinitionInput{})
+	got, err := svc.DeleteContainerGroupDefinition(context.Background(), &DeleteContainerGroupDefinitionInput{
+		Name:                 ptr.String("__Name__"),
+		VersionNumber:        ptr.Int32(1),
+		VersionCountToRetain: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1182,7 +1830,9 @@ func TestCheckResponseSnapshot_DeleteFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{})
+	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1866,13 @@ func TestCheckResponseSnapshot_DeleteFleetLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleetLocations(context.Background(), &DeleteFleetLocationsInput{})
+	got, err := svc.DeleteFleetLocations(context.Background(), &DeleteFleetLocationsInput{
+		FleetId: ptr.String("__FleetId__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1262,7 +1918,10 @@ func TestCheckResponseSnapshot_DeleteGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGameServerGroup(context.Background(), &DeleteGameServerGroupInput{})
+	got, err := svc.DeleteGameServerGroup(context.Background(), &DeleteGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		DeleteOption:        types.GameServerGroupDeleteOption("SAFE_DELETE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1281,7 +1940,9 @@ func TestCheckResponseSnapshot_DeleteGameSessionQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGameSessionQueue(context.Background(), &DeleteGameSessionQueueInput{})
+	got, err := svc.DeleteGameSessionQueue(context.Background(), &DeleteGameSessionQueueInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1300,7 +1961,9 @@ func TestCheckResponseSnapshot_DeleteLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLocation(context.Background(), &DeleteLocationInput{})
+	got, err := svc.DeleteLocation(context.Background(), &DeleteLocationInput{
+		LocationName: ptr.String("__LocationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +1982,9 @@ func TestCheckResponseSnapshot_DeleteMatchmakingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMatchmakingConfiguration(context.Background(), &DeleteMatchmakingConfigurationInput{})
+	got, err := svc.DeleteMatchmakingConfiguration(context.Background(), &DeleteMatchmakingConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +2003,9 @@ func TestCheckResponseSnapshot_DeleteMatchmakingRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMatchmakingRuleSet(context.Background(), &DeleteMatchmakingRuleSetInput{})
+	got, err := svc.DeleteMatchmakingRuleSet(context.Background(), &DeleteMatchmakingRuleSetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +2024,10 @@ func TestCheckResponseSnapshot_DeleteScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	got, err := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		Name:    ptr.String("__Name__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1376,7 +2046,9 @@ func TestCheckResponseSnapshot_DeleteScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScript(context.Background(), &DeleteScriptInput{})
+	got, err := svc.DeleteScript(context.Background(), &DeleteScriptInput{
+		ScriptId: ptr.String("__ScriptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1395,7 +2067,10 @@ func TestCheckResponseSnapshot_DeleteVpcPeeringAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcPeeringAuthorization(context.Background(), &DeleteVpcPeeringAuthorizationInput{})
+	got, err := svc.DeleteVpcPeeringAuthorization(context.Background(), &DeleteVpcPeeringAuthorizationInput{
+		GameLiftAwsAccountId: ptr.String("__GameLiftAwsAccountId__"),
+		PeerVpcId:            ptr.String("__PeerVpcId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1414,7 +2089,10 @@ func TestCheckResponseSnapshot_DeleteVpcPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcPeeringConnection(context.Background(), &DeleteVpcPeeringConnectionInput{})
+	got, err := svc.DeleteVpcPeeringConnection(context.Background(), &DeleteVpcPeeringConnectionInput{
+		FleetId:                ptr.String("__FleetId__"),
+		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +2111,10 @@ func TestCheckResponseSnapshot_DeregisterCompute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterCompute(context.Background(), &DeregisterComputeInput{})
+	got, err := svc.DeregisterCompute(context.Background(), &DeregisterComputeInput{
+		FleetId:     ptr.String("__FleetId__"),
+		ComputeName: ptr.String("__ComputeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1452,7 +2133,10 @@ func TestCheckResponseSnapshot_DeregisterGameServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterGameServer(context.Background(), &DeregisterGameServerInput{})
+	got, err := svc.DeregisterGameServer(context.Background(), &DeregisterGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1485,7 +2169,9 @@ func TestCheckResponseSnapshot_DescribeAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlias(context.Background(), &DescribeAliasInput{})
+	got, err := svc.DescribeAlias(context.Background(), &DescribeAliasInput{
+		AliasId: ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +2202,9 @@ func TestCheckResponseSnapshot_DescribeBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBuild(context.Background(), &DescribeBuildInput{})
+	got, err := svc.DescribeBuild(context.Background(), &DescribeBuildInput{
+		BuildId: ptr.String("__BuildId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1563,7 +2251,10 @@ func TestCheckResponseSnapshot_DescribeCompute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCompute(context.Background(), &DescribeComputeInput{})
+	got, err := svc.DescribeCompute(context.Background(), &DescribeComputeInput{
+		FleetId:     ptr.String("__FleetId__"),
+		ComputeName: ptr.String("__ComputeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1647,7 +2338,9 @@ func TestCheckResponseSnapshot_DescribeContainerFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainerFleet(context.Background(), &DescribeContainerFleetInput{})
+	got, err := svc.DescribeContainerFleet(context.Background(), &DescribeContainerFleetInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1880,7 +2573,10 @@ func TestCheckResponseSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainerGroupDefinition(context.Background(), &DescribeContainerGroupDefinitionInput{})
+	got, err := svc.DescribeContainerGroupDefinition(context.Background(), &DescribeContainerGroupDefinitionInput{
+		Name:          ptr.String("__Name__"),
+		VersionNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1941,7 +2637,13 @@ func TestCheckResponseSnapshot_DescribeContainerGroupPortMappings(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainerGroupPortMappings(context.Background(), &DescribeContainerGroupPortMappingsInput{})
+	got, err := svc.DescribeContainerGroupPortMappings(context.Background(), &DescribeContainerGroupPortMappingsInput{
+		FleetId:            ptr.String("__FleetId__"),
+		ContainerGroupType: types.ContainerGroupType("GAME_SERVER"),
+		ComputeName:        ptr.String("__ComputeName__"),
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContainerName:      ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1975,7 +2677,10 @@ func TestCheckResponseSnapshot_DescribeEC2InstanceLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEC2InstanceLimits(context.Background(), &DescribeEC2InstanceLimitsInput{})
+	got, err := svc.DescribeEC2InstanceLimits(context.Background(), &DescribeEC2InstanceLimitsInput{
+		EC2InstanceType: types.EC2InstanceType("t2.micro"),
+		Location:        ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2094,7 +2799,14 @@ func TestCheckResponseSnapshot_DescribeFleetAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAttributes(context.Background(), &DescribeFleetAttributesInput{})
+	got, err := svc.DescribeFleetAttributes(context.Background(), &DescribeFleetAttributesInput{
+		FleetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2167,7 +2879,14 @@ func TestCheckResponseSnapshot_DescribeFleetCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetCapacity(context.Background(), &DescribeFleetCapacityInput{})
+	got, err := svc.DescribeFleetCapacity(context.Background(), &DescribeFleetCapacityInput{
+		FleetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2207,7 +2926,10 @@ func TestCheckResponseSnapshot_DescribeFleetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetDeployment(context.Background(), &DescribeFleetDeploymentInput{})
+	got, err := svc.DescribeFleetDeployment(context.Background(), &DescribeFleetDeploymentInput{
+		FleetId:      ptr.String("__FleetId__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2248,7 +2970,13 @@ func TestCheckResponseSnapshot_DescribeFleetEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetEvents(context.Background(), &DescribeFleetEventsInput{})
+	got, err := svc.DescribeFleetEvents(context.Background(), &DescribeFleetEventsInput{
+		FleetId:   ptr.String("__FleetId__"),
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2297,7 +3025,15 @@ func TestCheckResponseSnapshot_DescribeFleetLocationAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetLocationAttributes(context.Background(), &DescribeFleetLocationAttributesInput{})
+	got, err := svc.DescribeFleetLocationAttributes(context.Background(), &DescribeFleetLocationAttributesInput{
+		FleetId: ptr.String("__FleetId__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2342,7 +3078,10 @@ func TestCheckResponseSnapshot_DescribeFleetLocationCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetLocationCapacity(context.Background(), &DescribeFleetLocationCapacityInput{})
+	got, err := svc.DescribeFleetLocationCapacity(context.Background(), &DescribeFleetLocationCapacityInput{
+		FleetId:  ptr.String("__FleetId__"),
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2371,7 +3110,10 @@ func TestCheckResponseSnapshot_DescribeFleetLocationUtilization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetLocationUtilization(context.Background(), &DescribeFleetLocationUtilizationInput{})
+	got, err := svc.DescribeFleetLocationUtilization(context.Background(), &DescribeFleetLocationUtilizationInput{
+		FleetId:  ptr.String("__FleetId__"),
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2409,7 +3151,10 @@ func TestCheckResponseSnapshot_DescribeFleetPortSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetPortSettings(context.Background(), &DescribeFleetPortSettingsInput{})
+	got, err := svc.DescribeFleetPortSettings(context.Background(), &DescribeFleetPortSettingsInput{
+		FleetId:  ptr.String("__FleetId__"),
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2450,7 +3195,14 @@ func TestCheckResponseSnapshot_DescribeFleetUtilization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetUtilization(context.Background(), &DescribeFleetUtilizationInput{})
+	got, err := svc.DescribeFleetUtilization(context.Background(), &DescribeFleetUtilizationInput{
+		FleetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2483,7 +3235,10 @@ func TestCheckResponseSnapshot_DescribeGameServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameServer(context.Background(), &DescribeGameServerInput{})
+	got, err := svc.DescribeGameServer(context.Background(), &DescribeGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2529,7 +3284,9 @@ func TestCheckResponseSnapshot_DescribeGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameServerGroup(context.Background(), &DescribeGameServerGroupInput{})
+	got, err := svc.DescribeGameServerGroup(context.Background(), &DescribeGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2564,7 +3321,15 @@ func TestCheckResponseSnapshot_DescribeGameServerInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameServerInstances(context.Background(), &DescribeGameServerInstancesInput{})
+	got, err := svc.DescribeGameServerInstances(context.Background(), &DescribeGameServerInstancesInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2657,7 +3422,15 @@ func TestCheckResponseSnapshot_DescribeGameSessionDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameSessionDetails(context.Background(), &DescribeGameSessionDetailsInput{})
+	got, err := svc.DescribeGameSessionDetails(context.Background(), &DescribeGameSessionDetailsInput{
+		FleetId:       ptr.String("__FleetId__"),
+		GameSessionId: ptr.String("__GameSessionId__"),
+		AliasId:       ptr.String("__AliasId__"),
+		Location:      ptr.String("__Location__"),
+		StatusFilter:  ptr.String("__StatusFilter__"),
+		Limit:         ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2734,7 +3507,9 @@ func TestCheckResponseSnapshot_DescribeGameSessionPlacement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameSessionPlacement(context.Background(), &DescribeGameSessionPlacementInput{})
+	got, err := svc.DescribeGameSessionPlacement(context.Background(), &DescribeGameSessionPlacementInput{
+		PlacementId: ptr.String("__PlacementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2839,7 +3614,14 @@ func TestCheckResponseSnapshot_DescribeGameSessionQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameSessionQueues(context.Background(), &DescribeGameSessionQueuesInput{})
+	got, err := svc.DescribeGameSessionQueues(context.Background(), &DescribeGameSessionQueuesInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2926,7 +3708,15 @@ func TestCheckResponseSnapshot_DescribeGameSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGameSessions(context.Background(), &DescribeGameSessionsInput{})
+	got, err := svc.DescribeGameSessions(context.Background(), &DescribeGameSessionsInput{
+		FleetId:       ptr.String("__FleetId__"),
+		GameSessionId: ptr.String("__GameSessionId__"),
+		AliasId:       ptr.String("__AliasId__"),
+		Location:      ptr.String("__Location__"),
+		StatusFilter:  ptr.String("__StatusFilter__"),
+		Limit:         ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2973,7 +3763,13 @@ func TestCheckResponseSnapshot_DescribeInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstances(context.Background(), &DescribeInstancesInput{})
+	got, err := svc.DescribeInstances(context.Background(), &DescribeInstancesInput{
+		FleetId:    ptr.String("__FleetId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Location:   ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3135,7 +3931,12 @@ func TestCheckResponseSnapshot_DescribeMatchmaking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMatchmaking(context.Background(), &DescribeMatchmakingInput{})
+	got, err := svc.DescribeMatchmaking(context.Background(), &DescribeMatchmakingInput{
+		TicketIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3220,7 +4021,15 @@ func TestCheckResponseSnapshot_DescribeMatchmakingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMatchmakingConfigurations(context.Background(), &DescribeMatchmakingConfigurationsInput{})
+	got, err := svc.DescribeMatchmakingConfigurations(context.Background(), &DescribeMatchmakingConfigurationsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RuleSetName: ptr.String("__RuleSetName__"),
+		Limit:       ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3255,7 +4064,14 @@ func TestCheckResponseSnapshot_DescribeMatchmakingRuleSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMatchmakingRuleSets(context.Background(), &DescribeMatchmakingRuleSetsInput{})
+	got, err := svc.DescribeMatchmakingRuleSets(context.Background(), &DescribeMatchmakingRuleSetsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3306,7 +4122,14 @@ func TestCheckResponseSnapshot_DescribePlayerSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePlayerSessions(context.Background(), &DescribePlayerSessionsInput{})
+	got, err := svc.DescribePlayerSessions(context.Background(), &DescribePlayerSessionsInput{
+		GameSessionId:             ptr.String("__GameSessionId__"),
+		PlayerId:                  ptr.String("__PlayerId__"),
+		PlayerSessionId:           ptr.String("__PlayerSessionId__"),
+		PlayerSessionStatusFilter: ptr.String("__PlayerSessionStatusFilter__"),
+		Limit:                     ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3342,7 +4165,9 @@ func TestCheckResponseSnapshot_DescribeRuntimeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuntimeConfiguration(context.Background(), &DescribeRuntimeConfigurationInput{})
+	got, err := svc.DescribeRuntimeConfiguration(context.Background(), &DescribeRuntimeConfigurationInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3401,7 +4226,13 @@ func TestCheckResponseSnapshot_DescribeScalingPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{})
+	got, err := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{
+		FleetId:      ptr.String("__FleetId__"),
+		StatusFilter: types.ScalingStatusType("ACTIVE"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Location:     ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3436,7 +4267,9 @@ func TestCheckResponseSnapshot_DescribeScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScript(context.Background(), &DescribeScriptInput{})
+	got, err := svc.DescribeScript(context.Background(), &DescribeScriptInput{
+		ScriptId: ptr.String("__ScriptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3518,7 +4351,9 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcPeeringConnections(context.Background(), &DescribeVpcPeeringConnectionsInput{})
+	got, err := svc.DescribeVpcPeeringConnections(context.Background(), &DescribeVpcPeeringConnectionsInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3558,7 +4393,10 @@ func TestCheckResponseSnapshot_GetComputeAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComputeAccess(context.Background(), &GetComputeAccessInput{})
+	got, err := svc.GetComputeAccess(context.Background(), &GetComputeAccessInput{
+		FleetId:     ptr.String("__FleetId__"),
+		ComputeName: ptr.String("__ComputeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3584,7 +4422,10 @@ func TestCheckResponseSnapshot_GetComputeAuthToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComputeAuthToken(context.Background(), &GetComputeAuthTokenInput{})
+	got, err := svc.GetComputeAuthToken(context.Background(), &GetComputeAuthTokenInput{
+		FleetId:     ptr.String("__FleetId__"),
+		ComputeName: ptr.String("__ComputeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3605,7 +4446,9 @@ func TestCheckResponseSnapshot_GetGameSessionLogUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGameSessionLogUrl(context.Background(), &GetGameSessionLogUrlInput{})
+	got, err := svc.GetGameSessionLogUrl(context.Background(), &GetGameSessionLogUrlInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3635,7 +4478,10 @@ func TestCheckResponseSnapshot_GetInstanceAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstanceAccess(context.Background(), &GetInstanceAccessInput{})
+	got, err := svc.GetInstanceAccess(context.Background(), &GetInstanceAccessInput{
+		FleetId:    ptr.String("__FleetId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3688,7 +4534,13 @@ func TestCheckResponseSnapshot_GetPlayerConnectionDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlayerConnectionDetails(context.Background(), &GetPlayerConnectionDetailsInput{})
+	got, err := svc.GetPlayerConnectionDetails(context.Background(), &GetPlayerConnectionDetailsInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3737,7 +4589,12 @@ func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{})
+	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{
+		RoutingStrategyType: types.RoutingStrategyType("SIMPLE"),
+		Name:                ptr.String("__Name__"),
+		Limit:               ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3782,7 +4639,11 @@ func TestCheckResponseSnapshot_ListBuilds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuilds(context.Background(), &ListBuildsInput{})
+	got, err := svc.ListBuilds(context.Background(), &ListBuildsInput{
+		Status:    types.BuildStatus("INITIALIZED"),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3859,7 +4720,14 @@ func TestCheckResponseSnapshot_ListCompute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCompute(context.Background(), &ListComputeInput{})
+	got, err := svc.ListCompute(context.Background(), &ListComputeInput{
+		FleetId:                      ptr.String("__FleetId__"),
+		Location:                     ptr.String("__Location__"),
+		ContainerGroupDefinitionName: ptr.String("__ContainerGroupDefinitionName__"),
+		ComputeStatus:                types.ListComputeInputStatus("ACTIVE"),
+		Limit:                        ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4010,7 +4878,11 @@ func TestCheckResponseSnapshot_ListContainerFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerFleets(context.Background(), &ListContainerFleetsInput{})
+	got, err := svc.ListContainerFleets(context.Background(), &ListContainerFleetsInput{
+		ContainerGroupDefinitionName: ptr.String("__ContainerGroupDefinitionName__"),
+		Limit:                        ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4459,7 +5331,11 @@ func TestCheckResponseSnapshot_ListContainerGroupDefinitionVersions(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerGroupDefinitionVersions(context.Background(), &ListContainerGroupDefinitionVersionsInput{})
+	got, err := svc.ListContainerGroupDefinitionVersions(context.Background(), &ListContainerGroupDefinitionVersionsInput{
+		Name:      ptr.String("__Name__"),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4908,7 +5784,11 @@ func TestCheckResponseSnapshot_ListContainerGroupDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerGroupDefinitions(context.Background(), &ListContainerGroupDefinitionsInput{})
+	got, err := svc.ListContainerGroupDefinitions(context.Background(), &ListContainerGroupDefinitionsInput{
+		ContainerGroupType: types.ContainerGroupType("GAME_SERVER"),
+		Limit:              ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4961,7 +5841,11 @@ func TestCheckResponseSnapshot_ListFleetDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleetDeployments(context.Background(), &ListFleetDeploymentsInput{})
+	got, err := svc.ListFleetDeployments(context.Background(), &ListFleetDeploymentsInput{
+		FleetId:   ptr.String("__FleetId__"),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4986,7 +5870,12 @@ func TestCheckResponseSnapshot_ListFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{})
+	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{
+		BuildId:   ptr.String("__BuildId__"),
+		ScriptId:  ptr.String("__ScriptId__"),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5061,7 +5950,10 @@ func TestCheckResponseSnapshot_ListGameServerGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGameServerGroups(context.Background(), &ListGameServerGroupsInput{})
+	got, err := svc.ListGameServerGroups(context.Background(), &ListGameServerGroupsInput{
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5110,7 +6002,12 @@ func TestCheckResponseSnapshot_ListGameServers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGameServers(context.Background(), &ListGameServersInput{})
+	got, err := svc.ListGameServers(context.Background(), &ListGameServersInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		SortOrder:           types.SortOrder("ASCENDING"),
+		Limit:               ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5153,7 +6050,14 @@ func TestCheckResponseSnapshot_ListLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLocations(context.Background(), &ListLocationsInput{})
+	got, err := svc.ListLocations(context.Background(), &ListLocationsInput{
+		Filters: []types.LocationFilter{
+			types.LocationFilter("AWS"),
+			types.LocationFilter("AWS"),
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5206,7 +6110,10 @@ func TestCheckResponseSnapshot_ListScripts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScripts(context.Background(), &ListScriptsInput{})
+	got, err := svc.ListScripts(context.Background(), &ListScriptsInput{
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5236,7 +6143,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5257,7 +6166,20 @@ func TestCheckResponseSnapshot_PutScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{})
+	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{
+		Name:                  ptr.String("__Name__"),
+		FleetId:               ptr.String("__FleetId__"),
+		ScalingAdjustment:     ptr.Int32(1),
+		ScalingAdjustmentType: types.ScalingAdjustmentType("ChangeInCapacity"),
+		Threshold:             ptr.Float64(1.0),
+		ComparisonOperator:    types.ComparisonOperatorType("GreaterThanOrEqualToThreshold"),
+		EvaluationPeriods:     ptr.Int32(1),
+		MetricName:            types.MetricName("ActivatingGameSessions"),
+		PolicyType:            types.PolicyType("RuleBased"),
+		TargetConfiguration: &types.TargetConfiguration{
+			TargetValue: ptr.Float64(1.0),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5304,7 +6226,14 @@ func TestCheckResponseSnapshot_RegisterCompute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterCompute(context.Background(), &RegisterComputeInput{})
+	got, err := svc.RegisterCompute(context.Background(), &RegisterComputeInput{
+		FleetId:         ptr.String("__FleetId__"),
+		ComputeName:     ptr.String("__ComputeName__"),
+		CertificatePath: ptr.String("__CertificatePath__"),
+		DnsName:         ptr.String("__DnsName__"),
+		IpAddress:       ptr.String("__IpAddress__"),
+		Location:        ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5337,7 +6266,13 @@ func TestCheckResponseSnapshot_RegisterGameServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterGameServer(context.Background(), &RegisterGameServerInput{})
+	got, err := svc.RegisterGameServer(context.Background(), &RegisterGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		InstanceId:          ptr.String("__InstanceId__"),
+		ConnectionInfo:      ptr.String("__ConnectionInfo__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5368,7 +6303,9 @@ func TestCheckResponseSnapshot_RequestUploadCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RequestUploadCredentials(context.Background(), &RequestUploadCredentialsInput{})
+	got, err := svc.RequestUploadCredentials(context.Background(), &RequestUploadCredentialsInput{
+		BuildId: ptr.String("__BuildId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5390,7 +6327,9 @@ func TestCheckResponseSnapshot_ResolveAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResolveAlias(context.Background(), &ResolveAliasInput{})
+	got, err := svc.ResolveAlias(context.Background(), &ResolveAliasInput{
+		AliasId: ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5436,7 +6375,13 @@ func TestCheckResponseSnapshot_ResumeGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeGameServerGroup(context.Background(), &ResumeGameServerGroupInput{})
+	got, err := svc.ResumeGameServerGroup(context.Background(), &ResumeGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		ResumeActions: []types.GameServerGroupAction{
+			types.GameServerGroupAction("REPLACE_INSTANCE_TYPES"),
+			types.GameServerGroupAction("REPLACE_INSTANCE_TYPES"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5523,7 +6468,15 @@ func TestCheckResponseSnapshot_SearchGameSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchGameSessions(context.Background(), &SearchGameSessionsInput{})
+	got, err := svc.SearchGameSessions(context.Background(), &SearchGameSessionsInput{
+		FleetId:          ptr.String("__FleetId__"),
+		AliasId:          ptr.String("__AliasId__"),
+		Location:         ptr.String("__Location__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+		SortExpression:   ptr.String("__SortExpression__"),
+		Limit:            ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5545,7 +6498,14 @@ func TestCheckResponseSnapshot_StartFleetActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFleetActions(context.Background(), &StartFleetActionsInput{})
+	got, err := svc.StartFleetActions(context.Background(), &StartFleetActionsInput{
+		FleetId: ptr.String("__FleetId__"),
+		Actions: []types.FleetAction{
+			types.FleetAction("AUTO_SCALING"),
+			types.FleetAction("AUTO_SCALING"),
+		},
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5622,7 +6582,52 @@ func TestCheckResponseSnapshot_StartGameSessionPlacement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartGameSessionPlacement(context.Background(), &StartGameSessionPlacementInput{})
+	got, err := svc.StartGameSessionPlacement(context.Background(), &StartGameSessionPlacementInput{
+		PlacementId:          ptr.String("__PlacementId__"),
+		GameSessionQueueName: ptr.String("__GameSessionQueueName__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MaximumPlayerSessionCount: ptr.Int32(1),
+		GameSessionName:           ptr.String("__GameSessionName__"),
+		PlayerLatencies: []types.PlayerLatency{
+			{
+				PlayerId:              ptr.String("__PlayerId__"),
+				RegionIdentifier:      ptr.String("__RegionIdentifier__"),
+				LatencyInMilliseconds: ptr.Float32(1.0),
+			},
+			{
+				PlayerId:              ptr.String("__PlayerId__"),
+				RegionIdentifier:      ptr.String("__RegionIdentifier__"),
+				LatencyInMilliseconds: ptr.Float32(1.0),
+			},
+		},
+		DesiredPlayerSessions: []types.DesiredPlayerSession{
+			{
+				PlayerId:   ptr.String("__PlayerId__"),
+				PlayerData: ptr.String("__PlayerData__"),
+			},
+			{
+				PlayerId:   ptr.String("__PlayerId__"),
+				PlayerData: ptr.String("__PlayerData__"),
+			},
+		},
+		GameSessionData: ptr.String("__GameSessionData__"),
+		PriorityConfigurationOverride: &types.PriorityConfigurationOverride{
+			PlacementFallbackStrategy: types.PlacementFallbackStrategy("DEFAULT_AFTER_SINGLE_PASS"),
+			LocationOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5712,7 +6717,53 @@ func TestCheckResponseSnapshot_StartMatchBackfill(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMatchBackfill(context.Background(), &StartMatchBackfillInput{})
+	got, err := svc.StartMatchBackfill(context.Background(), &StartMatchBackfillInput{
+		TicketId:          ptr.String("__TicketId__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		GameSessionArn:    ptr.String("__GameSessionArn__"),
+		Players: []types.Player{
+			{
+				PlayerId: ptr.String("__PlayerId__"),
+				PlayerAttributes: map[string]types.AttributeValue{
+					"key0": {
+						S: ptr.String("__S__"),
+						N: ptr.Float64(1.0),
+						SL: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SDM: map[string]float64{
+							"key0": 1.0,
+						},
+					},
+				},
+				Team: ptr.String("__Team__"),
+				LatencyInMs: map[string]int32{
+					"key0": 1,
+				},
+			},
+			{
+				PlayerId: ptr.String("__PlayerId__"),
+				PlayerAttributes: map[string]types.AttributeValue{
+					"key0": {
+						S: ptr.String("__S__"),
+						N: ptr.Float64(1.0),
+						SL: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SDM: map[string]float64{
+							"key0": 1.0,
+						},
+					},
+				},
+				Team: ptr.String("__Team__"),
+				LatencyInMs: map[string]int32{
+					"key0": 1,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5802,7 +6853,52 @@ func TestCheckResponseSnapshot_StartMatchmaking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMatchmaking(context.Background(), &StartMatchmakingInput{})
+	got, err := svc.StartMatchmaking(context.Background(), &StartMatchmakingInput{
+		TicketId:          ptr.String("__TicketId__"),
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		Players: []types.Player{
+			{
+				PlayerId: ptr.String("__PlayerId__"),
+				PlayerAttributes: map[string]types.AttributeValue{
+					"key0": {
+						S: ptr.String("__S__"),
+						N: ptr.Float64(1.0),
+						SL: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SDM: map[string]float64{
+							"key0": 1.0,
+						},
+					},
+				},
+				Team: ptr.String("__Team__"),
+				LatencyInMs: map[string]int32{
+					"key0": 1,
+				},
+			},
+			{
+				PlayerId: ptr.String("__PlayerId__"),
+				PlayerAttributes: map[string]types.AttributeValue{
+					"key0": {
+						S: ptr.String("__S__"),
+						N: ptr.Float64(1.0),
+						SL: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SDM: map[string]float64{
+							"key0": 1.0,
+						},
+					},
+				},
+				Team: ptr.String("__Team__"),
+				LatencyInMs: map[string]int32{
+					"key0": 1,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5824,7 +6920,14 @@ func TestCheckResponseSnapshot_StopFleetActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopFleetActions(context.Background(), &StopFleetActionsInput{})
+	got, err := svc.StopFleetActions(context.Background(), &StopFleetActionsInput{
+		FleetId: ptr.String("__FleetId__"),
+		Actions: []types.FleetAction{
+			types.FleetAction("AUTO_SCALING"),
+			types.FleetAction("AUTO_SCALING"),
+		},
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5901,7 +7004,9 @@ func TestCheckResponseSnapshot_StopGameSessionPlacement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopGameSessionPlacement(context.Background(), &StopGameSessionPlacementInput{})
+	got, err := svc.StopGameSessionPlacement(context.Background(), &StopGameSessionPlacementInput{
+		PlacementId: ptr.String("__PlacementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5920,7 +7025,9 @@ func TestCheckResponseSnapshot_StopMatchmaking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopMatchmaking(context.Background(), &StopMatchmakingInput{})
+	got, err := svc.StopMatchmaking(context.Background(), &StopMatchmakingInput{
+		TicketId: ptr.String("__TicketId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5966,7 +7073,13 @@ func TestCheckResponseSnapshot_SuspendGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SuspendGameServerGroup(context.Background(), &SuspendGameServerGroupInput{})
+	got, err := svc.SuspendGameServerGroup(context.Background(), &SuspendGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		SuspendActions: []types.GameServerGroupAction{
+			types.GameServerGroupAction("REPLACE_INSTANCE_TYPES"),
+			types.GameServerGroupAction("REPLACE_INSTANCE_TYPES"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5985,7 +7098,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6037,7 +7162,10 @@ func TestCheckResponseSnapshot_TerminateGameSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateGameSession(context.Background(), &TerminateGameSessionInput{})
+	got, err := svc.TerminateGameSession(context.Background(), &TerminateGameSessionInput{
+		GameSessionId:   ptr.String("__GameSessionId__"),
+		TerminationMode: types.TerminationMode("TRIGGER_ON_PROCESS_TERMINATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6056,7 +7184,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6089,7 +7223,16 @@ func TestCheckResponseSnapshot_UpdateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{})
+	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{
+		AliasId:     ptr.String("__AliasId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingStrategy: &types.RoutingStrategy{
+			Type:    types.RoutingStrategyType("SIMPLE"),
+			FleetId: ptr.String("__FleetId__"),
+			Message: ptr.String("__Message__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6120,7 +7263,11 @@ func TestCheckResponseSnapshot_UpdateBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBuild(context.Background(), &UpdateBuildInput{})
+	got, err := svc.UpdateBuild(context.Background(), &UpdateBuildInput{
+		BuildId: ptr.String("__BuildId__"),
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6204,7 +7351,68 @@ func TestCheckResponseSnapshot_UpdateContainerFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContainerFleet(context.Background(), &UpdateContainerFleetInput{})
+	got, err := svc.UpdateContainerFleet(context.Background(), &UpdateContainerFleetInput{
+		FleetId:                                 ptr.String("__FleetId__"),
+		GameServerContainerGroupDefinitionName:  ptr.String("__GameServerContainerGroupDefinitionName__"),
+		PerInstanceContainerGroupDefinitionName: ptr.String("__PerInstanceContainerGroupDefinitionName__"),
+		GameServerContainerGroupsPerInstance:    ptr.Int32(1),
+		InstanceConnectionPortRange: &types.ConnectionPortRange{
+			FromPort: ptr.Int32(1),
+			ToPort:   ptr.Int32(1),
+		},
+		InstanceInboundPermissionAuthorizations: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		InstanceInboundPermissionRevocations: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		DeploymentConfiguration: &types.DeploymentConfiguration{
+			ProtectionStrategy:       types.DeploymentProtectionStrategy("WITH_PROTECTION"),
+			MinimumHealthyPercentage: ptr.Int32(1),
+			ImpairmentStrategy:       types.DeploymentImpairmentStrategy("MAINTAIN"),
+		},
+		Description: ptr.String("__Description__"),
+		MetricGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NewGameSessionProtectionPolicy: types.ProtectionPolicy("NoProtection"),
+		GameSessionCreationLimitPolicy: &types.GameSessionCreationLimitPolicy{
+			NewGameSessionsPerCreator: ptr.Int32(1),
+			PolicyPeriodInMinutes:     ptr.Int32(1),
+		},
+		LogConfiguration: &types.LogConfiguration{
+			LogDestination: types.LogDestination("NONE"),
+			S3BucketName:   ptr.String("__S3BucketName__"),
+			LogGroupArn:    ptr.String("__LogGroupArn__"),
+		},
+		RemoveAttributes: []types.ContainerFleetRemoveAttribute{
+			types.ContainerFleetRemoveAttribute("PER_INSTANCE_CONTAINER_GROUP_DEFINITION"),
+			types.ContainerFleetRemoveAttribute("PER_INSTANCE_CONTAINER_GROUP_DEFINITION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6437,7 +7645,211 @@ func TestCheckResponseSnapshot_UpdateContainerGroupDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContainerGroupDefinition(context.Background(), &UpdateContainerGroupDefinitionInput{})
+	got, err := svc.UpdateContainerGroupDefinition(context.Background(), &UpdateContainerGroupDefinitionInput{
+		Name: ptr.String("__Name__"),
+		GameServerContainerDefinition: &types.GameServerContainerDefinitionInput{
+			ContainerName: ptr.String("__ContainerName__"),
+			DependsOn: []types.ContainerDependency{
+				{
+					ContainerName: ptr.String("__ContainerName__"),
+					Condition:     types.ContainerDependencyCondition("START"),
+				},
+				{
+					ContainerName: ptr.String("__ContainerName__"),
+					Condition:     types.ContainerDependencyCondition("START"),
+				},
+			},
+			MountPoints: []types.ContainerMountPoint{
+				{
+					InstancePath:  ptr.String("__InstancePath__"),
+					ContainerPath: ptr.String("__ContainerPath__"),
+					AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+				},
+				{
+					InstancePath:  ptr.String("__InstancePath__"),
+					ContainerPath: ptr.String("__ContainerPath__"),
+					AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+				},
+			},
+			EnvironmentOverride: []types.ContainerEnvironment{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ImageUri: ptr.String("__ImageUri__"),
+			PortConfiguration: &types.ContainerPortConfiguration{
+				ContainerPortRanges: []types.ContainerPortRange{
+					{
+						FromPort: ptr.Int32(1),
+						ToPort:   ptr.Int32(1),
+						Protocol: types.IpProtocol("TCP"),
+					},
+					{
+						FromPort: ptr.Int32(1),
+						ToPort:   ptr.Int32(1),
+						Protocol: types.IpProtocol("TCP"),
+					},
+				},
+			},
+			ServerSdkVersion: ptr.String("__ServerSdkVersion__"),
+			LinuxCapabilities: &types.LinuxCapabilities{
+				Include: []types.LinuxCapability{
+					types.LinuxCapability("AUDIT_CONTROL"),
+					types.LinuxCapability("AUDIT_CONTROL"),
+				},
+			},
+		},
+		SupportContainerDefinitions: []types.SupportContainerDefinitionInput{
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+				},
+				MountPoints: []types.ContainerMountPoint{
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+				},
+				EnvironmentOverride: []types.ContainerEnvironment{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				HealthCheck: &types.ContainerHealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+				},
+				ImageUri:                 ptr.String("__ImageUri__"),
+				MemoryHardLimitMebibytes: ptr.Int32(1),
+				PortConfiguration: &types.ContainerPortConfiguration{
+					ContainerPortRanges: []types.ContainerPortRange{
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+					},
+				},
+				Vcpu: ptr.Float64(1.0),
+				LinuxCapabilities: &types.LinuxCapabilities{
+					Include: []types.LinuxCapability{
+						types.LinuxCapability("AUDIT_CONTROL"),
+						types.LinuxCapability("AUDIT_CONTROL"),
+					},
+				},
+			},
+			{
+				ContainerName: ptr.String("__ContainerName__"),
+				DependsOn: []types.ContainerDependency{
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+					{
+						ContainerName: ptr.String("__ContainerName__"),
+						Condition:     types.ContainerDependencyCondition("START"),
+					},
+				},
+				MountPoints: []types.ContainerMountPoint{
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+					{
+						InstancePath:  ptr.String("__InstancePath__"),
+						ContainerPath: ptr.String("__ContainerPath__"),
+						AccessLevel:   types.ContainerMountPointAccessLevel("READ_ONLY"),
+					},
+				},
+				EnvironmentOverride: []types.ContainerEnvironment{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Essential: ptr.Bool(true),
+				HealthCheck: &types.ContainerHealthCheck{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Interval:    ptr.Int32(1),
+					Retries:     ptr.Int32(1),
+					StartPeriod: ptr.Int32(1),
+					Timeout:     ptr.Int32(1),
+				},
+				ImageUri:                 ptr.String("__ImageUri__"),
+				MemoryHardLimitMebibytes: ptr.Int32(1),
+				PortConfiguration: &types.ContainerPortConfiguration{
+					ContainerPortRanges: []types.ContainerPortRange{
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+						{
+							FromPort: ptr.Int32(1),
+							ToPort:   ptr.Int32(1),
+							Protocol: types.IpProtocol("TCP"),
+						},
+					},
+				},
+				Vcpu: ptr.Float64(1.0),
+				LinuxCapabilities: &types.LinuxCapabilities{
+					Include: []types.LinuxCapability{
+						types.LinuxCapability("AUDIT_CONTROL"),
+						types.LinuxCapability("AUDIT_CONTROL"),
+					},
+				},
+			},
+		},
+		TotalMemoryLimitMebibytes: ptr.Int32(1),
+		TotalVcpuLimit:            ptr.Float64(1.0),
+		VersionDescription:        ptr.String("__VersionDescription__"),
+		SourceVersionNumber:       ptr.Int32(1),
+		OperatingSystem:           types.ContainerOperatingSystem("AMAZON_LINUX_2023"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6459,7 +7871,23 @@ func TestCheckResponseSnapshot_UpdateFleetAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleetAttributes(context.Background(), &UpdateFleetAttributesInput{})
+	got, err := svc.UpdateFleetAttributes(context.Background(), &UpdateFleetAttributesInput{
+		FleetId:                        ptr.String("__FleetId__"),
+		Name:                           ptr.String("__Name__"),
+		Description:                    ptr.String("__Description__"),
+		NewGameSessionProtectionPolicy: types.ProtectionPolicy("NoProtection"),
+		ResourceCreationLimitPolicy: &types.ResourceCreationLimitPolicy{
+			NewGameSessionsPerCreator: ptr.Int32(1),
+			PolicyPeriodInMinutes:     ptr.Int32(1),
+		},
+		MetricGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AnywhereConfiguration: &types.AnywhereConfiguration{
+			Cost: ptr.String("__Cost__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6486,7 +7914,17 @@ func TestCheckResponseSnapshot_UpdateFleetCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleetCapacity(context.Background(), &UpdateFleetCapacityInput{})
+	got, err := svc.UpdateFleetCapacity(context.Background(), &UpdateFleetCapacityInput{
+		FleetId:          ptr.String("__FleetId__"),
+		DesiredInstances: ptr.Int32(1),
+		MinSize:          ptr.Int32(1),
+		MaxSize:          ptr.Int32(1),
+		Location:         ptr.String("__Location__"),
+		ManagedCapacityConfiguration: &types.ManagedCapacityConfiguration{
+			ZeroCapacityStrategy:          types.ZeroCapacityStrategy("MANUAL"),
+			ScaleInAfterInactivityMinutes: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6508,7 +7946,37 @@ func TestCheckResponseSnapshot_UpdateFleetPortSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleetPortSettings(context.Background(), &UpdateFleetPortSettingsInput{})
+	got, err := svc.UpdateFleetPortSettings(context.Background(), &UpdateFleetPortSettingsInput{
+		FleetId: ptr.String("__FleetId__"),
+		InboundPermissionAuthorizations: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		InboundPermissionRevocations: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6541,7 +8009,13 @@ func TestCheckResponseSnapshot_UpdateGameServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGameServer(context.Background(), &UpdateGameServerInput{})
+	got, err := svc.UpdateGameServer(context.Background(), &UpdateGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+		UtilizationStatus:   types.GameServerUtilizationStatus("AVAILABLE"),
+		HealthCheck:         types.GameServerHealthCheck("HEALTHY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6587,7 +8061,22 @@ func TestCheckResponseSnapshot_UpdateGameServerGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGameServerGroup(context.Background(), &UpdateGameServerGroupInput{})
+	got, err := svc.UpdateGameServerGroup(context.Background(), &UpdateGameServerGroupInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		RoleArn:             ptr.String("__RoleArn__"),
+		InstanceDefinitions: []types.InstanceDefinition{
+			{
+				InstanceType:     types.GameServerGroupInstanceType("c4.large"),
+				WeightedCapacity: ptr.String("__WeightedCapacity__"),
+			},
+			{
+				InstanceType:     types.GameServerGroupInstanceType("c4.large"),
+				WeightedCapacity: ptr.String("__WeightedCapacity__"),
+			},
+		},
+		GameServerProtectionPolicy: types.GameServerProtectionPolicy("NO_PROTECTION"),
+		BalancingStrategy:          types.BalancingStrategy("SPOT_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6639,7 +8128,23 @@ func TestCheckResponseSnapshot_UpdateGameSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGameSession(context.Background(), &UpdateGameSessionInput{})
+	got, err := svc.UpdateGameSession(context.Background(), &UpdateGameSessionInput{
+		GameSessionId:               ptr.String("__GameSessionId__"),
+		MaximumPlayerSessionCount:   ptr.Int32(1),
+		Name:                        ptr.String("__Name__"),
+		PlayerSessionCreationPolicy: types.PlayerSessionCreationPolicy("ACCEPT_ALL"),
+		ProtectionPolicy:            types.ProtectionPolicy("NoProtection"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6700,7 +8205,46 @@ func TestCheckResponseSnapshot_UpdateGameSessionQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGameSessionQueue(context.Background(), &UpdateGameSessionQueueInput{})
+	got, err := svc.UpdateGameSessionQueue(context.Background(), &UpdateGameSessionQueueInput{
+		Name:             ptr.String("__Name__"),
+		TimeoutInSeconds: ptr.Int32(1),
+		PlayerLatencyPolicies: []types.PlayerLatencyPolicy{
+			{
+				MaximumIndividualPlayerLatencyMilliseconds: ptr.Int32(1),
+				PolicyDurationSeconds:                      ptr.Int32(1),
+			},
+			{
+				MaximumIndividualPlayerLatencyMilliseconds: ptr.Int32(1),
+				PolicyDurationSeconds:                      ptr.Int32(1),
+			},
+		},
+		Destinations: []types.GameSessionQueueDestination{
+			{
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
+		FilterConfiguration: &types.FilterConfiguration{
+			AllowedLocations: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PriorityConfiguration: &types.PriorityConfiguration{
+			PriorityOrder: []types.PriorityType{
+				types.PriorityType("LATENCY"),
+				types.PriorityType("LATENCY"),
+			},
+			LocationOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CustomEventData:    ptr.String("__CustomEventData__"),
+		NotificationTarget: ptr.String("__NotificationTarget__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6751,7 +8295,34 @@ func TestCheckResponseSnapshot_UpdateMatchmakingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMatchmakingConfiguration(context.Background(), &UpdateMatchmakingConfigurationInput{})
+	got, err := svc.UpdateMatchmakingConfiguration(context.Background(), &UpdateMatchmakingConfigurationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		GameSessionQueueArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestTimeoutSeconds:    ptr.Int32(1),
+		AcceptanceTimeoutSeconds: ptr.Int32(1),
+		AcceptanceRequired:       ptr.Bool(true),
+		RuleSetName:              ptr.String("__RuleSetName__"),
+		NotificationTarget:       ptr.String("__NotificationTarget__"),
+		AdditionalPlayerCount:    ptr.Int32(1),
+		CustomEventData:          ptr.String("__CustomEventData__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		GameSessionData: ptr.String("__GameSessionData__"),
+		BackfillMode:    types.BackfillMode("AUTOMATIC"),
+		FlexMatchMode:   types.FlexMatchMode("STANDALONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6787,7 +8358,25 @@ func TestCheckResponseSnapshot_UpdateRuntimeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuntimeConfiguration(context.Background(), &UpdateRuntimeConfigurationInput{})
+	got, err := svc.UpdateRuntimeConfiguration(context.Background(), &UpdateRuntimeConfigurationInput{
+		FleetId: ptr.String("__FleetId__"),
+		RuntimeConfiguration: &types.RuntimeConfiguration{
+			ServerProcesses: []types.ServerProcess{
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+			},
+			MaxConcurrentGameSessionActivations: ptr.Int32(1),
+			GameSessionActivationTimeoutSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6822,7 +8411,18 @@ func TestCheckResponseSnapshot_UpdateScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScript(context.Background(), &UpdateScriptInput{})
+	got, err := svc.UpdateScript(context.Background(), &UpdateScriptInput{
+		ScriptId: ptr.String("__ScriptId__"),
+		Name:     ptr.String("__Name__"),
+		Version:  ptr.String("__Version__"),
+		StorageLocation: &types.S3Location{
+			Bucket:        ptr.String("__Bucket__"),
+			Key:           ptr.String("__Key__"),
+			RoleArn:       ptr.String("__RoleArn__"),
+			ObjectVersion: ptr.String("__ObjectVersion__"),
+		},
+		ZipFile: []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6843,7 +8443,9 @@ func TestCheckResponseSnapshot_ValidateMatchmakingRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateMatchmakingRuleSet(context.Background(), &ValidateMatchmakingRuleSetInput{})
+	got, err := svc.ValidateMatchmakingRuleSet(context.Background(), &ValidateMatchmakingRuleSetInput{
+		RuleSetBody: ptr.String("__RuleSetBody__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6864,7 +8466,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{})
+	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+		FilterOption: &types.ClaimFilterOption{
+			InstanceStatuses: []types.FilterInstanceStatus{
+				types.FilterInstanceStatus("ACTIVE"),
+				types.FilterInstanceStatus("ACTIVE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6889,7 +8501,27 @@ func TestCheckResponseSnapshot_Error_FleetCapacityExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{})
+	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{
+		FleetId:                   ptr.String("__FleetId__"),
+		AliasId:                   ptr.String("__AliasId__"),
+		MaximumPlayerSessionCount: ptr.Int32(1),
+		Name:                      ptr.String("__Name__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatorId:        ptr.String("__CreatorId__"),
+		GameSessionId:    ptr.String("__GameSessionId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		GameSessionData:  ptr.String("__GameSessionData__"),
+		Location:         ptr.String("__Location__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6914,7 +8546,11 @@ func TestCheckResponseSnapshot_Error_GameSessionFullException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{})
+	_, opErr := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+		PlayerId:      ptr.String("__PlayerId__"),
+		PlayerData:    ptr.String("__PlayerData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6939,7 +8575,27 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{})
+	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{
+		FleetId:                   ptr.String("__FleetId__"),
+		AliasId:                   ptr.String("__AliasId__"),
+		MaximumPlayerSessionCount: ptr.Int32(1),
+		Name:                      ptr.String("__Name__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatorId:        ptr.String("__CreatorId__"),
+		GameSessionId:    ptr.String("__GameSessionId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		GameSessionData:  ptr.String("__GameSessionData__"),
+		Location:         ptr.String("__Location__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6964,7 +8620,14 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{})
+	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{
+		TicketId: ptr.String("__TicketId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AcceptanceType: types.AcceptanceType("ACCEPT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6989,7 +8652,17 @@ func TestCheckResponseSnapshot_Error_InvalidFleetStatusException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFleetLocations(context.Background(), &CreateFleetLocationsInput{})
+	_, opErr := svc.CreateFleetLocations(context.Background(), &CreateFleetLocationsInput{
+		FleetId: ptr.String("__FleetId__"),
+		Locations: []types.LocationConfiguration{
+			{
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7014,7 +8687,11 @@ func TestCheckResponseSnapshot_Error_InvalidGameSessionStatusException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{})
+	_, opErr := svc.CreatePlayerSession(context.Background(), &CreatePlayerSessionInput{
+		GameSessionId: ptr.String("__GameSessionId__"),
+		PlayerId:      ptr.String("__PlayerId__"),
+		PlayerData:    ptr.String("__PlayerData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7039,7 +8716,14 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{})
+	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{
+		TicketId: ptr.String("__TicketId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AcceptanceType: types.AcceptanceType("ACCEPT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7064,7 +8748,25 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingStrategy: &types.RoutingStrategy{
+			Type:    types.RoutingStrategyType("SIMPLE"),
+			FleetId: ptr.String("__FleetId__"),
+			Message: ptr.String("__Message__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7089,7 +8791,14 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{})
+	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{
+		TicketId: ptr.String("__TicketId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AcceptanceType: types.AcceptanceType("ACCEPT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7114,7 +8823,92 @@ func TestCheckResponseSnapshot_Error_NotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		BuildId:                ptr.String("__BuildId__"),
+		ScriptId:               ptr.String("__ScriptId__"),
+		ServerLaunchPath:       ptr.String("__ServerLaunchPath__"),
+		ServerLaunchParameters: ptr.String("__ServerLaunchParameters__"),
+		LogPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EC2InstanceType: types.EC2InstanceType("t2.micro"),
+		EC2InboundPermissions: []types.IpPermission{
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+			{
+				FromPort: ptr.Int32(1),
+				ToPort:   ptr.Int32(1),
+				IpRange:  ptr.String("__IpRange__"),
+				Protocol: types.IpProtocol("TCP"),
+			},
+		},
+		NewGameSessionProtectionPolicy: types.ProtectionPolicy("NoProtection"),
+		RuntimeConfiguration: &types.RuntimeConfiguration{
+			ServerProcesses: []types.ServerProcess{
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+				{
+					LaunchPath:           ptr.String("__LaunchPath__"),
+					Parameters:           ptr.String("__Parameters__"),
+					ConcurrentExecutions: ptr.Int32(1),
+				},
+			},
+			MaxConcurrentGameSessionActivations: ptr.Int32(1),
+			GameSessionActivationTimeoutSeconds: ptr.Int32(1),
+		},
+		ResourceCreationLimitPolicy: &types.ResourceCreationLimitPolicy{
+			NewGameSessionsPerCreator: ptr.Int32(1),
+			PolicyPeriodInMinutes:     ptr.Int32(1),
+		},
+		MetricGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeerVpcAwsAccountId: ptr.String("__PeerVpcAwsAccountId__"),
+		PeerVpcId:           ptr.String("__PeerVpcId__"),
+		FleetType:           types.FleetType("ON_DEMAND"),
+		InstanceRoleArn:     ptr.String("__InstanceRoleArn__"),
+		CertificateConfiguration: &types.CertificateConfiguration{
+			CertificateType: types.CertificateType("DISABLED"),
+		},
+		Locations: []types.LocationConfiguration{
+			{
+				Location: ptr.String("__Location__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ComputeType: types.ComputeType("EC2"),
+		AnywhereConfiguration: &types.AnywhereConfiguration{
+			Cost: ptr.String("__Cost__"),
+		},
+		InstanceRoleCredentialsProvider: types.InstanceRoleCredentialsProvider("SHARED_CREDENTIAL_FILE"),
+		PlayerGatewayMode:               types.PlayerGatewayMode("DISABLED"),
+		PlayerGatewayConfiguration: &types.PlayerGatewayConfiguration{
+			GameServerIpProtocolSupported: types.GameServerIpProtocolSupported("IPv4"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7139,7 +8933,17 @@ func TestCheckResponseSnapshot_Error_OutOfCapacityException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{})
+	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+		FilterOption: &types.ClaimFilterOption{
+			InstanceStatuses: []types.FilterInstanceStatus{
+				types.FilterInstanceStatus("ACTIVE"),
+				types.FilterInstanceStatus("ACTIVE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7164,7 +8968,25 @@ func TestCheckResponseSnapshot_Error_TaggingFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RoutingStrategy: &types.RoutingStrategy{
+			Type:    types.RoutingStrategyType("SIMPLE"),
+			FleetId: ptr.String("__FleetId__"),
+			Message: ptr.String("__Message__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7189,7 +9011,27 @@ func TestCheckResponseSnapshot_Error_TerminalRoutingStrategyException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{})
+	_, opErr := svc.CreateGameSession(context.Background(), &CreateGameSessionInput{
+		FleetId:                   ptr.String("__FleetId__"),
+		AliasId:                   ptr.String("__AliasId__"),
+		MaximumPlayerSessionCount: ptr.Int32(1),
+		Name:                      ptr.String("__Name__"),
+		GameProperties: []types.GameProperty{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatorId:        ptr.String("__CreatorId__"),
+		GameSessionId:    ptr.String("__GameSessionId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		GameSessionData:  ptr.String("__GameSessionData__"),
+		Location:         ptr.String("__Location__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7214,7 +9056,17 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{})
+	_, opErr := svc.ClaimGameServer(context.Background(), &ClaimGameServerInput{
+		GameServerGroupName: ptr.String("__GameServerGroupName__"),
+		GameServerId:        ptr.String("__GameServerId__"),
+		GameServerData:      ptr.String("__GameServerData__"),
+		FilterOption: &types.ClaimFilterOption{
+			InstanceStatuses: []types.FilterInstanceStatus{
+				types.FilterInstanceStatus("ACTIVE"),
+				types.FilterInstanceStatus("ACTIVE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7239,7 +9091,14 @@ func TestCheckResponseSnapshot_Error_UnsupportedRegionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{})
+	_, opErr := svc.AcceptMatch(context.Background(), &AcceptMatchInput{
+		TicketId: ptr.String("__TicketId__"),
+		PlayerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AcceptanceType: types.AcceptanceType("ACCEPT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

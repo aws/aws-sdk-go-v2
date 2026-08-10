@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"gatewayId":"__GatewayId__","status":"CREATING","statusReasons":["__Member__","__Member__"]}

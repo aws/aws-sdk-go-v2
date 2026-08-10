@@ -120,7 +120,10 @@ func TestCheckResponseSnapshot_CancelJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	got, err := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -144,7 +147,75 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJobTemplate(context.Background(), &CreateJobTemplateInput{})
+	got, err := svc.CreateJobTemplate(context.Background(), &CreateJobTemplateInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		JobTemplateData: &types.JobTemplateData{
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			ReleaseLabel:     ptr.String("__ReleaseLabel__"),
+			ConfigurationOverrides: &types.ParametricConfigurationOverrides{
+				ApplicationConfiguration: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+					},
+				},
+				MonitoringConfiguration: &types.ParametricMonitoringConfiguration{
+					PersistentAppUI: ptr.String("__PersistentAppUI__"),
+					CloudWatchMonitoringConfiguration: &types.ParametricCloudWatchMonitoringConfiguration{
+						LogGroupName:        ptr.String("__LogGroupName__"),
+						LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+					},
+					S3MonitoringConfiguration: &types.ParametricS3MonitoringConfiguration{
+						LogUri: ptr.String("__LogUri__"),
+					},
+				},
+			},
+			JobDriver: &types.JobDriver{
+				SparkSubmitJobDriver: &types.SparkSubmitJobDriver{
+					EntryPoint: ptr.String("__EntryPoint__"),
+					EntryPointArguments: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SparkSubmitParameters: ptr.String("__SparkSubmitParameters__"),
+				},
+				SparkSqlJobDriver: &types.SparkSqlJobDriver{
+					EntryPoint:         ptr.String("__EntryPoint__"),
+					SparkSqlParameters: ptr.String("__SparkSqlParameters__"),
+				},
+			},
+			ParameterConfiguration: map[string]types.TemplateParameterConfiguration{
+				"key0": {
+					Type:         types.TemplateParameterDataType("NUMBER"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			JobTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,7 +239,62 @@ func TestCheckResponseSnapshot_CreateManagedEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateManagedEndpoint(context.Background(), &CreateManagedEndpointInput{})
+	got, err := svc.CreateManagedEndpoint(context.Background(), &CreateManagedEndpointInput{
+		Name:             ptr.String("__Name__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+		Type:             ptr.String("__Type__"),
+		ReleaseLabel:     ptr.String("__ReleaseLabel__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			ApplicationConfiguration: []types.Configuration{
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+			},
+			MonitoringConfiguration: &types.MonitoringConfiguration{
+				ManagedLogs: &types.ManagedLogs{
+					AllowAWSToRetainLogs: types.AllowAWSToRetainLogs("ENABLED"),
+					EncryptionKeyArn:     ptr.String("__EncryptionKeyArn__"),
+				},
+				PersistentAppUI: types.PersistentAppUI("ENABLED"),
+				CloudWatchMonitoringConfiguration: &types.CloudWatchMonitoringConfiguration{
+					LogGroupName:        ptr.String("__LogGroupName__"),
+					LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				},
+				S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+					LogUri:           ptr.String("__LogUri__"),
+					EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				},
+				ContainerLogRotationConfiguration: &types.ContainerLogRotationConfiguration{
+					RotationSize:   ptr.String("__RotationSize__"),
+					MaxFilesToKeep: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SessionIdleTimeoutInMinutes: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +317,55 @@ func TestCheckResponseSnapshot_CreateSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityConfiguration(context.Background(), &CreateSecurityConfigurationInput{})
+	got, err := svc.CreateSecurityConfiguration(context.Background(), &CreateSecurityConfigurationInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		ContainerProvider: &types.ContainerProvider{
+			Type: types.ContainerProviderType("EKS"),
+			Id:   ptr.String("__Id__"),
+			Info: &types.ContainerInfoMemberEksInfo{
+				Value: types.EksInfo{
+					Namespace: ptr.String("__Namespace__"),
+					NodeLabel: ptr.String("__NodeLabel__"),
+				},
+			},
+		},
+		SecurityConfigurationData: &types.SecurityConfigurationData{
+			AuthorizationConfiguration: &types.AuthorizationConfiguration{
+				LakeFormationConfiguration: &types.LakeFormationConfiguration{
+					AuthorizedSessionTagValue: ptr.String("__AuthorizedSessionTagValue__"),
+					SecureNamespaceInfo: &types.SecureNamespaceInfo{
+						ClusterId: ptr.String("__ClusterId__"),
+						Namespace: ptr.String("__Namespace__"),
+					},
+					QueryEngineRoleArn: ptr.String("__QueryEngineRoleArn__"),
+				},
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					InTransitEncryptionConfiguration: &types.InTransitEncryptionConfiguration{
+						TlsCertificateConfiguration: &types.TLSCertificateConfiguration{
+							CertificateProviderType:     types.CertificateProviderType("PEM"),
+							PublicCertificateSecretArn:  ptr.String("__PublicCertificateSecretArn__"),
+							PrivateCertificateSecretArn: ptr.String("__PrivateCertificateSecretArn__"),
+						},
+					},
+				},
+			},
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+					EnableIdentityCenter:                        ptr.Bool(true),
+					IdentityCenterApplicationAssignmentRequired: ptr.Bool(true),
+					IdentityCenterInstanceARN:                   ptr.String("__IdentityCenterInstanceARN__"),
+					EmrIdentityCenterApplicationARN:             ptr.String("__EmrIdentityCenterApplicationARN__"),
+				},
+				IamConfiguration: &types.IAMConfiguration{
+					SystemRole: ptr.String("__SystemRole__"),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -214,7 +388,29 @@ func TestCheckResponseSnapshot_CreateVirtualCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVirtualCluster(context.Background(), &CreateVirtualClusterInput{})
+	got, err := svc.CreateVirtualCluster(context.Background(), &CreateVirtualClusterInput{
+		Name: ptr.String("__Name__"),
+		ContainerProvider: &types.ContainerProvider{
+			Type: types.ContainerProviderType("EKS"),
+			Id:   ptr.String("__Id__"),
+			Info: &types.ContainerInfoMemberEksInfo{
+				Value: types.EksInfo{
+					Namespace: ptr.String("__Namespace__"),
+					NodeLabel: ptr.String("__NodeLabel__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
+		SessionEnabled:          ptr.Bool(true),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -235,7 +431,9 @@ func TestCheckResponseSnapshot_DeleteJobTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJobTemplate(context.Background(), &DeleteJobTemplateInput{})
+	got, err := svc.DeleteJobTemplate(context.Background(), &DeleteJobTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +455,10 @@ func TestCheckResponseSnapshot_DeleteManagedEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteManagedEndpoint(context.Background(), &DeleteManagedEndpointInput{})
+	got, err := svc.DeleteManagedEndpoint(context.Background(), &DeleteManagedEndpointInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +479,9 @@ func TestCheckResponseSnapshot_DeleteSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityConfiguration(context.Background(), &DeleteSecurityConfigurationInput{})
+	got, err := svc.DeleteSecurityConfiguration(context.Background(), &DeleteSecurityConfigurationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +502,9 @@ func TestCheckResponseSnapshot_DeleteVirtualCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualCluster(context.Background(), &DeleteVirtualClusterInput{})
+	got, err := svc.DeleteVirtualCluster(context.Background(), &DeleteVirtualClusterInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +605,10 @@ func TestCheckResponseSnapshot_DescribeJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobRun(context.Background(), &DescribeJobRunInput{})
+	got, err := svc.DescribeJobRun(context.Background(), &DescribeJobRunInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +701,9 @@ func TestCheckResponseSnapshot_DescribeJobTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobTemplate(context.Background(), &DescribeJobTemplateInput{})
+	got, err := svc.DescribeJobTemplate(context.Background(), &DescribeJobTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -584,7 +794,10 @@ func TestCheckResponseSnapshot_DescribeManagedEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeManagedEndpoint(context.Background(), &DescribeManagedEndpointInput{})
+	got, err := svc.DescribeManagedEndpoint(context.Background(), &DescribeManagedEndpointInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -646,7 +859,9 @@ func TestCheckResponseSnapshot_DescribeSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSecurityConfiguration(context.Background(), &DescribeSecurityConfigurationInput{})
+	got, err := svc.DescribeSecurityConfiguration(context.Background(), &DescribeSecurityConfigurationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -696,7 +911,9 @@ func TestCheckResponseSnapshot_DescribeVirtualCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualCluster(context.Background(), &DescribeVirtualClusterInput{})
+	got, err := svc.DescribeVirtualCluster(context.Background(), &DescribeVirtualClusterInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -724,7 +941,15 @@ func TestCheckResponseSnapshot_GetManagedEndpointSessionCredentials(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedEndpointSessionCredentials(context.Background(), &GetManagedEndpointSessionCredentialsInput{})
+	got, err := svc.GetManagedEndpointSessionCredentials(context.Background(), &GetManagedEndpointSessionCredentialsInput{
+		EndpointIdentifier:       ptr.String("__EndpointIdentifier__"),
+		VirtualClusterIdentifier: ptr.String("__VirtualClusterIdentifier__"),
+		ExecutionRoleArn:         ptr.String("__ExecutionRoleArn__"),
+		CredentialType:           ptr.String("__CredentialType__"),
+		DurationInSeconds:        ptr.Int32(1),
+		LogContext:               ptr.String("__LogContext__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1134,18 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{})
+	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+		CreatedBefore:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAfter:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Name:             ptr.String("__Name__"),
+		States: []types.JobRunState{
+			types.JobRunState("PENDING"),
+			types.JobRunState("PENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1314,12 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobTemplates(context.Background(), &ListJobTemplatesInput{})
+	got, err := svc.ListJobTemplates(context.Background(), &ListJobTemplatesInput{
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1243,7 +1484,21 @@ func TestCheckResponseSnapshot_ListManagedEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedEndpoints(context.Background(), &ListManagedEndpointsInput{})
+	got, err := svc.ListManagedEndpoints(context.Background(), &ListManagedEndpointsInput{
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+		CreatedBefore:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAfter:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Types: []string{
+			"__Member__",
+			"__Member__",
+		},
+		States: []types.EndpointState{
+			types.EndpointState("CREATING"),
+			types.EndpointState("CREATING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1350,7 +1605,12 @@ func TestCheckResponseSnapshot_ListSecurityConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityConfigurations(context.Background(), &ListSecurityConfigurationsInput{})
+	got, err := svc.ListSecurityConfigurations(context.Background(), &ListSecurityConfigurationsInput{
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1633,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1456,7 +1718,19 @@ func TestCheckResponseSnapshot_ListVirtualClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualClusters(context.Background(), &ListVirtualClustersInput{})
+	got, err := svc.ListVirtualClusters(context.Background(), &ListVirtualClustersInput{
+		ContainerProviderId:   ptr.String("__ContainerProviderId__"),
+		ContainerProviderType: types.ContainerProviderType("EKS"),
+		CreatedAfter:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		States: []types.VirtualClusterState{
+			types.VirtualClusterState("RUNNING"),
+			types.VirtualClusterState("RUNNING"),
+		},
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+		EksAccessEntryIntegrated: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1480,7 +1754,80 @@ func TestCheckResponseSnapshot_StartJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{})
+	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{
+		Name:             ptr.String("__Name__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ReleaseLabel:     ptr.String("__ReleaseLabel__"),
+		JobDriver: &types.JobDriver{
+			SparkSubmitJobDriver: &types.SparkSubmitJobDriver{
+				EntryPoint: ptr.String("__EntryPoint__"),
+				EntryPointArguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SparkSubmitParameters: ptr.String("__SparkSubmitParameters__"),
+			},
+			SparkSqlJobDriver: &types.SparkSqlJobDriver{
+				EntryPoint:         ptr.String("__EntryPoint__"),
+				SparkSqlParameters: ptr.String("__SparkSqlParameters__"),
+			},
+		},
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			ApplicationConfiguration: []types.Configuration{
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+			},
+			MonitoringConfiguration: &types.MonitoringConfiguration{
+				ManagedLogs: &types.ManagedLogs{
+					AllowAWSToRetainLogs: types.AllowAWSToRetainLogs("ENABLED"),
+					EncryptionKeyArn:     ptr.String("__EncryptionKeyArn__"),
+				},
+				PersistentAppUI: types.PersistentAppUI("ENABLED"),
+				CloudWatchMonitoringConfiguration: &types.CloudWatchMonitoringConfiguration{
+					LogGroupName:        ptr.String("__LogGroupName__"),
+					LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				},
+				S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+					LogUri:           ptr.String("__LogUri__"),
+					EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				},
+				ContainerLogRotationConfiguration: &types.ContainerLogRotationConfiguration{
+					RotationSize:   ptr.String("__RotationSize__"),
+					MaxFilesToKeep: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		JobTemplateId: ptr.String("__JobTemplateId__"),
+		JobTemplateParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		RetryPolicyConfiguration: &types.RetryPolicyConfiguration{
+			MaxAttempts: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1499,7 +1846,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1518,7 +1870,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1568,7 +1926,14 @@ func TestCheckResponseSnapshot_UpdateVirtualCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualCluster(context.Background(), &UpdateVirtualClusterInput{})
+	got, err := svc.UpdateVirtualCluster(context.Background(), &UpdateVirtualClusterInput{
+		Id: ptr.String("__Id__"),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1589,7 +1954,29 @@ func TestCheckResponseSnapshot_Error_EKSRequestThrottledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVirtualCluster(context.Background(), &CreateVirtualClusterInput{})
+	_, opErr := svc.CreateVirtualCluster(context.Background(), &CreateVirtualClusterInput{
+		Name: ptr.String("__Name__"),
+		ContainerProvider: &types.ContainerProvider{
+			Type: types.ContainerProviderType("EKS"),
+			Id:   ptr.String("__Id__"),
+			Info: &types.ContainerInfoMemberEksInfo{
+				Value: types.EksInfo{
+					Namespace: ptr.String("__Namespace__"),
+					NodeLabel: ptr.String("__NodeLabel__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
+		SessionEnabled:          ptr.Bool(true),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1614,7 +2001,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1639,7 +2029,15 @@ func TestCheckResponseSnapshot_Error_RequestThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetManagedEndpointSessionCredentials(context.Background(), &GetManagedEndpointSessionCredentialsInput{})
+	_, opErr := svc.GetManagedEndpointSessionCredentials(context.Background(), &GetManagedEndpointSessionCredentialsInput{
+		EndpointIdentifier:       ptr.String("__EndpointIdentifier__"),
+		VirtualClusterIdentifier: ptr.String("__VirtualClusterIdentifier__"),
+		ExecutionRoleArn:         ptr.String("__ExecutionRoleArn__"),
+		CredentialType:           ptr.String("__CredentialType__"),
+		DurationInSeconds:        ptr.Int32(1),
+		LogContext:               ptr.String("__LogContext__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1664,7 +2062,75 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJobTemplate(context.Background(), &CreateJobTemplateInput{})
+	_, opErr := svc.CreateJobTemplate(context.Background(), &CreateJobTemplateInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		JobTemplateData: &types.JobTemplateData{
+			ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+			ReleaseLabel:     ptr.String("__ReleaseLabel__"),
+			ConfigurationOverrides: &types.ParametricConfigurationOverrides{
+				ApplicationConfiguration: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+					},
+				},
+				MonitoringConfiguration: &types.ParametricMonitoringConfiguration{
+					PersistentAppUI: ptr.String("__PersistentAppUI__"),
+					CloudWatchMonitoringConfiguration: &types.ParametricCloudWatchMonitoringConfiguration{
+						LogGroupName:        ptr.String("__LogGroupName__"),
+						LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+					},
+					S3MonitoringConfiguration: &types.ParametricS3MonitoringConfiguration{
+						LogUri: ptr.String("__LogUri__"),
+					},
+				},
+			},
+			JobDriver: &types.JobDriver{
+				SparkSubmitJobDriver: &types.SparkSubmitJobDriver{
+					EntryPoint: ptr.String("__EntryPoint__"),
+					EntryPointArguments: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SparkSubmitParameters: ptr.String("__SparkSubmitParameters__"),
+				},
+				SparkSqlJobDriver: &types.SparkSqlJobDriver{
+					EntryPoint:         ptr.String("__EntryPoint__"),
+					SparkSqlParameters: ptr.String("__SparkSqlParameters__"),
+				},
+			},
+			ParameterConfiguration: map[string]types.TemplateParameterConfiguration{
+				"key0": {
+					Type:         types.TemplateParameterDataType("NUMBER"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			JobTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1689,7 +2155,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		Id:               ptr.String("__Id__"),
+		VirtualClusterId: ptr.String("__VirtualClusterId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

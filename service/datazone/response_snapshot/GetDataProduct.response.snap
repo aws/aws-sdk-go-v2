@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","firstRevisionCreatedAt":946684800,"firstRevisionCreatedBy":"__FirstRevisionCreatedBy__","formsOutput":[{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"}],"glossaryTerms":["__Member__","__Member__"],"id":"__Id__","items":[{"glossaryTerms":["__Member__","__Member__"],"identifier":"__Identifier__","itemType":"ASSET","revision":"__Revision__"},{"glossaryTerms":["__Member__","__Member__"],"identifier":"__Identifier__","itemType":"ASSET","revision":"__Revision__"}],"name":"__Name__","owningProjectId":"__OwningProjectId__","revision":"__Revision__","status":"CREATED"}

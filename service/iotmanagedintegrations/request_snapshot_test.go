@@ -7,6 +7,7 @@ package iotmanagedintegrations
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/document"
@@ -19,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -181,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_CreateAccountAssociation(t *testing.T) {
 	input := &CreateAccountAssociationInput{
@@ -528,14 +551,14 @@ func TestCheckRequestSnapshot_CreateManagedThing(t *testing.T) {
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 			{
 				Format:           types.SchemaVersionFormat("AWS"),
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 		},
 		Capabilities:   ptr.String("__Capabilities__"),
@@ -2421,12 +2444,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2454,12 +2477,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2508,12 +2531,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2541,12 +2564,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2586,17 +2609,17 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Format:           types.SchemaVersionFormat("AWS"),
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 				},
-				DeviceMetadata: nil,
+				DeviceMetadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				ConnectorDeviceId:   ptr.String("__ConnectorDeviceId__"),
@@ -2622,12 +2645,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2655,12 +2678,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2709,12 +2732,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2742,12 +2765,12 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -2787,17 +2810,17 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Format:           types.SchemaVersionFormat("AWS"),
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 				},
-				DeviceMetadata: nil,
+				DeviceMetadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		MatterEndpoint: &types.MatterEndpoint{
@@ -2805,22 +2828,22 @@ func TestCheckRequestSnapshot_SendConnectorEvent(t *testing.T) {
 			Clusters: []types.MatterCluster{
 				{
 					Id:         ptr.String("__Id__"),
-					Attributes: nil,
+					Attributes: document.NewLazyDocument("__Document__"),
 					Commands: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					Events: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 				{
 					Id:         ptr.String("__Id__"),
-					Attributes: nil,
+					Attributes: document.NewLazyDocument("__Document__"),
 					Commands: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					Events: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -2865,13 +2888,13 @@ func TestCheckRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -2884,13 +2907,13 @@ func TestCheckRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -2908,13 +2931,13 @@ func TestCheckRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -2927,13 +2950,13 @@ func TestCheckRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -3405,14 +3428,14 @@ func TestCheckRequestSnapshot_UpdateManagedThing(t *testing.T) {
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 			{
 				Format:           types.SchemaVersionFormat("AWS"),
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 		},
 		Capabilities:   ptr.String("__Capabilities__"),
@@ -3846,14 +3869,14 @@ func TestUpdateRequestSnapshot_CreateManagedThing(t *testing.T) {
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 			{
 				Format:           types.SchemaVersionFormat("AWS"),
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 		},
 		Capabilities:   ptr.String("__Capabilities__"),
@@ -5739,12 +5762,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -5772,12 +5795,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -5826,12 +5849,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -5859,12 +5882,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -5904,17 +5927,17 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Format:           types.SchemaVersionFormat("AWS"),
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 				},
-				DeviceMetadata: nil,
+				DeviceMetadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				ConnectorDeviceId:   ptr.String("__ConnectorDeviceId__"),
@@ -5940,12 +5963,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -5973,12 +5996,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -6027,12 +6050,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -6060,12 +6083,12 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 										{
 											Id:    ptr.String("__Id__"),
 											Name:  ptr.String("__Name__"),
-											Value: nil,
+											Value: document.NewLazyDocument("__Document__"),
 										},
 									},
 									Commands: []string{
@@ -6105,17 +6128,17 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Format:           types.SchemaVersionFormat("AWS"),
 						CapabilityId:     ptr.String("__CapabilityId__"),
 						ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 						ExtrinsicVersion: ptr.Int32(1),
-						Schema:           nil,
+						Schema:           document.NewLazyDocument("__Document__"),
 					},
 				},
-				DeviceMetadata: nil,
+				DeviceMetadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		MatterEndpoint: &types.MatterEndpoint{
@@ -6123,22 +6146,22 @@ func TestUpdateRequestSnapshot_SendConnectorEvent(t *testing.T) {
 			Clusters: []types.MatterCluster{
 				{
 					Id:         ptr.String("__Id__"),
-					Attributes: nil,
+					Attributes: document.NewLazyDocument("__Document__"),
 					Commands: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					Events: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 				{
 					Id:         ptr.String("__Id__"),
-					Attributes: nil,
+					Attributes: document.NewLazyDocument("__Document__"),
 					Commands: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					Events: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -6183,13 +6206,13 @@ func TestUpdateRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -6202,13 +6225,13 @@ func TestUpdateRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -6226,13 +6249,13 @@ func TestUpdateRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -6245,13 +6268,13 @@ func TestUpdateRequestSnapshot_SendManagedThingCommand(t *testing.T) {
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 							{
 								Name:          ptr.String("__Name__"),
 								Ref:           ptr.String("__Ref__"),
 								ActionTraceId: ptr.String("__ActionTraceId__"),
-								Parameters:    nil,
+								Parameters:    document.NewLazyDocument("__Document__"),
 							},
 						},
 					},
@@ -6723,14 +6746,14 @@ func TestUpdateRequestSnapshot_UpdateManagedThing(t *testing.T) {
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 			{
 				Format:           types.SchemaVersionFormat("AWS"),
 				CapabilityId:     ptr.String("__CapabilityId__"),
 				ExtrinsicId:      ptr.String("__ExtrinsicId__"),
 				ExtrinsicVersion: ptr.Int32(1),
-				Schema:           nil,
+				Schema:           document.NewLazyDocument("__Document__"),
 			},
 		},
 		Capabilities:   ptr.String("__Capabilities__"),

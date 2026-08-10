@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ResourceTypeManagementPreference":{"key0":true},"ResourceTypeOptInPreference":{"key0":true}}

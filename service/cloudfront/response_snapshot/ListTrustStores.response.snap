@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListTrustStoresResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><NextMarker>__NextMarker__</NextMarker><TrustStoreList><TrustStoreSummary><Arn>__Arn__</Arn><ETag>__ETag__</ETag><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><NumberOfCaCertificates>1</NumberOfCaCertificates><Reason>__Reason__</Reason><Status>pending</Status></TrustStoreSummary><TrustStoreSummary><Arn>__Arn__</Arn><ETag>__ETag__</ETag><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><NumberOfCaCertificates>1</NumberOfCaCertificates><Reason>__Reason__</Reason><Status>pending</Status></TrustStoreSummary></TrustStoreList></ListTrustStoresResult>

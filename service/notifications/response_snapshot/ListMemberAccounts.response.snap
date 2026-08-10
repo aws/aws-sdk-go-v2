@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"memberAccounts":[{"accountId":"__AccountId__","notificationConfigurationArn":"__NotificationConfigurationArn__","organizationalUnitId":"__OrganizationalUnitId__","status":"ACTIVE","statusReason":"__StatusReason__"},{"accountId":"__AccountId__","notificationConfigurationArn":"__NotificationConfigurationArn__","organizationalUnitId":"__OrganizationalUnitId__","status":"ACTIVE","statusReason":"__StatusReason__"}],"nextToken":"__NextToken__"}

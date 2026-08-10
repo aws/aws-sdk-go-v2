@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"exceptions":[{"exception":"__Exception__","region":"__Region__","remediation":"__Remediation__","timestamp":"2000-01-01T00:00:00Z"},{"exception":"__Exception__","region":"__Region__","remediation":"__Remediation__","timestamp":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

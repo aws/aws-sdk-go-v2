@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationTimestamp":946684800,"description":"__Description__","environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","kmsKeyId":"__KmsKeyId__","name":"__Name__","status":"CREATE_REQUESTED"}

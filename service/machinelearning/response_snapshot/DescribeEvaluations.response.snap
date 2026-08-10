@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.DescribeEvaluations
+
+{"NextToken":"__NextToken__","Results":[{"ComputeTime":1,"CreatedAt":946684800,"CreatedByIamUser":"__CreatedByIamUser__","EvaluationDataSourceId":"__EvaluationDataSourceId__","EvaluationId":"__EvaluationId__","FinishedAt":946684800,"InputDataLocationS3":"__InputDataLocationS3__","LastUpdatedAt":946684800,"MLModelId":"__MLModelId__","Message":"__Message__","Name":"__Name__","PerformanceMetrics":{"Properties":{"key0":"__Value__"}},"StartedAt":946684800,"Status":"PENDING"},{"ComputeTime":1,"CreatedAt":946684800,"CreatedByIamUser":"__CreatedByIamUser__","EvaluationDataSourceId":"__EvaluationDataSourceId__","EvaluationId":"__EvaluationId__","FinishedAt":946684800,"InputDataLocationS3":"__InputDataLocationS3__","LastUpdatedAt":946684800,"MLModelId":"__MLModelId__","Message":"__Message__","Name":"__Name__","PerformanceMetrics":{"Properties":{"key0":"__Value__"}},"StartedAt":946684800,"Status":"PENDING"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","Status":200,"ThemeAlias":{"AliasName":"__AliasName__","Arn":"__Arn__","ThemeVersionNumber":1}}

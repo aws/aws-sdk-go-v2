@@ -1,7 +1,0 @@
-POST /
-
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Json10QueryCompatible.GetItem
-X-Amzn-Query-Mode: true
-
-{}

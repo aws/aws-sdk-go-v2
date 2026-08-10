@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeMlflowTrackingServer
+
+{"ArtifactStoreUri":"__ArtifactStoreUri__","AutomaticModelRegistration":true,"CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"IsActive":"Active","LastModifiedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"LastModifiedTime":946684800,"MlflowVersion":"__MlflowVersion__","RoleArn":"__RoleArn__","S3BucketOwnerAccountId":"__S3BucketOwnerAccountId__","S3BucketOwnerVerification":true,"TrackingServerArn":"__TrackingServerArn__","TrackingServerMaintenanceStatus":"MaintenanceInProgress","TrackingServerName":"__TrackingServerName__","TrackingServerSize":"Small","TrackingServerStatus":"Creating","TrackingServerUrl":"__TrackingServerUrl__","WeeklyMaintenanceWindowStart":"__WeeklyMaintenanceWindowStart__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","name":"__Name__","notebookId":"__NotebookId__","owningProjectId":"__OwningProjectId__","sourceLocation":{"s3":"__SourceLocationMemberS3__"},"status":"ACTIVE"}

@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/document"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -119,7 +120,9 @@ func TestCheckResponseSnapshot_AssociateDefaultView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	got, err := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +190,12 @@ func TestCheckResponseSnapshot_BatchGetView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetView(context.Background(), &BatchGetViewInput{})
+	got, err := svc.BatchGetView(context.Background(), &BatchGetViewInput{
+		ViewArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +218,12 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +244,17 @@ func TestCheckResponseSnapshot_CreateResourceExplorerSetup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceExplorerSetup(context.Background(), &CreateResourceExplorerSetupInput{})
+	got, err := svc.CreateResourceExplorerSetup(context.Background(), &CreateResourceExplorerSetupInput{
+		RegionList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AggregatorRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ViewName: ptr.String("__ViewName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +292,25 @@ func TestCheckResponseSnapshot_CreateView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateView(context.Background(), &CreateViewInput{})
+	got, err := svc.CreateView(context.Background(), &CreateViewInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ViewName:    ptr.String("__ViewName__"),
+		IncludedProperties: []types.IncludedProperty{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		Scope: ptr.String("__Scope__"),
+		Filters: &types.SearchFilter{
+			FilterString: ptr.String("__FilterString__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +333,9 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +356,13 @@ func TestCheckResponseSnapshot_DeleteResourceExplorerSetup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceExplorerSetup(context.Background(), &DeleteResourceExplorerSetupInput{})
+	got, err := svc.DeleteResourceExplorerSetup(context.Background(), &DeleteResourceExplorerSetupInput{
+		RegionList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeleteInAllRegions: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +383,9 @@ func TestCheckResponseSnapshot_DeleteView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteView(context.Background(), &DeleteViewInput{})
+	got, err := svc.DeleteView(context.Background(), &DeleteViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +526,9 @@ func TestCheckResponseSnapshot_GetManagedView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedView(context.Background(), &GetManagedViewInput{})
+	got, err := svc.GetManagedView(context.Background(), &GetManagedViewInput{
+		ManagedViewArn: ptr.String("__ManagedViewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +631,11 @@ func TestCheckResponseSnapshot_GetResourceExplorerSetup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceExplorerSetup(context.Background(), &GetResourceExplorerSetupInput{})
+	got, err := svc.GetResourceExplorerSetup(context.Background(), &GetResourceExplorerSetupInput{
+		TaskId:     ptr.String("__TaskId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -642,7 +699,9 @@ func TestCheckResponseSnapshot_GetServiceView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceView(context.Background(), &GetServiceViewInput{})
+	got, err := svc.GetServiceView(context.Background(), &GetServiceViewInput{
+		ServiceViewArn: ptr.String("__ServiceViewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -683,7 +742,9 @@ func TestCheckResponseSnapshot_GetView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetView(context.Background(), &GetViewInput{})
+	got, err := svc.GetView(context.Background(), &GetViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -716,7 +777,15 @@ func TestCheckResponseSnapshot_ListIndexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndexes(context.Background(), &ListIndexesInput{})
+	got, err := svc.ListIndexes(context.Background(), &ListIndexesInput{
+		Type: types.IndexType("LOCAL"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +820,14 @@ func TestCheckResponseSnapshot_ListIndexesForMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndexesForMembers(context.Background(), &ListIndexesForMembersInput{})
+	got, err := svc.ListIndexesForMembers(context.Background(), &ListIndexesForMembersInput{
+		AccountIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -776,7 +852,11 @@ func TestCheckResponseSnapshot_ListManagedViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedViews(context.Background(), &ListManagedViewsInput{})
+	got, err := svc.ListManagedViews(context.Background(), &ListManagedViewsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,12 +880,12 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -821,12 +901,12 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -842,7 +922,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		Filters: &types.SearchFilter{
+			FilterString: ptr.String("__FilterString__"),
+		},
+		MaxResults: ptr.Int32(1),
+		ViewArn:    ptr.String("__ViewArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +962,14 @@ func TestCheckResponseSnapshot_ListServiceIndexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceIndexes(context.Background(), &ListServiceIndexesInput{})
+	got, err := svc.ListServiceIndexes(context.Background(), &ListServiceIndexesInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +994,10 @@ func TestCheckResponseSnapshot_ListServiceViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceViews(context.Background(), &ListServiceViewsInput{})
+	got, err := svc.ListServiceViews(context.Background(), &ListServiceViewsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -931,7 +1028,10 @@ func TestCheckResponseSnapshot_ListStreamingAccessForServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamingAccessForServices(context.Background(), &ListStreamingAccessForServicesInput{})
+	got, err := svc.ListStreamingAccessForServices(context.Background(), &ListStreamingAccessForServicesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1070,10 @@ func TestCheckResponseSnapshot_ListSupportedResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportedResourceTypes(context.Background(), &ListSupportedResourceTypesInput{})
+	got, err := svc.ListSupportedResourceTypes(context.Background(), &ListSupportedResourceTypesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -993,7 +1096,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1018,7 +1123,10 @@ func TestCheckResponseSnapshot_ListViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListViews(context.Background(), &ListViewsInput{})
+	got, err := svc.ListViews(context.Background(), &ListViewsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1042,12 +1150,12 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -1063,12 +1171,12 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 					{
 						Name:           ptr.String("__Name__"),
 						LastReportedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-						Data:           nil,
+						Data:           document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -1088,7 +1196,12 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Search(context.Background(), &SearchInput{})
+	got, err := svc.Search(context.Background(), &SearchInput{
+		QueryString: ptr.String("__QueryString__"),
+		MaxResults:  ptr.Int32(1),
+		ViewArn:     ptr.String("__ViewArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1107,7 +1220,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1244,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1150,7 +1274,10 @@ func TestCheckResponseSnapshot_UpdateIndexType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndexType(context.Background(), &UpdateIndexTypeInput{})
+	got, err := svc.UpdateIndexType(context.Background(), &UpdateIndexTypeInput{
+		Arn:  ptr.String("__Arn__"),
+		Type: types.IndexType("LOCAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1188,7 +1315,20 @@ func TestCheckResponseSnapshot_UpdateView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateView(context.Background(), &UpdateViewInput{})
+	got, err := svc.UpdateView(context.Background(), &UpdateViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+		IncludedProperties: []types.IncludedProperty{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		Filters: &types.SearchFilter{
+			FilterString: ptr.String("__FilterString__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1209,7 +1349,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1234,7 +1376,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1259,7 +1406,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1284,7 +1433,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1311,7 +1462,25 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{})
+	_, opErr := svc.CreateView(context.Background(), &CreateViewInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ViewName:    ptr.String("__ViewName__"),
+		IncludedProperties: []types.IncludedProperty{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		Scope: ptr.String("__Scope__"),
+		Filters: &types.SearchFilter{
+			FilterString: ptr.String("__FilterString__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1336,7 +1505,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1361,7 +1532,12 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetView(context.Background(), &BatchGetViewInput{})
+	_, opErr := svc.BatchGetView(context.Background(), &BatchGetViewInput{
+		ViewArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1396,7 +1572,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{})
+	_, opErr := svc.AssociateDefaultView(context.Background(), &AssociateDefaultViewInput{
+		ViewArn: ptr.String("__ViewArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

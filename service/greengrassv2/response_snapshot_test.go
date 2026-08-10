@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_AssociateServiceRoleToAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{})
+	got, err := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +153,17 @@ func TestCheckResponseSnapshot_BatchAssociateClientDeviceWithCoreDevice(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{})
+	got, err := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{
+		Entries: []types.AssociateClientDeviceWithCoreDeviceEntry{
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+		},
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +195,17 @@ func TestCheckResponseSnapshot_BatchDisassociateClientDeviceFromCoreDevice(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateClientDeviceFromCoreDevice(context.Background(), &BatchDisassociateClientDeviceFromCoreDeviceInput{})
+	got, err := svc.BatchDisassociateClientDeviceFromCoreDevice(context.Background(), &BatchDisassociateClientDeviceFromCoreDeviceInput{
+		Entries: []types.DisassociateClientDeviceFromCoreDeviceEntry{
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+		},
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +226,9 @@ func TestCheckResponseSnapshot_CancelDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelDeployment(context.Background(), &CancelDeploymentInput{})
+	got, err := svc.CancelDeployment(context.Background(), &CancelDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +261,97 @@ func TestCheckResponseSnapshot_CreateComponentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{})
+	got, err := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{
+		InlineRecipe: []byte("blob"),
+		LambdaFunction: &types.LambdaFunctionRecipeSource{
+			LambdaArn:        ptr.String("__LambdaArn__"),
+			ComponentName:    ptr.String("__ComponentName__"),
+			ComponentVersion: ptr.String("__ComponentVersion__"),
+			ComponentPlatforms: []types.ComponentPlatform{
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			ComponentDependencies: map[string]types.ComponentDependencyRequirement{
+				"key0": {
+					VersionRequirement: ptr.String("__VersionRequirement__"),
+					DependencyType:     types.ComponentDependencyType("HARD"),
+				},
+			},
+			ComponentLambdaParameters: &types.LambdaExecutionParameters{
+				EventSources: []types.LambdaEventSource{
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+				},
+				MaxQueueSize:             ptr.Int32(1),
+				MaxInstancesCount:        ptr.Int32(1),
+				MaxIdleTimeInSeconds:     ptr.Int32(1),
+				TimeoutInSeconds:         ptr.Int32(1),
+				StatusTimeoutInSeconds:   ptr.Int32(1),
+				Pinned:                   ptr.Bool(true),
+				InputPayloadEncodingType: types.LambdaInputPayloadEncodingType("json"),
+				ExecArgs: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				LinuxProcessParams: &types.LambdaLinuxProcessParams{
+					IsolationMode: types.LambdaIsolationMode("GreengrassContainer"),
+					ContainerParams: &types.LambdaContainerParams{
+						MemorySizeInKB: ptr.Int32(1),
+						MountROSysfs:   ptr.Bool(true),
+						Volumes: []types.LambdaVolumeMount{
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+						},
+						Devices: []types.LambdaDeviceMount{
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +374,77 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		TargetArn:      ptr.String("__TargetArn__"),
+		DeploymentName: ptr.String("__DeploymentName__"),
+		Components: map[string]types.ComponentDeploymentSpecification{
+			"key0": {
+				ComponentVersion: ptr.String("__ComponentVersion__"),
+				ConfigurationUpdate: &types.ComponentConfigurationUpdate{
+					Merge: ptr.String("__Merge__"),
+					Reset: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				RunWith: &types.ComponentRunWith{
+					PosixUser: ptr.String("__PosixUser__"),
+					SystemResourceLimits: &types.SystemResourceLimits{
+						Memory: 1,
+						Cpus:   1.0,
+					},
+					WindowsUser: ptr.String("__WindowsUser__"),
+				},
+			},
+		},
+		IotJobConfiguration: &types.DeploymentIoTJobConfiguration{
+			JobExecutionsRolloutConfig: &types.IoTJobExecutionsRolloutConfig{
+				ExponentialRate: &types.IoTJobExponentialRolloutRate{
+					BaseRatePerMinute: ptr.Int32(1),
+					IncrementFactor:   ptr.Float64(1.0),
+					RateIncreaseCriteria: &types.IoTJobRateIncreaseCriteria{
+						NumberOfNotifiedThings:  ptr.Int32(1),
+						NumberOfSucceededThings: ptr.Int32(1),
+					},
+				},
+				MaximumPerMinute: ptr.Int32(1),
+			},
+			AbortConfig: &types.IoTJobAbortConfig{
+				CriteriaList: []types.IoTJobAbortCriteria{
+					{
+						FailureType:               types.IoTJobExecutionFailureType("FAILED"),
+						Action:                    types.IoTJobAbortAction("CANCEL"),
+						ThresholdPercentage:       1.0,
+						MinNumberOfExecutedThings: ptr.Int32(1),
+					},
+					{
+						FailureType:               types.IoTJobExecutionFailureType("FAILED"),
+						Action:                    types.IoTJobAbortAction("CANCEL"),
+						ThresholdPercentage:       1.0,
+						MinNumberOfExecutedThings: ptr.Int32(1),
+					},
+				},
+			},
+			TimeoutConfig: &types.IoTJobTimeoutConfig{
+				InProgressTimeoutInMinutes: ptr.Int64(1),
+			},
+		},
+		DeploymentPolicies: &types.DeploymentPolicies{
+			FailureHandlingPolicy: types.DeploymentFailureHandlingPolicy("ROLLBACK"),
+			ComponentUpdatePolicy: &types.DeploymentComponentUpdatePolicy{
+				TimeoutInSeconds: ptr.Int32(1),
+				Action:           types.DeploymentComponentUpdatePolicyAction("NOTIFY_COMPONENTS"),
+			},
+			ConfigurationValidationPolicy: &types.DeploymentConfigurationValidationPolicy{
+				TimeoutInSeconds: ptr.Int32(1),
+			},
+		},
+		ParentTargetArn: ptr.String("__ParentTargetArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +463,9 @@ func TestCheckResponseSnapshot_DeleteComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +484,9 @@ func TestCheckResponseSnapshot_DeleteCoreDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCoreDevice(context.Background(), &DeleteCoreDeviceInput{})
+	got, err := svc.DeleteCoreDevice(context.Background(), &DeleteCoreDeviceInput{
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +505,9 @@ func TestCheckResponseSnapshot_DeleteDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{})
+	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +559,9 @@ func TestCheckResponseSnapshot_DescribeComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComponent(context.Background(), &DescribeComponentInput{})
+	got, err := svc.DescribeComponent(context.Background(), &DescribeComponentInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +607,10 @@ func TestCheckResponseSnapshot_GetComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponent(context.Background(), &GetComponentInput{})
+	got, err := svc.GetComponent(context.Background(), &GetComponentInput{
+		RecipeOutputFormat: types.RecipeOutputFormat("JSON"),
+		Arn:                ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +631,12 @@ func TestCheckResponseSnapshot_GetComponentVersionArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponentVersionArtifact(context.Background(), &GetComponentVersionArtifactInput{})
+	got, err := svc.GetComponentVersionArtifact(context.Background(), &GetComponentVersionArtifactInput{
+		Arn:             ptr.String("__Arn__"),
+		ArtifactName:    ptr.String("__ArtifactName__"),
+		S3EndpointType:  types.S3EndpointType("REGIONAL"),
+		IotEndpointType: types.IotEndpointType("fips"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +671,9 @@ func TestCheckResponseSnapshot_GetConnectivityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectivityInfo(context.Background(), &GetConnectivityInfoInput{})
+	got, err := svc.GetConnectivityInfo(context.Background(), &GetConnectivityInfoInput{
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +703,9 @@ func TestCheckResponseSnapshot_GetCoreDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoreDevice(context.Background(), &GetCoreDeviceInput{})
+	got, err := svc.GetCoreDevice(context.Background(), &GetCoreDeviceInput{
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -596,7 +800,9 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +855,11 @@ func TestCheckResponseSnapshot_ListClientDevicesAssociatedWithCoreDevice(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClientDevicesAssociatedWithCoreDevice(context.Background(), &ListClientDevicesAssociatedWithCoreDeviceInput{})
+	got, err := svc.ListClientDevicesAssociatedWithCoreDevice(context.Background(), &ListClientDevicesAssociatedWithCoreDeviceInput{
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +892,11 @@ func TestCheckResponseSnapshot_ListComponentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponentVersions(context.Background(), &ListComponentVersionsInput{})
+	got, err := svc.ListComponentVersions(context.Background(), &ListComponentVersionsInput{
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +969,11 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		Scope:      types.ComponentVisibilityScope("PRIVATE"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +1012,13 @@ func TestCheckResponseSnapshot_ListCoreDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoreDevices(context.Background(), &ListCoreDevicesInput{})
+	got, err := svc.ListCoreDevices(context.Background(), &ListCoreDevicesInput{
+		ThingGroupArn: ptr.String("__ThingGroupArn__"),
+		Status:        types.CoreDeviceStatus("HEALTHY"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Runtime:       ptr.String("__Runtime__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -837,7 +1061,13 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		TargetArn:       ptr.String("__TargetArn__"),
+		HistoryFilter:   types.DeploymentHistoryFilter("ALL"),
+		ParentTargetArn: ptr.String("__ParentTargetArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1134,11 @@ func TestCheckResponseSnapshot_ListEffectiveDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEffectiveDeployments(context.Background(), &ListEffectiveDeploymentsInput{})
+	got, err := svc.ListEffectiveDeployments(context.Background(), &ListEffectiveDeploymentsInput{
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -955,7 +1189,12 @@ func TestCheckResponseSnapshot_ListInstalledComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstalledComponents(context.Background(), &ListInstalledComponentsInput{})
+	got, err := svc.ListInstalledComponents(context.Background(), &ListInstalledComponentsInput{
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		TopologyFilter:      types.InstalledComponentTopologyFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +1217,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1016,7 +1257,30 @@ func TestCheckResponseSnapshot_ResolveComponentCandidates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResolveComponentCandidates(context.Background(), &ResolveComponentCandidatesInput{})
+	got, err := svc.ResolveComponentCandidates(context.Background(), &ResolveComponentCandidatesInput{
+		Platform: &types.ComponentPlatform{
+			Name: ptr.String("__Name__"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ComponentCandidates: []types.ComponentCandidate{
+			{
+				ComponentName:    ptr.String("__ComponentName__"),
+				ComponentVersion: ptr.String("__ComponentVersion__"),
+				VersionRequirements: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ComponentName:    ptr.String("__ComponentName__"),
+				ComponentVersion: ptr.String("__ComponentVersion__"),
+				VersionRequirements: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1035,7 +1299,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1054,7 +1323,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1351,23 @@ func TestCheckResponseSnapshot_UpdateConnectivityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectivityInfo(context.Background(), &UpdateConnectivityInfoInput{})
+	got, err := svc.UpdateConnectivityInfo(context.Background(), &UpdateConnectivityInfoInput{
+		ThingName: ptr.String("__ThingName__"),
+		ConnectivityInfo: []types.ConnectivityInfo{
+			{
+				Id:          ptr.String("__Id__"),
+				HostAddress: ptr.String("__HostAddress__"),
+				PortNumber:  1,
+				Metadata:    ptr.String("__Metadata__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				HostAddress: ptr.String("__HostAddress__"),
+				PortNumber:  1,
+				Metadata:    ptr.String("__Metadata__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1388,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{})
+	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{
+		Entries: []types.AssociateClientDeviceWithCoreDeviceEntry{
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+		},
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1124,7 +1425,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelDeployment(context.Background(), &CancelDeploymentInput{})
+	_, opErr := svc.CancelDeployment(context.Background(), &CancelDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1150,7 +1453,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{})
+	_, opErr := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1175,7 +1480,97 @@ func TestCheckResponseSnapshot_Error_RequestAlreadyInProgressException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{})
+	_, opErr := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{
+		InlineRecipe: []byte("blob"),
+		LambdaFunction: &types.LambdaFunctionRecipeSource{
+			LambdaArn:        ptr.String("__LambdaArn__"),
+			ComponentName:    ptr.String("__ComponentName__"),
+			ComponentVersion: ptr.String("__ComponentVersion__"),
+			ComponentPlatforms: []types.ComponentPlatform{
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			ComponentDependencies: map[string]types.ComponentDependencyRequirement{
+				"key0": {
+					VersionRequirement: ptr.String("__VersionRequirement__"),
+					DependencyType:     types.ComponentDependencyType("HARD"),
+				},
+			},
+			ComponentLambdaParameters: &types.LambdaExecutionParameters{
+				EventSources: []types.LambdaEventSource{
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+				},
+				MaxQueueSize:             ptr.Int32(1),
+				MaxInstancesCount:        ptr.Int32(1),
+				MaxIdleTimeInSeconds:     ptr.Int32(1),
+				TimeoutInSeconds:         ptr.Int32(1),
+				StatusTimeoutInSeconds:   ptr.Int32(1),
+				Pinned:                   ptr.Bool(true),
+				InputPayloadEncodingType: types.LambdaInputPayloadEncodingType("json"),
+				ExecArgs: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				LinuxProcessParams: &types.LambdaLinuxProcessParams{
+					IsolationMode: types.LambdaIsolationMode("GreengrassContainer"),
+					ContainerParams: &types.LambdaContainerParams{
+						MemorySizeInKB: ptr.Int32(1),
+						MountROSysfs:   ptr.Bool(true),
+						Volumes: []types.LambdaVolumeMount{
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+						},
+						Devices: []types.LambdaDeviceMount{
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1202,7 +1597,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{})
+	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{
+		Entries: []types.AssociateClientDeviceWithCoreDeviceEntry{
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+		},
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1231,7 +1636,97 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{})
+	_, opErr := svc.CreateComponentVersion(context.Background(), &CreateComponentVersionInput{
+		InlineRecipe: []byte("blob"),
+		LambdaFunction: &types.LambdaFunctionRecipeSource{
+			LambdaArn:        ptr.String("__LambdaArn__"),
+			ComponentName:    ptr.String("__ComponentName__"),
+			ComponentVersion: ptr.String("__ComponentVersion__"),
+			ComponentPlatforms: []types.ComponentPlatform{
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			ComponentDependencies: map[string]types.ComponentDependencyRequirement{
+				"key0": {
+					VersionRequirement: ptr.String("__VersionRequirement__"),
+					DependencyType:     types.ComponentDependencyType("HARD"),
+				},
+			},
+			ComponentLambdaParameters: &types.LambdaExecutionParameters{
+				EventSources: []types.LambdaEventSource{
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+					{
+						Topic: ptr.String("__Topic__"),
+						Type:  types.LambdaEventSourceType("PUB_SUB"),
+					},
+				},
+				MaxQueueSize:             ptr.Int32(1),
+				MaxInstancesCount:        ptr.Int32(1),
+				MaxIdleTimeInSeconds:     ptr.Int32(1),
+				TimeoutInSeconds:         ptr.Int32(1),
+				StatusTimeoutInSeconds:   ptr.Int32(1),
+				Pinned:                   ptr.Bool(true),
+				InputPayloadEncodingType: types.LambdaInputPayloadEncodingType("json"),
+				ExecArgs: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				LinuxProcessParams: &types.LambdaLinuxProcessParams{
+					IsolationMode: types.LambdaIsolationMode("GreengrassContainer"),
+					ContainerParams: &types.LambdaContainerParams{
+						MemorySizeInKB: ptr.Int32(1),
+						MountROSysfs:   ptr.Bool(true),
+						Volumes: []types.LambdaVolumeMount{
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+							{
+								SourcePath:      ptr.String("__SourcePath__"),
+								DestinationPath: ptr.String("__DestinationPath__"),
+								Permission:      types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner:   ptr.Bool(true),
+							},
+						},
+						Devices: []types.LambdaDeviceMount{
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+							{
+								Path:          ptr.String("__Path__"),
+								Permission:    types.LambdaFilesystemPermission("ro"),
+								AddGroupOwner: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1259,7 +1754,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{})
+	_, opErr := svc.BatchAssociateClientDeviceWithCoreDevice(context.Background(), &BatchAssociateClientDeviceWithCoreDeviceInput{
+		Entries: []types.AssociateClientDeviceWithCoreDeviceEntry{
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+			{
+				ThingName: ptr.String("__ThingName__"),
+			},
+		},
+		CoreDeviceThingName: ptr.String("__CoreDeviceThingName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1295,7 +1800,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{})
+	_, opErr := svc.AssociateServiceRoleToAccount(context.Background(), &AssociateServiceRoleToAccountInput{
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

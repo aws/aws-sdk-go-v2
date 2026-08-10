@@ -119,7 +119,990 @@ func TestCheckResponseSnapshot_CreateDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{})
+	got, err := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamType: types.DeliveryStreamType("DirectPut"),
+		DirectPutSourceConfiguration: &types.DirectPutSourceConfiguration{
+			ThroughputHintInMBs: ptr.Int32(1),
+		},
+		KinesisStreamSourceConfiguration: &types.KinesisStreamSourceConfiguration{
+			KinesisStreamARN: ptr.String("__KinesisStreamARN__"),
+			RoleARN:          ptr.String("__RoleARN__"),
+		},
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationConfiguration: &types.ExtendedS3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationConfiguration: &types.RedshiftDestinationConfiguration{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationConfiguration: &types.ElasticsearchDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.ElasticsearchS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationConfiguration: &types.AmazonopensearchserviceDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonopensearchserviceS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationConfiguration: &types.SplunkDestinationConfiguration{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationConfiguration: &types.HttpEndpointDestinationConfiguration{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationConfiguration: &types.AmazonOpenSearchServerlessDestinationConfiguration{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonOpenSearchServerlessS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MSKSourceConfiguration: &types.MSKSourceConfiguration{
+			MSKClusterARN: ptr.String("__MSKClusterARN__"),
+			TopicName:     ptr.String("__TopicName__"),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				RoleARN:      ptr.String("__RoleARN__"),
+				Connectivity: types.Connectivity("PUBLIC"),
+			},
+			ReadFromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SnowflakeDestinationConfiguration: &types.SnowflakeDestinationConfiguration{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			SnowflakeVpcConfiguration: &types.SnowflakeVpcConfiguration{
+				PrivateLinkVpceId: ptr.String("__PrivateLinkVpceId__"),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+		DatabaseSourceConfiguration: &types.DatabaseSourceConfiguration{
+			Type:     types.DatabaseType("MySQL"),
+			Endpoint: ptr.String("__Endpoint__"),
+			Port:     ptr.Int32(1),
+			SSLMode:  types.SSLMode("Disabled"),
+			Databases: &types.DatabaseList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tables: &types.DatabaseTableList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Columns: &types.DatabaseColumnList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SurrogateKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotWatermarkTable: ptr.String("__SnapshotWatermarkTable__"),
+			DatabaseSourceAuthenticationConfiguration: &types.DatabaseSourceAuthenticationConfiguration{
+				SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+					SecretARN: ptr.String("__SecretARN__"),
+					RoleARN:   ptr.String("__RoleARN__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			DatabaseSourceVPCConfiguration: &types.DatabaseSourceVPCConfiguration{
+				VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +1121,10 @@ func TestCheckResponseSnapshot_DeleteDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeliveryStream(context.Background(), &DeleteDeliveryStreamInput{})
+	got, err := svc.DeleteDeliveryStream(context.Background(), &DeleteDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		AllowForceDelete:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2080,7 +3066,11 @@ func TestCheckResponseSnapshot_DescribeDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliveryStream(context.Background(), &DescribeDeliveryStreamInput{})
+	got, err := svc.DescribeDeliveryStream(context.Background(), &DescribeDeliveryStreamInput{
+		DeliveryStreamName:          ptr.String("__DeliveryStreamName__"),
+		Limit:                       ptr.Int32(1),
+		ExclusiveStartDestinationId: ptr.String("__ExclusiveStartDestinationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2105,7 +3095,11 @@ func TestCheckResponseSnapshot_ListDeliveryStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeliveryStreams(context.Background(), &ListDeliveryStreamsInput{})
+	got, err := svc.ListDeliveryStreams(context.Background(), &ListDeliveryStreamsInput{
+		Limit:                            ptr.Int32(1),
+		DeliveryStreamType:               types.DeliveryStreamType("DirectPut"),
+		ExclusiveStartDeliveryStreamName: ptr.String("__ExclusiveStartDeliveryStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2136,7 +3130,11 @@ func TestCheckResponseSnapshot_ListTagsForDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForDeliveryStream(context.Background(), &ListTagsForDeliveryStreamInput{})
+	got, err := svc.ListTagsForDeliveryStream(context.Background(), &ListTagsForDeliveryStreamInput{
+		DeliveryStreamName:   ptr.String("__DeliveryStreamName__"),
+		ExclusiveStartTagKey: ptr.String("__ExclusiveStartTagKey__"),
+		Limit:                ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2158,7 +3156,12 @@ func TestCheckResponseSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecord(context.Background(), &PutRecordInput{})
+	got, err := svc.PutRecord(context.Background(), &PutRecordInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		Record: &types.Record{
+			Data: []byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2192,7 +3195,17 @@ func TestCheckResponseSnapshot_PutRecordBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecordBatch(context.Background(), &PutRecordBatchInput{})
+	got, err := svc.PutRecordBatch(context.Background(), &PutRecordBatchInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		Records: []types.Record{
+			{
+				Data: []byte("blob"),
+			},
+			{
+				Data: []byte("blob"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2211,7 +3224,13 @@ func TestCheckResponseSnapshot_StartDeliveryStreamEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeliveryStreamEncryption(context.Background(), &StartDeliveryStreamEncryptionInput{})
+	got, err := svc.StartDeliveryStreamEncryption(context.Background(), &StartDeliveryStreamEncryptionInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2230,7 +3249,9 @@ func TestCheckResponseSnapshot_StopDeliveryStreamEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDeliveryStreamEncryption(context.Background(), &StopDeliveryStreamEncryptionInput{})
+	got, err := svc.StopDeliveryStreamEncryption(context.Background(), &StopDeliveryStreamEncryptionInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2249,7 +3270,19 @@ func TestCheckResponseSnapshot_TagDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagDeliveryStream(context.Background(), &TagDeliveryStreamInput{})
+	got, err := svc.TagDeliveryStream(context.Background(), &TagDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2268,7 +3301,13 @@ func TestCheckResponseSnapshot_UntagDeliveryStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagDeliveryStream(context.Background(), &UntagDeliveryStreamInput{})
+	got, err := svc.UntagDeliveryStream(context.Background(), &UntagDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2287,7 +3326,871 @@ func TestCheckResponseSnapshot_UpdateDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{})
+	got, err := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{
+		DeliveryStreamName:             ptr.String("__DeliveryStreamName__"),
+		CurrentDeliveryStreamVersionId: ptr.String("__CurrentDeliveryStreamVersionId__"),
+		DestinationId:                  ptr.String("__DestinationId__"),
+		S3DestinationUpdate: &types.S3DestinationUpdate{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationUpdate: &types.ExtendedS3DestinationUpdate{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupUpdate: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationUpdate: &types.RedshiftDestinationUpdate{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupUpdate: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationUpdate: &types.ElasticsearchDestinationUpdate{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationUpdate: &types.AmazonopensearchserviceDestinationUpdate{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationUpdate: &types.SplunkDestinationUpdate{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationUpdate: &types.HttpEndpointDestinationUpdate{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationUpdate: &types.AmazonOpenSearchServerlessDestinationUpdate{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		SnowflakeDestinationUpdate: &types.SnowflakeDestinationUpdate{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationUpdate: &types.IcebergDestinationUpdate{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2308,7 +4211,871 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{})
+	_, opErr := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{
+		DeliveryStreamName:             ptr.String("__DeliveryStreamName__"),
+		CurrentDeliveryStreamVersionId: ptr.String("__CurrentDeliveryStreamVersionId__"),
+		DestinationId:                  ptr.String("__DestinationId__"),
+		S3DestinationUpdate: &types.S3DestinationUpdate{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationUpdate: &types.ExtendedS3DestinationUpdate{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupUpdate: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationUpdate: &types.RedshiftDestinationUpdate{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupUpdate: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationUpdate: &types.ElasticsearchDestinationUpdate{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationUpdate: &types.AmazonopensearchserviceDestinationUpdate{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationUpdate: &types.SplunkDestinationUpdate{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationUpdate: &types.HttpEndpointDestinationUpdate{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationUpdate: &types.AmazonOpenSearchServerlessDestinationUpdate{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		SnowflakeDestinationUpdate: &types.SnowflakeDestinationUpdate{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Update: &types.S3DestinationUpdate{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationUpdate: &types.IcebergDestinationUpdate{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2333,7 +5100,990 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{})
+	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamType: types.DeliveryStreamType("DirectPut"),
+		DirectPutSourceConfiguration: &types.DirectPutSourceConfiguration{
+			ThroughputHintInMBs: ptr.Int32(1),
+		},
+		KinesisStreamSourceConfiguration: &types.KinesisStreamSourceConfiguration{
+			KinesisStreamARN: ptr.String("__KinesisStreamARN__"),
+			RoleARN:          ptr.String("__RoleARN__"),
+		},
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationConfiguration: &types.ExtendedS3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationConfiguration: &types.RedshiftDestinationConfiguration{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationConfiguration: &types.ElasticsearchDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.ElasticsearchS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationConfiguration: &types.AmazonopensearchserviceDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonopensearchserviceS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationConfiguration: &types.SplunkDestinationConfiguration{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationConfiguration: &types.HttpEndpointDestinationConfiguration{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationConfiguration: &types.AmazonOpenSearchServerlessDestinationConfiguration{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonOpenSearchServerlessS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MSKSourceConfiguration: &types.MSKSourceConfiguration{
+			MSKClusterARN: ptr.String("__MSKClusterARN__"),
+			TopicName:     ptr.String("__TopicName__"),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				RoleARN:      ptr.String("__RoleARN__"),
+				Connectivity: types.Connectivity("PUBLIC"),
+			},
+			ReadFromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SnowflakeDestinationConfiguration: &types.SnowflakeDestinationConfiguration{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			SnowflakeVpcConfiguration: &types.SnowflakeVpcConfiguration{
+				PrivateLinkVpceId: ptr.String("__PrivateLinkVpceId__"),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+		DatabaseSourceConfiguration: &types.DatabaseSourceConfiguration{
+			Type:     types.DatabaseType("MySQL"),
+			Endpoint: ptr.String("__Endpoint__"),
+			Port:     ptr.Int32(1),
+			SSLMode:  types.SSLMode("Disabled"),
+			Databases: &types.DatabaseList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tables: &types.DatabaseTableList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Columns: &types.DatabaseColumnList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SurrogateKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotWatermarkTable: ptr.String("__SnapshotWatermarkTable__"),
+			DatabaseSourceAuthenticationConfiguration: &types.DatabaseSourceAuthenticationConfiguration{
+				SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+					SecretARN: ptr.String("__SecretARN__"),
+					RoleARN:   ptr.String("__RoleARN__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			DatabaseSourceVPCConfiguration: &types.DatabaseSourceVPCConfiguration{
+				VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2348,7 +6098,7 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_InvalidKMSResourceException(t *testing.T) {
 	want := &types.InvalidKMSResourceException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidKMSResourceException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidKMSResourceException.error")
@@ -2359,7 +6109,990 @@ func TestCheckResponseSnapshot_Error_InvalidKMSResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{})
+	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamType: types.DeliveryStreamType("DirectPut"),
+		DirectPutSourceConfiguration: &types.DirectPutSourceConfiguration{
+			ThroughputHintInMBs: ptr.Int32(1),
+		},
+		KinesisStreamSourceConfiguration: &types.KinesisStreamSourceConfiguration{
+			KinesisStreamARN: ptr.String("__KinesisStreamARN__"),
+			RoleARN:          ptr.String("__RoleARN__"),
+		},
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationConfiguration: &types.ExtendedS3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationConfiguration: &types.RedshiftDestinationConfiguration{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationConfiguration: &types.ElasticsearchDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.ElasticsearchS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationConfiguration: &types.AmazonopensearchserviceDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonopensearchserviceS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationConfiguration: &types.SplunkDestinationConfiguration{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationConfiguration: &types.HttpEndpointDestinationConfiguration{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationConfiguration: &types.AmazonOpenSearchServerlessDestinationConfiguration{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonOpenSearchServerlessS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MSKSourceConfiguration: &types.MSKSourceConfiguration{
+			MSKClusterARN: ptr.String("__MSKClusterARN__"),
+			TopicName:     ptr.String("__TopicName__"),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				RoleARN:      ptr.String("__RoleARN__"),
+				Connectivity: types.Connectivity("PUBLIC"),
+			},
+			ReadFromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SnowflakeDestinationConfiguration: &types.SnowflakeDestinationConfiguration{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			SnowflakeVpcConfiguration: &types.SnowflakeVpcConfiguration{
+				PrivateLinkVpceId: ptr.String("__PrivateLinkVpceId__"),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+		DatabaseSourceConfiguration: &types.DatabaseSourceConfiguration{
+			Type:     types.DatabaseType("MySQL"),
+			Endpoint: ptr.String("__Endpoint__"),
+			Port:     ptr.Int32(1),
+			SSLMode:  types.SSLMode("Disabled"),
+			Databases: &types.DatabaseList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tables: &types.DatabaseTableList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Columns: &types.DatabaseColumnList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SurrogateKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotWatermarkTable: ptr.String("__SnapshotWatermarkTable__"),
+			DatabaseSourceAuthenticationConfiguration: &types.DatabaseSourceAuthenticationConfiguration{
+				SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+					SecretARN: ptr.String("__SecretARN__"),
+					RoleARN:   ptr.String("__RoleARN__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			DatabaseSourceVPCConfiguration: &types.DatabaseSourceVPCConfiguration{
+				VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2374,7 +7107,7 @@ func TestCheckResponseSnapshot_Error_InvalidKMSResourceException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_InvalidSourceException(t *testing.T) {
 	want := &types.InvalidSourceException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidSourceException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidSourceException.error")
@@ -2385,7 +7118,12 @@ func TestCheckResponseSnapshot_Error_InvalidSourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRecord(context.Background(), &PutRecordInput{})
+	_, opErr := svc.PutRecord(context.Background(), &PutRecordInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		Record: &types.Record{
+			Data: []byte("blob"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2410,7 +7148,990 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{})
+	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamType: types.DeliveryStreamType("DirectPut"),
+		DirectPutSourceConfiguration: &types.DirectPutSourceConfiguration{
+			ThroughputHintInMBs: ptr.Int32(1),
+		},
+		KinesisStreamSourceConfiguration: &types.KinesisStreamSourceConfiguration{
+			KinesisStreamARN: ptr.String("__KinesisStreamARN__"),
+			RoleARN:          ptr.String("__RoleARN__"),
+		},
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationConfiguration: &types.ExtendedS3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationConfiguration: &types.RedshiftDestinationConfiguration{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationConfiguration: &types.ElasticsearchDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.ElasticsearchS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationConfiguration: &types.AmazonopensearchserviceDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonopensearchserviceS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationConfiguration: &types.SplunkDestinationConfiguration{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationConfiguration: &types.HttpEndpointDestinationConfiguration{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationConfiguration: &types.AmazonOpenSearchServerlessDestinationConfiguration{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonOpenSearchServerlessS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MSKSourceConfiguration: &types.MSKSourceConfiguration{
+			MSKClusterARN: ptr.String("__MSKClusterARN__"),
+			TopicName:     ptr.String("__TopicName__"),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				RoleARN:      ptr.String("__RoleARN__"),
+				Connectivity: types.Connectivity("PUBLIC"),
+			},
+			ReadFromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SnowflakeDestinationConfiguration: &types.SnowflakeDestinationConfiguration{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			SnowflakeVpcConfiguration: &types.SnowflakeVpcConfiguration{
+				PrivateLinkVpceId: ptr.String("__PrivateLinkVpceId__"),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+		DatabaseSourceConfiguration: &types.DatabaseSourceConfiguration{
+			Type:     types.DatabaseType("MySQL"),
+			Endpoint: ptr.String("__Endpoint__"),
+			Port:     ptr.Int32(1),
+			SSLMode:  types.SSLMode("Disabled"),
+			Databases: &types.DatabaseList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tables: &types.DatabaseTableList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Columns: &types.DatabaseColumnList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SurrogateKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotWatermarkTable: ptr.String("__SnapshotWatermarkTable__"),
+			DatabaseSourceAuthenticationConfiguration: &types.DatabaseSourceAuthenticationConfiguration{
+				SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+					SecretARN: ptr.String("__SecretARN__"),
+					RoleARN:   ptr.String("__RoleARN__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			DatabaseSourceVPCConfiguration: &types.DatabaseSourceVPCConfiguration{
+				VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2435,7 +8156,990 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{})
+	_, opErr := svc.CreateDeliveryStream(context.Background(), &CreateDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		DeliveryStreamType: types.DeliveryStreamType("DirectPut"),
+		DirectPutSourceConfiguration: &types.DirectPutSourceConfiguration{
+			ThroughputHintInMBs: ptr.Int32(1),
+		},
+		KinesisStreamSourceConfiguration: &types.KinesisStreamSourceConfiguration{
+			KinesisStreamARN: ptr.String("__KinesisStreamARN__"),
+			RoleARN:          ptr.String("__RoleARN__"),
+		},
+		DeliveryStreamEncryptionConfigurationInput: &types.DeliveryStreamEncryptionConfigurationInput{
+			KeyARN:  ptr.String("__KeyARN__"),
+			KeyType: types.KeyType("AWS_OWNED_CMK"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+		ExtendedS3DestinationConfiguration: &types.ExtendedS3DestinationConfiguration{
+			RoleARN:           ptr.String("__RoleARN__"),
+			BucketARN:         ptr.String("__BucketARN__"),
+			Prefix:            ptr.String("__Prefix__"),
+			ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+				KMSEncryptionConfig: &types.KMSEncryptionConfig{
+					AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.S3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			DataFormatConversionConfiguration: &types.DataFormatConversionConfiguration{
+				SchemaConfiguration: &types.SchemaConfiguration{
+					RoleARN:      ptr.String("__RoleARN__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					Region:       ptr.String("__Region__"),
+					VersionId:    ptr.String("__VersionId__"),
+				},
+				InputFormatConfiguration: &types.InputFormatConfiguration{
+					Deserializer: &types.Deserializer{
+						OpenXJsonSerDe: &types.OpenXJsonSerDe{
+							ConvertDotsInJsonKeysToUnderscores: ptr.Bool(true),
+							CaseInsensitive:                    ptr.Bool(true),
+							ColumnToJsonKeyMappings: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						HiveJsonSerDe: &types.HiveJsonSerDe{
+							TimestampFormats: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				OutputFormatConfiguration: &types.OutputFormatConfiguration{
+					Serializer: &types.Serializer{
+						ParquetSerDe: &types.ParquetSerDe{
+							BlockSizeBytes:              ptr.Int32(1),
+							PageSizeBytes:               ptr.Int32(1),
+							Compression:                 types.ParquetCompression("UNCOMPRESSED"),
+							EnableDictionaryCompression: ptr.Bool(true),
+							MaxPaddingBytes:             ptr.Int32(1),
+							WriterVersion:               types.ParquetWriterVersion("V1"),
+						},
+						OrcSerDe: &types.OrcSerDe{
+							StripeSizeBytes:  ptr.Int32(1),
+							BlockSizeBytes:   ptr.Int32(1),
+							RowIndexStride:   ptr.Int32(1),
+							EnablePadding:    ptr.Bool(true),
+							PaddingTolerance: ptr.Float64(1.0),
+							Compression:      types.OrcCompression("NONE"),
+							BloomFilterColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BloomFilterFalsePositiveProbability: ptr.Float64(1.0),
+							DictionaryKeyThreshold:              ptr.Float64(1.0),
+							FormatVersion:                       types.OrcFormatVersion("V0_11"),
+						},
+					},
+				},
+				Enabled: ptr.Bool(true),
+			},
+			DynamicPartitioningConfiguration: &types.DynamicPartitioningConfiguration{
+				RetryOptions: &types.RetryOptions{
+					DurationInSeconds: ptr.Int32(1),
+				},
+				Enabled: ptr.Bool(true),
+			},
+			FileExtension:  ptr.String("__FileExtension__"),
+			CustomTimeZone: ptr.String("__CustomTimeZone__"),
+		},
+		RedshiftDestinationConfiguration: &types.RedshiftDestinationConfiguration{
+			RoleARN:        ptr.String("__RoleARN__"),
+			ClusterJDBCURL: ptr.String("__ClusterJDBCURL__"),
+			CopyCommand: &types.CopyCommand{
+				DataTableName:    ptr.String("__DataTableName__"),
+				DataTableColumns: ptr.String("__DataTableColumns__"),
+				CopyOptions:      ptr.String("__CopyOptions__"),
+			},
+			Username: ptr.String("__Username__"),
+			Password: ptr.String("__Password__"),
+			RetryOptions: &types.RedshiftRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.RedshiftS3BackupMode("Disabled"),
+			S3BackupConfiguration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		ElasticsearchDestinationConfiguration: &types.ElasticsearchDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.ElasticsearchIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.ElasticsearchBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.ElasticsearchRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.ElasticsearchS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		AmazonopensearchserviceDestinationConfiguration: &types.AmazonopensearchserviceDestinationConfiguration{
+			RoleARN:             ptr.String("__RoleARN__"),
+			DomainARN:           ptr.String("__DomainARN__"),
+			ClusterEndpoint:     ptr.String("__ClusterEndpoint__"),
+			IndexName:           ptr.String("__IndexName__"),
+			TypeName:            ptr.String("__TypeName__"),
+			IndexRotationPeriod: types.AmazonopensearchserviceIndexRotationPeriod("NoRotation"),
+			BufferingHints: &types.AmazonopensearchserviceBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonopensearchserviceRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonopensearchserviceS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DocumentIdOptions: &types.DocumentIdOptions{
+				DefaultDocumentIdFormat: types.DefaultDocumentIdFormat("FIREHOSE_DEFAULT"),
+			},
+		},
+		SplunkDestinationConfiguration: &types.SplunkDestinationConfiguration{
+			HECEndpoint:                       ptr.String("__HECEndpoint__"),
+			HECEndpointType:                   types.HECEndpointType("Raw"),
+			HECToken:                          ptr.String("__HECToken__"),
+			HECAcknowledgmentTimeoutInSeconds: ptr.Int32(1),
+			RetryOptions: &types.SplunkRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SplunkS3BackupMode("FailedEventsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			BufferingHints: &types.SplunkBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		HttpEndpointDestinationConfiguration: &types.HttpEndpointDestinationConfiguration{
+			EndpointConfiguration: &types.HttpEndpointConfiguration{
+				Url:       ptr.String("__Url__"),
+				Name:      ptr.String("__Name__"),
+				AccessKey: ptr.String("__AccessKey__"),
+			},
+			BufferingHints: &types.HttpEndpointBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			RequestConfiguration: &types.HttpEndpointRequestConfiguration{
+				ContentEncoding: types.ContentEncoding("NONE"),
+				CommonAttributes: []types.HttpEndpointCommonAttribute{
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+					{
+						AttributeName:  ptr.String("__AttributeName__"),
+						AttributeValue: ptr.String("__AttributeValue__"),
+					},
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.HttpEndpointRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.HttpEndpointS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AmazonOpenSearchServerlessDestinationConfiguration: &types.AmazonOpenSearchServerlessDestinationConfiguration{
+			RoleARN:            ptr.String("__RoleARN__"),
+			CollectionEndpoint: ptr.String("__CollectionEndpoint__"),
+			IndexName:          ptr.String("__IndexName__"),
+			BufferingHints: &types.AmazonOpenSearchServerlessBufferingHints{
+				IntervalInSeconds: ptr.Int32(1),
+				SizeInMBs:         ptr.Int32(1),
+			},
+			RetryOptions: &types.AmazonOpenSearchServerlessRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.AmazonOpenSearchServerlessS3BackupMode("FailedDocumentsOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			VpcConfiguration: &types.VpcConfiguration{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RoleARN: ptr.String("__RoleARN__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MSKSourceConfiguration: &types.MSKSourceConfiguration{
+			MSKClusterARN: ptr.String("__MSKClusterARN__"),
+			TopicName:     ptr.String("__TopicName__"),
+			AuthenticationConfiguration: &types.AuthenticationConfiguration{
+				RoleARN:      ptr.String("__RoleARN__"),
+				Connectivity: types.Connectivity("PUBLIC"),
+			},
+			ReadFromTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SnowflakeDestinationConfiguration: &types.SnowflakeDestinationConfiguration{
+			AccountUrl:    ptr.String("__AccountUrl__"),
+			PrivateKey:    ptr.String("__PrivateKey__"),
+			KeyPassphrase: ptr.String("__KeyPassphrase__"),
+			User:          ptr.String("__User__"),
+			Database:      ptr.String("__Database__"),
+			Schema:        ptr.String("__Schema__"),
+			Table:         ptr.String("__Table__"),
+			SnowflakeRoleConfiguration: &types.SnowflakeRoleConfiguration{
+				Enabled:       ptr.Bool(true),
+				SnowflakeRole: ptr.String("__SnowflakeRole__"),
+			},
+			DataLoadingOption:  types.SnowflakeDataLoadingOption("JSON_MAPPING"),
+			MetaDataColumnName: ptr.String("__MetaDataColumnName__"),
+			ContentColumnName:  ptr.String("__ContentColumnName__"),
+			SnowflakeVpcConfiguration: &types.SnowflakeVpcConfiguration{
+				PrivateLinkVpceId: ptr.String("__PrivateLinkVpceId__"),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			RoleARN: ptr.String("__RoleARN__"),
+			RetryOptions: &types.SnowflakeRetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			S3BackupMode: types.SnowflakeS3BackupMode("FailedDataOnly"),
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+			SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+				SecretARN: ptr.String("__SecretARN__"),
+				RoleARN:   ptr.String("__RoleARN__"),
+				Enabled:   ptr.Bool(true),
+			},
+			BufferingHints: &types.SnowflakeBufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			DestinationTableConfigurationList: []types.DestinationTableConfiguration{
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+				{
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					UniqueKeys: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PartitionSpec: &types.PartitionSpec{
+						Identity: []types.PartitionField{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+					S3ErrorOutputPrefix: ptr.String("__S3ErrorOutputPrefix__"),
+				},
+			},
+			SchemaEvolutionConfiguration: &types.SchemaEvolutionConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			TableCreationConfiguration: &types.TableCreationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+			BufferingHints: &types.BufferingHints{
+				SizeInMBs:         ptr.Int32(1),
+				IntervalInSeconds: ptr.Int32(1),
+			},
+			CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+			ProcessingConfiguration: &types.ProcessingConfiguration{
+				Enabled: ptr.Bool(true),
+				Processors: []types.Processor{
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+					{
+						Type: types.ProcessorType("RecordDeAggregation"),
+						Parameters: []types.ProcessorParameter{
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+							{
+								ParameterName:  types.ProcessorParameterName("LambdaArn"),
+								ParameterValue: ptr.String("__ParameterValue__"),
+							},
+						},
+					},
+				},
+			},
+			S3BackupMode: types.IcebergS3BackupMode("FailedDataOnly"),
+			RetryOptions: &types.RetryOptions{
+				DurationInSeconds: ptr.Int32(1),
+			},
+			RoleARN:    ptr.String("__RoleARN__"),
+			AppendOnly: ptr.Bool(true),
+			CatalogConfiguration: &types.CatalogConfiguration{
+				CatalogARN:        ptr.String("__CatalogARN__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			S3Configuration: &types.S3DestinationConfiguration{
+				RoleARN:           ptr.String("__RoleARN__"),
+				BucketARN:         ptr.String("__BucketARN__"),
+				Prefix:            ptr.String("__Prefix__"),
+				ErrorOutputPrefix: ptr.String("__ErrorOutputPrefix__"),
+				BufferingHints: &types.BufferingHints{
+					SizeInMBs:         ptr.Int32(1),
+					IntervalInSeconds: ptr.Int32(1),
+				},
+				CompressionFormat: types.CompressionFormat("UNCOMPRESSED"),
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					NoEncryptionConfig: types.NoEncryptionConfig("NoEncryption"),
+					KMSEncryptionConfig: &types.KMSEncryptionConfig{
+						AWSKMSKeyARN: ptr.String("__AWSKMSKeyARN__"),
+					},
+				},
+				CloudWatchLoggingOptions: &types.CloudWatchLoggingOptions{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+		DatabaseSourceConfiguration: &types.DatabaseSourceConfiguration{
+			Type:     types.DatabaseType("MySQL"),
+			Endpoint: ptr.String("__Endpoint__"),
+			Port:     ptr.Int32(1),
+			SSLMode:  types.SSLMode("Disabled"),
+			Databases: &types.DatabaseList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Tables: &types.DatabaseTableList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Columns: &types.DatabaseColumnList{
+				Include: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exclude: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SurrogateKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotWatermarkTable: ptr.String("__SnapshotWatermarkTable__"),
+			DatabaseSourceAuthenticationConfiguration: &types.DatabaseSourceAuthenticationConfiguration{
+				SecretsManagerConfiguration: &types.SecretsManagerConfiguration{
+					SecretARN: ptr.String("__SecretARN__"),
+					RoleARN:   ptr.String("__RoleARN__"),
+					Enabled:   ptr.Bool(true),
+				},
+			},
+			DatabaseSourceVPCConfiguration: &types.DatabaseSourceVPCConfiguration{
+				VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2460,7 +9164,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDeliveryStream(context.Background(), &DeleteDeliveryStreamInput{})
+	_, opErr := svc.DeleteDeliveryStream(context.Background(), &DeleteDeliveryStreamInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		AllowForceDelete:   ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2485,7 +9192,12 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRecord(context.Background(), &PutRecordInput{})
+	_, opErr := svc.PutRecord(context.Background(), &PutRecordInput{
+		DeliveryStreamName: ptr.String("__DeliveryStreamName__"),
+		Record: &types.Record{
+			Data: []byte("blob"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

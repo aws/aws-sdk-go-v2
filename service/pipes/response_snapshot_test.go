@@ -124,7 +124,491 @@ func TestCheckResponseSnapshot_CreatePipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	got, err := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +634,9 @@ func TestCheckResponseSnapshot_DeletePipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipe(context.Background(), &DeletePipeInput{})
+	got, err := svc.DeletePipe(context.Background(), &DeletePipeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +1144,9 @@ func TestCheckResponseSnapshot_DescribePipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePipe(context.Background(), &DescribePipeInput{})
+	got, err := svc.DescribePipe(context.Background(), &DescribePipeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -705,7 +1193,15 @@ func TestCheckResponseSnapshot_ListPipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipes(context.Background(), &ListPipesInput{})
+	got, err := svc.ListPipes(context.Background(), &ListPipesInput{
+		NamePrefix:   ptr.String("__NamePrefix__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		CurrentState: types.PipeState("RUNNING"),
+		SourcePrefix: ptr.String("__SourcePrefix__"),
+		TargetPrefix: ptr.String("__TargetPrefix__"),
+		NextToken:    ptr.String("__NextToken__"),
+		Limit:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +1224,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -754,7 +1252,9 @@ func TestCheckResponseSnapshot_StartPipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPipe(context.Background(), &StartPipeInput{})
+	got, err := svc.StartPipe(context.Background(), &StartPipeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +1280,9 @@ func TestCheckResponseSnapshot_StopPipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopPipe(context.Background(), &StopPipeInput{})
+	got, err := svc.StopPipe(context.Background(), &StopPipeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +1301,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -818,7 +1325,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +1357,471 @@ func TestCheckResponseSnapshot_UpdatePipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePipe(context.Background(), &UpdatePipeInput{})
+	got, err := svc.UpdatePipe(context.Background(), &UpdatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		SourceParameters: &types.UpdatePipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.UpdatePipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+			},
+			DynamoDBStreamParameters: &types.UpdatePipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+			},
+			SqsQueueParameters: &types.UpdatePipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.UpdatePipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.UpdatePipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.UpdatePipeSourceManagedStreamingKafkaParameters{
+				BatchSize: ptr.Int32(1),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			SelfManagedKafkaParameters: &types.UpdatePipeSourceSelfManagedKafkaParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -867,7 +1844,491 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -893,7 +2354,491 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -918,7 +2863,491 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -947,7 +3376,491 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -975,7 +3888,491 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1010,7 +4407,491 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{})
+	_, opErr := svc.CreatePipe(context.Background(), &CreatePipeInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DesiredState: types.RequestedPipeState("RUNNING"),
+		Source:       ptr.String("__Source__"),
+		SourceParameters: &types.PipeSourceParameters{
+			FilterCriteria: &types.FilterCriteria{
+				Filters: []types.Filter{
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+					{
+						Pattern: ptr.String("__Pattern__"),
+					},
+				},
+			},
+			KinesisStreamParameters: &types.PipeSourceKinesisStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.KinesisStreamStartPosition("TRIM_HORIZON"),
+				StartingPositionTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			DynamoDBStreamParameters: &types.PipeSourceDynamoDBStreamParameters{
+				BatchSize: ptr.Int32(1),
+				DeadLetterConfig: &types.DeadLetterConfig{
+					Arn: ptr.String("__Arn__"),
+				},
+				OnPartialBatchItemFailure:      types.OnPartialBatchItemFailureStreams("AUTOMATIC_BISECT"),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				MaximumRecordAgeInSeconds:      ptr.Int32(1),
+				MaximumRetryAttempts:           ptr.Int32(1),
+				ParallelizationFactor:          ptr.Int32(1),
+				StartingPosition:               types.DynamoDBStreamStartPosition("TRIM_HORIZON"),
+			},
+			SqsQueueParameters: &types.PipeSourceSqsQueueParameters{
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ActiveMQBrokerParameters: &types.PipeSourceActiveMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			RabbitMQBrokerParameters: &types.PipeSourceRabbitMQBrokerParameters{
+				Credentials: &types.MQBrokerAccessCredentialsMemberBasicAuth{
+					Value: "__MQBrokerAccessCredentialsMemberBasicAuth__",
+				},
+				QueueName:                      ptr.String("__QueueName__"),
+				VirtualHost:                    ptr.String("__VirtualHost__"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+			},
+			ManagedStreamingKafkaParameters: &types.PipeSourceManagedStreamingKafkaParameters{
+				TopicName:                      ptr.String("__TopicName__"),
+				StartingPosition:               types.MSKStartPosition("TRIM_HORIZON"),
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.MSKAccessCredentialsMemberSaslScram512Auth{
+					Value: "__MSKAccessCredentialsMemberSaslScram512Auth__",
+				},
+			},
+			SelfManagedKafkaParameters: &types.PipeSourceSelfManagedKafkaParameters{
+				TopicName:        ptr.String("__TopicName__"),
+				StartingPosition: types.SelfManagedKafkaStartPosition("TRIM_HORIZON"),
+				AdditionalBootstrapServers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				BatchSize:                      ptr.Int32(1),
+				MaximumBatchingWindowInSeconds: ptr.Int32(1),
+				ConsumerGroupID:                ptr.String("__ConsumerGroupID__"),
+				Credentials: &types.SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth{
+					Value: "__SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth__",
+				},
+				ServerRootCaCertificate: ptr.String("__ServerRootCaCertificate__"),
+				Vpc: &types.SelfManagedKafkaAccessConfigurationVpc{
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroup: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Enrichment: ptr.String("__Enrichment__"),
+		EnrichmentParameters: &types.PipeEnrichmentParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			HttpParameters: &types.PipeEnrichmentHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Target: ptr.String("__Target__"),
+		TargetParameters: &types.PipeTargetParameters{
+			InputTemplate: ptr.String("__InputTemplate__"),
+			LambdaFunctionParameters: &types.PipeTargetLambdaFunctionParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			StepFunctionStateMachineParameters: &types.PipeTargetStateMachineParameters{
+				InvocationType: types.PipeTargetInvocationType("REQUEST_RESPONSE"),
+			},
+			KinesisStreamParameters: &types.PipeTargetKinesisStreamParameters{
+				PartitionKey: ptr.String("__PartitionKey__"),
+			},
+			EcsTaskParameters: &types.PipeTargetEcsTaskParameters{
+				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
+				TaskCount:         ptr.Int32(1),
+				LaunchType:        types.LaunchType("EC2"),
+				NetworkConfiguration: &types.NetworkConfiguration{
+					AwsvpcConfiguration: &types.AwsVpcConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AssignPublicIp: types.AssignPublicIp("ENABLED"),
+					},
+				},
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Group:           ptr.String("__Group__"),
+				CapacityProviderStrategy: []types.CapacityProviderStrategyItem{
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+					{
+						CapacityProvider: ptr.String("__CapacityProvider__"),
+						Weight:           1,
+						Base:             1,
+					},
+				},
+				EnableECSManagedTags: true,
+				EnableExecuteCommand: true,
+				PlacementConstraints: []types.PlacementConstraint{
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+					{
+						Type:       types.PlacementConstraintType("distinctInstance"),
+						Expression: ptr.String("__Expression__"),
+					},
+				},
+				PlacementStrategy: []types.PlacementStrategy{
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+					{
+						Type:  types.PlacementStrategyType("random"),
+						Field: ptr.String("__Field__"),
+					},
+				},
+				PropagateTags: types.PropagateTags("TASK_DEFINITION"),
+				ReferenceId:   ptr.String("__ReferenceId__"),
+				Overrides: &types.EcsTaskOverride{
+					ContainerOverrides: []types.EcsContainerOverride{
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						{
+							Command: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Cpu: ptr.Int32(1),
+							Environment: []types.EcsEnvironmentVariable{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							EnvironmentFiles: []types.EcsEnvironmentFile{
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsEnvironmentFileType("s3"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Memory:            ptr.Int32(1),
+							MemoryReservation: ptr.Int32(1),
+							Name:              ptr.String("__Name__"),
+							ResourceRequirements: []types.EcsResourceRequirement{
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Type:  types.EcsResourceRequirementType("GPU"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Cpu: ptr.String("__Cpu__"),
+					EphemeralStorage: &types.EcsEphemeralStorage{
+						SizeInGiB: ptr.Int32(1),
+					},
+					ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+					InferenceAcceleratorOverrides: []types.EcsInferenceAcceleratorOverride{
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+						{
+							DeviceName: ptr.String("__DeviceName__"),
+							DeviceType: ptr.String("__DeviceType__"),
+						},
+					},
+					Memory:      ptr.String("__Memory__"),
+					TaskRoleArn: ptr.String("__TaskRoleArn__"),
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			BatchJobParameters: &types.PipeTargetBatchJobParameters{
+				JobDefinition: ptr.String("__JobDefinition__"),
+				JobName:       ptr.String("__JobName__"),
+				ArrayProperties: &types.BatchArrayProperties{
+					Size: ptr.Int32(1),
+				},
+				RetryStrategy: &types.BatchRetryStrategy{
+					Attempts: ptr.Int32(1),
+				},
+				ContainerOverrides: &types.BatchContainerOverrides{
+					Command: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Environment: []types.BatchEnvironmentVariable{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					InstanceType: ptr.String("__InstanceType__"),
+					ResourceRequirements: []types.BatchResourceRequirement{
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Type:  types.BatchResourceRequirementType("GPU"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				DependsOn: []types.BatchJobDependency{
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+					{
+						JobId: ptr.String("__JobId__"),
+						Type:  types.BatchJobDependencyType("N_TO_N"),
+					},
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			SqsQueueParameters: &types.PipeTargetSqsQueueParameters{
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+			},
+			HttpParameters: &types.PipeTargetHttpParameters{
+				PathParameterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HeaderParameters: map[string]string{
+					"key0": "__Value__",
+				},
+				QueryStringParameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			RedshiftDataParameters: &types.PipeTargetRedshiftDataParameters{
+				SecretManagerArn: ptr.String("__SecretManagerArn__"),
+				Database:         ptr.String("__Database__"),
+				DbUser:           ptr.String("__DbUser__"),
+				StatementName:    ptr.String("__StatementName__"),
+				WithEvent:        true,
+				Sqls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			SageMakerPipelineParameters: &types.PipeTargetSageMakerPipelineParameters{
+				PipelineParameterList: []types.SageMakerPipelineParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventBridgeEventBusParameters: &types.PipeTargetEventBridgeEventBusParameters{
+				EndpointId: ptr.String("__EndpointId__"),
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Time: ptr.String("__Time__"),
+			},
+			CloudWatchLogsParameters: &types.PipeTargetCloudWatchLogsParameters{
+				LogStreamName: ptr.String("__LogStreamName__"),
+				Timestamp:     ptr.String("__Timestamp__"),
+			},
+			TimestreamParameters: &types.PipeTargetTimestreamParameters{
+				TimeValue:       ptr.String("__TimeValue__"),
+				EpochTimeUnit:   types.EpochTimeUnit("MILLISECONDS"),
+				TimeFieldType:   types.TimeFieldType("EPOCH"),
+				TimestampFormat: ptr.String("__TimestampFormat__"),
+				VersionValue:    ptr.String("__VersionValue__"),
+				DimensionMappings: []types.DimensionMapping{
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+					{
+						DimensionValue:     ptr.String("__DimensionValue__"),
+						DimensionValueType: types.DimensionValueType("VARCHAR"),
+						DimensionName:      ptr.String("__DimensionName__"),
+					},
+				},
+				SingleMeasureMappings: []types.SingleMeasureMapping{
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+					{
+						MeasureValue:     ptr.String("__MeasureValue__"),
+						MeasureValueType: types.MeasureValueType("DOUBLE"),
+						MeasureName:      ptr.String("__MeasureName__"),
+					},
+				},
+				MultiMeasureMappings: []types.MultiMeasureMapping{
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+					{
+						MultiMeasureName: ptr.String("__MultiMeasureName__"),
+						MultiMeasureAttributeMappings: []types.MultiMeasureAttributeMapping{
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+							{
+								MeasureValue:              ptr.String("__MeasureValue__"),
+								MeasureValueType:          types.MeasureValueType("DOUBLE"),
+								MultiMeasureAttributeName: ptr.String("__MultiMeasureAttributeName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.PipeLogConfigurationParameters{
+			S3LogDestination: &types.S3LogDestinationParameters{
+				BucketName:   ptr.String("__BucketName__"),
+				BucketOwner:  ptr.String("__BucketOwner__"),
+				OutputFormat: types.S3OutputFormat("json"),
+				Prefix:       ptr.String("__Prefix__"),
+			},
+			FirehoseLogDestination: &types.FirehoseLogDestinationParameters{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+			},
+			CloudwatchLogsLogDestination: &types.CloudwatchLogsLogDestinationParameters{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Level: types.LogLevel("OFF"),
+			IncludeExecutionData: []types.IncludeExecutionDataOption{
+				types.IncludeExecutionDataOption("ALL"),
+				types.IncludeExecutionDataOption("ALL"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

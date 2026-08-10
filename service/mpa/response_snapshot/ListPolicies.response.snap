@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Policies":[{"Arn":"__Arn__","DefaultVersion":1,"Name":"__Name__","PolicyType":"AWS_MANAGED"},{"Arn":"__Arn__","DefaultVersion":1,"Name":"__Name__","PolicyType":"AWS_MANAGED"}]}

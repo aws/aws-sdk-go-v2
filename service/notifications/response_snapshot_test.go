@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	got, err := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,10 @@ func TestCheckResponseSnapshot_AssociateManagedNotificationAccountContact(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateManagedNotificationAccountContact(context.Background(), &AssociateManagedNotificationAccountContactInput{})
+	got, err := svc.AssociateManagedNotificationAccountContact(context.Background(), &AssociateManagedNotificationAccountContactInput{
+		ContactIdentifier:                   types.AccountContactType("ACCOUNT_PRIMARY"),
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +161,10 @@ func TestCheckResponseSnapshot_AssociateManagedNotificationAdditionalChannel(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateManagedNotificationAdditionalChannel(context.Background(), &AssociateManagedNotificationAdditionalChannelInput{})
+	got, err := svc.AssociateManagedNotificationAdditionalChannel(context.Background(), &AssociateManagedNotificationAdditionalChannelInput{
+		ChannelArn:                          ptr.String("__ChannelArn__"),
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +183,10 @@ func TestCheckResponseSnapshot_AssociateOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateOrganizationalUnit(context.Background(), &AssociateOrganizationalUnitInput{})
+	got, err := svc.AssociateOrganizationalUnit(context.Background(), &AssociateOrganizationalUnitInput{
+		OrganizationalUnitId:         ptr.String("__OrganizationalUnitId__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +214,16 @@ func TestCheckResponseSnapshot_CreateEventRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventRule(context.Background(), &CreateEventRuleInput{})
+	got, err := svc.CreateEventRule(context.Background(), &CreateEventRuleInput{
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+		Source:                       ptr.String("__Source__"),
+		EventType:                    ptr.String("__EventType__"),
+		EventPattern:                 ptr.String("__EventPattern__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +245,14 @@ func TestCheckResponseSnapshot_CreateNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotificationConfiguration(context.Background(), &CreateNotificationConfigurationInput{})
+	got, err := svc.CreateNotificationConfiguration(context.Background(), &CreateNotificationConfigurationInput{
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		AggregationDuration: types.AggregationDuration("LONG"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +271,9 @@ func TestCheckResponseSnapshot_DeleteEventRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventRule(context.Background(), &DeleteEventRuleInput{})
+	got, err := svc.DeleteEventRule(context.Background(), &DeleteEventRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +292,9 @@ func TestCheckResponseSnapshot_DeleteNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotificationConfiguration(context.Background(), &DeleteNotificationConfigurationInput{})
+	got, err := svc.DeleteNotificationConfiguration(context.Background(), &DeleteNotificationConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +319,9 @@ func TestCheckResponseSnapshot_DeregisterNotificationHub(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterNotificationHub(context.Background(), &DeregisterNotificationHubInput{})
+	got, err := svc.DeregisterNotificationHub(context.Background(), &DeregisterNotificationHubInput{
+		NotificationHubRegion: ptr.String("__NotificationHubRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +359,10 @@ func TestCheckResponseSnapshot_DisassociateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateChannel(context.Background(), &DisassociateChannelInput{})
+	got, err := svc.DisassociateChannel(context.Background(), &DisassociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +381,10 @@ func TestCheckResponseSnapshot_DisassociateManagedNotificationAccountContact(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateManagedNotificationAccountContact(context.Background(), &DisassociateManagedNotificationAccountContactInput{})
+	got, err := svc.DisassociateManagedNotificationAccountContact(context.Background(), &DisassociateManagedNotificationAccountContactInput{
+		ContactIdentifier:                   types.AccountContactType("ACCOUNT_PRIMARY"),
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +403,10 @@ func TestCheckResponseSnapshot_DisassociateManagedNotificationAdditionalChannel(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateManagedNotificationAdditionalChannel(context.Background(), &DisassociateManagedNotificationAdditionalChannelInput{})
+	got, err := svc.DisassociateManagedNotificationAdditionalChannel(context.Background(), &DisassociateManagedNotificationAdditionalChannelInput{
+		ChannelArn:                          ptr.String("__ChannelArn__"),
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +425,10 @@ func TestCheckResponseSnapshot_DisassociateOrganizationalUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateOrganizationalUnit(context.Background(), &DisassociateOrganizationalUnitInput{})
+	got, err := svc.DisassociateOrganizationalUnit(context.Background(), &DisassociateOrganizationalUnitInput{
+		OrganizationalUnitId:         ptr.String("__OrganizationalUnitId__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +487,9 @@ func TestCheckResponseSnapshot_GetEventRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventRule(context.Background(), &GetEventRuleInput{})
+	got, err := svc.GetEventRule(context.Background(), &GetEventRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +561,10 @@ func TestCheckResponseSnapshot_GetManagedNotificationChildEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedNotificationChildEvent(context.Background(), &GetManagedNotificationChildEventInput{})
+	got, err := svc.GetManagedNotificationChildEvent(context.Background(), &GetManagedNotificationChildEventInput{
+		Arn:    ptr.String("__Arn__"),
+		Locale: types.LocaleCode("de_DE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +589,9 @@ func TestCheckResponseSnapshot_GetManagedNotificationConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedNotificationConfiguration(context.Background(), &GetManagedNotificationConfigurationInput{})
+	got, err := svc.GetManagedNotificationConfiguration(context.Background(), &GetManagedNotificationConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -653,7 +706,10 @@ func TestCheckResponseSnapshot_GetManagedNotificationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedNotificationEvent(context.Background(), &GetManagedNotificationEventInput{})
+	got, err := svc.GetManagedNotificationEvent(context.Background(), &GetManagedNotificationEventInput{
+		Arn:    ptr.String("__Arn__"),
+		Locale: types.LocaleCode("de_DE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +736,9 @@ func TestCheckResponseSnapshot_GetNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotificationConfiguration(context.Background(), &GetNotificationConfigurationInput{})
+	got, err := svc.GetNotificationConfiguration(context.Background(), &GetNotificationConfigurationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +897,10 @@ func TestCheckResponseSnapshot_GetNotificationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotificationEvent(context.Background(), &GetNotificationEventInput{})
+	got, err := svc.GetNotificationEvent(context.Background(), &GetNotificationEventInput{
+		Arn:    ptr.String("__Arn__"),
+		Locale: types.LocaleCode("de_DE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +948,11 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1019,11 @@ func TestCheckResponseSnapshot_ListEventRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventRules(context.Background(), &ListEventRulesInput{})
+	got, err := svc.ListEventRules(context.Background(), &ListEventRulesInput{
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -987,7 +1056,11 @@ func TestCheckResponseSnapshot_ListManagedNotificationChannelAssociations(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedNotificationChannelAssociations(context.Background(), &ListManagedNotificationChannelAssociationsInput{})
+	got, err := svc.ListManagedNotificationChannelAssociations(context.Background(), &ListManagedNotificationChannelAssociationsInput{
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		MaxResults:                          ptr.Int32(1),
+		NextToken:                           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1149,16 @@ func TestCheckResponseSnapshot_ListManagedNotificationChildEvents(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedNotificationChildEvents(context.Background(), &ListManagedNotificationChildEventsInput{})
+	got, err := svc.ListManagedNotificationChildEvents(context.Background(), &ListManagedNotificationChildEventsInput{
+		AggregateManagedNotificationEventArn: ptr.String("__AggregateManagedNotificationEventArn__"),
+		StartTime:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:                               types.LocaleCode("de_DE"),
+		MaxResults:                           ptr.Int32(1),
+		RelatedAccount:                       ptr.String("__RelatedAccount__"),
+		OrganizationalUnitId:                 ptr.String("__OrganizationalUnitId__"),
+		NextToken:                            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1109,7 +1191,11 @@ func TestCheckResponseSnapshot_ListManagedNotificationConfigurations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedNotificationConfigurations(context.Background(), &ListManagedNotificationConfigurationsInput{})
+	got, err := svc.ListManagedNotificationConfigurations(context.Background(), &ListManagedNotificationConfigurationsInput{
+		ChannelIdentifier: ptr.String("__ChannelIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1292,7 +1378,16 @@ func TestCheckResponseSnapshot_ListManagedNotificationEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedNotificationEvents(context.Background(), &ListManagedNotificationEventsInput{})
+	got, err := svc.ListManagedNotificationEvents(context.Background(), &ListManagedNotificationEventsInput{
+		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:               types.LocaleCode("de_DE"),
+		Source:               ptr.String("__Source__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+		RelatedAccount:       ptr.String("__RelatedAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1329,7 +1424,14 @@ func TestCheckResponseSnapshot_ListMemberAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemberAccounts(context.Background(), &ListMemberAccountsInput{})
+	got, err := svc.ListMemberAccounts(context.Background(), &ListMemberAccountsInput{
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		MemberAccount:                ptr.String("__MemberAccount__"),
+		Status:                       types.MemberAccountNotificationConfigurationStatus("ACTIVE"),
+		OrganizationalUnitId:         ptr.String("__OrganizationalUnitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +1472,14 @@ func TestCheckResponseSnapshot_ListNotificationConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotificationConfigurations(context.Background(), &ListNotificationConfigurationsInput{})
+	got, err := svc.ListNotificationConfigurations(context.Background(), &ListNotificationConfigurationsInput{
+		EventRuleSource: ptr.String("__EventRuleSource__"),
+		ChannelArn:      ptr.String("__ChannelArn__"),
+		Status:          types.NotificationConfigurationStatus("ACTIVE"),
+		Subtype:         types.NotificationConfigurationSubtype("ACCOUNT"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1547,7 +1656,17 @@ func TestCheckResponseSnapshot_ListNotificationEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotificationEvents(context.Background(), &ListNotificationEventsInput{})
+	got, err := svc.ListNotificationEvents(context.Background(), &ListNotificationEventsInput{
+		StartTime:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:                        types.LocaleCode("de_DE"),
+		Source:                        ptr.String("__Source__"),
+		IncludeChildEvents:            ptr.Bool(true),
+		AggregateNotificationEventArn: ptr.String("__AggregateNotificationEventArn__"),
+		MaxResults:                    ptr.Int32(1),
+		NextToken:                     ptr.String("__NextToken__"),
+		OrganizationalUnitId:          ptr.String("__OrganizationalUnitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1588,7 +1707,10 @@ func TestCheckResponseSnapshot_ListNotificationHubs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotificationHubs(context.Background(), &ListNotificationHubsInput{})
+	got, err := svc.ListNotificationHubs(context.Background(), &ListNotificationHubsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1735,11 @@ func TestCheckResponseSnapshot_ListOrganizationalUnits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationalUnits(context.Background(), &ListOrganizationalUnitsInput{})
+	got, err := svc.ListOrganizationalUnits(context.Background(), &ListOrganizationalUnitsInput{
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1636,7 +1762,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1663,7 +1791,9 @@ func TestCheckResponseSnapshot_RegisterNotificationHub(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterNotificationHub(context.Background(), &RegisterNotificationHubInput{})
+	got, err := svc.RegisterNotificationHub(context.Background(), &RegisterNotificationHubInput{
+		NotificationHubRegion: ptr.String("__NotificationHubRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1682,7 +1812,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1701,7 +1836,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1729,7 +1870,14 @@ func TestCheckResponseSnapshot_UpdateEventRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventRule(context.Background(), &UpdateEventRuleInput{})
+	got, err := svc.UpdateEventRule(context.Background(), &UpdateEventRuleInput{
+		Arn:          ptr.String("__Arn__"),
+		EventPattern: ptr.String("__EventPattern__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1750,7 +1898,12 @@ func TestCheckResponseSnapshot_UpdateNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotificationConfiguration(context.Background(), &UpdateNotificationConfigurationInput{})
+	got, err := svc.UpdateNotificationConfiguration(context.Background(), &UpdateNotificationConfigurationInput{
+		Arn:                 ptr.String("__Arn__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		AggregationDuration: types.AggregationDuration("LONG"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1771,7 +1924,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1797,7 +1953,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1822,7 +1981,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1848,7 +2010,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1877,7 +2042,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1905,7 +2073,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1941,7 +2112,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{})
+	_, opErr := svc.AssociateChannel(context.Background(), &AssociateChannelInput{
+		Arn:                          ptr.String("__Arn__"),
+		NotificationConfigurationArn: ptr.String("__NotificationConfigurationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

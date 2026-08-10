@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccessPointArn":"__AccessPointArn__","Status":"AVAILABLE"}

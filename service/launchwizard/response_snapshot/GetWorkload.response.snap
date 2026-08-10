@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"workload":{"description":"__Description__","displayName":"__DisplayName__","documentationUrl":"__DocumentationUrl__","iconUrl":"__IconUrl__","status":"ACTIVE","statusMessage":"__StatusMessage__","workloadName":"__WorkloadName__"}}

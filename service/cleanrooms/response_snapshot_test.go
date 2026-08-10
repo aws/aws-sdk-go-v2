@@ -327,7 +327,13 @@ func TestCheckResponseSnapshot_BatchGetCollaborationAnalysisTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	got, err := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -551,7 +557,13 @@ func TestCheckResponseSnapshot_BatchGetSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSchema(context.Background(), &BatchGetSchemaInput{})
+	got, err := svc.BatchGetSchema(context.Background(), &BatchGetSchemaInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +733,19 @@ func TestCheckResponseSnapshot_BatchGetSchemaAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSchemaAnalysisRule(context.Background(), &BatchGetSchemaAnalysisRuleInput{})
+	got, err := svc.BatchGetSchemaAnalysisRule(context.Background(), &BatchGetSchemaAnalysisRuleInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		SchemaAnalysisRuleRequests: []types.SchemaAnalysisRuleRequest{
+			{
+				Name: ptr.String("__Name__"),
+				Type: types.AnalysisRuleType("AGGREGATION"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: types.AnalysisRuleType("AGGREGATION"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +863,59 @@ func TestCheckResponseSnapshot_CreateAnalysisTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{})
+	got, err := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{
+		Description:          ptr.String("__Description__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Format:               types.AnalysisFormat("SQL"),
+		Source: &types.AnalysisSourceMemberText{
+			Value: "__AnalysisSourceMemberText__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalysisParameters: []types.AnalysisParameter{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+		},
+		Schema: &types.AnalysisSchema{
+			ReferencedTables: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ErrorMessageConfiguration: &types.ErrorMessageConfiguration{
+			Type: types.ErrorMessageType("DETAILED"),
+		},
+		SyntheticDataParameters: &types.SyntheticDataParametersMemberMlSyntheticDataParameters{
+			Value: types.MLSyntheticDataParameters{
+				Epsilon:                           ptr.Float64(1.0),
+				MaxMembershipInferenceAttackScore: ptr.Float64(1.0),
+				ColumnClassification: &types.ColumnClassificationDetails{
+					ColumnMapping: []types.SyntheticDataColumnProperties{
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +966,129 @@ func TestCheckResponseSnapshot_CreateCollaboration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCollaboration(context.Background(), &CreateCollaborationInput{})
+	got, err := svc.CreateCollaboration(context.Background(), &CreateCollaborationInput{
+		Members: []types.MemberSpecification{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				MemberAbilities: []types.MemberAbility{
+					types.MemberAbility("CAN_QUERY"),
+					types.MemberAbility("CAN_QUERY"),
+				},
+				MlMemberAbilities: &types.MLMemberAbilities{
+					CustomMLMemberAbilities: []types.CustomMLMemberAbility{
+						types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+						types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+					},
+				},
+				DisplayName: ptr.String("__DisplayName__"),
+				PaymentConfiguration: &types.PaymentConfiguration{
+					QueryCompute: &types.QueryComputePaymentConfig{
+						IsResponsible: ptr.Bool(true),
+					},
+					MachineLearning: &types.MLPaymentConfig{
+						ModelTraining: &types.ModelTrainingPaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+						ModelInference: &types.ModelInferencePaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+						SyntheticDataGeneration: &types.SyntheticDataGenerationPaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+					},
+					JobCompute: &types.JobComputePaymentConfig{
+						IsResponsible: ptr.Bool(true),
+					},
+				},
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				MemberAbilities: []types.MemberAbility{
+					types.MemberAbility("CAN_QUERY"),
+					types.MemberAbility("CAN_QUERY"),
+				},
+				MlMemberAbilities: &types.MLMemberAbilities{
+					CustomMLMemberAbilities: []types.CustomMLMemberAbility{
+						types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+						types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+					},
+				},
+				DisplayName: ptr.String("__DisplayName__"),
+				PaymentConfiguration: &types.PaymentConfiguration{
+					QueryCompute: &types.QueryComputePaymentConfig{
+						IsResponsible: ptr.Bool(true),
+					},
+					MachineLearning: &types.MLPaymentConfig{
+						ModelTraining: &types.ModelTrainingPaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+						ModelInference: &types.ModelInferencePaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+						SyntheticDataGeneration: &types.SyntheticDataGenerationPaymentConfig{
+							IsResponsible: ptr.Bool(true),
+						},
+					},
+					JobCompute: &types.JobComputePaymentConfig{
+						IsResponsible: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CreatorMemberAbilities: []types.MemberAbility{
+			types.MemberAbility("CAN_QUERY"),
+			types.MemberAbility("CAN_QUERY"),
+		},
+		CreatorMLMemberAbilities: &types.MLMemberAbilities{
+			CustomMLMemberAbilities: []types.CustomMLMemberAbility{
+				types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+				types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+			},
+		},
+		CreatorDisplayName: ptr.String("__CreatorDisplayName__"),
+		DataEncryptionMetadata: &types.DataEncryptionMetadata{
+			AllowCleartext:                        ptr.Bool(true),
+			AllowDuplicates:                       ptr.Bool(true),
+			AllowJoinsOnColumnsWithDifferentNames: ptr.Bool(true),
+			PreserveNulls:                         ptr.Bool(true),
+		},
+		QueryLogStatus: types.CollaborationQueryLogStatus("ENABLED"),
+		JobLogStatus:   types.CollaborationJobLogStatus("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatorPaymentConfiguration: &types.PaymentConfiguration{
+			QueryCompute: &types.QueryComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+			MachineLearning: &types.MLPaymentConfig{
+				ModelTraining: &types.ModelTrainingPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				ModelInference: &types.ModelInferencePaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				SyntheticDataGeneration: &types.SyntheticDataGenerationPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+			},
+			JobCompute: &types.JobComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+		},
+		AnalyticsEngine: types.AnalyticsEngine("SPARK"),
+		AutoApprovedChangeRequestTypes: []types.AutoApprovedChangeType{
+			types.AutoApprovedChangeType("ADD_MEMBER"),
+			types.AutoApprovedChangeType("ADD_MEMBER"),
+		},
+		AllowedResultRegions: []types.SupportedS3Region{
+			types.SupportedS3Region("us-west-1"),
+			types.SupportedS3Region("us-west-1"),
+		},
+		IsMetricsEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1009,7 +1207,87 @@ func TestCheckResponseSnapshot_CreateCollaborationChangeRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCollaborationChangeRequest(context.Background(), &CreateCollaborationChangeRequestInput{})
+	got, err := svc.CreateCollaborationChangeRequest(context.Background(), &CreateCollaborationChangeRequestInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Changes: []types.ChangeInput{
+			{
+				SpecificationType: types.ChangeSpecificationType("MEMBER"),
+				Specification: &types.ChangeSpecificationMemberMember{
+					Value: types.MemberChangeSpecification{
+						AccountId: ptr.String("__AccountId__"),
+						MemberAbilities: []types.MemberAbility{
+							types.MemberAbility("CAN_QUERY"),
+							types.MemberAbility("CAN_QUERY"),
+						},
+						MlMemberAbilities: &types.MLMemberAbilities{
+							CustomMLMemberAbilities: []types.CustomMLMemberAbility{
+								types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+								types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+							},
+						},
+						PaymentConfiguration: &types.PaymentConfiguration{
+							QueryCompute: &types.QueryComputePaymentConfig{
+								IsResponsible: ptr.Bool(true),
+							},
+							MachineLearning: &types.MLPaymentConfig{
+								ModelTraining: &types.ModelTrainingPaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+								ModelInference: &types.ModelInferencePaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+								SyntheticDataGeneration: &types.SyntheticDataGenerationPaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+							},
+							JobCompute: &types.JobComputePaymentConfig{
+								IsResponsible: ptr.Bool(true),
+							},
+						},
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+				},
+			},
+			{
+				SpecificationType: types.ChangeSpecificationType("MEMBER"),
+				Specification: &types.ChangeSpecificationMemberMember{
+					Value: types.MemberChangeSpecification{
+						AccountId: ptr.String("__AccountId__"),
+						MemberAbilities: []types.MemberAbility{
+							types.MemberAbility("CAN_QUERY"),
+							types.MemberAbility("CAN_QUERY"),
+						},
+						MlMemberAbilities: &types.MLMemberAbilities{
+							CustomMLMemberAbilities: []types.CustomMLMemberAbility{
+								types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+								types.CustomMLMemberAbility("CAN_RECEIVE_MODEL_OUTPUT"),
+							},
+						},
+						PaymentConfiguration: &types.PaymentConfiguration{
+							QueryCompute: &types.QueryComputePaymentConfig{
+								IsResponsible: ptr.Bool(true),
+							},
+							MachineLearning: &types.MLPaymentConfig{
+								ModelTraining: &types.ModelTrainingPaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+								ModelInference: &types.ModelInferencePaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+								SyntheticDataGeneration: &types.SyntheticDataGenerationPaymentConfig{
+									IsResponsible: ptr.Bool(true),
+								},
+							},
+							JobCompute: &types.JobComputePaymentConfig{
+								IsResponsible: ptr.Bool(true),
+							},
+						},
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1321,16 @@ func TestCheckResponseSnapshot_CreateConfiguredAudienceModelAssociation(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredAudienceModelAssociation(context.Background(), &CreateConfiguredAudienceModelAssociationInput{})
+	got, err := svc.CreateConfiguredAudienceModelAssociation(context.Background(), &CreateConfiguredAudienceModelAssociationInput{
+		MembershipIdentifier:                   ptr.String("__MembershipIdentifier__"),
+		ConfiguredAudienceModelArn:             ptr.String("__ConfiguredAudienceModelArn__"),
+		ConfiguredAudienceModelAssociationName: ptr.String("__ConfiguredAudienceModelAssociationName__"),
+		ManageResourcePolicies:                 ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1091,7 +1378,29 @@ func TestCheckResponseSnapshot_CreateConfiguredTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredTable(context.Background(), &CreateConfiguredTableInput{})
+	got, err := svc.CreateConfiguredTable(context.Background(), &CreateConfiguredTableInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		TableReference: &types.TableReferenceMemberGlue{
+			Value: types.GlueTableReference{
+				Region:       types.CommercialRegion("us-west-1"),
+				TableName:    ptr.String("__TableName__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+			},
+		},
+		AllowedColumns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AnalysisMethod: types.AnalysisMethod("DIRECT_QUERY"),
+		SelectedAnalysisMethods: []types.SelectedAnalysisMethod{
+			types.SelectedAnalysisMethod("DIRECT_QUERY"),
+			types.SelectedAnalysisMethod("DIRECT_QUERY"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1446,29 @@ func TestCheckResponseSnapshot_CreateConfiguredTableAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredTableAnalysisRule(context.Background(), &CreateConfiguredTableAnalysisRuleInput{})
+	got, err := svc.CreateConfiguredTableAnalysisRule(context.Background(), &CreateConfiguredTableAnalysisRuleInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		AnalysisRuleType:          types.ConfiguredTableAnalysisRuleType("AGGREGATION"),
+		AnalysisRulePolicy: &types.ConfiguredTableAnalysisRulePolicyMemberV1{
+			Value: &types.ConfiguredTableAnalysisRulePolicyV1MemberList{
+				Value: types.AnalysisRuleList{
+					JoinColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedJoinOperators: []types.JoinOperator{
+						types.JoinOperator("OR"),
+						types.JoinOperator("OR"),
+					},
+					ListColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1521,16 @@ func TestCheckResponseSnapshot_CreateConfiguredTableAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredTableAssociation(context.Background(), &CreateConfiguredTableAssociationInput{})
+	got, err := svc.CreateConfiguredTableAssociation(context.Background(), &CreateConfiguredTableAssociationInput{
+		Name:                      ptr.String("__Name__"),
+		Description:               ptr.String("__Description__"),
+		MembershipIdentifier:      ptr.String("__MembershipIdentifier__"),
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		RoleArn:                   ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1232,7 +1572,25 @@ func TestCheckResponseSnapshot_CreateConfiguredTableAssociationAnalysisRule(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguredTableAssociationAnalysisRule(context.Background(), &CreateConfiguredTableAssociationAnalysisRuleInput{})
+	got, err := svc.CreateConfiguredTableAssociationAnalysisRule(context.Background(), &CreateConfiguredTableAssociationAnalysisRuleInput{
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		AnalysisRuleType:                     types.ConfiguredTableAssociationAnalysisRuleType("AGGREGATION"),
+		AnalysisRulePolicy: &types.ConfiguredTableAssociationAnalysisRulePolicyMemberV1{
+			Value: &types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberList{
+				Value: types.ConfiguredTableAssociationAnalysisRuleList{
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1297,7 +1655,19 @@ func TestCheckResponseSnapshot_CreateIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdMappingTable(context.Background(), &CreateIdMappingTableInput{})
+	got, err := svc.CreateIdMappingTable(context.Background(), &CreateIdMappingTableInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		InputReferenceConfig: &types.IdMappingTableInputReferenceConfig{
+			InputReferenceArn:      ptr.String("__InputReferenceArn__"),
+			ManageResourcePolicies: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1326,8 +1696,8 @@ func TestCheckResponseSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 			InputReferenceProperties: &types.IdNamespaceAssociationInputReferenceProperties{
 				IdNamespaceType: types.IdNamespaceType("SOURCE"),
 				IdMappingWorkflowsSupported: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 			IdMappingConfig: &types.IdMappingConfig{
@@ -1343,7 +1713,21 @@ func TestCheckResponseSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdNamespaceAssociation(context.Background(), &CreateIdNamespaceAssociationInput{})
+	got, err := svc.CreateIdNamespaceAssociation(context.Background(), &CreateIdNamespaceAssociationInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		InputReferenceConfig: &types.IdNamespaceAssociationInputReferenceConfig{
+			InputReferenceArn:      ptr.String("__InputReferenceArn__"),
+			ManageResourcePolicies: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		IdMappingConfig: &types.IdMappingConfig{
+			AllowUseAsDimensionColumn: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1544,7 +1928,22 @@ func TestCheckResponseSnapshot_CreateIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntermediateTable(context.Background(), &CreateIntermediateTableInput{})
+	got, err := svc.CreateIntermediateTable(context.Background(), &CreateIntermediateTableInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		PopulationAnalysisConfiguration: &types.PopulationAnalysisConfigurationMemberSqlParameters{
+			Value: types.PopulationAnalysisSqlParameters{
+				QueryString:         ptr.String("__QueryString__"),
+				AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+			},
+		},
+		KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+		RetentionInDays: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1608,7 +2007,48 @@ func TestCheckResponseSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), &CreateIntermediateTableAnalysisRuleInput{})
+	got, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), &CreateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1692,7 +2132,54 @@ func TestCheckResponseSnapshot_CreateMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMembership(context.Background(), &CreateMembershipInput{})
+	got, err := svc.CreateMembership(context.Background(), &CreateMembershipInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		QueryLogStatus:          types.MembershipQueryLogStatus("ENABLED"),
+		JobLogStatus:            types.MembershipJobLogStatus("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultResultConfiguration: &types.MembershipProtectedQueryResultConfiguration{
+			OutputConfiguration: &types.MembershipProtectedQueryOutputConfigurationMemberS3{
+				Value: types.ProtectedQueryS3OutputConfiguration{
+					ResultFormat:     types.ResultFormat("CSV"),
+					Bucket:           ptr.String("__Bucket__"),
+					KeyPrefix:        ptr.String("__KeyPrefix__"),
+					SingleFileOutput: ptr.Bool(true),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
+			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
+				Value: types.ProtectedJobS3OutputConfigurationInput{
+					Bucket:    ptr.String("__Bucket__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		PaymentConfiguration: &types.MembershipPaymentConfiguration{
+			QueryCompute: &types.MembershipQueryComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+			MachineLearning: &types.MembershipMLPaymentConfig{
+				ModelTraining: &types.MembershipModelTrainingPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				ModelInference: &types.MembershipModelInferencePaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				SyntheticDataGeneration: &types.MembershipSyntheticDataGenerationPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+			},
+			JobCompute: &types.MembershipJobComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+		},
+		IsMetricsEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1730,7 +2217,20 @@ func TestCheckResponseSnapshot_CreatePrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrivacyBudgetTemplate(context.Background(), &CreatePrivacyBudgetTemplateInput{})
+	got, err := svc.CreatePrivacyBudgetTemplate(context.Background(), &CreatePrivacyBudgetTemplateInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AutoRefresh:          types.PrivacyBudgetTemplateAutoRefresh("CALENDAR_MONTH"),
+		PrivacyBudgetType:    types.PrivacyBudgetType("DIFFERENTIAL_PRIVACY"),
+		Parameters: &types.PrivacyBudgetTemplateParametersInputMemberDifferentialPrivacy{
+			Value: types.DifferentialPrivacyTemplateParametersInput{
+				Epsilon:            ptr.Int32(1),
+				UsersNoisePerQuery: ptr.Int32(1),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1749,7 +2249,10 @@ func TestCheckResponseSnapshot_DeleteAnalysisTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnalysisTemplate(context.Background(), &DeleteAnalysisTemplateInput{})
+	got, err := svc.DeleteAnalysisTemplate(context.Background(), &DeleteAnalysisTemplateInput{
+		MembershipIdentifier:       ptr.String("__MembershipIdentifier__"),
+		AnalysisTemplateIdentifier: ptr.String("__AnalysisTemplateIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1768,7 +2271,9 @@ func TestCheckResponseSnapshot_DeleteCollaboration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCollaboration(context.Background(), &DeleteCollaborationInput{})
+	got, err := svc.DeleteCollaboration(context.Background(), &DeleteCollaborationInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1787,7 +2292,10 @@ func TestCheckResponseSnapshot_DeleteConfiguredAudienceModelAssociation(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredAudienceModelAssociation(context.Background(), &DeleteConfiguredAudienceModelAssociationInput{})
+	got, err := svc.DeleteConfiguredAudienceModelAssociation(context.Background(), &DeleteConfiguredAudienceModelAssociationInput{
+		ConfiguredAudienceModelAssociationIdentifier: ptr.String("__ConfiguredAudienceModelAssociationIdentifier__"),
+		MembershipIdentifier:                         ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1806,7 +2314,9 @@ func TestCheckResponseSnapshot_DeleteConfiguredTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredTable(context.Background(), &DeleteConfiguredTableInput{})
+	got, err := svc.DeleteConfiguredTable(context.Background(), &DeleteConfiguredTableInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1825,7 +2335,10 @@ func TestCheckResponseSnapshot_DeleteConfiguredTableAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredTableAnalysisRule(context.Background(), &DeleteConfiguredTableAnalysisRuleInput{})
+	got, err := svc.DeleteConfiguredTableAnalysisRule(context.Background(), &DeleteConfiguredTableAnalysisRuleInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		AnalysisRuleType:          types.ConfiguredTableAnalysisRuleType("AGGREGATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1844,7 +2357,10 @@ func TestCheckResponseSnapshot_DeleteConfiguredTableAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredTableAssociation(context.Background(), &DeleteConfiguredTableAssociationInput{})
+	got, err := svc.DeleteConfiguredTableAssociation(context.Background(), &DeleteConfiguredTableAssociationInput{
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1863,7 +2379,11 @@ func TestCheckResponseSnapshot_DeleteConfiguredTableAssociationAnalysisRule(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguredTableAssociationAnalysisRule(context.Background(), &DeleteConfiguredTableAssociationAnalysisRuleInput{})
+	got, err := svc.DeleteConfiguredTableAssociationAnalysisRule(context.Background(), &DeleteConfiguredTableAssociationAnalysisRuleInput{
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		AnalysisRuleType:                     types.ConfiguredTableAssociationAnalysisRuleType("AGGREGATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1882,7 +2402,10 @@ func TestCheckResponseSnapshot_DeleteIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdMappingTable(context.Background(), &DeleteIdMappingTableInput{})
+	got, err := svc.DeleteIdMappingTable(context.Background(), &DeleteIdMappingTableInput{
+		IdMappingTableIdentifier: ptr.String("__IdMappingTableIdentifier__"),
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1901,7 +2424,10 @@ func TestCheckResponseSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdNamespaceAssociation(context.Background(), &DeleteIdNamespaceAssociationInput{})
+	got, err := svc.DeleteIdNamespaceAssociation(context.Background(), &DeleteIdNamespaceAssociationInput{
+		IdNamespaceAssociationIdentifier: ptr.String("__IdNamespaceAssociationIdentifier__"),
+		MembershipIdentifier:             ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1920,7 +2446,10 @@ func TestCheckResponseSnapshot_DeleteIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntermediateTable(context.Background(), &DeleteIntermediateTableInput{})
+	got, err := svc.DeleteIntermediateTable(context.Background(), &DeleteIntermediateTableInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1939,7 +2468,11 @@ func TestCheckResponseSnapshot_DeleteIntermediateTableAnalysisRule(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), &DeleteIntermediateTableAnalysisRuleInput{})
+	got, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), &DeleteIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1958,7 +2491,10 @@ func TestCheckResponseSnapshot_DeleteMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{})
+	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AccountId:               ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1977,7 +2513,9 @@ func TestCheckResponseSnapshot_DeleteMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMembership(context.Background(), &DeleteMembershipInput{})
+	got, err := svc.DeleteMembership(context.Background(), &DeleteMembershipInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1996,7 +2534,10 @@ func TestCheckResponseSnapshot_DeletePrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrivacyBudgetTemplate(context.Background(), &DeletePrivacyBudgetTemplateInput{})
+	got, err := svc.DeletePrivacyBudgetTemplate(context.Background(), &DeletePrivacyBudgetTemplateInput{
+		MembershipIdentifier:            ptr.String("__MembershipIdentifier__"),
+		PrivacyBudgetTemplateIdentifier: ptr.String("__PrivacyBudgetTemplateIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2015,7 +2556,11 @@ func TestCheckResponseSnapshot_DisallowIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisallowIntermediateTable(context.Background(), &DisallowIntermediateTableInput{})
+	got, err := svc.DisallowIntermediateTable(context.Background(), &DisallowIntermediateTableInput{
+		MembershipIdentifier:  ptr.String("__MembershipIdentifier__"),
+		IntermediateTableName: ptr.String("__IntermediateTableName__"),
+		IncludeDescendants:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2133,7 +2678,10 @@ func TestCheckResponseSnapshot_GetAnalysisTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnalysisTemplate(context.Background(), &GetAnalysisTemplateInput{})
+	got, err := svc.GetAnalysisTemplate(context.Background(), &GetAnalysisTemplateInput{
+		MembershipIdentifier:       ptr.String("__MembershipIdentifier__"),
+		AnalysisTemplateIdentifier: ptr.String("__AnalysisTemplateIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2184,7 +2732,9 @@ func TestCheckResponseSnapshot_GetCollaboration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaboration(context.Background(), &GetCollaborationInput{})
+	got, err := svc.GetCollaboration(context.Background(), &GetCollaborationInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2301,7 +2851,10 @@ func TestCheckResponseSnapshot_GetCollaborationAnalysisTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationAnalysisTemplate(context.Background(), &GetCollaborationAnalysisTemplateInput{})
+	got, err := svc.GetCollaborationAnalysisTemplate(context.Background(), &GetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArn:     ptr.String("__AnalysisTemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2420,7 +2973,10 @@ func TestCheckResponseSnapshot_GetCollaborationChangeRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationChangeRequest(context.Background(), &GetCollaborationChangeRequestInput{})
+	got, err := svc.GetCollaborationChangeRequest(context.Background(), &GetCollaborationChangeRequestInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		ChangeRequestIdentifier: ptr.String("__ChangeRequestIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2452,7 +3008,10 @@ func TestCheckResponseSnapshot_GetCollaborationConfiguredAudienceModelAssociatio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationConfiguredAudienceModelAssociation(context.Background(), &GetCollaborationConfiguredAudienceModelAssociationInput{})
+	got, err := svc.GetCollaborationConfiguredAudienceModelAssociation(context.Background(), &GetCollaborationConfiguredAudienceModelAssociationInput{
+		CollaborationIdentifier:                      ptr.String("__CollaborationIdentifier__"),
+		ConfiguredAudienceModelAssociationIdentifier: ptr.String("__ConfiguredAudienceModelAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2480,8 +3039,8 @@ func TestCheckResponseSnapshot_GetCollaborationIdNamespaceAssociation(t *testing
 			InputReferenceProperties: &types.IdNamespaceAssociationInputReferenceProperties{
 				IdNamespaceType: types.IdNamespaceType("SOURCE"),
 				IdMappingWorkflowsSupported: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 			IdMappingConfig: &types.IdMappingConfig{
@@ -2497,7 +3056,10 @@ func TestCheckResponseSnapshot_GetCollaborationIdNamespaceAssociation(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationIdNamespaceAssociation(context.Background(), &GetCollaborationIdNamespaceAssociationInput{})
+	got, err := svc.GetCollaborationIdNamespaceAssociation(context.Background(), &GetCollaborationIdNamespaceAssociationInput{
+		CollaborationIdentifier:          ptr.String("__CollaborationIdentifier__"),
+		IdNamespaceAssociationIdentifier: ptr.String("__IdNamespaceAssociationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2534,7 +3096,10 @@ func TestCheckResponseSnapshot_GetCollaborationPrivacyBudgetTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCollaborationPrivacyBudgetTemplate(context.Background(), &GetCollaborationPrivacyBudgetTemplateInput{})
+	got, err := svc.GetCollaborationPrivacyBudgetTemplate(context.Background(), &GetCollaborationPrivacyBudgetTemplateInput{
+		CollaborationIdentifier:         ptr.String("__CollaborationIdentifier__"),
+		PrivacyBudgetTemplateIdentifier: ptr.String("__PrivacyBudgetTemplateIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2568,7 +3133,10 @@ func TestCheckResponseSnapshot_GetConfiguredAudienceModelAssociation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredAudienceModelAssociation(context.Background(), &GetConfiguredAudienceModelAssociationInput{})
+	got, err := svc.GetConfiguredAudienceModelAssociation(context.Background(), &GetConfiguredAudienceModelAssociationInput{
+		ConfiguredAudienceModelAssociationIdentifier: ptr.String("__ConfiguredAudienceModelAssociationIdentifier__"),
+		MembershipIdentifier:                         ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2616,7 +3184,9 @@ func TestCheckResponseSnapshot_GetConfiguredTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredTable(context.Background(), &GetConfiguredTableInput{})
+	got, err := svc.GetConfiguredTable(context.Background(), &GetConfiguredTableInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2662,7 +3232,10 @@ func TestCheckResponseSnapshot_GetConfiguredTableAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredTableAnalysisRule(context.Background(), &GetConfiguredTableAnalysisRuleInput{})
+	got, err := svc.GetConfiguredTableAnalysisRule(context.Background(), &GetConfiguredTableAnalysisRuleInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		AnalysisRuleType:          types.ConfiguredTableAnalysisRuleType("AGGREGATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2715,7 +3288,10 @@ func TestCheckResponseSnapshot_GetConfiguredTableAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredTableAssociation(context.Background(), &GetConfiguredTableAssociationInput{})
+	got, err := svc.GetConfiguredTableAssociation(context.Background(), &GetConfiguredTableAssociationInput{
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2757,7 +3333,11 @@ func TestCheckResponseSnapshot_GetConfiguredTableAssociationAnalysisRule(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguredTableAssociationAnalysisRule(context.Background(), &GetConfiguredTableAssociationAnalysisRuleInput{})
+	got, err := svc.GetConfiguredTableAssociationAnalysisRule(context.Background(), &GetConfiguredTableAssociationAnalysisRuleInput{
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		AnalysisRuleType:                     types.ConfiguredTableAssociationAnalysisRuleType("AGGREGATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2822,7 +3402,10 @@ func TestCheckResponseSnapshot_GetIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdMappingTable(context.Background(), &GetIdMappingTableInput{})
+	got, err := svc.GetIdMappingTable(context.Background(), &GetIdMappingTableInput{
+		IdMappingTableIdentifier: ptr.String("__IdMappingTableIdentifier__"),
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2851,8 +3434,8 @@ func TestCheckResponseSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 			InputReferenceProperties: &types.IdNamespaceAssociationInputReferenceProperties{
 				IdNamespaceType: types.IdNamespaceType("SOURCE"),
 				IdMappingWorkflowsSupported: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 			IdMappingConfig: &types.IdMappingConfig{
@@ -2868,7 +3451,10 @@ func TestCheckResponseSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdNamespaceAssociation(context.Background(), &GetIdNamespaceAssociationInput{})
+	got, err := svc.GetIdNamespaceAssociation(context.Background(), &GetIdNamespaceAssociationInput{
+		IdNamespaceAssociationIdentifier: ptr.String("__IdNamespaceAssociationIdentifier__"),
+		MembershipIdentifier:             ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3069,7 +3655,10 @@ func TestCheckResponseSnapshot_GetIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntermediateTable(context.Background(), &GetIntermediateTableInput{})
+	got, err := svc.GetIntermediateTable(context.Background(), &GetIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3133,7 +3722,11 @@ func TestCheckResponseSnapshot_GetIntermediateTableAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIntermediateTableAnalysisRule(context.Background(), &GetIntermediateTableAnalysisRuleInput{})
+	got, err := svc.GetIntermediateTableAnalysisRule(context.Background(), &GetIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3217,7 +3810,9 @@ func TestCheckResponseSnapshot_GetMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMembership(context.Background(), &GetMembershipInput{})
+	got, err := svc.GetMembership(context.Background(), &GetMembershipInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3255,7 +3850,10 @@ func TestCheckResponseSnapshot_GetPrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrivacyBudgetTemplate(context.Background(), &GetPrivacyBudgetTemplateInput{})
+	got, err := svc.GetPrivacyBudgetTemplate(context.Background(), &GetPrivacyBudgetTemplateInput{
+		MembershipIdentifier:            ptr.String("__MembershipIdentifier__"),
+		PrivacyBudgetTemplateIdentifier: ptr.String("__PrivacyBudgetTemplateIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3325,7 +3923,10 @@ func TestCheckResponseSnapshot_GetProtectedJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProtectedJob(context.Background(), &GetProtectedJobInput{})
+	got, err := svc.GetProtectedJob(context.Background(), &GetProtectedJobInput{
+		MembershipIdentifier:   ptr.String("__MembershipIdentifier__"),
+		ProtectedJobIdentifier: ptr.String("__ProtectedJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3416,7 +4017,10 @@ func TestCheckResponseSnapshot_GetProtectedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProtectedQuery(context.Background(), &GetProtectedQueryInput{})
+	got, err := svc.GetProtectedQuery(context.Background(), &GetProtectedQueryInput{
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+		ProtectedQueryIdentifier: ptr.String("__ProtectedQueryIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3531,7 +4135,10 @@ func TestCheckResponseSnapshot_GetSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchema(context.Background(), &GetSchemaInput{})
+	got, err := svc.GetSchema(context.Background(), &GetSchemaInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3618,7 +4225,11 @@ func TestCheckResponseSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchemaAnalysisRule(context.Background(), &GetSchemaAnalysisRuleInput{})
+	got, err := svc.GetSchemaAnalysisRule(context.Background(), &GetSchemaAnalysisRuleInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+		Type:                    types.AnalysisRuleType("AGGREGATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3667,7 +4278,11 @@ func TestCheckResponseSnapshot_ListAnalysisTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalysisTemplates(context.Background(), &ListAnalysisTemplatesInput{})
+	got, err := svc.ListAnalysisTemplates(context.Background(), &ListAnalysisTemplatesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3714,7 +4329,11 @@ func TestCheckResponseSnapshot_ListCollaborationAnalysisTemplates(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationAnalysisTemplates(context.Background(), &ListCollaborationAnalysisTemplatesInput{})
+	got, err := svc.ListCollaborationAnalysisTemplates(context.Background(), &ListCollaborationAnalysisTemplatesInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3935,7 +4554,12 @@ func TestCheckResponseSnapshot_ListCollaborationChangeRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationChangeRequests(context.Background(), &ListCollaborationChangeRequestsInput{})
+	got, err := svc.ListCollaborationChangeRequests(context.Background(), &ListCollaborationChangeRequestsInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Status:                  types.ChangeRequestStatus("PENDING"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3980,7 +4604,11 @@ func TestCheckResponseSnapshot_ListCollaborationConfiguredAudienceModelAssociati
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationConfiguredAudienceModelAssociations(context.Background(), &ListCollaborationConfiguredAudienceModelAssociationsInput{})
+	got, err := svc.ListCollaborationConfiguredAudienceModelAssociations(context.Background(), &ListCollaborationConfiguredAudienceModelAssociationsInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4039,7 +4667,11 @@ func TestCheckResponseSnapshot_ListCollaborationIdNamespaceAssociations(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationIdNamespaceAssociations(context.Background(), &ListCollaborationIdNamespaceAssociationsInput{})
+	got, err := svc.ListCollaborationIdNamespaceAssociations(context.Background(), &ListCollaborationIdNamespaceAssociationsInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4082,7 +4714,11 @@ func TestCheckResponseSnapshot_ListCollaborationPrivacyBudgetTemplates(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationPrivacyBudgetTemplates(context.Background(), &ListCollaborationPrivacyBudgetTemplatesInput{})
+	got, err := svc.ListCollaborationPrivacyBudgetTemplates(context.Background(), &ListCollaborationPrivacyBudgetTemplatesInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4161,7 +4797,13 @@ func TestCheckResponseSnapshot_ListCollaborationPrivacyBudgets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborationPrivacyBudgets(context.Background(), &ListCollaborationPrivacyBudgetsInput{})
+	got, err := svc.ListCollaborationPrivacyBudgets(context.Background(), &ListCollaborationPrivacyBudgetsInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		PrivacyBudgetType:       types.PrivacyBudgetType("DIFFERENTIAL_PRIVACY"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		AccessBudgetResourceArn: ptr.String("__AccessBudgetResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4210,7 +4852,11 @@ func TestCheckResponseSnapshot_ListCollaborations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollaborations(context.Background(), &ListCollaborationsInput{})
+	got, err := svc.ListCollaborations(context.Background(), &ListCollaborationsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		MemberStatus: types.FilterableMemberStatus("INVITED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4259,7 +4905,11 @@ func TestCheckResponseSnapshot_ListConfiguredAudienceModelAssociations(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredAudienceModelAssociations(context.Background(), &ListConfiguredAudienceModelAssociationsInput{})
+	got, err := svc.ListConfiguredAudienceModelAssociations(context.Background(), &ListConfiguredAudienceModelAssociationsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4310,7 +4960,11 @@ func TestCheckResponseSnapshot_ListConfiguredTableAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredTableAssociations(context.Background(), &ListConfiguredTableAssociationsInput{})
+	got, err := svc.ListConfiguredTableAssociations(context.Background(), &ListConfiguredTableAssociationsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4365,7 +5019,10 @@ func TestCheckResponseSnapshot_ListConfiguredTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfiguredTables(context.Background(), &ListConfiguredTablesInput{})
+	got, err := svc.ListConfiguredTables(context.Background(), &ListConfiguredTablesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4420,7 +5077,11 @@ func TestCheckResponseSnapshot_ListIdMappingTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdMappingTables(context.Background(), &ListIdMappingTablesInput{})
+	got, err := svc.ListIdMappingTables(context.Background(), &ListIdMappingTablesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4481,7 +5142,11 @@ func TestCheckResponseSnapshot_ListIdNamespaceAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdNamespaceAssociations(context.Background(), &ListIdNamespaceAssociationsInput{})
+	got, err := svc.ListIdNamespaceAssociations(context.Background(), &ListIdNamespaceAssociationsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4524,7 +5189,12 @@ func TestCheckResponseSnapshot_ListIntermediateTableVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntermediateTableVersions(context.Background(), &ListIntermediateTableVersionsInput{})
+	got, err := svc.ListIntermediateTableVersions(context.Background(), &ListIntermediateTableVersionsInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4583,7 +5253,11 @@ func TestCheckResponseSnapshot_ListIntermediateTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntermediateTables(context.Background(), &ListIntermediateTablesInput{})
+	got, err := svc.ListIntermediateTables(context.Background(), &ListIntermediateTablesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4682,7 +5356,11 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4787,7 +5465,11 @@ func TestCheckResponseSnapshot_ListMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemberships(context.Background(), &ListMembershipsInput{})
+	got, err := svc.ListMemberships(context.Background(), &ListMembershipsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.MembershipStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4832,7 +5514,11 @@ func TestCheckResponseSnapshot_ListPrivacyBudgetTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrivacyBudgetTemplates(context.Background(), &ListPrivacyBudgetTemplatesInput{})
+	got, err := svc.ListPrivacyBudgetTemplates(context.Background(), &ListPrivacyBudgetTemplatesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4913,7 +5599,13 @@ func TestCheckResponseSnapshot_ListPrivacyBudgets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrivacyBudgets(context.Background(), &ListPrivacyBudgetsInput{})
+	got, err := svc.ListPrivacyBudgets(context.Background(), &ListPrivacyBudgetsInput{
+		MembershipIdentifier:    ptr.String("__MembershipIdentifier__"),
+		PrivacyBudgetType:       types.PrivacyBudgetType("DIFFERENTIAL_PRIVACY"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		AccessBudgetResourceArn: ptr.String("__AccessBudgetResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5000,7 +5692,12 @@ func TestCheckResponseSnapshot_ListProtectedJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProtectedJobs(context.Background(), &ListProtectedJobsInput{})
+	got, err := svc.ListProtectedJobs(context.Background(), &ListProtectedJobsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Status:               types.ProtectedJobStatus("SUBMITTED"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5097,7 +5794,12 @@ func TestCheckResponseSnapshot_ListProtectedQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProtectedQueries(context.Background(), &ListProtectedQueriesInput{})
+	got, err := svc.ListProtectedQueries(context.Background(), &ListProtectedQueriesInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Status:               types.ProtectedQueryStatus("SUBMITTED"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5158,7 +5860,12 @@ func TestCheckResponseSnapshot_ListSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{})
+	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		SchemaType:              types.SchemaType("TABLE"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5181,7 +5888,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5202,7 +5911,11 @@ func TestCheckResponseSnapshot_PopulateIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PopulateIdMappingTable(context.Background(), &PopulateIdMappingTableInput{})
+	got, err := svc.PopulateIdMappingTable(context.Background(), &PopulateIdMappingTableInput{
+		IdMappingTableIdentifier: ptr.String("__IdMappingTableIdentifier__"),
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+		JobType:                  types.JobType("BATCH"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5225,7 +5938,25 @@ func TestCheckResponseSnapshot_PopulateIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PopulateIntermediateTable(context.Background(), &PopulateIntermediateTableInput{})
+	got, err := svc.PopulateIntermediateTable(context.Background(), &PopulateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeConfiguration: &types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration{
+			Value: types.WorkerComputeConfiguration{
+				Type:   types.WorkerComputeType("CR.1X"),
+				Number: ptr.Int32(1),
+				Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		AnalysisPayerAccountId: ptr.String("__AnalysisPayerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5259,7 +5990,15 @@ func TestCheckResponseSnapshot_PreviewPrivacyImpact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PreviewPrivacyImpact(context.Background(), &PreviewPrivacyImpactInput{})
+	got, err := svc.PreviewPrivacyImpact(context.Background(), &PreviewPrivacyImpactInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Parameters: &types.PreviewPrivacyImpactParametersInputMemberDifferentialPrivacy{
+			Value: types.DifferentialPrivacyPreviewParametersInput{
+				Epsilon:            ptr.Int32(1),
+				UsersNoisePerQuery: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5329,7 +6068,35 @@ func TestCheckResponseSnapshot_StartProtectedJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProtectedJob(context.Background(), &StartProtectedJobInput{})
+	got, err := svc.StartProtectedJob(context.Background(), &StartProtectedJobInput{
+		Type:                 types.ProtectedJobType("PYSPARK"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		JobParameters: &types.ProtectedJobParameters{
+			AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+			Parameters: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ResultConfiguration: &types.ProtectedJobResultConfigurationInput{
+			OutputConfiguration: &types.ProtectedJobOutputConfigurationInputMemberMember{
+				Value: types.ProtectedJobMemberOutputConfigurationInput{
+					AccountId: ptr.String("__AccountId__"),
+				},
+			},
+		},
+		ComputeConfiguration: &types.ProtectedJobComputeConfigurationMemberWorker{
+			Value: types.ProtectedJobWorkerComputeConfiguration{
+				Type:   types.ProtectedJobWorkerComputeType("CR.1X"),
+				Number: ptr.Int32(1),
+				Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		JobComputePayerAccountId: ptr.String("__JobComputePayerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5420,7 +6187,39 @@ func TestCheckResponseSnapshot_StartProtectedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProtectedQuery(context.Background(), &StartProtectedQueryInput{})
+	got, err := svc.StartProtectedQuery(context.Background(), &StartProtectedQueryInput{
+		Type:                 types.ProtectedQueryType("SQL"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		SqlParameters: &types.ProtectedQuerySQLParameters{
+			QueryString:         ptr.String("__QueryString__"),
+			AnalysisTemplateArn: ptr.String("__AnalysisTemplateArn__"),
+			Parameters: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ResultConfiguration: &types.ProtectedQueryResultConfiguration{
+			OutputConfiguration: &types.ProtectedQueryOutputConfigurationMemberS3{
+				Value: types.ProtectedQueryS3OutputConfiguration{
+					ResultFormat:     types.ResultFormat("CSV"),
+					Bucket:           ptr.String("__Bucket__"),
+					KeyPrefix:        ptr.String("__KeyPrefix__"),
+					SingleFileOutput: ptr.Bool(true),
+				},
+			},
+		},
+		ComputeConfiguration: &types.ComputeConfigurationMemberWorker{
+			Value: types.WorkerComputeConfiguration{
+				Type:   types.WorkerComputeType("CR.1X"),
+				Number: ptr.Int32(1),
+				Properties: &types.WorkerComputeConfigurationPropertiesMemberSpark{
+					Value: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		QueryComputePayerAccountId: ptr.String("__QueryComputePayerAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5439,7 +6238,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5458,7 +6262,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5576,7 +6386,11 @@ func TestCheckResponseSnapshot_UpdateAnalysisTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnalysisTemplate(context.Background(), &UpdateAnalysisTemplateInput{})
+	got, err := svc.UpdateAnalysisTemplate(context.Background(), &UpdateAnalysisTemplateInput{
+		MembershipIdentifier:       ptr.String("__MembershipIdentifier__"),
+		AnalysisTemplateIdentifier: ptr.String("__AnalysisTemplateIdentifier__"),
+		Description:                ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5627,7 +6441,12 @@ func TestCheckResponseSnapshot_UpdateCollaboration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCollaboration(context.Background(), &UpdateCollaborationInput{})
+	got, err := svc.UpdateCollaboration(context.Background(), &UpdateCollaborationInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		AnalyticsEngine:         types.AnalyticsEngine("SPARK"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5746,7 +6565,11 @@ func TestCheckResponseSnapshot_UpdateCollaborationChangeRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCollaborationChangeRequest(context.Background(), &UpdateCollaborationChangeRequestInput{})
+	got, err := svc.UpdateCollaborationChangeRequest(context.Background(), &UpdateCollaborationChangeRequestInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		ChangeRequestIdentifier: ptr.String("__ChangeRequestIdentifier__"),
+		Action:                  types.ChangeRequestAction("APPROVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5780,7 +6603,12 @@ func TestCheckResponseSnapshot_UpdateConfiguredAudienceModelAssociation(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredAudienceModelAssociation(context.Background(), &UpdateConfiguredAudienceModelAssociationInput{})
+	got, err := svc.UpdateConfiguredAudienceModelAssociation(context.Background(), &UpdateConfiguredAudienceModelAssociationInput{
+		ConfiguredAudienceModelAssociationIdentifier: ptr.String("__ConfiguredAudienceModelAssociationIdentifier__"),
+		MembershipIdentifier:                         ptr.String("__MembershipIdentifier__"),
+		Description:                                  ptr.String("__Description__"),
+		Name:                                         ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5828,7 +6656,27 @@ func TestCheckResponseSnapshot_UpdateConfiguredTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredTable(context.Background(), &UpdateConfiguredTableInput{})
+	got, err := svc.UpdateConfiguredTable(context.Background(), &UpdateConfiguredTableInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		Name:                      ptr.String("__Name__"),
+		Description:               ptr.String("__Description__"),
+		TableReference: &types.TableReferenceMemberGlue{
+			Value: types.GlueTableReference{
+				Region:       types.CommercialRegion("us-west-1"),
+				TableName:    ptr.String("__TableName__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+			},
+		},
+		AllowedColumns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AnalysisMethod: types.AnalysisMethod("DIRECT_QUERY"),
+		SelectedAnalysisMethods: []types.SelectedAnalysisMethod{
+			types.SelectedAnalysisMethod("DIRECT_QUERY"),
+			types.SelectedAnalysisMethod("DIRECT_QUERY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5874,7 +6722,29 @@ func TestCheckResponseSnapshot_UpdateConfiguredTableAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredTableAnalysisRule(context.Background(), &UpdateConfiguredTableAnalysisRuleInput{})
+	got, err := svc.UpdateConfiguredTableAnalysisRule(context.Background(), &UpdateConfiguredTableAnalysisRuleInput{
+		ConfiguredTableIdentifier: ptr.String("__ConfiguredTableIdentifier__"),
+		AnalysisRuleType:          types.ConfiguredTableAnalysisRuleType("AGGREGATION"),
+		AnalysisRulePolicy: &types.ConfiguredTableAnalysisRulePolicyMemberV1{
+			Value: &types.ConfiguredTableAnalysisRulePolicyV1MemberList{
+				Value: types.AnalysisRuleList{
+					JoinColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedJoinOperators: []types.JoinOperator{
+						types.JoinOperator("OR"),
+						types.JoinOperator("OR"),
+					},
+					ListColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5927,7 +6797,12 @@ func TestCheckResponseSnapshot_UpdateConfiguredTableAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredTableAssociation(context.Background(), &UpdateConfiguredTableAssociationInput{})
+	got, err := svc.UpdateConfiguredTableAssociation(context.Background(), &UpdateConfiguredTableAssociationInput{
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+		Description:                          ptr.String("__Description__"),
+		RoleArn:                              ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5969,7 +6844,25 @@ func TestCheckResponseSnapshot_UpdateConfiguredTableAssociationAnalysisRule(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguredTableAssociationAnalysisRule(context.Background(), &UpdateConfiguredTableAssociationAnalysisRuleInput{})
+	got, err := svc.UpdateConfiguredTableAssociationAnalysisRule(context.Background(), &UpdateConfiguredTableAssociationAnalysisRuleInput{
+		MembershipIdentifier:                 ptr.String("__MembershipIdentifier__"),
+		ConfiguredTableAssociationIdentifier: ptr.String("__ConfiguredTableAssociationIdentifier__"),
+		AnalysisRuleType:                     types.ConfiguredTableAssociationAnalysisRuleType("AGGREGATION"),
+		AnalysisRulePolicy: &types.ConfiguredTableAssociationAnalysisRulePolicyMemberV1{
+			Value: &types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberList{
+				Value: types.ConfiguredTableAssociationAnalysisRuleList{
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6034,7 +6927,12 @@ func TestCheckResponseSnapshot_UpdateIdMappingTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdMappingTable(context.Background(), &UpdateIdMappingTableInput{})
+	got, err := svc.UpdateIdMappingTable(context.Background(), &UpdateIdMappingTableInput{
+		IdMappingTableIdentifier: ptr.String("__IdMappingTableIdentifier__"),
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+		Description:              ptr.String("__Description__"),
+		KmsKeyArn:                ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6063,8 +6961,8 @@ func TestCheckResponseSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 			InputReferenceProperties: &types.IdNamespaceAssociationInputReferenceProperties{
 				IdNamespaceType: types.IdNamespaceType("SOURCE"),
 				IdMappingWorkflowsSupported: []document.Interface{
-					nil,
-					nil,
+					document.NewLazyDocument("__Document__"),
+					document.NewLazyDocument("__Document__"),
 				},
 			},
 			IdMappingConfig: &types.IdMappingConfig{
@@ -6080,7 +6978,15 @@ func TestCheckResponseSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdNamespaceAssociation(context.Background(), &UpdateIdNamespaceAssociationInput{})
+	got, err := svc.UpdateIdNamespaceAssociation(context.Background(), &UpdateIdNamespaceAssociationInput{
+		IdNamespaceAssociationIdentifier: ptr.String("__IdNamespaceAssociationIdentifier__"),
+		MembershipIdentifier:             ptr.String("__MembershipIdentifier__"),
+		Name:                             ptr.String("__Name__"),
+		Description:                      ptr.String("__Description__"),
+		IdMappingConfig: &types.IdMappingConfig{
+			AllowUseAsDimensionColumn: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6281,7 +7187,22 @@ func TestCheckResponseSnapshot_UpdateIntermediateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntermediateTable(context.Background(), &UpdateIntermediateTableInput{})
+	got, err := svc.UpdateIntermediateTable(context.Background(), &UpdateIntermediateTableInput{
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		Description:                 ptr.String("__Description__"),
+		KmsKeyArn:                   ptr.String("__KmsKeyArn__"),
+		Columns: []types.IntermediateTableColumn{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6345,7 +7266,48 @@ func TestCheckResponseSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), &UpdateIntermediateTableAnalysisRuleInput{})
+	got, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), &UpdateIntermediateTableAnalysisRuleInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		IntermediateTableIdentifier: ptr.String("__IntermediateTableIdentifier__"),
+		AnalysisRuleType:            types.IntermediateTableAnalysisRuleType("CUSTOM"),
+		AnalysisRulePolicy: &types.IntermediateTableAnalysisRulePolicyMemberV1{
+			Value: &types.IntermediateTableAnalysisRulePolicyV1MemberCustom{
+				Value: types.IntermediateTableAnalysisRuleCustom{
+					AllowedAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalAnalyses: types.AdditionalAnalyses("ALLOWED"),
+					AllowedAdditionalAnalyses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedAnalysisProviders: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllowedResultReceivers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DifferentialPrivacy: &types.DifferentialPrivacyConfiguration{
+						Columns: []types.DifferentialPrivacyColumn{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					DisallowedOutputColumns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6429,7 +7391,50 @@ func TestCheckResponseSnapshot_UpdateMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMembership(context.Background(), &UpdateMembershipInput{})
+	got, err := svc.UpdateMembership(context.Background(), &UpdateMembershipInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		QueryLogStatus:       types.MembershipQueryLogStatus("ENABLED"),
+		JobLogStatus:         types.MembershipJobLogStatus("ENABLED"),
+		DefaultResultConfiguration: &types.MembershipProtectedQueryResultConfiguration{
+			OutputConfiguration: &types.MembershipProtectedQueryOutputConfigurationMemberS3{
+				Value: types.ProtectedQueryS3OutputConfiguration{
+					ResultFormat:     types.ResultFormat("CSV"),
+					Bucket:           ptr.String("__Bucket__"),
+					KeyPrefix:        ptr.String("__KeyPrefix__"),
+					SingleFileOutput: ptr.Bool(true),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
+			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
+				Value: types.ProtectedJobS3OutputConfigurationInput{
+					Bucket:    ptr.String("__Bucket__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		MembershipPaymentConfiguration: &types.UpdateMembershipPaymentConfiguration{
+			QueryCompute: &types.MembershipQueryComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+			MachineLearning: &types.MembershipMLPaymentConfig{
+				ModelTraining: &types.MembershipModelTrainingPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				ModelInference: &types.MembershipModelInferencePaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+				SyntheticDataGeneration: &types.MembershipSyntheticDataGenerationPaymentConfig{
+					IsResponsible: ptr.Bool(true),
+				},
+			},
+			JobCompute: &types.MembershipJobComputePaymentConfig{
+				IsResponsible: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6467,7 +7472,17 @@ func TestCheckResponseSnapshot_UpdatePrivacyBudgetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrivacyBudgetTemplate(context.Background(), &UpdatePrivacyBudgetTemplateInput{})
+	got, err := svc.UpdatePrivacyBudgetTemplate(context.Background(), &UpdatePrivacyBudgetTemplateInput{
+		MembershipIdentifier:            ptr.String("__MembershipIdentifier__"),
+		PrivacyBudgetTemplateIdentifier: ptr.String("__PrivacyBudgetTemplateIdentifier__"),
+		PrivacyBudgetType:               types.PrivacyBudgetType("DIFFERENTIAL_PRIVACY"),
+		Parameters: &types.PrivacyBudgetTemplateUpdateParametersMemberDifferentialPrivacy{
+			Value: types.DifferentialPrivacyTemplateUpdateParameters{
+				Epsilon:            ptr.Int32(1),
+				UsersNoisePerQuery: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6537,7 +7552,11 @@ func TestCheckResponseSnapshot_UpdateProtectedJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProtectedJob(context.Background(), &UpdateProtectedJobInput{})
+	got, err := svc.UpdateProtectedJob(context.Background(), &UpdateProtectedJobInput{
+		MembershipIdentifier:   ptr.String("__MembershipIdentifier__"),
+		ProtectedJobIdentifier: ptr.String("__ProtectedJobIdentifier__"),
+		TargetStatus:           types.TargetProtectedJobStatus("CANCELLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6628,7 +7647,11 @@ func TestCheckResponseSnapshot_UpdateProtectedQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProtectedQuery(context.Background(), &UpdateProtectedQueryInput{})
+	got, err := svc.UpdateProtectedQuery(context.Background(), &UpdateProtectedQueryInput{
+		MembershipIdentifier:     ptr.String("__MembershipIdentifier__"),
+		ProtectedQueryIdentifier: ptr.String("__ProtectedQueryIdentifier__"),
+		TargetStatus:             types.TargetProtectedQueryStatus("CANCELLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6650,7 +7673,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6678,7 +7707,59 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{})
+	_, opErr := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{
+		Description:          ptr.String("__Description__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Format:               types.AnalysisFormat("SQL"),
+		Source: &types.AnalysisSourceMemberText{
+			Value: "__AnalysisSourceMemberText__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalysisParameters: []types.AnalysisParameter{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+		},
+		Schema: &types.AnalysisSchema{
+			ReferencedTables: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ErrorMessageConfiguration: &types.ErrorMessageConfiguration{
+			Type: types.ErrorMessageType("DETAILED"),
+		},
+		SyntheticDataParameters: &types.SyntheticDataParametersMemberMlSyntheticDataParameters{
+			Value: types.MLSyntheticDataParameters{
+				Epsilon:                           ptr.Float64(1.0),
+				MaxMembershipInferenceAttackScore: ptr.Float64(1.0),
+				ColumnClassification: &types.ColumnClassificationDetails{
+					ColumnMapping: []types.SyntheticDataColumnProperties{
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6703,7 +7784,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6730,7 +7817,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6757,7 +7850,59 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{})
+	_, opErr := svc.CreateAnalysisTemplate(context.Background(), &CreateAnalysisTemplateInput{
+		Description:          ptr.String("__Description__"),
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		Name:                 ptr.String("__Name__"),
+		Format:               types.AnalysisFormat("SQL"),
+		Source: &types.AnalysisSourceMemberText{
+			Value: "__AnalysisSourceMemberText__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AnalysisParameters: []types.AnalysisParameter{
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				Type:         types.ParameterType("SMALLINT"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+		},
+		Schema: &types.AnalysisSchema{
+			ReferencedTables: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ErrorMessageConfiguration: &types.ErrorMessageConfiguration{
+			Type: types.ErrorMessageType("DETAILED"),
+		},
+		SyntheticDataParameters: &types.SyntheticDataParametersMemberMlSyntheticDataParameters{
+			Value: types.MLSyntheticDataParameters{
+				Epsilon:                           ptr.Float64(1.0),
+				MaxMembershipInferenceAttackScore: ptr.Float64(1.0),
+				ColumnClassification: &types.ColumnClassificationDetails{
+					ColumnMapping: []types.SyntheticDataColumnProperties{
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+						{
+							ColumnName:        ptr.String("__ColumnName__"),
+							ColumnType:        types.SyntheticDataColumnType("CATEGORICAL"),
+							IsPredictiveValue: ptr.Bool(true),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6782,7 +7927,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6818,7 +7969,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{})
+	_, opErr := svc.BatchGetCollaborationAnalysisTemplate(context.Background(), &BatchGetCollaborationAnalysisTemplateInput{
+		CollaborationIdentifier: ptr.String("__CollaborationIdentifier__"),
+		AnalysisTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

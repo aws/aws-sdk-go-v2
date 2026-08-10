@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelArn":"__ChannelArn__","NextToken":"__NextToken__","SubChannels":[{"MembershipCount":1,"SubChannelId":"__SubChannelId__"},{"MembershipCount":1,"SubChannelId":"__SubChannelId__"}]}

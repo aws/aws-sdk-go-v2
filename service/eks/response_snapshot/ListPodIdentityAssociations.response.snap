@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associations":[{"associationArn":"__AssociationArn__","associationId":"__AssociationId__","clusterName":"__ClusterName__","namespace":"__Namespace__","ownerArn":"__OwnerArn__","serviceAccount":"__ServiceAccount__"},{"associationArn":"__AssociationArn__","associationId":"__AssociationId__","clusterName":"__ClusterName__","namespace":"__Namespace__","ownerArn":"__OwnerArn__","serviceAccount":"__ServiceAccount__"}],"nextToken":"__NextToken__"}

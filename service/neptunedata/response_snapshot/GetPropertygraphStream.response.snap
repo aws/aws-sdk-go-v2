@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"format":"__Format__","lastEventId":{"key0":"__Value__"},"lastTrxTimestamp":1,"records":[{"commitTimestamp":1,"data":{"from":"__From__","id":"__Id__","key":"__Key__","to":"__To__","type":"__Type__","value":"__Document__"},"eventId":{"key0":"__Value__"},"isLastOp":true,"op":"__Op__"},{"commitTimestamp":1,"data":{"from":"__From__","id":"__Id__","key":"__Key__","to":"__To__","type":"__Type__","value":"__Document__"},"eventId":{"key0":"__Value__"},"isLastOp":true,"op":"__Op__"}],"totalRecords":1}

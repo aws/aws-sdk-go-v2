@@ -121,7 +121,155 @@ func TestCheckResponseSnapshot_AddInstanceFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{})
+	got, err := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		InstanceFleet: &types.InstanceFleetConfig{
+			Name:                   ptr.String("__Name__"),
+			InstanceFleetType:      types.InstanceFleetType("MASTER"),
+			TargetOnDemandCapacity: ptr.Int32(1),
+			TargetSpotCapacity:     ptr.Int32(1),
+			InstanceTypeConfigs: []types.InstanceTypeConfig{
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+			},
+			LaunchSpecifications: &types.InstanceFleetProvisioningSpecifications{
+				SpotSpecification: &types.SpotProvisioningSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					TimeoutAction:          types.SpotProvisioningTimeoutAction("SWITCH_TO_ON_DEMAND"),
+					BlockDurationMinutes:   ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandSpecification: &types.OnDemandProvisioningSpecification{
+					AllocationStrategy: types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+				SpotResizeSpecification: &types.SpotResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			Context: ptr.String("__Context__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -147,7 +295,271 @@ func TestCheckResponseSnapshot_AddInstanceGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddInstanceGroups(context.Background(), &AddInstanceGroupsInput{})
+	got, err := svc.AddInstanceGroups(context.Background(), &AddInstanceGroupsInput{
+		InstanceGroups: []types.InstanceGroupConfig{
+			{
+				Name:          ptr.String("__Name__"),
+				Market:        types.MarketType("ON_DEMAND"),
+				InstanceRole:  types.InstanceRoleType("MASTER"),
+				BidPrice:      ptr.String("__BidPrice__"),
+				InstanceType:  ptr.String("__InstanceType__"),
+				InstanceCount: ptr.Int32(1),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				EbsConfiguration: &types.EbsConfiguration{
+					EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+					},
+					EbsOptimized: ptr.Bool(true),
+				},
+				AutoScalingPolicy: &types.AutoScalingPolicy{
+					Constraints: &types.ScalingConstraints{
+						MinCapacity: ptr.Int32(1),
+						MaxCapacity: ptr.Int32(1),
+					},
+					Rules: []types.ScalingRule{
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				CustomAmiId: ptr.String("__CustomAmiId__"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Market:        types.MarketType("ON_DEMAND"),
+				InstanceRole:  types.InstanceRoleType("MASTER"),
+				BidPrice:      ptr.String("__BidPrice__"),
+				InstanceType:  ptr.String("__InstanceType__"),
+				InstanceCount: ptr.Int32(1),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				EbsConfiguration: &types.EbsConfiguration{
+					EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+					},
+					EbsOptimized: ptr.Bool(true),
+				},
+				AutoScalingPolicy: &types.AutoScalingPolicy{
+					Constraints: &types.ScalingConstraints{
+						MinCapacity: ptr.Int32(1),
+						MaxCapacity: ptr.Int32(1),
+					},
+					Rules: []types.ScalingRule{
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				CustomAmiId: ptr.String("__CustomAmiId__"),
+			},
+		},
+		JobFlowId: ptr.String("__JobFlowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +583,68 @@ func TestCheckResponseSnapshot_AddJobFlowSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddJobFlowSteps(context.Background(), &AddJobFlowStepsInput{})
+	got, err := svc.AddJobFlowSteps(context.Background(), &AddJobFlowStepsInput{
+		JobFlowId: ptr.String("__JobFlowId__"),
+		Steps: []types.StepConfig{
+			{
+				Name:            ptr.String("__Name__"),
+				ActionOnFailure: types.ActionOnFailure("TERMINATE_JOB_FLOW"),
+				HadoopJarStep: &types.HadoopJarStepConfig{
+					Properties: []types.KeyValue{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Jar:       ptr.String("__Jar__"),
+					MainClass: ptr.String("__MainClass__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StepMonitoringConfiguration: &types.StepMonitoringConfiguration{
+					S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+						LogUri:           ptr.String("__LogUri__"),
+						EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+					},
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				ActionOnFailure: types.ActionOnFailure("TERMINATE_JOB_FLOW"),
+				HadoopJarStep: &types.HadoopJarStepConfig{
+					Properties: []types.KeyValue{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Jar:       ptr.String("__Jar__"),
+					MainClass: ptr.String("__MainClass__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StepMonitoringConfiguration: &types.StepMonitoringConfiguration{
+					S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+						LogUri:           ptr.String("__LogUri__"),
+						EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+					},
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +663,20 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +708,14 @@ func TestCheckResponseSnapshot_CancelSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSteps(context.Background(), &CancelStepsInput{})
+	got, err := svc.CancelSteps(context.Background(), &CancelStepsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		StepIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StepCancellationOption: types.StepCancellationOption("SEND_INTERRUPT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +737,24 @@ func TestCheckResponseSnapshot_CreatePersistentAppUI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePersistentAppUI(context.Background(), &CreatePersistentAppUIInput{})
+	got, err := svc.CreatePersistentAppUI(context.Background(), &CreatePersistentAppUIInput{
+		TargetResourceArn: ptr.String("__TargetResourceArn__"),
+		EMRContainersConfig: &types.EMRContainersConfig{
+			JobRunId: ptr.String("__JobRunId__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		XReferer:     ptr.String("__XReferer__"),
+		ProfilerType: types.ProfilerType("SHS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +776,10 @@ func TestCheckResponseSnapshot_CreateSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityConfiguration(context.Background(), &CreateSecurityConfigurationInput{})
+	got, err := svc.CreateSecurityConfiguration(context.Background(), &CreateSecurityConfigurationInput{
+		Name:                  ptr.String("__Name__"),
+		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +801,37 @@ func TestCheckResponseSnapshot_CreateStudio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStudio(context.Background(), &CreateStudioInput{})
+	got, err := svc.CreateStudio(context.Background(), &CreateStudioInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		AuthMode:    types.AuthMode("SSO"),
+		VpcId:       ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceRole:                ptr.String("__ServiceRole__"),
+		UserRole:                   ptr.String("__UserRole__"),
+		WorkspaceSecurityGroupId:   ptr.String("__WorkspaceSecurityGroupId__"),
+		EngineSecurityGroupId:      ptr.String("__EngineSecurityGroupId__"),
+		DefaultS3Location:          ptr.String("__DefaultS3Location__"),
+		IdpAuthUrl:                 ptr.String("__IdpAuthUrl__"),
+		IdpRelayStateParameterName: ptr.String("__IdpRelayStateParameterName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TrustedIdentityPropagationEnabled: ptr.Bool(true),
+		IdcUserAssignment:                 types.IdcUserAssignment("REQUIRED"),
+		IdcInstanceArn:                    ptr.String("__IdcInstanceArn__"),
+		EncryptionKeyArn:                  ptr.String("__EncryptionKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +850,13 @@ func TestCheckResponseSnapshot_CreateStudioSessionMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStudioSessionMapping(context.Background(), &CreateStudioSessionMappingInput{})
+	got, err := svc.CreateStudioSessionMapping(context.Background(), &CreateStudioSessionMappingInput{
+		StudioId:         ptr.String("__StudioId__"),
+		IdentityId:       ptr.String("__IdentityId__"),
+		IdentityName:     ptr.String("__IdentityName__"),
+		IdentityType:     types.IdentityType("USER"),
+		SessionPolicyArn: ptr.String("__SessionPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +875,9 @@ func TestCheckResponseSnapshot_DeleteSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityConfiguration(context.Background(), &DeleteSecurityConfigurationInput{})
+	got, err := svc.DeleteSecurityConfiguration(context.Background(), &DeleteSecurityConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +896,9 @@ func TestCheckResponseSnapshot_DeleteStudio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStudio(context.Background(), &DeleteStudioInput{})
+	got, err := svc.DeleteStudio(context.Background(), &DeleteStudioInput{
+		StudioId: ptr.String("__StudioId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +917,12 @@ func TestCheckResponseSnapshot_DeleteStudioSessionMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStudioSessionMapping(context.Background(), &DeleteStudioSessionMappingInput{})
+	got, err := svc.DeleteStudioSessionMapping(context.Background(), &DeleteStudioSessionMappingInput{
+		StudioId:     ptr.String("__StudioId__"),
+		IdentityId:   ptr.String("__IdentityId__"),
+		IdentityName: ptr.String("__IdentityName__"),
+		IdentityType: types.IdentityType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +1128,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{})
+	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1518,18 @@ func TestCheckResponseSnapshot_DescribeJobFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobFlows(context.Background(), &DescribeJobFlowsInput{})
+	got, err := svc.DescribeJobFlows(context.Background(), &DescribeJobFlowsInput{
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		JobFlowStates: []types.JobFlowExecutionState{
+			types.JobFlowExecutionState("STARTING"),
+			types.JobFlowExecutionState("STARTING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1590,9 @@ func TestCheckResponseSnapshot_DescribeNotebookExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotebookExecution(context.Background(), &DescribeNotebookExecutionInput{})
+	got, err := svc.DescribeNotebookExecution(context.Background(), &DescribeNotebookExecutionInput{
+		NotebookExecutionId: ptr.String("__NotebookExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1061,7 +1634,9 @@ func TestCheckResponseSnapshot_DescribePersistentAppUI(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePersistentAppUI(context.Background(), &DescribePersistentAppUIInput{})
+	got, err := svc.DescribePersistentAppUI(context.Background(), &DescribePersistentAppUIInput{
+		PersistentAppUIId: ptr.String("__PersistentAppUIId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1101,7 +1676,11 @@ func TestCheckResponseSnapshot_DescribeReleaseLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReleaseLabel(context.Background(), &DescribeReleaseLabelInput{})
+	got, err := svc.DescribeReleaseLabel(context.Background(), &DescribeReleaseLabelInput{
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1124,7 +1703,9 @@ func TestCheckResponseSnapshot_DescribeSecurityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSecurityConfiguration(context.Background(), &DescribeSecurityConfigurationInput{})
+	got, err := svc.DescribeSecurityConfiguration(context.Background(), &DescribeSecurityConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1180,7 +1761,10 @@ func TestCheckResponseSnapshot_DescribeStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStep(context.Background(), &DescribeStepInput{})
+	got, err := svc.DescribeStep(context.Background(), &DescribeStepInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		StepId:    ptr.String("__StepId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1235,7 +1819,9 @@ func TestCheckResponseSnapshot_DescribeStudio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStudio(context.Background(), &DescribeStudioInput{})
+	got, err := svc.DescribeStudio(context.Background(), &DescribeStudioInput{
+		StudioId: ptr.String("__StudioId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1844,9 @@ func TestCheckResponseSnapshot_GetAutoTerminationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutoTerminationPolicy(context.Background(), &GetAutoTerminationPolicyInput{})
+	got, err := svc.GetAutoTerminationPolicy(context.Background(), &GetAutoTerminationPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1348,7 +1936,10 @@ func TestCheckResponseSnapshot_GetClusterSessionCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClusterSessionCredentials(context.Background(), &GetClusterSessionCredentialsInput{})
+	got, err := svc.GetClusterSessionCredentials(context.Background(), &GetClusterSessionCredentialsInput{
+		ClusterId:        ptr.String("__ClusterId__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1379,7 +1970,9 @@ func TestCheckResponseSnapshot_GetManagedScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedScalingPolicy(context.Background(), &GetManagedScalingPolicyInput{})
+	got, err := svc.GetManagedScalingPolicy(context.Background(), &GetManagedScalingPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1994,13 @@ func TestCheckResponseSnapshot_GetOnClusterAppUIPresignedURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOnClusterAppUIPresignedURL(context.Background(), &GetOnClusterAppUIPresignedURLInput{})
+	got, err := svc.GetOnClusterAppUIPresignedURL(context.Background(), &GetOnClusterAppUIPresignedURLInput{
+		ClusterId:          ptr.String("__ClusterId__"),
+		OnClusterAppUIType: types.OnClusterAppUIType("SparkHistoryServer"),
+		ApplicationId:      ptr.String("__ApplicationId__"),
+		DryRun:             ptr.Bool(true),
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1423,7 +2022,13 @@ func TestCheckResponseSnapshot_GetPersistentAppUIPresignedURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPersistentAppUIPresignedURL(context.Background(), &GetPersistentAppUIPresignedURLInput{})
+	got, err := svc.GetPersistentAppUIPresignedURL(context.Background(), &GetPersistentAppUIPresignedURLInput{
+		PersistentAppUIId:   ptr.String("__PersistentAppUIId__"),
+		PersistentAppUIType: types.PersistentAppUIType("SHS"),
+		ApplicationId:       ptr.String("__ApplicationId__"),
+		AuthProxyCall:       ptr.Bool(true),
+		ExecutionRoleArn:    ptr.String("__ExecutionRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1522,7 +2127,10 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1551,7 +2159,10 @@ func TestCheckResponseSnapshot_GetSessionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{})
+	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +2191,12 @@ func TestCheckResponseSnapshot_GetStudioSessionMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStudioSessionMapping(context.Background(), &GetStudioSessionMappingInput{})
+	got, err := svc.GetStudioSessionMapping(context.Background(), &GetStudioSessionMappingInput{
+		StudioId:     ptr.String("__StudioId__"),
+		IdentityId:   ptr.String("__IdentityId__"),
+		IdentityName: ptr.String("__IdentityName__"),
+		IdentityType: types.IdentityType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1619,7 +2235,10 @@ func TestCheckResponseSnapshot_ListBootstrapActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBootstrapActions(context.Background(), &ListBootstrapActionsInput{})
+	got, err := svc.ListBootstrapActions(context.Background(), &ListBootstrapActionsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Marker:    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1732,7 +2351,15 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClusterStates: []types.ClusterState{
+			types.ClusterState("STARTING"),
+			types.ClusterState("STARTING"),
+		},
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2069,7 +2696,10 @@ func TestCheckResponseSnapshot_ListInstanceFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceFleets(context.Background(), &ListInstanceFleetsInput{})
+	got, err := svc.ListInstanceFleets(context.Background(), &ListInstanceFleetsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Marker:    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2466,7 +3096,10 @@ func TestCheckResponseSnapshot_ListInstanceGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceGroups(context.Background(), &ListInstanceGroupsInput{})
+	got, err := svc.ListInstanceGroups(context.Background(), &ListInstanceGroupsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Marker:    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2557,7 +3190,21 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		ClusterId:       ptr.String("__ClusterId__"),
+		InstanceGroupId: ptr.String("__InstanceGroupId__"),
+		InstanceGroupTypes: []types.InstanceGroupType{
+			types.InstanceGroupType("MASTER"),
+			types.InstanceGroupType("MASTER"),
+		},
+		InstanceFleetId:   ptr.String("__InstanceFleetId__"),
+		InstanceFleetType: types.InstanceFleetType("MASTER"),
+		InstanceStates: []types.InstanceState{
+			types.InstanceState("AWAITING_FULFILLMENT"),
+			types.InstanceState("AWAITING_FULFILLMENT"),
+		},
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2606,7 +3253,14 @@ func TestCheckResponseSnapshot_ListNotebookExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotebookExecutions(context.Background(), &ListNotebookExecutionsInput{})
+	got, err := svc.ListNotebookExecutions(context.Background(), &ListNotebookExecutionsInput{
+		EditorId:          ptr.String("__EditorId__"),
+		Status:            types.NotebookExecutionStatus("START_PENDING"),
+		From:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		To:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Marker:            ptr.String("__Marker__"),
+		ExecutionEngineId: ptr.String("__ExecutionEngineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2631,7 +3285,14 @@ func TestCheckResponseSnapshot_ListReleaseLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReleaseLabels(context.Background(), &ListReleaseLabelsInput{})
+	got, err := svc.ListReleaseLabels(context.Background(), &ListReleaseLabelsInput{
+		Filters: &types.ReleaseLabelFilter{
+			Prefix:      ptr.String("__Prefix__"),
+			Application: ptr.String("__Application__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2662,7 +3323,9 @@ func TestCheckResponseSnapshot_ListSecurityConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityConfigurations(context.Background(), &ListSecurityConfigurationsInput{})
+	got, err := svc.ListSecurityConfigurations(context.Background(), &ListSecurityConfigurationsInput{
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2843,7 +3506,15 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		SessionStates: []types.SessionState{
+			types.SessionState("SUBMITTED"),
+			types.SessionState("SUBMITTED"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2936,7 +3607,18 @@ func TestCheckResponseSnapshot_ListSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSteps(context.Background(), &ListStepsInput{})
+	got, err := svc.ListSteps(context.Background(), &ListStepsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		StepStates: []types.StepState{
+			types.StepState("PENDING"),
+			types.StepState("PENDING"),
+		},
+		StepIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2975,7 +3657,11 @@ func TestCheckResponseSnapshot_ListStudioSessionMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStudioSessionMappings(context.Background(), &ListStudioSessionMappingsInput{})
+	got, err := svc.ListStudioSessionMappings(context.Background(), &ListStudioSessionMappingsInput{
+		StudioId:     ptr.String("__StudioId__"),
+		IdentityType: types.IdentityType("USER"),
+		Marker:       ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3016,7 +3702,9 @@ func TestCheckResponseSnapshot_ListStudios(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStudios(context.Background(), &ListStudiosInput{})
+	got, err := svc.ListStudios(context.Background(), &ListStudiosInput{
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3065,7 +3753,10 @@ func TestCheckResponseSnapshot_ListSupportedInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSupportedInstanceTypes(context.Background(), &ListSupportedInstanceTypesInput{})
+	got, err := svc.ListSupportedInstanceTypes(context.Background(), &ListSupportedInstanceTypesInput{
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		Marker:       ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3087,7 +3778,11 @@ func TestCheckResponseSnapshot_ModifyCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCluster(context.Background(), &ModifyClusterInput{})
+	got, err := svc.ModifyCluster(context.Background(), &ModifyClusterInput{
+		ClusterId:            ptr.String("__ClusterId__"),
+		StepConcurrencyLevel: ptr.Int32(1),
+		ExtendedSupport:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3106,7 +3801,138 @@ func TestCheckResponseSnapshot_ModifyInstanceFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyInstanceFleet(context.Background(), &ModifyInstanceFleetInput{})
+	got, err := svc.ModifyInstanceFleet(context.Background(), &ModifyInstanceFleetInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		InstanceFleet: &types.InstanceFleetModifyConfig{
+			InstanceFleetId:        ptr.String("__InstanceFleetId__"),
+			TargetOnDemandCapacity: ptr.Int32(1),
+			TargetSpotCapacity:     ptr.Int32(1),
+			ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+				SpotResizeSpecification: &types.SpotResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			InstanceTypeConfigs: []types.InstanceTypeConfig{
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+			},
+			Context: ptr.String("__Context__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3125,7 +3951,101 @@ func TestCheckResponseSnapshot_ModifyInstanceGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyInstanceGroups(context.Background(), &ModifyInstanceGroupsInput{})
+	got, err := svc.ModifyInstanceGroups(context.Background(), &ModifyInstanceGroupsInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		InstanceGroups: []types.InstanceGroupModifyConfig{
+			{
+				InstanceGroupId: ptr.String("__InstanceGroupId__"),
+				InstanceCount:   ptr.Int32(1),
+				EC2InstanceIdsToTerminate: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ShrinkPolicy: &types.ShrinkPolicy{
+					DecommissionTimeout: ptr.Int32(1),
+					InstanceResizePolicy: &types.InstanceResizePolicy{
+						InstancesToTerminate: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstancesToProtect: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstanceTerminationTimeout: ptr.Int32(1),
+					},
+				},
+				ReconfigurationType: types.ReconfigurationType("OVERWRITE"),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			{
+				InstanceGroupId: ptr.String("__InstanceGroupId__"),
+				InstanceCount:   ptr.Int32(1),
+				EC2InstanceIdsToTerminate: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ShrinkPolicy: &types.ShrinkPolicy{
+					DecommissionTimeout: ptr.Int32(1),
+					InstanceResizePolicy: &types.InstanceResizePolicy{
+						InstancesToTerminate: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstancesToProtect: []string{
+							"__Member__",
+							"__Member__",
+						},
+						InstanceTerminationTimeout: ptr.Int32(1),
+					},
+				},
+				ReconfigurationType: types.ReconfigurationType("OVERWRITE"),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3231,7 +4151,86 @@ func TestCheckResponseSnapshot_PutAutoScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAutoScalingPolicy(context.Background(), &PutAutoScalingPolicyInput{})
+	got, err := svc.PutAutoScalingPolicy(context.Background(), &PutAutoScalingPolicyInput{
+		ClusterId:       ptr.String("__ClusterId__"),
+		InstanceGroupId: ptr.String("__InstanceGroupId__"),
+		AutoScalingPolicy: &types.AutoScalingPolicy{
+			Constraints: &types.ScalingConstraints{
+				MinCapacity: ptr.Int32(1),
+				MaxCapacity: ptr.Int32(1),
+			},
+			Rules: []types.ScalingRule{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Action: &types.ScalingAction{
+						Market: types.MarketType("ON_DEMAND"),
+						SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+							AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+							ScalingAdjustment: ptr.Int32(1),
+							CoolDown:          ptr.Int32(1),
+						},
+					},
+					Trigger: &types.ScalingTrigger{
+						CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+							ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+							EvaluationPeriods:  ptr.Int32(1),
+							MetricName:         ptr.String("__MetricName__"),
+							Namespace:          ptr.String("__Namespace__"),
+							Period:             ptr.Int32(1),
+							Statistic:          types.Statistic("SAMPLE_COUNT"),
+							Threshold:          ptr.Float64(1.0),
+							Unit:               types.Unit("NONE"),
+							Dimensions: []types.MetricDimension{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Action: &types.ScalingAction{
+						Market: types.MarketType("ON_DEMAND"),
+						SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+							AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+							ScalingAdjustment: ptr.Int32(1),
+							CoolDown:          ptr.Int32(1),
+						},
+					},
+					Trigger: &types.ScalingTrigger{
+						CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+							ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+							EvaluationPeriods:  ptr.Int32(1),
+							MetricName:         ptr.String("__MetricName__"),
+							Namespace:          ptr.String("__Namespace__"),
+							Period:             ptr.Int32(1),
+							Statistic:          types.Statistic("SAMPLE_COUNT"),
+							Threshold:          ptr.Float64(1.0),
+							Unit:               types.Unit("NONE"),
+							Dimensions: []types.MetricDimension{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3250,7 +4249,12 @@ func TestCheckResponseSnapshot_PutAutoTerminationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAutoTerminationPolicy(context.Background(), &PutAutoTerminationPolicyInput{})
+	got, err := svc.PutAutoTerminationPolicy(context.Background(), &PutAutoTerminationPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		AutoTerminationPolicy: &types.AutoTerminationPolicy{
+			IdleTimeout: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3269,7 +4273,47 @@ func TestCheckResponseSnapshot_PutBlockPublicAccessConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutBlockPublicAccessConfiguration(context.Background(), &PutBlockPublicAccessConfigurationInput{})
+	got, err := svc.PutBlockPublicAccessConfiguration(context.Background(), &PutBlockPublicAccessConfigurationInput{
+		BlockPublicAccessConfiguration: &types.BlockPublicAccessConfiguration{
+			BlockPublicSecurityGroupRules: ptr.Bool(true),
+			PermittedPublicSecurityGroupRuleRanges: []types.PortRange{
+				{
+					MinRange: ptr.Int32(1),
+					MaxRange: ptr.Int32(1),
+				},
+				{
+					MinRange: ptr.Int32(1),
+					MaxRange: ptr.Int32(1),
+				},
+			},
+			Classification: ptr.String("__Classification__"),
+			Configurations: []types.Configuration{
+				{
+					Classification: ptr.String("__Classification__"),
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Classification: ptr.String("__Classification__"),
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			Properties: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3288,7 +4332,20 @@ func TestCheckResponseSnapshot_PutManagedScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutManagedScalingPolicy(context.Background(), &PutManagedScalingPolicyInput{})
+	got, err := svc.PutManagedScalingPolicy(context.Background(), &PutManagedScalingPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		ManagedScalingPolicy: &types.ManagedScalingPolicy{
+			ComputeLimits: &types.ComputeLimits{
+				UnitType:                     types.ComputeLimitsUnitType("InstanceFleetUnits"),
+				MinimumCapacityUnits:         ptr.Int32(1),
+				MaximumCapacityUnits:         ptr.Int32(1),
+				MaximumOnDemandCapacityUnits: ptr.Int32(1),
+				MaximumCoreCapacityUnits:     ptr.Int32(1),
+			},
+			UtilizationPerformanceIndex: ptr.Int32(1),
+			ScalingStrategy:             types.ScalingStrategy("DEFAULT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3307,7 +4364,10 @@ func TestCheckResponseSnapshot_RemoveAutoScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAutoScalingPolicy(context.Background(), &RemoveAutoScalingPolicyInput{})
+	got, err := svc.RemoveAutoScalingPolicy(context.Background(), &RemoveAutoScalingPolicyInput{
+		ClusterId:       ptr.String("__ClusterId__"),
+		InstanceGroupId: ptr.String("__InstanceGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3326,7 +4386,9 @@ func TestCheckResponseSnapshot_RemoveAutoTerminationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAutoTerminationPolicy(context.Background(), &RemoveAutoTerminationPolicyInput{})
+	got, err := svc.RemoveAutoTerminationPolicy(context.Background(), &RemoveAutoTerminationPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +4407,9 @@ func TestCheckResponseSnapshot_RemoveManagedScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveManagedScalingPolicy(context.Background(), &RemoveManagedScalingPolicyInput{})
+	got, err := svc.RemoveManagedScalingPolicy(context.Background(), &RemoveManagedScalingPolicyInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3364,7 +4428,14 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3386,7 +4457,825 @@ func TestCheckResponseSnapshot_RunJobFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RunJobFlow(context.Background(), &RunJobFlowInput{})
+	got, err := svc.RunJobFlow(context.Background(), &RunJobFlowInput{
+		Name:                  ptr.String("__Name__"),
+		LogUri:                ptr.String("__LogUri__"),
+		LogEncryptionKmsKeyId: ptr.String("__LogEncryptionKmsKeyId__"),
+		AdditionalInfo:        ptr.String("__AdditionalInfo__"),
+		AmiVersion:            ptr.String("__AmiVersion__"),
+		ReleaseLabel:          ptr.String("__ReleaseLabel__"),
+		Instances: &types.JobFlowInstancesConfig{
+			MasterInstanceType: ptr.String("__MasterInstanceType__"),
+			SlaveInstanceType:  ptr.String("__SlaveInstanceType__"),
+			InstanceCount:      ptr.Int32(1),
+			InstanceGroups: []types.InstanceGroupConfig{
+				{
+					Name:          ptr.String("__Name__"),
+					Market:        types.MarketType("ON_DEMAND"),
+					InstanceRole:  types.InstanceRoleType("MASTER"),
+					BidPrice:      ptr.String("__BidPrice__"),
+					InstanceType:  ptr.String("__InstanceType__"),
+					InstanceCount: ptr.Int32(1),
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					AutoScalingPolicy: &types.AutoScalingPolicy{
+						Constraints: &types.ScalingConstraints{
+							MinCapacity: ptr.Int32(1),
+							MaxCapacity: ptr.Int32(1),
+						},
+						Rules: []types.ScalingRule{
+							{
+								Name:        ptr.String("__Name__"),
+								Description: ptr.String("__Description__"),
+								Action: &types.ScalingAction{
+									Market: types.MarketType("ON_DEMAND"),
+									SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+										AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+										ScalingAdjustment: ptr.Int32(1),
+										CoolDown:          ptr.Int32(1),
+									},
+								},
+								Trigger: &types.ScalingTrigger{
+									CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+										ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+										EvaluationPeriods:  ptr.Int32(1),
+										MetricName:         ptr.String("__MetricName__"),
+										Namespace:          ptr.String("__Namespace__"),
+										Period:             ptr.Int32(1),
+										Statistic:          types.Statistic("SAMPLE_COUNT"),
+										Threshold:          ptr.Float64(1.0),
+										Unit:               types.Unit("NONE"),
+										Dimensions: []types.MetricDimension{
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Description: ptr.String("__Description__"),
+								Action: &types.ScalingAction{
+									Market: types.MarketType("ON_DEMAND"),
+									SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+										AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+										ScalingAdjustment: ptr.Int32(1),
+										CoolDown:          ptr.Int32(1),
+									},
+								},
+								Trigger: &types.ScalingTrigger{
+									CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+										ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+										EvaluationPeriods:  ptr.Int32(1),
+										MetricName:         ptr.String("__MetricName__"),
+										Namespace:          ptr.String("__Namespace__"),
+										Period:             ptr.Int32(1),
+										Statistic:          types.Statistic("SAMPLE_COUNT"),
+										Threshold:          ptr.Float64(1.0),
+										Unit:               types.Unit("NONE"),
+										Dimensions: []types.MetricDimension{
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Market:        types.MarketType("ON_DEMAND"),
+					InstanceRole:  types.InstanceRoleType("MASTER"),
+					BidPrice:      ptr.String("__BidPrice__"),
+					InstanceType:  ptr.String("__InstanceType__"),
+					InstanceCount: ptr.Int32(1),
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					AutoScalingPolicy: &types.AutoScalingPolicy{
+						Constraints: &types.ScalingConstraints{
+							MinCapacity: ptr.Int32(1),
+							MaxCapacity: ptr.Int32(1),
+						},
+						Rules: []types.ScalingRule{
+							{
+								Name:        ptr.String("__Name__"),
+								Description: ptr.String("__Description__"),
+								Action: &types.ScalingAction{
+									Market: types.MarketType("ON_DEMAND"),
+									SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+										AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+										ScalingAdjustment: ptr.Int32(1),
+										CoolDown:          ptr.Int32(1),
+									},
+								},
+								Trigger: &types.ScalingTrigger{
+									CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+										ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+										EvaluationPeriods:  ptr.Int32(1),
+										MetricName:         ptr.String("__MetricName__"),
+										Namespace:          ptr.String("__Namespace__"),
+										Period:             ptr.Int32(1),
+										Statistic:          types.Statistic("SAMPLE_COUNT"),
+										Threshold:          ptr.Float64(1.0),
+										Unit:               types.Unit("NONE"),
+										Dimensions: []types.MetricDimension{
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Description: ptr.String("__Description__"),
+								Action: &types.ScalingAction{
+									Market: types.MarketType("ON_DEMAND"),
+									SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+										AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+										ScalingAdjustment: ptr.Int32(1),
+										CoolDown:          ptr.Int32(1),
+									},
+								},
+								Trigger: &types.ScalingTrigger{
+									CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+										ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+										EvaluationPeriods:  ptr.Int32(1),
+										MetricName:         ptr.String("__MetricName__"),
+										Namespace:          ptr.String("__Namespace__"),
+										Period:             ptr.Int32(1),
+										Statistic:          types.Statistic("SAMPLE_COUNT"),
+										Threshold:          ptr.Float64(1.0),
+										Unit:               types.Unit("NONE"),
+										Dimensions: []types.MetricDimension{
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Key:   ptr.String("__Key__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+				},
+			},
+			InstanceFleets: []types.InstanceFleetConfig{
+				{
+					Name:                   ptr.String("__Name__"),
+					InstanceFleetType:      types.InstanceFleetType("MASTER"),
+					TargetOnDemandCapacity: ptr.Int32(1),
+					TargetSpotCapacity:     ptr.Int32(1),
+					InstanceTypeConfigs: []types.InstanceTypeConfig{
+						{
+							InstanceType:                        ptr.String("__InstanceType__"),
+							WeightedCapacity:                    ptr.Int32(1),
+							BidPrice:                            ptr.String("__BidPrice__"),
+							BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+							EbsConfiguration: &types.EbsConfiguration{
+								EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+								},
+								EbsOptimized: ptr.Bool(true),
+							},
+							Configurations: []types.Configuration{
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+							},
+							CustomAmiId: ptr.String("__CustomAmiId__"),
+							Priority:    ptr.Float64(1.0),
+						},
+						{
+							InstanceType:                        ptr.String("__InstanceType__"),
+							WeightedCapacity:                    ptr.Int32(1),
+							BidPrice:                            ptr.String("__BidPrice__"),
+							BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+							EbsConfiguration: &types.EbsConfiguration{
+								EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+								},
+								EbsOptimized: ptr.Bool(true),
+							},
+							Configurations: []types.Configuration{
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+							},
+							CustomAmiId: ptr.String("__CustomAmiId__"),
+							Priority:    ptr.Float64(1.0),
+						},
+					},
+					LaunchSpecifications: &types.InstanceFleetProvisioningSpecifications{
+						SpotSpecification: &types.SpotProvisioningSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							TimeoutAction:          types.SpotProvisioningTimeoutAction("SWITCH_TO_ON_DEMAND"),
+							BlockDurationMinutes:   ptr.Int32(1),
+							AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+						},
+						OnDemandSpecification: &types.OnDemandProvisioningSpecification{
+							AllocationStrategy: types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+							CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+								UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+								CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+					},
+					ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+						SpotResizeSpecification: &types.SpotResizingSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+						},
+						OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+							CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+								UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+								CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+					},
+					Context: ptr.String("__Context__"),
+				},
+				{
+					Name:                   ptr.String("__Name__"),
+					InstanceFleetType:      types.InstanceFleetType("MASTER"),
+					TargetOnDemandCapacity: ptr.Int32(1),
+					TargetSpotCapacity:     ptr.Int32(1),
+					InstanceTypeConfigs: []types.InstanceTypeConfig{
+						{
+							InstanceType:                        ptr.String("__InstanceType__"),
+							WeightedCapacity:                    ptr.Int32(1),
+							BidPrice:                            ptr.String("__BidPrice__"),
+							BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+							EbsConfiguration: &types.EbsConfiguration{
+								EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+								},
+								EbsOptimized: ptr.Bool(true),
+							},
+							Configurations: []types.Configuration{
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+							},
+							CustomAmiId: ptr.String("__CustomAmiId__"),
+							Priority:    ptr.Float64(1.0),
+						},
+						{
+							InstanceType:                        ptr.String("__InstanceType__"),
+							WeightedCapacity:                    ptr.Int32(1),
+							BidPrice:                            ptr.String("__BidPrice__"),
+							BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+							EbsConfiguration: &types.EbsConfiguration{
+								EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+									{
+										VolumeSpecification: &types.VolumeSpecification{
+											VolumeType: ptr.String("__VolumeType__"),
+											Iops:       ptr.Int32(1),
+											SizeInGB:   ptr.Int32(1),
+											Throughput: ptr.Int32(1),
+										},
+										VolumesPerInstance: ptr.Int32(1),
+									},
+								},
+								EbsOptimized: ptr.Bool(true),
+							},
+							Configurations: []types.Configuration{
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								{
+									Classification: ptr.String("__Classification__"),
+									Configurations: []types.Configuration{
+										{},
+										{},
+									},
+									Properties: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+							},
+							CustomAmiId: ptr.String("__CustomAmiId__"),
+							Priority:    ptr.Float64(1.0),
+						},
+					},
+					LaunchSpecifications: &types.InstanceFleetProvisioningSpecifications{
+						SpotSpecification: &types.SpotProvisioningSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							TimeoutAction:          types.SpotProvisioningTimeoutAction("SWITCH_TO_ON_DEMAND"),
+							BlockDurationMinutes:   ptr.Int32(1),
+							AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+						},
+						OnDemandSpecification: &types.OnDemandProvisioningSpecification{
+							AllocationStrategy: types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+							CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+								UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+								CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+					},
+					ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+						SpotResizeSpecification: &types.SpotResizingSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+						},
+						OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+							TimeoutDurationMinutes: ptr.Int32(1),
+							AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+							CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+								UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+								CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+								CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+							},
+						},
+					},
+					Context: ptr.String("__Context__"),
+				},
+			},
+			Ec2KeyName: ptr.String("__Ec2KeyName__"),
+			Placement: &types.PlacementType{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AvailabilityZones: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			KeepJobFlowAliveWhenNoSteps: ptr.Bool(true),
+			TerminationProtected:        ptr.Bool(true),
+			UnhealthyNodeReplacement:    ptr.Bool(true),
+			HadoopVersion:               ptr.String("__HadoopVersion__"),
+			Ec2SubnetId:                 ptr.String("__Ec2SubnetId__"),
+			Ec2SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EmrManagedMasterSecurityGroup: ptr.String("__EmrManagedMasterSecurityGroup__"),
+			EmrManagedSlaveSecurityGroup:  ptr.String("__EmrManagedSlaveSecurityGroup__"),
+			ServiceAccessSecurityGroup:    ptr.String("__ServiceAccessSecurityGroup__"),
+			AdditionalMasterSecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AdditionalSlaveSecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Steps: []types.StepConfig{
+			{
+				Name:            ptr.String("__Name__"),
+				ActionOnFailure: types.ActionOnFailure("TERMINATE_JOB_FLOW"),
+				HadoopJarStep: &types.HadoopJarStepConfig{
+					Properties: []types.KeyValue{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Jar:       ptr.String("__Jar__"),
+					MainClass: ptr.String("__MainClass__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StepMonitoringConfiguration: &types.StepMonitoringConfiguration{
+					S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+						LogUri:           ptr.String("__LogUri__"),
+						EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+					},
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				ActionOnFailure: types.ActionOnFailure("TERMINATE_JOB_FLOW"),
+				HadoopJarStep: &types.HadoopJarStepConfig{
+					Properties: []types.KeyValue{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Jar:       ptr.String("__Jar__"),
+					MainClass: ptr.String("__MainClass__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				StepMonitoringConfiguration: &types.StepMonitoringConfiguration{
+					S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+						LogUri:           ptr.String("__LogUri__"),
+						EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+					},
+				},
+			},
+		},
+		StepExecutionRoleArn: ptr.String("__StepExecutionRoleArn__"),
+		BootstrapActions: []types.BootstrapActionConfig{
+			{
+				Name: ptr.String("__Name__"),
+				ScriptBootstrapAction: &types.ScriptBootstrapActionConfig{
+					Path: ptr.String("__Path__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ScriptBootstrapAction: &types.ScriptBootstrapActionConfig{
+					Path: ptr.String("__Path__"),
+					Args: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		SupportedProducts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NewSupportedProducts: []types.SupportedProductConfig{
+			{
+				Name: ptr.String("__Name__"),
+				Args: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Args: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Applications: []types.Application{
+			{
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+				Args: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AdditionalInfo: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+				Args: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AdditionalInfo: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Configurations: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		VisibleToAllUsers: ptr.Bool(true),
+		JobFlowRole:       ptr.String("__JobFlowRole__"),
+		ServiceRole:       ptr.String("__ServiceRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SecurityConfiguration: ptr.String("__SecurityConfiguration__"),
+		AutoScalingRole:       ptr.String("__AutoScalingRole__"),
+		ScaleDownBehavior:     types.ScaleDownBehavior("TERMINATE_AT_INSTANCE_HOUR"),
+		CustomAmiId:           ptr.String("__CustomAmiId__"),
+		EbsRootVolumeSize:     ptr.Int32(1),
+		RepoUpgradeOnBoot:     types.RepoUpgradeOnBoot("SECURITY"),
+		KerberosAttributes: &types.KerberosAttributes{
+			Realm:                            ptr.String("__Realm__"),
+			KdcAdminPassword:                 ptr.String("__KdcAdminPassword__"),
+			CrossRealmTrustPrincipalPassword: ptr.String("__CrossRealmTrustPrincipalPassword__"),
+			ADDomainJoinUser:                 ptr.String("__ADDomainJoinUser__"),
+			ADDomainJoinPassword:             ptr.String("__ADDomainJoinPassword__"),
+		},
+		StepConcurrencyLevel: ptr.Int32(1),
+		ManagedScalingPolicy: &types.ManagedScalingPolicy{
+			ComputeLimits: &types.ComputeLimits{
+				UnitType:                     types.ComputeLimitsUnitType("InstanceFleetUnits"),
+				MinimumCapacityUnits:         ptr.Int32(1),
+				MaximumCapacityUnits:         ptr.Int32(1),
+				MaximumOnDemandCapacityUnits: ptr.Int32(1),
+				MaximumCoreCapacityUnits:     ptr.Int32(1),
+			},
+			UtilizationPerformanceIndex: ptr.Int32(1),
+			ScalingStrategy:             types.ScalingStrategy("DEFAULT"),
+		},
+		PlacementGroupConfigs: []types.PlacementGroupConfig{
+			{
+				InstanceRole:      types.InstanceRoleType("MASTER"),
+				PlacementStrategy: types.PlacementGroupStrategy("SPREAD"),
+			},
+			{
+				InstanceRole:      types.InstanceRoleType("MASTER"),
+				PlacementStrategy: types.PlacementGroupStrategy("SPREAD"),
+			},
+		},
+		AutoTerminationPolicy: &types.AutoTerminationPolicy{
+			IdleTimeout: ptr.Int64(1),
+		},
+		OSReleaseLabel:          ptr.String("__OSReleaseLabel__"),
+		EbsRootVolumeIops:       ptr.Int32(1),
+		EbsRootVolumeThroughput: ptr.Int32(1),
+		ExtendedSupport:         ptr.Bool(true),
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			CloudWatchLogConfiguration: &types.CloudWatchLogConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroupName:        ptr.String("__LogGroupName__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			S3LoggingConfiguration: &types.S3LoggingConfiguration{
+				LogTypeUploadPolicy: map[string]types.LogUploadPolicyValue{
+					"key0": types.LogUploadPolicyValue("emr-managed"),
+				},
+			},
+		},
+		SessionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3405,7 +5294,13 @@ func TestCheckResponseSnapshot_SetKeepJobFlowAliveWhenNoSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetKeepJobFlowAliveWhenNoSteps(context.Background(), &SetKeepJobFlowAliveWhenNoStepsInput{})
+	got, err := svc.SetKeepJobFlowAliveWhenNoSteps(context.Background(), &SetKeepJobFlowAliveWhenNoStepsInput{
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeepJobFlowAliveWhenNoSteps: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3424,7 +5319,13 @@ func TestCheckResponseSnapshot_SetTerminationProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetTerminationProtection(context.Background(), &SetTerminationProtectionInput{})
+	got, err := svc.SetTerminationProtection(context.Background(), &SetTerminationProtectionInput{
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TerminationProtected: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3443,7 +5344,13 @@ func TestCheckResponseSnapshot_SetUnhealthyNodeReplacement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetUnhealthyNodeReplacement(context.Background(), &SetUnhealthyNodeReplacementInput{})
+	got, err := svc.SetUnhealthyNodeReplacement(context.Background(), &SetUnhealthyNodeReplacementInput{
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UnhealthyNodeReplacement: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3462,7 +5369,13 @@ func TestCheckResponseSnapshot_SetVisibleToAllUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetVisibleToAllUsers(context.Background(), &SetVisibleToAllUsersInput{})
+	got, err := svc.SetVisibleToAllUsers(context.Background(), &SetVisibleToAllUsersInput{
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VisibleToAllUsers: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3483,7 +5396,42 @@ func TestCheckResponseSnapshot_StartNotebookExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNotebookExecution(context.Background(), &StartNotebookExecutionInput{})
+	got, err := svc.StartNotebookExecution(context.Background(), &StartNotebookExecutionInput{
+		EditorId:              ptr.String("__EditorId__"),
+		RelativePath:          ptr.String("__RelativePath__"),
+		NotebookExecutionName: ptr.String("__NotebookExecutionName__"),
+		NotebookParams:        ptr.String("__NotebookParams__"),
+		ExecutionEngine: &types.ExecutionEngineConfig{
+			Id:                            ptr.String("__Id__"),
+			Type:                          types.ExecutionEngineType("EMR"),
+			MasterInstanceSecurityGroupId: ptr.String("__MasterInstanceSecurityGroupId__"),
+			ExecutionRoleArn:              ptr.String("__ExecutionRoleArn__"),
+		},
+		ServiceRole:                     ptr.String("__ServiceRole__"),
+		NotebookInstanceSecurityGroupId: ptr.String("__NotebookInstanceSecurityGroupId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NotebookS3Location: &types.NotebookS3LocationFromInput{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		OutputNotebookS3Location: &types.OutputNotebookS3LocationFromInput{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+		},
+		OutputNotebookFormat: types.OutputNotebookFormat("HTML"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3508,7 +5456,74 @@ func TestCheckResponseSnapshot_StartSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSession(context.Background(), &StartSessionInput{})
+	got, err := svc.StartSession(context.Background(), &StartSessionInput{
+		Name:             ptr.String("__Name__"),
+		ClusterId:        ptr.String("__ClusterId__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		EngineConfigurations: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MonitoringConfiguration: &types.SessionMonitoringConfiguration{
+			CloudWatchLoggingConfiguration: &types.SessionCloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroup:            ptr.String("__LogGroup__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ManagedLoggingConfiguration: &types.SessionManagedLoggingConfiguration{
+				Enabled:          ptr.Bool(true),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			S3LoggingConfiguration: &types.SessionS3LoggingConfiguration{
+				Enabled:          ptr.Bool(true),
+				LogUri:           ptr.String("__LogUri__"),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		SessionIdleTimeoutInMinutes: ptr.Int64(1),
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3527,7 +5542,9 @@ func TestCheckResponseSnapshot_StopNotebookExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopNotebookExecution(context.Background(), &StopNotebookExecutionInput{})
+	got, err := svc.StopNotebookExecution(context.Background(), &StopNotebookExecutionInput{
+		NotebookExecutionId: ptr.String("__NotebookExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3546,7 +5563,12 @@ func TestCheckResponseSnapshot_TerminateJobFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateJobFlows(context.Background(), &TerminateJobFlowsInput{})
+	got, err := svc.TerminateJobFlows(context.Background(), &TerminateJobFlowsInput{
+		JobFlowIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3569,7 +5591,10 @@ func TestCheckResponseSnapshot_TerminateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{})
+	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3588,7 +5613,17 @@ func TestCheckResponseSnapshot_UpdateStudio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStudio(context.Background(), &UpdateStudioInput{})
+	got, err := svc.UpdateStudio(context.Background(), &UpdateStudioInput{
+		StudioId:    ptr.String("__StudioId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultS3Location: ptr.String("__DefaultS3Location__"),
+		EncryptionKeyArn:  ptr.String("__EncryptionKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3607,7 +5642,13 @@ func TestCheckResponseSnapshot_UpdateStudioSessionMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStudioSessionMapping(context.Background(), &UpdateStudioSessionMappingInput{})
+	got, err := svc.UpdateStudioSessionMapping(context.Background(), &UpdateStudioSessionMappingInput{
+		StudioId:         ptr.String("__StudioId__"),
+		IdentityId:       ptr.String("__IdentityId__"),
+		IdentityName:     ptr.String("__IdentityName__"),
+		IdentityType:     types.IdentityType("USER"),
+		SessionPolicyArn: ptr.String("__SessionPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3626,7 +5667,271 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddInstanceGroups(context.Background(), &AddInstanceGroupsInput{})
+	_, opErr := svc.AddInstanceGroups(context.Background(), &AddInstanceGroupsInput{
+		InstanceGroups: []types.InstanceGroupConfig{
+			{
+				Name:          ptr.String("__Name__"),
+				Market:        types.MarketType("ON_DEMAND"),
+				InstanceRole:  types.InstanceRoleType("MASTER"),
+				BidPrice:      ptr.String("__BidPrice__"),
+				InstanceType:  ptr.String("__InstanceType__"),
+				InstanceCount: ptr.Int32(1),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				EbsConfiguration: &types.EbsConfiguration{
+					EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+					},
+					EbsOptimized: ptr.Bool(true),
+				},
+				AutoScalingPolicy: &types.AutoScalingPolicy{
+					Constraints: &types.ScalingConstraints{
+						MinCapacity: ptr.Int32(1),
+						MaxCapacity: ptr.Int32(1),
+					},
+					Rules: []types.ScalingRule{
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				CustomAmiId: ptr.String("__CustomAmiId__"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Market:        types.MarketType("ON_DEMAND"),
+				InstanceRole:  types.InstanceRoleType("MASTER"),
+				BidPrice:      ptr.String("__BidPrice__"),
+				InstanceType:  ptr.String("__InstanceType__"),
+				InstanceCount: ptr.Int32(1),
+				Configurations: []types.Configuration{
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						Classification: ptr.String("__Classification__"),
+						Configurations: []types.Configuration{
+							{},
+							{},
+						},
+						Properties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				EbsConfiguration: &types.EbsConfiguration{
+					EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+						{
+							VolumeSpecification: &types.VolumeSpecification{
+								VolumeType: ptr.String("__VolumeType__"),
+								Iops:       ptr.Int32(1),
+								SizeInGB:   ptr.Int32(1),
+								Throughput: ptr.Int32(1),
+							},
+							VolumesPerInstance: ptr.Int32(1),
+						},
+					},
+					EbsOptimized: ptr.Bool(true),
+				},
+				AutoScalingPolicy: &types.AutoScalingPolicy{
+					Constraints: &types.ScalingConstraints{
+						MinCapacity: ptr.Int32(1),
+						MaxCapacity: ptr.Int32(1),
+					},
+					Rules: []types.ScalingRule{
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							Name:        ptr.String("__Name__"),
+							Description: ptr.String("__Description__"),
+							Action: &types.ScalingAction{
+								Market: types.MarketType("ON_DEMAND"),
+								SimpleScalingPolicyConfiguration: &types.SimpleScalingPolicyConfiguration{
+									AdjustmentType:    types.AdjustmentType("CHANGE_IN_CAPACITY"),
+									ScalingAdjustment: ptr.Int32(1),
+									CoolDown:          ptr.Int32(1),
+								},
+							},
+							Trigger: &types.ScalingTrigger{
+								CloudWatchAlarmDefinition: &types.CloudWatchAlarmDefinition{
+									ComparisonOperator: types.ComparisonOperator("GREATER_THAN_OR_EQUAL"),
+									EvaluationPeriods:  ptr.Int32(1),
+									MetricName:         ptr.String("__MetricName__"),
+									Namespace:          ptr.String("__Namespace__"),
+									Period:             ptr.Int32(1),
+									Statistic:          types.Statistic("SAMPLE_COUNT"),
+									Threshold:          ptr.Float64(1.0),
+									Unit:               types.Unit("NONE"),
+									Dimensions: []types.MetricDimension{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				CustomAmiId: ptr.String("__CustomAmiId__"),
+			},
+		},
+		JobFlowId: ptr.String("__JobFlowId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3651,7 +5956,155 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{})
+	_, opErr := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		InstanceFleet: &types.InstanceFleetConfig{
+			Name:                   ptr.String("__Name__"),
+			InstanceFleetType:      types.InstanceFleetType("MASTER"),
+			TargetOnDemandCapacity: ptr.Int32(1),
+			TargetSpotCapacity:     ptr.Int32(1),
+			InstanceTypeConfigs: []types.InstanceTypeConfig{
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+			},
+			LaunchSpecifications: &types.InstanceFleetProvisioningSpecifications{
+				SpotSpecification: &types.SpotProvisioningSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					TimeoutAction:          types.SpotProvisioningTimeoutAction("SWITCH_TO_ON_DEMAND"),
+					BlockDurationMinutes:   ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandSpecification: &types.OnDemandProvisioningSpecification{
+					AllocationStrategy: types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+				SpotResizeSpecification: &types.SpotResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			Context: ptr.String("__Context__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3677,7 +6130,155 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{})
+	_, opErr := svc.AddInstanceFleet(context.Background(), &AddInstanceFleetInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		InstanceFleet: &types.InstanceFleetConfig{
+			Name:                   ptr.String("__Name__"),
+			InstanceFleetType:      types.InstanceFleetType("MASTER"),
+			TargetOnDemandCapacity: ptr.Int32(1),
+			TargetSpotCapacity:     ptr.Int32(1),
+			InstanceTypeConfigs: []types.InstanceTypeConfig{
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+				{
+					InstanceType:                        ptr.String("__InstanceType__"),
+					WeightedCapacity:                    ptr.Int32(1),
+					BidPrice:                            ptr.String("__BidPrice__"),
+					BidPriceAsPercentageOfOnDemandPrice: ptr.Float64(1.0),
+					EbsConfiguration: &types.EbsConfiguration{
+						EbsBlockDeviceConfigs: []types.EbsBlockDeviceConfig{
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+							{
+								VolumeSpecification: &types.VolumeSpecification{
+									VolumeType: ptr.String("__VolumeType__"),
+									Iops:       ptr.Int32(1),
+									SizeInGB:   ptr.Int32(1),
+									Throughput: ptr.Int32(1),
+								},
+								VolumesPerInstance: ptr.Int32(1),
+							},
+						},
+						EbsOptimized: ptr.Bool(true),
+					},
+					Configurations: []types.Configuration{
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						{
+							Classification: ptr.String("__Classification__"),
+							Configurations: []types.Configuration{
+								{},
+								{},
+							},
+							Properties: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					CustomAmiId: ptr.String("__CustomAmiId__"),
+					Priority:    ptr.Float64(1.0),
+				},
+			},
+			LaunchSpecifications: &types.InstanceFleetProvisioningSpecifications{
+				SpotSpecification: &types.SpotProvisioningSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					TimeoutAction:          types.SpotProvisioningTimeoutAction("SWITCH_TO_ON_DEMAND"),
+					BlockDurationMinutes:   ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandSpecification: &types.OnDemandProvisioningSpecification{
+					AllocationStrategy: types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			ResizeSpecifications: &types.InstanceFleetResizingSpecifications{
+				SpotResizeSpecification: &types.SpotResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.SpotProvisioningAllocationStrategy("capacity-optimized"),
+				},
+				OnDemandResizeSpecification: &types.OnDemandResizingSpecification{
+					TimeoutDurationMinutes: ptr.Int32(1),
+					AllocationStrategy:     types.OnDemandProvisioningAllocationStrategy("lowest-price"),
+					CapacityReservationOptions: &types.OnDemandCapacityReservationOptions{
+						UsageStrategy:                       types.OnDemandCapacityReservationUsageStrategy("use-capacity-reservations-first"),
+						CapacityReservationPreference:       types.OnDemandCapacityReservationPreference("open"),
+						CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+					},
+				},
+			},
+			Context: ptr.String("__Context__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

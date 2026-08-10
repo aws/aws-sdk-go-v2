@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accessTokenId":"__AccessTokenId__","expiresTime":"2000-01-01T00:00:00Z","name":"__Name__","secret":"__Secret__"}

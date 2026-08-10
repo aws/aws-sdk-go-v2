@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RefreshSchedules":[{"Arn":"__Arn__","RefreshType":"INCREMENTAL_REFRESH","ScheduleFrequency":{"Interval":"MINUTE15","RefreshOnDay":{"DayOfMonth":"__DayOfMonth__","DayOfWeek":"SUNDAY"},"TimeOfTheDay":"__TimeOfTheDay__","Timezone":"__Timezone__"},"ScheduleId":"__ScheduleId__","StartAfterDateTime":946684800},{"Arn":"__Arn__","RefreshType":"INCREMENTAL_REFRESH","ScheduleFrequency":{"Interval":"MINUTE15","RefreshOnDay":{"DayOfMonth":"__DayOfMonth__","DayOfWeek":"SUNDAY"},"TimeOfTheDay":"__TimeOfTheDay__","Timezone":"__Timezone__"},"ScheduleId":"__ScheduleId__","StartAfterDateTime":946684800}],"RequestId":"__RequestId__","Status":200}

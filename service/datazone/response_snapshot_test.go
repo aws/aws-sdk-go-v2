@@ -121,7 +121,28 @@ func TestCheckResponseSnapshot_AcceptPredictions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	got, err := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +285,47 @@ func TestCheckResponseSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptSubscriptionRequest(context.Background(), &AcceptSubscriptionRequestInput{})
+	got, err := svc.AcceptSubscriptionRequest(context.Background(), &AcceptSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		DecisionComment:  ptr.String("__DecisionComment__"),
+		AssetScopes: []types.AcceptedAssetScope{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AssetPermissions: []types.AssetPermission{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +344,17 @@ func TestCheckResponseSnapshot_AddEntityOwner(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddEntityOwner(context.Background(), &AddEntityOwnerInput{})
+	got, err := svc.AddEntityOwner(context.Background(), &AddEntityOwnerInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.DataZoneEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		Owner: &types.OwnerPropertiesMemberUser{
+			Value: types.OwnerUserProperties{
+				UserIdentifier: ptr.String("__UserIdentifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +375,23 @@ func TestCheckResponseSnapshot_AddPolicyGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddPolicyGrant(context.Background(), &AddPolicyGrantInput{})
+	got, err := svc.AddPolicyGrant(context.Background(), &AddPolicyGrantInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.TargetEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		PolicyType:       types.ManagedPolicyType("CREATE_DOMAIN_UNIT"),
+		Principal: &types.PolicyGrantPrincipalMemberUser{
+			Value: &types.UserPolicyGrantPrincipalMemberUserIdentifier{
+				Value: "__UserPolicyGrantPrincipalMemberUserIdentifier__",
+			},
+		},
+		Detail: &types.PolicyGrantDetailMemberCreateDomainUnit{
+			Value: types.CreateDomainUnitPolicyGrantDetail{
+				IncludeChildDomainUnits: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -323,7 +410,11 @@ func TestCheckResponseSnapshot_AssociateEnvironmentRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEnvironmentRole(context.Background(), &AssociateEnvironmentRoleInput{})
+	got, err := svc.AssociateEnvironmentRole(context.Background(), &AssociateEnvironmentRoleInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		EnvironmentRoleArn:    ptr.String("__EnvironmentRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +433,15 @@ func TestCheckResponseSnapshot_AssociateGovernedTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateGovernedTerms(context.Background(), &AssociateGovernedTermsInput{})
+	got, err := svc.AssociateGovernedTerms(context.Background(), &AssociateGovernedTermsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.GovernedEntityType("ASSET"),
+		GovernedGlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +509,16 @@ func TestCheckResponseSnapshot_BatchGetAttributesMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAttributesMetadata(context.Background(), &BatchGetAttributesMetadataInput{})
+	got, err := svc.BatchGetAttributesMetadata(context.Background(), &BatchGetAttributesMetadataInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.AttributeEntityType("ASSET"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityRevision:   ptr.String("__EntityRevision__"),
+		AttributeIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +558,48 @@ func TestCheckResponseSnapshot_BatchPutAttributesMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutAttributesMetadata(context.Background(), &BatchPutAttributesMetadataInput{})
+	got, err := svc.BatchPutAttributesMetadata(context.Background(), &BatchPutAttributesMetadataInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.AttributeEntityType("ASSET"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Attributes: []types.AttributeInput{
+			{
+				AttributeIdentifier: ptr.String("__AttributeIdentifier__"),
+				Forms: []types.FormInput{
+					{
+						FormName:       ptr.String("__FormName__"),
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+						Content:        ptr.String("__Content__"),
+					},
+					{
+						FormName:       ptr.String("__FormName__"),
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+						Content:        ptr.String("__Content__"),
+					},
+				},
+			},
+			{
+				AttributeIdentifier: ptr.String("__AttributeIdentifier__"),
+				Forms: []types.FormInput{
+					{
+						FormName:       ptr.String("__FormName__"),
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+						Content:        ptr.String("__Content__"),
+					},
+					{
+						FormName:       ptr.String("__FormName__"),
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+						Content:        ptr.String("__Content__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +618,10 @@ func TestCheckResponseSnapshot_CancelMetadataGenerationRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMetadataGenerationRun(context.Background(), &CancelMetadataGenerationRunInput{})
+	got, err := svc.CancelMetadataGenerationRun(context.Background(), &CancelMetadataGenerationRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +697,10 @@ func TestCheckResponseSnapshot_CancelSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{})
+	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +750,32 @@ func TestCheckResponseSnapshot_CreateAccountPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccountPool(context.Background(), &CreateAccountPoolInput{})
+	got, err := svc.CreateAccountPool(context.Background(), &CreateAccountPoolInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ResolutionStrategy: types.ResolutionStrategy("MANUAL"),
+		AccountSource: &types.AccountSourceMemberAccounts{
+			Value: []types.AccountInfo{
+				{
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+					SupportedRegions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsAccountName: ptr.String("__AwsAccountName__"),
+				},
+				{
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+					SupportedRegions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsAccountName: ptr.String("__AwsAccountName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -691,7 +871,39 @@ func TestCheckResponseSnapshot_CreateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{})
+	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{
+		Name:               ptr.String("__Name__"),
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		ExternalIdentifier: ptr.String("__ExternalIdentifier__"),
+		TypeIdentifier:     ptr.String("__TypeIdentifier__"),
+		TypeRevision:       ptr.String("__TypeRevision__"),
+		Description:        ptr.String("__Description__"),
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		PredictionConfiguration: &types.PredictionConfiguration{
+			BusinessNameGeneration: &types.BusinessNameGenerationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +944,21 @@ func TestCheckResponseSnapshot_CreateAssetFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetFilter(context.Background(), &CreateAssetFilterInput{})
+	got, err := svc.CreateAssetFilter(context.Background(), &CreateAssetFilterInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Configuration: &types.AssetFilterConfigurationMemberColumnConfiguration{
+			Value: types.ColumnFilterConfiguration{
+				IncludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -828,7 +1054,37 @@ func TestCheckResponseSnapshot_CreateAssetRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetRevision(context.Background(), &CreateAssetRevisionInput{})
+	got, err := svc.CreateAssetRevision(context.Background(), &CreateAssetRevisionInput{
+		Name:             ptr.String("__Name__"),
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		TypeRevision:     ptr.String("__TypeRevision__"),
+		Description:      ptr.String("__Description__"),
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		PredictionConfiguration: &types.PredictionConfiguration{
+			BusinessNameGeneration: &types.BusinessNameGenerationConfiguration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +1122,19 @@ func TestCheckResponseSnapshot_CreateAssetType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetType(context.Background(), &CreateAssetTypeInput{})
+	got, err := svc.CreateAssetType(context.Background(), &CreateAssetTypeInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		FormsInput: map[string]types.FormEntryInput{
+			"key0": {
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Required:       ptr.Bool(true),
+			},
+		},
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1358,40 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		AwsLocation: &types.AwsLocation{
+			AccessRole:      ptr.String("__AccessRole__"),
+			AwsAccountId:    ptr.String("__AwsAccountId__"),
+			AwsRegion:       ptr.String("__AwsRegion__"),
+			IamConnectionId: ptr.String("__IamConnectionId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Configurations: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Description:           ptr.String("__Description__"),
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Name:                  ptr.String("__Name__"),
+		Props: &types.ConnectionPropertiesInputMemberAthenaProperties{
+			Value: types.AthenaPropertiesInput{
+				WorkgroupName: ptr.String("__WorkgroupName__"),
+			},
+		},
+		EnableTrustedIdentityPropagation: ptr.Bool(true),
+		Scope:                            types.ConnectionScope("DOMAIN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1460,51 @@ func TestCheckResponseSnapshot_CreateDataProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataProduct(context.Background(), &CreateDataProductInput{})
+	got, err := svc.CreateDataProduct(context.Background(), &CreateDataProductInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		Description:             ptr.String("__Description__"),
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		Items: []types.DataProductItem{
+			{
+				ItemType:   types.DataProductItemType("ASSET"),
+				Identifier: ptr.String("__Identifier__"),
+				Revision:   ptr.String("__Revision__"),
+				GlossaryTerms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ItemType:   types.DataProductItemType("ASSET"),
+				Identifier: ptr.String("__Identifier__"),
+				Revision:   ptr.String("__Revision__"),
+				GlossaryTerms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1228,7 +1573,51 @@ func TestCheckResponseSnapshot_CreateDataProductRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataProductRevision(context.Background(), &CreateDataProductRevisionInput{})
+	got, err := svc.CreateDataProductRevision(context.Background(), &CreateDataProductRevisionInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Items: []types.DataProductItem{
+			{
+				ItemType:   types.DataProductItemType("ASSET"),
+				Identifier: ptr.String("__Identifier__"),
+				Revision:   ptr.String("__Revision__"),
+				GlossaryTerms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ItemType:   types.DataProductItemType("ASSET"),
+				Identifier: ptr.String("__Identifier__"),
+				Revision:   ptr.String("__Revision__"),
+				GlossaryTerms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1331,7 +1720,76 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{})
+	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		ProjectIdentifier:     ptr.String("__ProjectIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ConnectionIdentifier:  ptr.String("__ConnectionIdentifier__"),
+		Type:                  ptr.String("__Type__"),
+		Configuration: &types.DataSourceConfigurationInputMemberGlueRunConfiguration{
+			Value: types.GlueRunConfigurationInput{
+				DataAccessRole: ptr.String("__DataAccessRole__"),
+				RelationalFilterConfigurations: []types.RelationalFilterConfiguration{
+					{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						SchemaName:   ptr.String("__SchemaName__"),
+						FilterExpressions: []types.FilterExpression{
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+						},
+					},
+					{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						SchemaName:   ptr.String("__SchemaName__"),
+						FilterExpressions: []types.FilterExpression{
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+						},
+					},
+				},
+				AutoImportDataQualityResult: ptr.Bool(true),
+				CatalogName:                 ptr.String("__CatalogName__"),
+			},
+		},
+		Recommendation: &types.RecommendationConfiguration{
+			EnableBusinessNameGeneration: ptr.Bool(true),
+		},
+		EnableSetting: types.EnableSetting("ENABLED"),
+		Schedule: &types.ScheduleConfiguration{
+			Timezone: types.Timezone("UTC"),
+			Schedule: ptr.String("__Schedule__"),
+		},
+		PublishOnImport: ptr.Bool(true),
+		AssetFormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +1828,23 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SingleSignOn: &types.SingleSignOn{
+			Type:           types.AuthType("IAM_IDC"),
+			UserAssignment: types.UserAssignment("AUTOMATIC"),
+			IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+		},
+		DomainExecutionRole: ptr.String("__DomainExecutionRole__"),
+		KmsKeyIdentifier:    ptr.String("__KmsKeyIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DomainVersion: types.DomainVersion("V1"),
+		ServiceRole:   ptr.String("__ServiceRole__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1413,7 +1887,13 @@ func TestCheckResponseSnapshot_CreateDomainUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomainUnit(context.Background(), &CreateDomainUnitInput{})
+	got, err := svc.CreateDomainUnit(context.Background(), &CreateDomainUnitInput{
+		DomainIdentifier:           ptr.String("__DomainIdentifier__"),
+		Name:                       ptr.String("__Name__"),
+		ParentDomainUnitIdentifier: ptr.String("__ParentDomainUnitIdentifier__"),
+		Description:                ptr.String("__Description__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1540,7 +2020,33 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
+		DomainIdentifier:             ptr.String("__DomainIdentifier__"),
+		Description:                  ptr.String("__Description__"),
+		Name:                         ptr.String("__Name__"),
+		EnvironmentProfileIdentifier: ptr.String("__EnvironmentProfileIdentifier__"),
+		UserParameters: []types.EnvironmentParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnvironmentAccountIdentifier:   ptr.String("__EnvironmentAccountIdentifier__"),
+		EnvironmentAccountRegion:       ptr.String("__EnvironmentAccountRegion__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+		DeploymentOrder:                ptr.Int32(1),
+		EnvironmentConfigurationId:     ptr.String("__EnvironmentConfigurationId__"),
+		EnvironmentConfigurationName:   ptr.String("__EnvironmentConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1570,7 +2076,17 @@ func TestCheckResponseSnapshot_CreateEnvironmentAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentAction(context.Background(), &CreateEnvironmentActionInput{})
+	got, err := svc.CreateEnvironmentAction(context.Background(), &CreateEnvironmentActionInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Name:                  ptr.String("__Name__"),
+		Parameters: &types.ActionParametersMemberAwsConsoleLink{
+			Value: types.AwsConsoleLinkParameters{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +2145,36 @@ func TestCheckResponseSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentBlueprint(context.Background(), &CreateEnvironmentBlueprintInput{})
+	got, err := svc.CreateEnvironmentBlueprint(context.Background(), &CreateEnvironmentBlueprintInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ProvisioningProperties: &types.ProvisioningPropertiesMemberCloudFormation{
+			Value: types.CloudFormationProperties{
+				TemplateUrl: ptr.String("__TemplateUrl__"),
+			},
+		},
+		UserParameters: []types.CustomParameter{
+			{
+				KeyName:           ptr.String("__KeyName__"),
+				Description:       ptr.String("__Description__"),
+				FieldType:         ptr.String("__FieldType__"),
+				DefaultValue:      ptr.String("__DefaultValue__"),
+				IsEditable:        ptr.Bool(true),
+				IsOptional:        ptr.Bool(true),
+				IsUpdateSupported: ptr.Bool(true),
+			},
+			{
+				KeyName:           ptr.String("__KeyName__"),
+				Description:       ptr.String("__Description__"),
+				FieldType:         ptr.String("__FieldType__"),
+				DefaultValue:      ptr.String("__DefaultValue__"),
+				IsEditable:        ptr.Bool(true),
+				IsOptional:        ptr.Bool(true),
+				IsUpdateSupported: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1680,7 +2225,25 @@ func TestCheckResponseSnapshot_CreateEnvironmentProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentProfile(context.Background(), &CreateEnvironmentProfileInput{})
+	got, err := svc.CreateEnvironmentProfile(context.Background(), &CreateEnvironmentProfileInput{
+		DomainIdentifier:               ptr.String("__DomainIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		Description:                    ptr.String("__Description__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+		ProjectIdentifier:              ptr.String("__ProjectIdentifier__"),
+		UserParameters: []types.EnvironmentParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AwsAccountId:     ptr.String("__AwsAccountId__"),
+		AwsAccountRegion: ptr.String("__AwsAccountRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +2270,16 @@ func TestCheckResponseSnapshot_CreateFormType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFormType(context.Background(), &CreateFormTypeInput{})
+	got, err := svc.CreateFormType(context.Background(), &CreateFormTypeInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Model: &types.ModelMemberSmithy{
+			Value: "__ModelMemberSmithy__",
+		},
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		Status:                  types.FormTypeStatus("ENABLED"),
+		Description:             ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1737,7 +2309,18 @@ func TestCheckResponseSnapshot_CreateGlossary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlossary(context.Background(), &CreateGlossaryInput{})
+	got, err := svc.CreateGlossary(context.Background(), &CreateGlossaryInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		Description:             ptr.String("__Description__"),
+		Status:                  types.GlossaryStatus("DISABLED"),
+		UsageRestrictions: []types.GlossaryUsageRestriction{
+			types.GlossaryUsageRestriction("ASSET_GOVERNED_TERMS"),
+			types.GlossaryUsageRestriction("ASSET_GOVERNED_TERMS"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1778,7 +2361,25 @@ func TestCheckResponseSnapshot_CreateGlossaryTerm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlossaryTerm(context.Background(), &CreateGlossaryTermInput{})
+	got, err := svc.CreateGlossaryTerm(context.Background(), &CreateGlossaryTermInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		GlossaryIdentifier: ptr.String("__GlossaryIdentifier__"),
+		Name:               ptr.String("__Name__"),
+		Status:             types.GlossaryTermStatus("ENABLED"),
+		ShortDescription:   ptr.String("__ShortDescription__"),
+		LongDescription:    ptr.String("__LongDescription__"),
+		TermRelations: &types.TermRelations{
+			IsA: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Classifies: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1804,7 +2405,12 @@ func TestCheckResponseSnapshot_CreateGroupProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroupProfile(context.Background(), &CreateGroupProfileInput{})
+	got, err := svc.CreateGroupProfile(context.Background(), &CreateGroupProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		GroupIdentifier:  ptr.String("__GroupIdentifier__"),
+		RolePrincipalArn: ptr.String("__RolePrincipalArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1827,7 +2433,14 @@ func TestCheckResponseSnapshot_CreateListingChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateListingChangeSet(context.Background(), &CreateListingChangeSetInput{})
+	got, err := svc.CreateListingChangeSet(context.Background(), &CreateListingChangeSetInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.EntityType("ASSET"),
+		EntityRevision:   ptr.String("__EntityRevision__"),
+		Action:           types.ChangeAction("PUBLISH"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1890,7 +2503,19 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotebook(context.Background(), &CreateNotebookInput{})
+	got, err := svc.CreateNotebook(context.Background(), &CreateNotebookInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2002,7 +2627,76 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainUnitId:     ptr.String("__DomainUnitId__"),
+		ProjectProfileId: ptr.String("__ProjectProfileId__"),
+		UserParameters: []types.EnvironmentConfigurationUserParameter{
+			{
+				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
+					AwsAccountId:        ptr.String("__AwsAccountId__"),
+					RegionName:          ptr.String("__RegionName__"),
+					SourceAccountPoolId: ptr.String("__SourceAccountPoolId__"),
+				},
+				EnvironmentConfigurationName: ptr.String("__EnvironmentConfigurationName__"),
+				EnvironmentParameters: []types.EnvironmentParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
+					AwsAccountId:        ptr.String("__AwsAccountId__"),
+					RegionName:          ptr.String("__RegionName__"),
+					SourceAccountPoolId: ptr.String("__SourceAccountPoolId__"),
+				},
+				EnvironmentConfigurationName: ptr.String("__EnvironmentConfigurationName__"),
+				EnvironmentParameters: []types.EnvironmentParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ProjectCategory:      ptr.String("__ProjectCategory__"),
+		ProjectExecutionRole: ptr.String("__ProjectExecutionRole__"),
+		MembershipAssignments: []types.ProjectMembershipAssignment{
+			{
+				Member: &types.MemberMemberUserIdentifier{
+					Value: "__MemberMemberUserIdentifier__",
+				},
+				Designation: types.UserDesignation("PROJECT_OWNER"),
+			},
+			{
+				Member: &types.MemberMemberUserIdentifier{
+					Value: "__MemberMemberUserIdentifier__",
+				},
+				Designation: types.UserDesignation("PROJECT_OWNER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2021,7 +2715,14 @@ func TestCheckResponseSnapshot_CreateProjectMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProjectMembership(context.Background(), &CreateProjectMembershipInput{})
+	got, err := svc.CreateProjectMembership(context.Background(), &CreateProjectMembershipInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		Member: &types.MemberMemberUserIdentifier{
+			Value: "__MemberMemberUserIdentifier__",
+		},
+		Designation: types.UserDesignation("PROJECT_OWNER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2156,7 +2857,119 @@ func TestCheckResponseSnapshot_CreateProjectProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProjectProfile(context.Background(), &CreateProjectProfileInput{})
+	got, err := svc.CreateProjectProfile(context.Background(), &CreateProjectProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Status:           types.Status("ENABLED"),
+		ProjectResourceTags: []types.ResourceTagParameter{
+			{
+				Key:             ptr.String("__Key__"),
+				Value:           ptr.String("__Value__"),
+				IsValueEditable: ptr.Bool(true),
+			},
+			{
+				Key:             ptr.String("__Key__"),
+				Value:           ptr.String("__Value__"),
+				IsValueEditable: ptr.Bool(true),
+			},
+		},
+		AllowCustomProjectResourceTags: ptr.Bool(true),
+		ProjectResourceTagsDescription: ptr.String("__ProjectResourceTagsDescription__"),
+		EnvironmentConfigurations: []types.EnvironmentConfiguration{
+			{
+				Name:                   ptr.String("__Name__"),
+				Id:                     ptr.String("__Id__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
+				Description:            ptr.String("__Description__"),
+				DeploymentMode:         types.DeploymentMode("ON_CREATE"),
+				ConfigurationParameters: &types.EnvironmentConfigurationParametersDetails{
+					SsmPath: ptr.String("__SsmPath__"),
+					ParameterOverrides: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+					ResolvedParameters: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+				},
+				AwsAccount: &types.AwsAccountMemberAwsAccountId{
+					Value: "__AwsAccountMemberAwsAccountId__",
+				},
+				AccountPools: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsRegion: &types.RegionMemberRegionName{
+					Value: "__RegionMemberRegionName__",
+				},
+				DeploymentOrder: ptr.Int32(1),
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				Id:                     ptr.String("__Id__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
+				Description:            ptr.String("__Description__"),
+				DeploymentMode:         types.DeploymentMode("ON_CREATE"),
+				ConfigurationParameters: &types.EnvironmentConfigurationParametersDetails{
+					SsmPath: ptr.String("__SsmPath__"),
+					ParameterOverrides: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+					ResolvedParameters: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+				},
+				AwsAccount: &types.AwsAccountMemberAwsAccountId{
+					Value: "__AwsAccountMemberAwsAccountId__",
+				},
+				AccountPools: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsRegion: &types.RegionMemberRegionName{
+					Value: "__RegionMemberRegionName__",
+				},
+				DeploymentOrder: ptr.Int32(1),
+			},
+		},
+		DomainUnitIdentifier: ptr.String("__DomainUnitIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2221,7 +3034,50 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		Target: &types.RuleTargetMemberDomainUnitTarget{
+			Value: types.DomainUnitTarget{
+				DomainUnitId:            ptr.String("__DomainUnitId__"),
+				IncludeChildDomainUnits: ptr.Bool(true),
+			},
+		},
+		Action: types.RuleAction("CREATE_LISTING_CHANGE_SET"),
+		Scope: &types.RuleScope{
+			AssetType: &types.AssetTypesForRule{
+				SelectionMode: types.RuleScopeSelectionMode("ALL"),
+				SpecificAssetTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DataProduct: ptr.Bool(true),
+			Project: &types.ProjectsForRule{
+				SelectionMode: types.RuleScopeSelectionMode("ALL"),
+				SpecificProjects: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Detail: &types.RuleDetailMemberMetadataFormEnforcementDetail{
+			Value: types.MetadataFormEnforcementDetail{
+				RequiredMetadataForms: []types.MetadataFormReference{
+					{
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+					},
+					{
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2311,7 +3167,28 @@ func TestCheckResponseSnapshot_CreateSubscriptionGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriptionGrant(context.Background(), &CreateSubscriptionGrantInput{})
+	got, err := svc.CreateSubscriptionGrant(context.Background(), &CreateSubscriptionGrantInput{
+		DomainIdentifier:             ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier:        ptr.String("__EnvironmentIdentifier__"),
+		SubscriptionTargetIdentifier: ptr.String("__SubscriptionTargetIdentifier__"),
+		GrantedEntity: &types.GrantedEntityInputMemberListing{
+			Value: types.ListingRevisionInput{
+				Identifier: ptr.String("__Identifier__"),
+				Revision:   ptr.String("__Revision__"),
+			},
+		},
+		AssetTargetNames: []types.AssetTargetNameMap{
+			{
+				AssetId:    ptr.String("__AssetId__"),
+				TargetName: ptr.String("__TargetName__"),
+			},
+			{
+				AssetId:    ptr.String("__AssetId__"),
+				TargetName: ptr.String("__TargetName__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2454,7 +3331,81 @@ func TestCheckResponseSnapshot_CreateSubscriptionRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriptionRequest(context.Background(), &CreateSubscriptionRequestInput{})
+	got, err := svc.CreateSubscriptionRequest(context.Background(), &CreateSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		SubscribedPrincipals: []types.SubscribedPrincipalInput{
+			&types.SubscribedPrincipalInputMemberProject{
+				Value: types.SubscribedProjectInput{
+					Identifier: ptr.String("__Identifier__"),
+				},
+			},
+			&types.SubscribedPrincipalInputMemberProject{
+				Value: types.SubscribedProjectInput{
+					Identifier: ptr.String("__Identifier__"),
+				},
+			},
+		},
+		SubscribedListings: []types.SubscribedListingInput{
+			{
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RequestReason: ptr.String("__RequestReason__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		MetadataForms: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		AssetPermissions: []types.AssetPermission{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+		},
+		AssetScopes: []types.AcceptedAssetScope{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2505,7 +3456,34 @@ func TestCheckResponseSnapshot_CreateSubscriptionTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriptionTarget(context.Background(), &CreateSubscriptionTargetInput{})
+	got, err := svc.CreateSubscriptionTarget(context.Background(), &CreateSubscriptionTargetInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Name:                  ptr.String("__Name__"),
+		Type:                  ptr.String("__Type__"),
+		SubscriptionTargetConfig: []types.SubscriptionTargetForm{
+			{
+				FormName: ptr.String("__FormName__"),
+				Content:  ptr.String("__Content__"),
+			},
+			{
+				FormName: ptr.String("__FormName__"),
+				Content:  ptr.String("__Content__"),
+			},
+		},
+		AuthorizedPrincipals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManageAccessRole: ptr.String("__ManageAccessRole__"),
+		ApplicableAssetTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Provider:                      ptr.String("__Provider__"),
+		ClientToken:                   ptr.String("__ClientToken__"),
+		SubscriptionGrantCreationMode: types.SubscriptionGrantCreationMode("AUTOMATIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2537,7 +3515,13 @@ func TestCheckResponseSnapshot_CreateUserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserProfile(context.Background(), &CreateUserProfileInput{})
+	got, err := svc.CreateUserProfile(context.Background(), &CreateUserProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		UserIdentifier:   ptr.String("__UserIdentifier__"),
+		UserType:         types.UserType("IAM_USER"),
+		SessionName:      ptr.String("__SessionName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2556,7 +3540,10 @@ func TestCheckResponseSnapshot_DeleteAccountPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccountPool(context.Background(), &DeleteAccountPoolInput{})
+	got, err := svc.DeleteAccountPool(context.Background(), &DeleteAccountPoolInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2575,7 +3562,10 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{})
+	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2594,7 +3584,11 @@ func TestCheckResponseSnapshot_DeleteAssetFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetFilter(context.Background(), &DeleteAssetFilterInput{})
+	got, err := svc.DeleteAssetFilter(context.Background(), &DeleteAssetFilterInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2613,7 +3607,10 @@ func TestCheckResponseSnapshot_DeleteAssetType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetType(context.Background(), &DeleteAssetTypeInput{})
+	got, err := svc.DeleteAssetType(context.Background(), &DeleteAssetTypeInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2634,7 +3631,10 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2653,7 +3653,9 @@ func TestCheckResponseSnapshot_DeleteDataExportConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataExportConfiguration(context.Background(), &DeleteDataExportConfigurationInput{})
+	got, err := svc.DeleteDataExportConfiguration(context.Background(), &DeleteDataExportConfigurationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2672,7 +3674,10 @@ func TestCheckResponseSnapshot_DeleteDataProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataProduct(context.Background(), &DeleteDataProductInput{})
+	got, err := svc.DeleteDataProduct(context.Background(), &DeleteDataProductInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2791,7 +3796,12 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		DomainIdentifier:                 ptr.String("__DomainIdentifier__"),
+		Identifier:                       ptr.String("__Identifier__"),
+		ClientToken:                      ptr.String("__ClientToken__"),
+		RetainPermissionsOnRevokeFailure: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2812,7 +3822,11 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		Identifier:        ptr.String("__Identifier__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		SkipDeletionCheck: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2831,7 +3845,10 @@ func TestCheckResponseSnapshot_DeleteDomainUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainUnit(context.Background(), &DeleteDomainUnitInput{})
+	got, err := svc.DeleteDomainUnit(context.Background(), &DeleteDomainUnitInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2850,7 +3867,10 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2869,7 +3889,11 @@ func TestCheckResponseSnapshot_DeleteEnvironmentAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentAction(context.Background(), &DeleteEnvironmentActionInput{})
+	got, err := svc.DeleteEnvironmentAction(context.Background(), &DeleteEnvironmentActionInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2888,7 +3912,10 @@ func TestCheckResponseSnapshot_DeleteEnvironmentBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentBlueprint(context.Background(), &DeleteEnvironmentBlueprintInput{})
+	got, err := svc.DeleteEnvironmentBlueprint(context.Background(), &DeleteEnvironmentBlueprintInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2907,7 +3934,10 @@ func TestCheckResponseSnapshot_DeleteEnvironmentBlueprintConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentBlueprintConfiguration(context.Background(), &DeleteEnvironmentBlueprintConfigurationInput{})
+	got, err := svc.DeleteEnvironmentBlueprintConfiguration(context.Background(), &DeleteEnvironmentBlueprintConfigurationInput{
+		DomainIdentifier:               ptr.String("__DomainIdentifier__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2926,7 +3956,10 @@ func TestCheckResponseSnapshot_DeleteEnvironmentProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentProfile(context.Background(), &DeleteEnvironmentProfileInput{})
+	got, err := svc.DeleteEnvironmentProfile(context.Background(), &DeleteEnvironmentProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2945,7 +3978,10 @@ func TestCheckResponseSnapshot_DeleteFormType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFormType(context.Background(), &DeleteFormTypeInput{})
+	got, err := svc.DeleteFormType(context.Background(), &DeleteFormTypeInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2964,7 +4000,10 @@ func TestCheckResponseSnapshot_DeleteGlossary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGlossary(context.Background(), &DeleteGlossaryInput{})
+	got, err := svc.DeleteGlossary(context.Background(), &DeleteGlossaryInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2983,7 +4022,10 @@ func TestCheckResponseSnapshot_DeleteGlossaryTerm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGlossaryTerm(context.Background(), &DeleteGlossaryTermInput{})
+	got, err := svc.DeleteGlossaryTerm(context.Background(), &DeleteGlossaryTermInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3006,7 +4048,10 @@ func TestCheckResponseSnapshot_DeleteLineageEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLineageEvent(context.Background(), &DeleteLineageEventInput{})
+	got, err := svc.DeleteLineageEvent(context.Background(), &DeleteLineageEventInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3025,7 +4070,10 @@ func TestCheckResponseSnapshot_DeleteListing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteListing(context.Background(), &DeleteListingInput{})
+	got, err := svc.DeleteListing(context.Background(), &DeleteListingInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3044,7 +4092,10 @@ func TestCheckResponseSnapshot_DeleteNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotebook(context.Background(), &DeleteNotebookInput{})
+	got, err := svc.DeleteNotebook(context.Background(), &DeleteNotebookInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3063,7 +4114,11 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		Identifier:        ptr.String("__Identifier__"),
+		SkipDeletionCheck: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3082,7 +4137,13 @@ func TestCheckResponseSnapshot_DeleteProjectMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProjectMembership(context.Background(), &DeleteProjectMembershipInput{})
+	got, err := svc.DeleteProjectMembership(context.Background(), &DeleteProjectMembershipInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		Member: &types.MemberMemberUserIdentifier{
+			Value: "__MemberMemberUserIdentifier__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3101,7 +4162,10 @@ func TestCheckResponseSnapshot_DeleteProjectProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProjectProfile(context.Background(), &DeleteProjectProfileInput{})
+	got, err := svc.DeleteProjectProfile(context.Background(), &DeleteProjectProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3120,7 +4184,10 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3210,7 +4277,10 @@ func TestCheckResponseSnapshot_DeleteSubscriptionGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriptionGrant(context.Background(), &DeleteSubscriptionGrantInput{})
+	got, err := svc.DeleteSubscriptionGrant(context.Background(), &DeleteSubscriptionGrantInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3229,7 +4299,10 @@ func TestCheckResponseSnapshot_DeleteSubscriptionRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriptionRequest(context.Background(), &DeleteSubscriptionRequestInput{})
+	got, err := svc.DeleteSubscriptionRequest(context.Background(), &DeleteSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3248,7 +4321,11 @@ func TestCheckResponseSnapshot_DeleteSubscriptionTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriptionTarget(context.Background(), &DeleteSubscriptionTargetInput{})
+	got, err := svc.DeleteSubscriptionTarget(context.Background(), &DeleteSubscriptionTargetInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3267,7 +4344,13 @@ func TestCheckResponseSnapshot_DeleteTimeSeriesDataPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTimeSeriesDataPoints(context.Background(), &DeleteTimeSeriesDataPointsInput{})
+	got, err := svc.DeleteTimeSeriesDataPoints(context.Background(), &DeleteTimeSeriesDataPointsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.TimeSeriesEntityType("ASSET"),
+		FormName:         ptr.String("__FormName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3286,7 +4369,11 @@ func TestCheckResponseSnapshot_DisassociateEnvironmentRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateEnvironmentRole(context.Background(), &DisassociateEnvironmentRoleInput{})
+	got, err := svc.DisassociateEnvironmentRole(context.Background(), &DisassociateEnvironmentRoleInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		EnvironmentRoleArn:    ptr.String("__EnvironmentRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3305,7 +4392,15 @@ func TestCheckResponseSnapshot_DisassociateGovernedTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateGovernedTerms(context.Background(), &DisassociateGovernedTermsInput{})
+	got, err := svc.DisassociateGovernedTerms(context.Background(), &DisassociateGovernedTermsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.GovernedEntityType("ASSET"),
+		GovernedGlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3355,7 +4450,10 @@ func TestCheckResponseSnapshot_GetAccountPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountPool(context.Background(), &GetAccountPoolInput{})
+	got, err := svc.GetAccountPool(context.Background(), &GetAccountPoolInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3446,7 +4544,11 @@ func TestCheckResponseSnapshot_GetAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAsset(context.Background(), &GetAssetInput{})
+	got, err := svc.GetAsset(context.Background(), &GetAssetInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3487,7 +4589,11 @@ func TestCheckResponseSnapshot_GetAssetFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetFilter(context.Background(), &GetAssetFilterInput{})
+	got, err := svc.GetAssetFilter(context.Background(), &GetAssetFilterInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3525,7 +4631,11 @@ func TestCheckResponseSnapshot_GetAssetType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetType(context.Background(), &GetAssetTypeInput{})
+	got, err := svc.GetAssetType(context.Background(), &GetAssetTypeInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3756,7 +4866,11 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		WithSecret:       ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3785,7 +4899,9 @@ func TestCheckResponseSnapshot_GetDataExportConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataExportConfiguration(context.Background(), &GetDataExportConfigurationInput{})
+	got, err := svc.GetDataExportConfiguration(context.Background(), &GetDataExportConfigurationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3854,7 +4970,11 @@ func TestCheckResponseSnapshot_GetDataProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataProduct(context.Background(), &GetDataProductInput{})
+	got, err := svc.GetDataProduct(context.Background(), &GetDataProductInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3976,7 +5096,10 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4021,7 +5144,10 @@ func TestCheckResponseSnapshot_GetDataSourceRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSourceRun(context.Background(), &GetDataSourceRunInput{})
+	got, err := svc.GetDataSourceRun(context.Background(), &GetDataSourceRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4062,7 +5188,9 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomain(context.Background(), &GetDomainInput{})
+	got, err := svc.GetDomain(context.Background(), &GetDomainInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4103,7 +5231,10 @@ func TestCheckResponseSnapshot_GetDomainUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainUnit(context.Background(), &GetDomainUnitInput{})
+	got, err := svc.GetDomainUnit(context.Background(), &GetDomainUnitInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4230,7 +5361,10 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4260,7 +5394,11 @@ func TestCheckResponseSnapshot_GetEnvironmentAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentAction(context.Background(), &GetEnvironmentActionInput{})
+	got, err := svc.GetEnvironmentAction(context.Background(), &GetEnvironmentActionInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4319,7 +5457,10 @@ func TestCheckResponseSnapshot_GetEnvironmentBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentBlueprint(context.Background(), &GetEnvironmentBlueprintInput{})
+	got, err := svc.GetEnvironmentBlueprint(context.Background(), &GetEnvironmentBlueprintInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4396,7 +5537,10 @@ func TestCheckResponseSnapshot_GetEnvironmentBlueprintConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentBlueprintConfiguration(context.Background(), &GetEnvironmentBlueprintConfigurationInput{})
+	got, err := svc.GetEnvironmentBlueprintConfiguration(context.Background(), &GetEnvironmentBlueprintConfigurationInput{
+		DomainIdentifier:               ptr.String("__DomainIdentifier__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4420,7 +5564,10 @@ func TestCheckResponseSnapshot_GetEnvironmentCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentCredentials(context.Background(), &GetEnvironmentCredentialsInput{})
+	got, err := svc.GetEnvironmentCredentials(context.Background(), &GetEnvironmentCredentialsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4471,7 +5618,10 @@ func TestCheckResponseSnapshot_GetEnvironmentProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentProfile(context.Background(), &GetEnvironmentProfileInput{})
+	got, err := svc.GetEnvironmentProfile(context.Background(), &GetEnvironmentProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4514,7 +5664,11 @@ func TestCheckResponseSnapshot_GetFormType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFormType(context.Background(), &GetFormTypeInput{})
+	got, err := svc.GetFormType(context.Background(), &GetFormTypeInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+		Revision:           ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4548,7 +5702,10 @@ func TestCheckResponseSnapshot_GetGlossary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGlossary(context.Background(), &GetGlossaryInput{})
+	got, err := svc.GetGlossary(context.Background(), &GetGlossaryInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4593,7 +5750,10 @@ func TestCheckResponseSnapshot_GetGlossaryTerm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGlossaryTerm(context.Background(), &GetGlossaryTermInput{})
+	got, err := svc.GetGlossaryTerm(context.Background(), &GetGlossaryTermInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4619,7 +5779,10 @@ func TestCheckResponseSnapshot_GetGroupProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroupProfile(context.Background(), &GetGroupProfileInput{})
+	got, err := svc.GetGroupProfile(context.Background(), &GetGroupProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		GroupIdentifier:  ptr.String("__GroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4641,7 +5804,9 @@ func TestCheckResponseSnapshot_GetIamPortalLoginUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIamPortalLoginUrl(context.Background(), &GetIamPortalLoginUrlInput{})
+	got, err := svc.GetIamPortalLoginUrl(context.Background(), &GetIamPortalLoginUrlInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4688,7 +5853,10 @@ func TestCheckResponseSnapshot_GetJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobRun(context.Background(), &GetJobRunInput{})
+	got, err := svc.GetJobRun(context.Background(), &GetJobRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4715,7 +5883,10 @@ func TestCheckResponseSnapshot_GetLineageEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLineageEvent(context.Background(), &GetLineageEventInput{})
+	got, err := svc.GetLineageEvent(context.Background(), &GetLineageEventInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4781,7 +5952,11 @@ func TestCheckResponseSnapshot_GetLineageNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLineageNode(context.Background(), &GetLineageNodeInput{})
+	got, err := svc.GetLineageNode(context.Background(), &GetLineageNodeInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		EventTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4859,7 +6034,11 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetListing(context.Background(), &GetListingInput{})
+	got, err := svc.GetListing(context.Background(), &GetListingInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		ListingRevision:  ptr.String("__ListingRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4907,7 +6086,11 @@ func TestCheckResponseSnapshot_GetMetadataGenerationRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetadataGenerationRun(context.Background(), &GetMetadataGenerationRunInput{})
+	got, err := svc.GetMetadataGenerationRun(context.Background(), &GetMetadataGenerationRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Type:             types.MetadataGenerationRunType("BUSINESS_DESCRIPTIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4970,7 +6153,10 @@ func TestCheckResponseSnapshot_GetNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotebook(context.Background(), &GetNotebookInput{})
+	got, err := svc.GetNotebook(context.Background(), &GetNotebookInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5007,7 +6193,10 @@ func TestCheckResponseSnapshot_GetNotebookExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotebookExport(context.Background(), &GetNotebookExportInput{})
+	got, err := svc.GetNotebookExport(context.Background(), &GetNotebookExportInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5086,7 +6275,10 @@ func TestCheckResponseSnapshot_GetNotebookRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotebookRun(context.Background(), &GetNotebookRunInput{})
+	got, err := svc.GetNotebookRun(context.Background(), &GetNotebookRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5198,7 +6390,10 @@ func TestCheckResponseSnapshot_GetProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProject(context.Background(), &GetProjectInput{})
+	got, err := svc.GetProject(context.Background(), &GetProjectInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5333,7 +6528,10 @@ func TestCheckResponseSnapshot_GetProjectProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProjectProfile(context.Background(), &GetProjectProfileInput{})
+	got, err := svc.GetProjectProfile(context.Background(), &GetProjectProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5401,7 +6599,11 @@ func TestCheckResponseSnapshot_GetRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRule(context.Background(), &GetRuleInput{})
+	got, err := svc.GetRule(context.Background(), &GetRuleInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5477,7 +6679,10 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{})
+	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5567,7 +6772,10 @@ func TestCheckResponseSnapshot_GetSubscriptionGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionGrant(context.Background(), &GetSubscriptionGrantInput{})
+	got, err := svc.GetSubscriptionGrant(context.Background(), &GetSubscriptionGrantInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5710,7 +6918,10 @@ func TestCheckResponseSnapshot_GetSubscriptionRequestDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionRequestDetails(context.Background(), &GetSubscriptionRequestDetailsInput{})
+	got, err := svc.GetSubscriptionRequestDetails(context.Background(), &GetSubscriptionRequestDetailsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5761,7 +6972,11 @@ func TestCheckResponseSnapshot_GetSubscriptionTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionTarget(context.Background(), &GetSubscriptionTargetInput{})
+	got, err := svc.GetSubscriptionTarget(context.Background(), &GetSubscriptionTargetInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5793,7 +7008,13 @@ func TestCheckResponseSnapshot_GetTimeSeriesDataPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTimeSeriesDataPoint(context.Background(), &GetTimeSeriesDataPointInput{})
+	got, err := svc.GetTimeSeriesDataPoint(context.Background(), &GetTimeSeriesDataPointInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.TimeSeriesEntityType("ASSET"),
+		Identifier:       ptr.String("__Identifier__"),
+		FormName:         ptr.String("__FormName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5825,7 +7046,12 @@ func TestCheckResponseSnapshot_GetUserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserProfile(context.Background(), &GetUserProfileInput{})
+	got, err := svc.GetUserProfile(context.Background(), &GetUserProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		UserIdentifier:   ptr.String("__UserIdentifier__"),
+		Type:             types.UserProfileType("IAM"),
+		SessionName:      ptr.String("__SessionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5866,7 +7092,14 @@ func TestCheckResponseSnapshot_ListAccountPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountPools(context.Background(), &ListAccountPoolsInput{})
+	got, err := svc.ListAccountPools(context.Background(), &ListAccountPoolsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		SortBy:           types.SortFieldAccountPool("NAME"),
+		SortOrder:        types.SortOrder("ASCENDING"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5905,7 +7138,12 @@ func TestCheckResponseSnapshot_ListAccountsInAccountPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountsInAccountPool(context.Background(), &ListAccountsInAccountPoolInput{})
+	got, err := svc.ListAccountsInAccountPool(context.Background(), &ListAccountsInAccountPoolInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5958,7 +7196,13 @@ func TestCheckResponseSnapshot_ListAssetFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetFilters(context.Background(), &ListAssetFiltersInput{})
+	got, err := svc.ListAssetFilters(context.Background(), &ListAssetFiltersInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Status:           types.FilterStatus("VALID"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5995,7 +7239,12 @@ func TestCheckResponseSnapshot_ListAssetRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetRevisions(context.Background(), &ListAssetRevisionsInput{})
+	got, err := svc.ListAssetRevisions(context.Background(), &ListAssetRevisionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6428,7 +7677,18 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		SortBy:                types.SortFieldConnection("NAME"),
+		SortOrder:             types.SortOrder("ASCENDING"),
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ProjectIdentifier:     ptr.String("__ProjectIdentifier__"),
+		Type:                  types.ConnectionType("ATHENA"),
+		Scope:                 types.ConnectionScope("DOMAIN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6465,7 +7725,12 @@ func TestCheckResponseSnapshot_ListDataProductRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataProductRevisions(context.Background(), &ListDataProductRevisionsInput{})
+	got, err := svc.ListDataProductRevisions(context.Background(), &ListDataProductRevisionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6528,7 +7793,13 @@ func TestCheckResponseSnapshot_ListDataSourceRunActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSourceRunActivities(context.Background(), &ListDataSourceRunActivitiesInput{})
+	got, err := svc.ListDataSourceRunActivities(context.Background(), &ListDataSourceRunActivitiesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Status:           types.DataAssetActivityStatus("FAILED"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6601,7 +7872,13 @@ func TestCheckResponseSnapshot_ListDataSourceRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSourceRuns(context.Background(), &ListDataSourceRunsInput{})
+	got, err := svc.ListDataSourceRuns(context.Background(), &ListDataSourceRunsInput{
+		DomainIdentifier:     ptr.String("__DomainIdentifier__"),
+		DataSourceIdentifier: ptr.String("__DataSourceIdentifier__"),
+		Status:               types.DataSourceRunStatus("REQUESTED"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6672,7 +7949,17 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		ProjectIdentifier:     ptr.String("__ProjectIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ConnectionIdentifier:  ptr.String("__ConnectionIdentifier__"),
+		Type:                  ptr.String("__Type__"),
+		Status:                types.DataSourceStatus("CREATING"),
+		Name:                  ptr.String("__Name__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6703,7 +7990,12 @@ func TestCheckResponseSnapshot_ListDomainUnitsForParent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainUnitsForParent(context.Background(), &ListDomainUnitsForParentInput{})
+	got, err := svc.ListDomainUnitsForParent(context.Background(), &ListDomainUnitsForParentInput{
+		DomainIdentifier:           ptr.String("__DomainIdentifier__"),
+		ParentDomainUnitIdentifier: ptr.String("__ParentDomainUnitIdentifier__"),
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6750,7 +8042,11 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		Status:     types.DomainStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6783,7 +8079,13 @@ func TestCheckResponseSnapshot_ListEntityOwners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntityOwners(context.Background(), &ListEntityOwnersInput{})
+	got, err := svc.ListEntityOwners(context.Background(), &ListEntityOwnersInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.DataZoneEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6830,7 +8132,12 @@ func TestCheckResponseSnapshot_ListEnvironmentActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentActions(context.Background(), &ListEnvironmentActionsInput{})
+	got, err := svc.ListEnvironmentActions(context.Background(), &ListEnvironmentActionsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6971,7 +8278,11 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprintConfigurations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentBlueprintConfigurations(context.Background(), &ListEnvironmentBlueprintConfigurationsInput{})
+	got, err := svc.ListEnvironmentBlueprintConfigurations(context.Background(), &ListEnvironmentBlueprintConfigurationsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7020,7 +8331,13 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentBlueprints(context.Background(), &ListEnvironmentBlueprintsInput{})
+	got, err := svc.ListEnvironmentBlueprints(context.Background(), &ListEnvironmentBlueprintsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		Name:             ptr.String("__Name__"),
+		Managed:          ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7069,7 +8386,16 @@ func TestCheckResponseSnapshot_ListEnvironmentProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentProfiles(context.Background(), &ListEnvironmentProfilesInput{})
+	got, err := svc.ListEnvironmentProfiles(context.Background(), &ListEnvironmentProfilesInput{
+		DomainIdentifier:               ptr.String("__DomainIdentifier__"),
+		AwsAccountId:                   ptr.String("__AwsAccountId__"),
+		AwsAccountRegion:               ptr.String("__AwsAccountRegion__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+		ProjectIdentifier:              ptr.String("__ProjectIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		NextToken:                      ptr.String("__NextToken__"),
+		MaxResults:                     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7126,7 +8452,19 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		DomainIdentifier:               ptr.String("__DomainIdentifier__"),
+		AwsAccountId:                   ptr.String("__AwsAccountId__"),
+		Status:                         types.EnvironmentStatus("ACTIVE"),
+		AwsAccountRegion:               ptr.String("__AwsAccountRegion__"),
+		ProjectIdentifier:              ptr.String("__ProjectIdentifier__"),
+		EnvironmentProfileIdentifier:   ptr.String("__EnvironmentProfileIdentifier__"),
+		EnvironmentBlueprintIdentifier: ptr.String("__EnvironmentBlueprintIdentifier__"),
+		Provider:                       ptr.String("__Provider__"),
+		Name:                           ptr.String("__Name__"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7179,7 +8517,14 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{})
+	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		JobIdentifier:    ptr.String("__JobIdentifier__"),
+		Status:           types.JobRunStatus("SCHEDULED"),
+		SortOrder:        types.SortOrder("ASCENDING"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7278,7 +8623,15 @@ func TestCheckResponseSnapshot_ListLineageEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLineageEvents(context.Background(), &ListLineageEventsInput{})
+	got, err := svc.ListLineageEvents(context.Background(), &ListLineageEventsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		TimestampAfter:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimestampBefore:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProcessingStatus: types.LineageEventProcessingStatus("REQUESTED"),
+		SortOrder:        types.SortOrder("ASCENDING"),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7329,7 +8682,16 @@ func TestCheckResponseSnapshot_ListLineageNodeHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLineageNodeHistory(context.Background(), &ListLineageNodeHistoryInput{})
+	got, err := svc.ListLineageNodeHistory(context.Background(), &ListLineageNodeHistoryInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		Identifier:        ptr.String("__Identifier__"),
+		Direction:         types.EdgeDirection("UPSTREAM"),
+		EventTimestampGTE: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventTimestampLTE: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortOrder:         types.SortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7388,7 +8750,14 @@ func TestCheckResponseSnapshot_ListMetadataGenerationRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetadataGenerationRuns(context.Background(), &ListMetadataGenerationRunsInput{})
+	got, err := svc.ListMetadataGenerationRuns(context.Background(), &ListMetadataGenerationRunsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Status:           types.MetadataGenerationRunStatus("SUBMITTED"),
+		Type:             types.MetadataGenerationRunType("BUSINESS_DESCRIPTIONS"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		TargetIdentifier: ptr.String("__TargetIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7447,7 +8816,16 @@ func TestCheckResponseSnapshot_ListNotebookRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotebookRuns(context.Background(), &ListNotebookRunsInput{})
+	got, err := svc.ListNotebookRuns(context.Background(), &ListNotebookRunsInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		NotebookIdentifier:      ptr.String("__NotebookIdentifier__"),
+		Status:                  types.NotebookRunStatus("QUEUED"),
+		ScheduleIdentifier:      ptr.String("__ScheduleIdentifier__"),
+		MaxResults:              ptr.Int32(1),
+		SortOrder:               types.SortOrder("ASCENDING"),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7494,7 +8872,15 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotebooks(context.Background(), &ListNotebooksInput{})
+	got, err := svc.ListNotebooks(context.Background(), &ListNotebooksInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		MaxResults:              ptr.Int32(1),
+		SortOrder:               types.SortOrder("ASCENDING"),
+		SortBy:                  types.SortKey("CREATED_AT"),
+		Status:                  types.NotebookStatus("ACTIVE"),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7563,7 +8949,19 @@ func TestCheckResponseSnapshot_ListNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{})
+	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Type:             types.NotificationType("TASK"),
+		AfterTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BeforeTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Subjects: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskStatus: types.TaskStatus("ACTIVE"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7616,7 +9014,14 @@ func TestCheckResponseSnapshot_ListPolicyGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyGrants(context.Background(), &ListPolicyGrantsInput{})
+	got, err := svc.ListPolicyGrants(context.Background(), &ListPolicyGrantsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.TargetEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		PolicyType:       types.ManagedPolicyType("CREATE_DOMAIN_UNIT"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7655,7 +9060,14 @@ func TestCheckResponseSnapshot_ListProjectMemberships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjectMemberships(context.Background(), &ListProjectMembershipsInput{})
+	got, err := svc.ListProjectMemberships(context.Background(), &ListProjectMembershipsInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		SortBy:            types.SortFieldProject("NAME"),
+		SortOrder:         types.SortOrder("ASCENDING"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7700,7 +9112,14 @@ func TestCheckResponseSnapshot_ListProjectProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjectProfiles(context.Background(), &ListProjectProfilesInput{})
+	got, err := svc.ListProjectProfiles(context.Background(), &ListProjectProfilesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		SortBy:           types.SortFieldProject("NAME"),
+		SortOrder:        types.SortOrder("ASCENDING"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7767,7 +9186,15 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{})
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		UserIdentifier:   ptr.String("__UserIdentifier__"),
+		GroupIdentifier:  ptr.String("__GroupIdentifier__"),
+		Name:             ptr.String("__Name__"),
+		ProjectCategory:  ptr.String("__ProjectCategory__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7856,7 +9283,25 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		TargetType:       types.RuleTargetType("DOMAIN_UNIT"),
+		TargetIdentifier: ptr.String("__TargetIdentifier__"),
+		RuleType:         types.RuleType("METADATA_FORM_ENFORCEMENT"),
+		Action:           types.RuleAction("CREATE_LISTING_CHANGE_SET"),
+		ProjectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssetTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataProduct:     ptr.Bool(true),
+		IncludeCascaded: ptr.Bool(true),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8023,7 +9468,21 @@ func TestCheckResponseSnapshot_ListSubscriptionGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionGrants(context.Background(), &ListSubscriptionGrantsInput{})
+	got, err := svc.ListSubscriptionGrants(context.Background(), &ListSubscriptionGrantsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentId:         ptr.String("__EnvironmentId__"),
+		SubscriptionTargetId:  ptr.String("__SubscriptionTargetId__"),
+		SubscribedListingId:   ptr.String("__SubscribedListingId__"),
+		SubscriptionId:        ptr.String("__SubscriptionId__"),
+		OwningProjectId:       ptr.String("__OwningProjectId__"),
+		OwningIamPrincipalArn: ptr.String("__OwningIamPrincipalArn__"),
+		OwningUserId:          ptr.String("__OwningUserId__"),
+		OwningGroupId:         ptr.String("__OwningGroupId__"),
+		SortBy:                types.SortKey("CREATED_AT"),
+		SortOrder:             types.SortOrder("ASCENDING"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8292,7 +9751,20 @@ func TestCheckResponseSnapshot_ListSubscriptionRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionRequests(context.Background(), &ListSubscriptionRequestsInput{})
+	got, err := svc.ListSubscriptionRequests(context.Background(), &ListSubscriptionRequestsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		Status:                types.SubscriptionRequestStatus("PENDING"),
+		SubscribedListingId:   ptr.String("__SubscribedListingId__"),
+		OwningProjectId:       ptr.String("__OwningProjectId__"),
+		OwningIamPrincipalArn: ptr.String("__OwningIamPrincipalArn__"),
+		ApproverProjectId:     ptr.String("__ApproverProjectId__"),
+		OwningUserId:          ptr.String("__OwningUserId__"),
+		OwningGroupId:         ptr.String("__OwningGroupId__"),
+		SortBy:                types.SortKey("CREATED_AT"),
+		SortOrder:             types.SortOrder("ASCENDING"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8381,7 +9853,14 @@ func TestCheckResponseSnapshot_ListSubscriptionTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionTargets(context.Background(), &ListSubscriptionTargetsInput{})
+	got, err := svc.ListSubscriptionTargets(context.Background(), &ListSubscriptionTargetsInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		SortBy:                types.SortKey("CREATED_AT"),
+		SortOrder:             types.SortOrder("ASCENDING"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8520,7 +9999,21 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		DomainIdentifier:              ptr.String("__DomainIdentifier__"),
+		SubscriptionRequestIdentifier: ptr.String("__SubscriptionRequestIdentifier__"),
+		Status:                        types.SubscriptionStatus("APPROVED"),
+		SubscribedListingId:           ptr.String("__SubscribedListingId__"),
+		OwningProjectId:               ptr.String("__OwningProjectId__"),
+		OwningIamPrincipalArn:         ptr.String("__OwningIamPrincipalArn__"),
+		OwningUserId:                  ptr.String("__OwningUserId__"),
+		OwningGroupId:                 ptr.String("__OwningGroupId__"),
+		ApproverProjectId:             ptr.String("__ApproverProjectId__"),
+		SortBy:                        types.SortKey("CREATED_AT"),
+		SortOrder:                     types.SortOrder("ASCENDING"),
+		MaxResults:                    ptr.Int32(1),
+		NextToken:                     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8543,7 +10036,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8582,7 +10077,16 @@ func TestCheckResponseSnapshot_ListTimeSeriesDataPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTimeSeriesDataPoints(context.Background(), &ListTimeSeriesDataPointsInput{})
+	got, err := svc.ListTimeSeriesDataPoints(context.Background(), &ListTimeSeriesDataPointsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.TimeSeriesEntityType("ASSET"),
+		FormName:         ptr.String("__FormName__"),
+		StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8604,7 +10108,11 @@ func TestCheckResponseSnapshot_PostLineageEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostLineageEvent(context.Background(), &PostLineageEventInput{})
+	got, err := svc.PostLineageEvent(context.Background(), &PostLineageEventInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Event:            []byte("blob"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8645,7 +10153,28 @@ func TestCheckResponseSnapshot_PostTimeSeriesDataPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostTimeSeriesDataPoints(context.Background(), &PostTimeSeriesDataPointsInput{})
+	got, err := svc.PostTimeSeriesDataPoints(context.Background(), &PostTimeSeriesDataPointsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		EntityType:       types.TimeSeriesEntityType("ASSET"),
+		Forms: []types.TimeSeriesDataPointFormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8664,7 +10193,15 @@ func TestCheckResponseSnapshot_PutDataExportConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDataExportConfiguration(context.Background(), &PutDataExportConfigurationInput{})
+	got, err := svc.PutDataExportConfiguration(context.Background(), &PutDataExportConfigurationInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EnableExport:     ptr.Bool(true),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			SseAlgorithm: ptr.String("__SseAlgorithm__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8741,7 +10278,64 @@ func TestCheckResponseSnapshot_PutEnvironmentBlueprintConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEnvironmentBlueprintConfiguration(context.Background(), &PutEnvironmentBlueprintConfigurationInput{})
+	got, err := svc.PutEnvironmentBlueprintConfiguration(context.Background(), &PutEnvironmentBlueprintConfigurationInput{
+		DomainIdentifier:                  ptr.String("__DomainIdentifier__"),
+		EnvironmentBlueprintIdentifier:    ptr.String("__EnvironmentBlueprintIdentifier__"),
+		ProvisioningRoleArn:               ptr.String("__ProvisioningRoleArn__"),
+		ManageAccessRoleArn:               ptr.String("__ManageAccessRoleArn__"),
+		EnvironmentRolePermissionBoundary: ptr.String("__EnvironmentRolePermissionBoundary__"),
+		EnabledRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RegionalParameters: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		ResourceConfigurations: []types.PutResourceConfiguration{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Region:      ptr.String("__Region__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Region:      ptr.String("__Region__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AllowUserProvidedConfigurations: ptr.Bool(true),
+		GlobalParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ProvisioningConfigurations: []types.ProvisioningConfiguration{
+			&types.ProvisioningConfigurationMemberLakeFormationConfiguration{
+				Value: types.LakeFormationConfiguration{
+					LocationRegistrationRole: ptr.String("__LocationRegistrationRole__"),
+					LocationRegistrationExcludeS3Locations: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			&types.ProvisioningConfigurationMemberLakeFormationConfiguration{
+				Value: types.LakeFormationConfiguration{
+					LocationRegistrationRole: ptr.String("__LocationRegistrationRole__"),
+					LocationRegistrationExcludeS3Locations: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8840,7 +10434,33 @@ func TestCheckResponseSnapshot_QueryGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryGraph(context.Background(), &QueryGraphInput{})
+	got, err := svc.QueryGraph(context.Background(), &QueryGraphInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Match: []types.MatchClause{
+			&types.MatchClauseMemberRelationPattern{
+				Value: types.RelationPattern{
+					RelationType:      types.RelationType("LINEAGE"),
+					RelationDirection: types.RelationDirection("IN"),
+					MaxPathLength:     ptr.Int32(1),
+				},
+			},
+			&types.MatchClauseMemberRelationPattern{
+				Value: types.RelationPattern{
+					RelationType:      types.RelationType("LINEAGE"),
+					RelationDirection: types.RelationDirection("IN"),
+					MaxPathLength:     ptr.Int32(1),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AdditionalAttributes: &types.AdditionalAttributes{
+			FormNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8863,7 +10483,32 @@ func TestCheckResponseSnapshot_RejectPredictions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectPredictions(context.Background(), &RejectPredictionsInput{})
+	got, err := svc.RejectPredictions(context.Background(), &RejectPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		RejectRule: &types.RejectRule{
+			Rule:      types.RejectRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		RejectChoices: []types.RejectChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoices: []int32{
+					1,
+					1,
+				},
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoices: []int32{
+					1,
+					1,
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9006,7 +10651,11 @@ func TestCheckResponseSnapshot_RejectSubscriptionRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectSubscriptionRequest(context.Background(), &RejectSubscriptionRequestInput{})
+	got, err := svc.RejectSubscriptionRequest(context.Background(), &RejectSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		DecisionComment:  ptr.String("__DecisionComment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9025,7 +10674,17 @@ func TestCheckResponseSnapshot_RemoveEntityOwner(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveEntityOwner(context.Background(), &RemoveEntityOwnerInput{})
+	got, err := svc.RemoveEntityOwner(context.Background(), &RemoveEntityOwnerInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.DataZoneEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		Owner: &types.OwnerPropertiesMemberUser{
+			Value: types.OwnerUserProperties{
+				UserIdentifier: ptr.String("__UserIdentifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9044,7 +10703,19 @@ func TestCheckResponseSnapshot_RemovePolicyGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePolicyGrant(context.Background(), &RemovePolicyGrantInput{})
+	got, err := svc.RemovePolicyGrant(context.Background(), &RemovePolicyGrantInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		EntityType:       types.TargetEntityType("DOMAIN_UNIT"),
+		EntityIdentifier: ptr.String("__EntityIdentifier__"),
+		PolicyType:       types.ManagedPolicyType("CREATE_DOMAIN_UNIT"),
+		Principal: &types.PolicyGrantPrincipalMemberUser{
+			Value: &types.UserPolicyGrantPrincipalMemberUserIdentifier{
+				Value: "__UserPolicyGrantPrincipalMemberUserIdentifier__",
+			},
+		},
+		GrantIdentifier: ptr.String("__GrantIdentifier__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9120,7 +10791,11 @@ func TestCheckResponseSnapshot_RevokeSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeSubscription(context.Background(), &RevokeSubscriptionInput{})
+	got, err := svc.RevokeSubscription(context.Background(), &RevokeSubscriptionInput{
+		DomainIdentifier:  ptr.String("__DomainIdentifier__"),
+		Identifier:        ptr.String("__Identifier__"),
+		RetainPermissions: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9316,7 +10991,38 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Search(context.Background(), &SearchInput{})
+	got, err := svc.Search(context.Background(), &SearchInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+		SearchScope:             types.InventorySearchScope("ASSET"),
+		SearchText:              ptr.String("__SearchText__"),
+		SearchIn: []types.SearchInItem{
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+		},
+		Filters: &types.FilterClauseMemberFilter{
+			Value: types.Filter{
+				Attribute: ptr.String("__Attribute__"),
+				Value:     ptr.String("__Value__"),
+				IntValue:  ptr.Int64(1),
+				Operator:  types.FilterOperator("EQ"),
+			},
+		},
+		Sort: &types.SearchSort{
+			Attribute: ptr.String("__Attribute__"),
+			Order:     types.SortOrder("ASCENDING"),
+		},
+		AdditionalAttributes: []types.SearchOutputAdditionalAttribute{
+			types.SearchOutputAdditionalAttribute("FORMS"),
+			types.SearchOutputAdditionalAttribute("FORMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9355,7 +11061,13 @@ func TestCheckResponseSnapshot_SearchGroupProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchGroupProfiles(context.Background(), &SearchGroupProfilesInput{})
+	got, err := svc.SearchGroupProfiles(context.Background(), &SearchGroupProfilesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		GroupType:        types.GroupSearchType("SSO_GROUP"),
+		SearchText:       ptr.String("__SearchText__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9657,7 +11369,46 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchListings(context.Background(), &SearchListingsInput{})
+	got, err := svc.SearchListings(context.Background(), &SearchListingsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		SearchText:       ptr.String("__SearchText__"),
+		SearchIn: []types.SearchInItem{
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: &types.FilterClauseMemberFilter{
+			Value: types.Filter{
+				Attribute: ptr.String("__Attribute__"),
+				Value:     ptr.String("__Value__"),
+				IntValue:  ptr.Int64(1),
+				Operator:  types.FilterOperator("EQ"),
+			},
+		},
+		Aggregations: []types.AggregationListItem{
+			{
+				Attribute:    ptr.String("__Attribute__"),
+				DisplayValue: ptr.String("__DisplayValue__"),
+			},
+			{
+				Attribute:    ptr.String("__Attribute__"),
+				DisplayValue: ptr.String("__DisplayValue__"),
+			},
+		},
+		Sort: &types.SearchSort{
+			Attribute: ptr.String("__Attribute__"),
+			Order:     types.SortOrder("ASCENDING"),
+		},
+		AdditionalAttributes: []types.SearchOutputAdditionalAttribute{
+			types.SearchOutputAdditionalAttribute("FORMS"),
+			types.SearchOutputAdditionalAttribute("FORMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9725,7 +11476,34 @@ func TestCheckResponseSnapshot_SearchTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchTypes(context.Background(), &SearchTypesInput{})
+	got, err := svc.SearchTypes(context.Background(), &SearchTypesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		SearchScope:      types.TypesSearchScope("ASSET_TYPE"),
+		SearchText:       ptr.String("__SearchText__"),
+		SearchIn: []types.SearchInItem{
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+			{
+				Attribute: ptr.String("__Attribute__"),
+			},
+		},
+		Filters: &types.FilterClauseMemberFilter{
+			Value: types.Filter{
+				Attribute: ptr.String("__Attribute__"),
+				Value:     ptr.String("__Value__"),
+				IntValue:  ptr.Int64(1),
+				Operator:  types.FilterOperator("EQ"),
+			},
+		},
+		Sort: &types.SearchSort{
+			Attribute: ptr.String("__Attribute__"),
+			Order:     types.SortOrder("ASCENDING"),
+		},
+		Managed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9776,7 +11554,13 @@ func TestCheckResponseSnapshot_SearchUserProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUserProfiles(context.Background(), &SearchUserProfilesInput{})
+	got, err := svc.SearchUserProfiles(context.Background(), &SearchUserProfilesInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		UserType:         types.UserSearchType("SSO_USER"),
+		SearchText:       ptr.String("__SearchText__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9818,7 +11602,11 @@ func TestCheckResponseSnapshot_StartDataSourceRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataSourceRun(context.Background(), &StartDataSourceRunInput{})
+	got, err := svc.StartDataSourceRun(context.Background(), &StartDataSourceRunInput{
+		DomainIdentifier:     ptr.String("__DomainIdentifier__"),
+		DataSourceIdentifier: ptr.String("__DataSourceIdentifier__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9849,7 +11637,21 @@ func TestCheckResponseSnapshot_StartMetadataGenerationRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataGenerationRun(context.Background(), &StartMetadataGenerationRunInput{})
+	got, err := svc.StartMetadataGenerationRun(context.Background(), &StartMetadataGenerationRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Type:             types.MetadataGenerationRunType("BUSINESS_DESCRIPTIONS"),
+		Types: []types.MetadataGenerationRunType{
+			types.MetadataGenerationRunType("BUSINESS_DESCRIPTIONS"),
+			types.MetadataGenerationRunType("BUSINESS_DESCRIPTIONS"),
+		},
+		Target: &types.MetadataGenerationRunTarget{
+			Type:       types.MetadataGenerationTargetType("ASSET"),
+			Identifier: ptr.String("__Identifier__"),
+			Revision:   ptr.String("__Revision__"),
+		},
+		ClientToken:             ptr.String("__ClientToken__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9877,7 +11679,13 @@ func TestCheckResponseSnapshot_StartNotebookExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNotebookExport(context.Background(), &StartNotebookExportInput{})
+	got, err := svc.StartNotebookExport(context.Background(), &StartNotebookExportInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		NotebookIdentifier:      ptr.String("__NotebookIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		FileFormat:              types.FileFormat("PDF"),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9908,7 +11716,16 @@ func TestCheckResponseSnapshot_StartNotebookImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNotebookImport(context.Background(), &StartNotebookImportInput{})
+	got, err := svc.StartNotebookImport(context.Background(), &StartNotebookImportInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		SourceLocation: &types.SourceLocationMemberS3{
+			Value: "__SourceLocationMemberS3__",
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9987,7 +11804,42 @@ func TestCheckResponseSnapshot_StartNotebookRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNotebookRun(context.Background(), &StartNotebookRunInput{})
+	got, err := svc.StartNotebookRun(context.Background(), &StartNotebookRunInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		NotebookIdentifier:      ptr.String("__NotebookIdentifier__"),
+		ScheduleIdentifier:      ptr.String("__ScheduleIdentifier__"),
+		ComputeConfiguration: &types.ComputeConfig{
+			InstanceType:       ptr.String("__InstanceType__"),
+			EnvironmentVersion: ptr.String("__EnvironmentVersion__"),
+		},
+		NetworkConfiguration: &types.NetworkConfig{
+			NetworkAccessType: types.NetworkAccessType("PUBLIC_INTERNET_ONLY"),
+			VpcId:             ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TimeoutConfiguration: &types.TimeoutConfig{
+			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		TriggerSource: &types.TriggerSource{
+			Type: types.TriggerSourceType("MANUAL"),
+			Name: ptr.String("__Name__"),
+		},
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10027,7 +11879,26 @@ func TestCheckResponseSnapshot_StartNotebookSync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNotebookSync(context.Background(), &StartNotebookSyncInput{})
+	got, err := svc.StartNotebookSync(context.Background(), &StartNotebookSyncInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
+		SourceLocation: &types.SourceLocationMemberS3{
+			Value: "__SourceLocationMemberS3__",
+		},
+		GitMetadata: &types.GitMetadata{
+			ConnectionId:  ptr.String("__ConnectionId__"),
+			Repository:    ptr.String("__Repository__"),
+			Branch:        ptr.String("__Branch__"),
+			CommitHash:    ptr.String("__CommitHash__"),
+			FileName:      ptr.String("__FileName__"),
+			CommittedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CommitMessage: ptr.String("__CommitMessage__"),
+		},
+		NotebookId:  ptr.String("__NotebookId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10051,7 +11922,11 @@ func TestCheckResponseSnapshot_StopNotebookRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopNotebookRun(context.Background(), &StopNotebookRunInput{})
+	got, err := svc.StopNotebookRun(context.Background(), &StopNotebookRunInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10070,7 +11945,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10089,7 +11969,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10139,7 +12025,33 @@ func TestCheckResponseSnapshot_UpdateAccountPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountPool(context.Background(), &UpdateAccountPoolInput{})
+	got, err := svc.UpdateAccountPool(context.Background(), &UpdateAccountPoolInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ResolutionStrategy: types.ResolutionStrategy("MANUAL"),
+		AccountSource: &types.AccountSourceMemberAccounts{
+			Value: []types.AccountInfo{
+				{
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+					SupportedRegions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsAccountName: ptr.String("__AwsAccountName__"),
+				},
+				{
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+					SupportedRegions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsAccountName: ptr.String("__AwsAccountName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10180,7 +12092,21 @@ func TestCheckResponseSnapshot_UpdateAssetFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssetFilter(context.Background(), &UpdateAssetFilterInput{})
+	got, err := svc.UpdateAssetFilter(context.Background(), &UpdateAssetFilterInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Configuration: &types.AssetFilterConfigurationMemberColumnConfiguration{
+			Value: types.ColumnFilterConfiguration{
+				IncludedColumnNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10404,7 +12330,36 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{})
+	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{
+		Configurations: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Description:      ptr.String("__Description__"),
+		AwsLocation: &types.AwsLocation{
+			AccessRole:      ptr.String("__AccessRole__"),
+			AwsAccountId:    ptr.String("__AwsAccountId__"),
+			AwsRegion:       ptr.String("__AwsRegion__"),
+			IamConnectionId: ptr.String("__IamConnectionId__"),
+		},
+		Props: &types.ConnectionPropertiesPatchMemberAthenaProperties{
+			Value: types.AthenaPropertiesPatch{
+				WorkgroupName: ptr.String("__WorkgroupName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10526,7 +12481,73 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		EnableSetting:    types.EnableSetting("ENABLED"),
+		PublishOnImport:  ptr.Bool(true),
+		AssetFormsInput: []types.FormInput{
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+			{
+				FormName:       ptr.String("__FormName__"),
+				TypeIdentifier: ptr.String("__TypeIdentifier__"),
+				TypeRevision:   ptr.String("__TypeRevision__"),
+				Content:        ptr.String("__Content__"),
+			},
+		},
+		Schedule: &types.ScheduleConfiguration{
+			Timezone: types.Timezone("UTC"),
+			Schedule: ptr.String("__Schedule__"),
+		},
+		Configuration: &types.DataSourceConfigurationInputMemberGlueRunConfiguration{
+			Value: types.GlueRunConfigurationInput{
+				DataAccessRole: ptr.String("__DataAccessRole__"),
+				RelationalFilterConfigurations: []types.RelationalFilterConfiguration{
+					{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						SchemaName:   ptr.String("__SchemaName__"),
+						FilterExpressions: []types.FilterExpression{
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+						},
+					},
+					{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						SchemaName:   ptr.String("__SchemaName__"),
+						FilterExpressions: []types.FilterExpression{
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+							{
+								Type:       types.FilterExpressionType("INCLUDE"),
+								Expression: ptr.String("__Expression__"),
+							},
+						},
+					},
+				},
+				AutoImportDataQualityResult: ptr.Bool(true),
+				CatalogName:                 ptr.String("__CatalogName__"),
+			},
+		},
+		Recommendation: &types.RecommendationConfiguration{
+			EnableBusinessNameGeneration: ptr.Bool(true),
+		},
+		RetainPermissionsOnRevokeFailure: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10558,7 +12579,19 @@ func TestCheckResponseSnapshot_UpdateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{})
+	got, err := svc.UpdateDomain(context.Background(), &UpdateDomainInput{
+		Identifier:  ptr.String("__Identifier__"),
+		Description: ptr.String("__Description__"),
+		SingleSignOn: &types.SingleSignOn{
+			Type:           types.AuthType("IAM_IDC"),
+			UserAssignment: types.UserAssignment("AUTOMATIC"),
+			IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+		},
+		DomainExecutionRole: ptr.String("__DomainExecutionRole__"),
+		ServiceRole:         ptr.String("__ServiceRole__"),
+		Name:                ptr.String("__Name__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10599,7 +12632,12 @@ func TestCheckResponseSnapshot_UpdateDomainUnit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainUnit(context.Background(), &UpdateDomainUnitInput{})
+	got, err := svc.UpdateDomainUnit(context.Background(), &UpdateDomainUnitInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Description:      ptr.String("__Description__"),
+		Name:             ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10726,7 +12764,28 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		UserParameters: []types.EnvironmentParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EnvironmentConfigurationName: ptr.String("__EnvironmentConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10756,7 +12815,18 @@ func TestCheckResponseSnapshot_UpdateEnvironmentAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentAction(context.Background(), &UpdateEnvironmentActionInput{})
+	got, err := svc.UpdateEnvironmentAction(context.Background(), &UpdateEnvironmentActionInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+		Parameters: &types.ActionParametersMemberAwsConsoleLink{
+			Value: types.AwsConsoleLinkParameters{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10815,7 +12885,36 @@ func TestCheckResponseSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentBlueprint(context.Background(), &UpdateEnvironmentBlueprintInput{})
+	got, err := svc.UpdateEnvironmentBlueprint(context.Background(), &UpdateEnvironmentBlueprintInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Description:      ptr.String("__Description__"),
+		ProvisioningProperties: &types.ProvisioningPropertiesMemberCloudFormation{
+			Value: types.CloudFormationProperties{
+				TemplateUrl: ptr.String("__TemplateUrl__"),
+			},
+		},
+		UserParameters: []types.CustomParameter{
+			{
+				KeyName:           ptr.String("__KeyName__"),
+				Description:       ptr.String("__Description__"),
+				FieldType:         ptr.String("__FieldType__"),
+				DefaultValue:      ptr.String("__DefaultValue__"),
+				IsEditable:        ptr.Bool(true),
+				IsOptional:        ptr.Bool(true),
+				IsUpdateSupported: ptr.Bool(true),
+			},
+			{
+				KeyName:           ptr.String("__KeyName__"),
+				Description:       ptr.String("__Description__"),
+				FieldType:         ptr.String("__FieldType__"),
+				DefaultValue:      ptr.String("__DefaultValue__"),
+				IsEditable:        ptr.Bool(true),
+				IsOptional:        ptr.Bool(true),
+				IsUpdateSupported: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10866,7 +12965,24 @@ func TestCheckResponseSnapshot_UpdateEnvironmentProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentProfile(context.Background(), &UpdateEnvironmentProfileInput{})
+	got, err := svc.UpdateEnvironmentProfile(context.Background(), &UpdateEnvironmentProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		UserParameters: []types.EnvironmentParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AwsAccountId:     ptr.String("__AwsAccountId__"),
+		AwsAccountRegion: ptr.String("__AwsAccountRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10896,7 +13012,14 @@ func TestCheckResponseSnapshot_UpdateGlossary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlossary(context.Background(), &UpdateGlossaryInput{})
+	got, err := svc.UpdateGlossary(context.Background(), &UpdateGlossaryInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Status:           types.GlossaryStatus("DISABLED"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10937,7 +13060,25 @@ func TestCheckResponseSnapshot_UpdateGlossaryTerm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlossaryTerm(context.Background(), &UpdateGlossaryTermInput{})
+	got, err := svc.UpdateGlossaryTerm(context.Background(), &UpdateGlossaryTermInput{
+		DomainIdentifier:   ptr.String("__DomainIdentifier__"),
+		GlossaryIdentifier: ptr.String("__GlossaryIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		Name:               ptr.String("__Name__"),
+		ShortDescription:   ptr.String("__ShortDescription__"),
+		LongDescription:    ptr.String("__LongDescription__"),
+		TermRelations: &types.TermRelations{
+			IsA: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Classifies: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Status: types.GlossaryTermStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10963,7 +13104,11 @@ func TestCheckResponseSnapshot_UpdateGroupProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroupProfile(context.Background(), &UpdateGroupProfileInput{})
+	got, err := svc.UpdateGroupProfile(context.Background(), &UpdateGroupProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		GroupIdentifier:  ptr.String("__GroupIdentifier__"),
+		Status:           types.GroupProfileStatus("ASSIGNED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11026,7 +13171,31 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotebook(context.Background(), &UpdateNotebookInput{})
+	got, err := svc.UpdateNotebook(context.Background(), &UpdateNotebookInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Description:      ptr.String("__Description__"),
+		Status:           types.NotebookStatus("ACTIVE"),
+		Name:             ptr.String("__Name__"),
+		CellOrder: []types.CellInformation{
+			{},
+			{},
+		},
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		EnvironmentConfiguration: &types.EnvironmentConfig{
+			ImageVersion: ptr.String("__ImageVersion__"),
+			PackageConfig: &types.PackageConfig{
+				PackageManager:       types.PackageManager("UV"),
+				PackageSpecification: ptr.String("__PackageSpecification__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11138,7 +13307,76 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{})
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		GlossaryTerms: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainUnitId: ptr.String("__DomainUnitId__"),
+		EnvironmentDeploymentDetails: &types.EnvironmentDeploymentDetails{
+			OverallDeploymentStatus: types.OverallDeploymentStatus("PENDING_DEPLOYMENT"),
+			EnvironmentFailureReasons: map[string][]types.EnvironmentError{
+				"key0": {
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+			},
+		},
+		UserParameters: []types.EnvironmentConfigurationUserParameter{
+			{
+				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
+					AwsAccountId:        ptr.String("__AwsAccountId__"),
+					RegionName:          ptr.String("__RegionName__"),
+					SourceAccountPoolId: ptr.String("__SourceAccountPoolId__"),
+				},
+				EnvironmentConfigurationName: ptr.String("__EnvironmentConfigurationName__"),
+				EnvironmentParameters: []types.EnvironmentParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
+					AwsAccountId:        ptr.String("__AwsAccountId__"),
+					RegionName:          ptr.String("__RegionName__"),
+					SourceAccountPoolId: ptr.String("__SourceAccountPoolId__"),
+				},
+				EnvironmentConfigurationName: ptr.String("__EnvironmentConfigurationName__"),
+				EnvironmentParameters: []types.EnvironmentParameter{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ProjectProfileVersion: ptr.String("__ProjectProfileVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11273,7 +13511,120 @@ func TestCheckResponseSnapshot_UpdateProjectProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProjectProfile(context.Background(), &UpdateProjectProfileInput{})
+	got, err := svc.UpdateProjectProfile(context.Background(), &UpdateProjectProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Status:           types.Status("ENABLED"),
+		ProjectResourceTags: []types.ResourceTagParameter{
+			{
+				Key:             ptr.String("__Key__"),
+				Value:           ptr.String("__Value__"),
+				IsValueEditable: ptr.Bool(true),
+			},
+			{
+				Key:             ptr.String("__Key__"),
+				Value:           ptr.String("__Value__"),
+				IsValueEditable: ptr.Bool(true),
+			},
+		},
+		AllowCustomProjectResourceTags: ptr.Bool(true),
+		ProjectResourceTagsDescription: ptr.String("__ProjectResourceTagsDescription__"),
+		EnvironmentConfigurations: []types.EnvironmentConfiguration{
+			{
+				Name:                   ptr.String("__Name__"),
+				Id:                     ptr.String("__Id__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
+				Description:            ptr.String("__Description__"),
+				DeploymentMode:         types.DeploymentMode("ON_CREATE"),
+				ConfigurationParameters: &types.EnvironmentConfigurationParametersDetails{
+					SsmPath: ptr.String("__SsmPath__"),
+					ParameterOverrides: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+					ResolvedParameters: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+				},
+				AwsAccount: &types.AwsAccountMemberAwsAccountId{
+					Value: "__AwsAccountMemberAwsAccountId__",
+				},
+				AccountPools: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsRegion: &types.RegionMemberRegionName{
+					Value: "__RegionMemberRegionName__",
+				},
+				DeploymentOrder: ptr.Int32(1),
+			},
+			{
+				Name:                   ptr.String("__Name__"),
+				Id:                     ptr.String("__Id__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
+				Description:            ptr.String("__Description__"),
+				DeploymentMode:         types.DeploymentMode("ON_CREATE"),
+				ConfigurationParameters: &types.EnvironmentConfigurationParametersDetails{
+					SsmPath: ptr.String("__SsmPath__"),
+					ParameterOverrides: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+					ResolvedParameters: []types.EnvironmentConfigurationParameter{
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+						{
+							Name:       ptr.String("__Name__"),
+							Value:      ptr.String("__Value__"),
+							IsEditable: ptr.Bool(true),
+						},
+					},
+				},
+				AwsAccount: &types.AwsAccountMemberAwsAccountId{
+					Value: "__AwsAccountMemberAwsAccountId__",
+				},
+				AccountPools: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsRegion: &types.RegionMemberRegionName{
+					Value: "__RegionMemberRegionName__",
+				},
+				DeploymentOrder: ptr.Int32(1),
+			},
+		},
+		DomainUnitIdentifier: ptr.String("__DomainUnitIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11292,7 +13643,12 @@ func TestCheckResponseSnapshot_UpdateRootDomainUnitOwner(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRootDomainUnitOwner(context.Background(), &UpdateRootDomainUnitOwnerInput{})
+	got, err := svc.UpdateRootDomainUnitOwner(context.Background(), &UpdateRootDomainUnitOwnerInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		CurrentOwner:     ptr.String("__CurrentOwner__"),
+		NewOwner:         ptr.String("__NewOwner__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11359,7 +13715,44 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{})
+	got, err := svc.UpdateRule(context.Background(), &UpdateRuleInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Scope: &types.RuleScope{
+			AssetType: &types.AssetTypesForRule{
+				SelectionMode: types.RuleScopeSelectionMode("ALL"),
+				SpecificAssetTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			DataProduct: ptr.Bool(true),
+			Project: &types.ProjectsForRule{
+				SelectionMode: types.RuleScopeSelectionMode("ALL"),
+				SpecificProjects: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Detail: &types.RuleDetailMemberMetadataFormEnforcementDetail{
+			Value: types.MetadataFormEnforcementDetail{
+				RequiredMetadataForms: []types.MetadataFormReference{
+					{
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+					},
+					{
+						TypeIdentifier: ptr.String("__TypeIdentifier__"),
+						TypeRevision:   ptr.String("__TypeRevision__"),
+					},
+				},
+			},
+		},
+		IncludeChildDomainUnits: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11449,7 +13842,16 @@ func TestCheckResponseSnapshot_UpdateSubscriptionGrantStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriptionGrantStatus(context.Background(), &UpdateSubscriptionGrantStatusInput{})
+	got, err := svc.UpdateSubscriptionGrantStatus(context.Background(), &UpdateSubscriptionGrantStatusInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		Status:           types.SubscriptionGrantStatus("GRANT_PENDING"),
+		FailureCause: &types.FailureCause{
+			Message: ptr.String("__Message__"),
+		},
+		TargetName: ptr.String("__TargetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11592,7 +13994,11 @@ func TestCheckResponseSnapshot_UpdateSubscriptionRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriptionRequest(context.Background(), &UpdateSubscriptionRequestInput{})
+	got, err := svc.UpdateSubscriptionRequest(context.Background(), &UpdateSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		RequestReason:    ptr.String("__RequestReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11643,7 +14049,33 @@ func TestCheckResponseSnapshot_UpdateSubscriptionTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriptionTarget(context.Background(), &UpdateSubscriptionTargetInput{})
+	got, err := svc.UpdateSubscriptionTarget(context.Background(), &UpdateSubscriptionTargetInput{
+		DomainIdentifier:      ptr.String("__DomainIdentifier__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		Identifier:            ptr.String("__Identifier__"),
+		Name:                  ptr.String("__Name__"),
+		AuthorizedPrincipals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplicableAssetTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubscriptionTargetConfig: []types.SubscriptionTargetForm{
+			{
+				FormName: ptr.String("__FormName__"),
+				Content:  ptr.String("__Content__"),
+			},
+			{
+				FormName: ptr.String("__FormName__"),
+				Content:  ptr.String("__Content__"),
+			},
+		},
+		ManageAccessRole:              ptr.String("__ManageAccessRole__"),
+		Provider:                      ptr.String("__Provider__"),
+		SubscriptionGrantCreationMode: types.SubscriptionGrantCreationMode("AUTOMATIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11675,7 +14107,13 @@ func TestCheckResponseSnapshot_UpdateUserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserProfile(context.Background(), &UpdateUserProfileInput{})
+	got, err := svc.UpdateUserProfile(context.Background(), &UpdateUserProfileInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		UserIdentifier:   ptr.String("__UserIdentifier__"),
+		Type:             types.UserProfileType("IAM"),
+		Status:           types.UserProfileStatus("ASSIGNED"),
+		SessionName:      ptr.String("__SessionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11696,7 +14134,28 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11721,7 +14180,28 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11746,7 +14226,28 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11771,7 +14272,28 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11796,7 +14318,47 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptSubscriptionRequest(context.Background(), &AcceptSubscriptionRequestInput{})
+	_, opErr := svc.AcceptSubscriptionRequest(context.Background(), &AcceptSubscriptionRequestInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		DecisionComment:  ptr.String("__DecisionComment__"),
+		AssetScopes: []types.AcceptedAssetScope{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				FilterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AssetPermissions: []types.AssetPermission{
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+			{
+				AssetId: ptr.String("__AssetId__"),
+				Permissions: &types.PermissionsMemberS3{
+					Value: []types.S3Permission{
+						types.S3Permission("READ"),
+						types.S3Permission("READ"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11821,7 +14383,28 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11846,7 +14429,28 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -11871,7 +14475,28 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{})
+	_, opErr := svc.AcceptPredictions(context.Background(), &AcceptPredictionsInput{
+		DomainIdentifier: ptr.String("__DomainIdentifier__"),
+		Identifier:       ptr.String("__Identifier__"),
+		Revision:         ptr.String("__Revision__"),
+		AcceptRule: &types.AcceptRule{
+			Rule:      types.AcceptRuleBehavior("ALL"),
+			Threshold: ptr.Float32(1.0),
+		},
+		AcceptChoices: []types.AcceptChoice{
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+			{
+				PredictionTarget: ptr.String("__PredictionTarget__"),
+				PredictionChoice: ptr.Int32(1),
+				EditedValue:      ptr.String("__EditedValue__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

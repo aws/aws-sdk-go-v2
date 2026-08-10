@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ephemerides":[{"creationTime":946684800,"enabled":true,"ephemerisId":"__EphemerisId__","ephemerisType":"TLE","name":"__Name__","priority":1,"sourceS3Object":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"},"status":"VALIDATING"},{"creationTime":946684800,"enabled":true,"ephemerisId":"__EphemerisId__","ephemerisType":"TLE","name":"__Name__","priority":1,"sourceS3Object":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"},"status":"VALIDATING"}],"nextToken":"__NextToken__"}

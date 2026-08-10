@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateTrackerConsumer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	got, err := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -153,7 +156,13 @@ func TestCheckResponseSnapshot_BatchDeleteDevicePositionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteDevicePositionHistory(context.Background(), &BatchDeleteDevicePositionHistoryInput{})
+	got, err := svc.BatchDeleteDevicePositionHistory(context.Background(), &BatchDeleteDevicePositionHistoryInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		DeviceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +198,13 @@ func TestCheckResponseSnapshot_BatchDeleteGeofence(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteGeofence(context.Background(), &BatchDeleteGeofenceInput{})
+	got, err := svc.BatchDeleteGeofence(context.Background(), &BatchDeleteGeofenceInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		GeofenceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +242,39 @@ func TestCheckResponseSnapshot_BatchEvaluateGeofences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchEvaluateGeofences(context.Background(), &BatchEvaluateGeofencesInput{})
+	got, err := svc.BatchEvaluateGeofences(context.Background(), &BatchEvaluateGeofencesInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		DevicePositionUpdates: []types.DevicePositionUpdate{
+			{
+				DeviceId:   ptr.String("__DeviceId__"),
+				SampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Accuracy: &types.PositionalAccuracy{
+					Horizontal: ptr.Float64(1.0),
+				},
+				PositionProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DeviceId:   ptr.String("__DeviceId__"),
+				SampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Accuracy: &types.PositionalAccuracy{
+					Horizontal: ptr.Float64(1.0),
+				},
+				PositionProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +342,13 @@ func TestCheckResponseSnapshot_BatchGetDevicePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDevicePosition(context.Background(), &BatchGetDevicePositionInput{})
+	got, err := svc.BatchGetDevicePosition(context.Background(), &BatchGetDevicePositionInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		DeviceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +396,179 @@ func TestCheckResponseSnapshot_BatchPutGeofence(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutGeofence(context.Background(), &BatchPutGeofenceInput{})
+	got, err := svc.BatchPutGeofence(context.Background(), &BatchPutGeofenceInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		Entries: []types.BatchPutGeofenceRequestEntry{
+			{
+				GeofenceId: ptr.String("__GeofenceId__"),
+				Geometry: &types.GeofenceGeometry{
+					Polygon: [][][]float64{
+						{
+							{
+								1.0,
+								1.0,
+							},
+							{
+								1.0,
+								1.0,
+							},
+						},
+						{
+							{
+								1.0,
+								1.0,
+							},
+							{
+								1.0,
+								1.0,
+							},
+						},
+					},
+					Circle: &types.Circle{
+						Center: []float64{
+							1.0,
+							1.0,
+						},
+						Radius: ptr.Float64(1.0),
+					},
+					Geobuf: []byte("blob"),
+					MultiPolygon: [][][][]float64{
+						{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+					},
+				},
+				GeofenceProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				GeofenceId: ptr.String("__GeofenceId__"),
+				Geometry: &types.GeofenceGeometry{
+					Polygon: [][][]float64{
+						{
+							{
+								1.0,
+								1.0,
+							},
+							{
+								1.0,
+								1.0,
+							},
+						},
+						{
+							{
+								1.0,
+								1.0,
+							},
+							{
+								1.0,
+								1.0,
+							},
+						},
+					},
+					Circle: &types.Circle{
+						Center: []float64{
+							1.0,
+							1.0,
+						},
+						Radius: ptr.Float64(1.0),
+					},
+					Geobuf: []byte("blob"),
+					MultiPolygon: [][][][]float64{
+						{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+					},
+				},
+				GeofenceProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +606,39 @@ func TestCheckResponseSnapshot_BatchUpdateDevicePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateDevicePosition(context.Background(), &BatchUpdateDevicePositionInput{})
+	got, err := svc.BatchUpdateDevicePosition(context.Background(), &BatchUpdateDevicePositionInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		Updates: []types.DevicePositionUpdate{
+			{
+				DeviceId:   ptr.String("__DeviceId__"),
+				SampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Accuracy: &types.PositionalAccuracy{
+					Horizontal: ptr.Float64(1.0),
+				},
+				PositionProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DeviceId:   ptr.String("__DeviceId__"),
+				SampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Accuracy: &types.PositionalAccuracy{
+					Horizontal: ptr.Float64(1.0),
+				},
+				PositionProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -517,7 +774,53 @@ func TestCheckResponseSnapshot_CalculateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CalculateRoute(context.Background(), &CalculateRouteInput{})
+	got, err := svc.CalculateRoute(context.Background(), &CalculateRouteInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+		DeparturePosition: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationPosition: []float64{
+			1.0,
+			1.0,
+		},
+		WaypointPositions: [][]float64{
+			{
+				1.0,
+				1.0,
+			},
+			{
+				1.0,
+				1.0,
+			},
+		},
+		TravelMode:         types.TravelMode("Car"),
+		DepartureTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DepartNow:          ptr.Bool(true),
+		DistanceUnit:       types.DistanceUnit("Kilometers"),
+		IncludeLegGeometry: ptr.Bool(true),
+		CarModeOptions: &types.CalculateRouteCarModeOptions{
+			AvoidFerries: ptr.Bool(true),
+			AvoidTolls:   ptr.Bool(true),
+		},
+		TruckModeOptions: &types.CalculateRouteTruckModeOptions{
+			AvoidFerries: ptr.Bool(true),
+			AvoidTolls:   ptr.Bool(true),
+			Dimensions: &types.TruckDimensions{
+				Length: ptr.Float64(1.0),
+				Height: ptr.Float64(1.0),
+				Width:  ptr.Float64(1.0),
+				Unit:   types.DimensionUnit("Meters"),
+			},
+			Weight: &types.TruckWeight{
+				Total: ptr.Float64(1.0),
+				Unit:  types.VehicleWeightUnit("Kilograms"),
+			},
+		},
+		ArrivalTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OptimizeFor: types.OptimizationMode("FastestRoute"),
+		Key:         ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +904,52 @@ func TestCheckResponseSnapshot_CalculateRouteMatrix(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CalculateRouteMatrix(context.Background(), &CalculateRouteMatrixInput{})
+	got, err := svc.CalculateRouteMatrix(context.Background(), &CalculateRouteMatrixInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+		DeparturePositions: [][]float64{
+			{
+				1.0,
+				1.0,
+			},
+			{
+				1.0,
+				1.0,
+			},
+		},
+		DestinationPositions: [][]float64{
+			{
+				1.0,
+				1.0,
+			},
+			{
+				1.0,
+				1.0,
+			},
+		},
+		TravelMode:    types.TravelMode("Car"),
+		DepartureTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DepartNow:     ptr.Bool(true),
+		DistanceUnit:  types.DistanceUnit("Kilometers"),
+		CarModeOptions: &types.CalculateRouteCarModeOptions{
+			AvoidFerries: ptr.Bool(true),
+			AvoidTolls:   ptr.Bool(true),
+		},
+		TruckModeOptions: &types.CalculateRouteTruckModeOptions{
+			AvoidFerries: ptr.Bool(true),
+			AvoidTolls:   ptr.Bool(true),
+			Dimensions: &types.TruckDimensions{
+				Length: ptr.Float64(1.0),
+				Height: ptr.Float64(1.0),
+				Width:  ptr.Float64(1.0),
+				Unit:   types.DimensionUnit("Meters"),
+			},
+			Weight: &types.TruckWeight{
+				Total: ptr.Float64(1.0),
+				Unit:  types.VehicleWeightUnit("Kilograms"),
+			},
+		},
+		Key: ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +972,9 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJob(context.Background(), &CancelJobInput{})
+	got, err := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +997,16 @@ func TestCheckResponseSnapshot_CreateGeofenceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGeofenceCollection(context.Background(), &CreateGeofenceCollectionInput{})
+	got, err := svc.CreateGeofenceCollection(context.Background(), &CreateGeofenceCollectionInput{
+		CollectionName:        ptr.String("__CollectionName__"),
+		PricingPlan:           types.PricingPlan("RequestBasedUsage"),
+		PricingPlanDataSource: ptr.String("__PricingPlanDataSource__"),
+		Description:           ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +1030,47 @@ func TestCheckResponseSnapshot_CreateKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{
+		KeyName: ptr.String("__KeyName__"),
+		Restrictions: &types.ApiKeyRestrictions{
+			AllowActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowResources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowReferers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowAndroidApps: []types.AndroidApp{
+				{
+					Package:                ptr.String("__Package__"),
+					CertificateFingerprint: ptr.String("__CertificateFingerprint__"),
+				},
+				{
+					Package:                ptr.String("__Package__"),
+					CertificateFingerprint: ptr.String("__CertificateFingerprint__"),
+				},
+			},
+			AllowAppleApps: []types.AppleApp{
+				{
+					BundleId: ptr.String("__BundleId__"),
+				},
+				{
+					BundleId: ptr.String("__BundleId__"),
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ExpireTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NoExpiry:    ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +1093,22 @@ func TestCheckResponseSnapshot_CreateMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMap(context.Background(), &CreateMapInput{})
+	got, err := svc.CreateMap(context.Background(), &CreateMapInput{
+		MapName: ptr.String("__MapName__"),
+		Configuration: &types.MapConfiguration{
+			Style:         ptr.String("__Style__"),
+			PoliticalView: ptr.String("__PoliticalView__"),
+			CustomLayers: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PricingPlan: types.PricingPlan("RequestBasedUsage"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -717,7 +1131,18 @@ func TestCheckResponseSnapshot_CreatePlaceIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlaceIndex(context.Background(), &CreatePlaceIndexInput{})
+	got, err := svc.CreatePlaceIndex(context.Background(), &CreatePlaceIndexInput{
+		IndexName:   ptr.String("__IndexName__"),
+		DataSource:  ptr.String("__DataSource__"),
+		PricingPlan: types.PricingPlan("RequestBasedUsage"),
+		Description: ptr.String("__Description__"),
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			IntendedUse: types.IntendedUse("SingleUse"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -740,7 +1165,15 @@ func TestCheckResponseSnapshot_CreateRouteCalculator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRouteCalculator(context.Background(), &CreateRouteCalculatorInput{})
+	got, err := svc.CreateRouteCalculator(context.Background(), &CreateRouteCalculatorInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+		DataSource:     ptr.String("__DataSource__"),
+		PricingPlan:    types.PricingPlan("RequestBasedUsage"),
+		Description:    ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +1196,19 @@ func TestCheckResponseSnapshot_CreateTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTracker(context.Background(), &CreateTrackerInput{})
+	got, err := svc.CreateTracker(context.Background(), &CreateTrackerInput{
+		TrackerName:           ptr.String("__TrackerName__"),
+		PricingPlan:           types.PricingPlan("RequestBasedUsage"),
+		KmsKeyId:              ptr.String("__KmsKeyId__"),
+		PricingPlanDataSource: ptr.String("__PricingPlanDataSource__"),
+		Description:           ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PositionFiltering:             types.PositionFiltering("TimeBased"),
+		EventBridgeEnabled:            ptr.Bool(true),
+		KmsKeyEnableGeospatialQueries: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +1227,9 @@ func TestCheckResponseSnapshot_DeleteGeofenceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGeofenceCollection(context.Background(), &DeleteGeofenceCollectionInput{})
+	got, err := svc.DeleteGeofenceCollection(context.Background(), &DeleteGeofenceCollectionInput{
+		CollectionName: ptr.String("__CollectionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1248,10 @@ func TestCheckResponseSnapshot_DeleteKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{})
+	got, err := svc.DeleteKey(context.Background(), &DeleteKeyInput{
+		KeyName:     ptr.String("__KeyName__"),
+		ForceDelete: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +1270,9 @@ func TestCheckResponseSnapshot_DeleteMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMap(context.Background(), &DeleteMapInput{})
+	got, err := svc.DeleteMap(context.Background(), &DeleteMapInput{
+		MapName: ptr.String("__MapName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +1291,9 @@ func TestCheckResponseSnapshot_DeletePlaceIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlaceIndex(context.Background(), &DeletePlaceIndexInput{})
+	got, err := svc.DeletePlaceIndex(context.Background(), &DeletePlaceIndexInput{
+		IndexName: ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1312,9 @@ func TestCheckResponseSnapshot_DeleteRouteCalculator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouteCalculator(context.Background(), &DeleteRouteCalculatorInput{})
+	got, err := svc.DeleteRouteCalculator(context.Background(), &DeleteRouteCalculatorInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -877,7 +1333,9 @@ func TestCheckResponseSnapshot_DeleteTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTracker(context.Background(), &DeleteTrackerInput{})
+	got, err := svc.DeleteTracker(context.Background(), &DeleteTrackerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1367,9 @@ func TestCheckResponseSnapshot_DescribeGeofenceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGeofenceCollection(context.Background(), &DescribeGeofenceCollectionInput{})
+	got, err := svc.DescribeGeofenceCollection(context.Background(), &DescribeGeofenceCollectionInput{
+		CollectionName: ptr.String("__CollectionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1431,9 @@ func TestCheckResponseSnapshot_DescribeKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKey(context.Background(), &DescribeKeyInput{})
+	got, err := svc.DescribeKey(context.Background(), &DescribeKeyInput{
+		KeyName: ptr.String("__KeyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1009,7 +1471,9 @@ func TestCheckResponseSnapshot_DescribeMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMap(context.Background(), &DescribeMapInput{})
+	got, err := svc.DescribeMap(context.Background(), &DescribeMapInput{
+		MapName: ptr.String("__MapName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1042,7 +1506,9 @@ func TestCheckResponseSnapshot_DescribePlaceIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePlaceIndex(context.Background(), &DescribePlaceIndexInput{})
+	got, err := svc.DescribePlaceIndex(context.Background(), &DescribePlaceIndexInput{
+		IndexName: ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1072,7 +1538,9 @@ func TestCheckResponseSnapshot_DescribeRouteCalculator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRouteCalculator(context.Background(), &DescribeRouteCalculatorInput{})
+	got, err := svc.DescribeRouteCalculator(context.Background(), &DescribeRouteCalculatorInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1106,7 +1574,9 @@ func TestCheckResponseSnapshot_DescribeTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTracker(context.Background(), &DescribeTrackerInput{})
+	got, err := svc.DescribeTracker(context.Background(), &DescribeTrackerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1595,10 @@ func TestCheckResponseSnapshot_DisassociateTrackerConsumer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTrackerConsumer(context.Background(), &DisassociateTrackerConsumerInput{})
+	got, err := svc.DisassociateTrackerConsumer(context.Background(), &DisassociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1172,7 +1645,21 @@ func TestCheckResponseSnapshot_ForecastGeofenceEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ForecastGeofenceEvents(context.Background(), &ForecastGeofenceEventsInput{})
+	got, err := svc.ForecastGeofenceEvents(context.Background(), &ForecastGeofenceEventsInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		DeviceState: &types.ForecastGeofenceEventsDeviceState{
+			Position: []float64{
+				1.0,
+				1.0,
+			},
+			Speed: ptr.Float64(1.0),
+		},
+		TimeHorizonMinutes: ptr.Float64(1.0),
+		DistanceUnit:       types.DistanceUnit("Kilometers"),
+		SpeedUnit:          types.SpeedUnit("KilometersPerHour"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1692,10 @@ func TestCheckResponseSnapshot_GetDevicePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevicePosition(context.Background(), &GetDevicePositionInput{})
+	got, err := svc.GetDevicePosition(context.Background(), &GetDevicePositionInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		DeviceId:    ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1748,14 @@ func TestCheckResponseSnapshot_GetDevicePositionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevicePositionHistory(context.Background(), &GetDevicePositionHistoryInput{})
+	got, err := svc.GetDevicePositionHistory(context.Background(), &GetDevicePositionHistoryInput{
+		TrackerName:        ptr.String("__TrackerName__"),
+		DeviceId:           ptr.String("__DeviceId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		StartTimeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1363,7 +1860,10 @@ func TestCheckResponseSnapshot_GetGeofence(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGeofence(context.Background(), &GetGeofenceInput{})
+	got, err := svc.GetGeofence(context.Background(), &GetGeofenceInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		GeofenceId:     ptr.String("__GeofenceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +1918,9 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJob(context.Background(), &GetJobInput{})
+	got, err := svc.GetJob(context.Background(), &GetJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1441,7 +1943,12 @@ func TestCheckResponseSnapshot_GetMapGlyphs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMapGlyphs(context.Background(), &GetMapGlyphsInput{})
+	got, err := svc.GetMapGlyphs(context.Background(), &GetMapGlyphsInput{
+		MapName:          ptr.String("__MapName__"),
+		FontStack:        ptr.String("__FontStack__"),
+		FontUnicodeRange: ptr.String("__FontUnicodeRange__"),
+		Key:              ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1464,7 +1971,11 @@ func TestCheckResponseSnapshot_GetMapSprites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMapSprites(context.Background(), &GetMapSpritesInput{})
+	got, err := svc.GetMapSprites(context.Background(), &GetMapSpritesInput{
+		MapName:  ptr.String("__MapName__"),
+		FileName: ptr.String("__FileName__"),
+		Key:      ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1487,7 +1998,10 @@ func TestCheckResponseSnapshot_GetMapStyleDescriptor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMapStyleDescriptor(context.Background(), &GetMapStyleDescriptorInput{})
+	got, err := svc.GetMapStyleDescriptor(context.Background(), &GetMapStyleDescriptorInput{
+		MapName: ptr.String("__MapName__"),
+		Key:     ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1510,7 +2024,13 @@ func TestCheckResponseSnapshot_GetMapTile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMapTile(context.Background(), &GetMapTileInput{})
+	got, err := svc.GetMapTile(context.Background(), &GetMapTileInput{
+		MapName: ptr.String("__MapName__"),
+		Z:       ptr.String("__Z__"),
+		X:       ptr.String("__X__"),
+		Y:       ptr.String("__Y__"),
+		Key:     ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1563,7 +2083,12 @@ func TestCheckResponseSnapshot_GetPlace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlace(context.Background(), &GetPlaceInput{})
+	got, err := svc.GetPlace(context.Background(), &GetPlaceInput{
+		IndexName: ptr.String("__IndexName__"),
+		PlaceId:   ptr.String("__PlaceId__"),
+		Language:  ptr.String("__Language__"),
+		Key:       ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1614,7 +2139,35 @@ func TestCheckResponseSnapshot_ListDevicePositions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevicePositions(context.Background(), &ListDevicePositionsInput{})
+	got, err := svc.ListDevicePositions(context.Background(), &ListDevicePositionsInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		FilterGeometry: &types.TrackingFilterGeometry{
+			Polygon: [][][]float64{
+				{
+					{
+						1.0,
+						1.0,
+					},
+					{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					{
+						1.0,
+						1.0,
+					},
+					{
+						1.0,
+						1.0,
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1653,7 +2206,10 @@ func TestCheckResponseSnapshot_ListGeofenceCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGeofenceCollections(context.Background(), &ListGeofenceCollectionsInput{})
+	got, err := svc.ListGeofenceCollections(context.Background(), &ListGeofenceCollectionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1850,7 +2406,11 @@ func TestCheckResponseSnapshot_ListGeofences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGeofences(context.Background(), &ListGeofencesInput{})
+	got, err := svc.ListGeofences(context.Background(), &ListGeofencesInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1941,7 +2501,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		Filter: &types.JobsFilter{
+			JobStatus: types.JobStatus("Pending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2042,7 +2608,13 @@ func TestCheckResponseSnapshot_ListKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeys(context.Background(), &ListKeysInput{})
+	got, err := svc.ListKeys(context.Background(), &ListKeysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.ApiKeyFilter{
+			KeyStatus: types.Status("Active"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2081,7 +2653,10 @@ func TestCheckResponseSnapshot_ListMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMaps(context.Background(), &ListMapsInput{})
+	got, err := svc.ListMaps(context.Background(), &ListMapsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2120,7 +2695,10 @@ func TestCheckResponseSnapshot_ListPlaceIndexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlaceIndexes(context.Background(), &ListPlaceIndexesInput{})
+	got, err := svc.ListPlaceIndexes(context.Background(), &ListPlaceIndexesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2159,7 +2737,10 @@ func TestCheckResponseSnapshot_ListRouteCalculators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRouteCalculators(context.Background(), &ListRouteCalculatorsInput{})
+	got, err := svc.ListRouteCalculators(context.Background(), &ListRouteCalculatorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2182,7 +2763,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2207,7 +2790,11 @@ func TestCheckResponseSnapshot_ListTrackerConsumers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrackerConsumers(context.Background(), &ListTrackerConsumersInput{})
+	got, err := svc.ListTrackerConsumers(context.Background(), &ListTrackerConsumersInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2246,7 +2833,10 @@ func TestCheckResponseSnapshot_ListTrackers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrackers(context.Background(), &ListTrackersInput{})
+	got, err := svc.ListTrackers(context.Background(), &ListTrackersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2269,7 +2859,91 @@ func TestCheckResponseSnapshot_PutGeofence(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGeofence(context.Background(), &PutGeofenceInput{})
+	got, err := svc.PutGeofence(context.Background(), &PutGeofenceInput{
+		CollectionName: ptr.String("__CollectionName__"),
+		GeofenceId:     ptr.String("__GeofenceId__"),
+		Geometry: &types.GeofenceGeometry{
+			Polygon: [][][]float64{
+				{
+					{
+						1.0,
+						1.0,
+					},
+					{
+						1.0,
+						1.0,
+					},
+				},
+				{
+					{
+						1.0,
+						1.0,
+					},
+					{
+						1.0,
+						1.0,
+					},
+				},
+			},
+			Circle: &types.Circle{
+				Center: []float64{
+					1.0,
+					1.0,
+				},
+				Radius: ptr.Float64(1.0),
+			},
+			Geobuf: []byte("blob"),
+			MultiPolygon: [][][][]float64{
+				{
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+				},
+				{
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+				},
+			},
+		},
+		GeofenceProperties: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2374,7 +3048,16 @@ func TestCheckResponseSnapshot_SearchPlaceIndexForPosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchPlaceIndexForPosition(context.Background(), &SearchPlaceIndexForPositionInput{})
+	got, err := svc.SearchPlaceIndexForPosition(context.Background(), &SearchPlaceIndexForPositionInput{
+		IndexName: ptr.String("__IndexName__"),
+		Position: []float64{
+			1.0,
+			1.0,
+		},
+		MaxResults: ptr.Int32(1),
+		Language:   ptr.String("__Language__"),
+		Key:        ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2442,7 +3125,29 @@ func TestCheckResponseSnapshot_SearchPlaceIndexForSuggestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchPlaceIndexForSuggestions(context.Background(), &SearchPlaceIndexForSuggestionsInput{})
+	got, err := svc.SearchPlaceIndexForSuggestions(context.Background(), &SearchPlaceIndexForSuggestionsInput{
+		IndexName: ptr.String("__IndexName__"),
+		Text:      ptr.String("__Text__"),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		FilterBBox: []float64{
+			1.0,
+			1.0,
+		},
+		FilterCountries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Language:   ptr.String("__Language__"),
+		FilterCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Key: ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2566,7 +3271,29 @@ func TestCheckResponseSnapshot_SearchPlaceIndexForText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchPlaceIndexForText(context.Background(), &SearchPlaceIndexForTextInput{})
+	got, err := svc.SearchPlaceIndexForText(context.Background(), &SearchPlaceIndexForTextInput{
+		IndexName: ptr.String("__IndexName__"),
+		Text:      ptr.String("__Text__"),
+		BiasPosition: []float64{
+			1.0,
+			1.0,
+		},
+		FilterBBox: []float64{
+			1.0,
+			1.0,
+		},
+		FilterCountries: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Language:   ptr.String("__Language__"),
+		FilterCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Key: ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2590,7 +3317,31 @@ func TestCheckResponseSnapshot_StartJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJob(context.Background(), &StartJobInput{})
+	got, err := svc.StartJob(context.Background(), &StartJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Action:      types.JobAction("ValidateAddress"),
+		ActionOptions: &types.JobActionOptions{
+			ValidateAddress: &types.ValidateAddressActionOptions{
+				AdditionalFeatures: []types.ValidateAddressAdditionalFeature{
+					types.ValidateAddressAdditionalFeature("Position"),
+					types.ValidateAddressAdditionalFeature("Position"),
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		InputOptions: &types.JobInputOptions{
+			Location: ptr.String("__Location__"),
+			Format:   types.JobInputFormat("Parquet"),
+		},
+		Name: ptr.String("__Name__"),
+		OutputOptions: &types.JobOutputOptions{
+			Format:   types.JobOutputFormat("Parquet"),
+			Location: ptr.String("__Location__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2609,7 +3360,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2628,7 +3384,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2651,7 +3413,12 @@ func TestCheckResponseSnapshot_UpdateGeofenceCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGeofenceCollection(context.Background(), &UpdateGeofenceCollectionInput{})
+	got, err := svc.UpdateGeofenceCollection(context.Background(), &UpdateGeofenceCollectionInput{
+		CollectionName:        ptr.String("__CollectionName__"),
+		PricingPlan:           types.PricingPlan("RequestBasedUsage"),
+		PricingPlanDataSource: ptr.String("__PricingPlanDataSource__"),
+		Description:           ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2674,7 +3441,45 @@ func TestCheckResponseSnapshot_UpdateKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKey(context.Background(), &UpdateKeyInput{})
+	got, err := svc.UpdateKey(context.Background(), &UpdateKeyInput{
+		KeyName:     ptr.String("__KeyName__"),
+		Description: ptr.String("__Description__"),
+		ExpireTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NoExpiry:    ptr.Bool(true),
+		ForceUpdate: ptr.Bool(true),
+		Restrictions: &types.ApiKeyRestrictions{
+			AllowActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowResources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowReferers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowAndroidApps: []types.AndroidApp{
+				{
+					Package:                ptr.String("__Package__"),
+					CertificateFingerprint: ptr.String("__CertificateFingerprint__"),
+				},
+				{
+					Package:                ptr.String("__Package__"),
+					CertificateFingerprint: ptr.String("__CertificateFingerprint__"),
+				},
+			},
+			AllowAppleApps: []types.AppleApp{
+				{
+					BundleId: ptr.String("__BundleId__"),
+				},
+				{
+					BundleId: ptr.String("__BundleId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2697,7 +3502,18 @@ func TestCheckResponseSnapshot_UpdateMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMap(context.Background(), &UpdateMapInput{})
+	got, err := svc.UpdateMap(context.Background(), &UpdateMapInput{
+		MapName:     ptr.String("__MapName__"),
+		PricingPlan: types.PricingPlan("RequestBasedUsage"),
+		Description: ptr.String("__Description__"),
+		ConfigurationUpdate: &types.MapConfigurationUpdate{
+			PoliticalView: ptr.String("__PoliticalView__"),
+			CustomLayers: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2720,7 +3536,14 @@ func TestCheckResponseSnapshot_UpdatePlaceIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlaceIndex(context.Background(), &UpdatePlaceIndexInput{})
+	got, err := svc.UpdatePlaceIndex(context.Background(), &UpdatePlaceIndexInput{
+		IndexName:   ptr.String("__IndexName__"),
+		PricingPlan: types.PricingPlan("RequestBasedUsage"),
+		Description: ptr.String("__Description__"),
+		DataSourceConfiguration: &types.DataSourceConfiguration{
+			IntendedUse: types.IntendedUse("SingleUse"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2743,7 +3566,11 @@ func TestCheckResponseSnapshot_UpdateRouteCalculator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRouteCalculator(context.Background(), &UpdateRouteCalculatorInput{})
+	got, err := svc.UpdateRouteCalculator(context.Background(), &UpdateRouteCalculatorInput{
+		CalculatorName: ptr.String("__CalculatorName__"),
+		PricingPlan:    types.PricingPlan("RequestBasedUsage"),
+		Description:    ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2766,7 +3593,15 @@ func TestCheckResponseSnapshot_UpdateTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTracker(context.Background(), &UpdateTrackerInput{})
+	got, err := svc.UpdateTracker(context.Background(), &UpdateTrackerInput{
+		TrackerName:                   ptr.String("__TrackerName__"),
+		PricingPlan:                   types.PricingPlan("RequestBasedUsage"),
+		PricingPlanDataSource:         ptr.String("__PricingPlanDataSource__"),
+		Description:                   ptr.String("__Description__"),
+		PositionFiltering:             types.PositionFiltering("TimeBased"),
+		EventBridgeEnabled:            ptr.Bool(true),
+		KmsKeyEnableGeospatialQueries: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2801,7 +3636,96 @@ func TestCheckResponseSnapshot_VerifyDevicePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyDevicePosition(context.Background(), &VerifyDevicePositionInput{})
+	got, err := svc.VerifyDevicePosition(context.Background(), &VerifyDevicePositionInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		DeviceState: &types.DeviceState{
+			DeviceId:   ptr.String("__DeviceId__"),
+			SampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Position: []float64{
+				1.0,
+				1.0,
+			},
+			Accuracy: &types.PositionalAccuracy{
+				Horizontal: ptr.Float64(1.0),
+			},
+			Ipv4Address: ptr.String("__Ipv4Address__"),
+			WiFiAccessPoints: []types.WiFiAccessPoint{
+				{
+					MacAddress: ptr.String("__MacAddress__"),
+					Rss:        ptr.Int32(1),
+				},
+				{
+					MacAddress: ptr.String("__MacAddress__"),
+					Rss:        ptr.Int32(1),
+				},
+			},
+			CellSignals: &types.CellSignals{
+				LteCellDetails: []types.LteCellDetails{
+					{
+						CellId: 1,
+						Mcc:    ptr.Int32(1),
+						Mnc:    ptr.Int32(1),
+						LocalId: &types.LteLocalId{
+							Earfcn: 1,
+							Pci:    1,
+						},
+						NetworkMeasurements: []types.LteNetworkMeasurements{
+							{
+								Earfcn: 1,
+								CellId: 1,
+								Pci:    1,
+								Rsrp:   ptr.Int32(1),
+								Rsrq:   ptr.Float32(1.0),
+							},
+							{
+								Earfcn: 1,
+								CellId: 1,
+								Pci:    1,
+								Rsrp:   ptr.Int32(1),
+								Rsrq:   ptr.Float32(1.0),
+							},
+						},
+						TimingAdvance: ptr.Int32(1),
+						NrCapable:     ptr.Bool(true),
+						Rsrp:          ptr.Int32(1),
+						Rsrq:          ptr.Float32(1.0),
+						Tac:           ptr.Int32(1),
+					},
+					{
+						CellId: 1,
+						Mcc:    ptr.Int32(1),
+						Mnc:    ptr.Int32(1),
+						LocalId: &types.LteLocalId{
+							Earfcn: 1,
+							Pci:    1,
+						},
+						NetworkMeasurements: []types.LteNetworkMeasurements{
+							{
+								Earfcn: 1,
+								CellId: 1,
+								Pci:    1,
+								Rsrp:   ptr.Int32(1),
+								Rsrq:   ptr.Float32(1.0),
+							},
+							{
+								Earfcn: 1,
+								CellId: 1,
+								Pci:    1,
+								Rsrp:   ptr.Int32(1),
+								Rsrq:   ptr.Float32(1.0),
+							},
+						},
+						TimingAdvance: ptr.Int32(1),
+						NrCapable:     ptr.Bool(true),
+						Rsrp:          ptr.Int32(1),
+						Rsrq:          ptr.Float32(1.0),
+						Tac:           ptr.Int32(1),
+					},
+				},
+			},
+		},
+		DistanceUnit: types.DistanceUnit("Kilometers"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2822,7 +3746,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2847,7 +3774,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2872,7 +3802,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2897,7 +3830,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2922,7 +3858,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2947,7 +3886,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2983,7 +3925,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{})
+	_, opErr := svc.AssociateTrackerConsumer(context.Background(), &AssociateTrackerConsumerInput{
+		TrackerName: ptr.String("__TrackerName__"),
+		ConsumerArn: ptr.String("__ConsumerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

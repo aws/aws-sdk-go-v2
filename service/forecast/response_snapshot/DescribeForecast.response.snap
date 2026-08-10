@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeForecast
+
+{"CreationTime":946684800,"DatasetGroupArn":"__DatasetGroupArn__","EstimatedTimeRemainingInMinutes":1,"ForecastArn":"__ForecastArn__","ForecastName":"__ForecastName__","ForecastTypes":["__Member__","__Member__"],"LastModificationTime":946684800,"Message":"__Message__","PredictorArn":"__PredictorArn__","Status":"__Status__","TimeSeriesSelector":{"TimeSeriesIdentifiers":{"DataSource":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"Format":"__Format__","Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]}}}}

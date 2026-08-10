@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DeleteResourcePolicy
+
+{"__type":"ResourcePolicyInvalidParameterException","Message":"__Message__","ParameterNames":["__Member__","__Member__"]}

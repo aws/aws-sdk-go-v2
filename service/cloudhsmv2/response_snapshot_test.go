@@ -124,7 +124,20 @@ func TestCheckResponseSnapshot_CopyBackupToRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	got, err := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +222,30 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		BackupRetentionPolicy: &types.BackupRetentionPolicy{
+			Type:  types.BackupRetentionType("DAYS"),
+			Value: ptr.String("__Value__"),
+		},
+		HsmType:        ptr.String("__HsmType__"),
+		SourceBackupId: ptr.String("__SourceBackupId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Mode: types.ClusterMode("FIPS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +277,11 @@ func TestCheckResponseSnapshot_CreateHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHsm(context.Background(), &CreateHsmInput{})
+	got, err := svc.CreateHsm(context.Background(), &CreateHsmInput{
+		ClusterId:        ptr.String("__ClusterId__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		IpAddress:        ptr.String("__IpAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +326,9 @@ func TestCheckResponseSnapshot_DeleteBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupId: ptr.String("__BackupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +413,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +436,12 @@ func TestCheckResponseSnapshot_DeleteHsm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHsm(context.Background(), &DeleteHsmInput{})
+	got, err := svc.DeleteHsm(context.Background(), &DeleteHsmInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		HsmId:     ptr.String("__HsmId__"),
+		EniId:     ptr.String("__EniId__"),
+		EniIp:     ptr.String("__EniIp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +463,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +538,18 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBackups(context.Background(), &DescribeBackupsInput{})
+	got, err := svc.DescribeBackups(context.Background(), &DescribeBackupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Shared:        ptr.Bool(true),
+		SortAscending: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +702,16 @@ func TestCheckResponseSnapshot_DescribeClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{})
+	got, err := svc.DescribeClusters(context.Background(), &DescribeClustersInput{
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +732,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -683,7 +756,11 @@ func TestCheckResponseSnapshot_InitializeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitializeCluster(context.Background(), &InitializeClusterInput{})
+	got, err := svc.InitializeCluster(context.Background(), &InitializeClusterInput{
+		ClusterId:   ptr.String("__ClusterId__"),
+		SignedCert:  ptr.String("__SignedCert__"),
+		TrustAnchor: ptr.String("__TrustAnchor__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +791,11 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +840,10 @@ func TestCheckResponseSnapshot_ModifyBackupAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyBackupAttributes(context.Background(), &ModifyBackupAttributesInput{})
+	got, err := svc.ModifyBackupAttributes(context.Background(), &ModifyBackupAttributesInput{
+		BackupId:     ptr.String("__BackupId__"),
+		NeverExpires: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +928,14 @@ func TestCheckResponseSnapshot_ModifyCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCluster(context.Background(), &ModifyClusterInput{})
+	got, err := svc.ModifyCluster(context.Background(), &ModifyClusterInput{
+		HsmType: ptr.String("__HsmType__"),
+		BackupRetentionPolicy: &types.BackupRetentionPolicy{
+			Type:  types.BackupRetentionType("DAYS"),
+			Value: ptr.String("__Value__"),
+		},
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +957,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -911,7 +1005,9 @@ func TestCheckResponseSnapshot_RestoreBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreBackup(context.Background(), &RestoreBackupInput{})
+	got, err := svc.RestoreBackup(context.Background(), &RestoreBackupInput{
+		BackupId: ptr.String("__BackupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -930,7 +1026,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -949,7 +1057,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeyList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1084,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmAccessDeniedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -995,7 +1122,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmInternalFailureException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1020,7 +1160,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmInvalidRequestException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1045,7 +1198,19 @@ func TestCheckResponseSnapshot_Error_CloudHsmResourceLimitExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1070,7 +1235,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmResourceNotFoundException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1095,7 +1273,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1120,7 +1311,20 @@ func TestCheckResponseSnapshot_Error_CloudHsmTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{})
+	_, opErr := svc.CopyBackupToRegion(context.Background(), &CopyBackupToRegionInput{
+		DestinationRegion: ptr.String("__DestinationRegion__"),
+		BackupId:          ptr.String("__BackupId__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

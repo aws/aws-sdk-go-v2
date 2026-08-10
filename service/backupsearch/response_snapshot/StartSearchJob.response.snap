@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationTime":946684800,"SearchJobArn":"__SearchJobArn__","SearchJobIdentifier":"__SearchJobIdentifier__"}

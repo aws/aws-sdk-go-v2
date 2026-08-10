@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"availabilityZoneIds":["__Member__","__Member__"],"azMode":"SINGLE","createdTimestamp":946684800,"description":"__Description__","environmentId":"__EnvironmentId__","nas1Configuration":{"size":1,"type":"SSD_1000"},"status":"CREATING","statusReason":"__StatusReason__","volumeArn":"__VolumeArn__","volumeName":"__VolumeName__","volumeType":"NAS_1"}

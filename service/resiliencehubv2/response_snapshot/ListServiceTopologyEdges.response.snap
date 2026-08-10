@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","serviceTopologyEdgeSummaries":[{"destinationAccount":"__DestinationAccount__","destinationRegion":"__DestinationRegion__","destinationResourceIdentifier":"__DestinationResourceIdentifier__","properties":[{"label":"__Label__","topologyType":"CONTAINMENT"},{"label":"__Label__","topologyType":"CONTAINMENT"}],"sourceAccount":"__SourceAccount__","sourceRegion":"__SourceRegion__","sourceResourceIdentifier":"__SourceResourceIdentifier__"},{"destinationAccount":"__DestinationAccount__","destinationRegion":"__DestinationRegion__","destinationResourceIdentifier":"__DestinationResourceIdentifier__","properties":[{"label":"__Label__","topologyType":"CONTAINMENT"},{"label":"__Label__","topologyType":"CONTAINMENT"}],"sourceAccount":"__SourceAccount__","sourceRegion":"__SourceRegion__","sourceResourceIdentifier":"__SourceResourceIdentifier__"}]}

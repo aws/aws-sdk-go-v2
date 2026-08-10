@@ -144,7 +144,14 @@ func TestCheckResponseSnapshot_BatchCheckLayerAvailability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	got, err := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +199,20 @@ func TestCheckResponseSnapshot_BatchDeleteImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteImage(context.Background(), &BatchDeleteImageInput{})
+	got, err := svc.BatchDeleteImage(context.Background(), &BatchDeleteImageInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		ImageIds: []types.ImageIdentifier{
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +236,15 @@ func TestCheckResponseSnapshot_CompleteLayerUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	got, err := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +286,33 @@ func TestCheckResponseSnapshot_CreateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +339,11 @@ func TestCheckResponseSnapshot_DeleteRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{})
+	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Force:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +366,10 @@ func TestCheckResponseSnapshot_DeleteRepositoryPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepositoryPolicy(context.Background(), &DeleteRepositoryPolicyInput{})
+	got, err := svc.DeleteRepositoryPolicy(context.Background(), &DeleteRepositoryPolicyInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +414,12 @@ func TestCheckResponseSnapshot_DescribeImageTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImageTags(context.Background(), &DescribeImageTagsInput{})
+	got, err := svc.DescribeImageTags(context.Background(), &DescribeImageTagsInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +468,22 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImages(context.Background(), &DescribeImagesInput{})
+	got, err := svc.DescribeImages(context.Background(), &DescribeImagesInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		ImageIds: []types.ImageIdentifier{
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +546,10 @@ func TestCheckResponseSnapshot_DescribeRegistries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRegistries(context.Background(), &DescribeRegistriesInput{})
+	got, err := svc.DescribeRegistries(context.Background(), &DescribeRegistriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +586,15 @@ func TestCheckResponseSnapshot_DescribeRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRepositories(context.Background(), &DescribeRepositoriesInput{})
+	got, err := svc.DescribeRepositories(context.Background(), &DescribeRepositoriesInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -584,7 +676,10 @@ func TestCheckResponseSnapshot_GetRepositoryCatalogData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryCatalogData(context.Background(), &GetRepositoryCatalogDataInput{})
+	got, err := svc.GetRepositoryCatalogData(context.Background(), &GetRepositoryCatalogDataInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +702,10 @@ func TestCheckResponseSnapshot_GetRepositoryPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryPolicy(context.Background(), &GetRepositoryPolicyInput{})
+	got, err := svc.GetRepositoryPolicy(context.Background(), &GetRepositoryPolicyInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +727,10 @@ func TestCheckResponseSnapshot_InitiateLayerUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateLayerUpload(context.Background(), &InitiateLayerUploadInput{})
+	got, err := svc.InitiateLayerUpload(context.Background(), &InitiateLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +760,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +792,14 @@ func TestCheckResponseSnapshot_PutImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutImage(context.Background(), &PutImageInput{})
+	got, err := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -712,7 +822,9 @@ func TestCheckResponseSnapshot_PutRegistryCatalogData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRegistryCatalogData(context.Background(), &PutRegistryCatalogDataInput{})
+	got, err := svc.PutRegistryCatalogData(context.Background(), &PutRegistryCatalogDataInput{
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +859,24 @@ func TestCheckResponseSnapshot_PutRepositoryCatalogData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRepositoryCatalogData(context.Background(), &PutRepositoryCatalogDataInput{})
+	got, err := svc.PutRepositoryCatalogData(context.Background(), &PutRepositoryCatalogDataInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +899,12 @@ func TestCheckResponseSnapshot_SetRepositoryPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetRepositoryPolicy(context.Background(), &SetRepositoryPolicyInput{})
+	got, err := svc.SetRepositoryPolicy(context.Background(), &SetRepositoryPolicyInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		PolicyText:     ptr.String("__PolicyText__"),
+		Force:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -789,7 +923,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +954,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +984,14 @@ func TestCheckResponseSnapshot_UploadLayerPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadLayerPart(context.Background(), &UploadLayerPartInput{})
+	got, err := svc.UploadLayerPart(context.Background(), &UploadLayerPartInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		PartFirstByte:  ptr.Int64(1),
+		PartLastByte:   ptr.Int64(1),
+		LayerPartBlob:  []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +1012,15 @@ func TestCheckResponseSnapshot_Error_EmptyUploadException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -878,7 +1045,14 @@ func TestCheckResponseSnapshot_Error_ImageAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutImage(context.Background(), &PutImageInput{})
+	_, opErr := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -903,7 +1077,14 @@ func TestCheckResponseSnapshot_Error_ImageDigestDoesNotMatchException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutImage(context.Background(), &PutImageInput{})
+	_, opErr := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -928,7 +1109,22 @@ func TestCheckResponseSnapshot_Error_ImageNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeImages(context.Background(), &DescribeImagesInput{})
+	_, opErr := svc.DescribeImages(context.Background(), &DescribeImagesInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		ImageIds: []types.ImageIdentifier{
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+			{
+				ImageDigest: ptr.String("__ImageDigest__"),
+				ImageTag:    ptr.String("__ImageTag__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -953,7 +1149,14 @@ func TestCheckResponseSnapshot_Error_ImageTagAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutImage(context.Background(), &PutImageInput{})
+	_, opErr := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -978,7 +1181,15 @@ func TestCheckResponseSnapshot_Error_InvalidLayerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1007,7 +1218,14 @@ func TestCheckResponseSnapshot_Error_InvalidLayerPartException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UploadLayerPart(context.Background(), &UploadLayerPartInput{})
+	_, opErr := svc.UploadLayerPart(context.Background(), &UploadLayerPartInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		PartFirstByte:  ptr.Int64(1),
+		PartLastByte:   ptr.Int64(1),
+		LayerPartBlob:  []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1032,7 +1250,14 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1057,7 +1282,33 @@ func TestCheckResponseSnapshot_Error_InvalidTagParameterException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1082,7 +1333,15 @@ func TestCheckResponseSnapshot_Error_LayerAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1107,7 +1366,15 @@ func TestCheckResponseSnapshot_Error_LayerPartTooSmallException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1132,7 +1399,14 @@ func TestCheckResponseSnapshot_Error_LayersNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutImage(context.Background(), &PutImageInput{})
+	_, opErr := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1157,7 +1431,33 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1182,7 +1482,14 @@ func TestCheckResponseSnapshot_Error_ReferencedImagesNotFoundException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutImage(context.Background(), &PutImageInput{})
+	_, opErr := svc.PutImage(context.Background(), &PutImageInput{
+		RegistryId:             ptr.String("__RegistryId__"),
+		RepositoryName:         ptr.String("__RepositoryName__"),
+		ImageManifest:          ptr.String("__ImageManifest__"),
+		ImageManifestMediaType: ptr.String("__ImageManifestMediaType__"),
+		ImageTag:               ptr.String("__ImageTag__"),
+		ImageDigest:            ptr.String("__ImageDigest__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1207,7 +1514,14 @@ func TestCheckResponseSnapshot_Error_RegistryNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1232,7 +1546,33 @@ func TestCheckResponseSnapshot_Error_RepositoryAlreadyExistsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1257,7 +1597,10 @@ func TestCheckResponseSnapshot_Error_RepositoryCatalogDataNotFoundException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRepositoryCatalogData(context.Background(), &GetRepositoryCatalogDataInput{})
+	_, opErr := svc.GetRepositoryCatalogData(context.Background(), &GetRepositoryCatalogDataInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1282,7 +1625,11 @@ func TestCheckResponseSnapshot_Error_RepositoryNotEmptyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{})
+	_, opErr := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		Force:          true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1307,7 +1654,14 @@ func TestCheckResponseSnapshot_Error_RepositoryNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1332,7 +1686,10 @@ func TestCheckResponseSnapshot_Error_RepositoryPolicyNotFoundException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRepositoryPolicy(context.Background(), &DeleteRepositoryPolicyInput{})
+	_, opErr := svc.DeleteRepositoryPolicy(context.Background(), &DeleteRepositoryPolicyInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1357,7 +1714,14 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1382,7 +1746,33 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	_, opErr := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		RepositoryName: ptr.String("__RepositoryName__"),
+		CatalogData: &types.RepositoryCatalogDataInput{
+			Description: ptr.String("__Description__"),
+			Architectures: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OperatingSystems: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LogoImageBlob: []byte("blob"),
+			AboutText:     ptr.String("__AboutText__"),
+			UsageText:     ptr.String("__UsageText__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1407,7 +1797,14 @@ func TestCheckResponseSnapshot_Error_UnsupportedCommandException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{})
+	_, opErr := svc.BatchCheckLayerAvailability(context.Background(), &BatchCheckLayerAvailabilityInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1432,7 +1829,15 @@ func TestCheckResponseSnapshot_Error_UploadNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{})
+	_, opErr := svc.CompleteLayerUpload(context.Background(), &CompleteLayerUploadInput{
+		RegistryId:     ptr.String("__RegistryId__"),
+		RepositoryName: ptr.String("__RepositoryName__"),
+		UploadId:       ptr.String("__UploadId__"),
+		LayerDigests: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

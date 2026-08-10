@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeMetadataModelAssessments
+
+{"Marker":"__Marker__","Requests":[{"Error":{"defaultErrorDetails":{"Message":"__Message__"}},"ExportSqlDetails":{"ObjectURL":"__ObjectURL__","S3ObjectKey":"__S3ObjectKey__"},"MigrationProjectArn":"__MigrationProjectArn__","Progress":{"ProcessedObject":{"EndpointType":"__EndpointType__","Name":"__Name__","Type":"__Type__"},"ProgressPercent":1,"ProgressStep":"__ProgressStep__","TotalObjects":1},"RequestIdentifier":"__RequestIdentifier__","Status":"__Status__"},{"Error":{"defaultErrorDetails":{"Message":"__Message__"}},"ExportSqlDetails":{"ObjectURL":"__ObjectURL__","S3ObjectKey":"__S3ObjectKey__"},"MigrationProjectArn":"__MigrationProjectArn__","Progress":{"ProcessedObject":{"EndpointType":"__EndpointType__","Name":"__Name__","Type":"__Type__"},"ProgressPercent":1,"ProgressStep":"__ProgressStep__","TotalObjects":1},"RequestIdentifier":"__RequestIdentifier__","Status":"__Status__"}]}

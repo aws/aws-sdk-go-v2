@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/document"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -140,7 +141,9 @@ func TestCheckResponseSnapshot_AcceptInboundConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{})
+	got, err := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +164,16 @@ func TestCheckResponseSnapshot_AddDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddDataSource(context.Background(), &AddDataSourceInput{})
+	got, err := svc.AddDataSource(context.Background(), &AddDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +194,30 @@ func TestCheckResponseSnapshot_AddDirectQueryDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddDirectQueryDataSource(context.Background(), &AddDirectQueryDataSourceInput{})
+	got, err := svc.AddDirectQueryDataSource(context.Background(), &AddDirectQueryDataSourceInput{
+		DataSourceName: ptr.String("__DataSourceName__"),
+		DataSourceType: &types.DirectQueryDataSourceTypeMemberCloudWatchLog{
+			Value: types.CloudWatchDirectQueryDataSource{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		OpenSearchArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataSourceAccessPolicy: ptr.String("__DataSourceAccessPolicy__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +236,19 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +292,20 @@ func TestCheckResponseSnapshot_AssociatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	got, err := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+		PrerequisitePackageIDList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfiguration: &types.PackageAssociationConfiguration{
+			KeyStoreAccessOption: &types.KeyStoreAccessOption{
+				KeyAccessRoleArn:      ptr.String("__KeyAccessRoleArn__"),
+				KeyStoreAccessEnabled: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +375,37 @@ func TestCheckResponseSnapshot_AssociatePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePackages(context.Background(), &AssociatePackagesInput{})
+	got, err := svc.AssociatePackages(context.Background(), &AssociatePackagesInput{
+		PackageList: []types.PackageDetailsForAssociation{
+			{
+				PackageID: ptr.String("__PackageID__"),
+				PrerequisitePackageIDList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssociationConfiguration: &types.PackageAssociationConfiguration{
+					KeyStoreAccessOption: &types.KeyStoreAccessOption{
+						KeyAccessRoleArn:      ptr.String("__KeyAccessRoleArn__"),
+						KeyStoreAccessEnabled: ptr.Bool(true),
+					},
+				},
+			},
+			{
+				PackageID: ptr.String("__PackageID__"),
+				PrerequisitePackageIDList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AssociationConfiguration: &types.PackageAssociationConfiguration{
+					KeyStoreAccessOption: &types.KeyStoreAccessOption{
+						KeyAccessRoleArn:      ptr.String("__KeyAccessRoleArn__"),
+						KeyStoreAccessEnabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +430,16 @@ func TestCheckResponseSnapshot_AttachDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachDataSource(context.Background(), &AttachDataSourceInput{})
+	got, err := svc.AttachDataSource(context.Background(), &AttachDataSourceInput{
+		Id:            ptr.String("__Id__"),
+		DataSourceArn: ptr.String("__DataSourceArn__"),
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		WorkspaceConfiguration: &types.WorkspaceConfigurationInput{
+			Name:          ptr.String("__Name__"),
+			WorkspaceType: ptr.String("__WorkspaceType__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +469,17 @@ func TestCheckResponseSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AuthorizeVpcEndpointAccess(context.Background(), &AuthorizeVpcEndpointAccessInput{})
+	got, err := svc.AuthorizeVpcEndpointAccess(context.Background(), &AuthorizeVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		Account:    ptr.String("__Account__"),
+		Service:    types.AWSServicePrincipal("application.opensearchservice.amazonaws.com"),
+		ServiceOptions: &types.ServiceOptions{
+			SupportedRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +516,10 @@ func TestCheckResponseSnapshot_CancelDomainConfigChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelDomainConfigChange(context.Background(), &CancelDomainConfigChangeInput{})
+	got, err := svc.CancelDomainConfigChange(context.Background(), &CancelDomainConfigChangeInput{
+		DomainName: ptr.String("__DomainName__"),
+		DryRun:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -437,7 +549,9 @@ func TestCheckResponseSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelServiceSoftwareUpdate(context.Background(), &CancelServiceSoftwareUpdateInput{})
+	got, err := svc.CancelServiceSoftwareUpdate(context.Background(), &CancelServiceSoftwareUpdateInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +614,48 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		DataSources: []types.DataSource{
+			{
+				DataSourceArn:           ptr.String("__DataSourceArn__"),
+				DataSourceDescription:   ptr.String("__DataSourceDescription__"),
+				IamRoleForDataSourceArn: ptr.String("__IamRoleForDataSourceArn__"),
+			},
+			{
+				DataSourceArn:           ptr.String("__DataSourceArn__"),
+				DataSourceDescription:   ptr.String("__DataSourceDescription__"),
+				IamRoleForDataSourceArn: ptr.String("__IamRoleForDataSourceArn__"),
+			},
+		},
+		IamIdentityCenterOptions: &types.IamIdentityCenterOptionsInput{
+			Enabled:                                ptr.Bool(true),
+			IamIdentityCenterInstanceArn:           ptr.String("__IamIdentityCenterInstanceArn__"),
+			IamRoleForIdentityCenterApplicationArn: ptr.String("__IamRoleForIdentityCenterApplicationArn__"),
+		},
+		AppConfigs: []types.AppConfig{
+			{
+				Key:   types.AppConfigType("opensearchDashboards.dashboardAdmin.users"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   types.AppConfigType("opensearchDashboards.dashboardAdmin.users"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -740,7 +895,205 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName:    ptr.String("__DomainName__"),
+		EngineVersion: ptr.String("__EngineVersion__"),
+		ClusterConfig: &types.ClusterConfig{
+			InstanceType:           types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.OpenSearchWarmPartitionInstanceType("ultrawarm1.medium.search"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+			MultiAZWithStandbyEnabled: ptr.Bool(true),
+			NodeOptions: []types.NodeOption{
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		IPAddressType:  types.IPAddressType("ipv4"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			JWTOptions: &types.JWTOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+				JwksUrl:    ptr.String("__JwksUrl__"),
+				PublicKey:  ptr.String("__PublicKey__"),
+			},
+			IAMFederationOptions: &types.IAMFederationOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		IdentityCenterOptions: &types.IdentityCenterOptionsInput{
+			EnabledAPIAccess:             ptr.Bool(true),
+			IdentityCenterInstanceARN:    ptr.String("__IdentityCenterInstanceARN__"),
+			IdentityCenterInstanceRegion: ptr.String("__IdentityCenterInstanceRegion__"),
+			SubjectKey:                   types.SubjectKeyIdCOption("UserName"),
+			RolesKey:                     types.RolesKeyIdCOption("GroupName"),
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+			UseOffPeakWindow: ptr.Bool(true),
+		},
+		OffPeakWindowOptions: &types.OffPeakWindowOptions{
+			Enabled: ptr.Bool(true),
+			OffPeakWindow: &types.OffPeakWindow{
+				WindowStartTime: &types.WindowStartTime{
+					Hours:   1,
+					Minutes: 1,
+				},
+			},
+		},
+		SoftwareUpdateOptions: &types.SoftwareUpdateOptions{
+			AutoSoftwareUpdateEnabled:            ptr.Bool(true),
+			UseLatestServiceSoftwareForBlueGreen: ptr.Bool(true),
+		},
+		AIMLOptions: &types.AIMLOptionsInput{
+			NaturalLanguageQueryGenerationOptions: &types.NaturalLanguageQueryGenerationOptionsInput{
+				DesiredState: types.NaturalLanguageQueryGenerationDesiredState("ENABLED"),
+			},
+			S3VectorsEngine: &types.S3VectorsEngine{
+				Enabled: ptr.Bool(true),
+			},
+			ServerlessVectorAcceleration: &types.ServerlessVectorAcceleration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +1114,11 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		DomainName:  ptr.String("__DomainName__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +1165,30 @@ func TestCheckResponseSnapshot_CreateOutboundConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOutboundConnection(context.Background(), &CreateOutboundConnectionInput{})
+	got, err := svc.CreateOutboundConnection(context.Background(), &CreateOutboundConnectionInput{
+		LocalDomainInfo: &types.DomainInformationContainer{
+			AWSDomainInformation: &types.AWSDomainInformation{
+				OwnerId:    ptr.String("__OwnerId__"),
+				DomainName: ptr.String("__DomainName__"),
+				Region:     ptr.String("__Region__"),
+			},
+		},
+		RemoteDomainInfo: &types.DomainInformationContainer{
+			AWSDomainInformation: &types.AWSDomainInformation{
+				OwnerId:    ptr.String("__OwnerId__"),
+				DomainName: ptr.String("__DomainName__"),
+				Region:     ptr.String("__Region__"),
+			},
+		},
+		ConnectionAlias: ptr.String("__ConnectionAlias__"),
+		ConnectionMode:  types.ConnectionMode("DIRECT"),
+		ConnectionProperties: &types.ConnectionProperties{
+			Endpoint: ptr.String("__Endpoint__"),
+			CrossClusterSearch: &types.CrossClusterSearchConnectionProperties{
+				SkipUnavailable: types.SkipUnavailableStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -868,7 +1248,29 @@ func TestCheckResponseSnapshot_CreatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePackage(context.Background(), &CreatePackageInput{})
+	got, err := svc.CreatePackage(context.Background(), &CreatePackageInput{
+		PackageName:        ptr.String("__PackageName__"),
+		PackageType:        types.PackageType("TXT-DICTIONARY"),
+		PackageDescription: ptr.String("__PackageDescription__"),
+		PackageSource: &types.PackageSource{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3Key:        ptr.String("__S3Key__"),
+		},
+		PackageConfiguration: &types.PackageConfiguration{
+			LicenseRequirement:                    types.RequirementLevel("REQUIRED"),
+			LicenseFilepath:                       ptr.String("__LicenseFilepath__"),
+			ConfigurationRequirement:              types.RequirementLevel("REQUIRED"),
+			RequiresRestartForConfigurationUpdate: ptr.Bool(true),
+		},
+		EngineVersion: ptr.String("__EngineVersion__"),
+		PackageVendingOptions: &types.PackageVendingOptions{
+			VendingEnabled: ptr.Bool(true),
+		},
+		PackageEncryptionOptions: &types.PackageEncryptionOptions{
+			KmsKeyIdentifier:  ptr.String("__KmsKeyIdentifier__"),
+			EncryptionEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -911,7 +1313,21 @@ func TestCheckResponseSnapshot_CreateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{})
+	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{
+		DomainArn: ptr.String("__DomainArn__"),
+		VpcOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -930,7 +1346,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -951,7 +1369,10 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1391,9 @@ func TestCheckResponseSnapshot_DeleteDirectQueryDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectQueryDataSource(context.Background(), &DeleteDirectQueryDataSourceInput{})
+	got, err := svc.DeleteDirectQueryDataSource(context.Background(), &DeleteDirectQueryDataSourceInput{
+		DataSourceName: ptr.String("__DataSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1210,7 +1633,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1252,7 +1677,9 @@ func TestCheckResponseSnapshot_DeleteInboundConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInboundConnection(context.Background(), &DeleteInboundConnectionInput{})
+	got, err := svc.DeleteInboundConnection(context.Background(), &DeleteInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1273,7 +1700,10 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		DomainName: ptr.String("__DomainName__"),
+		IndexName:  ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1752,9 @@ func TestCheckResponseSnapshot_DeleteOutboundConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutboundConnection(context.Background(), &DeleteOutboundConnectionInput{})
+	got, err := svc.DeleteOutboundConnection(context.Background(), &DeleteOutboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +1814,9 @@ func TestCheckResponseSnapshot_DeletePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{})
+	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{
+		PackageID: ptr.String("__PackageID__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1408,7 +1842,9 @@ func TestCheckResponseSnapshot_DeleteVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{})
+	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1429,7 +1865,10 @@ func TestCheckResponseSnapshot_DeregisterCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterCapability(context.Background(), &DeregisterCapabilityInput{})
+	got, err := svc.DeregisterCapability(context.Background(), &DeregisterCapabilityInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1454,7 +1893,10 @@ func TestCheckResponseSnapshot_DescribeDataSourceAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataSourceAttachment(context.Background(), &DescribeDataSourceAttachmentInput{})
+	got, err := svc.DescribeDataSourceAttachment(context.Background(), &DescribeDataSourceAttachmentInput{
+		Id:            ptr.String("__Id__"),
+		DataSourceArn: ptr.String("__DataSourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1694,7 +2136,9 @@ func TestCheckResponseSnapshot_DescribeDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{})
+	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1739,7 +2183,11 @@ func TestCheckResponseSnapshot_DescribeDomainAutoTunes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainAutoTunes(context.Background(), &DescribeDomainAutoTunesInput{})
+	got, err := svc.DescribeDomainAutoTunes(context.Background(), &DescribeDomainAutoTunesInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1790,7 +2238,10 @@ func TestCheckResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainChangeProgress(context.Background(), &DescribeDomainChangeProgressInput{})
+	got, err := svc.DescribeDomainChangeProgress(context.Background(), &DescribeDomainChangeProgressInput{
+		DomainName: ptr.String("__DomainName__"),
+		ChangeId:   ptr.String("__ChangeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2232,7 +2683,9 @@ func TestCheckResponseSnapshot_DescribeDomainConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainConfig(context.Background(), &DescribeDomainConfigInput{})
+	got, err := svc.DescribeDomainConfig(context.Background(), &DescribeDomainConfigInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2306,7 +2759,9 @@ func TestCheckResponseSnapshot_DescribeDomainHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainHealth(context.Background(), &DescribeDomainHealthInput{})
+	got, err := svc.DescribeDomainHealth(context.Background(), &DescribeDomainHealthInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2348,7 +2803,9 @@ func TestCheckResponseSnapshot_DescribeDomainNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomainNodes(context.Background(), &DescribeDomainNodesInput{})
+	got, err := svc.DescribeDomainNodes(context.Background(), &DescribeDomainNodesInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2810,7 +3267,12 @@ func TestCheckResponseSnapshot_DescribeDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomains(context.Background(), &DescribeDomainsInput{})
+	got, err := svc.DescribeDomains(context.Background(), &DescribeDomainsInput{
+		DomainNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3070,7 +3532,11 @@ func TestCheckResponseSnapshot_DescribeDryRunProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDryRunProgress(context.Background(), &DescribeDryRunProgressInput{})
+	got, err := svc.DescribeDryRunProgress(context.Background(), &DescribeDryRunProgressInput{
+		DomainName:       ptr.String("__DomainName__"),
+		DryRunId:         ptr.String("__DryRunId__"),
+		LoadDryRunConfig: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3137,7 +3603,26 @@ func TestCheckResponseSnapshot_DescribeInboundConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInboundConnections(context.Background(), &DescribeInboundConnectionsInput{})
+	got, err := svc.DescribeInboundConnections(context.Background(), &DescribeInboundConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3169,7 +3654,14 @@ func TestCheckResponseSnapshot_DescribeInsightDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInsightDetails(context.Background(), &DescribeInsightDetailsInput{})
+	got, err := svc.DescribeInsightDetails(context.Background(), &DescribeInsightDetailsInput{
+		Entity: &types.InsightEntity{
+			Type:  types.InsightEntityType("Account"),
+			Value: ptr.String("__Value__"),
+		},
+		InsightId:       ptr.String("__InsightId__"),
+		ShowHtmlContent: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3257,7 +3749,11 @@ func TestCheckResponseSnapshot_DescribeInstanceTypeLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceTypeLimits(context.Background(), &DescribeInstanceTypeLimitsInput{})
+	got, err := svc.DescribeInstanceTypeLimits(context.Background(), &DescribeInstanceTypeLimitsInput{
+		DomainName:    ptr.String("__DomainName__"),
+		InstanceType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
+		EngineVersion: ptr.String("__EngineVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3338,7 +3834,26 @@ func TestCheckResponseSnapshot_DescribeOutboundConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOutboundConnections(context.Background(), &DescribeOutboundConnectionsInput{})
+	got, err := svc.DescribeOutboundConnections(context.Background(), &DescribeOutboundConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3441,7 +3956,26 @@ func TestCheckResponseSnapshot_DescribePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackages(context.Background(), &DescribePackagesInput{})
+	got, err := svc.DescribePackages(context.Background(), &DescribePackagesInput{
+		Filters: []types.DescribePackagesFilter{
+			{
+				Name: types.DescribePackagesFilterName("PackageID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DescribePackagesFilterName("PackageID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3502,7 +4036,11 @@ func TestCheckResponseSnapshot_DescribeReservedInstanceOfferings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedInstanceOfferings(context.Background(), &DescribeReservedInstanceOfferingsInput{})
+	got, err := svc.DescribeReservedInstanceOfferings(context.Background(), &DescribeReservedInstanceOfferingsInput{
+		ReservedInstanceOfferingId: ptr.String("__ReservedInstanceOfferingId__"),
+		MaxResults:                 1,
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3575,7 +4113,11 @@ func TestCheckResponseSnapshot_DescribeReservedInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservedInstances(context.Background(), &DescribeReservedInstancesInput{})
+	got, err := svc.DescribeReservedInstances(context.Background(), &DescribeReservedInstancesInput{
+		ReservedInstanceId: ptr.String("__ReservedInstanceId__"),
+		MaxResults:         1,
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3655,7 +4197,12 @@ func TestCheckResponseSnapshot_DescribeVpcEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcEndpoints(context.Background(), &DescribeVpcEndpointsInput{})
+	got, err := svc.DescribeVpcEndpoints(context.Background(), &DescribeVpcEndpointsInput{
+		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3678,7 +4225,10 @@ func TestCheckResponseSnapshot_DetachDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachDataSource(context.Background(), &DetachDataSourceInput{})
+	got, err := svc.DetachDataSource(context.Background(), &DetachDataSourceInput{
+		Id:            ptr.String("__Id__"),
+		DataSourceArn: ptr.String("__DataSourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3722,7 +4272,10 @@ func TestCheckResponseSnapshot_DissociatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DissociatePackage(context.Background(), &DissociatePackageInput{})
+	got, err := svc.DissociatePackage(context.Background(), &DissociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3792,7 +4345,13 @@ func TestCheckResponseSnapshot_DissociatePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DissociatePackages(context.Background(), &DissociatePackagesInput{})
+	got, err := svc.DissociatePackages(context.Background(), &DissociatePackagesInput{
+		PackageList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3848,7 +4407,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3884,7 +4445,10 @@ func TestCheckResponseSnapshot_GetCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapability(context.Background(), &GetCapabilityInput{})
+	got, err := svc.GetCapability(context.Background(), &GetCapabilityInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3920,7 +4484,9 @@ func TestCheckResponseSnapshot_GetCompatibleVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCompatibleVersions(context.Background(), &GetCompatibleVersionsInput{})
+	got, err := svc.GetCompatibleVersions(context.Background(), &GetCompatibleVersionsInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3948,7 +4514,10 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4002,7 +4571,9 @@ func TestCheckResponseSnapshot_GetDirectQueryDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDirectQueryDataSource(context.Background(), &GetDirectQueryDataSourceInput{})
+	got, err := svc.GetDirectQueryDataSource(context.Background(), &GetDirectQueryDataSourceInput{
+		DataSourceName: ptr.String("__DataSourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4028,7 +4599,10 @@ func TestCheckResponseSnapshot_GetDomainMaintenanceStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainMaintenanceStatus(context.Background(), &GetDomainMaintenanceStatusInput{})
+	got, err := svc.GetDomainMaintenanceStatus(context.Background(), &GetDomainMaintenanceStatusInput{
+		DomainName:    ptr.String("__DomainName__"),
+		MaintenanceId: ptr.String("__MaintenanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4039,7 +4613,7 @@ func TestCheckResponseSnapshot_GetDomainMaintenanceStatus(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 	want := &GetIndexOutput{
-		IndexSchema: nil,
+		IndexSchema: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIndex.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4049,7 +4623,10 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIndex(context.Background(), &GetIndexInput{})
+	got, err := svc.GetIndex(context.Background(), &GetIndexInput{
+		DomainName: ptr.String("__DomainName__"),
+		IndexName:  ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4083,7 +4660,9 @@ func TestCheckResponseSnapshot_GetMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMigration(context.Background(), &GetMigrationInput{})
+	got, err := svc.GetMigration(context.Background(), &GetMigrationInput{
+		MigrationId: ptr.String("__MigrationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4143,7 +4722,11 @@ func TestCheckResponseSnapshot_GetPackageVersionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPackageVersionHistory(context.Background(), &GetPackageVersionHistoryInput{})
+	got, err := svc.GetPackageVersionHistory(context.Background(), &GetPackageVersionHistoryInput{
+		PackageID:  ptr.String("__PackageID__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4216,7 +4799,11 @@ func TestCheckResponseSnapshot_GetUpgradeHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUpgradeHistory(context.Background(), &GetUpgradeHistoryInput{})
+	got, err := svc.GetUpgradeHistory(context.Background(), &GetUpgradeHistoryInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4239,7 +4826,9 @@ func TestCheckResponseSnapshot_GetUpgradeStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUpgradeStatus(context.Background(), &GetUpgradeStatusInput{})
+	got, err := svc.GetUpgradeStatus(context.Background(), &GetUpgradeStatusInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4260,7 +4849,15 @@ func TestCheckResponseSnapshot_InsightFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InsightFeedback(context.Background(), &InsightFeedbackInput{})
+	got, err := svc.InsightFeedback(context.Background(), &InsightFeedbackInput{
+		Entity: &types.InsightFeedbackEntity{
+			Type:  types.InsightFeedbackEntityType("DomainName"),
+			Value: ptr.String("__Value__"),
+		},
+		InsightId:    ptr.String("__InsightId__"),
+		Thumbs:       types.InsightFeedbackThumbs("Up"),
+		FeedbackText: ptr.String("__FeedbackText__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4301,7 +4898,14 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken: ptr.String("__NextToken__"),
+		Statuses: []types.ApplicationStatus{
+			types.ApplicationStatus("CREATING"),
+			types.ApplicationStatus("CREATING"),
+		},
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4334,7 +4938,11 @@ func TestCheckResponseSnapshot_ListDataSourceAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSourceAttachments(context.Background(), &ListDataSourceAttachmentsInput{})
+	got, err := svc.ListDataSourceAttachments(context.Background(), &ListDataSourceAttachmentsInput{
+		Id:         ptr.String("__Id__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4376,7 +4984,9 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4447,7 +5057,9 @@ func TestCheckResponseSnapshot_ListDirectQueryDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDirectQueryDataSources(context.Background(), &ListDirectQueryDataSourcesInput{})
+	got, err := svc.ListDirectQueryDataSources(context.Background(), &ListDirectQueryDataSourcesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4490,7 +5102,13 @@ func TestCheckResponseSnapshot_ListDomainMaintenances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainMaintenances(context.Background(), &ListDomainMaintenancesInput{})
+	got, err := svc.ListDomainMaintenances(context.Background(), &ListDomainMaintenancesInput{
+		DomainName: ptr.String("__DomainName__"),
+		Action:     types.MaintenanceType("REBOOT_NODE"),
+		Status:     types.MaintenanceStatus("PENDING"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4520,7 +5138,9 @@ func TestCheckResponseSnapshot_ListDomainNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{})
+	got, err := svc.ListDomainNames(context.Background(), &ListDomainNamesInput{
+		EngineType: types.EngineType("OpenSearch"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4591,7 +5211,11 @@ func TestCheckResponseSnapshot_ListDomainsForPackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomainsForPackage(context.Background(), &ListDomainsForPackageInput{})
+	got, err := svc.ListDomainsForPackage(context.Background(), &ListDomainsForPackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4634,7 +5258,19 @@ func TestCheckResponseSnapshot_ListInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{})
+	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{
+		Entity: &types.InsightEntity{
+			Type:  types.InsightEntityType("Account"),
+			Value: ptr.String("__Value__"),
+		},
+		TimeRange: &types.InsightTimeRange{
+			From: ptr.Int64(1),
+			To:   ptr.Int64(1),
+		},
+		SortOrder:  types.InsightSortOrder("ASC"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4689,7 +5325,14 @@ func TestCheckResponseSnapshot_ListInstanceTypeDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceTypeDetails(context.Background(), &ListInstanceTypeDetailsInput{})
+	got, err := svc.ListInstanceTypeDetails(context.Background(), &ListInstanceTypeDetailsInput{
+		EngineVersion: ptr.String("__EngineVersion__"),
+		DomainName:    ptr.String("__DomainName__"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+		RetrieveAZs:   ptr.Bool(true),
+		InstanceType:  ptr.String("__InstanceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4744,7 +5387,12 @@ func TestCheckResponseSnapshot_ListMigrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMigrations(context.Background(), &ListMigrationsInput{})
+	got, err := svc.ListMigrations(context.Background(), &ListMigrationsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Status:        ptr.String("__Status__"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4815,7 +5463,11 @@ func TestCheckResponseSnapshot_ListPackagesForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackagesForDomain(context.Background(), &ListPackagesForDomainInput{})
+	got, err := svc.ListPackagesForDomain(context.Background(), &ListPackagesForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4860,7 +5512,11 @@ func TestCheckResponseSnapshot_ListScheduledActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScheduledActions(context.Background(), &ListScheduledActionsInput{})
+	got, err := svc.ListScheduledActions(context.Background(), &ListScheduledActionsInput{
+		DomainName: ptr.String("__DomainName__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4890,7 +5546,9 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ARN: ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4915,7 +5573,10 @@ func TestCheckResponseSnapshot_ListVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVersions(context.Background(), &ListVersionsInput{})
+	got, err := svc.ListVersions(context.Background(), &ListVersionsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4958,7 +5619,10 @@ func TestCheckResponseSnapshot_ListVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpointAccess(context.Background(), &ListVpcEndpointAccessInput{})
+	got, err := svc.ListVpcEndpointAccess(context.Background(), &ListVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4993,7 +5657,9 @@ func TestCheckResponseSnapshot_ListVpcEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{})
+	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5028,7 +5694,10 @@ func TestCheckResponseSnapshot_ListVpcEndpointsForDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpointsForDomain(context.Background(), &ListVpcEndpointsForDomainInput{})
+	got, err := svc.ListVpcEndpointsForDomain(context.Background(), &ListVpcEndpointsForDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5050,7 +5719,11 @@ func TestCheckResponseSnapshot_PurchaseReservedInstanceOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseReservedInstanceOffering(context.Background(), &PurchaseReservedInstanceOfferingInput{})
+	got, err := svc.PurchaseReservedInstanceOffering(context.Background(), &PurchaseReservedInstanceOfferingInput{
+		ReservedInstanceOfferingId: ptr.String("__ReservedInstanceOfferingId__"),
+		ReservationName:            ptr.String("__ReservationName__"),
+		InstanceCount:              ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5071,7 +5744,10 @@ func TestCheckResponseSnapshot_PutDefaultApplicationSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDefaultApplicationSetting(context.Background(), &PutDefaultApplicationSettingInput{})
+	got, err := svc.PutDefaultApplicationSetting(context.Background(), &PutDefaultApplicationSettingInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		SetAsDefault:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5097,7 +5773,13 @@ func TestCheckResponseSnapshot_RegisterCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterCapability(context.Background(), &RegisterCapabilityInput{})
+	got, err := svc.RegisterCapability(context.Background(), &RegisterCapabilityInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+		CapabilityConfig: &types.CapabilityBaseRequestConfigMemberAiConfig{
+			Value: types.AIConfig{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5139,7 +5821,9 @@ func TestCheckResponseSnapshot_RejectInboundConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectInboundConnection(context.Background(), &RejectInboundConnectionInput{})
+	got, err := svc.RejectInboundConnection(context.Background(), &RejectInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5158,7 +5842,13 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		ARN: ptr.String("__ARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5177,7 +5867,17 @@ func TestCheckResponseSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeVpcEndpointAccess(context.Background(), &RevokeVpcEndpointAccessInput{})
+	got, err := svc.RevokeVpcEndpointAccess(context.Background(), &RevokeVpcEndpointAccessInput{
+		DomainName: ptr.String("__DomainName__"),
+		Account:    ptr.String("__Account__"),
+		Service:    types.AWSServicePrincipal("application.opensearchservice.amazonaws.com"),
+		ServiceOptions: &types.ServiceOptions{
+			SupportedRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5203,7 +5903,9 @@ func TestCheckResponseSnapshot_RollbackServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackServiceSoftwareUpdate(context.Background(), &RollbackServiceSoftwareUpdateInput{})
+	got, err := svc.RollbackServiceSoftwareUpdate(context.Background(), &RollbackServiceSoftwareUpdateInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5224,7 +5926,11 @@ func TestCheckResponseSnapshot_StartDomainMaintenance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDomainMaintenance(context.Background(), &StartDomainMaintenanceInput{})
+	got, err := svc.StartDomainMaintenance(context.Background(), &StartDomainMaintenanceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Action:     types.MaintenanceType("REBOOT_NODE"),
+		NodeId:     ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5246,7 +5952,39 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{})
+	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MigrationOptions: &types.MigrationOptions{
+			Source: &types.MigrationSource{
+				DatasourceArn: ptr.String("__DatasourceArn__"),
+			},
+			Workspace: &types.MigrationWorkspace{
+				WorkspaceId:     ptr.String("__WorkspaceId__"),
+				CreateWorkspace: ptr.Bool(true),
+				Name:            ptr.String("__Name__"),
+				Type:            ptr.String("__Type__"),
+			},
+			ExportOptions: &types.ExportOptions{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Objects: []types.SavedObjectIdentifier{
+					{
+						Type: ptr.String("__Type__"),
+						Id:   ptr.String("__Id__"),
+					},
+					{
+						Type: ptr.String("__Type__"),
+						Id:   ptr.String("__Id__"),
+					},
+				},
+				IncludeReferencesDeep: ptr.Bool(true),
+			},
+			ConflictResolution: ptr.String("__ConflictResolution__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5276,7 +6014,11 @@ func TestCheckResponseSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartServiceSoftwareUpdate(context.Background(), &StartServiceSoftwareUpdateInput{})
+	got, err := svc.StartServiceSoftwareUpdate(context.Background(), &StartServiceSoftwareUpdateInput{
+		DomainName:       ptr.String("__DomainName__"),
+		ScheduleAt:       types.ScheduleAt("NOW"),
+		DesiredStartTime: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5329,7 +6071,36 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Id: ptr.String("__Id__"),
+		DataSources: []types.DataSource{
+			{
+				DataSourceArn:           ptr.String("__DataSourceArn__"),
+				DataSourceDescription:   ptr.String("__DataSourceDescription__"),
+				IamRoleForDataSourceArn: ptr.String("__IamRoleForDataSourceArn__"),
+			},
+			{
+				DataSourceArn:           ptr.String("__DataSourceArn__"),
+				DataSourceDescription:   ptr.String("__DataSourceDescription__"),
+				IamRoleForDataSourceArn: ptr.String("__IamRoleForDataSourceArn__"),
+			},
+		},
+		AppConfigs: []types.AppConfig{
+			{
+				Key:   types.AppConfigType("opensearchDashboards.dashboardAdmin.users"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   types.AppConfigType("opensearchDashboards.dashboardAdmin.users"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IamIdentityCenterOptions: &types.IamIdentityCenterOptionsInput{
+			Enabled:                                ptr.Bool(true),
+			IamIdentityCenterInstanceArn:           ptr.String("__IamIdentityCenterInstanceArn__"),
+			IamRoleForIdentityCenterApplicationArn: ptr.String("__IamRoleForIdentityCenterApplicationArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5350,7 +6121,17 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Status:      types.DataSourceStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5371,7 +6152,20 @@ func TestCheckResponseSnapshot_UpdateDirectQueryDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectQueryDataSource(context.Background(), &UpdateDirectQueryDataSourceInput{})
+	got, err := svc.UpdateDirectQueryDataSource(context.Background(), &UpdateDirectQueryDataSourceInput{
+		DataSourceName: ptr.String("__DataSourceName__"),
+		DataSourceType: &types.DirectQueryDataSourceTypeMemberCloudWatchLog{
+			Value: types.CloudWatchDirectQueryDataSource{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		OpenSearchArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataSourceAccessPolicy: ptr.String("__DataSourceAccessPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5833,7 +6627,197 @@ func TestCheckResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDomainConfig(context.Background(), &UpdateDomainConfigInput{})
+	got, err := svc.UpdateDomainConfig(context.Background(), &UpdateDomainConfigInput{
+		DomainName: ptr.String("__DomainName__"),
+		ClusterConfig: &types.ClusterConfig{
+			InstanceType:           types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.OpenSearchWarmPartitionInstanceType("ultrawarm1.medium.search"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+			MultiAZWithStandbyEnabled: ptr.Bool(true),
+			NodeOptions: []types.NodeOption{
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		IPAddressType:  types.IPAddressType("ipv4"),
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			JWTOptions: &types.JWTOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+				JwksUrl:    ptr.String("__JwksUrl__"),
+				PublicKey:  ptr.String("__PublicKey__"),
+			},
+			IAMFederationOptions: &types.IAMFederationOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		IdentityCenterOptions: &types.IdentityCenterOptionsInput{
+			EnabledAPIAccess:             ptr.Bool(true),
+			IdentityCenterInstanceARN:    ptr.String("__IdentityCenterInstanceARN__"),
+			IdentityCenterInstanceRegion: ptr.String("__IdentityCenterInstanceRegion__"),
+			SubjectKey:                   types.SubjectKeyIdCOption("UserName"),
+			RolesKey:                     types.RolesKeyIdCOption("GroupName"),
+		},
+		AutoTuneOptions: &types.AutoTuneOptions{
+			DesiredState:      types.AutoTuneDesiredState("ENABLED"),
+			RollbackOnDisable: types.RollbackOnDisable("NO_ROLLBACK"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+			UseOffPeakWindow: ptr.Bool(true),
+		},
+		DryRun:     ptr.Bool(true),
+		DryRunMode: types.DryRunMode("Basic"),
+		OffPeakWindowOptions: &types.OffPeakWindowOptions{
+			Enabled: ptr.Bool(true),
+			OffPeakWindow: &types.OffPeakWindow{
+				WindowStartTime: &types.WindowStartTime{
+					Hours:   1,
+					Minutes: 1,
+				},
+			},
+		},
+		SoftwareUpdateOptions: &types.SoftwareUpdateOptions{
+			AutoSoftwareUpdateEnabled:            ptr.Bool(true),
+			UseLatestServiceSoftwareForBlueGreen: ptr.Bool(true),
+		},
+		AIMLOptions: &types.AIMLOptionsInput{
+			NaturalLanguageQueryGenerationOptions: &types.NaturalLanguageQueryGenerationOptionsInput{
+				DesiredState: types.NaturalLanguageQueryGenerationDesiredState("ENABLED"),
+			},
+			S3VectorsEngine: &types.S3VectorsEngine{
+				Enabled: ptr.Bool(true),
+			},
+			ServerlessVectorAcceleration: &types.ServerlessVectorAcceleration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5854,7 +6838,11 @@ func TestCheckResponseSnapshot_UpdateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{})
+	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{
+		DomainName:  ptr.String("__DomainName__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5914,7 +6902,25 @@ func TestCheckResponseSnapshot_UpdatePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackage(context.Background(), &UpdatePackageInput{})
+	got, err := svc.UpdatePackage(context.Background(), &UpdatePackageInput{
+		PackageID: ptr.String("__PackageID__"),
+		PackageSource: &types.PackageSource{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3Key:        ptr.String("__S3Key__"),
+		},
+		PackageDescription: ptr.String("__PackageDescription__"),
+		CommitMessage:      ptr.String("__CommitMessage__"),
+		PackageConfiguration: &types.PackageConfiguration{
+			LicenseRequirement:                    types.RequirementLevel("REQUIRED"),
+			LicenseFilepath:                       ptr.String("__LicenseFilepath__"),
+			ConfigurationRequirement:              types.RequirementLevel("REQUIRED"),
+			RequiresRestartForConfigurationUpdate: ptr.Bool(true),
+		},
+		PackageEncryptionOptions: &types.PackageEncryptionOptions{
+			KmsKeyIdentifier:  ptr.String("__KmsKeyIdentifier__"),
+			EncryptionEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5940,7 +6946,14 @@ func TestCheckResponseSnapshot_UpdatePackageScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackageScope(context.Background(), &UpdatePackageScopeInput{})
+	got, err := svc.UpdatePackageScope(context.Background(), &UpdatePackageScopeInput{
+		PackageID: ptr.String("__PackageID__"),
+		Operation: types.PackageScopeOperationEnum("ADD"),
+		PackageUserList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5971,7 +6984,13 @@ func TestCheckResponseSnapshot_UpdateScheduledAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScheduledAction(context.Background(), &UpdateScheduledActionInput{})
+	got, err := svc.UpdateScheduledAction(context.Background(), &UpdateScheduledActionInput{
+		DomainName:       ptr.String("__DomainName__"),
+		ActionID:         ptr.String("__ActionID__"),
+		ActionType:       types.ActionType("SERVICE_SOFTWARE_UPDATE"),
+		ScheduleAt:       types.ScheduleAt("NOW"),
+		DesiredStartTime: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6014,7 +7033,20 @@ func TestCheckResponseSnapshot_UpdateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{})
+	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		VpcOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6049,7 +7081,14 @@ func TestCheckResponseSnapshot_UpgradeDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeDomain(context.Background(), &UpgradeDomainInput{})
+	got, err := svc.UpgradeDomain(context.Background(), &UpgradeDomainInput{
+		DomainName:       ptr.String("__DomainName__"),
+		TargetVersion:    ptr.String("__TargetVersion__"),
+		PerformCheckOnly: ptr.Bool(true),
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6070,7 +7109,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+		PrerequisitePackageIDList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfiguration: &types.PackageAssociationConfiguration{
+			KeyStoreAccessOption: &types.KeyStoreAccessOption{
+				KeyAccessRoleArn:      ptr.String("__KeyAccessRoleArn__"),
+				KeyStoreAccessEnabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6095,7 +7147,16 @@ func TestCheckResponseSnapshot_Error_BaseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{})
+	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6120,7 +7181,20 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{})
+	_, opErr := svc.AssociatePackage(context.Background(), &AssociatePackageInput{
+		PackageID:  ptr.String("__PackageID__"),
+		DomainName: ptr.String("__DomainName__"),
+		PrerequisitePackageIDList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfiguration: &types.PackageAssociationConfiguration{
+			KeyStoreAccessOption: &types.KeyStoreAccessOption{
+				KeyAccessRoleArn:      ptr.String("__KeyAccessRoleArn__"),
+				KeyStoreAccessEnabled: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6145,7 +7219,16 @@ func TestCheckResponseSnapshot_Error_DependencyFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{})
+	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6170,7 +7253,9 @@ func TestCheckResponseSnapshot_Error_DisabledOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{})
+	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6195,7 +7280,16 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{})
+	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6220,7 +7314,26 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeInboundConnections(context.Background(), &DescribeInboundConnectionsInput{})
+	_, opErr := svc.DescribeInboundConnections(context.Background(), &DescribeInboundConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6245,7 +7358,205 @@ func TestCheckResponseSnapshot_Error_InvalidTypeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName:    ptr.String("__DomainName__"),
+		EngineVersion: ptr.String("__EngineVersion__"),
+		ClusterConfig: &types.ClusterConfig{
+			InstanceType:           types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.OpenSearchWarmPartitionInstanceType("ultrawarm1.medium.search"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+			MultiAZWithStandbyEnabled: ptr.Bool(true),
+			NodeOptions: []types.NodeOption{
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		IPAddressType:  types.IPAddressType("ipv4"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			JWTOptions: &types.JWTOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+				JwksUrl:    ptr.String("__JwksUrl__"),
+				PublicKey:  ptr.String("__PublicKey__"),
+			},
+			IAMFederationOptions: &types.IAMFederationOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		IdentityCenterOptions: &types.IdentityCenterOptionsInput{
+			EnabledAPIAccess:             ptr.Bool(true),
+			IdentityCenterInstanceARN:    ptr.String("__IdentityCenterInstanceARN__"),
+			IdentityCenterInstanceRegion: ptr.String("__IdentityCenterInstanceRegion__"),
+			SubjectKey:                   types.SubjectKeyIdCOption("UserName"),
+			RolesKey:                     types.RolesKeyIdCOption("GroupName"),
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+			UseOffPeakWindow: ptr.Bool(true),
+		},
+		OffPeakWindowOptions: &types.OffPeakWindowOptions{
+			Enabled: ptr.Bool(true),
+			OffPeakWindow: &types.OffPeakWindow{
+				WindowStartTime: &types.WindowStartTime{
+					Hours:   1,
+					Minutes: 1,
+				},
+			},
+		},
+		SoftwareUpdateOptions: &types.SoftwareUpdateOptions{
+			AutoSoftwareUpdateEnabled:            ptr.Bool(true),
+			UseLatestServiceSoftwareForBlueGreen: ptr.Bool(true),
+		},
+		AIMLOptions: &types.AIMLOptionsInput{
+			NaturalLanguageQueryGenerationOptions: &types.NaturalLanguageQueryGenerationOptionsInput{
+				DesiredState: types.NaturalLanguageQueryGenerationDesiredState("ENABLED"),
+			},
+			S3VectorsEngine: &types.S3VectorsEngine{
+				Enabled: ptr.Bool(true),
+			},
+			ServerlessVectorAcceleration: &types.ServerlessVectorAcceleration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6270,7 +7581,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{})
+	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6295,7 +7608,205 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		DomainName:    ptr.String("__DomainName__"),
+		EngineVersion: ptr.String("__EngineVersion__"),
+		ClusterConfig: &types.ClusterConfig{
+			InstanceType:           types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			InstanceCount:          ptr.Int32(1),
+			DedicatedMasterEnabled: ptr.Bool(true),
+			ZoneAwarenessEnabled:   ptr.Bool(true),
+			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
+				AvailabilityZoneCount: ptr.Int32(1),
+			},
+			DedicatedMasterType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
+			DedicatedMasterCount: ptr.Int32(1),
+			WarmEnabled:          ptr.Bool(true),
+			WarmType:             types.OpenSearchWarmPartitionInstanceType("ultrawarm1.medium.search"),
+			WarmCount:            ptr.Int32(1),
+			ColdStorageOptions: &types.ColdStorageOptions{
+				Enabled: ptr.Bool(true),
+			},
+			MultiAZWithStandbyEnabled: ptr.Bool(true),
+			NodeOptions: []types.NodeOption{
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+				{
+					NodeType: types.NodeOptionsNodeType("coordinator"),
+					NodeConfig: &types.NodeConfig{
+						Enabled: ptr.Bool(true),
+						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
+						Count:   ptr.Int32(1),
+					},
+				},
+			},
+		},
+		EBSOptions: &types.EBSOptions{
+			EBSEnabled: ptr.Bool(true),
+			VolumeType: types.VolumeType("standard"),
+			VolumeSize: ptr.Int32(1),
+			Iops:       ptr.Int32(1),
+			Throughput: ptr.Int32(1),
+		},
+		AccessPolicies: ptr.String("__AccessPolicies__"),
+		IPAddressType:  types.IPAddressType("ipv4"),
+		SnapshotOptions: &types.SnapshotOptions{
+			AutomatedSnapshotStartHour: ptr.Int32(1),
+		},
+		VPCOptions: &types.VPCOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EgressEnabled: ptr.Bool(true),
+		},
+		CognitoOptions: &types.CognitoOptions{
+			Enabled:        ptr.Bool(true),
+			UserPoolId:     ptr.String("__UserPoolId__"),
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			RoleArn:        ptr.String("__RoleArn__"),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			Enabled:  ptr.Bool(true),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
+			Enabled: ptr.Bool(true),
+		},
+		AdvancedOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		LogPublishingOptions: map[string]types.LogPublishingOption{
+			"key0": {
+				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
+				Enabled:                   ptr.Bool(true),
+			},
+		},
+		DomainEndpointOptions: &types.DomainEndpointOptions{
+			EnforceHTTPS:                 ptr.Bool(true),
+			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
+			CustomEndpointEnabled:        ptr.Bool(true),
+			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
+			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
+		},
+		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
+			Enabled:                     ptr.Bool(true),
+			InternalUserDatabaseEnabled: ptr.Bool(true),
+			MasterUserOptions: &types.MasterUserOptions{
+				MasterUserARN:      ptr.String("__MasterUserARN__"),
+				MasterUserName:     ptr.String("__MasterUserName__"),
+				MasterUserPassword: ptr.String("__MasterUserPassword__"),
+			},
+			SAMLOptions: &types.SAMLOptionsInput{
+				Enabled: ptr.Bool(true),
+				Idp: &types.SAMLIdp{
+					MetadataContent: ptr.String("__MetadataContent__"),
+					EntityId:        ptr.String("__EntityId__"),
+				},
+				MasterUserName:        ptr.String("__MasterUserName__"),
+				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
+				SubjectKey:            ptr.String("__SubjectKey__"),
+				RolesKey:              ptr.String("__RolesKey__"),
+				SessionTimeoutMinutes: ptr.Int32(1),
+			},
+			JWTOptions: &types.JWTOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+				JwksUrl:    ptr.String("__JwksUrl__"),
+				PublicKey:  ptr.String("__PublicKey__"),
+			},
+			IAMFederationOptions: &types.IAMFederationOptionsInput{
+				Enabled:    ptr.Bool(true),
+				SubjectKey: ptr.String("__SubjectKey__"),
+				RolesKey:   ptr.String("__RolesKey__"),
+			},
+			AnonymousAuthEnabled: ptr.Bool(true),
+		},
+		IdentityCenterOptions: &types.IdentityCenterOptionsInput{
+			EnabledAPIAccess:             ptr.Bool(true),
+			IdentityCenterInstanceARN:    ptr.String("__IdentityCenterInstanceARN__"),
+			IdentityCenterInstanceRegion: ptr.String("__IdentityCenterInstanceRegion__"),
+			SubjectKey:                   types.SubjectKeyIdCOption("UserName"),
+			RolesKey:                     types.RolesKeyIdCOption("GroupName"),
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoTuneOptions: &types.AutoTuneOptionsInput{
+			DesiredState: types.AutoTuneDesiredState("ENABLED"),
+			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+				{
+					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Duration: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.TimeUnit("HOURS"),
+					},
+					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
+				},
+			},
+			UseOffPeakWindow: ptr.Bool(true),
+		},
+		OffPeakWindowOptions: &types.OffPeakWindowOptions{
+			Enabled: ptr.Bool(true),
+			OffPeakWindow: &types.OffPeakWindow{
+				WindowStartTime: &types.WindowStartTime{
+					Hours:   1,
+					Minutes: 1,
+				},
+			},
+		},
+		SoftwareUpdateOptions: &types.SoftwareUpdateOptions{
+			AutoSoftwareUpdateEnabled:            ptr.Bool(true),
+			UseLatestServiceSoftwareForBlueGreen: ptr.Bool(true),
+		},
+		AIMLOptions: &types.AIMLOptionsInput{
+			NaturalLanguageQueryGenerationOptions: &types.NaturalLanguageQueryGenerationOptionsInput{
+				DesiredState: types.NaturalLanguageQueryGenerationDesiredState("ENABLED"),
+			},
+			S3VectorsEngine: &types.S3VectorsEngine{
+				Enabled: ptr.Bool(true),
+			},
+			ServerlessVectorAcceleration: &types.ServerlessVectorAcceleration{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
+			DeploymentStrategy: types.DeploymentStrategy("Default"),
+		},
+		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
+			Enabled:   ptr.Bool(true),
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		UseCase:    types.DomainUseCase("SEARCH"),
+		EngineMode: types.EngineMode("GENERAL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6320,7 +7831,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{})
+	_, opErr := svc.AcceptInboundConnection(context.Background(), &AcceptInboundConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6345,7 +7858,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterCapability(context.Background(), &RegisterCapabilityInput{})
+	_, opErr := svc.RegisterCapability(context.Background(), &RegisterCapabilityInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+		CapabilityConfig: &types.CapabilityBaseRequestConfigMemberAiConfig{
+			Value: types.AIConfig{},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6374,7 +7893,13 @@ func TestCheckResponseSnapshot_Error_SlotNotAvailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateScheduledAction(context.Background(), &UpdateScheduledActionInput{})
+	_, opErr := svc.UpdateScheduledAction(context.Background(), &UpdateScheduledActionInput{
+		DomainName:       ptr.String("__DomainName__"),
+		ActionID:         ptr.String("__ActionID__"),
+		ActionType:       types.ActionType("SERVICE_SOFTWARE_UPDATE"),
+		ScheduleAt:       types.ScheduleAt("NOW"),
+		DesiredStartTime: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6399,7 +7924,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		DomainName:  ptr.String("__DomainName__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6424,7 +7953,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{})
+	_, opErr := svc.AddDataSource(context.Background(), &AddDataSourceInput{
+		DomainName: ptr.String("__DomainName__"),
+		Name:       ptr.String("__Name__"),
+		DataSourceType: &types.DataSourceTypeMemberS3GlueDataCatalog{
+			Value: types.S3GlueDataCatalog{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

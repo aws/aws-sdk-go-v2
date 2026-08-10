@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"computeEnvironmentArn":"__ComputeEnvironmentArn__","computeEnvironmentName":"__ComputeEnvironmentName__"}

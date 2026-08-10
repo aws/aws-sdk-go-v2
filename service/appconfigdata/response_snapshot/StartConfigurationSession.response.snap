@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"InitialConfigurationToken":"__InitialConfigurationToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeDatasetImportJob
+
+{"CreationTime":946684800,"DataSize":1,"DataSource":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"DatasetArn":"__DatasetArn__","DatasetImportJobArn":"__DatasetImportJobArn__","DatasetImportJobName":"__DatasetImportJobName__","EstimatedTimeRemainingInMinutes":1,"FieldStatistics":{"key0":{"Avg":1,"Count":1,"CountDistinct":1,"CountDistinctLong":1,"CountLong":1,"CountNan":1,"CountNanLong":1,"CountNull":1,"CountNullLong":1,"Max":"__Max__","Min":"__Min__","Stddev":1}},"Format":"__Format__","GeolocationFormat":"__GeolocationFormat__","ImportMode":"FULL","LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__","TimeZone":"__TimeZone__","TimestampFormat":"__TimestampFormat__","UseGeolocationForTimeZone":true}

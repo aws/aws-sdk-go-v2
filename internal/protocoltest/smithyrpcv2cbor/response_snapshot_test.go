@@ -247,7 +247,43 @@ func TestCheckResponseSnapshot_OperationWithDefaults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{})
+	got, err := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{
+		Defaults: &types.Defaults{
+			DefaultString:  ptr.String("__DefaultString__"),
+			DefaultBoolean: ptr.Bool(true),
+			DefaultList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DefaultTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DefaultBlob:      []byte("blob"),
+			DefaultByte:      ptr.Int8(1),
+			DefaultShort:     ptr.Int16(1),
+			DefaultInteger:   ptr.Int32(1),
+			DefaultLong:      ptr.Int64(1),
+			DefaultFloat:     ptr.Float32(1.0),
+			DefaultDouble:    ptr.Float64(1.0),
+			DefaultMap: map[string]string{
+				"key0": "__Value__",
+			},
+			DefaultEnum:    types.TestEnum("FOO"),
+			DefaultIntEnum: types.TestIntEnum(1),
+			EmptyString:    ptr.String("__EmptyString__"),
+			FalseBoolean:   true,
+			EmptyBlob:      []byte("blob"),
+			ZeroByte:       1,
+			ZeroShort:      1,
+			ZeroInteger:    1,
+			ZeroLong:       1,
+			ZeroFloat:      1.0,
+			ZeroDouble:     1.0,
+		},
+		ClientOptionalDefaults: &types.ClientOptionalDefaults{
+			Member: ptr.Int32(1),
+		},
+		TopLevelDefault:      ptr.String("__TopLevelDefault__"),
+		OtherTopLevelDefault: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +304,9 @@ func TestCheckResponseSnapshot_OptionalInputOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OptionalInputOutput(context.Background(), &OptionalInputOutputInput{})
+	got, err := svc.OptionalInputOutput(context.Background(), &OptionalInputOutputInput{
+		Value: ptr.String("__Value__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +333,15 @@ func TestCheckResponseSnapshot_RecursiveShapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecursiveShapes(context.Background(), &RecursiveShapesInput{})
+	got, err := svc.RecursiveShapes(context.Background(), &RecursiveShapesInput{
+		Nested: &types.RecursiveShapesInputOutputNested1{
+			Foo: ptr.String("__Foo__"),
+			Nested: &types.RecursiveShapesInputOutputNested2{
+				Bar:             ptr.String("__Bar__"),
+				RecursiveMember: nil,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +381,28 @@ func TestCheckResponseSnapshot_RpcV2CborDenseMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RpcV2CborDenseMaps(context.Background(), &RpcV2CborDenseMapsInput{})
+	got, err := svc.RpcV2CborDenseMaps(context.Background(), &RpcV2CborDenseMapsInput{
+		DenseStructMap: map[string]types.GreetingStruct{
+			"key0": {
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		DenseNumberMap: map[string]int32{
+			"key0": 1,
+		},
+		DenseBooleanMap: map[string]bool{
+			"key0": true,
+		},
+		DenseStringMap: map[string]string{
+			"key0": "__Value__",
+		},
+		DenseSetMap: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +474,60 @@ func TestCheckResponseSnapshot_RpcV2CborLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RpcV2CborLists(context.Background(), &RpcV2CborListsInput{})
+	got, err := svc.RpcV2CborLists(context.Background(), &RpcV2CborListsInput{
+		StringList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StringSet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IntegerList: []int32{
+			1,
+			1,
+		},
+		BooleanList: []bool{
+			true,
+			true,
+		},
+		TimestampList: []time.Time{
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+			time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+		},
+		EnumList: []types.FooEnum{
+			types.FooEnum("Foo"),
+			types.FooEnum("Foo"),
+		},
+		IntEnumList: []types.IntegerEnum{
+			types.IntegerEnum(1),
+			types.IntegerEnum(1),
+		},
+		NestedStringList: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		StructureList: []types.StructureListMember{
+			{
+				A: ptr.String("__A__"),
+				B: ptr.String("__B__"),
+			},
+			{
+				A: ptr.String("__A__"),
+				B: ptr.String("__B__"),
+			},
+		},
+		BlobList: [][]byte{
+			[]byte("blob"),
+			[]byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +567,28 @@ func TestCheckResponseSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RpcV2CborSparseMaps(context.Background(), &RpcV2CborSparseMapsInput{})
+	got, err := svc.RpcV2CborSparseMaps(context.Background(), &RpcV2CborSparseMapsInput{
+		SparseStructMap: map[string]*types.GreetingStruct{
+			"key0": {
+				Hi: ptr.String("__Hi__"),
+			},
+		},
+		SparseNumberMap: map[string]*int32{
+			"key0": ptr.Int32(1),
+		},
+		SparseBooleanMap: map[string]*bool{
+			"key0": ptr.Bool(true),
+		},
+		SparseStringMap: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+		SparseSetMap: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +618,18 @@ func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{})
+	got, err := svc.SimpleScalarProperties(context.Background(), &SimpleScalarPropertiesInput{
+		TrueBooleanValue:  ptr.Bool(true),
+		FalseBooleanValue: ptr.Bool(true),
+		ByteValue:         ptr.Int8(1),
+		DoubleValue:       ptr.Float64(1.0),
+		FloatValue:        ptr.Float32(1.0),
+		IntegerValue:      ptr.Int32(1),
+		LongValue:         ptr.Int64(1),
+		ShortValue:        ptr.Int16(1),
+		StringValue:       ptr.String("__StringValue__"),
+		BlobValue:         []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +656,15 @@ func TestCheckResponseSnapshot_SparseNullsOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SparseNullsOperation(context.Background(), &SparseNullsOperationInput{})
+	got, err := svc.SparseNullsOperation(context.Background(), &SparseNullsOperationInput{
+		SparseStringList: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+		SparseStringMap: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +695,43 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{})
+	_, opErr := svc.OperationWithDefaults(context.Background(), &OperationWithDefaultsInput{
+		Defaults: &types.Defaults{
+			DefaultString:  ptr.String("__DefaultString__"),
+			DefaultBoolean: ptr.Bool(true),
+			DefaultList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DefaultTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DefaultBlob:      []byte("blob"),
+			DefaultByte:      ptr.Int8(1),
+			DefaultShort:     ptr.Int16(1),
+			DefaultInteger:   ptr.Int32(1),
+			DefaultLong:      ptr.Int64(1),
+			DefaultFloat:     ptr.Float32(1.0),
+			DefaultDouble:    ptr.Float64(1.0),
+			DefaultMap: map[string]string{
+				"key0": "__Value__",
+			},
+			DefaultEnum:    types.TestEnum("FOO"),
+			DefaultIntEnum: types.TestIntEnum(1),
+			EmptyString:    ptr.String("__EmptyString__"),
+			FalseBoolean:   true,
+			EmptyBlob:      []byte("blob"),
+			ZeroByte:       1,
+			ZeroShort:      1,
+			ZeroInteger:    1,
+			ZeroLong:       1,
+			ZeroFloat:      1.0,
+			ZeroDouble:     1.0,
+		},
+		ClientOptionalDefaults: &types.ClientOptionalDefaults{
+			Member: ptr.Int32(1),
+		},
+		TopLevelDefault:      ptr.String("__TopLevelDefault__"),
+		OtherTopLevelDefault: 1,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"description":"__Description__","hasWorkflows":true,"mappedInputFields":[{"fieldName":"__FieldName__","groupName":"__GroupName__","hashed":true,"matchKey":"__MatchKey__","subType":"__SubType__","type":"NAME"},{"fieldName":"__FieldName__","groupName":"__GroupName__","hashed":true,"matchKey":"__MatchKey__","subType":"__SubType__","type":"NAME"}],"schemaArn":"__SchemaArn__","schemaName":"__SchemaName__","tags":{"key0":"__Value__"},"updatedAt":946684800}

@@ -117,7 +117,12 @@ func TestCheckResponseSnapshot_AssociateAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	got, err := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +141,12 @@ func TestCheckResponseSnapshot_AssociateTimeSeriesToAssetProperty(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTimeSeriesToAssetProperty(context.Background(), &AssociateTimeSeriesToAssetPropertyInput{})
+	got, err := svc.AssociateTimeSeriesToAssetProperty(context.Background(), &AssociateTimeSeriesToAssetPropertyInput{
+		Alias:       ptr.String("__Alias__"),
+		AssetId:     ptr.String("__AssetId__"),
+		PropertyId:  ptr.String("__PropertyId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +198,37 @@ func TestCheckResponseSnapshot_BatchAssociateDataSegmentsToDataset(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateDataSegmentsToDataset(context.Background(), &BatchAssociateDataSegmentsToDatasetInput{})
+	got, err := svc.BatchAssociateDataSegmentsToDataset(context.Background(), &BatchAssociateDataSegmentsToDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		AssociateDataSegmentEntries: []types.AssociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +260,14 @@ func TestCheckResponseSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateProjectAssets(context.Background(), &BatchAssociateProjectAssetsInput{})
+	got, err := svc.BatchAssociateProjectAssets(context.Background(), &BatchAssociateProjectAssetsInput{
+		ProjectId: ptr.String("__ProjectId__"),
+		AssetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +317,35 @@ func TestCheckResponseSnapshot_BatchDeleteDatasetDataSegments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteDatasetDataSegments(context.Background(), &BatchDeleteDatasetDataSegmentsInput{})
+	got, err := svc.BatchDeleteDatasetDataSegments(context.Background(), &BatchDeleteDatasetDataSegmentsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DeleteDataSegmentEntries: []types.DeleteDataSegmentEntry{
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +397,37 @@ func TestCheckResponseSnapshot_BatchDisassociateDataSegmentsFromDataset(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateDataSegmentsFromDataset(context.Background(), &BatchDisassociateDataSegmentsFromDatasetInput{})
+	got, err := svc.BatchDisassociateDataSegmentsFromDataset(context.Background(), &BatchDisassociateDataSegmentsFromDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DisassociateDataSegmentEntries: []types.DisassociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +459,14 @@ func TestCheckResponseSnapshot_BatchDisassociateProjectAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateProjectAssets(context.Background(), &BatchDisassociateProjectAssetsInput{})
+	got, err := svc.BatchDisassociateProjectAssets(context.Background(), &BatchDisassociateProjectAssetsInput{
+		ProjectId: ptr.String("__ProjectId__"),
+		AssetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +577,48 @@ func TestCheckResponseSnapshot_BatchGetAssetPropertyAggregates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAssetPropertyAggregates(context.Background(), &BatchGetAssetPropertyAggregatesInput{})
+	got, err := svc.BatchGetAssetPropertyAggregates(context.Background(), &BatchGetAssetPropertyAggregatesInput{
+		Entries: []types.BatchGetAssetPropertyAggregatesEntry{
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				AggregateTypes: []types.AggregateType{
+					types.AggregateType("AVERAGE"),
+					types.AggregateType("AVERAGE"),
+				},
+				Resolution: ptr.String("__Resolution__"),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				AggregateTypes: []types.AggregateType{
+					types.AggregateType("AVERAGE"),
+					types.AggregateType("AVERAGE"),
+				},
+				Resolution: ptr.String("__Resolution__"),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +709,23 @@ func TestCheckResponseSnapshot_BatchGetAssetPropertyValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAssetPropertyValue(context.Background(), &BatchGetAssetPropertyValueInput{})
+	got, err := svc.BatchGetAssetPropertyValue(context.Background(), &BatchGetAssetPropertyValueInput{
+		Entries: []types.BatchGetAssetPropertyValueEntry{
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+			},
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -683,7 +852,38 @@ func TestCheckResponseSnapshot_BatchGetAssetPropertyValueHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAssetPropertyValueHistory(context.Background(), &BatchGetAssetPropertyValueHistoryInput{})
+	got, err := svc.BatchGetAssetPropertyValueHistory(context.Background(), &BatchGetAssetPropertyValueHistoryInput{
+		Entries: []types.BatchGetAssetPropertyValueHistoryEntry{
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +971,91 @@ func TestCheckResponseSnapshot_BatchPutAssetPropertyValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutAssetPropertyValue(context.Background(), &BatchPutAssetPropertyValueInput{})
+	got, err := svc.BatchPutAssetPropertyValue(context.Background(), &BatchPutAssetPropertyValueInput{
+		EnablePartialEntryProcessing: ptr.Bool(true),
+		Entries: []types.PutAssetPropertyValueEntry{
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				PropertyValues: []types.AssetPropertyValue{
+					{
+						Value: &types.Variant{
+							StringValue:  ptr.String("__StringValue__"),
+							IntegerValue: ptr.Int32(1),
+							DoubleValue:  ptr.Float64(1.0),
+							BooleanValue: ptr.Bool(true),
+							NullValue: &types.PropertyValueNullValue{
+								ValueType: types.RawValueType("D"),
+							},
+						},
+						Timestamp: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						Quality: types.Quality("GOOD"),
+					},
+					{
+						Value: &types.Variant{
+							StringValue:  ptr.String("__StringValue__"),
+							IntegerValue: ptr.Int32(1),
+							DoubleValue:  ptr.Float64(1.0),
+							BooleanValue: ptr.Bool(true),
+							NullValue: &types.PropertyValueNullValue{
+								ValueType: types.RawValueType("D"),
+							},
+						},
+						Timestamp: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						Quality: types.Quality("GOOD"),
+					},
+				},
+			},
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				PropertyValues: []types.AssetPropertyValue{
+					{
+						Value: &types.Variant{
+							StringValue:  ptr.String("__StringValue__"),
+							IntegerValue: ptr.Int32(1),
+							DoubleValue:  ptr.Float64(1.0),
+							BooleanValue: ptr.Bool(true),
+							NullValue: &types.PropertyValueNullValue{
+								ValueType: types.RawValueType("D"),
+							},
+						},
+						Timestamp: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						Quality: types.Quality("GOOD"),
+					},
+					{
+						Value: &types.Variant{
+							StringValue:  ptr.String("__StringValue__"),
+							IntegerValue: ptr.Int32(1),
+							DoubleValue:  ptr.Float64(1.0),
+							BooleanValue: ptr.Bool(true),
+							NullValue: &types.PropertyValueNullValue{
+								ValueType: types.RawValueType("D"),
+							},
+						},
+						Timestamp: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						Quality: types.Quality("GOOD"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +1077,10 @@ func TestCheckResponseSnapshot_CancelEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{})
+	got, err := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +1101,12 @@ func TestCheckResponseSnapshot_CancelPipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelPipelineExecution(context.Background(), &CancelPipelineExecutionInput{})
+	got, err := svc.CancelPipelineExecution(context.Background(), &CancelPipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Reason:              ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -836,7 +1128,10 @@ func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1153,35 @@ func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{})
+	got, err := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{
+		AccessPolicyIdentity: &types.Identity{
+			User: &types.UserIdentity{
+				Id: ptr.String("__Id__"),
+			},
+			Group: &types.GroupIdentity{
+				Id: ptr.String("__Id__"),
+			},
+			IamUser: &types.IAMUserIdentity{
+				Arn: ptr.String("__Arn__"),
+			},
+			IamRole: &types.IAMRoleIdentity{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		AccessPolicyResource: &types.Resource{
+			Portal: &types.PortalResource{
+				Id: ptr.String("__Id__"),
+			},
+			Project: &types.ProjectResource{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		AccessPolicyPermission: types.Permission("ADMINISTRATOR"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +1206,16 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1254,17 @@ func TestCheckResponseSnapshot_CreateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{})
+	got, err := svc.CreateAsset(context.Background(), &CreateAssetInput{
+		AssetName:       ptr.String("__AssetName__"),
+		AssetModelId:    ptr.String("__AssetModelId__"),
+		AssetId:         ptr.String("__AssetId__"),
+		AssetExternalId: ptr.String("__AssetExternalId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AssetDescription: ptr.String("__AssetDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -961,7 +1303,731 @@ func TestCheckResponseSnapshot_CreateAssetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetModel(context.Background(), &CreateAssetModelInput{})
+	got, err := svc.CreateAssetModel(context.Background(), &CreateAssetModelInput{
+		AssetModelName:        ptr.String("__AssetModelName__"),
+		AssetModelType:        types.AssetModelType("ASSET_MODEL"),
+		AssetModelId:          ptr.String("__AssetModelId__"),
+		AssetModelExternalId:  ptr.String("__AssetModelExternalId__"),
+		AssetModelDescription: ptr.String("__AssetModelDescription__"),
+		AssetModelProperties: []types.AssetModelPropertyDefinition{
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+		},
+		AssetModelHierarchies: []types.AssetModelHierarchyDefinition{
+			{
+				Id:                ptr.String("__Id__"),
+				ExternalId:        ptr.String("__ExternalId__"),
+				Name:              ptr.String("__Name__"),
+				ChildAssetModelId: ptr.String("__ChildAssetModelId__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ExternalId:        ptr.String("__ExternalId__"),
+				Name:              ptr.String("__Name__"),
+				ChildAssetModelId: ptr.String("__ChildAssetModelId__"),
+			},
+		},
+		AssetModelCompositeModels: []types.AssetModelCompositeModelDefinition{
+			{
+				Id:          ptr.String("__Id__"),
+				ExternalId:  ptr.String("__ExternalId__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Type:        ptr.String("__Type__"),
+				Properties: []types.AssetModelPropertyDefinition{
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+					},
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				ExternalId:  ptr.String("__ExternalId__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Type:        ptr.String("__Type__"),
+				Properties: []types.AssetModelPropertyDefinition{
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+					},
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1010,7 +2076,248 @@ func TestCheckResponseSnapshot_CreateAssetModelCompositeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssetModelCompositeModel(context.Background(), &CreateAssetModelCompositeModelInput{})
+	got, err := svc.CreateAssetModelCompositeModel(context.Background(), &CreateAssetModelCompositeModelInput{
+		AssetModelId:                        ptr.String("__AssetModelId__"),
+		AssetModelCompositeModelExternalId:  ptr.String("__AssetModelCompositeModelExternalId__"),
+		ParentAssetModelCompositeModelId:    ptr.String("__ParentAssetModelCompositeModelId__"),
+		AssetModelCompositeModelId:          ptr.String("__AssetModelCompositeModelId__"),
+		AssetModelCompositeModelDescription: ptr.String("__AssetModelCompositeModelDescription__"),
+		AssetModelCompositeModelName:        ptr.String("__AssetModelCompositeModelName__"),
+		AssetModelCompositeModelType:        ptr.String("__AssetModelCompositeModelType__"),
+		ClientToken:                         ptr.String("__ClientToken__"),
+		ComposedAssetModelId:                ptr.String("__ComposedAssetModelId__"),
+		AssetModelCompositeModelProperties: []types.AssetModelPropertyDefinition{
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+		},
+		IfMatch:             ptr.String("__IfMatch__"),
+		IfNoneMatch:         ptr.String("__IfNoneMatch__"),
+		MatchForVersionType: types.AssetModelVersionType("LATEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +2340,75 @@ func TestCheckResponseSnapshot_CreateBulkImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBulkImportJob(context.Background(), &CreateBulkImportJobInput{})
+	got, err := svc.CreateBulkImportJob(context.Background(), &CreateBulkImportJobInput{
+		JobName:    ptr.String("__JobName__"),
+		JobRoleArn: ptr.String("__JobRoleArn__"),
+		Files: []types.File{
+			{
+				Bucket:    ptr.String("__Bucket__"),
+				Key:       ptr.String("__Key__"),
+				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
+			},
+			{
+				Bucket:    ptr.String("__Bucket__"),
+				Key:       ptr.String("__Key__"),
+				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
+			},
+		},
+		ErrorReportLocation: &types.ErrorReportLocation{
+			Bucket: ptr.String("__Bucket__"),
+			Prefix: ptr.String("__Prefix__"),
+		},
+		JobConfiguration: &types.JobConfiguration{
+			FileFormat: &types.FileFormat{
+				Csv: &types.Csv{
+					ColumnNames: []types.ColumnName{
+						types.ColumnName("ALIAS"),
+						types.ColumnName("ALIAS"),
+					},
+				},
+				Parquet:    &types.Parquet{},
+				Mp4:        &types.Mp4{},
+				Annotation: &types.Annotation{},
+			},
+		},
+		AdaptiveIngestion:      ptr.Bool(true),
+		DeleteFilesAfterImport: ptr.Bool(true),
+		DatasetId:              ptr.String("__DatasetId__"),
+		WorkspaceName:          ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1072,7 +2447,36 @@ func TestCheckResponseSnapshot_CreateComputationModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComputationModel(context.Background(), &CreateComputationModelInput{})
+	got, err := svc.CreateComputationModel(context.Background(), &CreateComputationModelInput{
+		ComputationModelName:        ptr.String("__ComputationModelName__"),
+		ComputationModelDescription: ptr.String("__ComputationModelDescription__"),
+		ComputationModelConfiguration: &types.ComputationModelConfiguration{
+			AnomalyDetection: &types.ComputationModelAnomalyDetectionConfiguration{
+				InputProperties: ptr.String("__InputProperties__"),
+				ResultProperty:  ptr.String("__ResultProperty__"),
+			},
+		},
+		ComputationModelDataBinding: map[string]types.ComputationModelDataBindingValue{
+			"key0": {
+				AssetModelProperty: &types.AssetModelPropertyBindingValue{
+					AssetModelId: ptr.String("__AssetModelId__"),
+					PropertyId:   ptr.String("__PropertyId__"),
+				},
+				AssetProperty: &types.AssetPropertyBindingValue{
+					AssetId:    ptr.String("__AssetId__"),
+					PropertyId: ptr.String("__PropertyId__"),
+				},
+				List: []types.ComputationModelDataBindingValue{
+					{},
+					{},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +2498,16 @@ func TestCheckResponseSnapshot_CreateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{})
+	got, err := svc.CreateDashboard(context.Background(), &CreateDashboardInput{
+		ProjectId:            ptr.String("__ProjectId__"),
+		DashboardName:        ptr.String("__DashboardName__"),
+		DashboardDescription: ptr.String("__DashboardDescription__"),
+		DashboardDefinition:  ptr.String("__DashboardDefinition__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1133,7 +2546,42 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetId:          ptr.String("__DatasetId__"),
+		DatasetName:        ptr.String("__DatasetName__"),
+		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetType:        types.DatasetTypeEnum("SESSION"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		DatasetSource: &types.DatasetSource{
+			SourceType:   types.DatasetSourceType("KENDRA"),
+			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
+			SourceDetail: &types.SourceDetail{
+				Kendra: &types.KendraSourceDetail{
+					KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+					RoleArn:          ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1155,7 +2603,56 @@ func TestCheckResponseSnapshot_CreateDatasetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetExportJob(context.Background(), &CreateDatasetExportJobInput{})
+	got, err := svc.CreateDatasetExportJob(context.Background(), &CreateDatasetExportJobInput{
+		WorkspaceName:    ptr.String("__WorkspaceName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+		Input: &types.ProcessingInputMemberTimeseries{
+			Value: []types.TimeseriesItem{
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ErrorReportLocation: &types.ExportErrorReportLocation{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +2675,27 @@ func TestCheckResponseSnapshot_CreateEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnrichmentJob(context.Background(), &CreateEnrichmentJobInput{})
+	got, err := svc.CreateEnrichmentJob(context.Background(), &CreateEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobConfiguration: &types.EnrichmentJobConfigurationMemberEventDetection{
+			Value: types.EventDetection{
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TrimSettings: &types.EnrichmentTrimSettings{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1200,7 +2717,25 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{})
+	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{
+		GatewayName: ptr.String("__GatewayName__"),
+		GatewayPlatform: &types.GatewayPlatform{
+			Greengrass: &types.Greengrass{
+				GroupArn: ptr.String("__GroupArn__"),
+			},
+			GreengrassV2: &types.GreengrassV2{
+				CoreDeviceThingName:       ptr.String("__CoreDeviceThingName__"),
+				CoreDeviceOperatingSystem: types.CoreDeviceOperatingSystem("LINUX_AARCH64"),
+			},
+			SiemensIE: &types.SiemensIE{
+				IotCoreThingName: ptr.String("__IotCoreThingName__"),
+			},
+		},
+		GatewayVersion: ptr.String("__GatewayVersion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1230,7 +2765,42 @@ func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1261,7 +2831,35 @@ func TestCheckResponseSnapshot_CreatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{})
+	got, err := svc.CreatePortal(context.Background(), &CreatePortalInput{
+		PortalName:         ptr.String("__PortalName__"),
+		PortalDescription:  ptr.String("__PortalDescription__"),
+		PortalContactEmail: ptr.String("__PortalContactEmail__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		PortalLogoImageFile: &types.ImageFile{
+			Data: []byte("blob"),
+			Type: types.ImageFileType("PNG"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PortalAuthMode:          types.AuthMode("IAM"),
+		NotificationSenderEmail: ptr.String("__NotificationSenderEmail__"),
+		Alarms: &types.Alarms{
+			AlarmRoleArn:          ptr.String("__AlarmRoleArn__"),
+			NotificationLambdaArn: ptr.String("__NotificationLambdaArn__"),
+		},
+		PortalType: types.PortalType("SITEWISE_PORTAL_V1"),
+		PortalTypeConfiguration: map[string]types.PortalTypeEntry{
+			"key0": {
+				PortalTools: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1283,7 +2881,15 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		PortalId:           ptr.String("__PortalId__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1313,7 +2919,31 @@ func TestCheckResponseSnapshot_CreateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{})
+	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +2972,18 @@ func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1361,7 +3002,10 @@ func TestCheckResponseSnapshot_DeleteAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPolicy(context.Background(), &DeleteAccessPolicyInput{})
+	got, err := svc.DeleteAccessPolicy(context.Background(), &DeleteAccessPolicyInput{
+		AccessPolicyId: ptr.String("__AccessPolicyId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1380,7 +3024,10 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +3065,10 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{})
+	got, err := svc.DeleteAsset(context.Background(), &DeleteAssetInput{
+		AssetId:     ptr.String("__AssetId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1456,7 +3106,13 @@ func TestCheckResponseSnapshot_DeleteAssetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetModel(context.Background(), &DeleteAssetModelInput{})
+	got, err := svc.DeleteAssetModel(context.Background(), &DeleteAssetModelInput{
+		AssetModelId:        ptr.String("__AssetModelId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		IfMatch:             ptr.String("__IfMatch__"),
+		IfNoneMatch:         ptr.String("__IfNoneMatch__"),
+		MatchForVersionType: types.AssetModelVersionType("LATEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +3150,14 @@ func TestCheckResponseSnapshot_DeleteAssetModelCompositeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetModelCompositeModel(context.Background(), &DeleteAssetModelCompositeModelInput{})
+	got, err := svc.DeleteAssetModelCompositeModel(context.Background(), &DeleteAssetModelCompositeModelInput{
+		AssetModelId:               ptr.String("__AssetModelId__"),
+		AssetModelCompositeModelId: ptr.String("__AssetModelCompositeModelId__"),
+		ClientToken:                ptr.String("__ClientToken__"),
+		IfMatch:                    ptr.String("__IfMatch__"),
+		IfNoneMatch:                ptr.String("__IfNoneMatch__"),
+		MatchForVersionType:        types.AssetModelVersionType("LATEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1534,7 +3197,11 @@ func TestCheckResponseSnapshot_DeleteAssetModelInterfaceRelationship(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetModelInterfaceRelationship(context.Background(), &DeleteAssetModelInterfaceRelationshipInput{})
+	got, err := svc.DeleteAssetModelInterfaceRelationship(context.Background(), &DeleteAssetModelInterfaceRelationshipInput{
+		AssetModelId:          ptr.String("__AssetModelId__"),
+		InterfaceAssetModelId: ptr.String("__InterfaceAssetModelId__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1571,7 +3238,10 @@ func TestCheckResponseSnapshot_DeleteComputationModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComputationModel(context.Background(), &DeleteComputationModelInput{})
+	got, err := svc.DeleteComputationModel(context.Background(), &DeleteComputationModelInput{
+		ComputationModelId: ptr.String("__ComputationModelId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1590,7 +3260,10 @@ func TestCheckResponseSnapshot_DeleteDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{})
+	got, err := svc.DeleteDashboard(context.Background(), &DeleteDashboardInput{
+		DashboardId: ptr.String("__DashboardId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1627,7 +3300,11 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +3323,9 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{})
+	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1673,7 +3352,10 @@ func TestCheckResponseSnapshot_DeletePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1700,7 +3382,10 @@ func TestCheckResponseSnapshot_DeletePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{})
+	got, err := svc.DeletePortal(context.Background(), &DeletePortalInput{
+		PortalId:    ptr.String("__PortalId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1719,7 +3404,10 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		ProjectId:   ptr.String("__ProjectId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1746,7 +3434,10 @@ func TestCheckResponseSnapshot_DeleteTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTask(context.Background(), &DeleteTaskInput{})
+	got, err := svc.DeleteTask(context.Background(), &DeleteTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1765,7 +3456,13 @@ func TestCheckResponseSnapshot_DeleteTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTimeSeries(context.Background(), &DeleteTimeSeriesInput{})
+	got, err := svc.DeleteTimeSeries(context.Background(), &DeleteTimeSeriesInput{
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1792,7 +3489,10 @@ func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1839,7 +3539,9 @@ func TestCheckResponseSnapshot_DescribeAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccessPolicy(context.Background(), &DescribeAccessPolicyInput{})
+	got, err := svc.DescribeAccessPolicy(context.Background(), &DescribeAccessPolicyInput{
+		AccessPolicyId: ptr.String("__AccessPolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1872,7 +3574,9 @@ func TestCheckResponseSnapshot_DescribeAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAction(context.Background(), &DescribeActionInput{})
+	got, err := svc.DescribeAction(context.Background(), &DescribeActionInput{
+		ActionId: ptr.String("__ActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1902,7 +3606,10 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{})
+	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2155,7 +3862,10 @@ func TestCheckResponseSnapshot_DescribeAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAsset(context.Background(), &DescribeAssetInput{})
+	got, err := svc.DescribeAsset(context.Background(), &DescribeAssetInput{
+		AssetId:           ptr.String("__AssetId__"),
+		ExcludeProperties: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2287,7 +3997,10 @@ func TestCheckResponseSnapshot_DescribeAssetCompositeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAssetCompositeModel(context.Background(), &DescribeAssetCompositeModelInput{})
+	got, err := svc.DescribeAssetCompositeModel(context.Background(), &DescribeAssetCompositeModelInput{
+		AssetId:               ptr.String("__AssetId__"),
+		AssetCompositeModelId: ptr.String("__AssetCompositeModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3152,7 +4865,11 @@ func TestCheckResponseSnapshot_DescribeAssetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAssetModel(context.Background(), &DescribeAssetModelInput{})
+	got, err := svc.DescribeAssetModel(context.Background(), &DescribeAssetModelInput{
+		AssetModelId:      ptr.String("__AssetModelId__"),
+		ExcludeProperties: true,
+		AssetModelVersion: ptr.String("__AssetModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3494,7 +5211,11 @@ func TestCheckResponseSnapshot_DescribeAssetModelCompositeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAssetModelCompositeModel(context.Background(), &DescribeAssetModelCompositeModelInput{})
+	got, err := svc.DescribeAssetModelCompositeModel(context.Background(), &DescribeAssetModelCompositeModelInput{
+		AssetModelId:               ptr.String("__AssetModelId__"),
+		AssetModelCompositeModelId: ptr.String("__AssetModelCompositeModelId__"),
+		AssetModelVersion:          ptr.String("__AssetModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3536,7 +5257,10 @@ func TestCheckResponseSnapshot_DescribeAssetModelInterfaceRelationship(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAssetModelInterfaceRelationship(context.Background(), &DescribeAssetModelInterfaceRelationshipInput{})
+	got, err := svc.DescribeAssetModelInterfaceRelationship(context.Background(), &DescribeAssetModelInterfaceRelationshipInput{
+		AssetModelId:          ptr.String("__AssetModelId__"),
+		InterfaceAssetModelId: ptr.String("__InterfaceAssetModelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3820,7 +5544,10 @@ func TestCheckResponseSnapshot_DescribeAssetProperty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAssetProperty(context.Background(), &DescribeAssetPropertyInput{})
+	got, err := svc.DescribeAssetProperty(context.Background(), &DescribeAssetPropertyInput{
+		AssetId:    ptr.String("__AssetId__"),
+		PropertyId: ptr.String("__PropertyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3911,7 +5638,10 @@ func TestCheckResponseSnapshot_DescribeBulkImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBulkImportJob(context.Background(), &DescribeBulkImportJobInput{})
+	got, err := svc.DescribeBulkImportJob(context.Background(), &DescribeBulkImportJobInput{
+		JobId:         ptr.String("__JobId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3989,7 +5719,10 @@ func TestCheckResponseSnapshot_DescribeComputationModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComputationModel(context.Background(), &DescribeComputationModelInput{})
+	got, err := svc.DescribeComputationModel(context.Background(), &DescribeComputationModelInput{
+		ComputationModelId:      ptr.String("__ComputationModelId__"),
+		ComputationModelVersion: ptr.String("__ComputationModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4016,7 +5749,11 @@ func TestCheckResponseSnapshot_DescribeComputationModelExecutionSummary(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComputationModelExecutionSummary(context.Background(), &DescribeComputationModelExecutionSummaryInput{})
+	got, err := svc.DescribeComputationModelExecutionSummary(context.Background(), &DescribeComputationModelExecutionSummaryInput{
+		ComputationModelId:    ptr.String("__ComputationModelId__"),
+		ResolveToResourceType: types.ResolveToResourceType("ASSET"),
+		ResolveToResourceId:   ptr.String("__ResolveToResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4044,7 +5781,9 @@ func TestCheckResponseSnapshot_DescribeDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDashboard(context.Background(), &DescribeDashboardInput{})
+	got, err := svc.DescribeDashboard(context.Background(), &DescribeDashboardInput{
+		DashboardId: ptr.String("__DashboardId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4121,7 +5860,11 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4192,7 +5935,10 @@ func TestCheckResponseSnapshot_DescribeDatasetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetExportJob(context.Background(), &DescribeDatasetExportJobInput{})
+	got, err := svc.DescribeDatasetExportJob(context.Background(), &DescribeDatasetExportJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4267,7 +6013,10 @@ func TestCheckResponseSnapshot_DescribeEnrichmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEnrichmentJob(context.Background(), &DescribeEnrichmentJobInput{})
+	got, err := svc.DescribeEnrichmentJob(context.Background(), &DescribeEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4309,7 +6058,9 @@ func TestCheckResponseSnapshot_DescribeExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{})
+	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{
+		ExecutionId: ptr.String("__ExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4357,7 +6108,9 @@ func TestCheckResponseSnapshot_DescribeGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGateway(context.Background(), &DescribeGatewayInput{})
+	got, err := svc.DescribeGateway(context.Background(), &DescribeGatewayInput{
+		GatewayId: ptr.String("__GatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4381,7 +6134,10 @@ func TestCheckResponseSnapshot_DescribeGatewayCapabilityConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGatewayCapabilityConfiguration(context.Background(), &DescribeGatewayCapabilityConfigurationInput{})
+	got, err := svc.DescribeGatewayCapabilityConfiguration(context.Background(), &DescribeGatewayCapabilityConfigurationInput{
+		GatewayId:           ptr.String("__GatewayId__"),
+		CapabilityNamespace: ptr.String("__CapabilityNamespace__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4404,7 +6160,9 @@ func TestCheckResponseSnapshot_DescribeLoggingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoggingOptions(context.Background(), &DescribeLoggingOptionsInput{})
+	got, err := svc.DescribeLoggingOptions(context.Background(), &DescribeLoggingOptionsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4465,7 +6223,11 @@ func TestCheckResponseSnapshot_DescribePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePipeline(context.Background(), &DescribePipelineInput{})
+	got, err := svc.DescribePipeline(context.Background(), &DescribePipelineInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		PipelineVersion: ptr.String("__PipelineVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4586,7 +6348,13 @@ func TestCheckResponseSnapshot_DescribePipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePipelineExecution(context.Background(), &DescribePipelineExecutionInput{})
+	got, err := svc.DescribePipelineExecution(context.Background(), &DescribePipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4642,7 +6410,9 @@ func TestCheckResponseSnapshot_DescribePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePortal(context.Background(), &DescribePortalInput{})
+	got, err := svc.DescribePortal(context.Background(), &DescribePortalInput{
+		PortalId: ptr.String("__PortalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4669,7 +6439,9 @@ func TestCheckResponseSnapshot_DescribeProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProject(context.Background(), &DescribeProjectInput{})
+	got, err := svc.DescribeProject(context.Background(), &DescribeProjectInput{
+		ProjectId: ptr.String("__ProjectId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4699,7 +6471,10 @@ func TestCheckResponseSnapshot_DescribeQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeQuery(context.Background(), &DescribeQueryInput{})
+	got, err := svc.DescribeQuery(context.Background(), &DescribeQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4727,7 +6502,10 @@ func TestCheckResponseSnapshot_DescribeSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSearch(context.Background(), &DescribeSearchInput{})
+	got, err := svc.DescribeSearch(context.Background(), &DescribeSearchInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		SearchId:      ptr.String("__SearchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4823,7 +6601,11 @@ func TestCheckResponseSnapshot_DescribeTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{})
+	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		TaskVersion:   ptr.String("__TaskVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4853,7 +6635,12 @@ func TestCheckResponseSnapshot_DescribeTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTimeSeries(context.Background(), &DescribeTimeSeriesInput{})
+	got, err := svc.DescribeTimeSeries(context.Background(), &DescribeTimeSeriesInput{
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4889,7 +6676,9 @@ func TestCheckResponseSnapshot_DescribeWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{})
+	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4908,7 +6697,12 @@ func TestCheckResponseSnapshot_DisassociateAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAssets(context.Background(), &DisassociateAssetsInput{})
+	got, err := svc.DisassociateAssets(context.Background(), &DisassociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4927,7 +6721,12 @@ func TestCheckResponseSnapshot_DisassociateTimeSeriesFromAssetProperty(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTimeSeriesFromAssetProperty(context.Background(), &DisassociateTimeSeriesFromAssetPropertyInput{})
+	got, err := svc.DisassociateTimeSeriesFromAssetProperty(context.Background(), &DisassociateTimeSeriesFromAssetPropertyInput{
+		Alias:       ptr.String("__Alias__"),
+		AssetId:     ptr.String("__AssetId__"),
+		PropertyId:  ptr.String("__PropertyId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4948,7 +6747,20 @@ func TestCheckResponseSnapshot_ExecuteAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteAction(context.Background(), &ExecuteActionInput{})
+	got, err := svc.ExecuteAction(context.Background(), &ExecuteActionInput{
+		TargetResource: &types.TargetResource{
+			AssetId:            ptr.String("__AssetId__"),
+			ComputationModelId: ptr.String("__ComputationModelId__"),
+		},
+		ActionDefinitionId: ptr.String("__ActionDefinitionId__"),
+		ActionPayload: &types.ActionPayload{
+			StringValue: ptr.String("__StringValue__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ResolveTo: &types.ResolveTo{
+			AssetId: ptr.String("__AssetId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5029,7 +6841,12 @@ func TestCheckResponseSnapshot_ExecuteQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		QueryStatement: ptr.String("__QueryStatement__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5076,7 +6893,25 @@ func TestCheckResponseSnapshot_GetAssetPropertyAggregates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetPropertyAggregates(context.Background(), &GetAssetPropertyAggregatesInput{})
+	got, err := svc.GetAssetPropertyAggregates(context.Background(), &GetAssetPropertyAggregatesInput{
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		AggregateTypes: []types.AggregateType{
+			types.AggregateType("AVERAGE"),
+			types.AggregateType("AVERAGE"),
+		},
+		Resolution: ptr.String("__Resolution__"),
+		Qualities: []types.Quality{
+			types.Quality("GOOD"),
+			types.Quality("GOOD"),
+		},
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimeOrdering: types.TimeOrdering("ASCENDING"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5112,7 +6947,11 @@ func TestCheckResponseSnapshot_GetAssetPropertyValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetPropertyValue(context.Background(), &GetAssetPropertyValueInput{})
+	got, err := svc.GetAssetPropertyValue(context.Background(), &GetAssetPropertyValueInput{
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5167,7 +7006,20 @@ func TestCheckResponseSnapshot_GetAssetPropertyValueHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssetPropertyValueHistory(context.Background(), &GetAssetPropertyValueHistoryInput{})
+	got, err := svc.GetAssetPropertyValueHistory(context.Background(), &GetAssetPropertyValueHistoryInput{
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Qualities: []types.Quality{
+			types.Quality("GOOD"),
+			types.Quality("GOOD"),
+		},
+		TimeOrdering: types.TimeOrdering("ASCENDING"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5198,7 +7050,25 @@ func TestCheckResponseSnapshot_GetCaptureData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCaptureData(context.Background(), &GetCaptureDataInput{})
+	got, err := svc.GetCaptureData(context.Background(), &GetCaptureDataInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		StartTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		EndTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		FormatSettings: &types.FormatSettings{
+			FramesPerSecond: ptr.Int32(1),
+			WidthInPixels:   ptr.Int32(1),
+			HeightInPixels:  ptr.Int32(1),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5251,7 +7121,21 @@ func TestCheckResponseSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInterpolatedAssetPropertyValues(context.Background(), &GetInterpolatedAssetPropertyValuesInput{})
+	got, err := svc.GetInterpolatedAssetPropertyValues(context.Background(), &GetInterpolatedAssetPropertyValuesInput{
+		AssetId:                 ptr.String("__AssetId__"),
+		PropertyId:              ptr.String("__PropertyId__"),
+		PropertyAlias:           ptr.String("__PropertyAlias__"),
+		StartTimeInSeconds:      ptr.Int64(1),
+		StartTimeOffsetInNanos:  ptr.Int32(1),
+		EndTimeInSeconds:        ptr.Int64(1),
+		EndTimeOffsetInNanos:    ptr.Int32(1),
+		Quality:                 types.Quality("GOOD"),
+		IntervalInSeconds:       ptr.Int64(1),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		Type:                    ptr.String("__Type__"),
+		IntervalWindowInSeconds: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5292,7 +7176,12 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5353,13 +7242,22 @@ func TestCheckResponseSnapshot_GetSearchResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSearchResults(context.Background(), &GetSearchResultsInput{})
+	got, err := svc.GetSearchResults(context.Background(), &GetSearchResultsInput{
+		SearchId:      ptr.String("__SearchId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSearchResults.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeAssistant(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ListAccessPolicies(t *testing.T) {
@@ -5432,7 +7330,15 @@ func TestCheckResponseSnapshot_ListAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{})
+	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{
+		IdentityType: types.IdentityType("USER"),
+		IdentityId:   ptr.String("__IdentityId__"),
+		ResourceType: types.ResourceType("PORTAL"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		IamArn:       ptr.String("__IamArn__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5477,7 +7383,14 @@ func TestCheckResponseSnapshot_ListActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActions(context.Background(), &ListActionsInput{})
+	got, err := svc.ListActions(context.Background(), &ListActionsInput{
+		TargetResourceType:    types.TargetResourceType("ASSET"),
+		TargetResourceId:      ptr.String("__TargetResourceId__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		ResolveToResourceType: types.ResolveToResourceType("ASSET"),
+		ResolveToResourceId:   ptr.String("__ResolveToResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5516,7 +7429,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5573,7 +7489,12 @@ func TestCheckResponseSnapshot_ListAssetModelCompositeModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetModelCompositeModels(context.Background(), &ListAssetModelCompositeModelsInput{})
+	got, err := svc.ListAssetModelCompositeModels(context.Background(), &ListAssetModelCompositeModelsInput{
+		AssetModelId:      ptr.String("__AssetModelId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		AssetModelVersion: ptr.String("__AssetModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5864,7 +7785,13 @@ func TestCheckResponseSnapshot_ListAssetModelProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetModelProperties(context.Background(), &ListAssetModelPropertiesInput{})
+	got, err := svc.ListAssetModelProperties(context.Background(), &ListAssetModelPropertiesInput{
+		AssetModelId:      ptr.String("__AssetModelId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		Filter:            types.ListAssetModelPropertiesFilter("ALL"),
+		AssetModelVersion: ptr.String("__AssetModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5943,7 +7870,15 @@ func TestCheckResponseSnapshot_ListAssetModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetModels(context.Background(), &ListAssetModelsInput{})
+	got, err := svc.ListAssetModels(context.Background(), &ListAssetModelsInput{
+		AssetModelTypes: []types.AssetModelType{
+			types.AssetModelType("ASSET_MODEL"),
+			types.AssetModelType("ASSET_MODEL"),
+		},
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		AssetModelVersion: ptr.String("__AssetModelVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6008,7 +7943,12 @@ func TestCheckResponseSnapshot_ListAssetProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetProperties(context.Background(), &ListAssetPropertiesInput{})
+	got, err := svc.ListAssetProperties(context.Background(), &ListAssetPropertiesInput{
+		AssetId:    ptr.String("__AssetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter:     types.ListAssetPropertiesFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6045,7 +7985,12 @@ func TestCheckResponseSnapshot_ListAssetRelationships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssetRelationships(context.Background(), &ListAssetRelationshipsInput{})
+	got, err := svc.ListAssetRelationships(context.Background(), &ListAssetRelationshipsInput{
+		AssetId:       ptr.String("__AssetId__"),
+		TraversalType: types.TraversalType("PATH_TO_ROOT"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6146,7 +8091,12 @@ func TestCheckResponseSnapshot_ListAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{})
+	got, err := svc.ListAssets(context.Background(), &ListAssetsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		AssetModelId: ptr.String("__AssetModelId__"),
+		Filter:       types.ListAssetsFilter("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6247,7 +8197,13 @@ func TestCheckResponseSnapshot_ListAssociatedAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedAssets(context.Background(), &ListAssociatedAssetsInput{})
+	got, err := svc.ListAssociatedAssets(context.Background(), &ListAssociatedAssetsInput{
+		AssetId:            ptr.String("__AssetId__"),
+		HierarchyId:        ptr.String("__HierarchyId__"),
+		TraversalDirection: types.TraversalDirection("PARENT"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6280,7 +8236,12 @@ func TestCheckResponseSnapshot_ListBulkImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBulkImportJobs(context.Background(), &ListBulkImportJobsInput{})
+	got, err := svc.ListBulkImportJobs(context.Background(), &ListBulkImportJobsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		Filter:        types.ListBulkImportJobsFilter("ALL"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6313,7 +8274,11 @@ func TestCheckResponseSnapshot_ListCompositionRelationships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCompositionRelationships(context.Background(), &ListCompositionRelationshipsInput{})
+	got, err := svc.ListCompositionRelationships(context.Background(), &ListCompositionRelationshipsInput{
+		AssetModelId: ptr.String("__AssetModelId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6372,7 +8337,26 @@ func TestCheckResponseSnapshot_ListComputationModelDataBindingUsages(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComputationModelDataBindingUsages(context.Background(), &ListComputationModelDataBindingUsagesInput{})
+	got, err := svc.ListComputationModelDataBindingUsages(context.Background(), &ListComputationModelDataBindingUsagesInput{
+		DataBindingValueFilter: &types.DataBindingValueFilter{
+			Asset: &types.AssetBindingValueFilter{
+				AssetId: ptr.String("__AssetId__"),
+			},
+			AssetModel: &types.AssetModelBindingValueFilter{
+				AssetModelId: ptr.String("__AssetModelId__"),
+			},
+			AssetProperty: &types.AssetPropertyBindingValueFilter{
+				AssetId:    ptr.String("__AssetId__"),
+				PropertyId: ptr.String("__PropertyId__"),
+			},
+			AssetModelProperty: &types.AssetModelPropertyBindingValueFilter{
+				AssetModelId: ptr.String("__AssetModelId__"),
+				PropertyId:   ptr.String("__PropertyId__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6405,7 +8389,11 @@ func TestCheckResponseSnapshot_ListComputationModelResolveToResources(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComputationModelResolveToResources(context.Background(), &ListComputationModelResolveToResourcesInput{})
+	got, err := svc.ListComputationModelResolveToResources(context.Background(), &ListComputationModelResolveToResourcesInput{
+		ComputationModelId: ptr.String("__ComputationModelId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6482,7 +8470,11 @@ func TestCheckResponseSnapshot_ListComputationModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComputationModels(context.Background(), &ListComputationModelsInput{})
+	got, err := svc.ListComputationModels(context.Background(), &ListComputationModelsInput{
+		ComputationModelType: types.ComputationModelType("ANOMALY_DETECTION"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6519,7 +8511,11 @@ func TestCheckResponseSnapshot_ListDashboards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{})
+	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{
+		ProjectId:  ptr.String("__ProjectId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6568,7 +8564,12 @@ func TestCheckResponseSnapshot_ListDatasetDataSegmentRelationships(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetDataSegmentRelationships(context.Background(), &ListDatasetDataSegmentRelationshipsInput{})
+	got, err := svc.ListDatasetDataSegmentRelationships(context.Background(), &ListDatasetDataSegmentRelationshipsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6627,7 +8628,13 @@ func TestCheckResponseSnapshot_ListDatasetDataSegments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetDataSegments(context.Background(), &ListDatasetDataSegmentsInput{})
+	got, err := svc.ListDatasetDataSegments(context.Background(), &ListDatasetDataSegmentsInput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6664,7 +8671,12 @@ func TestCheckResponseSnapshot_ListDatasetExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetExportJobs(context.Background(), &ListDatasetExportJobsInput{})
+	got, err := svc.ListDatasetExportJobs(context.Background(), &ListDatasetExportJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        types.DatasetExportJobFilter("ALL"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6754,7 +8766,13 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		SourceType:    types.DatasetSourceType("KENDRA"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetType:   types.DatasetTypeEnum("SESSION"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6799,7 +8817,18 @@ func TestCheckResponseSnapshot_ListEnrichmentJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnrichmentJobs(context.Background(), &ListEnrichmentJobsInput{})
+	got, err := svc.ListEnrichmentJobs(context.Background(), &ListEnrichmentJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		Status:        types.EnrichmentJobStatus("PENDING"),
+		JobType:       types.JobType("EVENT_DETECTION"),
+		StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6858,7 +8887,15 @@ func TestCheckResponseSnapshot_ListExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{})
+	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{
+		TargetResourceType:    types.TargetResourceType("ASSET"),
+		TargetResourceId:      ptr.String("__TargetResourceId__"),
+		ResolveToResourceType: types.ResolveToResourceType("ASSET"),
+		ResolveToResourceId:   ptr.String("__ResolveToResourceId__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		ActionType:            ptr.String("__ActionType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6939,7 +8976,10 @@ func TestCheckResponseSnapshot_ListGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{})
+	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6968,7 +9008,11 @@ func TestCheckResponseSnapshot_ListInterfaceRelationships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInterfaceRelationships(context.Background(), &ListInterfaceRelationshipsInput{})
+	got, err := svc.ListInterfaceRelationships(context.Background(), &ListInterfaceRelationshipsInput{
+		InterfaceAssetModelId: ptr.String("__InterfaceAssetModelId__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7039,7 +9083,17 @@ func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{})
+	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		State:           types.PipelineExecutionState("NOT_STARTED"),
+		StartTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeAfter:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeBefore:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7092,7 +9146,11 @@ func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{})
+	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7149,7 +9207,10 @@ func TestCheckResponseSnapshot_ListPortals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{})
+	got, err := svc.ListPortals(context.Background(), &ListPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7174,7 +9235,11 @@ func TestCheckResponseSnapshot_ListProjectAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjectAssets(context.Background(), &ListProjectAssetsInput{})
+	got, err := svc.ListProjectAssets(context.Background(), &ListProjectAssetsInput{
+		ProjectId:  ptr.String("__ProjectId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7211,7 +9276,11 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{})
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		PortalId:   ptr.String("__PortalId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7246,7 +9315,12 @@ func TestCheckResponseSnapshot_ListQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        ptr.String("__Filter__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7289,7 +9363,27 @@ func TestCheckResponseSnapshot_ListSearches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSearches(context.Background(), &ListSearchesInput{})
+	got, err := svc.ListSearches(context.Background(), &ListSearchesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ListSearchesFilters: &types.ListSearchesFilters{
+			StatusFilter: []types.SearchStatus{
+				types.SearchStatus("QUEUED"),
+				types.SearchStatus("QUEUED"),
+			},
+			StartedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			GroupIdFilter: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SearchTypeFilter: []types.SearchType{
+				types.SearchType("DEEP"),
+				types.SearchType("DEEP"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7312,7 +9406,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7365,7 +9461,11 @@ func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7411,7 +9511,14 @@ func TestCheckResponseSnapshot_ListTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTimeSeries(context.Background(), &ListTimeSeriesInput{})
+	got, err := svc.ListTimeSeries(context.Background(), &ListTimeSeriesInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		AssetId:        ptr.String("__AssetId__"),
+		AliasPrefix:    ptr.String("__AliasPrefix__"),
+		TimeSeriesType: types.ListTimeSeriesType("ASSOCIATED"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7460,7 +9567,10 @@ func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7500,7 +9610,25 @@ func TestCheckResponseSnapshot_PutAssetModelInterfaceRelationship(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAssetModelInterfaceRelationship(context.Background(), &PutAssetModelInterfaceRelationshipInput{})
+	got, err := svc.PutAssetModelInterfaceRelationship(context.Background(), &PutAssetModelInterfaceRelationshipInput{
+		AssetModelId:          ptr.String("__AssetModelId__"),
+		InterfaceAssetModelId: ptr.String("__InterfaceAssetModelId__"),
+		PropertyMappingConfiguration: &types.PropertyMappingConfiguration{
+			MatchByPropertyName:   true,
+			CreateMissingProperty: true,
+			Overrides: []types.PropertyMapping{
+				{
+					AssetModelPropertyId:          ptr.String("__AssetModelPropertyId__"),
+					InterfaceAssetModelPropertyId: ptr.String("__InterfaceAssetModelPropertyId__"),
+				},
+				{
+					AssetModelPropertyId:          ptr.String("__AssetModelPropertyId__"),
+					InterfaceAssetModelPropertyId: ptr.String("__InterfaceAssetModelPropertyId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7529,7 +9657,10 @@ func TestCheckResponseSnapshot_PutDefaultEncryptionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDefaultEncryptionConfiguration(context.Background(), &PutDefaultEncryptionConfigurationInput{})
+	got, err := svc.PutDefaultEncryptionConfiguration(context.Background(), &PutDefaultEncryptionConfigurationInput{
+		EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7548,7 +9679,12 @@ func TestCheckResponseSnapshot_PutLoggingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLoggingOptions(context.Background(), &PutLoggingOptionsInput{})
+	got, err := svc.PutLoggingOptions(context.Background(), &PutLoggingOptionsInput{
+		LoggingOptions: &types.LoggingOptions{
+			Level: types.LoggingLevel("ERROR"),
+		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7593,7 +9729,26 @@ func TestCheckResponseSnapshot_PutStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutStorageConfiguration(context.Background(), &PutStorageConfigurationInput{})
+	got, err := svc.PutStorageConfiguration(context.Background(), &PutStorageConfigurationInput{
+		StorageType: types.StorageType("SITEWISE_DEFAULT_STORAGE"),
+		MultiLayerStorage: &types.MultiLayerStorage{
+			CustomerManagedS3Storage: &types.CustomerManagedS3Storage{
+				S3ResourceArn: ptr.String("__S3ResourceArn__"),
+				RoleArn:       ptr.String("__RoleArn__"),
+			},
+		},
+		DisassociatedDataStorage: types.DisassociatedDataStorageState("ENABLED"),
+		RetentionPeriod: &types.RetentionPeriod{
+			NumberOfDays: ptr.Int32(1),
+			Unlimited:    ptr.Bool(true),
+		},
+		WarmTier: types.WarmTierState("ENABLED"),
+		WarmTierRetentionPeriod: &types.WarmTierRetentionPeriod{
+			NumberOfDays: ptr.Int32(1),
+			Unlimited:    ptr.Bool(true),
+		},
+		DisallowIngestNullNaN: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7614,7 +9769,22 @@ func TestCheckResponseSnapshot_StartPipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPipelineExecution(context.Background(), &StartPipelineExecutionInput{})
+	got, err := svc.StartPipelineExecution(context.Background(), &StartPipelineExecutionInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		ExecutionEnvironmentVariableOverrides: &types.ExecutionEnvironmentVariables{
+			Global: map[string]string{
+				"key0": "__Value__",
+			},
+			ComputeNodes: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+		},
+		ExecutionPriority: ptr.Int32(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7636,7 +9806,11 @@ func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQuery(context.Background(), &StartQueryInput{})
+	got, err := svc.StartQuery(context.Background(), &StartQueryInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7660,7 +9834,45 @@ func TestCheckResponseSnapshot_StartSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSearch(context.Background(), &StartSearchInput{})
+	got, err := svc.StartSearch(context.Background(), &StartSearchInput{
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		SearchType:     types.SearchType("DEEP"),
+		SearchFilters: &types.SearchFilters{
+			TimeSeriesIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DatasetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TimeIntervals: []types.TimeInterval{
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7679,7 +9891,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7698,7 +9915,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7717,7 +9940,33 @@ func TestCheckResponseSnapshot_UpdateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessPolicy(context.Background(), &UpdateAccessPolicyInput{})
+	got, err := svc.UpdateAccessPolicy(context.Background(), &UpdateAccessPolicyInput{
+		AccessPolicyId: ptr.String("__AccessPolicyId__"),
+		AccessPolicyIdentity: &types.Identity{
+			User: &types.UserIdentity{
+				Id: ptr.String("__Id__"),
+			},
+			Group: &types.GroupIdentity{
+				Id: ptr.String("__Id__"),
+			},
+			IamUser: &types.IAMUserIdentity{
+				Arn: ptr.String("__Arn__"),
+			},
+			IamRole: &types.IAMRoleIdentity{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		AccessPolicyResource: &types.Resource{
+			Portal: &types.PortalResource{
+				Id: ptr.String("__Id__"),
+			},
+			Project: &types.ProjectResource{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		AccessPolicyPermission: types.Permission("ADMINISTRATOR"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7755,7 +10004,13 @@ func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{})
+	got, err := svc.UpdateAsset(context.Background(), &UpdateAssetInput{
+		AssetId:          ptr.String("__AssetId__"),
+		AssetExternalId:  ptr.String("__AssetExternalId__"),
+		AssetName:        ptr.String("__AssetName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		AssetDescription: ptr.String("__AssetDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7793,7 +10048,790 @@ func TestCheckResponseSnapshot_UpdateAssetModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssetModel(context.Background(), &UpdateAssetModelInput{})
+	got, err := svc.UpdateAssetModel(context.Background(), &UpdateAssetModelInput{
+		AssetModelId:          ptr.String("__AssetModelId__"),
+		AssetModelExternalId:  ptr.String("__AssetModelExternalId__"),
+		AssetModelName:        ptr.String("__AssetModelName__"),
+		AssetModelDescription: ptr.String("__AssetModelDescription__"),
+		AssetModelProperties: []types.AssetModelProperty{
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+				Path: []types.AssetModelPropertyPathSegment{
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+				Path: []types.AssetModelPropertyPathSegment{
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		AssetModelHierarchies: []types.AssetModelHierarchy{
+			{
+				Id:                ptr.String("__Id__"),
+				ExternalId:        ptr.String("__ExternalId__"),
+				Name:              ptr.String("__Name__"),
+				ChildAssetModelId: ptr.String("__ChildAssetModelId__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				ExternalId:        ptr.String("__ExternalId__"),
+				Name:              ptr.String("__Name__"),
+				ChildAssetModelId: ptr.String("__ChildAssetModelId__"),
+			},
+		},
+		AssetModelCompositeModels: []types.AssetModelCompositeModel{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Type:        ptr.String("__Type__"),
+				Properties: []types.AssetModelProperty{
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+						Path: []types.AssetModelPropertyPathSegment{
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+						Path: []types.AssetModelPropertyPathSegment{
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				Id:         ptr.String("__Id__"),
+				ExternalId: ptr.String("__ExternalId__"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Type:        ptr.String("__Type__"),
+				Properties: []types.AssetModelProperty{
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+						Path: []types.AssetModelPropertyPathSegment{
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					{
+						Id:           ptr.String("__Id__"),
+						ExternalId:   ptr.String("__ExternalId__"),
+						Name:         ptr.String("__Name__"),
+						DataType:     types.PropertyDataType("STRING"),
+						DataTypeSpec: ptr.String("__DataTypeSpec__"),
+						Unit:         ptr.String("__Unit__"),
+						Type: &types.PropertyType{
+							Attribute: &types.Attribute{
+								DefaultValue: ptr.String("__DefaultValue__"),
+							},
+							Measurement: &types.Measurement{
+								ProcessingConfig: &types.MeasurementProcessingConfig{
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Transform: &types.Transform{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								ProcessingConfig: &types.TransformProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+									ForwardingConfig: &types.ForwardingConfig{
+										State: types.ForwardingConfigState("DISABLED"),
+									},
+								},
+							},
+							Metric: &types.Metric{
+								Expression: ptr.String("__Expression__"),
+								Variables: []types.ExpressionVariable{
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+									{
+										Name: ptr.String("__Name__"),
+										Value: &types.VariableValue{
+											PropertyId:  ptr.String("__PropertyId__"),
+											HierarchyId: ptr.String("__HierarchyId__"),
+											PropertyPath: []types.AssetModelPropertyPathSegment{
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+												{
+													Id:   ptr.String("__Id__"),
+													Name: ptr.String("__Name__"),
+												},
+											},
+										},
+									},
+								},
+								Window: &types.MetricWindow{
+									Tumbling: &types.TumblingWindow{
+										Interval: ptr.String("__Interval__"),
+										Offset:   ptr.String("__Offset__"),
+									},
+								},
+								ProcessingConfig: &types.MetricProcessingConfig{
+									ComputeLocation: types.ComputeLocation("EDGE"),
+								},
+							},
+						},
+						Path: []types.AssetModelPropertyPathSegment{
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+				},
+				Id:         ptr.String("__Id__"),
+				ExternalId: ptr.String("__ExternalId__"),
+			},
+		},
+		ClientToken:         ptr.String("__ClientToken__"),
+		IfMatch:             ptr.String("__IfMatch__"),
+		IfNoneMatch:         ptr.String("__IfNoneMatch__"),
+		MatchForVersionType: types.AssetModelVersionType("LATEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7841,7 +10879,265 @@ func TestCheckResponseSnapshot_UpdateAssetModelCompositeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssetModelCompositeModel(context.Background(), &UpdateAssetModelCompositeModelInput{})
+	got, err := svc.UpdateAssetModelCompositeModel(context.Background(), &UpdateAssetModelCompositeModelInput{
+		AssetModelId:                        ptr.String("__AssetModelId__"),
+		AssetModelCompositeModelId:          ptr.String("__AssetModelCompositeModelId__"),
+		AssetModelCompositeModelExternalId:  ptr.String("__AssetModelCompositeModelExternalId__"),
+		AssetModelCompositeModelDescription: ptr.String("__AssetModelCompositeModelDescription__"),
+		AssetModelCompositeModelName:        ptr.String("__AssetModelCompositeModelName__"),
+		ClientToken:                         ptr.String("__ClientToken__"),
+		AssetModelCompositeModelProperties: []types.AssetModelProperty{
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+				Path: []types.AssetModelPropertyPathSegment{
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+				Path: []types.AssetModelPropertyPathSegment{
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		IfMatch:             ptr.String("__IfMatch__"),
+		IfNoneMatch:         ptr.String("__IfNoneMatch__"),
+		MatchForVersionType: types.AssetModelVersionType("LATEST"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7860,7 +11156,14 @@ func TestCheckResponseSnapshot_UpdateAssetProperty(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssetProperty(context.Background(), &UpdateAssetPropertyInput{})
+	got, err := svc.UpdateAssetProperty(context.Background(), &UpdateAssetPropertyInput{
+		AssetId:                   ptr.String("__AssetId__"),
+		PropertyId:                ptr.String("__PropertyId__"),
+		PropertyAlias:             ptr.String("__PropertyAlias__"),
+		PropertyNotificationState: types.PropertyNotificationState("ENABLED"),
+		ClientToken:               ptr.String("__ClientToken__"),
+		PropertyUnit:              ptr.String("__PropertyUnit__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7897,7 +11200,34 @@ func TestCheckResponseSnapshot_UpdateComputationModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComputationModel(context.Background(), &UpdateComputationModelInput{})
+	got, err := svc.UpdateComputationModel(context.Background(), &UpdateComputationModelInput{
+		ComputationModelId:          ptr.String("__ComputationModelId__"),
+		ComputationModelName:        ptr.String("__ComputationModelName__"),
+		ComputationModelDescription: ptr.String("__ComputationModelDescription__"),
+		ComputationModelConfiguration: &types.ComputationModelConfiguration{
+			AnomalyDetection: &types.ComputationModelAnomalyDetectionConfiguration{
+				InputProperties: ptr.String("__InputProperties__"),
+				ResultProperty:  ptr.String("__ResultProperty__"),
+			},
+		},
+		ComputationModelDataBinding: map[string]types.ComputationModelDataBindingValue{
+			"key0": {
+				AssetModelProperty: &types.AssetModelPropertyBindingValue{
+					AssetModelId: ptr.String("__AssetModelId__"),
+					PropertyId:   ptr.String("__PropertyId__"),
+				},
+				AssetProperty: &types.AssetPropertyBindingValue{
+					AssetId:    ptr.String("__AssetId__"),
+					PropertyId: ptr.String("__PropertyId__"),
+				},
+				List: []types.ComputationModelDataBindingValue{
+					{},
+					{},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7916,7 +11246,13 @@ func TestCheckResponseSnapshot_UpdateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{})
+	got, err := svc.UpdateDashboard(context.Background(), &UpdateDashboardInput{
+		DashboardId:          ptr.String("__DashboardId__"),
+		DashboardName:        ptr.String("__DashboardName__"),
+		DashboardDescription: ptr.String("__DashboardDescription__"),
+		DashboardDefinition:  ptr.String("__DashboardDefinition__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7955,7 +11291,38 @@ func TestCheckResponseSnapshot_UpdateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{})
+	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{
+		DatasetId:          ptr.String("__DatasetId__"),
+		WorkspaceName:      ptr.String("__WorkspaceName__"),
+		DatasetName:        ptr.String("__DatasetName__"),
+		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		DatasetSource: &types.DatasetSource{
+			SourceType:   types.DatasetSourceType("KENDRA"),
+			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
+			SourceDetail: &types.SourceDetail{
+				Kendra: &types.KendraSourceDetail{
+					KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+					RoleArn:          ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7974,7 +11341,10 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGateway(context.Background(), &UpdateGatewayInput{})
+	got, err := svc.UpdateGateway(context.Background(), &UpdateGatewayInput{
+		GatewayId:   ptr.String("__GatewayId__"),
+		GatewayName: ptr.String("__GatewayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7996,7 +11366,11 @@ func TestCheckResponseSnapshot_UpdateGatewayCapabilityConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayCapabilityConfiguration(context.Background(), &UpdateGatewayCapabilityConfigurationInput{})
+	got, err := svc.UpdateGatewayCapabilityConfiguration(context.Background(), &UpdateGatewayCapabilityConfigurationInput{
+		GatewayId:               ptr.String("__GatewayId__"),
+		CapabilityNamespace:     ptr.String("__CapabilityNamespace__"),
+		CapabilityConfiguration: ptr.String("__CapabilityConfiguration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8024,7 +11398,38 @@ func TestCheckResponseSnapshot_UpdatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{})
+	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8051,7 +11456,35 @@ func TestCheckResponseSnapshot_UpdatePortal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{})
+	got, err := svc.UpdatePortal(context.Background(), &UpdatePortalInput{
+		PortalId:           ptr.String("__PortalId__"),
+		PortalName:         ptr.String("__PortalName__"),
+		PortalDescription:  ptr.String("__PortalDescription__"),
+		PortalContactEmail: ptr.String("__PortalContactEmail__"),
+		PortalLogoImage: &types.Image{
+			Id: ptr.String("__Id__"),
+			File: &types.ImageFile{
+				Data: []byte("blob"),
+				Type: types.ImageFileType("PNG"),
+			},
+		},
+		RoleArn:                 ptr.String("__RoleArn__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		NotificationSenderEmail: ptr.String("__NotificationSenderEmail__"),
+		Alarms: &types.Alarms{
+			AlarmRoleArn:          ptr.String("__AlarmRoleArn__"),
+			NotificationLambdaArn: ptr.String("__NotificationLambdaArn__"),
+		},
+		PortalType: types.PortalType("SITEWISE_PORTAL_V1"),
+		PortalTypeConfiguration: map[string]types.PortalTypeEntry{
+			"key0": {
+				PortalTools: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8070,7 +11503,12 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{})
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		ProjectId:          ptr.String("__ProjectId__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8098,7 +11536,27 @@ func TestCheckResponseSnapshot_UpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{})
+	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8125,7 +11583,15 @@ func TestCheckResponseSnapshot_UpdateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{})
+	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8146,7 +11612,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{})
+	_, opErr := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8173,7 +11642,12 @@ func TestCheckResponseSnapshot_Error_ConflictingOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8198,7 +11672,12 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8223,7 +11702,12 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8248,7 +11732,12 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8275,7 +11764,248 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssetModelCompositeModel(context.Background(), &CreateAssetModelCompositeModelInput{})
+	_, opErr := svc.CreateAssetModelCompositeModel(context.Background(), &CreateAssetModelCompositeModelInput{
+		AssetModelId:                        ptr.String("__AssetModelId__"),
+		AssetModelCompositeModelExternalId:  ptr.String("__AssetModelCompositeModelExternalId__"),
+		ParentAssetModelCompositeModelId:    ptr.String("__ParentAssetModelCompositeModelId__"),
+		AssetModelCompositeModelId:          ptr.String("__AssetModelCompositeModelId__"),
+		AssetModelCompositeModelDescription: ptr.String("__AssetModelCompositeModelDescription__"),
+		AssetModelCompositeModelName:        ptr.String("__AssetModelCompositeModelName__"),
+		AssetModelCompositeModelType:        ptr.String("__AssetModelCompositeModelType__"),
+		ClientToken:                         ptr.String("__ClientToken__"),
+		ComposedAssetModelId:                ptr.String("__ComposedAssetModelId__"),
+		AssetModelCompositeModelProperties: []types.AssetModelPropertyDefinition{
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				ExternalId:   ptr.String("__ExternalId__"),
+				Name:         ptr.String("__Name__"),
+				DataType:     types.PropertyDataType("STRING"),
+				DataTypeSpec: ptr.String("__DataTypeSpec__"),
+				Unit:         ptr.String("__Unit__"),
+				Type: &types.PropertyType{
+					Attribute: &types.Attribute{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					Measurement: &types.Measurement{
+						ProcessingConfig: &types.MeasurementProcessingConfig{
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Transform: &types.Transform{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						ProcessingConfig: &types.TransformProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+							ForwardingConfig: &types.ForwardingConfig{
+								State: types.ForwardingConfigState("DISABLED"),
+							},
+						},
+					},
+					Metric: &types.Metric{
+						Expression: ptr.String("__Expression__"),
+						Variables: []types.ExpressionVariable{
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								Value: &types.VariableValue{
+									PropertyId:  ptr.String("__PropertyId__"),
+									HierarchyId: ptr.String("__HierarchyId__"),
+									PropertyPath: []types.AssetModelPropertyPathSegment{
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+										{
+											Id:   ptr.String("__Id__"),
+											Name: ptr.String("__Name__"),
+										},
+									},
+								},
+							},
+						},
+						Window: &types.MetricWindow{
+							Tumbling: &types.TumblingWindow{
+								Interval: ptr.String("__Interval__"),
+								Offset:   ptr.String("__Offset__"),
+							},
+						},
+						ProcessingConfig: &types.MetricProcessingConfig{
+							ComputeLocation: types.ComputeLocation("EDGE"),
+						},
+					},
+				},
+			},
+		},
+		IfMatch:             ptr.String("__IfMatch__"),
+		IfNoneMatch:         ptr.String("__IfNoneMatch__"),
+		MatchForVersionType: types.AssetModelVersionType("LATEST"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8300,7 +12030,12 @@ func TestCheckResponseSnapshot_Error_QueryTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		QueryStatement: ptr.String("__QueryStatement__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8327,7 +12062,12 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8352,7 +12092,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8377,7 +12122,48 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetAssetPropertyAggregates(context.Background(), &BatchGetAssetPropertyAggregatesInput{})
+	_, opErr := svc.BatchGetAssetPropertyAggregates(context.Background(), &BatchGetAssetPropertyAggregatesInput{
+		Entries: []types.BatchGetAssetPropertyAggregatesEntry{
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				AggregateTypes: []types.AggregateType{
+					types.AggregateType("AVERAGE"),
+					types.AggregateType("AVERAGE"),
+				},
+				Resolution: ptr.String("__Resolution__"),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+			{
+				EntryId:       ptr.String("__EntryId__"),
+				AssetId:       ptr.String("__AssetId__"),
+				PropertyId:    ptr.String("__PropertyId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				AggregateTypes: []types.AggregateType{
+					types.AggregateType("AVERAGE"),
+					types.AggregateType("AVERAGE"),
+				},
+				Resolution: ptr.String("__Resolution__"),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Qualities: []types.Quality{
+					types.Quality("GOOD"),
+					types.Quality("GOOD"),
+				},
+				TimeOrdering: types.TimeOrdering("ASCENDING"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8402,7 +12188,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{})
+	_, opErr := svc.AssociateAssets(context.Background(), &AssociateAssetsInput{
+		AssetId:      ptr.String("__AssetId__"),
+		HierarchyId:  ptr.String("__HierarchyId__"),
+		ChildAssetId: ptr.String("__ChildAssetId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8428,7 +12219,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8453,7 +12249,9 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8478,7 +12276,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		QueryStatement: ptr.String("__QueryStatement__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

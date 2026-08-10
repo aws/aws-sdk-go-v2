@@ -126,7 +126,21 @@ func TestCheckResponseSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	got, err := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +171,14 @@ func TestCheckResponseSnapshot_CreateMarketplaceRevenueShareAllocation(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMarketplaceRevenueShareAllocation(context.Background(), &CreateMarketplaceRevenueShareAllocationInput{})
+	got, err := svc.CreateMarketplaceRevenueShareAllocation(context.Background(), &CreateMarketplaceRevenueShareAllocationInput{
+		Catalog:             types.CatalogName("AWS"),
+		ProductId:           ptr.String("__ProductId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		EffectiveFrom:       ptr.String("__EffectiveFrom__"),
+		EffectiveUntil:      ptr.String("__EffectiveUntil__"),
+		RevenueSharePercent: ptr.String("__RevenueSharePercent__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +209,24 @@ func TestCheckResponseSnapshot_CreateRevenueAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRevenueAttribution(context.Background(), &CreateRevenueAttributionInput{})
+	got, err := svc.CreateRevenueAttribution(context.Background(), &CreateRevenueAttributionInput{
+		Catalog:           types.CatalogName("AWS"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		TenancyModel:      types.TenancyModel("MULTI_TENANT"),
+		ProductIdentifier: ptr.String("__ProductIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +257,11 @@ func TestCheckResponseSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMarketplaceRevenueShare(context.Background(), &GetMarketplaceRevenueShareInput{})
+	got, err := svc.GetMarketplaceRevenueShare(context.Background(), &GetMarketplaceRevenueShareInput{
+		Catalog:   types.CatalogName("AWS"),
+		ProductId: ptr.String("__ProductId__"),
+		Revision:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +292,12 @@ func TestCheckResponseSnapshot_GetMarketplaceRevenueShareAllocation(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMarketplaceRevenueShareAllocation(context.Background(), &GetMarketplaceRevenueShareAllocationInput{})
+	got, err := svc.GetMarketplaceRevenueShareAllocation(context.Background(), &GetMarketplaceRevenueShareAllocationInput{
+		Catalog:                             types.CatalogName("AWS"),
+		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
+		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +336,11 @@ func TestCheckResponseSnapshot_GetRevenueAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueAttribution(context.Background(), &GetRevenueAttributionInput{})
+	got, err := svc.GetRevenueAttribution(context.Background(), &GetRevenueAttributionInput{
+		Catalog:    types.CatalogName("AWS"),
+		Identifier: ptr.String("__Identifier__"),
+		Revision:   ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -323,7 +374,12 @@ func TestCheckResponseSnapshot_GetRevenueAttributionAllocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueAttributionAllocation(context.Background(), &GetRevenueAttributionAllocationInput{})
+	got, err := svc.GetRevenueAttributionAllocation(context.Background(), &GetRevenueAttributionAllocationInput{
+		Catalog:                        types.CatalogName("AWS"),
+		RevenueAttributionIdentifier:   ptr.String("__RevenueAttributionIdentifier__"),
+		RevenueAttributionAllocationId: ptr.String("__RevenueAttributionAllocationId__"),
+		RevenueAttributionRevision:     ptr.String("__RevenueAttributionRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +432,10 @@ func TestCheckResponseSnapshot_GetRevenueAttributionAllocationsTask(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueAttributionAllocationsTask(context.Background(), &GetRevenueAttributionAllocationsTaskInput{})
+	got, err := svc.GetRevenueAttributionAllocationsTask(context.Background(), &GetRevenueAttributionAllocationsTaskInput{
+		Catalog:                      types.CatalogName("AWS"),
+		RevenueAttributionIdentifier: ptr.String("__RevenueAttributionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -423,7 +482,18 @@ func TestCheckResponseSnapshot_ListMarketplaceRevenueShareAllocations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMarketplaceRevenueShareAllocations(context.Background(), &ListMarketplaceRevenueShareAllocationsInput{})
+	got, err := svc.ListMarketplaceRevenueShareAllocations(context.Background(), &ListMarketplaceRevenueShareAllocationsInput{
+		Catalog:                         types.CatalogName("AWS"),
+		ProductId:                       ptr.String("__ProductId__"),
+		Status:                          types.AllocationStatus("ACTIVE"),
+		AfterEffectiveFrom:              ptr.String("__AfterEffectiveFrom__"),
+		BeforeEffectiveFrom:             ptr.String("__BeforeEffectiveFrom__"),
+		SortBy:                          types.MarketplaceRevenueShareAllocationSortField("EffectiveFrom"),
+		SortOrder:                       types.SortOrder("ASCENDING"),
+		MaxResults:                      ptr.Int32(1),
+		NextToken:                       ptr.String("__NextToken__"),
+		MarketplaceRevenueShareRevision: ptr.String("__MarketplaceRevenueShareRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +540,23 @@ func TestCheckResponseSnapshot_ListMarketplaceRevenueShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMarketplaceRevenueShares(context.Background(), &ListMarketplaceRevenueSharesInput{})
+	got, err := svc.ListMarketplaceRevenueShares(context.Background(), &ListMarketplaceRevenueSharesInput{
+		Catalog: types.CatalogName("AWS"),
+		ProductIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProductCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		SortBy:        types.MarketplaceRevenueShareSortBy("LastModifiedDate"),
+		SortOrder:     types.SortOrder("ASCENDING"),
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -517,7 +603,32 @@ func TestCheckResponseSnapshot_ListRevenueAttributionAllocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRevenueAttributionAllocations(context.Background(), &ListRevenueAttributionAllocationsInput{})
+	got, err := svc.ListRevenueAttributionAllocations(context.Background(), &ListRevenueAttributionAllocationsInput{
+		Catalog:                      types.CatalogName("AWS"),
+		RevenueAttributionIdentifier: ptr.String("__RevenueAttributionIdentifier__"),
+		EntityTypeFilters: []types.EntityType{
+			types.EntityType("OFFER"),
+			types.EntityType("OFFER"),
+		},
+		EntityIdentifierFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CustomerAwsAccountIdFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StatusFilter:               types.AllocationStatus("ACTIVE"),
+		AfterEffectiveFrom:         ptr.String("__AfterEffectiveFrom__"),
+		BeforeEffectiveFrom:        ptr.String("__BeforeEffectiveFrom__"),
+		AfterEffectiveUntil:        ptr.String("__AfterEffectiveUntil__"),
+		BeforeEffectiveUntil:       ptr.String("__BeforeEffectiveUntil__"),
+		SortBy:                     types.RevenueAttributionAllocationSortField("EffectiveFrom"),
+		SortOrder:                  types.SortOrder("ASCENDING"),
+		RevenueAttributionRevision: ptr.String("__RevenueAttributionRevision__"),
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -578,7 +689,19 @@ func TestCheckResponseSnapshot_ListRevenueAttributions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRevenueAttributions(context.Background(), &ListRevenueAttributionsInput{})
+	got, err := svc.ListRevenueAttributions(context.Background(), &ListRevenueAttributionsInput{
+		Catalog: types.CatalogName("AWS"),
+		Identifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:        types.AttributionSortBy("LastModifiedDate"),
+		SortOrder:     types.SortOrder("ASCENDING"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -608,7 +731,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +759,37 @@ func TestCheckResponseSnapshot_StartRevenueAttributionAllocationsTask(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRevenueAttributionAllocationsTask(context.Background(), &StartRevenueAttributionAllocationsTaskInput{})
+	got, err := svc.StartRevenueAttributionAllocationsTask(context.Background(), &StartRevenueAttributionAllocationsTaskInput{
+		Catalog:                      types.CatalogName("AWS"),
+		RevenueAttributionIdentifier: ptr.String("__RevenueAttributionIdentifier__"),
+		RevenueAttributionRevision:   ptr.String("__RevenueAttributionRevision__"),
+		RevenueShareAllocations: []types.RevenueShareAllocation{
+			{
+				Action:                         types.RevenueAttributionAllocationAction("CREATE"),
+				RevenueAttributionAllocationId: ptr.String("__RevenueAttributionAllocationId__"),
+				EntityType:                     types.EntityType("OFFER"),
+				EntityIdentifier:               ptr.String("__EntityIdentifier__"),
+				CustomerAwsAccountId:           ptr.String("__CustomerAwsAccountId__"),
+				RevenueSharePercent:            ptr.String("__RevenueSharePercent__"),
+				EffectiveFrom:                  ptr.String("__EffectiveFrom__"),
+				EffectiveUntil:                 ptr.String("__EffectiveUntil__"),
+				Status:                         types.AllocationStatus("ACTIVE"),
+			},
+			{
+				Action:                         types.RevenueAttributionAllocationAction("CREATE"),
+				RevenueAttributionAllocationId: ptr.String("__RevenueAttributionAllocationId__"),
+				EntityType:                     types.EntityType("OFFER"),
+				EntityIdentifier:               ptr.String("__EntityIdentifier__"),
+				CustomerAwsAccountId:           ptr.String("__CustomerAwsAccountId__"),
+				RevenueSharePercent:            ptr.String("__RevenueSharePercent__"),
+				EffectiveFrom:                  ptr.String("__EffectiveFrom__"),
+				EffectiveUntil:                 ptr.String("__EffectiveUntil__"),
+				Status:                         types.AllocationStatus("ACTIVE"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -653,7 +808,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +839,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +876,17 @@ func TestCheckResponseSnapshot_UpdateMarketplaceRevenueShareAllocation(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMarketplaceRevenueShareAllocation(context.Background(), &UpdateMarketplaceRevenueShareAllocationInput{})
+	got, err := svc.UpdateMarketplaceRevenueShareAllocation(context.Background(), &UpdateMarketplaceRevenueShareAllocationInput{
+		Catalog:                             types.CatalogName("AWS"),
+		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
+		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
+		ClientToken:                         ptr.String("__ClientToken__"),
+		EffectiveFrom:                       ptr.String("__EffectiveFrom__"),
+		EffectiveUntil:                      ptr.String("__EffectiveUntil__"),
+		RevenueSharePercent:                 ptr.String("__RevenueSharePercent__"),
+		Status:                              types.AllocationStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +911,13 @@ func TestCheckResponseSnapshot_UpdateRevenueAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRevenueAttribution(context.Background(), &UpdateRevenueAttributionInput{})
+	got, err := svc.UpdateRevenueAttribution(context.Background(), &UpdateRevenueAttributionInput{
+		Catalog:     types.CatalogName("AWS"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		Revision:    ptr.String("__Revision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +939,21 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -776,7 +979,21 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -801,7 +1018,21 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -827,7 +1058,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -853,7 +1098,21 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -880,7 +1139,21 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -918,7 +1191,21 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{})
+	_, opErr := svc.CreateMarketplaceRevenueShare(context.Background(), &CreateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ProductId:   ptr.String("__ProductId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"multiplexPrograms":[{"channelId":"__ChannelId__","programName":"__ProgramName__"},{"channelId":"__ChannelId__","programName":"__ProgramName__"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.BatchStopJobRun
+
+{"Errors":[{"ErrorDetail":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"JobName":"__JobName__","JobRunId":"__JobRunId__"},{"ErrorDetail":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"JobName":"__JobName__","JobRunId":"__JobRunId__"}],"SuccessfulSubmissions":[{"JobName":"__JobName__","JobRunId":"__JobRunId__"},{"JobName":"__JobName__","JobRunId":"__JobRunId__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthUrl":"__AuthUrl__","ConnectorArn":"__ConnectorArn__","ConnectorId":"__ConnectorId__","ConnectorStatus":"CONNECTED","EnablementStatus":"ENABLED"}

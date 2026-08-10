@@ -1,0 +1,5 @@
+402
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.AcceptConnectionInvitation
+
+{"__type":"ServiceQuotaExceededException","Message":"__Message__","Reason":"LIMIT_EXCEEDED_NUMBER_OF_EMAIL"}

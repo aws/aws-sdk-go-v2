@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+Ettag: __ETag__
+
+<FunctionSummary xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><FunctionConfig><Comment>__Comment__</Comment><KeyValueStoreAssociations><Items><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation><KeyValueStoreAssociation><KeyValueStoreARN>__KeyValueStoreARN__</KeyValueStoreARN></KeyValueStoreAssociation></Items><Quantity>1</Quantity></KeyValueStoreAssociations><Runtime>cloudfront-js-1.0</Runtime></FunctionConfig><FunctionMetadata><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><FunctionARN>__FunctionARN__</FunctionARN><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Stage>DEVELOPMENT</Stage></FunctionMetadata><Name>__Name__</Name><Status>__Status__</Status></FunctionSummary>

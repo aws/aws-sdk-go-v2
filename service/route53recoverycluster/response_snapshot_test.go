@@ -120,7 +120,9 @@ func TestCheckResponseSnapshot_GetRoutingControlState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	got, err := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +161,11 @@ func TestCheckResponseSnapshot_ListRoutingControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutingControls(context.Background(), &ListRoutingControlsInput{})
+	got, err := svc.ListRoutingControls(context.Background(), &ListRoutingControlsInput{
+		ControlPanelArn: ptr.String("__ControlPanelArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +184,14 @@ func TestCheckResponseSnapshot_UpdateRoutingControlState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingControlState(context.Background(), &UpdateRoutingControlStateInput{})
+	got, err := svc.UpdateRoutingControlState(context.Background(), &UpdateRoutingControlStateInput{
+		RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+		RoutingControlState: types.RoutingControlState("On"),
+		SafetyRulesToOverride: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +210,22 @@ func TestCheckResponseSnapshot_UpdateRoutingControlStates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoutingControlStates(context.Background(), &UpdateRoutingControlStatesInput{})
+	got, err := svc.UpdateRoutingControlStates(context.Background(), &UpdateRoutingControlStatesInput{
+		UpdateRoutingControlStateEntries: []types.UpdateRoutingControlStateEntry{
+			{
+				RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+				RoutingControlState: types.RoutingControlState("On"),
+			},
+			{
+				RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+				RoutingControlState: types.RoutingControlState("On"),
+			},
+		},
+		SafetyRulesToOverride: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +246,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -245,7 +275,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRoutingControlState(context.Background(), &UpdateRoutingControlStateInput{})
+	_, opErr := svc.UpdateRoutingControlState(context.Background(), &UpdateRoutingControlStateInput{
+		RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+		RoutingControlState: types.RoutingControlState("On"),
+		SafetyRulesToOverride: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -270,7 +307,9 @@ func TestCheckResponseSnapshot_Error_EndpointTemporarilyUnavailableException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -296,7 +335,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -323,7 +364,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -352,7 +395,22 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRoutingControlStates(context.Background(), &UpdateRoutingControlStatesInput{})
+	_, opErr := svc.UpdateRoutingControlStates(context.Background(), &UpdateRoutingControlStatesInput{
+		UpdateRoutingControlStateEntries: []types.UpdateRoutingControlStateEntry{
+			{
+				RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+				RoutingControlState: types.RoutingControlState("On"),
+			},
+			{
+				RoutingControlArn:   ptr.String("__RoutingControlArn__"),
+				RoutingControlState: types.RoutingControlState("On"),
+			},
+		},
+		SafetyRulesToOverride: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -378,7 +436,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -414,7 +474,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{})
+	_, opErr := svc.GetRoutingControlState(context.Background(), &GetRoutingControlStateInput{
+		RoutingControlArn: ptr.String("__RoutingControlArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

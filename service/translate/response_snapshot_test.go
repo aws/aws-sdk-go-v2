@@ -120,7 +120,29 @@ func TestCheckResponseSnapshot_CreateParallelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	got, err := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +164,9 @@ func TestCheckResponseSnapshot_DeleteParallelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteParallelData(context.Background(), &DeleteParallelDataInput{})
+	got, err := svc.DeleteParallelData(context.Background(), &DeleteParallelDataInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +185,9 @@ func TestCheckResponseSnapshot_DeleteTerminology(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTerminology(context.Background(), &DeleteTerminologyInput{})
+	got, err := svc.DeleteTerminology(context.Background(), &DeleteTerminologyInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +250,9 @@ func TestCheckResponseSnapshot_DescribeTextTranslationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTextTranslationJob(context.Background(), &DescribeTextTranslationJobInput{})
+	got, err := svc.DescribeTextTranslationJob(context.Background(), &DescribeTextTranslationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +312,9 @@ func TestCheckResponseSnapshot_GetParallelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetParallelData(context.Background(), &GetParallelDataInput{})
+	got, err := svc.GetParallelData(context.Background(), &GetParallelDataInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +364,10 @@ func TestCheckResponseSnapshot_GetTerminology(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTerminology(context.Background(), &GetTerminologyInput{})
+	got, err := svc.GetTerminology(context.Background(), &GetTerminologyInput{
+		Name:                  ptr.String("__Name__"),
+		TerminologyDataFormat: types.TerminologyDataFormat("CSV"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +413,30 @@ func TestCheckResponseSnapshot_ImportTerminology(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportTerminology(context.Background(), &ImportTerminologyInput{})
+	got, err := svc.ImportTerminology(context.Background(), &ImportTerminologyInput{
+		Name:          ptr.String("__Name__"),
+		MergeStrategy: types.MergeStrategy("OVERWRITE"),
+		Description:   ptr.String("__Description__"),
+		TerminologyData: &types.TerminologyData{
+			File:           []byte("blob"),
+			Format:         types.TerminologyDataFormat("CSV"),
+			Directionality: types.Directionality("UNI"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +468,11 @@ func TestCheckResponseSnapshot_ListLanguages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLanguages(context.Background(), &ListLanguagesInput{})
+	got, err := svc.ListLanguages(context.Background(), &ListLanguagesInput{
+		DisplayLanguageCode: types.DisplayLanguageCode("de"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +551,10 @@ func TestCheckResponseSnapshot_ListParallelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParallelData(context.Background(), &ListParallelDataInput{})
+	got, err := svc.ListParallelData(context.Background(), &ListParallelDataInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +584,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +653,10 @@ func TestCheckResponseSnapshot_ListTerminologies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTerminologies(context.Background(), &ListTerminologiesInput{})
+	got, err := svc.ListTerminologies(context.Background(), &ListTerminologiesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +765,16 @@ func TestCheckResponseSnapshot_ListTextTranslationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTextTranslationJobs(context.Background(), &ListTextTranslationJobsInput{})
+	got, err := svc.ListTextTranslationJobs(context.Background(), &ListTextTranslationJobsInput{
+		Filter: &types.TextTranslationJobFilter{
+			JobName:             ptr.String("__JobName__"),
+			JobStatus:           types.JobStatus("SUBMITTED"),
+			SubmittedBeforeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmittedAfterTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +796,40 @@ func TestCheckResponseSnapshot_StartTextTranslationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTextTranslationJob(context.Background(), &StartTextTranslationJobInput{})
+	got, err := svc.StartTextTranslationJob(context.Background(), &StartTextTranslationJobInput{
+		JobName: ptr.String("__JobName__"),
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			ContentType: ptr.String("__ContentType__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+			EncryptionKey: &types.EncryptionKey{
+				Type: types.EncryptionKeyType("KMS"),
+				Id:   ptr.String("__Id__"),
+			},
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParallelDataNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +851,9 @@ func TestCheckResponseSnapshot_StopTextTranslationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTextTranslationJob(context.Background(), &StopTextTranslationJobInput{})
+	got, err := svc.StopTextTranslationJob(context.Background(), &StopTextTranslationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -760,7 +872,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -818,7 +942,23 @@ func TestCheckResponseSnapshot_TranslateDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TranslateDocument(context.Background(), &TranslateDocumentInput{})
+	got, err := svc.TranslateDocument(context.Background(), &TranslateDocumentInput{
+		Document: &types.Document{
+			Content:     []byte("blob"),
+			ContentType: ptr.String("__ContentType__"),
+		},
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCode: ptr.String("__TargetLanguageCode__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -874,7 +1014,20 @@ func TestCheckResponseSnapshot_TranslateText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TranslateText(context.Background(), &TranslateTextInput{})
+	got, err := svc.TranslateText(context.Background(), &TranslateTextInput{
+		Text: ptr.String("__Text__"),
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCode: ptr.String("__TargetLanguageCode__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -893,7 +1046,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +1076,15 @@ func TestCheckResponseSnapshot_UpdateParallelData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateParallelData(context.Background(), &UpdateParallelDataInput{})
+	got, err := svc.UpdateParallelData(context.Background(), &UpdateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -938,7 +1105,29 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -963,7 +1152,29 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -989,7 +1200,20 @@ func TestCheckResponseSnapshot_Error_DetectedLanguageLowConfidenceException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TranslateText(context.Background(), &TranslateTextInput{})
+	_, opErr := svc.TranslateText(context.Background(), &TranslateTextInput{
+		Text: ptr.String("__Text__"),
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCode: ptr.String("__TargetLanguageCode__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1014,7 +1238,29 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1039,7 +1285,16 @@ func TestCheckResponseSnapshot_Error_InvalidFilterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTextTranslationJobs(context.Background(), &ListTextTranslationJobsInput{})
+	_, opErr := svc.ListTextTranslationJobs(context.Background(), &ListTextTranslationJobsInput{
+		Filter: &types.TextTranslationJobFilter{
+			JobName:             ptr.String("__JobName__"),
+			JobStatus:           types.JobStatus("SUBMITTED"),
+			SubmittedBeforeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmittedAfterTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1064,7 +1319,29 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1089,7 +1366,29 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1114,7 +1413,29 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1139,7 +1460,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteParallelData(context.Background(), &DeleteParallelDataInput{})
+	_, opErr := svc.DeleteParallelData(context.Background(), &DeleteParallelDataInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1164,7 +1487,23 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TranslateDocument(context.Background(), &TranslateDocumentInput{})
+	_, opErr := svc.TranslateDocument(context.Background(), &TranslateDocumentInput{
+		Document: &types.Document{
+			Content:     []byte("blob"),
+			ContentType: ptr.String("__ContentType__"),
+		},
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCode: ptr.String("__TargetLanguageCode__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1189,7 +1528,20 @@ func TestCheckResponseSnapshot_Error_TextSizeLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TranslateText(context.Background(), &TranslateTextInput{})
+	_, opErr := svc.TranslateText(context.Background(), &TranslateTextInput{
+		Text: ptr.String("__Text__"),
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCode: ptr.String("__TargetLanguageCode__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1214,7 +1566,29 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1240,7 +1614,29 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{})
+	_, opErr := svc.CreateParallelData(context.Background(), &CreateParallelDataInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ParallelDataConfig: &types.ParallelDataConfig{
+			S3Uri:  ptr.String("__S3Uri__"),
+			Format: types.ParallelDataFormat("TSV"),
+		},
+		EncryptionKey: &types.EncryptionKey{
+			Type: types.EncryptionKeyType("KMS"),
+			Id:   ptr.String("__Id__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1266,7 +1662,11 @@ func TestCheckResponseSnapshot_Error_UnsupportedDisplayLanguageCodeException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListLanguages(context.Background(), &ListLanguagesInput{})
+	_, opErr := svc.ListLanguages(context.Background(), &ListLanguagesInput{
+		DisplayLanguageCode: types.DisplayLanguageCode("de"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1293,7 +1693,40 @@ func TestCheckResponseSnapshot_Error_UnsupportedLanguagePairException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartTextTranslationJob(context.Background(), &StartTextTranslationJobInput{})
+	_, opErr := svc.StartTextTranslationJob(context.Background(), &StartTextTranslationJobInput{
+		JobName: ptr.String("__JobName__"),
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			ContentType: ptr.String("__ContentType__"),
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri: ptr.String("__S3Uri__"),
+			EncryptionKey: &types.EncryptionKey{
+				Type: types.EncryptionKeyType("KMS"),
+				Id:   ptr.String("__Id__"),
+			},
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		SourceLanguageCode: ptr.String("__SourceLanguageCode__"),
+		TargetLanguageCodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TerminologyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParallelDataNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Settings: &types.TranslationSettings{
+			Formality: types.Formality("FORMAL"),
+			Profanity: types.Profanity("MASK"),
+			Brevity:   types.Brevity("ON"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

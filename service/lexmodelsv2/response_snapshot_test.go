@@ -147,7 +147,23 @@ func TestCheckResponseSnapshot_BatchCreateCustomVocabularyItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	got, err := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +212,19 @@ func TestCheckResponseSnapshot_BatchDeleteCustomVocabularyItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteCustomVocabularyItem(context.Background(), &BatchDeleteCustomVocabularyItemInput{})
+	got, err := svc.BatchDeleteCustomVocabularyItem(context.Background(), &BatchDeleteCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.CustomVocabularyEntryId{
+			{
+				ItemId: ptr.String("__ItemId__"),
+			},
+			{
+				ItemId: ptr.String("__ItemId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +273,25 @@ func TestCheckResponseSnapshot_BatchUpdateCustomVocabularyItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateCustomVocabularyItem(context.Background(), &BatchUpdateCustomVocabularyItemInput{})
+	got, err := svc.BatchUpdateCustomVocabularyItem(context.Background(), &BatchUpdateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.CustomVocabularyItem{
+			{
+				ItemId:    ptr.String("__ItemId__"),
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				ItemId:    ptr.String("__ItemId__"),
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +316,11 @@ func TestCheckResponseSnapshot_BuildBotLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{})
+	got, err := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +376,41 @@ func TestCheckResponseSnapshot_CreateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBot(context.Background(), &CreateBotInput{})
+	got, err := svc.CreateBot(context.Background(), &CreateBotInput{
+		BotName:     ptr.String("__BotName__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		DataPrivacy: &types.DataPrivacy{
+			ChildDirected: true,
+		},
+		IdleSessionTTLInSeconds: ptr.Int32(1),
+		BotTags: map[string]string{
+			"key0": "__Value__",
+		},
+		TestBotAliasTags: map[string]string{
+			"key0": "__Value__",
+		},
+		BotType: types.BotType("Bot"),
+		BotMembers: []types.BotMember{
+			{
+				BotMemberId:        ptr.String("__BotMemberId__"),
+				BotMemberName:      ptr.String("__BotMemberName__"),
+				BotMemberAliasId:   ptr.String("__BotMemberAliasId__"),
+				BotMemberAliasName: ptr.String("__BotMemberAliasName__"),
+				BotMemberVersion:   ptr.String("__BotMemberVersion__"),
+			},
+			{
+				BotMemberId:        ptr.String("__BotMemberId__"),
+				BotMemberName:      ptr.String("__BotMemberName__"),
+				BotMemberAliasId:   ptr.String("__BotMemberAliasId__"),
+				BotMemberAliasName: ptr.String("__BotMemberAliasName__"),
+				BotMemberVersion:   ptr.String("__BotMemberVersion__"),
+			},
+		},
+		ErrorLogSettings: &types.ErrorLogSettings{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +502,77 @@ func TestCheckResponseSnapshot_CreateBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBotAlias(context.Background(), &CreateBotAliasInput{})
+	got, err := svc.CreateBotAlias(context.Background(), &CreateBotAliasInput{
+		BotAliasName: ptr.String("__BotAliasName__"),
+		Description:  ptr.String("__Description__"),
+		BotVersion:   ptr.String("__BotVersion__"),
+		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
+			"key0": {
+				Enabled: true,
+				CodeHookSpecification: &types.CodeHookSpecification{
+					LambdaCodeHook: &types.LambdaCodeHook{
+						LambdaARN:                ptr.String("__LambdaARN__"),
+						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
+					},
+				},
+			},
+		},
+		ConversationLogSettings: &types.ConversationLogSettings{
+			TextLogSettings: []types.TextLogSetting{
+				{
+					Enabled: true,
+					Destination: &types.TextLogDestination{
+						CloudWatch: &types.CloudWatchLogGroupLogDestination{
+							CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+							LogPrefix:             ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+				{
+					Enabled: true,
+					Destination: &types.TextLogDestination{
+						CloudWatch: &types.CloudWatchLogGroupLogDestination{
+							CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+							LogPrefix:             ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+			},
+			AudioLogSettings: []types.AudioLogSetting{
+				{
+					Enabled: true,
+					Destination: &types.AudioLogDestination{
+						S3Bucket: &types.S3BucketLogDestination{
+							KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+							S3BucketArn: ptr.String("__S3BucketArn__"),
+							LogPrefix:   ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+				{
+					Enabled: true,
+					Destination: &types.AudioLogDestination{
+						S3Bucket: &types.S3BucketLogDestination{
+							KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+							S3BucketArn: ptr.String("__S3BucketArn__"),
+							LogPrefix:   ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		SentimentAnalysisSettings: &types.SentimentAnalysisSettings{
+			DetectSentiment: true,
+		},
+		BotId: ptr.String("__BotId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -524,7 +678,91 @@ func TestCheckResponseSnapshot_CreateBotLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBotLocale(context.Background(), &CreateBotLocaleInput{})
+	got, err := svc.CreateBotLocale(context.Background(), &CreateBotLocaleInput{
+		BotId:                        ptr.String("__BotId__"),
+		BotVersion:                   ptr.String("__BotVersion__"),
+		LocaleId:                     ptr.String("__LocaleId__"),
+		Description:                  ptr.String("__Description__"),
+		NluIntentConfidenceThreshold: ptr.Float64(1.0),
+		VoiceSettings: &types.VoiceSettings{
+			Engine:  types.VoiceEngine("standard"),
+			VoiceId: ptr.String("__VoiceId__"),
+		},
+		UnifiedSpeechSettings: &types.UnifiedSpeechSettings{
+			SpeechFoundationModel: &types.SpeechFoundationModel{
+				ModelArn: ptr.String("__ModelArn__"),
+				VoiceId:  ptr.String("__VoiceId__"),
+			},
+		},
+		AudioFillerSettings: &types.AudioFillerSettings{
+			Enabled:                             true,
+			AudioType:                           types.AudioFillerType("MELODY_CHIPPER_CHIME"),
+			StartDelayInMilliseconds:            ptr.Int32(1),
+			MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
+			ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+		},
+		SpeechRecognitionSettings: &types.SpeechRecognitionSettings{
+			SpeechModelPreference: types.SpeechModelPreference("Standard"),
+			SpeechModelConfig: &types.SpeechModelConfig{
+				DeepgramConfig: &types.DeepgramSpeechModelConfig{
+					ApiTokenSecretArn: ptr.String("__ApiTokenSecretArn__"),
+					ModelId:           ptr.String("__ModelId__"),
+				},
+			},
+		},
+		GenerativeAISettings: &types.GenerativeAISettings{
+			RuntimeSettings: &types.RuntimeSettings{
+				SlotResolutionImprovement: &types.SlotResolutionImprovementSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+				NluImprovement: &types.NluImprovementSpecification{
+					Enabled:         true,
+					AssistedNluMode: types.AssistedNluMode("Primary"),
+					IntentDisambiguationSettings: &types.IntentDisambiguationSettings{
+						Enabled:                     true,
+						MaxDisambiguationIntents:    ptr.Int32(1),
+						CustomDisambiguationMessage: ptr.String("__CustomDisambiguationMessage__"),
+					},
+				},
+			},
+			BuildtimeSettings: &types.BuildtimeSettings{
+				DescriptiveBotBuilder: &types.DescriptiveBotBuilderSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+				SampleUtteranceGeneration: &types.SampleUtteranceGenerationSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+			},
+		},
+		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -549,7 +787,10 @@ func TestCheckResponseSnapshot_CreateBotReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBotReplica(context.Background(), &CreateBotReplicaInput{})
+	got, err := svc.CreateBotReplica(context.Background(), &CreateBotReplicaInput{
+		BotId:         ptr.String("__BotId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +820,15 @@ func TestCheckResponseSnapshot_CreateBotVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{})
+	got, err := svc.CreateBotVersion(context.Background(), &CreateBotVersionInput{
+		BotId:       ptr.String("__BotId__"),
+		Description: ptr.String("__Description__"),
+		BotVersionLocaleSpecification: map[string]types.BotVersionLocaleDetails{
+			"key0": {
+				SourceBotVersion: ptr.String("__SourceBotVersion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +871,29 @@ func TestCheckResponseSnapshot_CreateExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExport(context.Background(), &CreateExportInput{})
+	got, err := svc.CreateExport(context.Background(), &CreateExportInput{
+		ResourceSpecification: &types.ExportResourceSpecification{
+			BotExportSpecification: &types.BotExportSpecification{
+				BotId:      ptr.String("__BotId__"),
+				BotVersion: ptr.String("__BotVersion__"),
+			},
+			BotLocaleExportSpecification: &types.BotLocaleExportSpecification{
+				BotId:      ptr.String("__BotId__"),
+				BotVersion: ptr.String("__BotVersion__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+			},
+			CustomVocabularyExportSpecification: &types.CustomVocabularyExportSpecification{
+				BotId:      ptr.String("__BotId__"),
+				BotVersion: ptr.String("__BotVersion__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+			},
+			TestSetExportSpecification: &types.TestSetExportSpecification{
+				TestSetId: ptr.String("__TestSetId__"),
+			},
+		},
+		FileFormat:   types.ImportExportFileFormat("LexJson"),
+		FilePassword: ptr.String("__FilePassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6277,7 +6548,5641 @@ func TestCheckResponseSnapshot_CreateIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIntent(context.Background(), &CreateIntentInput{})
+	got, err := svc.CreateIntent(context.Background(), &CreateIntentInput{
+		IntentName:            ptr.String("__IntentName__"),
+		IntentDisplayName:     ptr.String("__IntentDisplayName__"),
+		Description:           ptr.String("__Description__"),
+		ParentIntentSignature: ptr.String("__ParentIntentSignature__"),
+		SampleUtterances: []types.SampleUtterance{
+			{
+				Utterance: ptr.String("__Utterance__"),
+			},
+			{
+				Utterance: ptr.String("__Utterance__"),
+			},
+		},
+		DialogCodeHook: &types.DialogCodeHookSettings{
+			Enabled: true,
+		},
+		FulfillmentCodeHook: &types.FulfillmentCodeHookSettings{
+			Enabled: true,
+			PostFulfillmentStatusSpecification: &types.PostFulfillmentStatusSpecification{
+				SuccessResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				FailureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				TimeoutResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				SuccessNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				SuccessConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				FailureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				FailureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				TimeoutNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				TimeoutConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			FulfillmentUpdatesSpecification: &types.FulfillmentUpdatesSpecification{
+				Active: ptr.Bool(true),
+				StartResponse: &types.FulfillmentStartResponseSpecification{
+					DelayInSeconds: ptr.Int32(1),
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				UpdateResponse: &types.FulfillmentUpdateResponseSpecification{
+					FrequencyInSeconds: ptr.Int32(1),
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				TimeoutInSeconds: ptr.Int32(1),
+			},
+			Active: ptr.Bool(true),
+		},
+		IntentConfirmationSetting: &types.IntentConfirmationSetting{
+			PromptSpecification: &types.PromptSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				MaxRetries:               ptr.Int32(1),
+				AllowInterrupt:           ptr.Bool(true),
+				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
+				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
+					"key0": {
+						AllowInterrupt: ptr.Bool(true),
+						AllowedInputTypes: &types.AllowedInputTypes{
+							AllowAudioInput: ptr.Bool(true),
+							AllowDTMFInput:  ptr.Bool(true),
+						},
+						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+							AudioSpecification: &types.AudioSpecification{
+								MaxLengthMs:  ptr.Int32(1),
+								EndTimeoutMs: ptr.Int32(1),
+							},
+							DtmfSpecification: &types.DTMFSpecification{
+								MaxLength:         ptr.Int32(1),
+								EndTimeoutMs:      ptr.Int32(1),
+								DeletionCharacter: ptr.String("__DeletionCharacter__"),
+								EndCharacter:      ptr.String("__EndCharacter__"),
+							},
+						},
+						TextInputSpecification: &types.TextInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			DeclinationResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			Active: ptr.Bool(true),
+			ConfirmationResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			ConfirmationNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			ConfirmationConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			DeclinationNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			DeclinationConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			FailureResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			FailureNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FailureConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			CodeHook: &types.DialogCodeHookInvocationSetting{
+				EnableCodeHookInvocation: ptr.Bool(true),
+				Active:                   ptr.Bool(true),
+				InvocationLabel:          ptr.String("__InvocationLabel__"),
+				PostCodeHookSpecification: &types.PostDialogCodeHookInvocationSpecification{
+					SuccessResponse: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+					SuccessNextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SuccessConditional: &types.ConditionalSpecification{
+						Active: ptr.Bool(true),
+						ConditionalBranches: []types.ConditionalBranch{
+							{
+								Name: ptr.String("__Name__"),
+								Condition: &types.Condition{
+									ExpressionString: ptr.String("__ExpressionString__"),
+								},
+								NextStep: &types.DialogState{
+									DialogAction: &types.DialogAction{
+										Type:                types.DialogActionType("ElicitIntent"),
+										SlotToElicit:        ptr.String("__SlotToElicit__"),
+										SuppressNextMessage: ptr.Bool(true),
+									},
+									Intent: &types.IntentOverride{
+										Name: ptr.String("__Name__"),
+										Slots: map[string]types.SlotValueOverride{
+											"key0": {
+												Shape: types.SlotShape("Scalar"),
+												Value: &types.SlotValue{
+													InterpretedValue: ptr.String("__InterpretedValue__"),
+												},
+												Values: []types.SlotValueOverride{
+													{},
+													{},
+												},
+											},
+										},
+									},
+									SessionAttributes: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								Response: &types.ResponseSpecification{
+									MessageGroups: []types.MessageGroup{
+										{
+											Message: &types.Message{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{},
+														{},
+													},
+												},
+											},
+											Variations: []types.Message{
+												{
+													PlainTextMessage:  nil,
+													CustomPayload:     nil,
+													SsmlMessage:       nil,
+													ImageResponseCard: nil,
+												},
+												{},
+											},
+										},
+										{},
+									},
+									AllowInterrupt: ptr.Bool(true),
+								},
+							},
+							{},
+						},
+						DefaultBranch: nil,
+					},
+					FailureResponse:    nil,
+					FailureNextStep:    nil,
+					FailureConditional: nil,
+					TimeoutResponse:    nil,
+					TimeoutNextStep:    nil,
+					TimeoutConditional: nil,
+				},
+			},
+			ElicitationCodeHook: nil,
+		},
+		IntentClosingSetting: nil,
+		InputContexts: []types.InputContext{
+			{},
+			{},
+		},
+		OutputContexts: []types.OutputContext{
+			{},
+			{},
+		},
+		KendraConfiguration:           nil,
+		BotId:                         ptr.String("__BotId__"),
+		BotVersion:                    ptr.String("__BotVersion__"),
+		LocaleId:                      ptr.String("__LocaleId__"),
+		InitialResponseSetting:        nil,
+		QnAIntentConfiguration:        nil,
+		QInConnectIntentConfiguration: nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6299,7 +12204,10 @@ func TestCheckResponseSnapshot_CreateResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourcePolicy(context.Background(), &CreateResourcePolicyInput{})
+	got, err := svc.CreateResourcePolicy(context.Background(), &CreateResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6321,7 +12229,31 @@ func TestCheckResponseSnapshot_CreateResourcePolicyStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourcePolicyStatement(context.Background(), &CreateResourcePolicyStatementInput{})
+	got, err := svc.CreateResourcePolicyStatement(context.Background(), &CreateResourcePolicyStatementInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.Effect("Allow"),
+		Principal: []types.Principal{
+			{
+				Service: ptr.String("__Service__"),
+				Arn:     ptr.String("__Arn__"),
+			},
+			{
+				Service: ptr.String("__Service__"),
+				Arn:     ptr.String("__Arn__"),
+			},
+		},
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: map[string]map[string]string{
+			"key0": {
+				"key0": "__Value__",
+			},
+		},
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8937,7 +14869,2602 @@ func TestCheckResponseSnapshot_CreateSlot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSlot(context.Background(), &CreateSlotInput{})
+	got, err := svc.CreateSlot(context.Background(), &CreateSlotInput{
+		SlotName:    ptr.String("__SlotName__"),
+		Description: ptr.String("__Description__"),
+		SlotTypeId:  ptr.String("__SlotTypeId__"),
+		ValueElicitationSetting: &types.SlotValueElicitationSetting{
+			DefaultValueSpecification: &types.SlotDefaultValueSpecification{
+				DefaultValueList: []types.SlotDefaultValue{
+					{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+			},
+			SlotConstraint: types.SlotConstraint("Required"),
+			PromptSpecification: &types.PromptSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				MaxRetries:               ptr.Int32(1),
+				AllowInterrupt:           ptr.Bool(true),
+				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
+				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
+					"key0": {
+						AllowInterrupt: ptr.Bool(true),
+						AllowedInputTypes: &types.AllowedInputTypes{
+							AllowAudioInput: ptr.Bool(true),
+							AllowDTMFInput:  ptr.Bool(true),
+						},
+						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+							AudioSpecification: &types.AudioSpecification{
+								MaxLengthMs:  ptr.Int32(1),
+								EndTimeoutMs: ptr.Int32(1),
+							},
+							DtmfSpecification: &types.DTMFSpecification{
+								MaxLength:         ptr.Int32(1),
+								EndTimeoutMs:      ptr.Int32(1),
+								DeletionCharacter: ptr.String("__DeletionCharacter__"),
+								EndCharacter:      ptr.String("__EndCharacter__"),
+							},
+						},
+						TextInputSpecification: &types.TextInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			SampleUtterances: []types.SampleUtterance{
+				{
+					Utterance: ptr.String("__Utterance__"),
+				},
+				{
+					Utterance: ptr.String("__Utterance__"),
+				},
+			},
+			WaitAndContinueSpecification: &types.WaitAndContinueSpecification{
+				WaitingResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				ContinueResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				StillWaitingResponse: &types.StillWaitingResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					FrequencyInSeconds: ptr.Int32(1),
+					TimeoutInSeconds:   ptr.Int32(1),
+					AllowInterrupt:     ptr.Bool(true),
+				},
+				Active: ptr.Bool(true),
+			},
+			SlotCaptureSetting: &types.SlotCaptureSetting{
+				CaptureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				CaptureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CaptureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				FailureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				FailureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				FailureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				CodeHook: &types.DialogCodeHookInvocationSetting{
+					EnableCodeHookInvocation: ptr.Bool(true),
+					Active:                   ptr.Bool(true),
+					InvocationLabel:          ptr.String("__InvocationLabel__"),
+					PostCodeHookSpecification: &types.PostDialogCodeHookInvocationSpecification{
+						SuccessResponse: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+						SuccessNextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						SuccessConditional: &types.ConditionalSpecification{
+							Active: ptr.Bool(true),
+							ConditionalBranches: []types.ConditionalBranch{
+								{
+									Name: ptr.String("__Name__"),
+									Condition: &types.Condition{
+										ExpressionString: ptr.String("__ExpressionString__"),
+									},
+									NextStep: &types.DialogState{
+										DialogAction: &types.DialogAction{
+											Type:                types.DialogActionType("ElicitIntent"),
+											SlotToElicit:        ptr.String("__SlotToElicit__"),
+											SuppressNextMessage: ptr.Bool(true),
+										},
+										Intent: &types.IntentOverride{
+											Name: ptr.String("__Name__"),
+											Slots: map[string]types.SlotValueOverride{
+												"key0": {
+													Shape: types.SlotShape("Scalar"),
+													Value: nil,
+													Values: []types.SlotValueOverride{
+														{},
+														{},
+													},
+												},
+											},
+										},
+										SessionAttributes: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									Response: &types.ResponseSpecification{
+										MessageGroups: []types.MessageGroup{
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
+											{},
+										},
+										AllowInterrupt: ptr.Bool(true),
+									},
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									Condition: nil,
+									NextStep:  nil,
+									Response:  nil,
+								},
+							},
+							DefaultBranch: nil,
+						},
+						FailureResponse:    nil,
+						FailureNextStep:    nil,
+						FailureConditional: nil,
+						TimeoutResponse:    nil,
+						TimeoutNextStep:    nil,
+						TimeoutConditional: nil,
+					},
+				},
+				ElicitationCodeHook: nil,
+			},
+			SlotResolutionSetting: nil,
+		},
+		ObfuscationSetting:    nil,
+		BotId:                 ptr.String("__BotId__"),
+		BotVersion:            ptr.String("__BotVersion__"),
+		LocaleId:              ptr.String("__LocaleId__"),
+		IntentId:              ptr.String("__IntentId__"),
+		MultipleValuesSetting: nil,
+		SubSlotSetting:        nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9023,7 +17550,72 @@ func TestCheckResponseSnapshot_CreateSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSlotType(context.Background(), &CreateSlotTypeInput{})
+	got, err := svc.CreateSlotType(context.Background(), &CreateSlotTypeInput{
+		SlotTypeName: ptr.String("__SlotTypeName__"),
+		Description:  ptr.String("__Description__"),
+		SlotTypeValues: []types.SlotTypeValue{
+			{
+				SampleValue: &types.SampleValue{
+					Value: ptr.String("__Value__"),
+				},
+				Synonyms: []types.SampleValue{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				SampleValue: &types.SampleValue{
+					Value: ptr.String("__Value__"),
+				},
+				Synonyms: []types.SampleValue{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ValueSelectionSetting: &types.SlotValueSelectionSetting{
+			ResolutionStrategy: types.SlotValueResolutionStrategy("OriginalValue"),
+			RegexFilter: &types.SlotValueRegexFilter{
+				Pattern: ptr.String("__Pattern__"),
+			},
+			AdvancedRecognitionSetting: &types.AdvancedRecognitionSetting{
+				AudioRecognitionStrategy: types.AudioRecognitionStrategy("UseSlotValuesAsCustomVocabulary"),
+			},
+		},
+		ParentSlotTypeSignature: ptr.String("__ParentSlotTypeSignature__"),
+		BotId:                   ptr.String("__BotId__"),
+		BotVersion:              ptr.String("__BotVersion__"),
+		LocaleId:                ptr.String("__LocaleId__"),
+		ExternalSourceSetting: &types.ExternalSourceSetting{
+			GrammarSlotTypeSetting: &types.GrammarSlotTypeSetting{
+				Source: &types.GrammarSlotTypeSource{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3ObjectKey:  ptr.String("__S3ObjectKey__"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+			},
+		},
+		CompositeSlotTypeSetting: &types.CompositeSlotTypeSetting{
+			SubSlots: []types.SubSlotTypeComposition{
+				{
+					Name:       ptr.String("__Name__"),
+					SlotTypeId: ptr.String("__SlotTypeId__"),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					SlotTypeId: ptr.String("__SlotTypeId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9053,7 +17645,16 @@ func TestCheckResponseSnapshot_CreateTestSetDiscrepancyReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTestSetDiscrepancyReport(context.Background(), &CreateTestSetDiscrepancyReportInput{})
+	got, err := svc.CreateTestSetDiscrepancyReport(context.Background(), &CreateTestSetDiscrepancyReportInput{
+		TestSetId: ptr.String("__TestSetId__"),
+		Target: &types.TestSetDiscrepancyReportResourceTarget{
+			BotAliasTarget: &types.TestSetDiscrepancyReportBotAliasTarget{
+				BotId:      ptr.String("__BotId__"),
+				BotAliasId: ptr.String("__BotAliasId__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9097,7 +17698,10 @@ func TestCheckResponseSnapshot_DeleteBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{})
+	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{
+		BotId:                  ptr.String("__BotId__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9120,7 +17724,11 @@ func TestCheckResponseSnapshot_DeleteBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotAlias(context.Background(), &DeleteBotAliasInput{})
+	got, err := svc.DeleteBotAlias(context.Background(), &DeleteBotAliasInput{
+		BotAliasId:             ptr.String("__BotAliasId__"),
+		BotId:                  ptr.String("__BotId__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9139,7 +17747,10 @@ func TestCheckResponseSnapshot_DeleteBotAnalyzerRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), &DeleteBotAnalyzerRecommendationInput{})
+	got, err := svc.DeleteBotAnalyzerRecommendation(context.Background(), &DeleteBotAnalyzerRecommendationInput{
+		BotId:                ptr.String("__BotId__"),
+		BotAnalyzerRequestId: ptr.String("__BotAnalyzerRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9163,7 +17774,11 @@ func TestCheckResponseSnapshot_DeleteBotLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotLocale(context.Background(), &DeleteBotLocaleInput{})
+	got, err := svc.DeleteBotLocale(context.Background(), &DeleteBotLocaleInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9186,7 +17801,10 @@ func TestCheckResponseSnapshot_DeleteBotReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotReplica(context.Background(), &DeleteBotReplicaInput{})
+	got, err := svc.DeleteBotReplica(context.Background(), &DeleteBotReplicaInput{
+		BotId:         ptr.String("__BotId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9209,7 +17827,11 @@ func TestCheckResponseSnapshot_DeleteBotVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBotVersion(context.Background(), &DeleteBotVersionInput{})
+	got, err := svc.DeleteBotVersion(context.Background(), &DeleteBotVersionInput{
+		BotId:                  ptr.String("__BotId__"),
+		BotVersion:             ptr.String("__BotVersion__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9233,7 +17855,11 @@ func TestCheckResponseSnapshot_DeleteCustomVocabulary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomVocabulary(context.Background(), &DeleteCustomVocabularyInput{})
+	got, err := svc.DeleteCustomVocabulary(context.Background(), &DeleteCustomVocabularyInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9255,7 +17881,9 @@ func TestCheckResponseSnapshot_DeleteExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExport(context.Background(), &DeleteExportInput{})
+	got, err := svc.DeleteExport(context.Background(), &DeleteExportInput{
+		ExportId: ptr.String("__ExportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9277,7 +17905,9 @@ func TestCheckResponseSnapshot_DeleteImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImport(context.Background(), &DeleteImportInput{})
+	got, err := svc.DeleteImport(context.Background(), &DeleteImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9296,7 +17926,12 @@ func TestCheckResponseSnapshot_DeleteIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIntent(context.Background(), &DeleteIntentInput{})
+	got, err := svc.DeleteIntent(context.Background(), &DeleteIntentInput{
+		IntentId:   ptr.String("__IntentId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9318,7 +17953,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9340,7 +17978,11 @@ func TestCheckResponseSnapshot_DeleteResourcePolicyStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicyStatement(context.Background(), &DeleteResourcePolicyStatementInput{})
+	got, err := svc.DeleteResourcePolicyStatement(context.Background(), &DeleteResourcePolicyStatementInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		StatementId:        ptr.String("__StatementId__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9359,7 +18001,13 @@ func TestCheckResponseSnapshot_DeleteSlot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlot(context.Background(), &DeleteSlotInput{})
+	got, err := svc.DeleteSlot(context.Background(), &DeleteSlotInput{
+		SlotId:     ptr.String("__SlotId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		IntentId:   ptr.String("__IntentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9378,7 +18026,13 @@ func TestCheckResponseSnapshot_DeleteSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlotType(context.Background(), &DeleteSlotTypeInput{})
+	got, err := svc.DeleteSlotType(context.Background(), &DeleteSlotTypeInput{
+		SlotTypeId:             ptr.String("__SlotTypeId__"),
+		BotId:                  ptr.String("__BotId__"),
+		BotVersion:             ptr.String("__BotVersion__"),
+		LocaleId:               ptr.String("__LocaleId__"),
+		SkipResourceInUseCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9397,7 +18051,9 @@ func TestCheckResponseSnapshot_DeleteTestSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTestSet(context.Background(), &DeleteTestSetInput{})
+	got, err := svc.DeleteTestSet(context.Background(), &DeleteTestSetInput{
+		TestSetId: ptr.String("__TestSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9416,7 +18072,11 @@ func TestCheckResponseSnapshot_DeleteUtterances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUtterances(context.Background(), &DeleteUtterancesInput{})
+	got, err := svc.DeleteUtterances(context.Background(), &DeleteUtterancesInput{
+		BotId:     ptr.String("__BotId__"),
+		LocaleId:  ptr.String("__LocaleId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9471,7 +18131,9 @@ func TestCheckResponseSnapshot_DescribeBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBot(context.Background(), &DescribeBotInput{})
+	got, err := svc.DescribeBot(context.Background(), &DescribeBotInput{
+		BotId: ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9583,7 +18245,10 @@ func TestCheckResponseSnapshot_DescribeBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotAlias(context.Background(), &DescribeBotAliasInput{})
+	got, err := svc.DescribeBotAlias(context.Background(), &DescribeBotAliasInput{
+		BotAliasId: ptr.String("__BotAliasId__"),
+		BotId:      ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9631,7 +18296,12 @@ func TestCheckResponseSnapshot_DescribeBotAnalyzerRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), &DescribeBotAnalyzerRecommendationInput{})
+	got, err := svc.DescribeBotAnalyzerRecommendation(context.Background(), &DescribeBotAnalyzerRecommendationInput{
+		BotId:                ptr.String("__BotId__"),
+		BotAnalyzerRequestId: ptr.String("__BotAnalyzerRequestId__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9759,7 +18429,11 @@ func TestCheckResponseSnapshot_DescribeBotLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotLocale(context.Background(), &DescribeBotLocaleInput{})
+	got, err := svc.DescribeBotLocale(context.Background(), &DescribeBotLocaleInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9828,7 +18502,12 @@ func TestCheckResponseSnapshot_DescribeBotRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotRecommendation(context.Background(), &DescribeBotRecommendationInput{})
+	got, err := svc.DescribeBotRecommendation(context.Background(), &DescribeBotRecommendationInput{
+		BotId:               ptr.String("__BotId__"),
+		BotVersion:          ptr.String("__BotVersion__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		BotRecommendationId: ptr.String("__BotRecommendationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9857,7 +18536,10 @@ func TestCheckResponseSnapshot_DescribeBotReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotReplica(context.Background(), &DescribeBotReplicaInput{})
+	got, err := svc.DescribeBotReplica(context.Background(), &DescribeBotReplicaInput{
+		BotId:         ptr.String("__BotId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9891,7 +18573,12 @@ func TestCheckResponseSnapshot_DescribeBotResourceGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotResourceGeneration(context.Background(), &DescribeBotResourceGenerationInput{})
+	got, err := svc.DescribeBotResourceGeneration(context.Background(), &DescribeBotResourceGenerationInput{
+		BotId:        ptr.String("__BotId__"),
+		BotVersion:   ptr.String("__BotVersion__"),
+		LocaleId:     ptr.String("__LocaleId__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9953,7 +18640,10 @@ func TestCheckResponseSnapshot_DescribeBotVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBotVersion(context.Background(), &DescribeBotVersionInput{})
+	got, err := svc.DescribeBotVersion(context.Background(), &DescribeBotVersionInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9979,7 +18669,11 @@ func TestCheckResponseSnapshot_DescribeCustomVocabularyMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomVocabularyMetadata(context.Background(), &DescribeCustomVocabularyMetadataInput{})
+	got, err := svc.DescribeCustomVocabularyMetadata(context.Background(), &DescribeCustomVocabularyMetadataInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10028,7 +18722,9 @@ func TestCheckResponseSnapshot_DescribeExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExport(context.Background(), &DescribeExportInput{})
+	got, err := svc.DescribeExport(context.Background(), &DescribeExportInput{
+		ExportId: ptr.String("__ExportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10134,7 +18830,9 @@ func TestCheckResponseSnapshot_DescribeImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImport(context.Background(), &DescribeImportInput{})
+	got, err := svc.DescribeImport(context.Background(), &DescribeImportInput{
+		ImportId: ptr.String("__ImportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15800,7 +24498,12 @@ func TestCheckResponseSnapshot_DescribeIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIntent(context.Background(), &DescribeIntentInput{})
+	got, err := svc.DescribeIntent(context.Background(), &DescribeIntentInput{
+		IntentId:   ptr.String("__IntentId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15823,7 +24526,9 @@ func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{})
+	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18440,7 +27145,13 @@ func TestCheckResponseSnapshot_DescribeSlot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSlot(context.Background(), &DescribeSlotInput{})
+	got, err := svc.DescribeSlot(context.Background(), &DescribeSlotInput{
+		SlotId:     ptr.String("__SlotId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		IntentId:   ptr.String("__IntentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18527,7 +27238,12 @@ func TestCheckResponseSnapshot_DescribeSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSlotType(context.Background(), &DescribeSlotTypeInput{})
+	got, err := svc.DescribeSlotType(context.Background(), &DescribeSlotTypeInput{
+		SlotTypeId: ptr.String("__SlotTypeId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18566,7 +27282,9 @@ func TestCheckResponseSnapshot_DescribeTestExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestExecution(context.Background(), &DescribeTestExecutionInput{})
+	got, err := svc.DescribeTestExecution(context.Background(), &DescribeTestExecutionInput{
+		TestExecutionId: ptr.String("__TestExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18600,7 +27318,9 @@ func TestCheckResponseSnapshot_DescribeTestSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestSet(context.Background(), &DescribeTestSetInput{})
+	got, err := svc.DescribeTestSet(context.Background(), &DescribeTestSetInput{
+		TestSetId: ptr.String("__TestSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18661,7 +27381,9 @@ func TestCheckResponseSnapshot_DescribeTestSetDiscrepancyReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestSetDiscrepancyReport(context.Background(), &DescribeTestSetDiscrepancyReportInput{})
+	got, err := svc.DescribeTestSetDiscrepancyReport(context.Background(), &DescribeTestSetDiscrepancyReportInput{
+		TestSetDiscrepancyReportId: ptr.String("__TestSetDiscrepancyReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18710,7 +27432,9 @@ func TestCheckResponseSnapshot_DescribeTestSetGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestSetGeneration(context.Background(), &DescribeTestSetGenerationInput{})
+	got, err := svc.DescribeTestSetGeneration(context.Background(), &DescribeTestSetGenerationInput{
+		TestSetGenerationId: ptr.String("__TestSetGenerationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18742,7 +27466,12 @@ func TestCheckResponseSnapshot_GenerateBotElement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateBotElement(context.Background(), &GenerateBotElementInput{})
+	got, err := svc.GenerateBotElement(context.Background(), &GenerateBotElementInput{
+		IntentId:   ptr.String("__IntentId__"),
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18764,7 +27493,9 @@ func TestCheckResponseSnapshot_GetTestExecutionArtifactsUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTestExecutionArtifactsUrl(context.Background(), &GetTestExecutionArtifactsUrlInput{})
+	got, err := svc.GetTestExecutionArtifactsUrl(context.Background(), &GetTestExecutionArtifactsUrlInput{
+		TestExecutionId: ptr.String("__TestExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18816,7 +27547,42 @@ func TestCheckResponseSnapshot_ListAggregatedUtterances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAggregatedUtterances(context.Background(), &ListAggregatedUtterancesInput{})
+	got, err := svc.ListAggregatedUtterances(context.Background(), &ListAggregatedUtterancesInput{
+		BotId:      ptr.String("__BotId__"),
+		BotAliasId: ptr.String("__BotAliasId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		AggregationDuration: &types.UtteranceAggregationDuration{
+			RelativeAggregationDuration: &types.RelativeAggregationDuration{
+				TimeDimension: types.TimeDimension("Hours"),
+				TimeValue:     ptr.Int32(1),
+			},
+		},
+		SortBy: &types.AggregatedUtterancesSortBy{
+			Attribute: types.AggregatedUtterancesSortAttribute("HitCount"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.AggregatedUtterancesFilter{
+			{
+				Name: types.AggregatedUtterancesFilterName("Utterance"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.AggregatedUtterancesFilterOperator("CO"),
+			},
+			{
+				Name: types.AggregatedUtterancesFilterName("Utterance"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.AggregatedUtterancesFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18864,7 +27630,12 @@ func TestCheckResponseSnapshot_ListBotAliasReplicas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotAliasReplicas(context.Background(), &ListBotAliasReplicasInput{})
+	got, err := svc.ListBotAliasReplicas(context.Background(), &ListBotAliasReplicasInput{
+		BotId:         ptr.String("__BotId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18906,7 +27677,11 @@ func TestCheckResponseSnapshot_ListBotAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotAliases(context.Background(), &ListBotAliasesInput{})
+	got, err := svc.ListBotAliases(context.Background(), &ListBotAliasesInput{
+		BotId:      ptr.String("__BotId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18942,7 +27717,13 @@ func TestCheckResponseSnapshot_ListBotAnalyzerHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotAnalyzerHistory(context.Background(), &ListBotAnalyzerHistoryInput{})
+	got, err := svc.ListBotAnalyzerHistory(context.Background(), &ListBotAnalyzerHistoryInput{
+		BotId:      ptr.String("__BotId__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18983,7 +27764,34 @@ func TestCheckResponseSnapshot_ListBotLocales(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotLocales(context.Background(), &ListBotLocalesInput{})
+	got, err := svc.ListBotLocales(context.Background(), &ListBotLocalesInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		SortBy: &types.BotLocaleSortBy{
+			Attribute: types.BotLocaleSortAttribute("BotLocaleName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.BotLocaleFilter{
+			{
+				Name: types.BotLocaleFilterName("BotLocaleName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.BotLocaleFilterOperator("CO"),
+			},
+			{
+				Name: types.BotLocaleFilterName("BotLocaleName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.BotLocaleFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19021,7 +27829,13 @@ func TestCheckResponseSnapshot_ListBotRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotRecommendations(context.Background(), &ListBotRecommendationsInput{})
+	got, err := svc.ListBotRecommendations(context.Background(), &ListBotRecommendationsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19063,7 +27877,9 @@ func TestCheckResponseSnapshot_ListBotReplicas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotReplicas(context.Background(), &ListBotReplicasInput{})
+	got, err := svc.ListBotReplicas(context.Background(), &ListBotReplicasInput{
+		BotId: ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19101,7 +27917,17 @@ func TestCheckResponseSnapshot_ListBotResourceGenerations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotResourceGenerations(context.Background(), &ListBotResourceGenerationsInput{})
+	got, err := svc.ListBotResourceGenerations(context.Background(), &ListBotResourceGenerationsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SortBy: &types.GenerationSortBy{
+			Attribute: types.GenerationSortByAttribute("creationStartTime"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19145,7 +27971,16 @@ func TestCheckResponseSnapshot_ListBotVersionReplicas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotVersionReplicas(context.Background(), &ListBotVersionReplicasInput{})
+	got, err := svc.ListBotVersionReplicas(context.Background(), &ListBotVersionReplicasInput{
+		BotId:         ptr.String("__BotId__"),
+		ReplicaRegion: ptr.String("__ReplicaRegion__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		SortBy: &types.BotVersionReplicaSortBy{
+			Attribute: types.BotVersionReplicaSortAttribute("BotVersion"),
+			Order:     types.SortOrder("Ascending"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19183,7 +28018,15 @@ func TestCheckResponseSnapshot_ListBotVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBotVersions(context.Background(), &ListBotVersionsInput{})
+	got, err := svc.ListBotVersions(context.Background(), &ListBotVersionsInput{
+		BotId: ptr.String("__BotId__"),
+		SortBy: &types.BotVersionSortBy{
+			Attribute: types.BotVersionSortAttribute("BotVersion"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19224,7 +28067,32 @@ func TestCheckResponseSnapshot_ListBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBots(context.Background(), &ListBotsInput{})
+	got, err := svc.ListBots(context.Background(), &ListBotsInput{
+		SortBy: &types.BotSortBy{
+			Attribute: types.BotSortAttribute("BotName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.BotFilter{
+			{
+				Name: types.BotFilterName("BotName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.BotFilterOperator("CO"),
+			},
+			{
+				Name: types.BotFilterName("BotName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.BotFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19256,7 +28124,15 @@ func TestCheckResponseSnapshot_ListBuiltInIntents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuiltInIntents(context.Background(), &ListBuiltInIntentsInput{})
+	got, err := svc.ListBuiltInIntents(context.Background(), &ListBuiltInIntentsInput{
+		LocaleId: ptr.String("__LocaleId__"),
+		SortBy: &types.BuiltInIntentSortBy{
+			Attribute: types.BuiltInIntentSortAttribute("IntentSignature"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19288,7 +28164,15 @@ func TestCheckResponseSnapshot_ListBuiltInSlotTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuiltInSlotTypes(context.Background(), &ListBuiltInSlotTypesInput{})
+	got, err := svc.ListBuiltInSlotTypes(context.Background(), &ListBuiltInSlotTypesInput{
+		LocaleId: ptr.String("__LocaleId__"),
+		SortBy: &types.BuiltInSlotTypeSortBy{
+			Attribute: types.BuiltInSlotTypeSortAttribute("SlotTypeSignature"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19326,7 +28210,13 @@ func TestCheckResponseSnapshot_ListCustomVocabularyItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomVocabularyItems(context.Background(), &ListCustomVocabularyItemsInput{})
+	got, err := svc.ListCustomVocabularyItems(context.Background(), &ListCustomVocabularyItemsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19404,7 +28294,35 @@ func TestCheckResponseSnapshot_ListExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExports(context.Background(), &ListExportsInput{})
+	got, err := svc.ListExports(context.Background(), &ListExportsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		SortBy: &types.ExportSortBy{
+			Attribute: types.ExportSortAttribute("LastUpdatedDateTime"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.ExportFilter{
+			{
+				Name: types.ExportFilterName("ExportResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.ExportFilterOperator("CO"),
+			},
+			{
+				Name: types.ExportFilterName("ExportResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.ExportFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19450,7 +28368,35 @@ func TestCheckResponseSnapshot_ListImports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImports(context.Background(), &ListImportsInput{})
+	got, err := svc.ListImports(context.Background(), &ListImportsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		SortBy: &types.ImportSortBy{
+			Attribute: types.ImportSortAttribute("LastUpdatedDateTime"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.ImportFilter{
+			{
+				Name: types.ImportFilterName("ImportResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.ImportFilterOperator("CO"),
+			},
+			{
+				Name: types.ImportFilterName("ImportResourceType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.ImportFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19542,7 +28488,63 @@ func TestCheckResponseSnapshot_ListIntentMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntentMetrics(context.Background(), &ListIntentMetricsInput{})
+	got, err := svc.ListIntentMetrics(context.Background(), &ListIntentMetricsInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Metrics: []types.AnalyticsIntentMetric{
+			{
+				Name:      types.AnalyticsIntentMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:      types.AnalyticsIntentMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		BinBy: []types.AnalyticsBinBySpecification{
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		GroupBy: []types.AnalyticsIntentGroupBySpecification{
+			{
+				Name: types.AnalyticsIntentField("IntentName"),
+			},
+			{
+				Name: types.AnalyticsIntentField("IntentName"),
+			},
+		},
+		Filters: []types.AnalyticsIntentFilter{
+			{
+				Name:     types.AnalyticsIntentFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsIntentFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19578,7 +28580,30 @@ func TestCheckResponseSnapshot_ListIntentPaths(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntentPaths(context.Background(), &ListIntentPathsInput{})
+	got, err := svc.ListIntentPaths(context.Background(), &ListIntentPathsInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IntentPath:    ptr.String("__IntentPath__"),
+		Filters: []types.AnalyticsPathFilter{
+			{
+				Name:     types.AnalyticsCommonFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsCommonFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19670,7 +28695,63 @@ func TestCheckResponseSnapshot_ListIntentStageMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntentStageMetrics(context.Background(), &ListIntentStageMetricsInput{})
+	got, err := svc.ListIntentStageMetrics(context.Background(), &ListIntentStageMetricsInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Metrics: []types.AnalyticsIntentStageMetric{
+			{
+				Name:      types.AnalyticsIntentStageMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:      types.AnalyticsIntentStageMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		BinBy: []types.AnalyticsBinBySpecification{
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		GroupBy: []types.AnalyticsIntentStageGroupBySpecification{
+			{
+				Name: types.AnalyticsIntentStageField("IntentStageName"),
+			},
+			{
+				Name: types.AnalyticsIntentStageField("IntentStageName"),
+			},
+		},
+		Filters: []types.AnalyticsIntentStageFilter{
+			{
+				Name:     types.AnalyticsIntentStageFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsIntentStageFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19752,7 +28833,35 @@ func TestCheckResponseSnapshot_ListIntents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIntents(context.Background(), &ListIntentsInput{})
+	got, err := svc.ListIntents(context.Background(), &ListIntentsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SortBy: &types.IntentSortBy{
+			Attribute: types.IntentSortAttribute("IntentName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.IntentFilter{
+			{
+				Name: types.IntentFilterName("IntentName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.IntentFilterOperator("CO"),
+			},
+			{
+				Name: types.IntentFilterName("IntentName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.IntentFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19789,7 +28898,14 @@ func TestCheckResponseSnapshot_ListRecommendedIntents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendedIntents(context.Background(), &ListRecommendedIntentsInput{})
+	got, err := svc.ListRecommendedIntents(context.Background(), &ListRecommendedIntentsInput{
+		BotId:               ptr.String("__BotId__"),
+		BotVersion:          ptr.String("__BotVersion__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		BotRecommendationId: ptr.String("__BotRecommendationId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19857,7 +28973,35 @@ func TestCheckResponseSnapshot_ListSessionAnalyticsData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessionAnalyticsData(context.Background(), &ListSessionAnalyticsDataInput{})
+	got, err := svc.ListSessionAnalyticsData(context.Background(), &ListSessionAnalyticsDataInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy: &types.SessionDataSortBy{
+			Name:  types.AnalyticsSessionSortByName("ConversationStartTime"),
+			Order: types.AnalyticsSortOrder("Ascending"),
+		},
+		Filters: []types.AnalyticsSessionFilter{
+			{
+				Name:     types.AnalyticsSessionFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsSessionFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19949,7 +29093,63 @@ func TestCheckResponseSnapshot_ListSessionMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessionMetrics(context.Background(), &ListSessionMetricsInput{})
+	got, err := svc.ListSessionMetrics(context.Background(), &ListSessionMetricsInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Metrics: []types.AnalyticsSessionMetric{
+			{
+				Name:      types.AnalyticsSessionMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:      types.AnalyticsSessionMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		BinBy: []types.AnalyticsBinBySpecification{
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		GroupBy: []types.AnalyticsSessionGroupBySpecification{
+			{
+				Name: types.AnalyticsSessionField("ConversationEndState"),
+			},
+			{
+				Name: types.AnalyticsSessionField("ConversationEndState"),
+			},
+		},
+		Filters: []types.AnalyticsSessionFilter{
+			{
+				Name:     types.AnalyticsSessionFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsSessionFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19991,7 +29191,35 @@ func TestCheckResponseSnapshot_ListSlotTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSlotTypes(context.Background(), &ListSlotTypesInput{})
+	got, err := svc.ListSlotTypes(context.Background(), &ListSlotTypesInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		SortBy: &types.SlotTypeSortBy{
+			Attribute: types.SlotTypeSortAttribute("SlotTypeName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.SlotTypeFilter{
+			{
+				Name: types.SlotTypeFilterName("SlotTypeName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SlotTypeFilterOperator("CO"),
+			},
+			{
+				Name: types.SlotTypeFilterName("SlotTypeName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SlotTypeFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20426,7 +29654,36 @@ func TestCheckResponseSnapshot_ListSlots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSlots(context.Background(), &ListSlotsInput{})
+	got, err := svc.ListSlots(context.Background(), &ListSlotsInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		IntentId:   ptr.String("__IntentId__"),
+		SortBy: &types.SlotSortBy{
+			Attribute: types.SlotSortAttribute("SlotName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		Filters: []types.SlotFilter{
+			{
+				Name: types.SlotFilterName("SlotName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SlotFilterOperator("CO"),
+			},
+			{
+				Name: types.SlotFilterName("SlotName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SlotFilterOperator("CO"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20449,7 +29706,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20842,7 +30101,17 @@ func TestCheckResponseSnapshot_ListTestExecutionResultItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestExecutionResultItems(context.Background(), &ListTestExecutionResultItemsInput{})
+	got, err := svc.ListTestExecutionResultItems(context.Background(), &ListTestExecutionResultItemsInput{
+		TestExecutionId: ptr.String("__TestExecutionId__"),
+		ResultFilterBy: &types.TestExecutionResultFilterBy{
+			ResultTypeFilter: types.TestResultTypeFilter("OverallTestResults"),
+			ConversationLevelTestResultsFilterBy: &types.ConversationLevelTestResultsFilterBy{
+				EndToEndResult: types.TestResultMatchStatus("Matched"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20899,7 +30168,14 @@ func TestCheckResponseSnapshot_ListTestExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestExecutions(context.Background(), &ListTestExecutionsInput{})
+	got, err := svc.ListTestExecutions(context.Background(), &ListTestExecutionsInput{
+		SortBy: &types.TestExecutionSortBy{
+			Attribute: types.TestExecutionSortAttribute("TestSetName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21084,7 +30360,11 @@ func TestCheckResponseSnapshot_ListTestSetRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestSetRecords(context.Background(), &ListTestSetRecordsInput{})
+	got, err := svc.ListTestSetRecords(context.Background(), &ListTestSetRecordsInput{
+		TestSetId:  ptr.String("__TestSetId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21139,7 +30419,14 @@ func TestCheckResponseSnapshot_ListTestSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestSets(context.Background(), &ListTestSetsInput{})
+	got, err := svc.ListTestSets(context.Background(), &ListTestSetsInput{
+		SortBy: &types.TestSetSortBy{
+			Attribute: types.TestSetSortAttribute("TestSetName"),
+			Order:     types.SortOrder("Ascending"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21289,7 +30576,35 @@ func TestCheckResponseSnapshot_ListUtteranceAnalyticsData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUtteranceAnalyticsData(context.Background(), &ListUtteranceAnalyticsDataInput{})
+	got, err := svc.ListUtteranceAnalyticsData(context.Background(), &ListUtteranceAnalyticsDataInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy: &types.UtteranceDataSortBy{
+			Name:  types.AnalyticsUtteranceSortByName("UtteranceTimestamp"),
+			Order: types.AnalyticsSortOrder("Ascending"),
+		},
+		Filters: []types.AnalyticsUtteranceFilter{
+			{
+				Name:     types.AnalyticsUtteranceFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsUtteranceFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21397,7 +30712,71 @@ func TestCheckResponseSnapshot_ListUtteranceMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUtteranceMetrics(context.Background(), &ListUtteranceMetricsInput{})
+	got, err := svc.ListUtteranceMetrics(context.Background(), &ListUtteranceMetricsInput{
+		BotId:         ptr.String("__BotId__"),
+		StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Metrics: []types.AnalyticsUtteranceMetric{
+			{
+				Name:      types.AnalyticsUtteranceMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:      types.AnalyticsUtteranceMetricName("Count"),
+				Statistic: types.AnalyticsMetricStatistic("Sum"),
+				Order:     types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		BinBy: []types.AnalyticsBinBySpecification{
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+			{
+				Name:     types.AnalyticsBinByName("ConversationStartTime"),
+				Interval: types.AnalyticsInterval("OneHour"),
+				Order:    types.AnalyticsSortOrder("Ascending"),
+			},
+		},
+		GroupBy: []types.AnalyticsUtteranceGroupBySpecification{
+			{
+				Name: types.AnalyticsUtteranceField("UtteranceText"),
+			},
+			{
+				Name: types.AnalyticsUtteranceField("UtteranceText"),
+			},
+		},
+		Attributes: []types.AnalyticsUtteranceAttribute{
+			{
+				Name: types.AnalyticsUtteranceAttributeName("LastUsedIntent"),
+			},
+			{
+				Name: types.AnalyticsUtteranceAttributeName("LastUsedIntent"),
+			},
+		},
+		Filters: []types.AnalyticsUtteranceFilter{
+			{
+				Name:     types.AnalyticsUtteranceFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name:     types.AnalyticsUtteranceFilterName("BotAliasId"),
+				Operator: types.AnalyticsFilterOperator("EQ"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21431,7 +30810,31 @@ func TestCheckResponseSnapshot_SearchAssociatedTranscripts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAssociatedTranscripts(context.Background(), &SearchAssociatedTranscriptsInput{})
+	got, err := svc.SearchAssociatedTranscripts(context.Background(), &SearchAssociatedTranscriptsInput{
+		BotId:               ptr.String("__BotId__"),
+		BotVersion:          ptr.String("__BotVersion__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		BotRecommendationId: ptr.String("__BotRecommendationId__"),
+		SearchOrder:         types.SearchOrder("Ascending"),
+		Filters: []types.AssociatedTranscriptFilter{
+			{
+				Name: types.AssociatedTranscriptFilterName("IntentId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.AssociatedTranscriptFilterName("IntentId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextIndex:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21457,7 +30860,12 @@ func TestCheckResponseSnapshot_StartBotAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBotAnalyzer(context.Background(), &StartBotAnalyzerInput{})
+	got, err := svc.StartBotAnalyzer(context.Background(), &StartBotAnalyzerInput{
+		BotId:         ptr.String("__BotId__"),
+		AnalysisScope: types.AnalysisScope("BotLocale"),
+		LocaleId:      ptr.String("__LocaleId__"),
+		BotVersion:    ptr.String("__BotVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21509,7 +30917,37 @@ func TestCheckResponseSnapshot_StartBotRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBotRecommendation(context.Background(), &StartBotRecommendationInput{})
+	got, err := svc.StartBotRecommendation(context.Background(), &StartBotRecommendationInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		TranscriptSourceSetting: &types.TranscriptSourceSetting{
+			S3BucketTranscriptSource: &types.S3BucketTranscriptSource{
+				S3BucketName: ptr.String("__S3BucketName__"),
+				PathFormat: &types.PathFormat{
+					ObjectPrefixes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				TranscriptFormat: types.TranscriptFormat("Lex"),
+				TranscriptFilter: &types.TranscriptFilter{
+					LexTranscriptFilter: &types.LexTranscriptFilter{
+						DateRangeFilter: &types.DateRangeFilter{
+							StartDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							EndDateTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		EncryptionSetting: &types.EncryptionSetting{
+			KmsKeyArn:                     ptr.String("__KmsKeyArn__"),
+			BotLocaleExportPassword:       ptr.String("__BotLocaleExportPassword__"),
+			AssociatedTranscriptsPassword: ptr.String("__AssociatedTranscriptsPassword__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21536,7 +30974,12 @@ func TestCheckResponseSnapshot_StartBotResourceGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBotResourceGeneration(context.Background(), &StartBotResourceGenerationInput{})
+	got, err := svc.StartBotResourceGeneration(context.Background(), &StartBotResourceGenerationInput{
+		GenerationInputPrompt: ptr.String("__GenerationInputPrompt__"),
+		BotId:                 ptr.String("__BotId__"),
+		BotVersion:            ptr.String("__BotVersion__"),
+		LocaleId:              ptr.String("__LocaleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21635,7 +31078,86 @@ func TestCheckResponseSnapshot_StartImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImport(context.Background(), &StartImportInput{})
+	got, err := svc.StartImport(context.Background(), &StartImportInput{
+		ImportId: ptr.String("__ImportId__"),
+		ResourceSpecification: &types.ImportResourceSpecification{
+			BotImportSpecification: &types.BotImportSpecification{
+				BotName: ptr.String("__BotName__"),
+				RoleArn: ptr.String("__RoleArn__"),
+				DataPrivacy: &types.DataPrivacy{
+					ChildDirected: true,
+				},
+				ErrorLogSettings: &types.ErrorLogSettings{
+					Enabled: ptr.Bool(true),
+				},
+				IdleSessionTTLInSeconds: ptr.Int32(1),
+				BotTags: map[string]string{
+					"key0": "__Value__",
+				},
+				TestBotAliasTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			BotLocaleImportSpecification: &types.BotLocaleImportSpecification{
+				BotId:                        ptr.String("__BotId__"),
+				BotVersion:                   ptr.String("__BotVersion__"),
+				LocaleId:                     ptr.String("__LocaleId__"),
+				NluIntentConfidenceThreshold: ptr.Float64(1.0),
+				VoiceSettings: &types.VoiceSettings{
+					Engine:  types.VoiceEngine("standard"),
+					VoiceId: ptr.String("__VoiceId__"),
+				},
+				SpeechRecognitionSettings: &types.SpeechRecognitionSettings{
+					SpeechModelPreference: types.SpeechModelPreference("Standard"),
+					SpeechModelConfig: &types.SpeechModelConfig{
+						DeepgramConfig: &types.DeepgramSpeechModelConfig{
+							ApiTokenSecretArn: ptr.String("__ApiTokenSecretArn__"),
+							ModelId:           ptr.String("__ModelId__"),
+						},
+					},
+				},
+				SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+				UnifiedSpeechSettings: &types.UnifiedSpeechSettings{
+					SpeechFoundationModel: &types.SpeechFoundationModel{
+						ModelArn: ptr.String("__ModelArn__"),
+						VoiceId:  ptr.String("__VoiceId__"),
+					},
+				},
+				AudioFillerSettings: &types.AudioFillerSettings{
+					Enabled:                             true,
+					AudioType:                           types.AudioFillerType("MELODY_CHIPPER_CHIME"),
+					StartDelayInMilliseconds:            ptr.Int32(1),
+					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
+					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+				},
+			},
+			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
+				BotId:      ptr.String("__BotId__"),
+				BotVersion: ptr.String("__BotVersion__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+			},
+			TestSetImportResourceSpecification: &types.TestSetImportResourceSpecification{
+				TestSetName: ptr.String("__TestSetName__"),
+				Description: ptr.String("__Description__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				StorageLocation: &types.TestSetStorageLocation{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3Path:       ptr.String("__S3Path__"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+				ImportInputLocation: &types.TestSetImportInputLocation{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3Path:       ptr.String("__S3Path__"),
+				},
+				Modality: types.TestSetModality("Text"),
+				TestSetTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MergeStrategy: types.MergeStrategy("Overwrite"),
+		FilePassword:  ptr.String("__FilePassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21667,7 +31189,18 @@ func TestCheckResponseSnapshot_StartTestExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTestExecution(context.Background(), &StartTestExecutionInput{})
+	got, err := svc.StartTestExecution(context.Background(), &StartTestExecutionInput{
+		TestSetId: ptr.String("__TestSetId__"),
+		Target: &types.TestExecutionTarget{
+			BotAliasTarget: &types.BotAliasTestExecutionTarget{
+				BotId:      ptr.String("__BotId__"),
+				BotAliasId: ptr.String("__BotAliasId__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+			},
+		},
+		ApiMode:               types.TestExecutionApiMode("Streaming"),
+		TestExecutionModality: types.TestExecutionModality("Text"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21713,7 +31246,31 @@ func TestCheckResponseSnapshot_StartTestSetGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTestSetGeneration(context.Background(), &StartTestSetGenerationInput{})
+	got, err := svc.StartTestSetGeneration(context.Background(), &StartTestSetGenerationInput{
+		TestSetName: ptr.String("__TestSetName__"),
+		Description: ptr.String("__Description__"),
+		StorageLocation: &types.TestSetStorageLocation{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3Path:       ptr.String("__S3Path__"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		GenerationDataSource: &types.TestSetGenerationDataSource{
+			ConversationLogsDataSource: &types.ConversationLogsDataSource{
+				BotId:      ptr.String("__BotId__"),
+				BotAliasId: ptr.String("__BotAliasId__"),
+				LocaleId:   ptr.String("__LocaleId__"),
+				Filter: &types.ConversationLogsDataSourceFilterBy{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					InputMode: types.ConversationLogsInputModeFilter("Speech"),
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		TestSetTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21738,7 +31295,10 @@ func TestCheckResponseSnapshot_StopBotAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBotAnalyzer(context.Background(), &StopBotAnalyzerInput{})
+	got, err := svc.StopBotAnalyzer(context.Background(), &StopBotAnalyzerInput{
+		BotId:                ptr.String("__BotId__"),
+		BotAnalyzerRequestId: ptr.String("__BotAnalyzerRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21763,7 +31323,12 @@ func TestCheckResponseSnapshot_StopBotRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBotRecommendation(context.Background(), &StopBotRecommendationInput{})
+	got, err := svc.StopBotRecommendation(context.Background(), &StopBotRecommendationInput{
+		BotId:               ptr.String("__BotId__"),
+		BotVersion:          ptr.String("__BotVersion__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		BotRecommendationId: ptr.String("__BotRecommendationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21782,7 +31347,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21801,7 +31371,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21852,7 +31428,36 @@ func TestCheckResponseSnapshot_UpdateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{})
+	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{
+		BotId:       ptr.String("__BotId__"),
+		BotName:     ptr.String("__BotName__"),
+		Description: ptr.String("__Description__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		DataPrivacy: &types.DataPrivacy{
+			ChildDirected: true,
+		},
+		IdleSessionTTLInSeconds: ptr.Int32(1),
+		BotType:                 types.BotType("Bot"),
+		BotMembers: []types.BotMember{
+			{
+				BotMemberId:        ptr.String("__BotMemberId__"),
+				BotMemberName:      ptr.String("__BotMemberName__"),
+				BotMemberAliasId:   ptr.String("__BotMemberAliasId__"),
+				BotMemberAliasName: ptr.String("__BotMemberAliasName__"),
+				BotMemberVersion:   ptr.String("__BotMemberVersion__"),
+			},
+			{
+				BotMemberId:        ptr.String("__BotMemberId__"),
+				BotMemberName:      ptr.String("__BotMemberName__"),
+				BotMemberAliasId:   ptr.String("__BotMemberAliasId__"),
+				BotMemberAliasName: ptr.String("__BotMemberAliasName__"),
+				BotMemberVersion:   ptr.String("__BotMemberVersion__"),
+			},
+		},
+		ErrorLogSettings: &types.ErrorLogSettings{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21942,7 +31547,75 @@ func TestCheckResponseSnapshot_UpdateBotAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBotAlias(context.Background(), &UpdateBotAliasInput{})
+	got, err := svc.UpdateBotAlias(context.Background(), &UpdateBotAliasInput{
+		BotAliasId:   ptr.String("__BotAliasId__"),
+		BotAliasName: ptr.String("__BotAliasName__"),
+		Description:  ptr.String("__Description__"),
+		BotVersion:   ptr.String("__BotVersion__"),
+		BotAliasLocaleSettings: map[string]types.BotAliasLocaleSettings{
+			"key0": {
+				Enabled: true,
+				CodeHookSpecification: &types.CodeHookSpecification{
+					LambdaCodeHook: &types.LambdaCodeHook{
+						LambdaARN:                ptr.String("__LambdaARN__"),
+						CodeHookInterfaceVersion: ptr.String("__CodeHookInterfaceVersion__"),
+					},
+				},
+			},
+		},
+		ConversationLogSettings: &types.ConversationLogSettings{
+			TextLogSettings: []types.TextLogSetting{
+				{
+					Enabled: true,
+					Destination: &types.TextLogDestination{
+						CloudWatch: &types.CloudWatchLogGroupLogDestination{
+							CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+							LogPrefix:             ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+				{
+					Enabled: true,
+					Destination: &types.TextLogDestination{
+						CloudWatch: &types.CloudWatchLogGroupLogDestination{
+							CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+							LogPrefix:             ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+			},
+			AudioLogSettings: []types.AudioLogSetting{
+				{
+					Enabled: true,
+					Destination: &types.AudioLogDestination{
+						S3Bucket: &types.S3BucketLogDestination{
+							KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+							S3BucketArn: ptr.String("__S3BucketArn__"),
+							LogPrefix:   ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+				{
+					Enabled: true,
+					Destination: &types.AudioLogDestination{
+						S3Bucket: &types.S3BucketLogDestination{
+							KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+							S3BucketArn: ptr.String("__S3BucketArn__"),
+							LogPrefix:   ptr.String("__LogPrefix__"),
+						},
+					},
+					SelectiveLoggingEnabled: ptr.Bool(true),
+				},
+			},
+		},
+		SentimentAnalysisSettings: &types.SentimentAnalysisSettings{
+			DetectSentiment: true,
+		},
+		BotId: ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22057,7 +31730,91 @@ func TestCheckResponseSnapshot_UpdateBotLocale(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBotLocale(context.Background(), &UpdateBotLocaleInput{})
+	got, err := svc.UpdateBotLocale(context.Background(), &UpdateBotLocaleInput{
+		BotId:                        ptr.String("__BotId__"),
+		BotVersion:                   ptr.String("__BotVersion__"),
+		LocaleId:                     ptr.String("__LocaleId__"),
+		Description:                  ptr.String("__Description__"),
+		NluIntentConfidenceThreshold: ptr.Float64(1.0),
+		VoiceSettings: &types.VoiceSettings{
+			Engine:  types.VoiceEngine("standard"),
+			VoiceId: ptr.String("__VoiceId__"),
+		},
+		UnifiedSpeechSettings: &types.UnifiedSpeechSettings{
+			SpeechFoundationModel: &types.SpeechFoundationModel{
+				ModelArn: ptr.String("__ModelArn__"),
+				VoiceId:  ptr.String("__VoiceId__"),
+			},
+		},
+		AudioFillerSettings: &types.AudioFillerSettings{
+			Enabled:                             true,
+			AudioType:                           types.AudioFillerType("MELODY_CHIPPER_CHIME"),
+			StartDelayInMilliseconds:            ptr.Int32(1),
+			MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
+			ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+		},
+		SpeechRecognitionSettings: &types.SpeechRecognitionSettings{
+			SpeechModelPreference: types.SpeechModelPreference("Standard"),
+			SpeechModelConfig: &types.SpeechModelConfig{
+				DeepgramConfig: &types.DeepgramSpeechModelConfig{
+					ApiTokenSecretArn: ptr.String("__ApiTokenSecretArn__"),
+					ModelId:           ptr.String("__ModelId__"),
+				},
+			},
+		},
+		GenerativeAISettings: &types.GenerativeAISettings{
+			RuntimeSettings: &types.RuntimeSettings{
+				SlotResolutionImprovement: &types.SlotResolutionImprovementSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+				NluImprovement: &types.NluImprovementSpecification{
+					Enabled:         true,
+					AssistedNluMode: types.AssistedNluMode("Primary"),
+					IntentDisambiguationSettings: &types.IntentDisambiguationSettings{
+						Enabled:                     true,
+						MaxDisambiguationIntents:    ptr.Int32(1),
+						CustomDisambiguationMessage: ptr.String("__CustomDisambiguationMessage__"),
+					},
+				},
+			},
+			BuildtimeSettings: &types.BuildtimeSettings{
+				DescriptiveBotBuilder: &types.DescriptiveBotBuilderSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+				SampleUtteranceGeneration: &types.SampleUtteranceGenerationSpecification{
+					Enabled: true,
+					BedrockModelSpecification: &types.BedrockModelSpecification{
+						ModelArn: ptr.String("__ModelArn__"),
+						Guardrail: &types.BedrockGuardrailConfiguration{
+							Identifier: ptr.String("__Identifier__"),
+							Version:    ptr.String("__Version__"),
+						},
+						TraceStatus:  types.BedrockTraceStatus("ENABLED"),
+						CustomPrompt: ptr.String("__CustomPrompt__"),
+					},
+				},
+			},
+		},
+		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22110,7 +31867,17 @@ func TestCheckResponseSnapshot_UpdateBotRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBotRecommendation(context.Background(), &UpdateBotRecommendationInput{})
+	got, err := svc.UpdateBotRecommendation(context.Background(), &UpdateBotRecommendationInput{
+		BotId:               ptr.String("__BotId__"),
+		BotVersion:          ptr.String("__BotVersion__"),
+		LocaleId:            ptr.String("__LocaleId__"),
+		BotRecommendationId: ptr.String("__BotRecommendationId__"),
+		EncryptionSetting: &types.EncryptionSetting{
+			KmsKeyArn:                     ptr.String("__KmsKeyArn__"),
+			BotLocaleExportPassword:       ptr.String("__BotLocaleExportPassword__"),
+			AssociatedTranscriptsPassword: ptr.String("__AssociatedTranscriptsPassword__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22154,7 +31921,10 @@ func TestCheckResponseSnapshot_UpdateExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExport(context.Background(), &UpdateExportInput{})
+	got, err := svc.UpdateExport(context.Background(), &UpdateExportInput{
+		ExportId:     ptr.String("__ExportId__"),
+		FilePassword: ptr.String("__FilePassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27820,7 +37590,5652 @@ func TestCheckResponseSnapshot_UpdateIntent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntent(context.Background(), &UpdateIntentInput{})
+	got, err := svc.UpdateIntent(context.Background(), &UpdateIntentInput{
+		IntentId:              ptr.String("__IntentId__"),
+		IntentName:            ptr.String("__IntentName__"),
+		IntentDisplayName:     ptr.String("__IntentDisplayName__"),
+		Description:           ptr.String("__Description__"),
+		ParentIntentSignature: ptr.String("__ParentIntentSignature__"),
+		SampleUtterances: []types.SampleUtterance{
+			{
+				Utterance: ptr.String("__Utterance__"),
+			},
+			{
+				Utterance: ptr.String("__Utterance__"),
+			},
+		},
+		DialogCodeHook: &types.DialogCodeHookSettings{
+			Enabled: true,
+		},
+		FulfillmentCodeHook: &types.FulfillmentCodeHookSettings{
+			Enabled: true,
+			PostFulfillmentStatusSpecification: &types.PostFulfillmentStatusSpecification{
+				SuccessResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				FailureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				TimeoutResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				SuccessNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				SuccessConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				FailureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				FailureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				TimeoutNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				TimeoutConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			FulfillmentUpdatesSpecification: &types.FulfillmentUpdatesSpecification{
+				Active: ptr.Bool(true),
+				StartResponse: &types.FulfillmentStartResponseSpecification{
+					DelayInSeconds: ptr.Int32(1),
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				UpdateResponse: &types.FulfillmentUpdateResponseSpecification{
+					FrequencyInSeconds: ptr.Int32(1),
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				TimeoutInSeconds: ptr.Int32(1),
+			},
+			Active: ptr.Bool(true),
+		},
+		SlotPriorities: []types.SlotPriority{
+			{
+				Priority: ptr.Int32(1),
+				SlotId:   ptr.String("__SlotId__"),
+			},
+			{
+				Priority: ptr.Int32(1),
+				SlotId:   ptr.String("__SlotId__"),
+			},
+		},
+		IntentConfirmationSetting: &types.IntentConfirmationSetting{
+			PromptSpecification: &types.PromptSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				MaxRetries:               ptr.Int32(1),
+				AllowInterrupt:           ptr.Bool(true),
+				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
+				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
+					"key0": {
+						AllowInterrupt: ptr.Bool(true),
+						AllowedInputTypes: &types.AllowedInputTypes{
+							AllowAudioInput: ptr.Bool(true),
+							AllowDTMFInput:  ptr.Bool(true),
+						},
+						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+							AudioSpecification: &types.AudioSpecification{
+								MaxLengthMs:  ptr.Int32(1),
+								EndTimeoutMs: ptr.Int32(1),
+							},
+							DtmfSpecification: &types.DTMFSpecification{
+								MaxLength:         ptr.Int32(1),
+								EndTimeoutMs:      ptr.Int32(1),
+								DeletionCharacter: ptr.String("__DeletionCharacter__"),
+								EndCharacter:      ptr.String("__EndCharacter__"),
+							},
+						},
+						TextInputSpecification: &types.TextInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			DeclinationResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			Active: ptr.Bool(true),
+			ConfirmationResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			ConfirmationNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			ConfirmationConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			DeclinationNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			DeclinationConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			FailureResponse: &types.ResponseSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				AllowInterrupt: ptr.Bool(true),
+			},
+			FailureNextStep: &types.DialogState{
+				DialogAction: &types.DialogAction{
+					Type:                types.DialogActionType("ElicitIntent"),
+					SlotToElicit:        ptr.String("__SlotToElicit__"),
+					SuppressNextMessage: ptr.Bool(true),
+				},
+				Intent: &types.IntentOverride{
+					Name: ptr.String("__Name__"),
+					Slots: map[string]types.SlotValueOverride{
+						"key0": {
+							Shape: types.SlotShape("Scalar"),
+							Value: &types.SlotValue{
+								InterpretedValue: ptr.String("__InterpretedValue__"),
+							},
+							Values: []types.SlotValueOverride{
+								{},
+								{},
+							},
+						},
+					},
+				},
+				SessionAttributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			FailureConditional: &types.ConditionalSpecification{
+				Active: ptr.Bool(true),
+				ConditionalBranches: []types.ConditionalBranch{
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Condition: &types.Condition{
+							ExpressionString: ptr.String("__ExpressionString__"),
+						},
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				DefaultBranch: &types.DefaultConditionalBranch{
+					NextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					Response: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+				},
+			},
+			CodeHook: &types.DialogCodeHookInvocationSetting{
+				EnableCodeHookInvocation: ptr.Bool(true),
+				Active:                   ptr.Bool(true),
+				InvocationLabel:          ptr.String("__InvocationLabel__"),
+				PostCodeHookSpecification: &types.PostDialogCodeHookInvocationSpecification{
+					SuccessResponse: &types.ResponseSpecification{
+						MessageGroups: []types.MessageGroup{
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+							{
+								Message: &types.Message{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								Variations: []types.Message{
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						AllowInterrupt: ptr.Bool(true),
+					},
+					SuccessNextStep: &types.DialogState{
+						DialogAction: &types.DialogAction{
+							Type:                types.DialogActionType("ElicitIntent"),
+							SlotToElicit:        ptr.String("__SlotToElicit__"),
+							SuppressNextMessage: ptr.Bool(true),
+						},
+						Intent: &types.IntentOverride{
+							Name: ptr.String("__Name__"),
+							Slots: map[string]types.SlotValueOverride{
+								"key0": {
+									Shape: types.SlotShape("Scalar"),
+									Value: &types.SlotValue{
+										InterpretedValue: ptr.String("__InterpretedValue__"),
+									},
+									Values: []types.SlotValueOverride{
+										{},
+										{},
+									},
+								},
+							},
+						},
+						SessionAttributes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SuccessConditional: &types.ConditionalSpecification{
+						Active: ptr.Bool(true),
+						ConditionalBranches: []types.ConditionalBranch{
+							{
+								Name: ptr.String("__Name__"),
+								Condition: &types.Condition{
+									ExpressionString: ptr.String("__ExpressionString__"),
+								},
+								NextStep: &types.DialogState{
+									DialogAction: &types.DialogAction{
+										Type:                types.DialogActionType("ElicitIntent"),
+										SlotToElicit:        ptr.String("__SlotToElicit__"),
+										SuppressNextMessage: ptr.Bool(true),
+									},
+									Intent: &types.IntentOverride{
+										Name: ptr.String("__Name__"),
+										Slots: map[string]types.SlotValueOverride{
+											"key0": {
+												Shape: types.SlotShape("Scalar"),
+												Value: &types.SlotValue{
+													InterpretedValue: ptr.String("__InterpretedValue__"),
+												},
+												Values: []types.SlotValueOverride{
+													{},
+													{},
+												},
+											},
+										},
+									},
+									SessionAttributes: map[string]string{
+										"key0": "__Value__",
+									},
+								},
+								Response: &types.ResponseSpecification{
+									MessageGroups: []types.MessageGroup{
+										{
+											Message: &types.Message{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{},
+														{},
+													},
+												},
+											},
+											Variations: []types.Message{
+												{
+													PlainTextMessage:  nil,
+													CustomPayload:     nil,
+													SsmlMessage:       nil,
+													ImageResponseCard: nil,
+												},
+												{},
+											},
+										},
+										{},
+									},
+									AllowInterrupt: ptr.Bool(true),
+								},
+							},
+							{},
+						},
+						DefaultBranch: nil,
+					},
+					FailureResponse:    nil,
+					FailureNextStep:    nil,
+					FailureConditional: nil,
+					TimeoutResponse:    nil,
+					TimeoutNextStep:    nil,
+					TimeoutConditional: nil,
+				},
+			},
+			ElicitationCodeHook: nil,
+		},
+		IntentClosingSetting: nil,
+		InputContexts: []types.InputContext{
+			{},
+			{},
+		},
+		OutputContexts: []types.OutputContext{
+			{},
+			{},
+		},
+		KendraConfiguration:           nil,
+		BotId:                         ptr.String("__BotId__"),
+		BotVersion:                    ptr.String("__BotVersion__"),
+		LocaleId:                      ptr.String("__LocaleId__"),
+		InitialResponseSetting:        nil,
+		QnAIntentConfiguration:        nil,
+		QInConnectIntentConfiguration: nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27842,7 +43257,11 @@ func TestCheckResponseSnapshot_UpdateResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourcePolicy(context.Background(), &UpdateResourcePolicyInput{})
+	got, err := svc.UpdateResourcePolicy(context.Background(), &UpdateResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		Policy:             ptr.String("__Policy__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30459,7 +45878,2603 @@ func TestCheckResponseSnapshot_UpdateSlot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSlot(context.Background(), &UpdateSlotInput{})
+	got, err := svc.UpdateSlot(context.Background(), &UpdateSlotInput{
+		SlotId:      ptr.String("__SlotId__"),
+		SlotName:    ptr.String("__SlotName__"),
+		Description: ptr.String("__Description__"),
+		SlotTypeId:  ptr.String("__SlotTypeId__"),
+		ValueElicitationSetting: &types.SlotValueElicitationSetting{
+			DefaultValueSpecification: &types.SlotDefaultValueSpecification{
+				DefaultValueList: []types.SlotDefaultValue{
+					{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+					{
+						DefaultValue: ptr.String("__DefaultValue__"),
+					},
+				},
+			},
+			SlotConstraint: types.SlotConstraint("Required"),
+			PromptSpecification: &types.PromptSpecification{
+				MessageGroups: []types.MessageGroup{
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+					{
+						Message: &types.Message{
+							PlainTextMessage: &types.PlainTextMessage{
+								Value: ptr.String("__Value__"),
+							},
+							CustomPayload: &types.CustomPayload{
+								Value: ptr.String("__Value__"),
+							},
+							SsmlMessage: &types.SSMLMessage{
+								Value: ptr.String("__Value__"),
+							},
+							ImageResponseCard: &types.ImageResponseCard{
+								Title:    ptr.String("__Title__"),
+								Subtitle: ptr.String("__Subtitle__"),
+								ImageUrl: ptr.String("__ImageUrl__"),
+								Buttons: []types.Button{
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Text:  ptr.String("__Text__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						Variations: []types.Message{
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				MaxRetries:               ptr.Int32(1),
+				AllowInterrupt:           ptr.Bool(true),
+				MessageSelectionStrategy: types.MessageSelectionStrategy("Random"),
+				PromptAttemptsSpecification: map[string]types.PromptAttemptSpecification{
+					"key0": {
+						AllowInterrupt: ptr.Bool(true),
+						AllowedInputTypes: &types.AllowedInputTypes{
+							AllowAudioInput: ptr.Bool(true),
+							AllowDTMFInput:  ptr.Bool(true),
+						},
+						AudioAndDTMFInputSpecification: &types.AudioAndDTMFInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+							AudioSpecification: &types.AudioSpecification{
+								MaxLengthMs:  ptr.Int32(1),
+								EndTimeoutMs: ptr.Int32(1),
+							},
+							DtmfSpecification: &types.DTMFSpecification{
+								MaxLength:         ptr.Int32(1),
+								EndTimeoutMs:      ptr.Int32(1),
+								DeletionCharacter: ptr.String("__DeletionCharacter__"),
+								EndCharacter:      ptr.String("__EndCharacter__"),
+							},
+						},
+						TextInputSpecification: &types.TextInputSpecification{
+							StartTimeoutMs: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			SampleUtterances: []types.SampleUtterance{
+				{
+					Utterance: ptr.String("__Utterance__"),
+				},
+				{
+					Utterance: ptr.String("__Utterance__"),
+				},
+			},
+			WaitAndContinueSpecification: &types.WaitAndContinueSpecification{
+				WaitingResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				ContinueResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				StillWaitingResponse: &types.StillWaitingResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					FrequencyInSeconds: ptr.Int32(1),
+					TimeoutInSeconds:   ptr.Int32(1),
+					AllowInterrupt:     ptr.Bool(true),
+				},
+				Active: ptr.Bool(true),
+			},
+			SlotCaptureSetting: &types.SlotCaptureSetting{
+				CaptureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				CaptureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CaptureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				FailureResponse: &types.ResponseSpecification{
+					MessageGroups: []types.MessageGroup{
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Message: &types.Message{
+								PlainTextMessage: &types.PlainTextMessage{
+									Value: ptr.String("__Value__"),
+								},
+								CustomPayload: &types.CustomPayload{
+									Value: ptr.String("__Value__"),
+								},
+								SsmlMessage: &types.SSMLMessage{
+									Value: ptr.String("__Value__"),
+								},
+								ImageResponseCard: &types.ImageResponseCard{
+									Title:    ptr.String("__Title__"),
+									Subtitle: ptr.String("__Subtitle__"),
+									ImageUrl: ptr.String("__ImageUrl__"),
+									Buttons: []types.Button{
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Text:  ptr.String("__Text__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+							Variations: []types.Message{
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+								{
+									PlainTextMessage: &types.PlainTextMessage{
+										Value: ptr.String("__Value__"),
+									},
+									CustomPayload: &types.CustomPayload{
+										Value: ptr.String("__Value__"),
+									},
+									SsmlMessage: &types.SSMLMessage{
+										Value: ptr.String("__Value__"),
+									},
+									ImageResponseCard: &types.ImageResponseCard{
+										Title:    ptr.String("__Title__"),
+										Subtitle: ptr.String("__Subtitle__"),
+										ImageUrl: ptr.String("__ImageUrl__"),
+										Buttons: []types.Button{
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Text:  ptr.String("__Text__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					AllowInterrupt: ptr.Bool(true),
+				},
+				FailureNextStep: &types.DialogState{
+					DialogAction: &types.DialogAction{
+						Type:                types.DialogActionType("ElicitIntent"),
+						SlotToElicit:        ptr.String("__SlotToElicit__"),
+						SuppressNextMessage: ptr.Bool(true),
+					},
+					Intent: &types.IntentOverride{
+						Name: ptr.String("__Name__"),
+						Slots: map[string]types.SlotValueOverride{
+							"key0": {
+								Shape: types.SlotShape("Scalar"),
+								Value: &types.SlotValue{
+									InterpretedValue: ptr.String("__InterpretedValue__"),
+								},
+								Values: []types.SlotValueOverride{
+									{},
+									{},
+								},
+							},
+						},
+					},
+					SessionAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				FailureConditional: &types.ConditionalSpecification{
+					Active: ptr.Bool(true),
+					ConditionalBranches: []types.ConditionalBranch{
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Condition: &types.Condition{
+								ExpressionString: ptr.String("__ExpressionString__"),
+							},
+							NextStep: &types.DialogState{
+								DialogAction: &types.DialogAction{
+									Type:                types.DialogActionType("ElicitIntent"),
+									SlotToElicit:        ptr.String("__SlotToElicit__"),
+									SuppressNextMessage: ptr.Bool(true),
+								},
+								Intent: &types.IntentOverride{
+									Name: ptr.String("__Name__"),
+									Slots: map[string]types.SlotValueOverride{
+										"key0": {
+											Shape: types.SlotShape("Scalar"),
+											Value: &types.SlotValue{
+												InterpretedValue: ptr.String("__InterpretedValue__"),
+											},
+											Values: []types.SlotValueOverride{
+												{},
+												{},
+											},
+										},
+									},
+								},
+								SessionAttributes: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+							Response: &types.ResponseSpecification{
+								MessageGroups: []types.MessageGroup{
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+									{
+										Message: &types.Message{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										Variations: []types.Message{
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+											{
+												PlainTextMessage: &types.PlainTextMessage{
+													Value: ptr.String("__Value__"),
+												},
+												CustomPayload: &types.CustomPayload{
+													Value: ptr.String("__Value__"),
+												},
+												SsmlMessage: &types.SSMLMessage{
+													Value: ptr.String("__Value__"),
+												},
+												ImageResponseCard: &types.ImageResponseCard{
+													Title:    ptr.String("__Title__"),
+													Subtitle: ptr.String("__Subtitle__"),
+													ImageUrl: ptr.String("__ImageUrl__"),
+													Buttons: []types.Button{
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+														{
+															Text:  ptr.String("__Text__"),
+															Value: ptr.String("__Value__"),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								AllowInterrupt: ptr.Bool(true),
+							},
+						},
+					},
+					DefaultBranch: &types.DefaultConditionalBranch{
+						NextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						Response: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+					},
+				},
+				CodeHook: &types.DialogCodeHookInvocationSetting{
+					EnableCodeHookInvocation: ptr.Bool(true),
+					Active:                   ptr.Bool(true),
+					InvocationLabel:          ptr.String("__InvocationLabel__"),
+					PostCodeHookSpecification: &types.PostDialogCodeHookInvocationSpecification{
+						SuccessResponse: &types.ResponseSpecification{
+							MessageGroups: []types.MessageGroup{
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+								{
+									Message: &types.Message{
+										PlainTextMessage: &types.PlainTextMessage{
+											Value: ptr.String("__Value__"),
+										},
+										CustomPayload: &types.CustomPayload{
+											Value: ptr.String("__Value__"),
+										},
+										SsmlMessage: &types.SSMLMessage{
+											Value: ptr.String("__Value__"),
+										},
+										ImageResponseCard: &types.ImageResponseCard{
+											Title:    ptr.String("__Title__"),
+											Subtitle: ptr.String("__Subtitle__"),
+											ImageUrl: ptr.String("__ImageUrl__"),
+											Buttons: []types.Button{
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Text:  ptr.String("__Text__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Variations: []types.Message{
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+										{
+											PlainTextMessage: &types.PlainTextMessage{
+												Value: ptr.String("__Value__"),
+											},
+											CustomPayload: &types.CustomPayload{
+												Value: ptr.String("__Value__"),
+											},
+											SsmlMessage: &types.SSMLMessage{
+												Value: ptr.String("__Value__"),
+											},
+											ImageResponseCard: &types.ImageResponseCard{
+												Title:    ptr.String("__Title__"),
+												Subtitle: ptr.String("__Subtitle__"),
+												ImageUrl: ptr.String("__ImageUrl__"),
+												Buttons: []types.Button{
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+													{
+														Text:  ptr.String("__Text__"),
+														Value: ptr.String("__Value__"),
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							AllowInterrupt: ptr.Bool(true),
+						},
+						SuccessNextStep: &types.DialogState{
+							DialogAction: &types.DialogAction{
+								Type:                types.DialogActionType("ElicitIntent"),
+								SlotToElicit:        ptr.String("__SlotToElicit__"),
+								SuppressNextMessage: ptr.Bool(true),
+							},
+							Intent: &types.IntentOverride{
+								Name: ptr.String("__Name__"),
+								Slots: map[string]types.SlotValueOverride{
+									"key0": {
+										Shape: types.SlotShape("Scalar"),
+										Value: &types.SlotValue{
+											InterpretedValue: ptr.String("__InterpretedValue__"),
+										},
+										Values: []types.SlotValueOverride{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							SessionAttributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						SuccessConditional: &types.ConditionalSpecification{
+							Active: ptr.Bool(true),
+							ConditionalBranches: []types.ConditionalBranch{
+								{
+									Name: ptr.String("__Name__"),
+									Condition: &types.Condition{
+										ExpressionString: ptr.String("__ExpressionString__"),
+									},
+									NextStep: &types.DialogState{
+										DialogAction: &types.DialogAction{
+											Type:                types.DialogActionType("ElicitIntent"),
+											SlotToElicit:        ptr.String("__SlotToElicit__"),
+											SuppressNextMessage: ptr.Bool(true),
+										},
+										Intent: &types.IntentOverride{
+											Name: ptr.String("__Name__"),
+											Slots: map[string]types.SlotValueOverride{
+												"key0": {
+													Shape: types.SlotShape("Scalar"),
+													Value: nil,
+													Values: []types.SlotValueOverride{
+														{},
+														{},
+													},
+												},
+											},
+										},
+										SessionAttributes: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+									Response: &types.ResponseSpecification{
+										MessageGroups: []types.MessageGroup{
+											{
+												Message: nil,
+												Variations: []types.Message{
+													{},
+													{},
+												},
+											},
+											{},
+										},
+										AllowInterrupt: ptr.Bool(true),
+									},
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									Condition: nil,
+									NextStep:  nil,
+									Response:  nil,
+								},
+							},
+							DefaultBranch: nil,
+						},
+						FailureResponse:    nil,
+						FailureNextStep:    nil,
+						FailureConditional: nil,
+						TimeoutResponse:    nil,
+						TimeoutNextStep:    nil,
+						TimeoutConditional: nil,
+					},
+				},
+				ElicitationCodeHook: nil,
+			},
+			SlotResolutionSetting: nil,
+		},
+		ObfuscationSetting:    nil,
+		BotId:                 ptr.String("__BotId__"),
+		BotVersion:            ptr.String("__BotVersion__"),
+		LocaleId:              ptr.String("__LocaleId__"),
+		IntentId:              ptr.String("__IntentId__"),
+		MultipleValuesSetting: nil,
+		SubSlotSetting:        nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30546,7 +48561,73 @@ func TestCheckResponseSnapshot_UpdateSlotType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSlotType(context.Background(), &UpdateSlotTypeInput{})
+	got, err := svc.UpdateSlotType(context.Background(), &UpdateSlotTypeInput{
+		SlotTypeId:   ptr.String("__SlotTypeId__"),
+		SlotTypeName: ptr.String("__SlotTypeName__"),
+		Description:  ptr.String("__Description__"),
+		SlotTypeValues: []types.SlotTypeValue{
+			{
+				SampleValue: &types.SampleValue{
+					Value: ptr.String("__Value__"),
+				},
+				Synonyms: []types.SampleValue{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				SampleValue: &types.SampleValue{
+					Value: ptr.String("__Value__"),
+				},
+				Synonyms: []types.SampleValue{
+					{
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ValueSelectionSetting: &types.SlotValueSelectionSetting{
+			ResolutionStrategy: types.SlotValueResolutionStrategy("OriginalValue"),
+			RegexFilter: &types.SlotValueRegexFilter{
+				Pattern: ptr.String("__Pattern__"),
+			},
+			AdvancedRecognitionSetting: &types.AdvancedRecognitionSetting{
+				AudioRecognitionStrategy: types.AudioRecognitionStrategy("UseSlotValuesAsCustomVocabulary"),
+			},
+		},
+		ParentSlotTypeSignature: ptr.String("__ParentSlotTypeSignature__"),
+		BotId:                   ptr.String("__BotId__"),
+		BotVersion:              ptr.String("__BotVersion__"),
+		LocaleId:                ptr.String("__LocaleId__"),
+		ExternalSourceSetting: &types.ExternalSourceSetting{
+			GrammarSlotTypeSetting: &types.GrammarSlotTypeSetting{
+				Source: &types.GrammarSlotTypeSource{
+					S3BucketName: ptr.String("__S3BucketName__"),
+					S3ObjectKey:  ptr.String("__S3ObjectKey__"),
+					KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				},
+			},
+		},
+		CompositeSlotTypeSetting: &types.CompositeSlotTypeSetting{
+			SubSlots: []types.SubSlotTypeComposition{
+				{
+					Name:       ptr.String("__Name__"),
+					SlotTypeId: ptr.String("__SlotTypeId__"),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					SlotTypeId: ptr.String("__SlotTypeId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30580,7 +48661,11 @@ func TestCheckResponseSnapshot_UpdateTestSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTestSet(context.Background(), &UpdateTestSetInput{})
+	got, err := svc.UpdateTestSet(context.Background(), &UpdateTestSetInput{
+		TestSetId:   ptr.String("__TestSetId__"),
+		TestSetName: ptr.String("__TestSetName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -30601,7 +48686,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{})
+	_, opErr := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30626,7 +48715,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30651,7 +48756,11 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{})
+	_, opErr := svc.BuildBotLocale(context.Background(), &BuildBotLocaleInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30676,7 +48785,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30701,7 +48826,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30727,7 +48868,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -30752,7 +48909,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{})
+	_, opErr := svc.BatchCreateCustomVocabularyItem(context.Background(), &BatchCreateCustomVocabularyItemInput{
+		BotId:      ptr.String("__BotId__"),
+		BotVersion: ptr.String("__BotVersion__"),
+		LocaleId:   ptr.String("__LocaleId__"),
+		CustomVocabularyItemList: []types.NewCustomVocabularyItem{
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+			{
+				Phrase:    ptr.String("__Phrase__"),
+				Weight:    ptr.Int32(1),
+				DisplayAs: ptr.String("__DisplayAs__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

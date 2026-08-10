@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributes":{"key0":"__Value__"},"description":"__Description__","errorReason":"__ErrorReason__","packageName":"__PackageName__","packageVersionArn":"__PackageVersionArn__","status":"DRAFT","versionName":"__VersionName__"}

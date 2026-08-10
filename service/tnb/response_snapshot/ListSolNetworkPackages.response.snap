@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"networkPackages":[{"arn":"__Arn__","id":"__Id__","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsdDesigner":"__NsdDesigner__","nsdId":"__NsdId__","nsdInvariantId":"__NsdInvariantId__","nsdName":"__NsdName__","nsdOnboardingState":"CREATED","nsdOperationalState":"ENABLED","nsdUsageState":"IN_USE","nsdVersion":"__NsdVersion__","vnfPkgIds":["__Member__","__Member__"]},{"arn":"__Arn__","id":"__Id__","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsdDesigner":"__NsdDesigner__","nsdId":"__NsdId__","nsdInvariantId":"__NsdInvariantId__","nsdName":"__NsdName__","nsdOnboardingState":"CREATED","nsdOperationalState":"ENABLED","nsdUsageState":"IN_USE","nsdVersion":"__NsdVersion__","vnfPkgIds":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

@@ -220,7 +220,12 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	got, err := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +246,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -266,7 +276,12 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -291,7 +306,12 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -316,7 +336,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -341,7 +366,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{})
+	_, opErr := svc.ListRealtimeContactAnalysisSegments(context.Background(), &ListRealtimeContactAnalysisSegmentsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		ContactId:  ptr.String("__ContactId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

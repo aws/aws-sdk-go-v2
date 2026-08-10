@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"sourceApiAssociation":{"associationArn":"__AssociationArn__","associationId":"__AssociationId__","description":"__Description__","lastSuccessfulMergeDate":946684800,"mergedApiArn":"__MergedApiArn__","mergedApiId":"__MergedApiId__","sourceApiArn":"__SourceApiArn__","sourceApiAssociationConfig":{"mergeType":"MANUAL_MERGE"},"sourceApiAssociationStatus":"MERGE_SCHEDULED","sourceApiAssociationStatusDetail":"__SourceApiAssociationStatusDetail__","sourceApiId":"__SourceApiId__"}}

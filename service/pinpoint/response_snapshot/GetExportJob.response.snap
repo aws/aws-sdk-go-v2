@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","CompletedPieces":1,"CompletionDate":"__CompletionDate__","CreationDate":"__CreationDate__","Definition":{"RoleArn":"__RoleArn__","S3UrlPrefix":"__S3UrlPrefix__","SegmentId":"__SegmentId__","SegmentVersion":1},"FailedPieces":1,"Failures":["__Member__","__Member__"],"Id":"__Id__","JobStatus":"CREATED","TotalFailures":1,"TotalPieces":1,"TotalProcessed":1,"Type":"__Type__"}

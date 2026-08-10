@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.ListUsers
+
+{"NextToken":"__NextToken__","Users":[{"UserId":"__UserId__","UserStatus":"ACTIVE"},{"UserId":"__UserId__","UserStatus":"ACTIVE"}]}

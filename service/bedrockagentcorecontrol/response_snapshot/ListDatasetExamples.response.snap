@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datasetArn":"__DatasetArn__","datasetId":"__DatasetId__","datasetVersion":"__DatasetVersion__","examples":["__Document__","__Document__"],"nextToken":"__NextToken__"}

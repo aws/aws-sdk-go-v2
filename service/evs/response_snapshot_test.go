@@ -143,7 +143,12 @@ func TestCheckResponseSnapshot_AssociateEipToVlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{})
+	got, err := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VlanName:      ptr.String("__VlanName__"),
+		AllocationId:  ptr.String("__AllocationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +200,16 @@ func TestCheckResponseSnapshot_CreateEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{})
+	got, err := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ConnectorId:     ptr.String("__ConnectorId__"),
+		EntitlementType: types.EntitlementType("WINDOWS_SERVER"),
+		VmIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +300,102 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		KmsKeyId:        ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServiceAccessSecurityGroups: &types.ServiceAccessSecurityGroups{
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		VpcId:                 ptr.String("__VpcId__"),
+		ServiceAccessSubnetId: ptr.String("__ServiceAccessSubnetId__"),
+		VcfVersion:            types.VcfVersion("VCF-5.2.1"),
+		TermsAccepted:         ptr.Bool(true),
+		InitialVlans: &types.InitialVlans{
+			VmkManagement: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			VmManagement: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			VMotion: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			VSan: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			VTep: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			EdgeVTep: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			NsxUplink: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			Hcx: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			ExpansionVlan1: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			ExpansionVlan2: &types.InitialVlanInfo{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			IsHcxPublic:     true,
+			HcxNetworkAclId: ptr.String("__HcxNetworkAclId__"),
+		},
+		ConnectivityInfo: &types.ConnectivityInfo{
+			PrivateRouteServerPeerings: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		LicenseInfo: []types.LicenseInfo{
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+			{
+				SolutionKey: ptr.String("__SolutionKey__"),
+				VsanKey:     ptr.String("__VsanKey__"),
+			},
+		},
+		Hosts: []types.HostInfoForCreate{
+			{
+				HostName:         ptr.String("__HostName__"),
+				KeyName:          ptr.String("__KeyName__"),
+				InstanceType:     types.InstanceType("i4i.metal"),
+				PlacementGroupId: ptr.String("__PlacementGroupId__"),
+				DedicatedHostId:  ptr.String("__DedicatedHostId__"),
+			},
+			{
+				HostName:         ptr.String("__HostName__"),
+				KeyName:          ptr.String("__KeyName__"),
+				InstanceType:     types.InstanceType("i4i.metal"),
+				PlacementGroupId: ptr.String("__PlacementGroupId__"),
+				DedicatedHostId:  ptr.String("__DedicatedHostId__"),
+			},
+		},
+		VcfHostnames: &types.VcfHostnames{
+			VCenter:      ptr.String("__VCenter__"),
+			Nsx:          ptr.String("__Nsx__"),
+			NsxManager1:  ptr.String("__NsxManager1__"),
+			NsxManager2:  ptr.String("__NsxManager2__"),
+			NsxManager3:  ptr.String("__NsxManager3__"),
+			NsxEdge1:     ptr.String("__NsxEdge1__"),
+			NsxEdge2:     ptr.String("__NsxEdge2__"),
+			SddcManager:  ptr.String("__SddcManager__"),
+			CloudBuilder: ptr.String("__CloudBuilder__"),
+		},
+		SiteId: ptr.String("__SiteId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +441,13 @@ func TestCheckResponseSnapshot_CreateEnvironmentConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentConnector(context.Background(), &CreateEnvironmentConnectorInput{})
+	got, err := svc.CreateEnvironmentConnector(context.Background(), &CreateEnvironmentConnectorInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		Type:             types.ConnectorType("OPERATIONS_MANAGER"),
+		ApplianceFqdn:    ptr.String("__ApplianceFqdn__"),
+		SecretIdentifier: ptr.String("__SecretIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +498,18 @@ func TestCheckResponseSnapshot_CreateEnvironmentHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentHost(context.Background(), &CreateEnvironmentHostInput{})
+	got, err := svc.CreateEnvironmentHost(context.Background(), &CreateEnvironmentHostInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Host: &types.HostInfoForCreate{
+			HostName:         ptr.String("__HostName__"),
+			KeyName:          ptr.String("__KeyName__"),
+			InstanceType:     types.InstanceType("i4i.metal"),
+			PlacementGroupId: ptr.String("__PlacementGroupId__"),
+			DedicatedHostId:  ptr.String("__DedicatedHostId__"),
+		},
+		EsxVersion: ptr.String("__EsxVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +561,16 @@ func TestCheckResponseSnapshot_DeleteEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEntitlement(context.Background(), &DeleteEntitlementInput{})
+	got, err := svc.DeleteEntitlement(context.Background(), &DeleteEntitlementInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ConnectorId:     ptr.String("__ConnectorId__"),
+		EntitlementType: types.EntitlementType("WINDOWS_SERVER"),
+		VmIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +661,10 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +720,11 @@ func TestCheckResponseSnapshot_DeleteEnvironmentConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentConnector(context.Background(), &DeleteEnvironmentConnectorInput{})
+	got, err := svc.DeleteEnvironmentConnector(context.Background(), &DeleteEnvironmentConnectorInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ConnectorId:   ptr.String("__ConnectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +775,11 @@ func TestCheckResponseSnapshot_DeleteEnvironmentHost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentHost(context.Background(), &DeleteEnvironmentHostInput{})
+	got, err := svc.DeleteEnvironmentHost(context.Background(), &DeleteEnvironmentHostInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		HostName:      ptr.String("__HostName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +824,12 @@ func TestCheckResponseSnapshot_DisassociateEipFromVlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateEipFromVlan(context.Background(), &DisassociateEipFromVlanInput{})
+	got, err := svc.DisassociateEipFromVlan(context.Background(), &DisassociateEipFromVlanInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VlanName:      ptr.String("__VlanName__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -700,7 +851,10 @@ func TestCheckResponseSnapshot_GetDepotUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDepotUrl(context.Background(), &GetDepotUrlInput{})
+	got, err := svc.GetDepotUrl(context.Background(), &GetDepotUrlInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Rotate:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +945,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1078,11 @@ func TestCheckResponseSnapshot_ListEnvironmentConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentConnectors(context.Background(), &ListEnvironmentConnectorsInput{})
+	got, err := svc.ListEnvironmentConnectors(context.Background(), &ListEnvironmentConnectorsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -987,7 +1147,11 @@ func TestCheckResponseSnapshot_ListEnvironmentHosts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentHosts(context.Background(), &ListEnvironmentHostsInput{})
+	got, err := svc.ListEnvironmentHosts(context.Background(), &ListEnvironmentHostsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1060,7 +1224,11 @@ func TestCheckResponseSnapshot_ListEnvironmentVlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentVlans(context.Background(), &ListEnvironmentVlansInput{})
+	got, err := svc.ListEnvironmentVlans(context.Background(), &ListEnvironmentVlansInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1103,7 +1271,14 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		State: []types.EnvironmentState{
+			types.EnvironmentState("CREATING"),
+			types.EnvironmentState("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1301,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1179,7 +1356,13 @@ func TestCheckResponseSnapshot_ListVmEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVmEntitlements(context.Background(), &ListVmEntitlementsInput{})
+	got, err := svc.ListVmEntitlements(context.Background(), &ListVmEntitlementsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		EnvironmentId:   ptr.String("__EnvironmentId__"),
+		ConnectorId:     ptr.String("__ConnectorId__"),
+		EntitlementType: types.EntitlementType("WINDOWS_SERVER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1198,7 +1381,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1217,7 +1405,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1263,7 +1457,13 @@ func TestCheckResponseSnapshot_UpdateEnvironmentConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentConnector(context.Background(), &UpdateEnvironmentConnectorInput{})
+	got, err := svc.UpdateEnvironmentConnector(context.Background(), &UpdateEnvironmentConnectorInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		ConnectorId:      ptr.String("__ConnectorId__"),
+		ApplianceFqdn:    ptr.String("__ApplianceFqdn__"),
+		SecretIdentifier: ptr.String("__SecretIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1311,7 +1511,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{})
+	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VlanName:      ptr.String("__VlanName__"),
+		AllocationId:  ptr.String("__AllocationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1336,7 +1541,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1361,7 +1571,12 @@ func TestCheckResponseSnapshot_Error_TagPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1387,7 +1602,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{})
+	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VlanName:      ptr.String("__VlanName__"),
+		AllocationId:  ptr.String("__AllocationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1412,7 +1632,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1448,7 +1673,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{})
+	_, opErr := svc.AssociateEipToVlan(context.Background(), &AssociateEipToVlanInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VlanName:      ptr.String("__VlanName__"),
+		AllocationId:  ptr.String("__AllocationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_AssociateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	got, err := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +173,22 @@ func TestCheckResponseSnapshot_BatchAssociateCodeSecurityScanConfiguration(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{})
+	got, err := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{
+		AssociateConfigurationRequests: []types.AssociateConfigurationRequest{
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +240,22 @@ func TestCheckResponseSnapshot_BatchDisassociateCodeSecurityScanConfiguration(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateCodeSecurityScanConfiguration(context.Background(), &BatchDisassociateCodeSecurityScanConfigurationInput{})
+	got, err := svc.BatchDisassociateCodeSecurityScanConfiguration(context.Background(), &BatchDisassociateCodeSecurityScanConfigurationInput{
+		DisassociateConfigurationRequests: []types.DisassociateConfigurationRequest{
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +375,12 @@ func TestCheckResponseSnapshot_BatchGetAccountStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAccountStatus(context.Background(), &BatchGetAccountStatusInput{})
+	got, err := svc.BatchGetAccountStatus(context.Background(), &BatchGetAccountStatusInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +464,12 @@ func TestCheckResponseSnapshot_BatchGetCodeSnippet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCodeSnippet(context.Background(), &BatchGetCodeSnippetInput{})
+	got, err := svc.BatchGetCodeSnippet(context.Background(), &BatchGetCodeSnippetInput{
+		FindingArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +587,12 @@ func TestCheckResponseSnapshot_BatchGetFindingDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFindingDetails(context.Background(), &BatchGetFindingDetailsInput{})
+	got, err := svc.BatchGetFindingDetails(context.Background(), &BatchGetFindingDetailsInput{
+		FindingArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +664,12 @@ func TestCheckResponseSnapshot_BatchGetFreeTrialInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFreeTrialInfo(context.Background(), &BatchGetFreeTrialInfoInput{})
+	got, err := svc.BatchGetFreeTrialInfo(context.Background(), &BatchGetFreeTrialInfoInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +713,12 @@ func TestCheckResponseSnapshot_BatchGetMemberEc2DeepInspectionStatus(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetMemberEc2DeepInspectionStatus(context.Background(), &BatchGetMemberEc2DeepInspectionStatusInput{})
+	got, err := svc.BatchGetMemberEc2DeepInspectionStatus(context.Background(), &BatchGetMemberEc2DeepInspectionStatusInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -705,7 +762,18 @@ func TestCheckResponseSnapshot_BatchUpdateMemberEc2DeepInspectionStatus(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateMemberEc2DeepInspectionStatus(context.Background(), &BatchUpdateMemberEc2DeepInspectionStatusInput{})
+	got, err := svc.BatchUpdateMemberEc2DeepInspectionStatus(context.Background(), &BatchUpdateMemberEc2DeepInspectionStatusInput{
+		AccountIds: []types.MemberAccountEc2DeepInspectionStatus{
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ActivateDeepInspection: ptr.Bool(true),
+			},
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ActivateDeepInspection: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +794,9 @@ func TestCheckResponseSnapshot_CancelFindingsReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelFindingsReport(context.Background(), &CancelFindingsReportInput{})
+	got, err := svc.CancelFindingsReport(context.Background(), &CancelFindingsReportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +817,9 @@ func TestCheckResponseSnapshot_CancelSbomExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSbomExport(context.Background(), &CancelSbomExportInput{})
+	got, err := svc.CancelSbomExport(context.Background(), &CancelSbomExportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -768,7 +840,28 @@ func TestCheckResponseSnapshot_CreateCisScanConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCisScanConfiguration(context.Background(), &CreateCisScanConfigurationInput{})
+	got, err := svc.CreateCisScanConfiguration(context.Background(), &CreateCisScanConfigurationInput{
+		ScanName:      ptr.String("__ScanName__"),
+		SecurityLevel: types.CisSecurityLevel("LEVEL_1"),
+		Schedule: &types.ScheduleMemberOneTime{
+			Value: types.OneTimeSchedule{},
+		},
+		Targets: &types.CreateCisTargets{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TargetResourceTags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +884,19 @@ func TestCheckResponseSnapshot_CreateCodeSecurityIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCodeSecurityIntegration(context.Background(), &CreateCodeSecurityIntegrationInput{})
+	got, err := svc.CreateCodeSecurityIntegration(context.Background(), &CreateCodeSecurityIntegrationInput{
+		Name: ptr.String("__Name__"),
+		Type: types.IntegrationType("GITLAB_SELF_MANAGED"),
+		Details: &types.CreateIntegrationDetailMemberGitlabSelfManaged{
+			Value: types.CreateGitLabSelfManagedIntegrationDetail{
+				InstanceUrl: ptr.String("__InstanceUrl__"),
+				AccessToken: ptr.String("__AccessToken__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -812,7 +917,32 @@ func TestCheckResponseSnapshot_CreateCodeSecurityScanConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCodeSecurityScanConfiguration(context.Background(), &CreateCodeSecurityScanConfigurationInput{})
+	got, err := svc.CreateCodeSecurityScanConfiguration(context.Background(), &CreateCodeSecurityScanConfigurationInput{
+		Name:  ptr.String("__Name__"),
+		Level: types.ConfigurationLevel("ORGANIZATION"),
+		Configuration: &types.CodeSecurityScanConfiguration{
+			PeriodicScanConfiguration: &types.PeriodicScanConfiguration{
+				Frequency:           types.PeriodicScanFrequency("WEEKLY"),
+				FrequencyExpression: ptr.String("__FrequencyExpression__"),
+			},
+			ContinuousIntegrationScanConfiguration: &types.ContinuousIntegrationScanConfiguration{
+				SupportedEvents: []types.ContinuousIntegrationScanEvent{
+					types.ContinuousIntegrationScanEvent("PULL_REQUEST"),
+					types.ContinuousIntegrationScanEvent("PULL_REQUEST"),
+				},
+			},
+			RuleSetCategories: []types.RuleSetCategory{
+				types.RuleSetCategory("SAST"),
+				types.RuleSetCategory("SAST"),
+			},
+		},
+		ScopeSettings: &types.ScopeSettings{
+			ProjectSelectionScope: types.ProjectSelectionScope("ALL"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +963,48 @@ func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Provider:    types.ConnectorCloudProvider("AZURE"),
+		Description: ptr.String("__Description__"),
+		ProviderDetail: &types.ProviderDetailCreateMemberAzure{
+			Value: types.AzureProviderDetailCreate{
+				AwsConfigConnectorArn: ptr.String("__AwsConfigConnectorArn__"),
+				ScopeConfiguration: &types.AzureScopeConfigurationInput{
+					VmScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ContainerImageScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ServerlessScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				AzureRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AutoInstallVMScanner: ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -854,7 +1025,729 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{})
+	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{
+		Action:      types.FilterAction("NONE"),
+		Description: ptr.String("__Description__"),
+		FilterCriteria: &types.FilterCriteria{
+			FindingArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FindingType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Severity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FirstObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			UpdatedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			FindingStatus: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Title: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			InspectorScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			ResourceType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceTags: []types.MapFilter{
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceVpcId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceSubnetId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageHash: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			PortRange: []types.PortRangeFilter{
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+			},
+			NetworkProtocol: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilityId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilitySource: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VendorSeverity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerablePackages: []types.PackageFilter{
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+			},
+			RelatedVulnerabilities: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FixAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLayers: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LambdaFunctionExecutionRoleArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ExploitAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityFilePath: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EpssScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CodeRepositoryProjectName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmImageReference: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmNetworkId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmSubnetIds: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageDigest: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CloudServerlessFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudServerlessFunctionExecutionRole: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1768,728 @@ func TestCheckResponseSnapshot_CreateFindingsReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFindingsReport(context.Background(), &CreateFindingsReportInput{})
+	got, err := svc.CreateFindingsReport(context.Background(), &CreateFindingsReportInput{
+		FilterCriteria: &types.FilterCriteria{
+			FindingArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FindingType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Severity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FirstObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			UpdatedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			FindingStatus: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Title: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			InspectorScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			ResourceType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceTags: []types.MapFilter{
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceVpcId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceSubnetId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageHash: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			PortRange: []types.PortRangeFilter{
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+			},
+			NetworkProtocol: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilityId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilitySource: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VendorSeverity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerablePackages: []types.PackageFilter{
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+			},
+			RelatedVulnerabilities: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FixAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLayers: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LambdaFunctionExecutionRoleArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ExploitAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityFilePath: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EpssScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CodeRepositoryProjectName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmImageReference: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmNetworkId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmSubnetIds: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageDigest: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CloudServerlessFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudServerlessFunctionExecutionRole: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		ReportFormat: types.ReportFormat("CSV"),
+		S3Destination: &types.Destination{
+			BucketName: ptr.String("__BucketName__"),
+			KeyPrefix:  ptr.String("__KeyPrefix__"),
+			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +2510,214 @@ func TestCheckResponseSnapshot_CreateSbomExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSbomExport(context.Background(), &CreateSbomExportInput{})
+	got, err := svc.CreateSbomExport(context.Background(), &CreateSbomExportInput{
+		ResourceFilterCriteria: &types.ResourceFilterCriteria{
+			AccountId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceType: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrRepositoryName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmInstanceTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerImageTags: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRepositoryName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRegistryName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionName: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.ResourceStringFilter{
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionTags: []types.ResourceMapFilter{
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ResourceMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		ReportFormat: types.SbomReportFormat("CYCLONEDX_1_4"),
+		S3Destination: &types.Destination{
+			BucketName: ptr.String("__BucketName__"),
+			KeyPrefix:  ptr.String("__KeyPrefix__"),
+			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +2738,9 @@ func TestCheckResponseSnapshot_DeleteCisScanConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCisScanConfiguration(context.Background(), &DeleteCisScanConfigurationInput{})
+	got, err := svc.DeleteCisScanConfiguration(context.Background(), &DeleteCisScanConfigurationInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -938,7 +2761,9 @@ func TestCheckResponseSnapshot_DeleteCodeSecurityIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCodeSecurityIntegration(context.Background(), &DeleteCodeSecurityIntegrationInput{})
+	got, err := svc.DeleteCodeSecurityIntegration(context.Background(), &DeleteCodeSecurityIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +2784,9 @@ func TestCheckResponseSnapshot_DeleteCodeSecurityScanConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), &DeleteCodeSecurityScanConfigurationInput{})
+	got, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), &DeleteCodeSecurityScanConfigurationInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -978,7 +2805,9 @@ func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +2828,9 @@ func TestCheckResponseSnapshot_DeleteFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{})
+	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +2930,16 @@ func TestCheckResponseSnapshot_Disable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Disable(context.Background(), &DisableInput{})
+	got, err := svc.Disable(context.Background(), &DisableInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTypes: []types.ResourceScanType{
+			types.ResourceScanType("EC2"),
+			types.ResourceScanType("EC2"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1120,7 +2960,9 @@ func TestCheckResponseSnapshot_DisableDelegatedAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDelegatedAdminAccount(context.Background(), &DisableDelegatedAdminAccountInput{})
+	got, err := svc.DisableDelegatedAdminAccount(context.Background(), &DisableDelegatedAdminAccountInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1141,7 +2983,9 @@ func TestCheckResponseSnapshot_DisassociateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMember(context.Background(), &DisassociateMemberInput{})
+	got, err := svc.DisassociateMember(context.Background(), &DisassociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1213,7 +3057,17 @@ func TestCheckResponseSnapshot_Enable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Enable(context.Background(), &EnableInput{})
+	got, err := svc.Enable(context.Background(), &EnableInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTypes: []types.ResourceScanType{
+			types.ResourceScanType("EC2"),
+			types.ResourceScanType("EC2"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +3088,10 @@ func TestCheckResponseSnapshot_EnableDelegatedAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDelegatedAdminAccount(context.Background(), &EnableDelegatedAdminAccountInput{})
+	got, err := svc.EnableDelegatedAdminAccount(context.Background(), &EnableDelegatedAdminAccountInput{
+		DelegatedAdminAccountId: ptr.String("__DelegatedAdminAccountId__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1256,7 +3113,14 @@ func TestCheckResponseSnapshot_GetCisScanReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCisScanReport(context.Background(), &GetCisScanReportInput{})
+	got, err := svc.GetCisScanReport(context.Background(), &GetCisScanReportInput{
+		ScanArn: ptr.String("__ScanArn__"),
+		TargetAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReportFormat: types.CisReportFormat("PDF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +3171,67 @@ func TestCheckResponseSnapshot_GetCisScanResultDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCisScanResultDetails(context.Background(), &GetCisScanResultDetailsInput{})
+	got, err := svc.GetCisScanResultDetails(context.Background(), &GetCisScanResultDetailsInput{
+		ScanArn:          ptr.String("__ScanArn__"),
+		TargetResourceId: ptr.String("__TargetResourceId__"),
+		AccountId:        ptr.String("__AccountId__"),
+		FilterCriteria: &types.CisScanResultDetailsFilterCriteria{
+			FindingStatusFilters: []types.CisFindingStatusFilter{
+				{
+					Comparison: types.CisFindingStatusComparison("EQUALS"),
+					Value:      types.CisFindingStatus("PASSED"),
+				},
+				{
+					Comparison: types.CisFindingStatusComparison("EQUALS"),
+					Value:      types.CisFindingStatus("PASSED"),
+				},
+			},
+			CheckIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TitleFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			SecurityLevelFilters: []types.CisSecurityLevelFilter{
+				{
+					Comparison: types.CisSecurityLevelComparison("EQUALS"),
+					Value:      types.CisSecurityLevel("LEVEL_1"),
+				},
+				{
+					Comparison: types.CisSecurityLevelComparison("EQUALS"),
+					Value:      types.CisSecurityLevel("LEVEL_1"),
+				},
+			},
+			FindingArnFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		SortBy:     types.CisScanResultDetailsSortBy("CHECK_ID"),
+		SortOrder:  types.CisSortOrder("ASC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1384,7 +3308,13 @@ func TestCheckResponseSnapshot_GetClustersForImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClustersForImage(context.Background(), &GetClustersForImageInput{})
+	got, err := svc.GetClustersForImage(context.Background(), &GetClustersForImageInput{
+		Filter: &types.ClusterForImageFilterCriteria{
+			ResourceId: ptr.String("__ResourceId__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1415,7 +3345,12 @@ func TestCheckResponseSnapshot_GetCodeSecurityIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeSecurityIntegration(context.Background(), &GetCodeSecurityIntegrationInput{})
+	got, err := svc.GetCodeSecurityIntegration(context.Background(), &GetCodeSecurityIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1445,7 +3380,12 @@ func TestCheckResponseSnapshot_GetCodeSecurityScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeSecurityScan(context.Background(), &GetCodeSecurityScanInput{})
+	got, err := svc.GetCodeSecurityScan(context.Background(), &GetCodeSecurityScanInput{
+		Resource: &types.CodeSecurityResourceMemberProjectId{
+			Value: "__CodeSecurityResourceMemberProjectId__",
+		},
+		ScanId: ptr.String("__ScanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1492,7 +3432,9 @@ func TestCheckResponseSnapshot_GetCodeSecurityScanConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeSecurityScanConfiguration(context.Background(), &GetCodeSecurityScanConfigurationInput{})
+	got, err := svc.GetCodeSecurityScanConfiguration(context.Background(), &GetCodeSecurityScanConfigurationInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1532,7 +3474,9 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{})
+	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1607,7 +3551,10 @@ func TestCheckResponseSnapshot_GetEncryptionKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEncryptionKey(context.Background(), &GetEncryptionKeyInput{})
+	got, err := svc.GetEncryptionKey(context.Background(), &GetEncryptionKeyInput{
+		ScanType:     types.ScanType("NETWORK"),
+		ResourceType: types.ResourceType("AWS_EC2_INSTANCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2350,7 +4297,9 @@ func TestCheckResponseSnapshot_GetFindingsReportStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingsReportStatus(context.Background(), &GetFindingsReportStatusInput{})
+	got, err := svc.GetFindingsReportStatus(context.Background(), &GetFindingsReportStatusInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2376,7 +4325,9 @@ func TestCheckResponseSnapshot_GetMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMember(context.Background(), &GetMemberInput{})
+	got, err := svc.GetMember(context.Background(), &GetMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2606,7 +4557,9 @@ func TestCheckResponseSnapshot_GetSbomExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSbomExport(context.Background(), &GetSbomExportInput{})
+	got, err := svc.GetSbomExport(context.Background(), &GetSbomExportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2637,7 +4590,11 @@ func TestCheckResponseSnapshot_ListAccountPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountPermissions(context.Background(), &ListAccountPermissionsInput{})
+	got, err := svc.ListAccountPermissions(context.Background(), &ListAccountPermissionsInput{
+		Service:    types.Service("EC2"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2708,7 +4665,46 @@ func TestCheckResponseSnapshot_ListCisScanConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCisScanConfigurations(context.Background(), &ListCisScanConfigurationsInput{})
+	got, err := svc.ListCisScanConfigurations(context.Background(), &ListCisScanConfigurationsInput{
+		FilterCriteria: &types.ListCisScanConfigurationsFilterCriteria{
+			ScanNameFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetResourceTagFilters: []types.TagFilter{
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanConfigurationArnFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		SortBy:     types.CisScanConfigurationsSortBy("SCAN_NAME"),
+		SortOrder:  types.CisSortOrder("ASC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2759,7 +4755,75 @@ func TestCheckResponseSnapshot_ListCisScanResultsAggregatedByChecks(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCisScanResultsAggregatedByChecks(context.Background(), &ListCisScanResultsAggregatedByChecksInput{})
+	got, err := svc.ListCisScanResultsAggregatedByChecks(context.Background(), &ListCisScanResultsAggregatedByChecksInput{
+		ScanArn: ptr.String("__ScanArn__"),
+		FilterCriteria: &types.CisScanResultsAggregatedByChecksFilterCriteria{
+			AccountIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CheckIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TitleFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			PlatformFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FailedResourcesFilters: []types.CisNumberFilter{
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+			},
+			SecurityLevelFilters: []types.CisSecurityLevelFilter{
+				{
+					Comparison: types.CisSecurityLevelComparison("EQUALS"),
+					Value:      types.CisSecurityLevel("LEVEL_1"),
+				},
+				{
+					Comparison: types.CisSecurityLevelComparison("EQUALS"),
+					Value:      types.CisSecurityLevel("LEVEL_1"),
+				},
+			},
+		},
+		SortBy:     types.CisScanResultsAggregatedByChecksSortBy("CHECK_ID"),
+		SortOrder:  types.CisSortOrder("ASC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2820,7 +4884,107 @@ func TestCheckResponseSnapshot_ListCisScanResultsAggregatedByTargetResource(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCisScanResultsAggregatedByTargetResource(context.Background(), &ListCisScanResultsAggregatedByTargetResourceInput{})
+	got, err := svc.ListCisScanResultsAggregatedByTargetResource(context.Background(), &ListCisScanResultsAggregatedByTargetResourceInput{
+		ScanArn: ptr.String("__ScanArn__"),
+		FilterCriteria: &types.CisScanResultsAggregatedByTargetResourceFilterCriteria{
+			AccountIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			StatusFilters: []types.CisResultStatusFilter{
+				{
+					Comparison: types.CisResultStatusComparison("EQUALS"),
+					Value:      types.CisResultStatus("PASSED"),
+				},
+				{
+					Comparison: types.CisResultStatusComparison("EQUALS"),
+					Value:      types.CisResultStatus("PASSED"),
+				},
+			},
+			CheckIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetResourceIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetResourceTagFilters: []types.TagFilter{
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			PlatformFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetStatusFilters: []types.CisTargetStatusFilter{
+				{
+					Comparison: types.CisTargetStatusComparison("EQUALS"),
+					Value:      types.CisTargetStatus("TIMED_OUT"),
+				},
+				{
+					Comparison: types.CisTargetStatusComparison("EQUALS"),
+					Value:      types.CisTargetStatus("TIMED_OUT"),
+				},
+			},
+			TargetStatusReasonFilters: []types.CisTargetStatusReasonFilter{
+				{
+					Comparison: types.CisTargetStatusComparison("EQUALS"),
+					Value:      types.CisTargetStatusReason("SCAN_IN_PROGRESS"),
+				},
+				{
+					Comparison: types.CisTargetStatusComparison("EQUALS"),
+					Value:      types.CisTargetStatusReason("SCAN_IN_PROGRESS"),
+				},
+			},
+			FailedChecksFilters: []types.CisNumberFilter{
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+			},
+		},
+		SortBy:     types.CisScanResultsAggregatedByTargetResourceSortBy("RESOURCE_ID"),
+		SortOrder:  types.CisSortOrder("ASC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2889,7 +5053,117 @@ func TestCheckResponseSnapshot_ListCisScans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCisScans(context.Background(), &ListCisScansInput{})
+	got, err := svc.ListCisScans(context.Background(), &ListCisScansInput{
+		FilterCriteria: &types.ListCisScansFilterCriteria{
+			ScanNameFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetResourceTagFilters: []types.TagFilter{
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.TagComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			TargetResourceIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanStatusFilters: []types.CisScanStatusFilter{
+				{
+					Comparison: types.CisScanStatusComparison("EQUALS"),
+					Value:      types.CisScanStatus("FAILED"),
+				},
+				{
+					Comparison: types.CisScanStatusComparison("EQUALS"),
+					Value:      types.CisScanStatus("FAILED"),
+				},
+			},
+			ScanAtFilters: []types.CisDateFilter{
+				{
+					EarliestScanStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LatestScanStartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					EarliestScanStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LatestScanStartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ScanConfigurationArnFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanArnFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScheduledByFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FailedChecksFilters: []types.CisNumberFilter{
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+				{
+					UpperInclusive: ptr.Int32(1),
+					LowerInclusive: ptr.Int32(1),
+				},
+			},
+			TargetAccountIdFilters: []types.CisStringFilter{
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CisStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		DetailLevel: types.ListCisScansDetailLevel("ORGANIZATION"),
+		SortBy:      types.ListCisScansSortBy("STATUS"),
+		SortOrder:   types.CisSortOrder("ASC"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2930,7 +5204,10 @@ func TestCheckResponseSnapshot_ListCodeSecurityIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeSecurityIntegrations(context.Background(), &ListCodeSecurityIntegrationsInput{})
+	got, err := svc.ListCodeSecurityIntegrations(context.Background(), &ListCodeSecurityIntegrationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2963,7 +5240,11 @@ func TestCheckResponseSnapshot_ListCodeSecurityScanConfigurationAssociations(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeSecurityScanConfigurationAssociations(context.Background(), &ListCodeSecurityScanConfigurationAssociationsInput{})
+	got, err := svc.ListCodeSecurityScanConfigurationAssociations(context.Background(), &ListCodeSecurityScanConfigurationAssociationsInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3022,7 +5303,10 @@ func TestCheckResponseSnapshot_ListCodeSecurityScanConfigurations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeSecurityScanConfigurations(context.Background(), &ListCodeSecurityScanConfigurationsInput{})
+	got, err := svc.ListCodeSecurityScanConfigurations(context.Background(), &ListCodeSecurityScanConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3071,7 +5355,14 @@ func TestCheckResponseSnapshot_ListConnectorScanConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectorScanConfigurations(context.Background(), &ListConnectorScanConfigurationsInput{})
+	got, err := svc.ListConnectorScanConfigurations(context.Background(), &ListConnectorScanConfigurationsInput{
+		AwsConfigConnectorArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3200,7 +5491,62 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		FilterCriteria: &types.ConnectorFilterCriteria{
+			ConnectorArns: []types.ConnectorArnFilter{
+				{
+					Comparison: types.ConnectorArnComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.ConnectorArnComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Accounts: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsConfigConnectorArns: []types.AwsConfigConnectorArnFilter{
+				{
+					Comparison: types.AwsConfigConnectorArnComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.AwsConfigConnectorArnComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ConnectorType: []types.ConnectorTypeFilter{
+				{
+					Comparison: types.ConnectorTypeComparison("EQUALS"),
+					Value:      types.ConnectorType("CUSTOMER_MANAGED"),
+				},
+				{
+					Comparison: types.ConnectorTypeComparison("EQUALS"),
+					Value:      types.ConnectorType("CUSTOMER_MANAGED"),
+				},
+			},
+			Provider: []types.ProviderFilter{
+				{
+					Comparison: types.ProviderComparison("EQUALS"),
+					Value:      types.ConnectorCloudProvider("AZURE"),
+				},
+				{
+					Comparison: types.ProviderComparison("EQUALS"),
+					Value:      types.ConnectorCloudProvider("AZURE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3483,7 +5829,340 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoverage(context.Background(), &ListCoverageInput{})
+	got, err := svc.ListCoverage(context.Background(), &ListCoverageInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		FilterCriteria: &types.CoverageFilterCriteria{
+			ScanStatusCode: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanStatusReason: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AccountId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrRepositoryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LastScannedAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ScanMode: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ImagePulledAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageLastInUseAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.CoverageNumberFilter{
+				{
+					UpperInclusive: ptr.Int64(1),
+					LowerInclusive: ptr.Int64(1),
+				},
+				{
+					UpperInclusive: ptr.Int64(1),
+					LowerInclusive: ptr.Int64(1),
+				},
+			},
+			CodeRepositoryProjectName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderTypeVisibility: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LastScannedCommitId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmInstanceTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerImageTags: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRepositoryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRegistryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3515,7 +6194,340 @@ func TestCheckResponseSnapshot_ListCoverageStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoverageStatistics(context.Background(), &ListCoverageStatisticsInput{})
+	got, err := svc.ListCoverageStatistics(context.Background(), &ListCoverageStatisticsInput{
+		FilterCriteria: &types.CoverageFilterCriteria{
+			ScanStatusCode: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanStatusReason: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AccountId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ScanType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrRepositoryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LastScannedAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			ScanMode: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ImagePulledAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageLastInUseAt: []types.CoverageDateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.CoverageNumberFilter{
+				{
+					UpperInclusive: ptr.Int64(1),
+					LowerInclusive: ptr.Int64(1),
+				},
+				{
+					UpperInclusive: ptr.Int64(1),
+					LowerInclusive: ptr.Int64(1),
+				},
+			},
+			CodeRepositoryProjectName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderTypeVisibility: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LastScannedCommitId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmInstanceTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerImageTags: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRepositoryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudContainerRegistryName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionName: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.CoverageStringFilter{
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		GroupBy:   types.GroupKey("SCAN_STATUS_CODE"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3546,7 +6558,10 @@ func TestCheckResponseSnapshot_ListDelegatedAdminAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDelegatedAdminAccounts(context.Background(), &ListDelegatedAdminAccountsInput{})
+	got, err := svc.ListDelegatedAdminAccounts(context.Background(), &ListDelegatedAdminAccountsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5023,7 +8038,15 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{})
+	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Action:     types.FilterAction("NONE"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5073,7 +8096,29 @@ func TestCheckResponseSnapshot_ListFindingAggregations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindingAggregations(context.Background(), &ListFindingAggregationsInput{})
+	got, err := svc.ListFindingAggregations(context.Background(), &ListFindingAggregationsInput{
+		AggregationType: types.AggregationType("FINDING_TYPE"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AccountIds: []types.StringFilter{
+			{
+				Comparison: types.StringComparison("EQUALS"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				Comparison: types.StringComparison("EQUALS"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		AggregationRequest: &types.AggregationRequestMemberAccountAggregation{
+			Value: types.AccountAggregation{
+				FindingType:  types.AggregationFindingType("NETWORK_REACHABILITY"),
+				ResourceType: types.AggregationResourceType("AWS_EC2_INSTANCE"),
+				SortOrder:    types.SortOrder("ASC"),
+				SortBy:       types.AccountSortBy("CRITICAL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5986,7 +9031,728 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{})
+	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		FilterCriteria: &types.FilterCriteria{
+			FindingArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FindingType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Severity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FirstObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			UpdatedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			FindingStatus: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Title: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			InspectorScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			ResourceType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceTags: []types.MapFilter{
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceVpcId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceSubnetId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageHash: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			PortRange: []types.PortRangeFilter{
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+			},
+			NetworkProtocol: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilityId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilitySource: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VendorSeverity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerablePackages: []types.PackageFilter{
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+			},
+			RelatedVulnerabilities: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FixAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLayers: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LambdaFunctionExecutionRoleArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ExploitAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityFilePath: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EpssScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CodeRepositoryProjectName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmImageReference: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmNetworkId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmSubnetIds: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageDigest: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CloudServerlessFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudServerlessFunctionExecutionRole: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		SortCriteria: &types.SortCriteria{
+			Field:     types.SortField("AWS_ACCOUNT_ID"),
+			SortOrder: types.SortOrder("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6021,7 +9787,11 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		OnlyAssociated: ptr.Bool(true),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6044,7 +9814,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6105,7 +9877,14 @@ func TestCheckResponseSnapshot_ListUsageTotals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsageTotals(context.Background(), &ListUsageTotalsInput{})
+	got, err := svc.ListUsageTotals(context.Background(), &ListUsageTotalsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6124,7 +9903,10 @@ func TestCheckResponseSnapshot_ResetEncryptionKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetEncryptionKey(context.Background(), &ResetEncryptionKeyInput{})
+	got, err := svc.ResetEncryptionKey(context.Background(), &ResetEncryptionKeyInput{
+		ScanType:     types.ScanType("NETWORK"),
+		ResourceType: types.ResourceType("AWS_EC2_INSTANCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6269,7 +10051,15 @@ func TestCheckResponseSnapshot_SearchVulnerabilities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchVulnerabilities(context.Background(), &SearchVulnerabilitiesInput{})
+	got, err := svc.SearchVulnerabilities(context.Background(), &SearchVulnerabilitiesInput{
+		FilterCriteria: &types.SearchVulnerabilitiesFilterCriteria{
+			VulnerabilityIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6288,7 +10078,10 @@ func TestCheckResponseSnapshot_SendCisSessionHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendCisSessionHealth(context.Background(), &SendCisSessionHealthInput{})
+	got, err := svc.SendCisSessionHealth(context.Background(), &SendCisSessionHealthInput{
+		ScanJobId:    ptr.String("__ScanJobId__"),
+		SessionToken: ptr.String("__SessionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6307,7 +10100,22 @@ func TestCheckResponseSnapshot_SendCisSessionTelemetry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendCisSessionTelemetry(context.Background(), &SendCisSessionTelemetryInput{})
+	got, err := svc.SendCisSessionTelemetry(context.Background(), &SendCisSessionTelemetryInput{
+		ScanJobId:    ptr.String("__ScanJobId__"),
+		SessionToken: ptr.String("__SessionToken__"),
+		Messages: []types.CisSessionMessage{
+			{
+				RuleId:         ptr.String("__RuleId__"),
+				Status:         types.CisRuleStatus("FAILED"),
+				CisRuleDetails: []byte("blob"),
+			},
+			{
+				RuleId:         ptr.String("__RuleId__"),
+				Status:         types.CisRuleStatus("FAILED"),
+				CisRuleDetails: []byte("blob"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6326,7 +10134,12 @@ func TestCheckResponseSnapshot_StartCisSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCisSession(context.Background(), &StartCisSessionInput{})
+	got, err := svc.StartCisSession(context.Background(), &StartCisSessionInput{
+		ScanJobId: ptr.String("__ScanJobId__"),
+		Message: &types.StartCisSessionMessage{
+			SessionToken: ptr.String("__SessionToken__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6348,7 +10161,12 @@ func TestCheckResponseSnapshot_StartCodeSecurityScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCodeSecurityScan(context.Background(), &StartCodeSecurityScanInput{})
+	got, err := svc.StartCodeSecurityScan(context.Background(), &StartCodeSecurityScanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Resource: &types.CodeSecurityResourceMemberProjectId{
+			Value: "__CodeSecurityResourceMemberProjectId__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6367,7 +10185,31 @@ func TestCheckResponseSnapshot_StopCisSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCisSession(context.Background(), &StopCisSessionInput{})
+	got, err := svc.StopCisSession(context.Background(), &StopCisSessionInput{
+		ScanJobId:    ptr.String("__ScanJobId__"),
+		SessionToken: ptr.String("__SessionToken__"),
+		Message: &types.StopCisSessionMessage{
+			Status: types.StopCisSessionStatus("SUCCESS"),
+			Reason: ptr.String("__Reason__"),
+			Progress: &types.StopCisMessageProgress{
+				TotalChecks:         1,
+				SuccessfulChecks:    1,
+				FailedChecks:        1,
+				NotEvaluatedChecks:  1,
+				UnknownChecks:       1,
+				NotApplicableChecks: 1,
+				InformationalChecks: 1,
+				ErrorChecks:         1,
+			},
+			ComputePlatform: &types.ComputePlatform{
+				Vendor:  ptr.String("__Vendor__"),
+				Product: ptr.String("__Product__"),
+				Version: ptr.String("__Version__"),
+			},
+			BenchmarkVersion: ptr.String("__BenchmarkVersion__"),
+			BenchmarkProfile: ptr.String("__BenchmarkProfile__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6386,7 +10228,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6405,7 +10252,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6426,7 +10279,26 @@ func TestCheckResponseSnapshot_UpdateCisScanConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCisScanConfiguration(context.Background(), &UpdateCisScanConfigurationInput{})
+	got, err := svc.UpdateCisScanConfiguration(context.Background(), &UpdateCisScanConfigurationInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+		ScanName:             ptr.String("__ScanName__"),
+		SecurityLevel:        types.CisSecurityLevel("LEVEL_1"),
+		Schedule: &types.ScheduleMemberOneTime{
+			Value: types.OneTimeSchedule{},
+		},
+		Targets: &types.UpdateCisTargets{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TargetResourceTags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6448,7 +10320,14 @@ func TestCheckResponseSnapshot_UpdateCodeSecurityIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCodeSecurityIntegration(context.Background(), &UpdateCodeSecurityIntegrationInput{})
+	got, err := svc.UpdateCodeSecurityIntegration(context.Background(), &UpdateCodeSecurityIntegrationInput{
+		IntegrationArn: ptr.String("__IntegrationArn__"),
+		Details: &types.UpdateIntegrationDetailsMemberGitlabSelfManaged{
+			Value: types.UpdateGitLabSelfManagedIntegrationDetail{
+				AuthCode: ptr.String("__AuthCode__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6469,7 +10348,25 @@ func TestCheckResponseSnapshot_UpdateCodeSecurityScanConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCodeSecurityScanConfiguration(context.Background(), &UpdateCodeSecurityScanConfigurationInput{})
+	got, err := svc.UpdateCodeSecurityScanConfiguration(context.Background(), &UpdateCodeSecurityScanConfigurationInput{
+		ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+		Configuration: &types.CodeSecurityScanConfiguration{
+			PeriodicScanConfiguration: &types.PeriodicScanConfiguration{
+				Frequency:           types.PeriodicScanFrequency("WEEKLY"),
+				FrequencyExpression: ptr.String("__FrequencyExpression__"),
+			},
+			ContinuousIntegrationScanConfiguration: &types.ContinuousIntegrationScanConfiguration{
+				SupportedEvents: []types.ContinuousIntegrationScanEvent{
+					types.ContinuousIntegrationScanEvent("PULL_REQUEST"),
+					types.ContinuousIntegrationScanEvent("PULL_REQUEST"),
+				},
+			},
+			RuleSetCategories: []types.RuleSetCategory{
+				types.RuleSetCategory("SAST"),
+				types.RuleSetCategory("SAST"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6488,7 +10385,22 @@ func TestCheckResponseSnapshot_UpdateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguration(context.Background(), &UpdateConfigurationInput{})
+	got, err := svc.UpdateConfiguration(context.Background(), &UpdateConfigurationInput{
+		AccountId: ptr.String("__AccountId__"),
+		EcrConfiguration: &types.EcrConfiguration{
+			RescanDuration:         types.EcrRescanDuration("LIFETIME"),
+			PullDateRescanDuration: types.EcrPullDateRescanDuration("DAYS_14"),
+			PullDateRescanMode:     types.EcrPullDateRescanMode("LAST_PULL_DATE"),
+		},
+		Ec2Configuration: &types.Ec2Configuration{
+			ScanMode:          types.Ec2ScanMode("EC2_SSM_AGENT_BASED"),
+			ActivateVMScanner: ptr.Bool(true),
+		},
+		UpdateConfigurationInheritance: &types.UpdateConfigurationInheritance{
+			Ec2Configuration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
+			EcrConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6509,7 +10421,42 @@ func TestCheckResponseSnapshot_UpdateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnector(context.Background(), &UpdateConnectorInput{})
+	got, err := svc.UpdateConnector(context.Background(), &UpdateConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		Description:  ptr.String("__Description__"),
+		ProviderDetail: &types.ProviderDetailUpdateMemberAzure{
+			Value: types.AzureProviderDetailUpdate{
+				AzureRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ScopeConfiguration: &types.AzureScopeConfigurationInput{
+					VmScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ContainerImageScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ServerlessScanning: &types.ScopeConfigurationInput{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				AutoInstallVMScanner: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6528,7 +10475,15 @@ func TestCheckResponseSnapshot_UpdateConnectorScanConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectorScanConfiguration(context.Background(), &UpdateConnectorScanConfigurationInput{})
+	got, err := svc.UpdateConnectorScanConfiguration(context.Background(), &UpdateConnectorScanConfigurationInput{
+		AwsConfigConnectorArn: ptr.String("__AwsConfigConnectorArn__"),
+		ScanConfiguration: &types.ConnectorScanConfiguration{
+			ContainerImageScanning: &types.ConnectorContainerImageScanConfiguration{
+				PushDuration: types.ContainerImageRescanDuration("LIFETIME"),
+				PullDuration: types.ContainerImagePullDateRescanDuration("DAYS_3"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6558,7 +10513,13 @@ func TestCheckResponseSnapshot_UpdateEc2DeepInspectionConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEc2DeepInspectionConfiguration(context.Background(), &UpdateEc2DeepInspectionConfigurationInput{})
+	got, err := svc.UpdateEc2DeepInspectionConfiguration(context.Background(), &UpdateEc2DeepInspectionConfigurationInput{
+		ActivateDeepInspection: ptr.Bool(true),
+		PackagePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6577,7 +10538,11 @@ func TestCheckResponseSnapshot_UpdateEncryptionKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEncryptionKey(context.Background(), &UpdateEncryptionKeyInput{})
+	got, err := svc.UpdateEncryptionKey(context.Background(), &UpdateEncryptionKeyInput{
+		KmsKeyId:     ptr.String("__KmsKeyId__"),
+		ScanType:     types.ScanType("NETWORK"),
+		ResourceType: types.ResourceType("AWS_EC2_INSTANCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6598,7 +10563,727 @@ func TestCheckResponseSnapshot_UpdateFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFilter(context.Background(), &UpdateFilterInput{})
+	got, err := svc.UpdateFilter(context.Background(), &UpdateFilterInput{
+		Action:      types.FilterAction("NONE"),
+		Description: ptr.String("__Description__"),
+		FilterCriteria: &types.FilterCriteria{
+			FindingArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FindingType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Severity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FirstObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			UpdatedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			FindingStatus: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Title: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			InspectorScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			ResourceType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceTags: []types.MapFilter{
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceVpcId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceSubnetId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageHash: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			PortRange: []types.PortRangeFilter{
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+			},
+			NetworkProtocol: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilityId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilitySource: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VendorSeverity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerablePackages: []types.PackageFilter{
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+			},
+			RelatedVulnerabilities: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FixAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLayers: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LambdaFunctionExecutionRoleArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ExploitAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityFilePath: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EpssScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CodeRepositoryProjectName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmImageReference: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmNetworkId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmSubnetIds: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageDigest: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CloudServerlessFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudServerlessFunctionExecutionRole: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		FilterArn: ptr.String("__FilterArn__"),
+		Reason:    ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6617,7 +11302,12 @@ func TestCheckResponseSnapshot_UpdateOrgEc2DeepInspectionConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrgEc2DeepInspectionConfiguration(context.Background(), &UpdateOrgEc2DeepInspectionConfigurationInput{})
+	got, err := svc.UpdateOrgEc2DeepInspectionConfiguration(context.Background(), &UpdateOrgEc2DeepInspectionConfigurationInput{
+		OrgPackagePaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6644,7 +11334,15 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{})
+	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{
+		AutoEnable: &types.AutoEnable{
+			Ec2:            ptr.Bool(true),
+			Ecr:            ptr.Bool(true),
+			Lambda:         ptr.Bool(true),
+			LambdaCode:     ptr.Bool(true),
+			CodeRepository: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6665,7 +11363,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6690,7 +11390,729 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFilter(context.Background(), &CreateFilterInput{})
+	_, opErr := svc.CreateFilter(context.Background(), &CreateFilterInput{
+		Action:      types.FilterAction("NONE"),
+		Description: ptr.String("__Description__"),
+		FilterCriteria: &types.FilterCriteria{
+			FindingArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			AwsAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FindingType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Severity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FirstObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LastObservedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			UpdatedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			FindingStatus: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Title: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			InspectorScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			ResourceType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ResourceTags: []types.MapFilter{
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.MapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceVpcId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			Ec2InstanceSubnetId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageHash: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EcrImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			EcrImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			PortRange: []types.PortRangeFilter{
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+				{
+					BeginInclusive: ptr.Int32(1),
+					EndInclusive:   ptr.Int32(1),
+				},
+			},
+			NetworkProtocol: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ComponentType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilityId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerabilitySource: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VendorSeverity: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			VulnerablePackages: []types.PackageFilter{
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+				{
+					Name: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Version: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Epoch: &types.NumberFilter{
+						UpperInclusive: ptr.Float64(1.0),
+						LowerInclusive: ptr.Float64(1.0),
+					},
+					Release: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					Architecture: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLayerHash: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					SourceLambdaLayerArn: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					FilePath: &types.StringFilter{
+						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+				},
+			},
+			RelatedVulnerabilities: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			FixAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLayers: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			LambdaFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			LambdaFunctionExecutionRoleArn: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			ExploitAvailable: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityDetectorTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeVulnerabilityFilePath: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			EpssScore: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CodeRepositoryProjectName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProvider: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderRegion: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudProviderOrgId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmImageReference: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmNetworkId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudVmSubnetIds: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRepositoryName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageRegistry: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageDigest: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageTags: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImagePushedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageArchitecture: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudImageLastInUseAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudImageInUseCount: []types.NumberFilter{
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+				{
+					UpperInclusive: ptr.Float64(1.0),
+					LowerInclusive: ptr.Float64(1.0),
+				},
+			},
+			CloudServerlessFunctionName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionRuntime: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			CloudServerlessFunctionLastModifiedAt: []types.DateFilter{
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			CloudServerlessFunctionExecutionRole: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6717,7 +12139,22 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{})
+	_, opErr := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{
+		AssociateConfigurationRequests: []types.AssociateConfigurationRequest{
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6743,7 +12180,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6768,7 +12207,22 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{})
+	_, opErr := svc.BatchAssociateCodeSecurityScanConfiguration(context.Background(), &BatchAssociateCodeSecurityScanConfigurationInput{
+		AssociateConfigurationRequests: []types.AssociateConfigurationRequest{
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+			{
+				ScanConfigurationArn: ptr.String("__ScanConfigurationArn__"),
+				Resource: &types.CodeSecurityResourceMemberProjectId{
+					Value: "__CodeSecurityResourceMemberProjectId__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6794,7 +12248,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6820,7 +12276,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6856,7 +12314,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{})
+	_, opErr := svc.AssociateMember(context.Background(), &AssociateMemberInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

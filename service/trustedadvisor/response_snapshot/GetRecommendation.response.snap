@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"recommendation":{"arn":"__Arn__","awsServices":["__Member__","__Member__"],"checkArn":"__CheckArn__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","lifecycleStage":"in_progress","name":"__Name__","pillarSpecificAggregates":{"costOptimizing":{"estimatedMonthlySavings":1,"estimatedPercentMonthlySavings":1}},"pillars":["cost_optimizing","cost_optimizing"],"resolvedAt":"2000-01-01T00:00:00Z","resourcesAggregates":{"errorCount":1,"excludedCount":1,"okCount":1,"warningCount":1},"source":"aws_config","status":"ok","statusReason":"no_data_ok","type":"standard","updateReason":"__UpdateReason__","updateReasonCode":"non_critical_account","updatedOnBehalfOf":"__UpdatedOnBehalfOf__","updatedOnBehalfOfJobTitle":"__UpdatedOnBehalfOfJobTitle__"}}

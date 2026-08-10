@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListAssociationsForLicenseConfiguration
+
+{"LicenseConfigurationAssociations":[{"AmiAssociationScope":"__AmiAssociationScope__","AssociationTime":946684800,"ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceType":"EC2_INSTANCE"},{"AmiAssociationScope":"__AmiAssociationScope__","AssociationTime":946684800,"ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceType":"EC2_INSTANCE"}],"NextToken":"__NextToken__"}

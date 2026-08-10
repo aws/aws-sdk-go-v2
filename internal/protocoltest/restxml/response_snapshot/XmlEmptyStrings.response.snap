@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<XmlEmptyStringsResponse><emptyString>__EmptyString__</emptyString></XmlEmptyStringsResponse>

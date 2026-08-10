@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.StopReplicationTask
+
+{"ReplicationTask":{"CdcStartPosition":"__CdcStartPosition__","CdcStopPosition":"__CdcStopPosition__","LastFailureMessage":"__LastFailureMessage__","MigrationType":"full-load","RecoveryCheckpoint":"__RecoveryCheckpoint__","ReplicationInstanceArn":"__ReplicationInstanceArn__","ReplicationTaskArn":"__ReplicationTaskArn__","ReplicationTaskCreationDate":946684800,"ReplicationTaskIdentifier":"__ReplicationTaskIdentifier__","ReplicationTaskSettings":"__ReplicationTaskSettings__","ReplicationTaskStartDate":946684800,"ReplicationTaskStats":{"ElapsedTimeMillis":1,"FreshStartDate":946684800,"FullLoadFinishDate":946684800,"FullLoadProgressPercent":1,"FullLoadStartDate":946684800,"StartDate":946684800,"StopDate":946684800,"TablesErrored":1,"TablesLoaded":1,"TablesLoading":1,"TablesQueued":1},"SourceEndpointArn":"__SourceEndpointArn__","Status":"__Status__","StopReason":"__StopReason__","TableMappings":"__TableMappings__","TargetEndpointArn":"__TargetEndpointArn__","TargetReplicationInstanceArn":"__TargetReplicationInstanceArn__","TaskData":"__TaskData__"}}

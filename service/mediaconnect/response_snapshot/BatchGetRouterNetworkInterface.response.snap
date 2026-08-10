@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"arn":"__Arn__","code":"__Code__","message":"__Message__"},{"arn":"__Arn__","code":"__Code__","message":"__Message__"}],"routerNetworkInterfaces":[{"arn":"__Arn__","associatedInputCount":1,"associatedOutputCount":1,"configuration":{"public":{"allowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"createdAt":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","networkInterfaceType":"PUBLIC","regionName":"__RegionName__","state":"CREATING","tags":{"key0":"__Value__"},"updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","associatedInputCount":1,"associatedOutputCount":1,"configuration":{"public":{"allowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"createdAt":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","networkInterfaceType":"PUBLIC","regionName":"__RegionName__","state":"CREATING","tags":{"key0":"__Value__"},"updatedAt":"2000-01-01T00:00:00Z"}]}

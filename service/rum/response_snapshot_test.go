@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -171,7 +172,33 @@ func TestCheckResponseSnapshot_BatchCreateRumMetricDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	got, err := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +234,15 @@ func TestCheckResponseSnapshot_BatchDeleteRumMetricDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteRumMetricDefinitions(context.Background(), &BatchDeleteRumMetricDefinitionsInput{})
+	got, err := svc.BatchDeleteRumMetricDefinitions(context.Background(), &BatchDeleteRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +287,13 @@ func TestCheckResponseSnapshot_BatchGetRumMetricDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRumMetricDefinitions(context.Background(), &BatchGetRumMetricDefinitionsInput{})
+	got, err := svc.BatchGetRumMetricDefinitions(context.Background(), &BatchGetRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +314,51 @@ func TestCheckResponseSnapshot_CreateAppMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppMonitor(context.Background(), &CreateAppMonitorInput{})
+	got, err := svc.CreateAppMonitor(context.Background(), &CreateAppMonitorInput{
+		Name:   ptr.String("__Name__"),
+		Domain: ptr.String("__Domain__"),
+		DomainList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AppMonitorConfiguration: &types.AppMonitorConfiguration{
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			ExcludedPages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludedPages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FavoritePages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SessionSampleRate: 1.0,
+			GuestRoleArn:      ptr.String("__GuestRoleArn__"),
+			AllowCookies:      ptr.Bool(true),
+			Telemetries: []types.Telemetry{
+				types.Telemetry("errors"),
+				types.Telemetry("errors"),
+			},
+			EnableXRay: ptr.Bool(true),
+		},
+		CwLogEnabled: ptr.Bool(true),
+		CustomEvents: &types.CustomEvents{
+			Status: types.CustomEventsStatus("ENABLED"),
+		},
+		DeobfuscationConfiguration: &types.DeobfuscationConfiguration{
+			JavaScriptSourceMaps: &types.JavaScriptSourceMaps{
+				Status: types.DeobfuscationStatus("ENABLED"),
+				S3Uri:  ptr.String("__S3Uri__"),
+			},
+		},
+		Platform: types.AppMonitorPlatform("Web"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +377,9 @@ func TestCheckResponseSnapshot_DeleteAppMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppMonitor(context.Background(), &DeleteAppMonitorInput{})
+	got, err := svc.DeleteAppMonitor(context.Background(), &DeleteAppMonitorInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +400,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +422,11 @@ func TestCheckResponseSnapshot_DeleteRumMetricsDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRumMetricsDestination(context.Background(), &DeleteRumMetricsDestinationInput{})
+	got, err := svc.DeleteRumMetricsDestination(context.Background(), &DeleteRumMetricsDestinationInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +500,9 @@ func TestCheckResponseSnapshot_GetAppMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppMonitor(context.Background(), &GetAppMonitorInput{})
+	got, err := svc.GetAppMonitor(context.Background(), &GetAppMonitorInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +527,31 @@ func TestCheckResponseSnapshot_GetAppMonitorData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppMonitorData(context.Background(), &GetAppMonitorDataInput{})
+	got, err := svc.GetAppMonitorData(context.Background(), &GetAppMonitorDataInput{
+		Name: ptr.String("__Name__"),
+		TimeRange: &types.TimeRange{
+			After:  1,
+			Before: 1,
+		},
+		Filters: []types.QueryFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +573,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +614,10 @@ func TestCheckResponseSnapshot_ListAppMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppMonitors(context.Background(), &ListAppMonitorsInput{})
+	got, err := svc.ListAppMonitors(context.Background(), &ListAppMonitorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -525,7 +650,11 @@ func TestCheckResponseSnapshot_ListRumMetricsDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRumMetricsDestinations(context.Background(), &ListRumMetricsDestinationsInput{})
+	got, err := svc.ListRumMetricsDestinations(context.Background(), &ListRumMetricsDestinationsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -549,7 +678,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +702,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyDocument:   ptr.String("__PolicyDocument__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +725,36 @@ func TestCheckResponseSnapshot_PutRumEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRumEvents(context.Background(), &PutRumEventsInput{})
+	got, err := svc.PutRumEvents(context.Background(), &PutRumEventsInput{
+		Id:      ptr.String("__Id__"),
+		BatchId: ptr.String("__BatchId__"),
+		AppMonitorDetails: &types.AppMonitorDetails{
+			Name:    ptr.String("__Name__"),
+			Id:      ptr.String("__Id__"),
+			Version: ptr.String("__Version__"),
+		},
+		UserDetails: &types.UserDetails{
+			UserId:    ptr.String("__UserId__"),
+			SessionId: ptr.String("__SessionId__"),
+		},
+		RumEvents: []types.RumEvent{
+			{
+				Id:        ptr.String("__Id__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:      ptr.String("__Type__"),
+				Metadata:  ptr.String("__Metadata__"),
+				Details:   ptr.String("__Details__"),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:      ptr.String("__Type__"),
+				Metadata:  ptr.String("__Metadata__"),
+				Details:   ptr.String("__Details__"),
+			},
+		},
+		Alias: ptr.String("__Alias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +773,12 @@ func TestCheckResponseSnapshot_PutRumMetricsDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRumMetricsDestination(context.Background(), &PutRumMetricsDestinationInput{})
+	got, err := svc.PutRumMetricsDestination(context.Background(), &PutRumMetricsDestinationInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +797,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +821,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -666,7 +846,47 @@ func TestCheckResponseSnapshot_UpdateAppMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppMonitor(context.Background(), &UpdateAppMonitorInput{})
+	got, err := svc.UpdateAppMonitor(context.Background(), &UpdateAppMonitorInput{
+		Name:   ptr.String("__Name__"),
+		Domain: ptr.String("__Domain__"),
+		DomainList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AppMonitorConfiguration: &types.AppMonitorConfiguration{
+			IdentityPoolId: ptr.String("__IdentityPoolId__"),
+			ExcludedPages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IncludedPages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FavoritePages: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SessionSampleRate: 1.0,
+			GuestRoleArn:      ptr.String("__GuestRoleArn__"),
+			AllowCookies:      ptr.Bool(true),
+			Telemetries: []types.Telemetry{
+				types.Telemetry("errors"),
+				types.Telemetry("errors"),
+			},
+			EnableXRay: ptr.Bool(true),
+		},
+		CwLogEnabled: ptr.Bool(true),
+		CustomEvents: &types.CustomEvents{
+			Status: types.CustomEventsStatus("ENABLED"),
+		},
+		DeobfuscationConfiguration: &types.DeobfuscationConfiguration{
+			JavaScriptSourceMaps: &types.JavaScriptSourceMaps{
+				Status: types.DeobfuscationStatus("ENABLED"),
+				S3Uri:  ptr.String("__S3Uri__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +905,22 @@ func TestCheckResponseSnapshot_UpdateRumMetricDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRumMetricDefinition(context.Background(), &UpdateRumMetricDefinitionInput{})
+	got, err := svc.UpdateRumMetricDefinition(context.Background(), &UpdateRumMetricDefinitionInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinition: &types.MetricDefinitionRequest{
+			Name:      ptr.String("__Name__"),
+			ValueKey:  ptr.String("__ValueKey__"),
+			UnitLabel: ptr.String("__UnitLabel__"),
+			DimensionKeys: map[string]string{
+				"key0": "__Value__",
+			},
+			EventPattern: ptr.String("__EventPattern__"),
+			Namespace:    ptr.String("__Namespace__"),
+		},
+		MetricDefinitionId: ptr.String("__MetricDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +941,33 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -733,7 +994,33 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -759,7 +1046,33 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -784,7 +1097,10 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyRevisionIdException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -809,7 +1125,11 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyDocument:   ptr.String("__PolicyDocument__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -834,7 +1154,10 @@ func TestCheckResponseSnapshot_Error_PolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -859,7 +1182,11 @@ func TestCheckResponseSnapshot_Error_PolicySizeLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Name:             ptr.String("__Name__"),
+		PolicyDocument:   ptr.String("__PolicyDocument__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -886,7 +1213,33 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -911,7 +1264,33 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -939,7 +1318,33 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -964,7 +1369,33 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{})
+	_, opErr := svc.BatchCreateRumMetricDefinitions(context.Background(), &BatchCreateRumMetricDefinitionsInput{
+		AppMonitorName: ptr.String("__AppMonitorName__"),
+		Destination:    types.MetricDestination("CloudWatch"),
+		DestinationArn: ptr.String("__DestinationArn__"),
+		MetricDefinitions: []types.MetricDefinitionRequest{
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+			{
+				Name:      ptr.String("__Name__"),
+				ValueKey:  ptr.String("__ValueKey__"),
+				UnitLabel: ptr.String("__UnitLabel__"),
+				DimensionKeys: map[string]string{
+					"key0": "__Value__",
+				},
+				EventPattern: ptr.String("__EventPattern__"),
+				Namespace:    ptr.String("__Namespace__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

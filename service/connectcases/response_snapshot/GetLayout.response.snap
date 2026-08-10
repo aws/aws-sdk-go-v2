@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"content":{"basic":{"moreInfo":{"sections":[{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}},{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}}]},"topPanel":{"sections":[{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}},{"fieldGroup":{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"name":"__Name__"}}]}}},"createdTime":"2000-01-01T00:00:00Z","deleted":true,"lastModifiedTime":"2000-01-01T00:00:00Z","layoutArn":"__LayoutArn__","layoutId":"__LayoutId__","name":"__Name__","tags":{"key0":"__Value__"}}

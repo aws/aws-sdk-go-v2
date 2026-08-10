@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RefreshDetails":{"RefreshArn":"__RefreshArn__","RefreshId":"__RefreshId__","RefreshStatus":"INITIALIZED"},"RequestId":"__RequestId__","Status":200}

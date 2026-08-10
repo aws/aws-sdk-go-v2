@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdBy":"__CreatedBy__","customDomainName":"__CustomDomainName__","dnsEntry":{"domainName":"__DomainName__","hostedZoneId":"__HostedZoneId__"},"id":"__Id__","status":"CREATE_IN_PROGRESS"}

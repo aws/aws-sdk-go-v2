@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.BatchGetDocumentStatus
+
+{"DocumentStatusList":[{"DocumentId":"__DocumentId__","DocumentStatus":"NOT_FOUND","FailureCode":"__FailureCode__","FailureReason":"__FailureReason__"},{"DocumentId":"__DocumentId__","DocumentStatus":"NOT_FOUND","FailureCode":"__FailureCode__","FailureReason":"__FailureReason__"}],"Errors":[{"DataSourceId":"__DataSourceId__","DocumentId":"__DocumentId__","ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__"},{"DataSourceId":"__DataSourceId__","DocumentId":"__DocumentId__","ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__"}]}

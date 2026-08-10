@@ -120,7 +120,9 @@ func TestCheckResponseSnapshot_AcceptNetworkFirewallTransitGatewayAttachment(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{})
+	got, err := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,7 +153,19 @@ func TestCheckResponseSnapshot_AssociateAvailabilityZones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{})
+	got, err := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +189,12 @@ func TestCheckResponseSnapshot_AssociateFirewallPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFirewallPolicy(context.Background(), &AssociateFirewallPolicyInput{})
+	got, err := svc.AssociateFirewallPolicy(context.Background(), &AssociateFirewallPolicyInput{
+		UpdateToken:       ptr.String("__UpdateToken__"),
+		FirewallArn:       ptr.String("__FirewallArn__"),
+		FirewallName:      ptr.String("__FirewallName__"),
+		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +227,21 @@ func TestCheckResponseSnapshot_AssociateSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSubnets(context.Background(), &AssociateSubnetsInput{})
+	got, err := svc.AssociateSubnets(context.Background(), &AssociateSubnetsInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:      ptr.String("__SubnetId__"),
+				IPAddressType: types.IPAddressType("DUALSTACK"),
+			},
+			{
+				SubnetId:      ptr.String("__SubnetId__"),
+				IPAddressType: types.IPAddressType("DUALSTACK"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +298,21 @@ func TestCheckResponseSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachRuleGroupsToProxyConfiguration(context.Background(), &AttachRuleGroupsToProxyConfigurationInput{})
+	got, err := svc.AttachRuleGroupsToProxyConfiguration(context.Background(), &AttachRuleGroupsToProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		RuleGroups: []types.ProxyRuleGroupAttachment{
+			{
+				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+				InsertPosition:     ptr.Int32(1),
+			},
+			{
+				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+				InsertPosition:     ptr.Int32(1),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +376,49 @@ func TestCheckResponseSnapshot_CreateContainerAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContainerAssociation(context.Background(), &CreateContainerAssociationInput{})
+	got, err := svc.CreateContainerAssociation(context.Background(), &CreateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +574,87 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewall(context.Background(), &CreateFirewallInput{})
+	got, err := svc.CreateFirewall(context.Background(), &CreateFirewallInput{
+		FirewallName:      ptr.String("__FirewallName__"),
+		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
+		VpcId:             ptr.String("__VpcId__"),
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:      ptr.String("__SubnetId__"),
+				IPAddressType: types.IPAddressType("DUALSTACK"),
+			},
+			{
+				SubnetId:      ptr.String("__SubnetId__"),
+				IPAddressType: types.IPAddressType("DUALSTACK"),
+			},
+		},
+		DeleteProtection:               true,
+		SubnetChangeProtection:         true,
+		FirewallPolicyChangeProtection: true,
+		Description:                    ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+		EnabledAnalysisTypes: []types.EnabledAnalysisType{
+			types.EnabledAnalysisType("TLS_SNI"),
+			types.EnabledAnalysisType("TLS_SNI"),
+		},
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+		AvailabilityZoneChangeProtection: true,
+		NatGatewayMappings: []types.NatGatewayMapping{
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+		},
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+		NoSourcePreservation: true,
+		VpcEndpoint: &types.VpcEndpoint{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetMappings: []types.SubnetMapping{
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +701,118 @@ func TestCheckResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallPolicy(context.Background(), &CreateFirewallPolicyInput{})
+	got, err := svc.CreateFirewallPolicy(context.Background(), &CreateFirewallPolicyInput{
+		FirewallPolicyName: ptr.String("__FirewallPolicyName__"),
+		FirewallPolicy: &types.FirewallPolicy{
+			StatelessRuleGroupReferences: []types.StatelessRuleGroupReference{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+				},
+			},
+			StatelessDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatelessFragmentDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatelessCustomActions: []types.CustomAction{
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ActionDefinition: &types.ActionDefinition{
+						PublishMetricAction: &types.PublishMetricAction{
+							Dimensions: []types.Dimension{
+								{
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ActionDefinition: &types.ActionDefinition{
+						PublishMetricAction: &types.PublishMetricAction{
+							Dimensions: []types.Dimension{
+								{
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			StatefulRuleGroupReferences: []types.StatefulRuleGroupReference{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+					Override: &types.StatefulRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+					DeepThreatInspection: ptr.Bool(true),
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+					Override: &types.StatefulRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+					DeepThreatInspection: ptr.Bool(true),
+				},
+			},
+			StatefulDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatefulEngineOptions: &types.StatefulEngineOptions{
+				RuleOrder:             types.RuleOrder("DEFAULT_ACTION_ORDER"),
+				StreamExceptionPolicy: types.StreamExceptionPolicy("DROP"),
+				FlowTimeouts: &types.FlowTimeouts{
+					TcpIdleTimeoutSeconds: ptr.Int32(1),
+				},
+			},
+			TLSInspectionConfigurationArn: ptr.String("__TLSInspectionConfigurationArn__"),
+			PolicyVariables: &types.PolicyVariables{
+				RuleVariables: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			EnableTLSSessionHolding: ptr.Bool(true),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DryRun: true,
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +871,36 @@ func TestCheckResponseSnapshot_CreateProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxy(context.Background(), &CreateProxyInput{})
+	got, err := svc.CreateProxy(context.Background(), &CreateProxyInput{
+		ProxyName:              ptr.String("__ProxyName__"),
+		NatGatewayId:           ptr.String("__NatGatewayId__"),
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		ListenerProperties: []types.ListenerPropertyRequest{
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+		},
+		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
+			PcaArn:           ptr.String("__PcaArn__"),
+			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -648,7 +957,33 @@ func TestCheckResponseSnapshot_CreateProxyConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyConfiguration(context.Background(), &CreateProxyConfigurationInput{})
+	got, err := svc.CreateProxyConfiguration(context.Background(), &CreateProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		Description:            ptr.String("__Description__"),
+		RuleGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RuleGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
+			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
+			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
+			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1167,166 @@ func TestCheckResponseSnapshot_CreateProxyRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyRuleGroup(context.Background(), &CreateProxyRuleGroupInput{})
+	got, err := svc.CreateProxyRuleGroup(context.Background(), &CreateProxyRuleGroupInput{
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		Description:        ptr.String("__Description__"),
+		Rules: &types.ProxyRulesByRequestPhase{
+			PreDNS: []types.ProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			PreREQUEST: []types.ProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			PostRESPONSE: []types.ProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1016,7 +1510,162 @@ func TestCheckResponseSnapshot_CreateProxyRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyRules(context.Background(), &CreateProxyRulesInput{})
+	got, err := svc.CreateProxyRules(context.Background(), &CreateProxyRulesInput{
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		Rules: &types.CreateProxyRulesByRequestPhase{
+			PreDNS: []types.CreateProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+			},
+			PreREQUEST: []types.CreateProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+			},
+			PostRESPONSE: []types.CreateProxyRule{
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+				{
+					ProxyRuleName: ptr.String("__ProxyRuleName__"),
+					Description:   ptr.String("__Description__"),
+					Action:        types.ProxyRulePhaseAction("ALLOW"),
+					Conditions: []types.ProxyRuleCondition{
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ConditionOperator: ptr.String("__ConditionOperator__"),
+							ConditionKey:      ptr.String("__ConditionKey__"),
+							ConditionValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					InsertPosition: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1092,7 +1741,321 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{})
+	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{
+		RuleGroupName: ptr.String("__RuleGroupName__"),
+		RuleGroup: &types.RuleGroup{
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+			RulesSource: &types.RulesSource{
+				RulesString: ptr.String("__RulesString__"),
+				RulesSourceList: &types.RulesSourceList{
+					Targets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetTypes: []types.TargetType{
+						types.TargetType("TLS_SNI"),
+						types.TargetType("TLS_SNI"),
+					},
+					GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+				},
+				StatefulRules: []types.StatefulRule{
+					{
+						Action: types.StatefulAction("PASS"),
+						Header: &types.Header{
+							Protocol:        types.StatefulRuleProtocol("IP"),
+							Source:          ptr.String("__Source__"),
+							SourcePort:      ptr.String("__SourcePort__"),
+							Direction:       types.StatefulRuleDirection("FORWARD"),
+							Destination:     ptr.String("__Destination__"),
+							DestinationPort: ptr.String("__DestinationPort__"),
+						},
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						Action: types.StatefulAction("PASS"),
+						Header: &types.Header{
+							Protocol:        types.StatefulRuleProtocol("IP"),
+							Source:          ptr.String("__Source__"),
+							SourcePort:      ptr.String("__SourcePort__"),
+							Direction:       types.StatefulRuleDirection("FORWARD"),
+							Destination:     ptr.String("__Destination__"),
+							DestinationPort: ptr.String("__DestinationPort__"),
+						},
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				StatelessRulesAndCustomActions: &types.StatelessRulesAndCustomActions{
+					StatelessRules: []types.StatelessRule{
+						{
+							RuleDefinition: &types.RuleDefinition{
+								MatchAttributes: &types.MatchAttributes{
+									Sources: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									Destinations: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									SourcePorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									DestinationPorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									Protocols: []int32{
+										1,
+										1,
+									},
+									TCPFlags: []types.TCPFlagField{
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+									},
+								},
+								Actions: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Priority: ptr.Int32(1),
+						},
+						{
+							RuleDefinition: &types.RuleDefinition{
+								MatchAttributes: &types.MatchAttributes{
+									Sources: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									Destinations: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									SourcePorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									DestinationPorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									Protocols: []int32{
+										1,
+										1,
+									},
+									TCPFlags: []types.TCPFlagField{
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+									},
+								},
+								Actions: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Priority: ptr.Int32(1),
+						},
+					},
+					CustomActions: []types.CustomAction{
+						{
+							ActionName: ptr.String("__ActionName__"),
+							ActionDefinition: &types.ActionDefinition{
+								PublishMetricAction: &types.PublishMetricAction{
+									Dimensions: []types.Dimension{
+										{
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							ActionName: ptr.String("__ActionName__"),
+							ActionDefinition: &types.ActionDefinition{
+								PublishMetricAction: &types.PublishMetricAction{
+									Dimensions: []types.Dimension{
+										{
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			StatefulRuleOptions: &types.StatefulRuleOptions{
+				RuleOrder: types.RuleOrder("DEFAULT_ACTION_ORDER"),
+			},
+		},
+		Rules:       ptr.String("__Rules__"),
+		Type:        types.RuleGroupType("STATELESS"),
+		Description: ptr.String("__Description__"),
+		Capacity:    ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DryRun: true,
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+		SourceMetadata: &types.SourceMetadata{
+			SourceArn:         ptr.String("__SourceArn__"),
+			SourceUpdateToken: ptr.String("__SourceUpdateToken__"),
+		},
+		AnalyzeRuleGroup: true,
+		SummaryConfiguration: &types.SummaryConfiguration{
+			RuleOptions: []types.SummaryRuleOption{
+				types.SummaryRuleOption("SID"),
+				types.SummaryRuleOption("SID"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1156,7 +2119,230 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTLSInspectionConfiguration(context.Background(), &CreateTLSInspectionConfigurationInput{})
+	got, err := svc.CreateTLSInspectionConfiguration(context.Background(), &CreateTLSInspectionConfigurationInput{
+		TLSInspectionConfigurationName: ptr.String("__TLSInspectionConfigurationName__"),
+		TLSInspectionConfiguration: &types.TLSInspectionConfiguration{
+			ServerCertificateConfigurations: []types.ServerCertificateConfiguration{
+				{
+					ServerCertificates: []types.ServerCertificate{
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+					},
+					Scopes: []types.ServerCertificateScope{
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+					},
+					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+					CheckCertificateRevocationStatus: &types.CheckCertificateRevocationStatusActions{
+						RevokedStatusAction: types.RevocationCheckAction("PASS"),
+						UnknownStatusAction: types.RevocationCheckAction("PASS"),
+					},
+				},
+				{
+					ServerCertificates: []types.ServerCertificate{
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+					},
+					Scopes: []types.ServerCertificateScope{
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+					},
+					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+					CheckCertificateRevocationStatus: &types.CheckCertificateRevocationStatusActions{
+						RevokedStatusAction: types.RevocationCheckAction("PASS"),
+						UnknownStatusAction: types.RevocationCheckAction("PASS"),
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1211,7 +2397,25 @@ func TestCheckResponseSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcEndpointAssociation(context.Background(), &CreateVpcEndpointAssociationInput{})
+	got, err := svc.CreateVpcEndpointAssociation(context.Background(), &CreateVpcEndpointAssociationInput{
+		FirewallArn: ptr.String("__FirewallArn__"),
+		VpcId:       ptr.String("__VpcId__"),
+		SubnetMapping: &types.SubnetMapping{
+			SubnetId:      ptr.String("__SubnetId__"),
+			IPAddressType: types.IPAddressType("DUALSTACK"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +2438,10 @@ func TestCheckResponseSnapshot_DeleteContainerAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainerAssociation(context.Background(), &DeleteContainerAssociationInput{})
+	got, err := svc.DeleteContainerAssociation(context.Background(), &DeleteContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +2597,10 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{})
+	got, err := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{
+		FirewallName: ptr.String("__FirewallName__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1436,7 +2646,10 @@ func TestCheckResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallPolicy(context.Background(), &DeleteFirewallPolicyInput{})
+	got, err := svc.DeleteFirewallPolicy(context.Background(), &DeleteFirewallPolicyInput{
+		FirewallPolicyName: ptr.String("__FirewallPolicyName__"),
+		FirewallPolicyArn:  ptr.String("__FirewallPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1458,7 +2671,9 @@ func TestCheckResponseSnapshot_DeleteNetworkFirewallTransitGatewayAttachment(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetworkFirewallTransitGatewayAttachment(context.Background(), &DeleteNetworkFirewallTransitGatewayAttachmentInput{})
+	got, err := svc.DeleteNetworkFirewallTransitGatewayAttachment(context.Background(), &DeleteNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1481,7 +2696,11 @@ func TestCheckResponseSnapshot_DeleteProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxy(context.Background(), &DeleteProxyInput{})
+	got, err := svc.DeleteProxy(context.Background(), &DeleteProxyInput{
+		NatGatewayId: ptr.String("__NatGatewayId__"),
+		ProxyName:    ptr.String("__ProxyName__"),
+		ProxyArn:     ptr.String("__ProxyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1503,7 +2722,10 @@ func TestCheckResponseSnapshot_DeleteProxyConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyConfiguration(context.Background(), &DeleteProxyConfigurationInput{})
+	got, err := svc.DeleteProxyConfiguration(context.Background(), &DeleteProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1525,7 +2747,10 @@ func TestCheckResponseSnapshot_DeleteProxyRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyRuleGroup(context.Background(), &DeleteProxyRuleGroupInput{})
+	got, err := svc.DeleteProxyRuleGroup(context.Background(), &DeleteProxyRuleGroupInput{
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1708,7 +2933,14 @@ func TestCheckResponseSnapshot_DeleteProxyRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyRules(context.Background(), &DeleteProxyRulesInput{})
+	got, err := svc.DeleteProxyRules(context.Background(), &DeleteProxyRulesInput{
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		Rules: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1727,7 +2959,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1802,7 +3036,11 @@ func TestCheckResponseSnapshot_DeleteRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{})
+	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{
+		RuleGroupName: ptr.String("__RuleGroupName__"),
+		RuleGroupArn:  ptr.String("__RuleGroupArn__"),
+		Type:          types.RuleGroupType("STATELESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1865,7 +3103,10 @@ func TestCheckResponseSnapshot_DeleteTLSInspectionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTLSInspectionConfiguration(context.Background(), &DeleteTLSInspectionConfigurationInput{})
+	got, err := svc.DeleteTLSInspectionConfiguration(context.Background(), &DeleteTLSInspectionConfigurationInput{
+		TLSInspectionConfigurationArn:  ptr.String("__TLSInspectionConfigurationArn__"),
+		TLSInspectionConfigurationName: ptr.String("__TLSInspectionConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1920,7 +3161,9 @@ func TestCheckResponseSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcEndpointAssociation(context.Background(), &DeleteVpcEndpointAssociationInput{})
+	got, err := svc.DeleteVpcEndpointAssociation(context.Background(), &DeleteVpcEndpointAssociationInput{
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1986,7 +3229,10 @@ func TestCheckResponseSnapshot_DescribeContainerAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainerAssociation(context.Background(), &DescribeContainerAssociationInput{})
+	got, err := svc.DescribeContainerAssociation(context.Background(), &DescribeContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2143,7 +3389,10 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFirewall(context.Background(), &DescribeFirewallInput{})
+	got, err := svc.DescribeFirewall(context.Background(), &DescribeFirewallInput{
+		FirewallName: ptr.String("__FirewallName__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2173,7 +3422,9 @@ func TestCheckResponseSnapshot_DescribeFirewallMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFirewallMetadata(context.Background(), &DescribeFirewallMetadataInput{})
+	got, err := svc.DescribeFirewallMetadata(context.Background(), &DescribeFirewallMetadataInput{
+		FirewallArn: ptr.String("__FirewallArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2313,7 +3564,10 @@ func TestCheckResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFirewallPolicy(context.Background(), &DescribeFirewallPolicyInput{})
+	got, err := svc.DescribeFirewallPolicy(context.Background(), &DescribeFirewallPolicyInput{
+		FirewallPolicyName: ptr.String("__FirewallPolicyName__"),
+		FirewallPolicyArn:  ptr.String("__FirewallPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2375,7 +3629,13 @@ func TestCheckResponseSnapshot_DescribeFlowOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlowOperation(context.Background(), &DescribeFlowOperationInput{})
+	got, err := svc.DescribeFlowOperation(context.Background(), &DescribeFlowOperationInput{
+		FirewallArn:               ptr.String("__FirewallArn__"),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
+		FlowOperationId:           ptr.String("__FlowOperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2415,7 +3675,10 @@ func TestCheckResponseSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoggingConfiguration(context.Background(), &DescribeLoggingConfigurationInput{})
+	got, err := svc.DescribeLoggingConfiguration(context.Background(), &DescribeLoggingConfigurationInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2476,7 +3739,10 @@ func TestCheckResponseSnapshot_DescribeProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxy(context.Background(), &DescribeProxyInput{})
+	got, err := svc.DescribeProxy(context.Background(), &DescribeProxyInput{
+		ProxyName: ptr.String("__ProxyName__"),
+		ProxyArn:  ptr.String("__ProxyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2533,7 +3799,10 @@ func TestCheckResponseSnapshot_DescribeProxyConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyConfiguration(context.Background(), &DescribeProxyConfigurationInput{})
+	got, err := svc.DescribeProxyConfiguration(context.Background(), &DescribeProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2577,7 +3846,11 @@ func TestCheckResponseSnapshot_DescribeProxyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyRule(context.Background(), &DescribeProxyRuleInput{})
+	got, err := svc.DescribeProxyRule(context.Background(), &DescribeProxyRuleInput{
+		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2761,7 +4034,10 @@ func TestCheckResponseSnapshot_DescribeProxyRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyRuleGroup(context.Background(), &DescribeProxyRuleGroupInput{})
+	got, err := svc.DescribeProxyRuleGroup(context.Background(), &DescribeProxyRuleGroupInput{
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2782,7 +4058,9 @@ func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{})
+	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3140,7 +4418,12 @@ func TestCheckResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuleGroup(context.Background(), &DescribeRuleGroupInput{})
+	got, err := svc.DescribeRuleGroup(context.Background(), &DescribeRuleGroupInput{
+		RuleGroupName:    ptr.String("__RuleGroupName__"),
+		RuleGroupArn:     ptr.String("__RuleGroupArn__"),
+		Type:             types.RuleGroupType("STATELESS"),
+		AnalyzeRuleGroup: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3172,7 +4455,11 @@ func TestCheckResponseSnapshot_DescribeRuleGroupMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuleGroupMetadata(context.Background(), &DescribeRuleGroupMetadataInput{})
+	got, err := svc.DescribeRuleGroupMetadata(context.Background(), &DescribeRuleGroupMetadataInput{
+		RuleGroupName: ptr.String("__RuleGroupName__"),
+		RuleGroupArn:  ptr.String("__RuleGroupArn__"),
+		Type:          types.RuleGroupType("STATELESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3208,7 +4495,11 @@ func TestCheckResponseSnapshot_DescribeRuleGroupSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuleGroupSummary(context.Background(), &DescribeRuleGroupSummaryInput{})
+	got, err := svc.DescribeRuleGroupSummary(context.Background(), &DescribeRuleGroupSummaryInput{
+		RuleGroupName: ptr.String("__RuleGroupName__"),
+		RuleGroupArn:  ptr.String("__RuleGroupArn__"),
+		Type:          types.RuleGroupType("STATELESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3478,7 +4769,10 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTLSInspectionConfiguration(context.Background(), &DescribeTLSInspectionConfigurationInput{})
+	got, err := svc.DescribeTLSInspectionConfiguration(context.Background(), &DescribeTLSInspectionConfigurationInput{
+		TLSInspectionConfigurationArn:  ptr.String("__TLSInspectionConfigurationArn__"),
+		TLSInspectionConfigurationName: ptr.String("__TLSInspectionConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3533,7 +4827,9 @@ func TestCheckResponseSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVpcEndpointAssociation(context.Background(), &DescribeVpcEndpointAssociationInput{})
+	got, err := svc.DescribeVpcEndpointAssociation(context.Background(), &DescribeVpcEndpointAssociationInput{
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3590,7 +4886,19 @@ func TestCheckResponseSnapshot_DetachRuleGroupsFromProxyConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachRuleGroupsFromProxyConfiguration(context.Background(), &DetachRuleGroupsFromProxyConfigurationInput{})
+	got, err := svc.DetachRuleGroupsFromProxyConfiguration(context.Background(), &DetachRuleGroupsFromProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		RuleGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RuleGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3621,7 +4929,19 @@ func TestCheckResponseSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAvailabilityZones(context.Background(), &DisassociateAvailabilityZonesInput{})
+	got, err := svc.DisassociateAvailabilityZones(context.Background(), &DisassociateAvailabilityZonesInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3654,7 +4974,15 @@ func TestCheckResponseSnapshot_DisassociateSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSubnets(context.Background(), &DisassociateSubnetsInput{})
+	got, err := svc.DisassociateSubnets(context.Background(), &DisassociateSubnetsInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3706,7 +5034,13 @@ func TestCheckResponseSnapshot_GetAnalysisReportResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnalysisReportResults(context.Background(), &GetAnalysisReportResultsInput{})
+	got, err := svc.GetAnalysisReportResults(context.Background(), &GetAnalysisReportResultsInput{
+		FirewallName:     ptr.String("__FirewallName__"),
+		AnalysisReportId: ptr.String("__AnalysisReportId__"),
+		FirewallArn:      ptr.String("__FirewallArn__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3741,7 +5075,12 @@ func TestCheckResponseSnapshot_ListAnalysisReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalysisReports(context.Background(), &ListAnalysisReportsInput{})
+	got, err := svc.ListAnalysisReports(context.Background(), &ListAnalysisReportsInput{
+		FirewallName: ptr.String("__FirewallName__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3772,7 +5111,10 @@ func TestCheckResponseSnapshot_ListContainerAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerAssociations(context.Background(), &ListContainerAssociationsInput{})
+	got, err := svc.ListContainerAssociations(context.Background(), &ListContainerAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3803,7 +5145,10 @@ func TestCheckResponseSnapshot_ListFirewallPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallPolicies(context.Background(), &ListFirewallPoliciesInput{})
+	got, err := svc.ListFirewallPolicies(context.Background(), &ListFirewallPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3836,7 +5181,14 @@ func TestCheckResponseSnapshot_ListFirewalls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewalls(context.Background(), &ListFirewallsInput{})
+	got, err := svc.ListFirewalls(context.Background(), &ListFirewallsInput{
+		NextToken: ptr.String("__NextToken__"),
+		VpcIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3895,7 +5247,15 @@ func TestCheckResponseSnapshot_ListFlowOperationResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowOperationResults(context.Background(), &ListFlowOperationResultsInput{})
+	got, err := svc.ListFlowOperationResults(context.Background(), &ListFlowOperationResultsInput{
+		FirewallArn:               ptr.String("__FirewallArn__"),
+		FlowOperationId:           ptr.String("__FlowOperationId__"),
+		NextToken:                 ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3930,7 +5290,15 @@ func TestCheckResponseSnapshot_ListFlowOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowOperations(context.Background(), &ListFlowOperationsInput{})
+	got, err := svc.ListFlowOperations(context.Background(), &ListFlowOperationsInput{
+		FirewallArn:               ptr.String("__FirewallArn__"),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
+		FlowOperationType:         types.FlowOperationType("FLOW_FLUSH"),
+		NextToken:                 ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3961,7 +5329,10 @@ func TestCheckResponseSnapshot_ListProxies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxies(context.Background(), &ListProxiesInput{})
+	got, err := svc.ListProxies(context.Background(), &ListProxiesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3992,7 +5363,10 @@ func TestCheckResponseSnapshot_ListProxyConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxyConfigurations(context.Background(), &ListProxyConfigurationsInput{})
+	got, err := svc.ListProxyConfigurations(context.Background(), &ListProxyConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4023,7 +5397,10 @@ func TestCheckResponseSnapshot_ListProxyRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxyRuleGroups(context.Background(), &ListProxyRuleGroupsInput{})
+	got, err := svc.ListProxyRuleGroups(context.Background(), &ListProxyRuleGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4056,7 +5433,14 @@ func TestCheckResponseSnapshot_ListRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{})
+	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		Scope:              types.ResourceManagedStatus("MANAGED"),
+		ManagedType:        types.ResourceManagedType("AWS_MANAGED_THREAT_SIGNATURES"),
+		SubscriptionStatus: types.SubscriptionStatus("NOT_SUBSCRIBED"),
+		Type:               types.RuleGroupType("STATELESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4087,7 +5471,10 @@ func TestCheckResponseSnapshot_ListTLSInspectionConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTLSInspectionConfigurations(context.Background(), &ListTLSInspectionConfigurationsInput{})
+	got, err := svc.ListTLSInspectionConfigurations(context.Background(), &ListTLSInspectionConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4118,7 +5505,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4147,7 +5538,11 @@ func TestCheckResponseSnapshot_ListVpcEndpointAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpointAssociations(context.Background(), &ListVpcEndpointAssociationsInput{})
+	got, err := svc.ListVpcEndpointAssociations(context.Background(), &ListVpcEndpointAssociationsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		FirewallArn: ptr.String("__FirewallArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4166,7 +5561,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4188,7 +5586,9 @@ func TestCheckResponseSnapshot_RejectNetworkFirewallTransitGatewayAttachment(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectNetworkFirewallTransitGatewayAttachment(context.Background(), &RejectNetworkFirewallTransitGatewayAttachmentInput{})
+	got, err := svc.RejectNetworkFirewallTransitGatewayAttachment(context.Background(), &RejectNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4209,7 +5609,11 @@ func TestCheckResponseSnapshot_StartAnalysisReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAnalysisReport(context.Background(), &StartAnalysisReportInput{})
+	got, err := svc.StartAnalysisReport(context.Background(), &StartAnalysisReportInput{
+		FirewallName: ptr.String("__FirewallName__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		AnalysisType: types.EnabledAnalysisType("TLS_SNI"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4232,7 +5636,43 @@ func TestCheckResponseSnapshot_StartFlowCapture(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlowCapture(context.Background(), &StartFlowCaptureInput{})
+	got, err := svc.StartFlowCapture(context.Background(), &StartFlowCaptureInput{
+		FirewallArn:               ptr.String("__FirewallArn__"),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
+		MinimumFlowAgeInSeconds:   ptr.Int32(1),
+		FlowFilters: []types.FlowFilter{
+			{
+				SourceAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				DestinationAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				SourcePort:      ptr.String("__SourcePort__"),
+				DestinationPort: ptr.String("__DestinationPort__"),
+				Protocols: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SourceAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				DestinationAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				SourcePort:      ptr.String("__SourcePort__"),
+				DestinationPort: ptr.String("__DestinationPort__"),
+				Protocols: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4255,7 +5695,43 @@ func TestCheckResponseSnapshot_StartFlowFlush(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlowFlush(context.Background(), &StartFlowFlushInput{})
+	got, err := svc.StartFlowFlush(context.Background(), &StartFlowFlushInput{
+		FirewallArn:               ptr.String("__FirewallArn__"),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
+		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
+		MinimumFlowAgeInSeconds:   ptr.Int32(1),
+		FlowFilters: []types.FlowFilter{
+			{
+				SourceAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				DestinationAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				SourcePort:      ptr.String("__SourcePort__"),
+				DestinationPort: ptr.String("__DestinationPort__"),
+				Protocols: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SourceAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				DestinationAddress: &types.Address{
+					AddressDefinition: ptr.String("__AddressDefinition__"),
+				},
+				SourcePort:      ptr.String("__SourcePort__"),
+				DestinationPort: ptr.String("__DestinationPort__"),
+				Protocols: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4274,7 +5750,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4293,7 +5781,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4317,7 +5811,12 @@ func TestCheckResponseSnapshot_UpdateAvailabilityZoneChangeProtection(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), &UpdateAvailabilityZoneChangeProtectionInput{})
+	got, err := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), &UpdateAvailabilityZoneChangeProtectionInput{
+		UpdateToken:                      ptr.String("__UpdateToken__"),
+		FirewallArn:                      ptr.String("__FirewallArn__"),
+		FirewallName:                     ptr.String("__FirewallName__"),
+		AvailabilityZoneChangeProtection: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4381,7 +5880,51 @@ func TestCheckResponseSnapshot_UpdateContainerAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContainerAssociation(context.Background(), &UpdateContainerAssociationInput{})
+	got, err := svc.UpdateContainerAssociation(context.Background(), &UpdateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4408,7 +5951,15 @@ func TestCheckResponseSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallAnalysisSettings(context.Background(), &UpdateFirewallAnalysisSettingsInput{})
+	got, err := svc.UpdateFirewallAnalysisSettings(context.Background(), &UpdateFirewallAnalysisSettingsInput{
+		EnabledAnalysisTypes: []types.EnabledAnalysisType{
+			types.EnabledAnalysisType("TLS_SNI"),
+			types.EnabledAnalysisType("TLS_SNI"),
+		},
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		UpdateToken:  ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4432,7 +5983,12 @@ func TestCheckResponseSnapshot_UpdateFirewallDeleteProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallDeleteProtection(context.Background(), &UpdateFirewallDeleteProtectionInput{})
+	got, err := svc.UpdateFirewallDeleteProtection(context.Background(), &UpdateFirewallDeleteProtectionInput{
+		UpdateToken:      ptr.String("__UpdateToken__"),
+		FirewallArn:      ptr.String("__FirewallArn__"),
+		FirewallName:     ptr.String("__FirewallName__"),
+		DeleteProtection: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4456,7 +6012,12 @@ func TestCheckResponseSnapshot_UpdateFirewallDescription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallDescription(context.Background(), &UpdateFirewallDescriptionInput{})
+	got, err := svc.UpdateFirewallDescription(context.Background(), &UpdateFirewallDescriptionInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		Description:  ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4483,7 +6044,15 @@ func TestCheckResponseSnapshot_UpdateFirewallEncryptionConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallEncryptionConfiguration(context.Background(), &UpdateFirewallEncryptionConfigurationInput{})
+	got, err := svc.UpdateFirewallEncryptionConfiguration(context.Background(), &UpdateFirewallEncryptionConfigurationInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4530,7 +6099,110 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallPolicy(context.Background(), &UpdateFirewallPolicyInput{})
+	got, err := svc.UpdateFirewallPolicy(context.Background(), &UpdateFirewallPolicyInput{
+		UpdateToken:        ptr.String("__UpdateToken__"),
+		FirewallPolicyArn:  ptr.String("__FirewallPolicyArn__"),
+		FirewallPolicyName: ptr.String("__FirewallPolicyName__"),
+		FirewallPolicy: &types.FirewallPolicy{
+			StatelessRuleGroupReferences: []types.StatelessRuleGroupReference{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+				},
+			},
+			StatelessDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatelessFragmentDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatelessCustomActions: []types.CustomAction{
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ActionDefinition: &types.ActionDefinition{
+						PublishMetricAction: &types.PublishMetricAction{
+							Dimensions: []types.Dimension{
+								{
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ActionDefinition: &types.ActionDefinition{
+						PublishMetricAction: &types.PublishMetricAction{
+							Dimensions: []types.Dimension{
+								{
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			StatefulRuleGroupReferences: []types.StatefulRuleGroupReference{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+					Override: &types.StatefulRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+					DeepThreatInspection: ptr.Bool(true),
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					Priority:    ptr.Int32(1),
+					Override: &types.StatefulRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+					DeepThreatInspection: ptr.Bool(true),
+				},
+			},
+			StatefulDefaultActions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StatefulEngineOptions: &types.StatefulEngineOptions{
+				RuleOrder:             types.RuleOrder("DEFAULT_ACTION_ORDER"),
+				StreamExceptionPolicy: types.StreamExceptionPolicy("DROP"),
+				FlowTimeouts: &types.FlowTimeouts{
+					TcpIdleTimeoutSeconds: ptr.Int32(1),
+				},
+			},
+			TLSInspectionConfigurationArn: ptr.String("__TLSInspectionConfigurationArn__"),
+			PolicyVariables: &types.PolicyVariables{
+				RuleVariables: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			EnableTLSSessionHolding: ptr.Bool(true),
+		},
+		Description: ptr.String("__Description__"),
+		DryRun:      true,
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4554,7 +6226,12 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallPolicyChangeProtection(context.Background(), &UpdateFirewallPolicyChangeProtectionInput{})
+	got, err := svc.UpdateFirewallPolicyChangeProtection(context.Background(), &UpdateFirewallPolicyChangeProtectionInput{
+		UpdateToken:                    ptr.String("__UpdateToken__"),
+		FirewallArn:                    ptr.String("__FirewallArn__"),
+		FirewallName:                   ptr.String("__FirewallName__"),
+		FirewallPolicyChangeProtection: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4595,7 +6272,29 @@ func TestCheckResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{})
+	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogDestinationConfigs: []types.LogDestinationConfig{
+				{
+					LogType:            types.LogType("ALERT"),
+					LogDestinationType: types.LogDestinationType("S3"),
+					LogDestination: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					LogType:            types.LogType("ALERT"),
+					LogDestinationType: types.LogDestinationType("S3"),
+					LogDestination: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		EnableMonitoringDashboard: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4654,7 +6353,36 @@ func TestCheckResponseSnapshot_UpdateProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxy(context.Background(), &UpdateProxyInput{})
+	got, err := svc.UpdateProxy(context.Background(), &UpdateProxyInput{
+		NatGatewayId: ptr.String("__NatGatewayId__"),
+		ProxyName:    ptr.String("__ProxyName__"),
+		ProxyArn:     ptr.String("__ProxyArn__"),
+		ListenerPropertiesToAdd: []types.ListenerPropertyRequest{
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+		},
+		ListenerPropertiesToRemove: []types.ListenerPropertyRequest{
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+		},
+		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
+			PcaArn:           ptr.String("__PcaArn__"),
+			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4711,7 +6439,16 @@ func TestCheckResponseSnapshot_UpdateProxyConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyConfiguration(context.Background(), &UpdateProxyConfigurationInput{})
+	got, err := svc.UpdateProxyConfiguration(context.Background(), &UpdateProxyConfigurationInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
+			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
+			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
+			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4773,7 +6510,50 @@ func TestCheckResponseSnapshot_UpdateProxyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRule(context.Background(), &UpdateProxyRuleInput{})
+	got, err := svc.UpdateProxyRule(context.Background(), &UpdateProxyRuleInput{
+		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
+		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
+		Description:        ptr.String("__Description__"),
+		Action:             types.ProxyRulePhaseAction("ALLOW"),
+		AddConditions: []types.ProxyRuleCondition{
+			{
+				ConditionOperator: ptr.String("__ConditionOperator__"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: ptr.String("__ConditionOperator__"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RemoveConditions: []types.ProxyRuleCondition{
+			{
+				ConditionOperator: ptr.String("__ConditionOperator__"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: ptr.String("__ConditionOperator__"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4804,7 +6584,21 @@ func TestCheckResponseSnapshot_UpdateProxyRuleGroupPriorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRuleGroupPriorities(context.Background(), &UpdateProxyRuleGroupPrioritiesInput{})
+	got, err := svc.UpdateProxyRuleGroupPriorities(context.Background(), &UpdateProxyRuleGroupPrioritiesInput{
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		RuleGroups: []types.ProxyRuleGroupPriority{
+			{
+				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+				NewPosition:        ptr.Int32(1),
+			},
+			{
+				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
+				NewPosition:        ptr.Int32(1),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4838,7 +6632,22 @@ func TestCheckResponseSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRulePriorities(context.Background(), &UpdateProxyRulePrioritiesInput{})
+	got, err := svc.UpdateProxyRulePriorities(context.Background(), &UpdateProxyRulePrioritiesInput{
+		ProxyRuleGroupName:    ptr.String("__ProxyRuleGroupName__"),
+		ProxyRuleGroupArn:     ptr.String("__ProxyRuleGroupArn__"),
+		RuleGroupRequestPhase: types.RuleGroupRequestPhase("PRE_DNS"),
+		Rules: []types.ProxyRulePriority{
+			{
+				ProxyRuleName: ptr.String("__ProxyRuleName__"),
+				NewPosition:   ptr.Int32(1),
+			},
+			{
+				ProxyRuleName: ptr.String("__ProxyRuleName__"),
+				NewPosition:   ptr.Int32(1),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4873,7 +6682,23 @@ func TestCheckResponseSnapshot_UpdateProxySettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxySettings(context.Background(), &UpdateProxySettingsInput{})
+	got, err := svc.UpdateProxySettings(context.Background(), &UpdateProxySettingsInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4949,7 +6774,312 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{})
+	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{
+		UpdateToken:   ptr.String("__UpdateToken__"),
+		RuleGroupArn:  ptr.String("__RuleGroupArn__"),
+		RuleGroupName: ptr.String("__RuleGroupName__"),
+		RuleGroup: &types.RuleGroup{
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+			RulesSource: &types.RulesSource{
+				RulesString: ptr.String("__RulesString__"),
+				RulesSourceList: &types.RulesSourceList{
+					Targets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetTypes: []types.TargetType{
+						types.TargetType("TLS_SNI"),
+						types.TargetType("TLS_SNI"),
+					},
+					GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+				},
+				StatefulRules: []types.StatefulRule{
+					{
+						Action: types.StatefulAction("PASS"),
+						Header: &types.Header{
+							Protocol:        types.StatefulRuleProtocol("IP"),
+							Source:          ptr.String("__Source__"),
+							SourcePort:      ptr.String("__SourcePort__"),
+							Direction:       types.StatefulRuleDirection("FORWARD"),
+							Destination:     ptr.String("__Destination__"),
+							DestinationPort: ptr.String("__DestinationPort__"),
+						},
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						Action: types.StatefulAction("PASS"),
+						Header: &types.Header{
+							Protocol:        types.StatefulRuleProtocol("IP"),
+							Source:          ptr.String("__Source__"),
+							SourcePort:      ptr.String("__SourcePort__"),
+							Direction:       types.StatefulRuleDirection("FORWARD"),
+							Destination:     ptr.String("__Destination__"),
+							DestinationPort: ptr.String("__DestinationPort__"),
+						},
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				StatelessRulesAndCustomActions: &types.StatelessRulesAndCustomActions{
+					StatelessRules: []types.StatelessRule{
+						{
+							RuleDefinition: &types.RuleDefinition{
+								MatchAttributes: &types.MatchAttributes{
+									Sources: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									Destinations: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									SourcePorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									DestinationPorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									Protocols: []int32{
+										1,
+										1,
+									},
+									TCPFlags: []types.TCPFlagField{
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+									},
+								},
+								Actions: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Priority: ptr.Int32(1),
+						},
+						{
+							RuleDefinition: &types.RuleDefinition{
+								MatchAttributes: &types.MatchAttributes{
+									Sources: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									Destinations: []types.Address{
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+										{
+											AddressDefinition: ptr.String("__AddressDefinition__"),
+										},
+									},
+									SourcePorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									DestinationPorts: []types.PortRange{
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+										{
+											FromPort: 1,
+											ToPort:   1,
+										},
+									},
+									Protocols: []int32{
+										1,
+										1,
+									},
+									TCPFlags: []types.TCPFlagField{
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+										{
+											Flags: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+											Masks: []types.TCPFlag{
+												types.TCPFlag("FIN"),
+												types.TCPFlag("FIN"),
+											},
+										},
+									},
+								},
+								Actions: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Priority: ptr.Int32(1),
+						},
+					},
+					CustomActions: []types.CustomAction{
+						{
+							ActionName: ptr.String("__ActionName__"),
+							ActionDefinition: &types.ActionDefinition{
+								PublishMetricAction: &types.PublishMetricAction{
+									Dimensions: []types.Dimension{
+										{
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							ActionName: ptr.String("__ActionName__"),
+							ActionDefinition: &types.ActionDefinition{
+								PublishMetricAction: &types.PublishMetricAction{
+									Dimensions: []types.Dimension{
+										{
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			StatefulRuleOptions: &types.StatefulRuleOptions{
+				RuleOrder: types.RuleOrder("DEFAULT_ACTION_ORDER"),
+			},
+		},
+		Rules:       ptr.String("__Rules__"),
+		Type:        types.RuleGroupType("STATELESS"),
+		Description: ptr.String("__Description__"),
+		DryRun:      true,
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+		SourceMetadata: &types.SourceMetadata{
+			SourceArn:         ptr.String("__SourceArn__"),
+			SourceUpdateToken: ptr.String("__SourceUpdateToken__"),
+		},
+		AnalyzeRuleGroup: true,
+		SummaryConfiguration: &types.SummaryConfiguration{
+			RuleOptions: []types.SummaryRuleOption{
+				types.SummaryRuleOption("SID"),
+				types.SummaryRuleOption("SID"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4973,7 +7103,12 @@ func TestCheckResponseSnapshot_UpdateSubnetChangeProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubnetChangeProtection(context.Background(), &UpdateSubnetChangeProtectionInput{})
+	got, err := svc.UpdateSubnetChangeProtection(context.Background(), &UpdateSubnetChangeProtectionInput{
+		UpdateToken:            ptr.String("__UpdateToken__"),
+		FirewallArn:            ptr.String("__FirewallArn__"),
+		FirewallName:           ptr.String("__FirewallName__"),
+		SubnetChangeProtection: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5037,7 +7172,222 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTLSInspectionConfiguration(context.Background(), &UpdateTLSInspectionConfigurationInput{})
+	got, err := svc.UpdateTLSInspectionConfiguration(context.Background(), &UpdateTLSInspectionConfigurationInput{
+		TLSInspectionConfigurationArn:  ptr.String("__TLSInspectionConfigurationArn__"),
+		TLSInspectionConfigurationName: ptr.String("__TLSInspectionConfigurationName__"),
+		TLSInspectionConfiguration: &types.TLSInspectionConfiguration{
+			ServerCertificateConfigurations: []types.ServerCertificateConfiguration{
+				{
+					ServerCertificates: []types.ServerCertificate{
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+					},
+					Scopes: []types.ServerCertificateScope{
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+					},
+					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+					CheckCertificateRevocationStatus: &types.CheckCertificateRevocationStatusActions{
+						RevokedStatusAction: types.RevocationCheckAction("PASS"),
+						UnknownStatusAction: types.RevocationCheckAction("PASS"),
+					},
+				},
+				{
+					ServerCertificates: []types.ServerCertificate{
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+						{
+							ResourceArn: ptr.String("__ResourceArn__"),
+						},
+					},
+					Scopes: []types.ServerCertificateScope{
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+						{
+							Sources: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							Destinations: []types.Address{
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+								{
+									AddressDefinition: ptr.String("__AddressDefinition__"),
+								},
+							},
+							SourcePorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							DestinationPorts: []types.PortRange{
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+								{
+									FromPort: 1,
+									ToPort:   1,
+								},
+							},
+							Protocols: []int32{
+								1,
+								1,
+							},
+						},
+					},
+					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+					CheckCertificateRevocationStatus: &types.CheckCertificateRevocationStatusActions{
+						RevokedStatusAction: types.RevocationCheckAction("PASS"),
+						UnknownStatusAction: types.RevocationCheckAction("PASS"),
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyId: ptr.String("__KeyId__"),
+			Type:  types.EncryptionType("CUSTOMER_KMS"),
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5058,7 +7408,19 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{})
+	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5083,7 +7445,9 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{})
+	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5108,7 +7472,19 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{})
+	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5133,7 +7509,9 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{})
+	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5158,7 +7536,9 @@ func TestCheckResponseSnapshot_Error_InvalidResourcePolicyException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5183,7 +7563,19 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{})
+	_, opErr := svc.AssociateAvailabilityZones(context.Background(), &AssociateAvailabilityZonesInput{
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		AvailabilityZoneMappings: []types.AvailabilityZoneMapping{
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+			{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5208,7 +7600,49 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContainerAssociation(context.Background(), &CreateContainerAssociationInput{})
+	_, opErr := svc.CreateContainerAssociation(context.Background(), &CreateContainerAssociationInput{
+		ContainerAssociationName: ptr.String("__ContainerAssociationName__"),
+		Description:              ptr.String("__Description__"),
+		Type:                     types.ContainerMonitoringType("ECS"),
+		ContainerMonitoringConfigurations: []types.ContainerMonitoringConfiguration{
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ClusterArn: ptr.String("__ClusterArn__"),
+				AttributeFilters: []types.ContainerAttribute{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5233,7 +7667,29 @@ func TestCheckResponseSnapshot_Error_LogDestinationPermissionException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{})
+	_, opErr := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			LogDestinationConfigs: []types.LogDestinationConfig{
+				{
+					LogType:            types.LogType("ALERT"),
+					LogDestinationType: types.LogDestinationType("S3"),
+					LogDestination: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					LogType:            types.LogType("ALERT"),
+					LogDestinationType: types.LogDestinationType("S3"),
+					LogDestination: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		EnableMonitoringDashboard: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5258,7 +7714,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{})
+	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5283,7 +7741,12 @@ func TestCheckResponseSnapshot_Error_ResourceOwnerCheckException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), &UpdateAvailabilityZoneChangeProtectionInput{})
+	_, opErr := svc.UpdateAvailabilityZoneChangeProtection(context.Background(), &UpdateAvailabilityZoneChangeProtectionInput{
+		UpdateToken:                      ptr.String("__UpdateToken__"),
+		FirewallArn:                      ptr.String("__FirewallArn__"),
+		FirewallName:                     ptr.String("__FirewallName__"),
+		AvailabilityZoneChangeProtection: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5308,7 +7771,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{})
+	_, opErr := svc.AcceptNetworkFirewallTransitGatewayAttachment(context.Background(), &AcceptNetworkFirewallTransitGatewayAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5333,7 +7798,36 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProxy(context.Background(), &CreateProxyInput{})
+	_, opErr := svc.CreateProxy(context.Background(), &CreateProxyInput{
+		ProxyName:              ptr.String("__ProxyName__"),
+		NatGatewayId:           ptr.String("__NatGatewayId__"),
+		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
+		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
+		ListenerProperties: []types.ListenerPropertyRequest{
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+			{
+				Port: ptr.Int32(1),
+				Type: types.ListenerPropertyType("HTTP"),
+			},
+		},
+		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
+			PcaArn:           ptr.String("__PcaArn__"),
+			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

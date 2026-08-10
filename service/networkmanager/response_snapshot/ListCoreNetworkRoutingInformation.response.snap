@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CoreNetworkRoutingInformation":[{"AsPath":["__Member__","__Member__"],"Communities":["__Member__","__Member__"],"LocalPreference":"__LocalPreference__","Med":"__Med__","NextHop":{"CoreNetworkAttachmentId":"__CoreNetworkAttachmentId__","EdgeLocation":"__EdgeLocation__","IpAddress":"__IpAddress__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","SegmentName":"__SegmentName__"},"Prefix":"__Prefix__"},{"AsPath":["__Member__","__Member__"],"Communities":["__Member__","__Member__"],"LocalPreference":"__LocalPreference__","Med":"__Med__","NextHop":{"CoreNetworkAttachmentId":"__CoreNetworkAttachmentId__","EdgeLocation":"__EdgeLocation__","IpAddress":"__IpAddress__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","SegmentName":"__SegmentName__"},"Prefix":"__Prefix__"}],"NextToken":"__NextToken__"}

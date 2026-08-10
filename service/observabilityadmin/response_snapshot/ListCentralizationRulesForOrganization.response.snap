@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CentralizationRuleSummaries":[{"CreatedRegion":"__CreatedRegion__","CreatedTimeStamp":1,"CreatorAccountId":"__CreatorAccountId__","DestinationAccountId":"__DestinationAccountId__","DestinationRegion":"__DestinationRegion__","FailureReason":"TRUSTED_ACCESS_NOT_ENABLED","LastUpdateTimeStamp":1,"RuleArn":"__RuleArn__","RuleHealth":"Healthy","RuleName":"__RuleName__"},{"CreatedRegion":"__CreatedRegion__","CreatedTimeStamp":1,"CreatorAccountId":"__CreatorAccountId__","DestinationAccountId":"__DestinationAccountId__","DestinationRegion":"__DestinationRegion__","FailureReason":"TRUSTED_ACCESS_NOT_ENABLED","LastUpdateTimeStamp":1,"RuleArn":"__RuleArn__","RuleHealth":"Healthy","RuleName":"__RuleName__"}],"NextToken":"__NextToken__"}

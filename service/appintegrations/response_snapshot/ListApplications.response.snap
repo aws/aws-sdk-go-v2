@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Applications":[{"ApplicationType":"STANDARD","Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IsService":true,"LastModifiedTime":946684800,"Name":"__Name__","Namespace":"__Namespace__"},{"ApplicationType":"STANDARD","Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IsService":true,"LastModifiedTime":946684800,"Name":"__Name__","Namespace":"__Namespace__"}],"NextToken":"__NextToken__"}

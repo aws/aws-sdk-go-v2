@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.CreateProxyConfiguration
+
+{"ProxyConfiguration":{"CreateTime":946684800,"DefaultRulePhaseActions":{"PostRESPONSE":"ALLOW","PreDNS":"ALLOW","PreREQUEST":"ALLOW"},"DeleteTime":946684800,"Description":"__Description__","ProxyConfigurationArn":"__ProxyConfigurationArn__","ProxyConfigurationName":"__ProxyConfigurationName__","RuleGroups":[{"Priority":1,"ProxyRuleGroupArn":"__ProxyRuleGroupArn__","ProxyRuleGroupName":"__ProxyRuleGroupName__","Type":"__Type__"},{"Priority":1,"ProxyRuleGroupArn":"__ProxyRuleGroupArn__","ProxyRuleGroupName":"__ProxyRuleGroupName__","Type":"__Type__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"UpdateToken":"__UpdateToken__"}

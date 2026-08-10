@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"controlOperation":{"controlIdentifier":"__ControlIdentifier__","enabledControlIdentifier":"__EnabledControlIdentifier__","endTime":"2000-01-01T00:00:00Z","operationIdentifier":"__OperationIdentifier__","operationType":"ENABLE_CONTROL","startTime":"2000-01-01T00:00:00Z","status":"SUCCEEDED","statusMessage":"__StatusMessage__","targetIdentifier":"__TargetIdentifier__"}}

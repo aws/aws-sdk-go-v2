@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Traces":[{"Duration":1,"Id":"__Id__","LimitExceeded":true,"Segments":[{"Document":"__Document__","Id":"__Id__"},{"Document":"__Document__","Id":"__Id__"}]},{"Duration":1,"Id":"__Id__","LimitExceeded":true,"Segments":[{"Document":"__Document__","Id":"__Id__"},{"Document":"__Document__","Id":"__Id__"}]}],"UnprocessedTraceIds":["__Member__","__Member__"]}

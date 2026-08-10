@@ -1,5 +1,0 @@
-PUT /DocumentTypeAsMapValue
-
-Content-Type: application/json
-
-{"docValuedMap":{"key0":null}}

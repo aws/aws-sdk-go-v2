@@ -117,7 +117,12 @@ func TestCheckResponseSnapshot_DeleteScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	got, err := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +141,12 @@ func TestCheckResponseSnapshot_DeleteScheduledAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduledAction(context.Background(), &DeleteScheduledActionInput{})
+	got, err := svc.DeleteScheduledAction(context.Background(), &DeleteScheduledActionInput{
+		ServiceNamespace:    types.ServiceNamespace("ecs"),
+		ScheduledActionName: ptr.String("__ScheduledActionName__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		ScalableDimension:   types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +165,11 @@ func TestCheckResponseSnapshot_DeregisterScalableTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterScalableTarget(context.Background(), &DeregisterScalableTargetInput{})
+	got, err := svc.DeregisterScalableTarget(context.Background(), &DeregisterScalableTargetInput{
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +224,16 @@ func TestCheckResponseSnapshot_DescribeScalableTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalableTargets(context.Background(), &DescribeScalableTargetsInput{})
+	got, err := svc.DescribeScalableTargets(context.Background(), &DescribeScalableTargetsInput{
+		ServiceNamespace: types.ServiceNamespace("ecs"),
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +310,14 @@ func TestCheckResponseSnapshot_DescribeScalingActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingActivities(context.Background(), &DescribeScalingActivitiesInput{})
+	got, err := svc.DescribeScalingActivities(context.Background(), &DescribeScalingActivitiesInput{
+		ServiceNamespace:           types.ServiceNamespace("ecs"),
+		ResourceId:                 ptr.String("__ResourceId__"),
+		ScalableDimension:          types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+		IncludeNotScaledActivities: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1236,7 +1266,17 @@ func TestCheckResponseSnapshot_DescribeScalingPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{})
+	got, err := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1291,7 +1331,17 @@ func TestCheckResponseSnapshot_DescribeScheduledActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScheduledActions(context.Background(), &DescribeScheduledActionsInput{})
+	got, err := svc.DescribeScheduledActions(context.Background(), &DescribeScheduledActionsInput{
+		ScheduledActionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1686,7 +1736,14 @@ func TestCheckResponseSnapshot_GetPredictiveScalingForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPredictiveScalingForecast(context.Background(), &GetPredictiveScalingForecastInput{})
+	got, err := svc.GetPredictiveScalingForecast(context.Background(), &GetPredictiveScalingForecastInput{
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		PolicyName:        ptr.String("__PolicyName__"),
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1709,7 +1766,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1740,7 +1799,457 @@ func TestCheckResponseSnapshot_PutScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{})
+	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		PolicyType:        types.PolicyType("StepScaling"),
+		StepScalingPolicyConfiguration: &types.StepScalingPolicyConfiguration{
+			AdjustmentType: types.AdjustmentType("ChangeInCapacity"),
+			StepAdjustments: []types.StepAdjustment{
+				{
+					MetricIntervalLowerBound: ptr.Float64(1.0),
+					MetricIntervalUpperBound: ptr.Float64(1.0),
+					ScalingAdjustment:        ptr.Int32(1),
+				},
+				{
+					MetricIntervalLowerBound: ptr.Float64(1.0),
+					MetricIntervalUpperBound: ptr.Float64(1.0),
+					ScalingAdjustment:        ptr.Int32(1),
+				},
+			},
+			MinAdjustmentMagnitude: ptr.Int32(1),
+			Cooldown:               ptr.Int32(1),
+			MetricAggregationType:  types.MetricAggregationType("Average"),
+		},
+		TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+			TargetValue: ptr.Float64(1.0),
+			PredefinedMetricSpecification: &types.PredefinedMetricSpecification{
+				PredefinedMetricType: types.MetricType("DynamoDBReadCapacityUtilization"),
+				ResourceLabel:        ptr.String("__ResourceLabel__"),
+			},
+			CustomizedMetricSpecification: &types.CustomizedMetricSpecification{
+				MetricName: ptr.String("__MetricName__"),
+				Namespace:  ptr.String("__Namespace__"),
+				Dimensions: []types.MetricDimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Statistic: types.MetricStatistic("Average"),
+				Unit:      ptr.String("__Unit__"),
+				Metrics: []types.TargetTrackingMetricDataQuery{
+					{
+						Expression: ptr.String("__Expression__"),
+						Id:         ptr.String("__Id__"),
+						Label:      ptr.String("__Label__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.TargetTrackingMetric{
+								Dimensions: []types.TargetTrackingMetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MetricName: ptr.String("__MetricName__"),
+								Namespace:  ptr.String("__Namespace__"),
+							},
+							Stat: ptr.String("__Stat__"),
+							Unit: ptr.String("__Unit__"),
+						},
+						ReturnData: ptr.Bool(true),
+					},
+					{
+						Expression: ptr.String("__Expression__"),
+						Id:         ptr.String("__Id__"),
+						Label:      ptr.String("__Label__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.TargetTrackingMetric{
+								Dimensions: []types.TargetTrackingMetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MetricName: ptr.String("__MetricName__"),
+								Namespace:  ptr.String("__Namespace__"),
+							},
+							Stat: ptr.String("__Stat__"),
+							Unit: ptr.String("__Unit__"),
+						},
+						ReturnData: ptr.Bool(true),
+					},
+				},
+			},
+			ScaleOutCooldown: ptr.Int32(1),
+			ScaleInCooldown:  ptr.Int32(1),
+			DisableScaleIn:   ptr.Bool(true),
+		},
+		PredictiveScalingPolicyConfiguration: &types.PredictiveScalingPolicyConfiguration{
+			MetricSpecifications: []types.PredictiveScalingMetricSpecification{
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPairSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPairSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			Mode:                      types.PredictiveScalingMode("ForecastOnly"),
+			SchedulingBufferTime:      ptr.Int32(1),
+			MaxCapacityBreachBehavior: types.PredictiveScalingMaxCapacityBreachBehavior("HonorMaxCapacity"),
+			MaxCapacityBuffer:         ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1759,7 +2268,20 @@ func TestCheckResponseSnapshot_PutScheduledAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutScheduledAction(context.Background(), &PutScheduledActionInput{})
+	got, err := svc.PutScheduledAction(context.Background(), &PutScheduledActionInput{
+		ServiceNamespace:    types.ServiceNamespace("ecs"),
+		Schedule:            ptr.String("__Schedule__"),
+		Timezone:            ptr.String("__Timezone__"),
+		ScheduledActionName: ptr.String("__ScheduledActionName__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		ScalableDimension:   types.ScalableDimension("ecs:service:DesiredCount"),
+		StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ScalableTargetAction: &types.ScalableTargetAction{
+			MinCapacity: ptr.Int32(1),
+			MaxCapacity: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1780,7 +2302,22 @@ func TestCheckResponseSnapshot_RegisterScalableTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterScalableTarget(context.Background(), &RegisterScalableTargetInput{})
+	got, err := svc.RegisterScalableTarget(context.Background(), &RegisterScalableTargetInput{
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MinCapacity:       ptr.Int32(1),
+		MaxCapacity:       ptr.Int32(1),
+		RoleARN:           ptr.String("__RoleARN__"),
+		SuspendedState: &types.SuspendedState{
+			DynamicScalingInSuspended:  ptr.Bool(true),
+			DynamicScalingOutSuspended: ptr.Bool(true),
+			ScheduledScalingSuspended:  ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2336,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1818,7 +2360,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1839,7 +2387,12 @@ func TestCheckResponseSnapshot_Error_ConcurrentUpdateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1864,7 +2417,17 @@ func TestCheckResponseSnapshot_Error_FailedResourceAccessException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{})
+	_, opErr := svc.DescribeScalingPolicies(context.Background(), &DescribeScalingPoliciesInput{
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1889,7 +2452,12 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1914,7 +2482,16 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeScalableTargets(context.Background(), &DescribeScalableTargetsInput{})
+	_, opErr := svc.DescribeScalableTargets(context.Background(), &DescribeScalableTargetsInput{
+		ServiceNamespace: types.ServiceNamespace("ecs"),
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1939,7 +2516,457 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{})
+	_, opErr := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+		PolicyType:        types.PolicyType("StepScaling"),
+		StepScalingPolicyConfiguration: &types.StepScalingPolicyConfiguration{
+			AdjustmentType: types.AdjustmentType("ChangeInCapacity"),
+			StepAdjustments: []types.StepAdjustment{
+				{
+					MetricIntervalLowerBound: ptr.Float64(1.0),
+					MetricIntervalUpperBound: ptr.Float64(1.0),
+					ScalingAdjustment:        ptr.Int32(1),
+				},
+				{
+					MetricIntervalLowerBound: ptr.Float64(1.0),
+					MetricIntervalUpperBound: ptr.Float64(1.0),
+					ScalingAdjustment:        ptr.Int32(1),
+				},
+			},
+			MinAdjustmentMagnitude: ptr.Int32(1),
+			Cooldown:               ptr.Int32(1),
+			MetricAggregationType:  types.MetricAggregationType("Average"),
+		},
+		TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+			TargetValue: ptr.Float64(1.0),
+			PredefinedMetricSpecification: &types.PredefinedMetricSpecification{
+				PredefinedMetricType: types.MetricType("DynamoDBReadCapacityUtilization"),
+				ResourceLabel:        ptr.String("__ResourceLabel__"),
+			},
+			CustomizedMetricSpecification: &types.CustomizedMetricSpecification{
+				MetricName: ptr.String("__MetricName__"),
+				Namespace:  ptr.String("__Namespace__"),
+				Dimensions: []types.MetricDimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Statistic: types.MetricStatistic("Average"),
+				Unit:      ptr.String("__Unit__"),
+				Metrics: []types.TargetTrackingMetricDataQuery{
+					{
+						Expression: ptr.String("__Expression__"),
+						Id:         ptr.String("__Id__"),
+						Label:      ptr.String("__Label__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.TargetTrackingMetric{
+								Dimensions: []types.TargetTrackingMetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MetricName: ptr.String("__MetricName__"),
+								Namespace:  ptr.String("__Namespace__"),
+							},
+							Stat: ptr.String("__Stat__"),
+							Unit: ptr.String("__Unit__"),
+						},
+						ReturnData: ptr.Bool(true),
+					},
+					{
+						Expression: ptr.String("__Expression__"),
+						Id:         ptr.String("__Id__"),
+						Label:      ptr.String("__Label__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.TargetTrackingMetric{
+								Dimensions: []types.TargetTrackingMetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MetricName: ptr.String("__MetricName__"),
+								Namespace:  ptr.String("__Namespace__"),
+							},
+							Stat: ptr.String("__Stat__"),
+							Unit: ptr.String("__Unit__"),
+						},
+						ReturnData: ptr.Bool(true),
+					},
+				},
+			},
+			ScaleOutCooldown: ptr.Int32(1),
+			ScaleInCooldown:  ptr.Int32(1),
+			DisableScaleIn:   ptr.Bool(true),
+		},
+		PredictiveScalingPolicyConfiguration: &types.PredictiveScalingPolicyConfiguration{
+			MetricSpecifications: []types.PredictiveScalingMetricSpecification{
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPairSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPairSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetricSpecification{
+						PredefinedMetricType: ptr.String("__PredefinedMetricType__"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedMetricSpecification{
+						MetricDataQueries: []types.PredictiveScalingMetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.PredictiveScalingMetricStat{
+									Metric: &types.PredictiveScalingMetric{
+										Dimensions: []types.PredictiveScalingMetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+										MetricName: ptr.String("__MetricName__"),
+										Namespace:  ptr.String("__Namespace__"),
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			Mode:                      types.PredictiveScalingMode("ForecastOnly"),
+			SchedulingBufferTime:      ptr.Int32(1),
+			MaxCapacityBreachBehavior: types.PredictiveScalingMaxCapacityBreachBehavior("HonorMaxCapacity"),
+			MaxCapacityBuffer:         ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1964,7 +2991,12 @@ func TestCheckResponseSnapshot_Error_ObjectNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1990,7 +3022,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2016,7 +3050,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2041,7 +3080,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{})
+	_, opErr := svc.DeleteScalingPolicy(context.Background(), &DeleteScalingPolicyInput{
+		PolicyName:        ptr.String("__PolicyName__"),
+		ServiceNamespace:  types.ServiceNamespace("ecs"),
+		ResourceId:        ptr.String("__ResourceId__"),
+		ScalableDimension: types.ScalableDimension("ecs:service:DesiredCount"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

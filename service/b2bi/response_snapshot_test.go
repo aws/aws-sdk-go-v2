@@ -153,7 +153,51 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	got, err := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +276,74 @@ func TestCheckResponseSnapshot_CreatePartnership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePartnership(context.Background(), &CreatePartnershipInput{})
+	got, err := svc.CreatePartnership(context.Background(), &CreatePartnershipInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		Name:      ptr.String("__Name__"),
+		Email:     ptr.String("__Email__"),
+		Phone:     ptr.String("__Phone__"),
+		Capabilities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CapabilityOptions: &types.CapabilityOptions{
+			OutboundEdi: &types.OutboundEdiOptionsMemberX12{
+				Value: types.X12Envelope{
+					Common: &types.X12OutboundEdiHeaders{
+						InterchangeControlHeaders: &types.X12InterchangeControlHeaders{
+							SenderIdQualifier:           ptr.String("__SenderIdQualifier__"),
+							SenderId:                    ptr.String("__SenderId__"),
+							ReceiverIdQualifier:         ptr.String("__ReceiverIdQualifier__"),
+							ReceiverId:                  ptr.String("__ReceiverId__"),
+							RepetitionSeparator:         ptr.String("__RepetitionSeparator__"),
+							AcknowledgmentRequestedCode: ptr.String("__AcknowledgmentRequestedCode__"),
+							UsageIndicatorCode:          ptr.String("__UsageIndicatorCode__"),
+						},
+						FunctionalGroupHeaders: &types.X12FunctionalGroupHeaders{
+							ApplicationSenderCode:   ptr.String("__ApplicationSenderCode__"),
+							ApplicationReceiverCode: ptr.String("__ApplicationReceiverCode__"),
+							ResponsibleAgencyCode:   ptr.String("__ResponsibleAgencyCode__"),
+						},
+						Delimiters: &types.X12Delimiters{
+							ComponentSeparator:   ptr.String("__ComponentSeparator__"),
+							DataElementSeparator: ptr.String("__DataElementSeparator__"),
+							SegmentTerminator:    ptr.String("__SegmentTerminator__"),
+						},
+						ValidateEdi: ptr.Bool(true),
+						ControlNumbers: &types.X12ControlNumbers{
+							StartingInterchangeControlNumber:     ptr.Int32(1),
+							StartingFunctionalGroupControlNumber: ptr.Int32(1),
+							StartingTransactionSetControlNumber:  ptr.Int32(1),
+						},
+						Gs05TimeFormat: types.X12GS05TimeFormat("HHMM"),
+					},
+					WrapOptions: &types.WrapOptions{
+						WrapBy:         types.WrapFormat("SEGMENT"),
+						LineTerminator: types.LineTerminator("CRLF"),
+						LineLength:     ptr.Int32(1),
+					},
+				},
+			},
+			InboundEdi: &types.InboundEdiOptions{
+				X12: &types.X12InboundEdiOptions{
+					AcknowledgmentOptions: &types.X12AcknowledgmentOptions{
+						FunctionalAcknowledgment: types.X12FunctionalAcknowledgment("DO_NOT_GENERATE"),
+						TechnicalAcknowledgment:  types.X12TechnicalAcknowledgment("DO_NOT_GENERATE"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +372,24 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		Name:         ptr.String("__Name__"),
+		Email:        ptr.String("__Email__"),
+		Phone:        ptr.String("__Phone__"),
+		BusinessName: ptr.String("__BusinessName__"),
+		Logging:      types.Logging("ENABLED"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -282,7 +410,19 @@ func TestCheckResponseSnapshot_CreateStarterMappingTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStarterMappingTemplate(context.Background(), &CreateStarterMappingTemplateInput{})
+	got, err := svc.CreateStarterMappingTemplate(context.Background(), &CreateStarterMappingTemplateInput{
+		OutputSampleLocation: &types.S3Location{
+			BucketName: ptr.String("__BucketName__"),
+			Key:        ptr.String("__Key__"),
+		},
+		MappingType: types.MappingType("JSONATA"),
+		TemplateDetails: &types.TemplateDetailsMemberX12{
+			Value: types.X12Details{
+				TransactionSet: types.X12TransactionSet("X12_100"),
+				Version:        types.X12Version("VERSION_4010"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +565,138 @@ func TestCheckResponseSnapshot_CreateTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTransformer(context.Background(), &CreateTransformerInput{})
+	got, err := svc.CreateTransformer(context.Background(), &CreateTransformerInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FileFormat:      types.FileFormat("XML"),
+		MappingTemplate: ptr.String("__MappingTemplate__"),
+		EdiType: &types.EdiTypeMemberX12Details{
+			Value: types.X12Details{
+				TransactionSet: types.X12TransactionSet("X12_100"),
+				Version:        types.X12Version("VERSION_4010"),
+			},
+		},
+		SampleDocument: ptr.String("__SampleDocument__"),
+		InputConversion: &types.InputConversion{
+			FromFormat: types.FromFormat("X12"),
+			FormatOptions: &types.FormatOptionsMemberX12{
+				Value: types.X12Details{
+					TransactionSet: types.X12TransactionSet("X12_100"),
+					Version:        types.X12Version("VERSION_4010"),
+				},
+			},
+			AdvancedOptions: &types.AdvancedOptions{
+				X12: &types.X12AdvancedOptions{
+					SplitOptions: &types.X12SplitOptions{
+						SplitBy: types.X12SplitBy("NONE"),
+					},
+					ValidationOptions: &types.X12ValidationOptions{
+						ValidationRules: []types.X12ValidationRule{
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Mapping: &types.Mapping{
+			TemplateLanguage: types.MappingTemplateLanguage("XSLT"),
+			Template:         ptr.String("__Template__"),
+		},
+		OutputConversion: &types.OutputConversion{
+			ToFormat: types.ToFormat("X12"),
+			FormatOptions: &types.FormatOptionsMemberX12{
+				Value: types.X12Details{
+					TransactionSet: types.X12TransactionSet("X12_100"),
+					Version:        types.X12Version("VERSION_4010"),
+				},
+			},
+			AdvancedOptions: &types.AdvancedOptions{
+				X12: &types.X12AdvancedOptions{
+					SplitOptions: &types.X12SplitOptions{
+						SplitBy: types.X12SplitBy("NONE"),
+					},
+					ValidationOptions: &types.X12ValidationOptions{
+						ValidationRules: []types.X12ValidationRule{
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		SampleDocuments: &types.SampleDocuments{
+			BucketName: ptr.String("__BucketName__"),
+			Keys: []types.SampleDocumentKeys{
+				{
+					Input:  ptr.String("__Input__"),
+					Output: ptr.String("__Output__"),
+				},
+				{
+					Input:  ptr.String("__Input__"),
+					Output: ptr.String("__Output__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +715,9 @@ func TestCheckResponseSnapshot_DeleteCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapability(context.Background(), &DeleteCapabilityInput{})
+	got, err := svc.DeleteCapability(context.Background(), &DeleteCapabilityInput{
+		CapabilityId: ptr.String("__CapabilityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -463,7 +736,9 @@ func TestCheckResponseSnapshot_DeletePartnership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePartnership(context.Background(), &DeletePartnershipInput{})
+	got, err := svc.DeletePartnership(context.Background(), &DeletePartnershipInput{
+		PartnershipId: ptr.String("__PartnershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -482,7 +757,9 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{})
+	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +778,9 @@ func TestCheckResponseSnapshot_DeleteTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTransformer(context.Background(), &DeleteTransformerInput{})
+	got, err := svc.DeleteTransformer(context.Background(), &DeleteTransformerInput{
+		TransformerId: ptr.String("__TransformerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +802,11 @@ func TestCheckResponseSnapshot_GenerateMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMapping(context.Background(), &GenerateMappingInput{})
+	got, err := svc.GenerateMapping(context.Background(), &GenerateMappingInput{
+		InputFileContent:  ptr.String("__InputFileContent__"),
+		OutputFileContent: ptr.String("__OutputFileContent__"),
+		MappingType:       types.MappingType("JSONATA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +862,9 @@ func TestCheckResponseSnapshot_GetCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCapability(context.Background(), &GetCapabilityInput{})
+	got, err := svc.GetCapability(context.Background(), &GetCapabilityInput{
+		CapabilityId: ptr.String("__CapabilityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +944,9 @@ func TestCheckResponseSnapshot_GetPartnership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPartnership(context.Background(), &GetPartnershipInput{})
+	got, err := svc.GetPartnership(context.Background(), &GetPartnershipInput{
+		PartnershipId: ptr.String("__PartnershipId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +976,9 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +1122,9 @@ func TestCheckResponseSnapshot_GetTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransformer(context.Background(), &GetTransformerInput{})
+	got, err := svc.GetTransformer(context.Background(), &GetTransformerInput{
+		TransformerId: ptr.String("__TransformerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1156,10 @@ func TestCheckResponseSnapshot_GetTransformerJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTransformerJob(context.Background(), &GetTransformerJobInput{})
+	got, err := svc.GetTransformerJob(context.Background(), &GetTransformerJobInput{
+		TransformerJobId: ptr.String("__TransformerJobId__"),
+		TransformerId:    ptr.String("__TransformerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -902,7 +1196,10 @@ func TestCheckResponseSnapshot_ListCapabilities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCapabilities(context.Background(), &ListCapabilitiesInput{})
+	got, err := svc.ListCapabilities(context.Background(), &ListCapabilitiesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1340,11 @@ func TestCheckResponseSnapshot_ListPartnerships(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPartnerships(context.Background(), &ListPartnershipsInput{})
+	got, err := svc.ListPartnerships(context.Background(), &ListPartnershipsInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1385,10 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{})
+	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1114,7 +1418,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1387,7 +1693,10 @@ func TestCheckResponseSnapshot_ListTransformers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTransformers(context.Background(), &ListTransformersInput{})
+	got, err := svc.ListTransformers(context.Background(), &ListTransformersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1408,7 +1717,18 @@ func TestCheckResponseSnapshot_StartTransformerJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTransformerJob(context.Background(), &StartTransformerJobInput{})
+	got, err := svc.StartTransformerJob(context.Background(), &StartTransformerJobInput{
+		InputFile: &types.S3Location{
+			BucketName: ptr.String("__BucketName__"),
+			Key:        ptr.String("__Key__"),
+		},
+		OutputLocation: &types.S3Location{
+			BucketName: ptr.String("__BucketName__"),
+			Key:        ptr.String("__Key__"),
+		},
+		TransformerId: ptr.String("__TransformerId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1427,7 +1747,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1452,7 +1784,66 @@ func TestCheckResponseSnapshot_TestConversion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestConversion(context.Background(), &TestConversionInput{})
+	got, err := svc.TestConversion(context.Background(), &TestConversionInput{
+		Source: &types.ConversionSource{
+			FileFormat: types.ConversionSourceFormat("JSON"),
+			InputFile: &types.InputFileSourceMemberFileContent{
+				Value: "__InputFileSourceMemberFileContent__",
+			},
+		},
+		Target: &types.ConversionTarget{
+			FileFormat: types.ConversionTargetFormat("X12"),
+			FormatDetails: &types.ConversionTargetFormatDetailsMemberX12{
+				Value: types.X12Details{
+					TransactionSet: types.X12TransactionSet("X12_100"),
+					Version:        types.X12Version("VERSION_4010"),
+				},
+			},
+			OutputSampleFile: &types.OutputSampleFileSourceMemberFileLocation{
+				Value: types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+			},
+			AdvancedOptions: &types.AdvancedOptions{
+				X12: &types.X12AdvancedOptions{
+					SplitOptions: &types.X12SplitOptions{
+						SplitBy: types.X12SplitBy("NONE"),
+					},
+					ValidationOptions: &types.X12ValidationOptions{
+						ValidationRules: []types.X12ValidationRule{
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1473,7 +1864,11 @@ func TestCheckResponseSnapshot_TestMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestMapping(context.Background(), &TestMappingInput{})
+	got, err := svc.TestMapping(context.Background(), &TestMappingInput{
+		InputFileContent: ptr.String("__InputFileContent__"),
+		MappingTemplate:  ptr.String("__MappingTemplate__"),
+		FileFormat:       types.FileFormat("XML"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1502,7 +1897,56 @@ func TestCheckResponseSnapshot_TestParsing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestParsing(context.Background(), &TestParsingInput{})
+	got, err := svc.TestParsing(context.Background(), &TestParsingInput{
+		InputFile: &types.S3Location{
+			BucketName: ptr.String("__BucketName__"),
+			Key:        ptr.String("__Key__"),
+		},
+		FileFormat: types.FileFormat("XML"),
+		EdiType: &types.EdiTypeMemberX12Details{
+			Value: types.X12Details{
+				TransactionSet: types.X12TransactionSet("X12_100"),
+				Version:        types.X12Version("VERSION_4010"),
+			},
+		},
+		AdvancedOptions: &types.AdvancedOptions{
+			X12: &types.X12AdvancedOptions{
+				SplitOptions: &types.X12SplitOptions{
+					SplitBy: types.X12SplitBy("NONE"),
+				},
+				ValidationOptions: &types.X12ValidationOptions{
+					ValidationRules: []types.X12ValidationRule{
+						&types.X12ValidationRuleMemberCodeListValidationRule{
+							Value: types.X12CodeListValidationRule{
+								ElementId: ptr.String("__ElementId__"),
+								CodesToAdd: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CodesToRemove: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						&types.X12ValidationRuleMemberCodeListValidationRule{
+							Value: types.X12CodeListValidationRule{
+								ElementId: ptr.String("__ElementId__"),
+								CodesToAdd: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CodesToRemove: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1521,7 +1965,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1577,7 +2027,40 @@ func TestCheckResponseSnapshot_UpdateCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCapability(context.Background(), &UpdateCapabilityInput{})
+	got, err := svc.UpdateCapability(context.Background(), &UpdateCapabilityInput{
+		CapabilityId: ptr.String("__CapabilityId__"),
+		Name:         ptr.String("__Name__"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1657,7 +2140,61 @@ func TestCheckResponseSnapshot_UpdatePartnership(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePartnership(context.Background(), &UpdatePartnershipInput{})
+	got, err := svc.UpdatePartnership(context.Background(), &UpdatePartnershipInput{
+		PartnershipId: ptr.String("__PartnershipId__"),
+		Name:          ptr.String("__Name__"),
+		Capabilities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CapabilityOptions: &types.CapabilityOptions{
+			OutboundEdi: &types.OutboundEdiOptionsMemberX12{
+				Value: types.X12Envelope{
+					Common: &types.X12OutboundEdiHeaders{
+						InterchangeControlHeaders: &types.X12InterchangeControlHeaders{
+							SenderIdQualifier:           ptr.String("__SenderIdQualifier__"),
+							SenderId:                    ptr.String("__SenderId__"),
+							ReceiverIdQualifier:         ptr.String("__ReceiverIdQualifier__"),
+							ReceiverId:                  ptr.String("__ReceiverId__"),
+							RepetitionSeparator:         ptr.String("__RepetitionSeparator__"),
+							AcknowledgmentRequestedCode: ptr.String("__AcknowledgmentRequestedCode__"),
+							UsageIndicatorCode:          ptr.String("__UsageIndicatorCode__"),
+						},
+						FunctionalGroupHeaders: &types.X12FunctionalGroupHeaders{
+							ApplicationSenderCode:   ptr.String("__ApplicationSenderCode__"),
+							ApplicationReceiverCode: ptr.String("__ApplicationReceiverCode__"),
+							ResponsibleAgencyCode:   ptr.String("__ResponsibleAgencyCode__"),
+						},
+						Delimiters: &types.X12Delimiters{
+							ComponentSeparator:   ptr.String("__ComponentSeparator__"),
+							DataElementSeparator: ptr.String("__DataElementSeparator__"),
+							SegmentTerminator:    ptr.String("__SegmentTerminator__"),
+						},
+						ValidateEdi: ptr.Bool(true),
+						ControlNumbers: &types.X12ControlNumbers{
+							StartingInterchangeControlNumber:     ptr.Int32(1),
+							StartingFunctionalGroupControlNumber: ptr.Int32(1),
+							StartingTransactionSetControlNumber:  ptr.Int32(1),
+						},
+						Gs05TimeFormat: types.X12GS05TimeFormat("HHMM"),
+					},
+					WrapOptions: &types.WrapOptions{
+						WrapBy:         types.WrapFormat("SEGMENT"),
+						LineTerminator: types.LineTerminator("CRLF"),
+						LineLength:     ptr.Int32(1),
+					},
+				},
+			},
+			InboundEdi: &types.InboundEdiOptions{
+				X12: &types.X12InboundEdiOptions{
+					AcknowledgmentOptions: &types.X12AcknowledgmentOptions{
+						FunctionalAcknowledgment: types.X12FunctionalAcknowledgment("DO_NOT_GENERATE"),
+						TechnicalAcknowledgment:  types.X12TechnicalAcknowledgment("DO_NOT_GENERATE"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1687,7 +2224,13 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{})
+	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		Name:         ptr.String("__Name__"),
+		Email:        ptr.String("__Email__"),
+		Phone:        ptr.String("__Phone__"),
+		BusinessName: ptr.String("__BusinessName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2374,129 @@ func TestCheckResponseSnapshot_UpdateTransformer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTransformer(context.Background(), &UpdateTransformerInput{})
+	got, err := svc.UpdateTransformer(context.Background(), &UpdateTransformerInput{
+		TransformerId:   ptr.String("__TransformerId__"),
+		Name:            ptr.String("__Name__"),
+		Status:          types.TransformerStatus("active"),
+		FileFormat:      types.FileFormat("XML"),
+		MappingTemplate: ptr.String("__MappingTemplate__"),
+		EdiType: &types.EdiTypeMemberX12Details{
+			Value: types.X12Details{
+				TransactionSet: types.X12TransactionSet("X12_100"),
+				Version:        types.X12Version("VERSION_4010"),
+			},
+		},
+		SampleDocument: ptr.String("__SampleDocument__"),
+		InputConversion: &types.InputConversion{
+			FromFormat: types.FromFormat("X12"),
+			FormatOptions: &types.FormatOptionsMemberX12{
+				Value: types.X12Details{
+					TransactionSet: types.X12TransactionSet("X12_100"),
+					Version:        types.X12Version("VERSION_4010"),
+				},
+			},
+			AdvancedOptions: &types.AdvancedOptions{
+				X12: &types.X12AdvancedOptions{
+					SplitOptions: &types.X12SplitOptions{
+						SplitBy: types.X12SplitBy("NONE"),
+					},
+					ValidationOptions: &types.X12ValidationOptions{
+						ValidationRules: []types.X12ValidationRule{
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Mapping: &types.Mapping{
+			TemplateLanguage: types.MappingTemplateLanguage("XSLT"),
+			Template:         ptr.String("__Template__"),
+		},
+		OutputConversion: &types.OutputConversion{
+			ToFormat: types.ToFormat("X12"),
+			FormatOptions: &types.FormatOptionsMemberX12{
+				Value: types.X12Details{
+					TransactionSet: types.X12TransactionSet("X12_100"),
+					Version:        types.X12Version("VERSION_4010"),
+				},
+			},
+			AdvancedOptions: &types.AdvancedOptions{
+				X12: &types.X12AdvancedOptions{
+					SplitOptions: &types.X12SplitOptions{
+						SplitBy: types.X12SplitBy("NONE"),
+					},
+					ValidationOptions: &types.X12ValidationOptions{
+						ValidationRules: []types.X12ValidationRule{
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							&types.X12ValidationRuleMemberCodeListValidationRule{
+								Value: types.X12CodeListValidationRule{
+									ElementId: ptr.String("__ElementId__"),
+									CodesToAdd: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CodesToRemove: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		SampleDocuments: &types.SampleDocuments{
+			BucketName: ptr.String("__BucketName__"),
+			Keys: []types.SampleDocumentKeys{
+				{
+					Input:  ptr.String("__Input__"),
+					Output: ptr.String("__Output__"),
+				},
+				{
+					Input:  ptr.String("__Input__"),
+					Output: ptr.String("__Output__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1852,7 +2517,51 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1877,7 +2586,51 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1903,7 +2656,51 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1928,7 +2725,51 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1957,7 +2798,51 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1983,7 +2868,51 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2008,7 +2937,51 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		Name: ptr.String("__Name__"),
+		Type: types.CapabilityType("edi"),
+		Configuration: &types.CapabilityConfigurationMemberEdi{
+			Value: types.EdiConfiguration{
+				CapabilityDirection: types.CapabilityDirection("INBOUND"),
+				Type: &types.EdiTypeMemberX12Details{
+					Value: types.X12Details{
+						TransactionSet: types.X12TransactionSet("X12_100"),
+						Version:        types.X12Version("VERSION_4010"),
+					},
+				},
+				InputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				OutputLocation: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Key:        ptr.String("__Key__"),
+				},
+				TransformerId: ptr.String("__TransformerId__"),
+			},
+		},
+		InstructionsDocuments: []types.S3Location{
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+			{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

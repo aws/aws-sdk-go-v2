@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -121,7 +122,16 @@ func TestCheckResponseSnapshot_GetRevocationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	got, err := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -133,7 +143,7 @@ func TestCheckResponseSnapshot_GetRevocationStatus(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -143,7 +153,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -159,7 +178,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T) {
 	want := &types.InternalServiceErrorException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServiceErrorException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServiceErrorException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -169,7 +188,16 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -185,7 +213,7 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	want := &types.TooManyRequestsException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("TooManyRequestsException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TooManyRequestsException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -195,7 +223,16 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -211,7 +248,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ValidationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -221,7 +258,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	_, opErr := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

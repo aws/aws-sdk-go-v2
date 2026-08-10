@@ -1,6 +1,0 @@
-PUT /SimpleScalarProperties
-
-Content-Type: application/json
-X-Foo: __Foo__
-
-{"byteValue":1,"DoubleDribble":1,"falseBooleanValue":true,"floatValue":1,"integerValue":1,"longValue":1,"shortValue":1,"stringValue":"__StringValue__","trueBooleanValue":true}

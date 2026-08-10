@@ -132,7 +132,12 @@ func TestCheckResponseSnapshot_BatchDeleteBuilds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteBuilds(context.Background(), &BatchDeleteBuildsInput{})
+	got, err := svc.BatchDeleteBuilds(context.Background(), &BatchDeleteBuildsInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1010,7 +1015,12 @@ func TestCheckResponseSnapshot_BatchGetBuildBatches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetBuildBatches(context.Background(), &BatchGetBuildBatchesInput{})
+	got, err := svc.BatchGetBuildBatches(context.Background(), &BatchGetBuildBatchesInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1606,7 +1616,12 @@ func TestCheckResponseSnapshot_BatchGetBuilds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetBuilds(context.Background(), &BatchGetBuildsInput{})
+	got, err := svc.BatchGetBuilds(context.Background(), &BatchGetBuildsInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1698,7 +1713,13 @@ func TestCheckResponseSnapshot_BatchGetCommandExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCommandExecutions(context.Background(), &BatchGetCommandExecutionsInput{})
+	got, err := svc.BatchGetCommandExecutions(context.Background(), &BatchGetCommandExecutionsInput{
+		SandboxId: ptr.String("__SandboxId__"),
+		CommandExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1888,7 +1909,12 @@ func TestCheckResponseSnapshot_BatchGetFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFleets(context.Background(), &BatchGetFleetsInput{})
+	got, err := svc.BatchGetFleets(context.Background(), &BatchGetFleetsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2518,7 +2544,12 @@ func TestCheckResponseSnapshot_BatchGetProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetProjects(context.Background(), &BatchGetProjectsInput{})
+	got, err := svc.BatchGetProjects(context.Background(), &BatchGetProjectsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2602,7 +2633,12 @@ func TestCheckResponseSnapshot_BatchGetReportGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetReportGroups(context.Background(), &BatchGetReportGroupsInput{})
+	got, err := svc.BatchGetReportGroups(context.Background(), &BatchGetReportGroupsInput{
+		ReportGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2702,7 +2738,12 @@ func TestCheckResponseSnapshot_BatchGetReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetReports(context.Background(), &BatchGetReportsInput{})
+	got, err := svc.BatchGetReports(context.Background(), &BatchGetReportsInput{
+		ReportArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3206,7 +3247,12 @@ func TestCheckResponseSnapshot_BatchGetSandboxes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSandboxes(context.Background(), &BatchGetSandboxesInput{})
+	got, err := svc.BatchGetSandboxes(context.Background(), &BatchGetSandboxesInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3308,7 +3354,78 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:            ptr.String("__Name__"),
+		BaseCapacity:    ptr.Int32(1),
+		EnvironmentType: types.EnvironmentType("WINDOWS_CONTAINER"),
+		ComputeType:     types.ComputeType("BUILD_GENERAL1_SMALL"),
+		ComputeConfiguration: &types.ComputeConfiguration{
+			VCpu:         ptr.Int64(1),
+			Memory:       ptr.Int64(1),
+			Disk:         ptr.Int64(1),
+			MachineType:  types.MachineType("GENERAL"),
+			InstanceType: ptr.String("__InstanceType__"),
+		},
+		ScalingConfiguration: &types.ScalingConfigurationInput{
+			ScalingType: types.FleetScalingType("TARGET_TRACKING_SCALING"),
+			TargetTrackingScalingConfigs: []types.TargetTrackingScalingConfiguration{
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+			},
+			MaxCapacity: ptr.Int32(1),
+		},
+		OverflowBehavior: types.FleetOverflowBehavior("QUEUE"),
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProxyConfiguration: &types.ProxyConfiguration{
+			DefaultBehavior: types.FleetProxyRuleBehavior("ALLOW_ALL"),
+			OrderedProxyRules: []types.FleetProxyRule{
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ImageId:          ptr.String("__ImageId__"),
+		FleetServiceRole: ptr.String("__FleetServiceRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3630,7 +3747,250 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Source: &types.ProjectSource{
+			Type:          types.SourceType("CODECOMMIT"),
+			Location:      ptr.String("__Location__"),
+			GitCloneDepth: ptr.Int32(1),
+			GitSubmodulesConfig: &types.GitSubmodulesConfig{
+				FetchSubmodules: ptr.Bool(true),
+			},
+			Buildspec: ptr.String("__Buildspec__"),
+			Auth: &types.SourceAuth{
+				Type:     types.SourceAuthType("OAUTH"),
+				Resource: ptr.String("__Resource__"),
+			},
+			ReportBuildStatus: ptr.Bool(true),
+			BuildStatusConfig: &types.BuildStatusConfig{
+				Context:   ptr.String("__Context__"),
+				TargetUrl: ptr.String("__TargetUrl__"),
+			},
+			InsecureSsl:      ptr.Bool(true),
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		SecondarySources: []types.ProjectSource{
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+		},
+		SourceVersion: ptr.String("__SourceVersion__"),
+		SecondarySourceVersions: []types.ProjectSourceVersion{
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+		},
+		Artifacts: &types.ProjectArtifacts{
+			Type:                 types.ArtifactsType("CODEPIPELINE"),
+			Location:             ptr.String("__Location__"),
+			Path:                 ptr.String("__Path__"),
+			NamespaceType:        types.ArtifactNamespace("NONE"),
+			Name:                 ptr.String("__Name__"),
+			Packaging:            types.ArtifactPackaging("NONE"),
+			OverrideArtifactName: ptr.Bool(true),
+			EncryptionDisabled:   ptr.Bool(true),
+			ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+			BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+		},
+		SecondaryArtifacts: []types.ProjectArtifacts{
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+		},
+		Cache: &types.ProjectCache{
+			Type:     types.CacheType("NO_CACHE"),
+			Location: ptr.String("__Location__"),
+			Modes: []types.CacheMode{
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+			},
+			CacheNamespace: ptr.String("__CacheNamespace__"),
+		},
+		Environment: &types.ProjectEnvironment{
+			Type:        types.EnvironmentType("WINDOWS_CONTAINER"),
+			Image:       ptr.String("__Image__"),
+			ComputeType: types.ComputeType("BUILD_GENERAL1_SMALL"),
+			ComputeConfiguration: &types.ComputeConfiguration{
+				VCpu:         ptr.Int64(1),
+				Memory:       ptr.Int64(1),
+				Disk:         ptr.Int64(1),
+				MachineType:  types.MachineType("GENERAL"),
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			Fleet: &types.ProjectFleet{
+				FleetArn: ptr.String("__FleetArn__"),
+			},
+			EnvironmentVariables: []types.EnvironmentVariable{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EnvironmentVariableType("PLAINTEXT"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EnvironmentVariableType("PLAINTEXT"),
+				},
+			},
+			PrivilegedMode: ptr.Bool(true),
+			Certificate:    ptr.String("__Certificate__"),
+			RegistryCredential: &types.RegistryCredential{
+				Credential:         ptr.String("__Credential__"),
+				CredentialProvider: types.CredentialProviderType("SECRETS_MANAGER"),
+			},
+			ImagePullCredentialsType: types.ImagePullCredentialsType("CODEBUILD"),
+			DockerServer: &types.DockerServer{
+				ComputeType: types.ComputeType("BUILD_GENERAL1_SMALL"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: &types.DockerServerStatus{
+					Status:  ptr.String("__Status__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
+		},
+		ServiceRole:            ptr.String("__ServiceRole__"),
+		TimeoutInMinutes:       ptr.Int32(1),
+		QueuedTimeoutInMinutes: ptr.Int32(1),
+		EncryptionKey:          ptr.String("__EncryptionKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		BadgeEnabled: ptr.Bool(true),
+		LogsConfig: &types.LogsConfig{
+			CloudWatchLogs: &types.CloudWatchLogsConfig{
+				Status:     types.LogsConfigStatusType("ENABLED"),
+				GroupName:  ptr.String("__GroupName__"),
+				StreamName: ptr.String("__StreamName__"),
+			},
+			S3Logs: &types.S3LogsConfig{
+				Status:             types.LogsConfigStatusType("ENABLED"),
+				Location:           ptr.String("__Location__"),
+				EncryptionDisabled: ptr.Bool(true),
+				BucketOwnerAccess:  types.BucketOwnerAccess("NONE"),
+			},
+		},
+		FileSystemLocations: []types.ProjectFileSystemLocation{
+			{
+				Type:         types.FileSystemType("EFS"),
+				Location:     ptr.String("__Location__"),
+				MountPoint:   ptr.String("__MountPoint__"),
+				Identifier:   ptr.String("__Identifier__"),
+				MountOptions: ptr.String("__MountOptions__"),
+			},
+			{
+				Type:         types.FileSystemType("EFS"),
+				Location:     ptr.String("__Location__"),
+				MountPoint:   ptr.String("__MountPoint__"),
+				Identifier:   ptr.String("__Identifier__"),
+				MountOptions: ptr.String("__MountOptions__"),
+			},
+		},
+		BuildBatchConfig: &types.ProjectBuildBatchConfig{
+			ServiceRole:      ptr.String("__ServiceRole__"),
+			CombineArtifacts: ptr.Bool(true),
+			Restrictions: &types.BatchRestrictions{
+				MaximumBuildsAllowed: ptr.Int32(1),
+				ComputeTypesAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FleetsAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TimeoutInMins:   ptr.Int32(1),
+			BatchReportMode: types.BatchReportModeType("REPORT_INDIVIDUAL_BUILDS"),
+		},
+		ConcurrentBuildLimit: ptr.Int32(1),
+		AutoRetryLimit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3679,7 +4039,31 @@ func TestCheckResponseSnapshot_CreateReportGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReportGroup(context.Background(), &CreateReportGroupInput{})
+	got, err := svc.CreateReportGroup(context.Background(), &CreateReportGroupInput{
+		Name: ptr.String("__Name__"),
+		Type: types.ReportType("TEST"),
+		ExportConfig: &types.ReportExportConfig{
+			ExportConfigType: types.ReportExportConfigType("S3"),
+			S3Destination: &types.S3ReportExportConfig{
+				Bucket:             ptr.String("__Bucket__"),
+				BucketOwner:        ptr.String("__BucketOwner__"),
+				Path:               ptr.String("__Path__"),
+				Packaging:          types.ReportPackagingType("ZIP"),
+				EncryptionKey:      ptr.String("__EncryptionKey__"),
+				EncryptionDisabled: ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3748,7 +4132,50 @@ func TestCheckResponseSnapshot_CreateWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebhook(context.Background(), &CreateWebhookInput{})
+	got, err := svc.CreateWebhook(context.Background(), &CreateWebhookInput{
+		ProjectName:  ptr.String("__ProjectName__"),
+		BranchFilter: ptr.String("__BranchFilter__"),
+		FilterGroups: [][]types.WebhookFilter{
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+		},
+		BuildType:      types.WebhookBuildType("BUILD"),
+		ManualCreation: ptr.Bool(true),
+		ScopeConfiguration: &types.ScopeConfiguration{
+			Name:   ptr.String("__Name__"),
+			Domain: ptr.String("__Domain__"),
+			Scope:  types.WebhookScopeType("GITHUB_ORGANIZATION"),
+		},
+		PullRequestBuildPolicy: &types.PullRequestBuildPolicy{
+			RequiresCommentApproval: types.PullRequestBuildCommentApproval("DISABLED"),
+			ApproverRoles: []types.PullRequestBuildApproverRole{
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3783,7 +4210,9 @@ func TestCheckResponseSnapshot_DeleteBuildBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBuildBatch(context.Background(), &DeleteBuildBatchInput{})
+	got, err := svc.DeleteBuildBatch(context.Background(), &DeleteBuildBatchInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3802,7 +4231,9 @@ func TestCheckResponseSnapshot_DeleteFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{})
+	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3821,7 +4252,9 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3840,7 +4273,9 @@ func TestCheckResponseSnapshot_DeleteReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReport(context.Background(), &DeleteReportInput{})
+	got, err := svc.DeleteReport(context.Background(), &DeleteReportInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3859,7 +4294,10 @@ func TestCheckResponseSnapshot_DeleteReportGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReportGroup(context.Background(), &DeleteReportGroupInput{})
+	got, err := svc.DeleteReportGroup(context.Background(), &DeleteReportGroupInput{
+		Arn:           ptr.String("__Arn__"),
+		DeleteReports: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3878,7 +4316,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3899,7 +4339,9 @@ func TestCheckResponseSnapshot_DeleteSourceCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSourceCredentials(context.Background(), &DeleteSourceCredentialsInput{})
+	got, err := svc.DeleteSourceCredentials(context.Background(), &DeleteSourceCredentialsInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3918,7 +4360,9 @@ func TestCheckResponseSnapshot_DeleteWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{})
+	got, err := svc.DeleteWebhook(context.Background(), &DeleteWebhookInput{
+		ProjectName: ptr.String("__ProjectName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3965,7 +4409,15 @@ func TestCheckResponseSnapshot_DescribeCodeCoverages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCodeCoverages(context.Background(), &DescribeCodeCoveragesInput{})
+	got, err := svc.DescribeCodeCoverages(context.Background(), &DescribeCodeCoveragesInput{
+		ReportArn:                 ptr.String("__ReportArn__"),
+		NextToken:                 ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+		SortOrder:                 types.SortOrderType("ASCENDING"),
+		SortBy:                    types.ReportCodeCoverageSortByType("LINE_COVERAGE_PERCENTAGE"),
+		MinLineCoveragePercentage: ptr.Float64(1.0),
+		MaxLineCoveragePercentage: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4010,7 +4462,15 @@ func TestCheckResponseSnapshot_DescribeTestCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTestCases(context.Background(), &DescribeTestCasesInput{})
+	got, err := svc.DescribeTestCases(context.Background(), &DescribeTestCasesInput{
+		ReportArn:  ptr.String("__ReportArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.TestCaseFilter{
+			Status:  ptr.String("__Status__"),
+			Keyword: ptr.String("__Keyword__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4045,7 +4505,11 @@ func TestCheckResponseSnapshot_GetReportGroupTrend(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReportGroupTrend(context.Background(), &GetReportGroupTrendInput{})
+	got, err := svc.GetReportGroupTrend(context.Background(), &GetReportGroupTrendInput{
+		ReportGroupArn: ptr.String("__ReportGroupArn__"),
+		NumOfReports:   ptr.Int32(1),
+		TrendField:     types.ReportGroupTrendFieldType("PASS_RATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4066,7 +4530,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4087,7 +4553,13 @@ func TestCheckResponseSnapshot_ImportSourceCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportSourceCredentials(context.Background(), &ImportSourceCredentialsInput{})
+	got, err := svc.ImportSourceCredentials(context.Background(), &ImportSourceCredentialsInput{
+		Username:        ptr.String("__Username__"),
+		Token:           ptr.String("__Token__"),
+		ServerType:      types.ServerType("GITHUB"),
+		AuthType:        types.AuthType("OAUTH"),
+		ShouldOverwrite: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4106,7 +4578,9 @@ func TestCheckResponseSnapshot_InvalidateProjectCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvalidateProjectCache(context.Background(), &InvalidateProjectCacheInput{})
+	got, err := svc.InvalidateProjectCache(context.Background(), &InvalidateProjectCacheInput{
+		ProjectName: ptr.String("__ProjectName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4131,7 +4605,14 @@ func TestCheckResponseSnapshot_ListBuildBatches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuildBatches(context.Background(), &ListBuildBatchesInput{})
+	got, err := svc.ListBuildBatches(context.Background(), &ListBuildBatchesInput{
+		Filter: &types.BuildBatchFilter{
+			Status: types.StatusType("SUCCEEDED"),
+		},
+		MaxResults: ptr.Int32(1),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4156,7 +4637,15 @@ func TestCheckResponseSnapshot_ListBuildBatchesForProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuildBatchesForProject(context.Background(), &ListBuildBatchesForProjectInput{})
+	got, err := svc.ListBuildBatchesForProject(context.Background(), &ListBuildBatchesForProjectInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		Filter: &types.BuildBatchFilter{
+			Status: types.StatusType("SUCCEEDED"),
+		},
+		MaxResults: ptr.Int32(1),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4181,7 +4670,10 @@ func TestCheckResponseSnapshot_ListBuilds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuilds(context.Background(), &ListBuildsInput{})
+	got, err := svc.ListBuilds(context.Background(), &ListBuildsInput{
+		SortOrder: types.SortOrderType("ASCENDING"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4206,7 +4698,11 @@ func TestCheckResponseSnapshot_ListBuildsForProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBuildsForProject(context.Background(), &ListBuildsForProjectInput{})
+	got, err := svc.ListBuildsForProject(context.Background(), &ListBuildsForProjectInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		SortOrder:   types.SortOrderType("ASCENDING"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4295,7 +4791,12 @@ func TestCheckResponseSnapshot_ListCommandExecutionsForSandbox(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCommandExecutionsForSandbox(context.Background(), &ListCommandExecutionsForSandboxInput{})
+	got, err := svc.ListCommandExecutionsForSandbox(context.Background(), &ListCommandExecutionsForSandboxInput{
+		SandboxId:  ptr.String("__SandboxId__"),
+		MaxResults: ptr.Int32(1),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4436,7 +4937,12 @@ func TestCheckResponseSnapshot_ListFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{})
+	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		SortBy:     types.FleetSortByType("NAME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4461,7 +4967,11 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{})
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		SortBy:    types.ProjectSortByType("NAME"),
+		SortOrder: types.SortOrderType("ASCENDING"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4486,7 +4996,12 @@ func TestCheckResponseSnapshot_ListReportGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReportGroups(context.Background(), &ListReportGroupsInput{})
+	got, err := svc.ListReportGroups(context.Background(), &ListReportGroupsInput{
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		SortBy:     types.ReportGroupSortByType("NAME"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4511,7 +5026,14 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReports(context.Background(), &ListReportsInput{})
+	got, err := svc.ListReports(context.Background(), &ListReportsInput{
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.ReportFilter{
+			Status: types.ReportStatusType("GENERATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4536,7 +5058,15 @@ func TestCheckResponseSnapshot_ListReportsForReportGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReportsForReportGroup(context.Background(), &ListReportsForReportGroupInput{})
+	got, err := svc.ListReportsForReportGroup(context.Background(), &ListReportsForReportGroupInput{
+		ReportGroupArn: ptr.String("__ReportGroupArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		SortOrder:      types.SortOrderType("ASCENDING"),
+		MaxResults:     ptr.Int32(1),
+		Filter: &types.ReportFilter{
+			Status: types.ReportStatusType("GENERATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4561,7 +5091,11 @@ func TestCheckResponseSnapshot_ListSandboxes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSandboxes(context.Background(), &ListSandboxesInput{})
+	got, err := svc.ListSandboxes(context.Background(), &ListSandboxesInput{
+		MaxResults: ptr.Int32(1),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4586,7 +5120,12 @@ func TestCheckResponseSnapshot_ListSandboxesForProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSandboxesForProject(context.Background(), &ListSandboxesForProjectInput{})
+	got, err := svc.ListSandboxesForProject(context.Background(), &ListSandboxesForProjectInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		MaxResults:  ptr.Int32(1),
+		SortOrder:   types.SortOrderType("ASCENDING"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4611,7 +5150,12 @@ func TestCheckResponseSnapshot_ListSharedProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSharedProjects(context.Background(), &ListSharedProjectsInput{})
+	got, err := svc.ListSharedProjects(context.Background(), &ListSharedProjectsInput{
+		SortBy:     types.SharedResourceSortByType("ARN"),
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4636,7 +5180,12 @@ func TestCheckResponseSnapshot_ListSharedReportGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSharedReportGroups(context.Background(), &ListSharedReportGroupsInput{})
+	got, err := svc.ListSharedReportGroups(context.Background(), &ListSharedReportGroupsInput{
+		SortOrder:  types.SortOrderType("ASCENDING"),
+		SortBy:     types.SharedResourceSortByType("ARN"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4691,7 +5240,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Policy:      ptr.String("__Policy__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4996,7 +5548,10 @@ func TestCheckResponseSnapshot_RetryBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetryBuild(context.Background(), &RetryBuildInput{})
+	got, err := svc.RetryBuild(context.Background(), &RetryBuildInput{
+		Id:               ptr.String("__Id__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5442,7 +5997,11 @@ func TestCheckResponseSnapshot_RetryBuildBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetryBuildBatch(context.Background(), &RetryBuildBatchInput{})
+	got, err := svc.RetryBuildBatch(context.Background(), &RetryBuildBatchInput{
+		Id:               ptr.String("__Id__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		RetryType:        types.RetryBuildBatchType("RETRY_ALL_BUILDS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5747,7 +6306,172 @@ func TestCheckResponseSnapshot_StartBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBuild(context.Background(), &StartBuildInput{})
+	got, err := svc.StartBuild(context.Background(), &StartBuildInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		SecondarySourcesOverride: []types.ProjectSource{
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+		},
+		SecondarySourcesVersionOverride: []types.ProjectSourceVersion{
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+		},
+		SourceVersion: ptr.String("__SourceVersion__"),
+		ArtifactsOverride: &types.ProjectArtifacts{
+			Type:                 types.ArtifactsType("CODEPIPELINE"),
+			Location:             ptr.String("__Location__"),
+			Path:                 ptr.String("__Path__"),
+			NamespaceType:        types.ArtifactNamespace("NONE"),
+			Name:                 ptr.String("__Name__"),
+			Packaging:            types.ArtifactPackaging("NONE"),
+			OverrideArtifactName: ptr.Bool(true),
+			EncryptionDisabled:   ptr.Bool(true),
+			ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+			BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+		},
+		SecondaryArtifactsOverride: []types.ProjectArtifacts{
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+		},
+		EnvironmentVariablesOverride: []types.EnvironmentVariable{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EnvironmentVariableType("PLAINTEXT"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EnvironmentVariableType("PLAINTEXT"),
+			},
+		},
+		SourceTypeOverride:     types.SourceType("CODECOMMIT"),
+		SourceLocationOverride: ptr.String("__SourceLocationOverride__"),
+		SourceAuthOverride: &types.SourceAuth{
+			Type:     types.SourceAuthType("OAUTH"),
+			Resource: ptr.String("__Resource__"),
+		},
+		GitCloneDepthOverride: ptr.Int32(1),
+		GitSubmodulesConfigOverride: &types.GitSubmodulesConfig{
+			FetchSubmodules: ptr.Bool(true),
+		},
+		BuildspecOverride:         ptr.String("__BuildspecOverride__"),
+		InsecureSslOverride:       ptr.Bool(true),
+		ReportBuildStatusOverride: ptr.Bool(true),
+		BuildStatusConfigOverride: &types.BuildStatusConfig{
+			Context:   ptr.String("__Context__"),
+			TargetUrl: ptr.String("__TargetUrl__"),
+		},
+		EnvironmentTypeOverride: types.EnvironmentType("WINDOWS_CONTAINER"),
+		ImageOverride:           ptr.String("__ImageOverride__"),
+		ComputeTypeOverride:     types.ComputeType("BUILD_GENERAL1_SMALL"),
+		CertificateOverride:     ptr.String("__CertificateOverride__"),
+		CacheOverride: &types.ProjectCache{
+			Type:     types.CacheType("NO_CACHE"),
+			Location: ptr.String("__Location__"),
+			Modes: []types.CacheMode{
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+			},
+			CacheNamespace: ptr.String("__CacheNamespace__"),
+		},
+		ServiceRoleOverride:            ptr.String("__ServiceRoleOverride__"),
+		PrivilegedModeOverride:         ptr.Bool(true),
+		TimeoutInMinutesOverride:       ptr.Int32(1),
+		QueuedTimeoutInMinutesOverride: ptr.Int32(1),
+		EncryptionKeyOverride:          ptr.String("__EncryptionKeyOverride__"),
+		IdempotencyToken:               ptr.String("__IdempotencyToken__"),
+		LogsConfigOverride: &types.LogsConfig{
+			CloudWatchLogs: &types.CloudWatchLogsConfig{
+				Status:     types.LogsConfigStatusType("ENABLED"),
+				GroupName:  ptr.String("__GroupName__"),
+				StreamName: ptr.String("__StreamName__"),
+			},
+			S3Logs: &types.S3LogsConfig{
+				Status:             types.LogsConfigStatusType("ENABLED"),
+				Location:           ptr.String("__Location__"),
+				EncryptionDisabled: ptr.Bool(true),
+				BucketOwnerAccess:  types.BucketOwnerAccess("NONE"),
+			},
+		},
+		RegistryCredentialOverride: &types.RegistryCredential{
+			Credential:         ptr.String("__Credential__"),
+			CredentialProvider: types.CredentialProviderType("SECRETS_MANAGER"),
+		},
+		ImagePullCredentialsTypeOverride: types.ImagePullCredentialsType("CODEBUILD"),
+		DebugSessionEnabled:              ptr.Bool(true),
+		FleetOverride: &types.ProjectFleet{
+			FleetArn: ptr.String("__FleetArn__"),
+		},
+		AutoRetryLimitOverride: ptr.Int32(1),
+		HostKernelOverride:     types.HostKernel("LINUX_KERNEL_4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6193,7 +6917,180 @@ func TestCheckResponseSnapshot_StartBuildBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBuildBatch(context.Background(), &StartBuildBatchInput{})
+	got, err := svc.StartBuildBatch(context.Background(), &StartBuildBatchInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		SecondarySourcesOverride: []types.ProjectSource{
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+		},
+		SecondarySourcesVersionOverride: []types.ProjectSourceVersion{
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+		},
+		SourceVersion: ptr.String("__SourceVersion__"),
+		ArtifactsOverride: &types.ProjectArtifacts{
+			Type:                 types.ArtifactsType("CODEPIPELINE"),
+			Location:             ptr.String("__Location__"),
+			Path:                 ptr.String("__Path__"),
+			NamespaceType:        types.ArtifactNamespace("NONE"),
+			Name:                 ptr.String("__Name__"),
+			Packaging:            types.ArtifactPackaging("NONE"),
+			OverrideArtifactName: ptr.Bool(true),
+			EncryptionDisabled:   ptr.Bool(true),
+			ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+			BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+		},
+		SecondaryArtifactsOverride: []types.ProjectArtifacts{
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+		},
+		EnvironmentVariablesOverride: []types.EnvironmentVariable{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EnvironmentVariableType("PLAINTEXT"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.EnvironmentVariableType("PLAINTEXT"),
+			},
+		},
+		SourceTypeOverride:     types.SourceType("CODECOMMIT"),
+		SourceLocationOverride: ptr.String("__SourceLocationOverride__"),
+		SourceAuthOverride: &types.SourceAuth{
+			Type:     types.SourceAuthType("OAUTH"),
+			Resource: ptr.String("__Resource__"),
+		},
+		GitCloneDepthOverride: ptr.Int32(1),
+		GitSubmodulesConfigOverride: &types.GitSubmodulesConfig{
+			FetchSubmodules: ptr.Bool(true),
+		},
+		BuildspecOverride:              ptr.String("__BuildspecOverride__"),
+		InsecureSslOverride:            ptr.Bool(true),
+		ReportBuildBatchStatusOverride: ptr.Bool(true),
+		EnvironmentTypeOverride:        types.EnvironmentType("WINDOWS_CONTAINER"),
+		ImageOverride:                  ptr.String("__ImageOverride__"),
+		ComputeTypeOverride:            types.ComputeType("BUILD_GENERAL1_SMALL"),
+		CertificateOverride:            ptr.String("__CertificateOverride__"),
+		CacheOverride: &types.ProjectCache{
+			Type:     types.CacheType("NO_CACHE"),
+			Location: ptr.String("__Location__"),
+			Modes: []types.CacheMode{
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+			},
+			CacheNamespace: ptr.String("__CacheNamespace__"),
+		},
+		ServiceRoleOverride:            ptr.String("__ServiceRoleOverride__"),
+		PrivilegedModeOverride:         ptr.Bool(true),
+		BuildTimeoutInMinutesOverride:  ptr.Int32(1),
+		QueuedTimeoutInMinutesOverride: ptr.Int32(1),
+		EncryptionKeyOverride:          ptr.String("__EncryptionKeyOverride__"),
+		IdempotencyToken:               ptr.String("__IdempotencyToken__"),
+		LogsConfigOverride: &types.LogsConfig{
+			CloudWatchLogs: &types.CloudWatchLogsConfig{
+				Status:     types.LogsConfigStatusType("ENABLED"),
+				GroupName:  ptr.String("__GroupName__"),
+				StreamName: ptr.String("__StreamName__"),
+			},
+			S3Logs: &types.S3LogsConfig{
+				Status:             types.LogsConfigStatusType("ENABLED"),
+				Location:           ptr.String("__Location__"),
+				EncryptionDisabled: ptr.Bool(true),
+				BucketOwnerAccess:  types.BucketOwnerAccess("NONE"),
+			},
+		},
+		RegistryCredentialOverride: &types.RegistryCredential{
+			Credential:         ptr.String("__Credential__"),
+			CredentialProvider: types.CredentialProviderType("SECRETS_MANAGER"),
+		},
+		ImagePullCredentialsTypeOverride: types.ImagePullCredentialsType("CODEBUILD"),
+		BuildBatchConfigOverride: &types.ProjectBuildBatchConfig{
+			ServiceRole:      ptr.String("__ServiceRole__"),
+			CombineArtifacts: ptr.Bool(true),
+			Restrictions: &types.BatchRestrictions{
+				MaximumBuildsAllowed: ptr.Int32(1),
+				ComputeTypesAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FleetsAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TimeoutInMins:   ptr.Int32(1),
+			BatchReportMode: types.BatchReportModeType("REPORT_INDIVIDUAL_BUILDS"),
+		},
+		DebugSessionEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6246,7 +7143,11 @@ func TestCheckResponseSnapshot_StartCommandExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	got, err := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		SandboxId: ptr.String("__SandboxId__"),
+		Command:   ptr.String("__Command__"),
+		Type:      types.CommandType("SHELL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6505,7 +7406,10 @@ func TestCheckResponseSnapshot_StartSandbox(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSandbox(context.Background(), &StartSandboxInput{})
+	got, err := svc.StartSandbox(context.Background(), &StartSandboxInput{
+		ProjectName:      ptr.String("__ProjectName__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6530,7 +7434,9 @@ func TestCheckResponseSnapshot_StartSandboxConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSandboxConnection(context.Background(), &StartSandboxConnectionInput{})
+	got, err := svc.StartSandboxConnection(context.Background(), &StartSandboxConnectionInput{
+		SandboxId: ptr.String("__SandboxId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6835,7 +7741,9 @@ func TestCheckResponseSnapshot_StopBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBuild(context.Background(), &StopBuildInput{})
+	got, err := svc.StopBuild(context.Background(), &StopBuildInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7281,7 +8189,9 @@ func TestCheckResponseSnapshot_StopBuildBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBuildBatch(context.Background(), &StopBuildBatchInput{})
+	got, err := svc.StopBuildBatch(context.Background(), &StopBuildBatchInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7540,7 +8450,9 @@ func TestCheckResponseSnapshot_StopSandbox(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSandbox(context.Background(), &StopSandboxInput{})
+	got, err := svc.StopSandbox(context.Background(), &StopSandboxInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7642,7 +8554,78 @@ func TestCheckResponseSnapshot_UpdateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{})
+	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{
+		Arn:             ptr.String("__Arn__"),
+		BaseCapacity:    ptr.Int32(1),
+		EnvironmentType: types.EnvironmentType("WINDOWS_CONTAINER"),
+		ComputeType:     types.ComputeType("BUILD_GENERAL1_SMALL"),
+		ComputeConfiguration: &types.ComputeConfiguration{
+			VCpu:         ptr.Int64(1),
+			Memory:       ptr.Int64(1),
+			Disk:         ptr.Int64(1),
+			MachineType:  types.MachineType("GENERAL"),
+			InstanceType: ptr.String("__InstanceType__"),
+		},
+		ScalingConfiguration: &types.ScalingConfigurationInput{
+			ScalingType: types.FleetScalingType("TARGET_TRACKING_SCALING"),
+			TargetTrackingScalingConfigs: []types.TargetTrackingScalingConfiguration{
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+			},
+			MaxCapacity: ptr.Int32(1),
+		},
+		OverflowBehavior: types.FleetOverflowBehavior("QUEUE"),
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProxyConfiguration: &types.ProxyConfiguration{
+			DefaultBehavior: types.FleetProxyRuleBehavior("ALLOW_ALL"),
+			OrderedProxyRules: []types.FleetProxyRule{
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ImageId:          ptr.String("__ImageId__"),
+		FleetServiceRole: ptr.String("__FleetServiceRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7964,7 +8947,250 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{})
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Source: &types.ProjectSource{
+			Type:          types.SourceType("CODECOMMIT"),
+			Location:      ptr.String("__Location__"),
+			GitCloneDepth: ptr.Int32(1),
+			GitSubmodulesConfig: &types.GitSubmodulesConfig{
+				FetchSubmodules: ptr.Bool(true),
+			},
+			Buildspec: ptr.String("__Buildspec__"),
+			Auth: &types.SourceAuth{
+				Type:     types.SourceAuthType("OAUTH"),
+				Resource: ptr.String("__Resource__"),
+			},
+			ReportBuildStatus: ptr.Bool(true),
+			BuildStatusConfig: &types.BuildStatusConfig{
+				Context:   ptr.String("__Context__"),
+				TargetUrl: ptr.String("__TargetUrl__"),
+			},
+			InsecureSsl:      ptr.Bool(true),
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		SecondarySources: []types.ProjectSource{
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+			{
+				Type:          types.SourceType("CODECOMMIT"),
+				Location:      ptr.String("__Location__"),
+				GitCloneDepth: ptr.Int32(1),
+				GitSubmodulesConfig: &types.GitSubmodulesConfig{
+					FetchSubmodules: ptr.Bool(true),
+				},
+				Buildspec: ptr.String("__Buildspec__"),
+				Auth: &types.SourceAuth{
+					Type:     types.SourceAuthType("OAUTH"),
+					Resource: ptr.String("__Resource__"),
+				},
+				ReportBuildStatus: ptr.Bool(true),
+				BuildStatusConfig: &types.BuildStatusConfig{
+					Context:   ptr.String("__Context__"),
+					TargetUrl: ptr.String("__TargetUrl__"),
+				},
+				InsecureSsl:      ptr.Bool(true),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+			},
+		},
+		SourceVersion: ptr.String("__SourceVersion__"),
+		SecondarySourceVersions: []types.ProjectSourceVersion{
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+			{
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceVersion:    ptr.String("__SourceVersion__"),
+			},
+		},
+		Artifacts: &types.ProjectArtifacts{
+			Type:                 types.ArtifactsType("CODEPIPELINE"),
+			Location:             ptr.String("__Location__"),
+			Path:                 ptr.String("__Path__"),
+			NamespaceType:        types.ArtifactNamespace("NONE"),
+			Name:                 ptr.String("__Name__"),
+			Packaging:            types.ArtifactPackaging("NONE"),
+			OverrideArtifactName: ptr.Bool(true),
+			EncryptionDisabled:   ptr.Bool(true),
+			ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+			BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+		},
+		SecondaryArtifacts: []types.ProjectArtifacts{
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+			{
+				Type:                 types.ArtifactsType("CODEPIPELINE"),
+				Location:             ptr.String("__Location__"),
+				Path:                 ptr.String("__Path__"),
+				NamespaceType:        types.ArtifactNamespace("NONE"),
+				Name:                 ptr.String("__Name__"),
+				Packaging:            types.ArtifactPackaging("NONE"),
+				OverrideArtifactName: ptr.Bool(true),
+				EncryptionDisabled:   ptr.Bool(true),
+				ArtifactIdentifier:   ptr.String("__ArtifactIdentifier__"),
+				BucketOwnerAccess:    types.BucketOwnerAccess("NONE"),
+			},
+		},
+		Cache: &types.ProjectCache{
+			Type:     types.CacheType("NO_CACHE"),
+			Location: ptr.String("__Location__"),
+			Modes: []types.CacheMode{
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+				types.CacheMode("LOCAL_DOCKER_LAYER_CACHE"),
+			},
+			CacheNamespace: ptr.String("__CacheNamespace__"),
+		},
+		Environment: &types.ProjectEnvironment{
+			Type:        types.EnvironmentType("WINDOWS_CONTAINER"),
+			Image:       ptr.String("__Image__"),
+			ComputeType: types.ComputeType("BUILD_GENERAL1_SMALL"),
+			ComputeConfiguration: &types.ComputeConfiguration{
+				VCpu:         ptr.Int64(1),
+				Memory:       ptr.Int64(1),
+				Disk:         ptr.Int64(1),
+				MachineType:  types.MachineType("GENERAL"),
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			Fleet: &types.ProjectFleet{
+				FleetArn: ptr.String("__FleetArn__"),
+			},
+			EnvironmentVariables: []types.EnvironmentVariable{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EnvironmentVariableType("PLAINTEXT"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EnvironmentVariableType("PLAINTEXT"),
+				},
+			},
+			PrivilegedMode: ptr.Bool(true),
+			Certificate:    ptr.String("__Certificate__"),
+			RegistryCredential: &types.RegistryCredential{
+				Credential:         ptr.String("__Credential__"),
+				CredentialProvider: types.CredentialProviderType("SECRETS_MANAGER"),
+			},
+			ImagePullCredentialsType: types.ImagePullCredentialsType("CODEBUILD"),
+			DockerServer: &types.DockerServer{
+				ComputeType: types.ComputeType("BUILD_GENERAL1_SMALL"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: &types.DockerServerStatus{
+					Status:  ptr.String("__Status__"),
+					Message: ptr.String("__Message__"),
+				},
+			},
+			HostKernel: types.HostKernel("LINUX_KERNEL_4"),
+		},
+		ServiceRole:            ptr.String("__ServiceRole__"),
+		TimeoutInMinutes:       ptr.Int32(1),
+		QueuedTimeoutInMinutes: ptr.Int32(1),
+		EncryptionKey:          ptr.String("__EncryptionKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		BadgeEnabled: ptr.Bool(true),
+		LogsConfig: &types.LogsConfig{
+			CloudWatchLogs: &types.CloudWatchLogsConfig{
+				Status:     types.LogsConfigStatusType("ENABLED"),
+				GroupName:  ptr.String("__GroupName__"),
+				StreamName: ptr.String("__StreamName__"),
+			},
+			S3Logs: &types.S3LogsConfig{
+				Status:             types.LogsConfigStatusType("ENABLED"),
+				Location:           ptr.String("__Location__"),
+				EncryptionDisabled: ptr.Bool(true),
+				BucketOwnerAccess:  types.BucketOwnerAccess("NONE"),
+			},
+		},
+		FileSystemLocations: []types.ProjectFileSystemLocation{
+			{
+				Type:         types.FileSystemType("EFS"),
+				Location:     ptr.String("__Location__"),
+				MountPoint:   ptr.String("__MountPoint__"),
+				Identifier:   ptr.String("__Identifier__"),
+				MountOptions: ptr.String("__MountOptions__"),
+			},
+			{
+				Type:         types.FileSystemType("EFS"),
+				Location:     ptr.String("__Location__"),
+				MountPoint:   ptr.String("__MountPoint__"),
+				Identifier:   ptr.String("__Identifier__"),
+				MountOptions: ptr.String("__MountOptions__"),
+			},
+		},
+		BuildBatchConfig: &types.ProjectBuildBatchConfig{
+			ServiceRole:      ptr.String("__ServiceRole__"),
+			CombineArtifacts: ptr.Bool(true),
+			Restrictions: &types.BatchRestrictions{
+				MaximumBuildsAllowed: ptr.Int32(1),
+				ComputeTypesAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FleetsAllowed: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			TimeoutInMins:   ptr.Int32(1),
+			BatchReportMode: types.BatchReportModeType("REPORT_INDIVIDUAL_BUILDS"),
+		},
+		ConcurrentBuildLimit: ptr.Int32(1),
+		AutoRetryLimit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7987,7 +9213,11 @@ func TestCheckResponseSnapshot_UpdateProjectVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProjectVisibility(context.Background(), &UpdateProjectVisibilityInput{})
+	got, err := svc.UpdateProjectVisibility(context.Background(), &UpdateProjectVisibilityInput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectVisibility:  types.ProjectVisibilityType("PUBLIC_READ"),
+		ResourceAccessRole: ptr.String("__ResourceAccessRole__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8036,7 +9266,30 @@ func TestCheckResponseSnapshot_UpdateReportGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReportGroup(context.Background(), &UpdateReportGroupInput{})
+	got, err := svc.UpdateReportGroup(context.Background(), &UpdateReportGroupInput{
+		Arn: ptr.String("__Arn__"),
+		ExportConfig: &types.ReportExportConfig{
+			ExportConfigType: types.ReportExportConfigType("S3"),
+			S3Destination: &types.S3ReportExportConfig{
+				Bucket:             ptr.String("__Bucket__"),
+				BucketOwner:        ptr.String("__BucketOwner__"),
+				Path:               ptr.String("__Path__"),
+				Packaging:          types.ReportPackagingType("ZIP"),
+				EncryptionKey:      ptr.String("__EncryptionKey__"),
+				EncryptionDisabled: ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8105,7 +9358,45 @@ func TestCheckResponseSnapshot_UpdateWebhook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWebhook(context.Background(), &UpdateWebhookInput{})
+	got, err := svc.UpdateWebhook(context.Background(), &UpdateWebhookInput{
+		ProjectName:  ptr.String("__ProjectName__"),
+		BranchFilter: ptr.String("__BranchFilter__"),
+		RotateSecret: true,
+		FilterGroups: [][]types.WebhookFilter{
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+		},
+		BuildType: types.WebhookBuildType("BUILD"),
+		PullRequestBuildPolicy: &types.PullRequestBuildPolicy{
+			RequiresCommentApproval: types.PullRequestBuildCommentApproval("DISABLED"),
+			ApproverRoles: []types.PullRequestBuildApproverRole{
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8126,7 +9417,78 @@ func TestCheckResponseSnapshot_Error_AccountLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:            ptr.String("__Name__"),
+		BaseCapacity:    ptr.Int32(1),
+		EnvironmentType: types.EnvironmentType("WINDOWS_CONTAINER"),
+		ComputeType:     types.ComputeType("BUILD_GENERAL1_SMALL"),
+		ComputeConfiguration: &types.ComputeConfiguration{
+			VCpu:         ptr.Int64(1),
+			Memory:       ptr.Int64(1),
+			Disk:         ptr.Int64(1),
+			MachineType:  types.MachineType("GENERAL"),
+			InstanceType: ptr.String("__InstanceType__"),
+		},
+		ScalingConfiguration: &types.ScalingConfigurationInput{
+			ScalingType: types.FleetScalingType("TARGET_TRACKING_SCALING"),
+			TargetTrackingScalingConfigs: []types.TargetTrackingScalingConfiguration{
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+			},
+			MaxCapacity: ptr.Int32(1),
+		},
+		OverflowBehavior: types.FleetOverflowBehavior("QUEUE"),
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProxyConfiguration: &types.ProxyConfiguration{
+			DefaultBehavior: types.FleetProxyRuleBehavior("ALLOW_ALL"),
+			OrderedProxyRules: []types.FleetProxyRule{
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ImageId:          ptr.String("__ImageId__"),
+		FleetServiceRole: ptr.String("__FleetServiceRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8151,7 +9513,10 @@ func TestCheckResponseSnapshot_Error_AccountSuspendedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSandbox(context.Background(), &StartSandboxInput{})
+	_, opErr := svc.StartSandbox(context.Background(), &StartSandboxInput{
+		ProjectName:      ptr.String("__ProjectName__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8176,7 +9541,12 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteBuilds(context.Background(), &BatchDeleteBuildsInput{})
+	_, opErr := svc.BatchDeleteBuilds(context.Background(), &BatchDeleteBuildsInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8201,7 +9571,50 @@ func TestCheckResponseSnapshot_Error_OAuthProviderException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebhook(context.Background(), &CreateWebhookInput{})
+	_, opErr := svc.CreateWebhook(context.Background(), &CreateWebhookInput{
+		ProjectName:  ptr.String("__ProjectName__"),
+		BranchFilter: ptr.String("__BranchFilter__"),
+		FilterGroups: [][]types.WebhookFilter{
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+		},
+		BuildType:      types.WebhookBuildType("BUILD"),
+		ManualCreation: ptr.Bool(true),
+		ScopeConfiguration: &types.ScopeConfiguration{
+			Name:   ptr.String("__Name__"),
+			Domain: ptr.String("__Domain__"),
+			Scope:  types.WebhookScopeType("GITHUB_ORGANIZATION"),
+		},
+		PullRequestBuildPolicy: &types.PullRequestBuildPolicy{
+			RequiresCommentApproval: types.PullRequestBuildCommentApproval("DISABLED"),
+			ApproverRoles: []types.PullRequestBuildApproverRole{
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8226,7 +9639,78 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	_, opErr := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:            ptr.String("__Name__"),
+		BaseCapacity:    ptr.Int32(1),
+		EnvironmentType: types.EnvironmentType("WINDOWS_CONTAINER"),
+		ComputeType:     types.ComputeType("BUILD_GENERAL1_SMALL"),
+		ComputeConfiguration: &types.ComputeConfiguration{
+			VCpu:         ptr.Int64(1),
+			Memory:       ptr.Int64(1),
+			Disk:         ptr.Int64(1),
+			MachineType:  types.MachineType("GENERAL"),
+			InstanceType: ptr.String("__InstanceType__"),
+		},
+		ScalingConfiguration: &types.ScalingConfigurationInput{
+			ScalingType: types.FleetScalingType("TARGET_TRACKING_SCALING"),
+			TargetTrackingScalingConfigs: []types.TargetTrackingScalingConfiguration{
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+				{
+					MetricType:  types.FleetScalingMetricType("FLEET_UTILIZATION_RATE"),
+					TargetValue: ptr.Float64(1.0),
+				},
+			},
+			MaxCapacity: ptr.Int32(1),
+		},
+		OverflowBehavior: types.FleetOverflowBehavior("QUEUE"),
+		VpcConfig: &types.VpcConfig{
+			VpcId: ptr.String("__VpcId__"),
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ProxyConfiguration: &types.ProxyConfiguration{
+			DefaultBehavior: types.FleetProxyRuleBehavior("ALLOW_ALL"),
+			OrderedProxyRules: []types.FleetProxyRule{
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Type:   types.FleetProxyRuleType("DOMAIN"),
+					Effect: types.FleetProxyRuleEffectType("ALLOW"),
+					Entities: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ImageId:          ptr.String("__ImageId__"),
+		FleetServiceRole: ptr.String("__FleetServiceRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8251,7 +9735,50 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebhook(context.Background(), &CreateWebhookInput{})
+	_, opErr := svc.CreateWebhook(context.Background(), &CreateWebhookInput{
+		ProjectName:  ptr.String("__ProjectName__"),
+		BranchFilter: ptr.String("__BranchFilter__"),
+		FilterGroups: [][]types.WebhookFilter{
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+			{
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+				{
+					Type:                  types.WebhookFilterType("EVENT"),
+					Pattern:               ptr.String("__Pattern__"),
+					ExcludeMatchedPattern: ptr.Bool(true),
+				},
+			},
+		},
+		BuildType:      types.WebhookBuildType("BUILD"),
+		ManualCreation: ptr.Bool(true),
+		ScopeConfiguration: &types.ScopeConfiguration{
+			Name:   ptr.String("__Name__"),
+			Domain: ptr.String("__Domain__"),
+			Scope:  types.WebhookScopeType("GITHUB_ORGANIZATION"),
+		},
+		PullRequestBuildPolicy: &types.PullRequestBuildPolicy{
+			RequiresCommentApproval: types.PullRequestBuildCommentApproval("DISABLED"),
+			ApproverRoles: []types.PullRequestBuildApproverRole{
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+				types.PullRequestBuildApproverRole("GITHUB_READ"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

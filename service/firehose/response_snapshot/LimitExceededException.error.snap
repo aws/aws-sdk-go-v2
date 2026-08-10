@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Firehose_20150804.CreateDeliveryStream
+
+{"__type":"LimitExceededException","message":"__Message__"}

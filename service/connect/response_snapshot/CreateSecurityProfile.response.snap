@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SecurityProfileArn":"__SecurityProfileArn__","SecurityProfileId":"__SecurityProfileId__"}

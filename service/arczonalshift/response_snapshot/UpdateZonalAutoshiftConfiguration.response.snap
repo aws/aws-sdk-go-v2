@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"resourceIdentifier":"__ResourceIdentifier__","zonalAutoshiftStatus":"ENABLED"}

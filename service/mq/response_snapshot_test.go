@@ -120,7 +120,87 @@ func TestCheckResponseSnapshot_CreateBroker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	got, err := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +230,15 @@ func TestCheckResponseSnapshot_CreateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguration(context.Background(), &CreateConfigurationInput{})
+	got, err := svc.CreateConfiguration(context.Background(), &CreateConfigurationInput{
+		AuthenticationStrategy: types.AuthenticationStrategy("SIMPLE"),
+		EngineType:             types.EngineType("ACTIVEMQ"),
+		EngineVersion:          ptr.String("__EngineVersion__"),
+		Name:                   ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,7 +257,12 @@ func TestCheckResponseSnapshot_CreateTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{})
+	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +281,17 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		BrokerId:      ptr.String("__BrokerId__"),
+		ConsoleAccess: ptr.Bool(true),
+		Groups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Password:        ptr.String("__Password__"),
+		Username:        ptr.String("__Username__"),
+		ReplicationUser: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +312,9 @@ func TestCheckResponseSnapshot_DeleteBroker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBroker(context.Background(), &DeleteBrokerInput{})
+	got, err := svc.DeleteBroker(context.Background(), &DeleteBrokerInput{
+		BrokerId: ptr.String("__BrokerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +335,9 @@ func TestCheckResponseSnapshot_DeleteConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguration(context.Background(), &DeleteConfigurationInput{})
+	got, err := svc.DeleteConfiguration(context.Background(), &DeleteConfigurationInput{
+		ConfigurationId: ptr.String("__ConfigurationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +356,13 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +381,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		BrokerId: ptr.String("__BrokerId__"),
+		Username: ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +560,9 @@ func TestCheckResponseSnapshot_DescribeBroker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBroker(context.Background(), &DescribeBrokerInput{})
+	got, err := svc.DescribeBroker(context.Background(), &DescribeBrokerInput{
+		BrokerId: ptr.String("__BrokerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +608,11 @@ func TestCheckResponseSnapshot_DescribeBrokerEngineTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBrokerEngineTypes(context.Background(), &DescribeBrokerEngineTypesInput{})
+	got, err := svc.DescribeBrokerEngineTypes(context.Background(), &DescribeBrokerEngineTypesInput{
+		EngineType: ptr.String("__EngineType__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +678,13 @@ func TestCheckResponseSnapshot_DescribeBrokerInstanceOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBrokerInstanceOptions(context.Background(), &DescribeBrokerInstanceOptionsInput{})
+	got, err := svc.DescribeBrokerInstanceOptions(context.Background(), &DescribeBrokerInstanceOptionsInput{
+		EngineType:       ptr.String("__EngineType__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		StorageType:      ptr.String("__StorageType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +720,9 @@ func TestCheckResponseSnapshot_DescribeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfiguration(context.Background(), &DescribeConfigurationInput{})
+	got, err := svc.DescribeConfiguration(context.Background(), &DescribeConfigurationInput{
+		ConfigurationId: ptr.String("__ConfigurationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -616,7 +746,10 @@ func TestCheckResponseSnapshot_DescribeConfigurationRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationRevision(context.Background(), &DescribeConfigurationRevisionInput{})
+	got, err := svc.DescribeConfigurationRevision(context.Background(), &DescribeConfigurationRevisionInput{
+		ConfigurationId:       ptr.String("__ConfigurationId__"),
+		ConfigurationRevision: ptr.String("__ConfigurationRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +806,11 @@ func TestCheckResponseSnapshot_DescribeSharedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSharedResources(context.Background(), &DescribeSharedResourcesInput{})
+	got, err := svc.DescribeSharedResources(context.Background(), &DescribeSharedResourcesInput{
+		BrokerId:   ptr.String("__BrokerId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +846,10 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{})
+	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{
+		BrokerId: ptr.String("__BrokerId__"),
+		Username: ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -752,7 +892,10 @@ func TestCheckResponseSnapshot_ListBrokers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBrokers(context.Background(), &ListBrokersInput{})
+	got, err := svc.ListBrokers(context.Background(), &ListBrokersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -787,7 +930,11 @@ func TestCheckResponseSnapshot_ListConfigurationRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationRevisions(context.Background(), &ListConfigurationRevisionsInput{})
+	got, err := svc.ListConfigurationRevisions(context.Background(), &ListConfigurationRevisionsInput{
+		ConfigurationId: ptr.String("__ConfigurationId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -847,7 +994,10 @@ func TestCheckResponseSnapshot_ListConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{})
+	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1020,9 @@ func TestCheckResponseSnapshot_ListTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTags(context.Background(), &ListTagsInput{})
+	got, err := svc.ListTags(context.Background(), &ListTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1055,11 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		BrokerId:   ptr.String("__BrokerId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -924,7 +1080,10 @@ func TestCheckResponseSnapshot_Promote(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Promote(context.Background(), &PromoteInput{})
+	got, err := svc.Promote(context.Background(), &PromoteInput{
+		BrokerId: ptr.String("__BrokerId__"),
+		Mode:     types.PromoteMode("SWITCHOVER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1102,9 @@ func TestCheckResponseSnapshot_RebootBroker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootBroker(context.Background(), &RebootBrokerInput{})
+	got, err := svc.RebootBroker(context.Background(), &RebootBrokerInput{
+		BrokerId: ptr.String("__BrokerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1021,7 +1182,52 @@ func TestCheckResponseSnapshot_UpdateBroker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBroker(context.Background(), &UpdateBrokerInput{})
+	got, err := svc.UpdateBroker(context.Background(), &UpdateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerId:                ptr.String("__BrokerId__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		ResourceShareArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize:         ptr.Int32(1),
+		DataReplicationMode: types.DataReplicationMode("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1268,11 @@ func TestCheckResponseSnapshot_UpdateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfiguration(context.Background(), &UpdateConfigurationInput{})
+	got, err := svc.UpdateConfiguration(context.Background(), &UpdateConfigurationInput{
+		ConfigurationId: ptr.String("__ConfigurationId__"),
+		Data:            ptr.String("__Data__"),
+		Description:     ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1291,17 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		BrokerId:      ptr.String("__BrokerId__"),
+		ConsoleAccess: ptr.Bool(true),
+		Groups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Password:        ptr.String("__Password__"),
+		Username:        ptr.String("__Username__"),
+		ReplicationUser: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1335,87 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1153,7 +1453,87 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1191,7 +1571,87 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1229,7 +1689,87 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1267,7 +1807,12 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTags(context.Background(), &CreateTagsInput{})
+	_, opErr := svc.CreateTags(context.Background(), &CreateTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1305,7 +1850,87 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{})
+	_, opErr := svc.CreateBroker(context.Background(), &CreateBrokerInput{
+		AuthenticationStrategy:  types.AuthenticationStrategy("SIMPLE"),
+		AutoMinorVersionUpgrade: ptr.Bool(true),
+		BrokerName:              ptr.String("__BrokerName__"),
+		Configuration: &types.ConfigurationId{
+			Id:       ptr.String("__Id__"),
+			Revision: ptr.Int32(1),
+		},
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		DeploymentMode:   types.DeploymentMode("SINGLE_INSTANCE"),
+		EncryptionOptions: &types.EncryptionOptions{
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+			UseAwsOwnedKey: ptr.Bool(true),
+		},
+		EngineType:       types.EngineType("ACTIVEMQ"),
+		EngineVersion:    ptr.String("__EngineVersion__"),
+		HostInstanceType: ptr.String("__HostInstanceType__"),
+		LdapServerMetadata: &types.LdapServerMetadataInput{
+			Hosts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleBase:               ptr.String("__RoleBase__"),
+			RoleName:               ptr.String("__RoleName__"),
+			RoleSearchMatching:     ptr.String("__RoleSearchMatching__"),
+			RoleSearchSubtree:      ptr.Bool(true),
+			ServiceAccountPassword: ptr.String("__ServiceAccountPassword__"),
+			ServiceAccountUsername: ptr.String("__ServiceAccountUsername__"),
+			UserBase:               ptr.String("__UserBase__"),
+			UserRoleName:           ptr.String("__UserRoleName__"),
+			UserSearchMatching:     ptr.String("__UserSearchMatching__"),
+			UserSearchSubtree:      ptr.Bool(true),
+		},
+		Logs: &types.Logs{
+			Audit:   ptr.Bool(true),
+			General: ptr.Bool(true),
+		},
+		MaintenanceWindowStartTime: &types.WeeklyStartTime{
+			DayOfWeek: types.DayOfWeek("MONDAY"),
+			TimeOfDay: ptr.String("__TimeOfDay__"),
+			TimeZone:  ptr.String("__TimeZone__"),
+		},
+		PubliclyAccessible: ptr.Bool(true),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageSize: ptr.Int32(1),
+		StorageType: types.BrokerStorageType("EBS"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Users: []types.User{
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+			{
+				ConsoleAccess: ptr.Bool(true),
+				Groups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Password:        ptr.String("__Password__"),
+				Username:        ptr.String("__Username__"),
+				ReplicationUser: ptr.Bool(true),
+			},
+		},
+		DataReplicationMode:             types.DataReplicationMode("NONE"),
+		DataReplicationPrimaryBrokerArn: ptr.String("__DataReplicationPrimaryBrokerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

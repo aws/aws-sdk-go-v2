@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizationEndpoint":"__AuthorizationEndpoint__","endSessionEndpoint":"__EndSessionEndpoint__","grantTypesSupported":["__Member__","__Member__"],"issuer":"__Issuer__","logoutEndpoint":"__LogoutEndpoint__","microsoftMultiRefreshToken":true,"responseTypesSupported":["__Member__","__Member__"],"revocationEndpoint":"__RevocationEndpoint__","scopesSupported":["__Member__","__Member__"],"tokenEndpoint":"__TokenEndpoint__","tokenEndpointAuthMethodsSupported":["__Member__","__Member__"],"userinfoEndpoint":"__UserinfoEndpoint__"}

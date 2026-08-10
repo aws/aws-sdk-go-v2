@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"caseArn":"__CaseArn__","caseId":"__CaseId__","caseStatus":"Submitted","closedDate":946684800,"createdDate":946684800,"engagementType":"Security Incident","lastUpdatedDate":946684800,"pendingAction":"Customer","resolverType":"AWS","title":"__Title__"},{"caseArn":"__CaseArn__","caseId":"__CaseId__","caseStatus":"Submitted","closedDate":946684800,"createdDate":946684800,"engagementType":"Security Incident","lastUpdatedDate":946684800,"pendingAction":"Customer","resolverType":"AWS","title":"__Title__"}],"nextToken":"__NextToken__","total":1}

@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/document"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -127,7 +128,9 @@ func TestCheckResponseSnapshot_CancelExportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	got, err := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +157,9 @@ func TestCheckResponseSnapshot_CancelImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelImportTask(context.Background(), &CancelImportTaskInput{})
+	got, err := svc.CancelImportTask(context.Background(), &CancelImportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +178,10 @@ func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		QueryId:         ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +218,20 @@ func TestCheckResponseSnapshot_CreateGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGraph(context.Background(), &CreateGraphInput{})
+	got, err := svc.CreateGraph(context.Background(), &CreateGraphInput{
+		GraphName: ptr.String("__GraphName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PublicConnectivity: ptr.Bool(true),
+		KmsKeyIdentifier:   ptr.String("__KmsKeyIdentifier__"),
+		VectorSearchConfiguration: &types.VectorSearchConfiguration{
+			Dimension: ptr.Int32(1),
+		},
+		ReplicaCount:       ptr.Int32(1),
+		DeletionProtection: ptr.Bool(true),
+		ProvisionedMemory:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +258,13 @@ func TestCheckResponseSnapshot_CreateGraphSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGraphSnapshot(context.Background(), &CreateGraphSnapshotInput{})
+	got, err := svc.CreateGraphSnapshot(context.Background(), &CreateGraphSnapshotInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		SnapshotName:    ptr.String("__SnapshotName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +299,35 @@ func TestCheckResponseSnapshot_CreateGraphUsingImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGraphUsingImportTask(context.Background(), &CreateGraphUsingImportTaskInput{})
+	got, err := svc.CreateGraphUsingImportTask(context.Background(), &CreateGraphUsingImportTaskInput{
+		GraphName: ptr.String("__GraphName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PublicConnectivity: ptr.Bool(true),
+		KmsKeyIdentifier:   ptr.String("__KmsKeyIdentifier__"),
+		VectorSearchConfiguration: &types.VectorSearchConfiguration{
+			Dimension: ptr.Int32(1),
+		},
+		ReplicaCount:       ptr.Int32(1),
+		DeletionProtection: ptr.Bool(true),
+		ImportOptions: &types.ImportOptionsMemberNeptune{
+			Value: types.NeptuneImportOptions{
+				S3ExportPath:                ptr.String("__S3ExportPath__"),
+				S3ExportKmsKeyId:            ptr.String("__S3ExportKmsKeyId__"),
+				PreserveDefaultVertexLabels: ptr.Bool(true),
+				PreserveEdgeIds:             ptr.Bool(true),
+			},
+		},
+		MaxProvisionedMemory: ptr.Int32(1),
+		MinProvisionedMemory: ptr.Int32(1),
+		FailOnError:          ptr.Bool(true),
+		Source:               ptr.String("__Source__"),
+		Format:               types.Format("CSV"),
+		ParquetType:          types.ParquetType("COLUMNAR"),
+		BlankNodeHandling:    types.BlankNodeHandling("convertToIri"),
+		RoleArn:              ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +354,18 @@ func TestCheckResponseSnapshot_CreatePrivateGraphEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrivateGraphEndpoint(context.Background(), &CreatePrivateGraphEndpointInput{})
+	got, err := svc.CreatePrivateGraphEndpoint(context.Background(), &CreatePrivateGraphEndpointInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		VpcId:           ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +402,10 @@ func TestCheckResponseSnapshot_DeleteGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGraph(context.Background(), &DeleteGraphInput{})
+	got, err := svc.DeleteGraph(context.Background(), &DeleteGraphInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		SkipSnapshot:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +432,9 @@ func TestCheckResponseSnapshot_DeleteGraphSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGraphSnapshot(context.Background(), &DeleteGraphSnapshotInput{})
+	got, err := svc.DeleteGraphSnapshot(context.Background(), &DeleteGraphSnapshotInput{
+		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +461,10 @@ func TestCheckResponseSnapshot_DeletePrivateGraphEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePrivateGraphEndpoint(context.Background(), &DeletePrivateGraphEndpointInput{})
+	got, err := svc.DeletePrivateGraphEndpoint(context.Background(), &DeletePrivateGraphEndpointInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		VpcId:           ptr.String("__VpcId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +474,9 @@ func TestCheckResponseSnapshot_DeletePrivateGraphEndpoint(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_ExecuteQuery(t *testing.T) {
-	want := &ExecuteQueryOutput{}
+	want := &ExecuteQueryOutput{
+		Payload: io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("ExecuteQuery.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -409,7 +485,17 @@ func TestCheckResponseSnapshot_ExecuteQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	got, err := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		QueryString:     ptr.String("__QueryString__"),
+		Language:        types.QueryLanguage("OPEN_CYPHER"),
+		Parameters: map[string]document.Interface{
+			"key0": document.NewLazyDocument("__Document__"),
+		},
+		PlanCache:                types.PlanCacheType("ENABLED"),
+		ExplainMode:              types.ExplainMode("STATIC"),
+		QueryTimeoutMilliseconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +555,9 @@ func TestCheckResponseSnapshot_GetExportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExportTask(context.Background(), &GetExportTaskInput{})
+	got, err := svc.GetExportTask(context.Background(), &GetExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +594,9 @@ func TestCheckResponseSnapshot_GetGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGraph(context.Background(), &GetGraphInput{})
+	got, err := svc.GetGraph(context.Background(), &GetGraphInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +623,9 @@ func TestCheckResponseSnapshot_GetGraphSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGraphSnapshot(context.Background(), &GetGraphSnapshotInput{})
+	got, err := svc.GetGraphSnapshot(context.Background(), &GetGraphSnapshotInput{
+		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +721,10 @@ func TestCheckResponseSnapshot_GetGraphSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGraphSummary(context.Background(), &GetGraphSummaryInput{})
+	got, err := svc.GetGraphSummary(context.Background(), &GetGraphSummaryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		Mode:            types.GraphSummaryMode("BASIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -676,7 +771,9 @@ func TestCheckResponseSnapshot_GetImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportTask(context.Background(), &GetImportTaskInput{})
+	got, err := svc.GetImportTask(context.Background(), &GetImportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +800,10 @@ func TestCheckResponseSnapshot_GetPrivateGraphEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrivateGraphEndpoint(context.Background(), &GetPrivateGraphEndpointInput{})
+	got, err := svc.GetPrivateGraphEndpoint(context.Background(), &GetPrivateGraphEndpointInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		VpcId:           ptr.String("__VpcId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +828,10 @@ func TestCheckResponseSnapshot_GetQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuery(context.Background(), &GetQueryInput{})
+	got, err := svc.GetQuery(context.Background(), &GetQueryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		QueryId:         ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -773,7 +876,11 @@ func TestCheckResponseSnapshot_ListExportTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExportTasks(context.Background(), &ListExportTasksInput{})
+	got, err := svc.ListExportTasks(context.Background(), &ListExportTasksInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +921,11 @@ func TestCheckResponseSnapshot_ListGraphSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGraphSnapshots(context.Background(), &ListGraphSnapshotsInput{})
+	got, err := svc.ListGraphSnapshots(context.Background(), &ListGraphSnapshotsInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +972,10 @@ func TestCheckResponseSnapshot_ListGraphs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGraphs(context.Background(), &ListGraphsInput{})
+	got, err := svc.ListGraphs(context.Background(), &ListGraphsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -902,7 +1016,10 @@ func TestCheckResponseSnapshot_ListImportTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportTasks(context.Background(), &ListImportTasksInput{})
+	got, err := svc.ListImportTasks(context.Background(), &ListImportTasksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1060,11 @@ func TestCheckResponseSnapshot_ListPrivateGraphEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrivateGraphEndpoints(context.Background(), &ListPrivateGraphEndpointsInput{})
+	got, err := svc.ListPrivateGraphEndpoints(context.Background(), &ListPrivateGraphEndpointsInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -979,7 +1100,11 @@ func TestCheckResponseSnapshot_ListQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		MaxResults:      ptr.Int32(1),
+		State:           types.QueryStateInput("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1127,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1039,7 +1166,10 @@ func TestCheckResponseSnapshot_ResetGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetGraph(context.Background(), &ResetGraphInput{})
+	got, err := svc.ResetGraph(context.Background(), &ResetGraphInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		SkipSnapshot:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1206,17 @@ func TestCheckResponseSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreGraphFromSnapshot(context.Background(), &RestoreGraphFromSnapshotInput{})
+	got, err := svc.RestoreGraphFromSnapshot(context.Background(), &RestoreGraphFromSnapshotInput{
+		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
+		GraphName:          ptr.String("__GraphName__"),
+		ProvisionedMemory:  ptr.Int32(1),
+		DeletionProtection: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ReplicaCount:       ptr.Int32(1),
+		PublicConnectivity: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1129,7 +1269,41 @@ func TestCheckResponseSnapshot_StartExportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExportTask(context.Background(), &StartExportTaskInput{})
+	got, err := svc.StartExportTask(context.Background(), &StartExportTaskInput{
+		GraphIdentifier:  ptr.String("__GraphIdentifier__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		Format:           types.ExportFormat("PARQUET"),
+		Destination:      ptr.String("__Destination__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ParquetType:      types.ParquetType("COLUMNAR"),
+		ExportFilter: &types.ExportFilter{
+			VertexFilter: map[string]types.ExportFilterElement{
+				"key0": {
+					Properties: map[string]types.ExportFilterPropertyAttributes{
+						"key0": {
+							OutputType:         ptr.String("__OutputType__"),
+							SourcePropertyName: ptr.String("__SourcePropertyName__"),
+							MultiValueHandling: types.MultiValueHandlingType("TO_LIST"),
+						},
+					},
+				},
+			},
+			EdgeFilter: map[string]types.ExportFilterElement{
+				"key0": {
+					Properties: map[string]types.ExportFilterPropertyAttributes{
+						"key0": {
+							OutputType:         ptr.String("__OutputType__"),
+							SourcePropertyName: ptr.String("__SourcePropertyName__"),
+							MultiValueHandling: types.MultiValueHandlingType("TO_LIST"),
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1166,7 +1340,9 @@ func TestCheckResponseSnapshot_StartGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartGraph(context.Background(), &StartGraphInput{})
+	got, err := svc.StartGraph(context.Background(), &StartGraphInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1201,7 +1377,23 @@ func TestCheckResponseSnapshot_StartImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImportTask(context.Background(), &StartImportTaskInput{})
+	got, err := svc.StartImportTask(context.Background(), &StartImportTaskInput{
+		ImportOptions: &types.ImportOptionsMemberNeptune{
+			Value: types.NeptuneImportOptions{
+				S3ExportPath:                ptr.String("__S3ExportPath__"),
+				S3ExportKmsKeyId:            ptr.String("__S3ExportKmsKeyId__"),
+				PreserveDefaultVertexLabels: ptr.Bool(true),
+				PreserveEdgeIds:             ptr.Bool(true),
+			},
+		},
+		FailOnError:       ptr.Bool(true),
+		Source:            ptr.String("__Source__"),
+		Format:            types.Format("CSV"),
+		ParquetType:       types.ParquetType("COLUMNAR"),
+		BlankNodeHandling: types.BlankNodeHandling("convertToIri"),
+		GraphIdentifier:   ptr.String("__GraphIdentifier__"),
+		RoleArn:           ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1238,7 +1430,9 @@ func TestCheckResponseSnapshot_StopGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopGraph(context.Background(), &StopGraphInput{})
+	got, err := svc.StopGraph(context.Background(), &StopGraphInput{
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1257,7 +1451,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1276,7 +1475,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1313,7 +1518,12 @@ func TestCheckResponseSnapshot_UpdateGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGraph(context.Background(), &UpdateGraphInput{})
+	got, err := svc.UpdateGraph(context.Background(), &UpdateGraphInput{
+		GraphIdentifier:    ptr.String("__GraphIdentifier__"),
+		PublicConnectivity: ptr.Bool(true),
+		ProvisionedMemory:  ptr.Int32(1),
+		DeletionProtection: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1334,7 +1544,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	_, opErr := svc.CancelQuery(context.Background(), &CancelQueryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		QueryId:         ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1360,7 +1573,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1385,7 +1600,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1410,7 +1627,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1439,7 +1658,20 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGraph(context.Background(), &CreateGraphInput{})
+	_, opErr := svc.CreateGraph(context.Background(), &CreateGraphInput{
+		GraphName: ptr.String("__GraphName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PublicConnectivity: ptr.Bool(true),
+		KmsKeyIdentifier:   ptr.String("__KmsKeyIdentifier__"),
+		VectorSearchConfiguration: &types.VectorSearchConfiguration{
+			Dimension: ptr.Int32(1),
+		},
+		ReplicaCount:       ptr.Int32(1),
+		DeletionProtection: ptr.Bool(true),
+		ProvisionedMemory:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1464,7 +1696,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1490,7 +1724,17 @@ func TestCheckResponseSnapshot_Error_UnprocessableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{
+		GraphIdentifier: ptr.String("GraphIdentifier-value"),
+		QueryString:     ptr.String("__QueryString__"),
+		Language:        types.QueryLanguage("OPEN_CYPHER"),
+		Parameters: map[string]document.Interface{
+			"key0": document.NewLazyDocument("__Document__"),
+		},
+		PlanCache:                types.PlanCacheType("ENABLED"),
+		ExplainMode:              types.ExplainMode("STATIC"),
+		QueryTimeoutMilliseconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1516,7 +1760,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{})
+	_, opErr := svc.CancelExportTask(context.Background(), &CancelExportTaskInput{
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

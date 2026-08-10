@@ -1,0 +1,7 @@
+200
+Content-Type: __ContentType__
+Next-Poll-Configuration-Token: __NextPollConfigurationToken__
+Next-Poll-Interval-In-Seconds: 1
+Version-Label: __VersionLabel__
+
+blob

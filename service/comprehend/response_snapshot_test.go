@@ -158,7 +158,12 @@ func TestCheckResponseSnapshot_BatchDetectDominantLanguage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{})
+	got, err := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +379,13 @@ func TestCheckResponseSnapshot_BatchDetectEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectEntities(context.Background(), &BatchDetectEntitiesInput{})
+	got, err := svc.BatchDetectEntities(context.Background(), &BatchDetectEntitiesInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +453,13 @@ func TestCheckResponseSnapshot_BatchDetectKeyPhrases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectKeyPhrases(context.Background(), &BatchDetectKeyPhrasesInput{})
+	got, err := svc.BatchDetectKeyPhrases(context.Background(), &BatchDetectKeyPhrasesInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +513,13 @@ func TestCheckResponseSnapshot_BatchDetectSentiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectSentiment(context.Background(), &BatchDetectSentimentInput{})
+	got, err := svc.BatchDetectSentiment(context.Background(), &BatchDetectSentimentInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -580,7 +603,13 @@ func TestCheckResponseSnapshot_BatchDetectSyntax(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectSyntax(context.Background(), &BatchDetectSyntaxInput{})
+	got, err := svc.BatchDetectSyntax(context.Background(), &BatchDetectSyntaxInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.SyntaxLanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +821,13 @@ func TestCheckResponseSnapshot_BatchDetectTargetedSentiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDetectTargetedSentiment(context.Background(), &BatchDetectTargetedSentimentInput{})
+	got, err := svc.BatchDetectTargetedSentiment(context.Background(), &BatchDetectTargetedSentimentInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +918,19 @@ func TestCheckResponseSnapshot_ClassifyDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ClassifyDocument(context.Background(), &ClassifyDocumentInput{})
+	got, err := svc.ClassifyDocument(context.Background(), &ClassifyDocumentInput{
+		Text:        ptr.String("__Text__"),
+		EndpointArn: ptr.String("__EndpointArn__"),
+		Bytes:       []byte("blob"),
+		DocumentReaderConfig: &types.DocumentReaderConfig{
+			DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+			DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+			FeatureTypes: []types.DocumentReadFeatureTypes{
+				types.DocumentReadFeatureTypes("TABLES"),
+				types.DocumentReadFeatureTypes("TABLES"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -913,7 +960,10 @@ func TestCheckResponseSnapshot_ContainsPiiEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContainsPiiEntities(context.Background(), &ContainsPiiEntitiesInput{})
+	got, err := svc.ContainsPiiEntities(context.Background(), &ContainsPiiEntitiesInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -934,7 +984,64 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -955,7 +1062,85 @@ func TestCheckResponseSnapshot_CreateDocumentClassifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDocumentClassifier(context.Background(), &CreateDocumentClassifierInput{})
+	got, err := svc.CreateDocumentClassifier(context.Background(), &CreateDocumentClassifierInput{
+		DocumentClassifierName: ptr.String("__DocumentClassifierName__"),
+		VersionName:            ptr.String("__VersionName__"),
+		DataAccessRoleArn:      ptr.String("__DataAccessRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputDataConfig: &types.DocumentClassifierInputDataConfig{
+			DataFormat:     types.DocumentClassifierDataFormat("COMPREHEND_CSV"),
+			S3Uri:          ptr.String("__S3Uri__"),
+			TestS3Uri:      ptr.String("__TestS3Uri__"),
+			LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			AugmentedManifests: []types.AugmentedManifestsListItem{
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DocumentType: types.DocumentClassifierDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+			Documents: &types.DocumentClassifierDocuments{
+				S3Uri:     ptr.String("__S3Uri__"),
+				TestS3Uri: ptr.String("__TestS3Uri__"),
+			},
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.DocumentClassifierOutputDataConfig{
+			S3Uri:                 ptr.String("__S3Uri__"),
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			FlywheelStatsS3Prefix: ptr.String("__FlywheelStatsS3Prefix__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LanguageCode:       types.LanguageCode("en"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Mode:          types.DocumentClassifierMode("MULTI_CLASS"),
+		ModelKmsKeyId: ptr.String("__ModelKmsKeyId__"),
+		ModelPolicy:   ptr.String("__ModelPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -977,7 +1162,24 @@ func TestCheckResponseSnapshot_CreateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		EndpointName:          ptr.String("__EndpointName__"),
+		ModelArn:              ptr.String("__ModelArn__"),
+		DesiredInferenceUnits: ptr.Int32(1),
+		ClientRequestToken:    ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		FlywheelArn:       ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1200,83 @@ func TestCheckResponseSnapshot_CreateEntityRecognizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEntityRecognizer(context.Background(), &CreateEntityRecognizerInput{})
+	got, err := svc.CreateEntityRecognizer(context.Background(), &CreateEntityRecognizerInput{
+		RecognizerName:    ptr.String("__RecognizerName__"),
+		VersionName:       ptr.String("__VersionName__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputDataConfig: &types.EntityRecognizerInputDataConfig{
+			DataFormat: types.EntityRecognizerDataFormat("COMPREHEND_CSV"),
+			EntityTypes: []types.EntityTypesListItem{
+				{
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Type: ptr.String("__Type__"),
+				},
+			},
+			Documents: &types.EntityRecognizerDocuments{
+				S3Uri:       ptr.String("__S3Uri__"),
+				TestS3Uri:   ptr.String("__TestS3Uri__"),
+				InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			},
+			Annotations: &types.EntityRecognizerAnnotations{
+				S3Uri:     ptr.String("__S3Uri__"),
+				TestS3Uri: ptr.String("__TestS3Uri__"),
+			},
+			EntityList: &types.EntityRecognizerEntityList{
+				S3Uri: ptr.String("__S3Uri__"),
+			},
+			AugmentedManifests: []types.AugmentedManifestsListItem{
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LanguageCode:       types.LanguageCode("en"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ModelKmsKeyId: ptr.String("__ModelKmsKeyId__"),
+		ModelPolicy:   ptr.String("__ModelPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1020,7 +1298,59 @@ func TestCheckResponseSnapshot_CreateFlywheel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlywheel(context.Background(), &CreateFlywheelInput{})
+	got, err := svc.CreateFlywheel(context.Background(), &CreateFlywheelInput{
+		FlywheelName:      ptr.String("__FlywheelName__"),
+		ActiveModelArn:    ptr.String("__ActiveModelArn__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		TaskConfig: &types.TaskConfig{
+			LanguageCode: types.LanguageCode("en"),
+			DocumentClassificationConfig: &types.DocumentClassificationConfig{
+				Mode: types.DocumentClassifierMode("MULTI_CLASS"),
+				Labels: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			EntityRecognitionConfig: &types.EntityRecognitionConfig{
+				EntityTypes: []types.EntityTypesListItem{
+					{
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Type: ptr.String("__Type__"),
+					},
+				},
+			},
+		},
+		ModelType:     types.ModelType("DOCUMENT_CLASSIFIER"),
+		DataLakeS3Uri: ptr.String("__DataLakeS3Uri__"),
+		DataSecurityConfig: &types.DataSecurityConfig{
+			ModelKmsKeyId:    ptr.String("__ModelKmsKeyId__"),
+			VolumeKmsKeyId:   ptr.String("__VolumeKmsKeyId__"),
+			DataLakeKmsKeyId: ptr.String("__DataLakeKmsKeyId__"),
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1039,7 +1369,9 @@ func TestCheckResponseSnapshot_DeleteDocumentClassifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDocumentClassifier(context.Background(), &DeleteDocumentClassifierInput{})
+	got, err := svc.DeleteDocumentClassifier(context.Background(), &DeleteDocumentClassifierInput{
+		DocumentClassifierArn: ptr.String("__DocumentClassifierArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1390,9 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1077,7 +1411,9 @@ func TestCheckResponseSnapshot_DeleteEntityRecognizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEntityRecognizer(context.Background(), &DeleteEntityRecognizerInput{})
+	got, err := svc.DeleteEntityRecognizer(context.Background(), &DeleteEntityRecognizerInput{
+		EntityRecognizerArn: ptr.String("__EntityRecognizerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1432,9 @@ func TestCheckResponseSnapshot_DeleteFlywheel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlywheel(context.Background(), &DeleteFlywheelInput{})
+	got, err := svc.DeleteFlywheel(context.Background(), &DeleteFlywheelInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1453,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn:      ptr.String("__ResourceArn__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1488,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1206,7 +1549,9 @@ func TestCheckResponseSnapshot_DescribeDocumentClassificationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDocumentClassificationJob(context.Background(), &DescribeDocumentClassificationJobInput{})
+	got, err := svc.DescribeDocumentClassificationJob(context.Background(), &DescribeDocumentClassificationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1316,7 +1661,9 @@ func TestCheckResponseSnapshot_DescribeDocumentClassifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDocumentClassifier(context.Background(), &DescribeDocumentClassifierInput{})
+	got, err := svc.DescribeDocumentClassifier(context.Background(), &DescribeDocumentClassifierInput{
+		DocumentClassifierArn: ptr.String("__DocumentClassifierArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1720,9 @@ func TestCheckResponseSnapshot_DescribeDominantLanguageDetectionJob(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDominantLanguageDetectionJob(context.Background(), &DescribeDominantLanguageDetectionJobInput{})
+	got, err := svc.DescribeDominantLanguageDetectionJob(context.Background(), &DescribeDominantLanguageDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1756,9 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpoint(context.Background(), &DescribeEndpointInput{})
+	got, err := svc.DescribeEndpoint(context.Background(), &DescribeEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1467,7 +1818,9 @@ func TestCheckResponseSnapshot_DescribeEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntitiesDetectionJob(context.Background(), &DescribeEntitiesDetectionJobInput{})
+	got, err := svc.DescribeEntitiesDetectionJob(context.Background(), &DescribeEntitiesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1592,7 +1945,9 @@ func TestCheckResponseSnapshot_DescribeEntityRecognizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntityRecognizer(context.Background(), &DescribeEntityRecognizerInput{})
+	got, err := svc.DescribeEntityRecognizer(context.Background(), &DescribeEntityRecognizerInput{
+		EntityRecognizerArn: ptr.String("__EntityRecognizerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1643,7 +1998,9 @@ func TestCheckResponseSnapshot_DescribeEventsDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventsDetectionJob(context.Background(), &DescribeEventsDetectionJobInput{})
+	got, err := svc.DescribeEventsDetectionJob(context.Background(), &DescribeEventsDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +2067,9 @@ func TestCheckResponseSnapshot_DescribeFlywheel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlywheel(context.Background(), &DescribeFlywheelInput{})
+	got, err := svc.DescribeFlywheel(context.Background(), &DescribeFlywheelInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1753,7 +2112,10 @@ func TestCheckResponseSnapshot_DescribeFlywheelIteration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlywheelIteration(context.Background(), &DescribeFlywheelIterationInput{})
+	got, err := svc.DescribeFlywheelIteration(context.Background(), &DescribeFlywheelIterationInput{
+		FlywheelArn:         ptr.String("__FlywheelArn__"),
+		FlywheelIterationId: ptr.String("__FlywheelIterationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1811,7 +2173,9 @@ func TestCheckResponseSnapshot_DescribeKeyPhrasesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKeyPhrasesDetectionJob(context.Background(), &DescribeKeyPhrasesDetectionJobInput{})
+	got, err := svc.DescribeKeyPhrasesDetectionJob(context.Background(), &DescribeKeyPhrasesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1867,7 +2231,9 @@ func TestCheckResponseSnapshot_DescribePiiEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePiiEntitiesDetectionJob(context.Background(), &DescribePiiEntitiesDetectionJobInput{})
+	got, err := svc.DescribePiiEntitiesDetectionJob(context.Background(), &DescribePiiEntitiesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2257,9 @@ func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{})
+	got, err := svc.DescribeResourcePolicy(context.Background(), &DescribeResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1949,7 +2317,9 @@ func TestCheckResponseSnapshot_DescribeSentimentDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSentimentDetectionJob(context.Background(), &DescribeSentimentDetectionJobInput{})
+	got, err := svc.DescribeSentimentDetectionJob(context.Background(), &DescribeSentimentDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2007,7 +2377,9 @@ func TestCheckResponseSnapshot_DescribeTargetedSentimentDetectionJob(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTargetedSentimentDetectionJob(context.Background(), &DescribeTargetedSentimentDetectionJobInput{})
+	got, err := svc.DescribeTargetedSentimentDetectionJob(context.Background(), &DescribeTargetedSentimentDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2065,7 +2437,9 @@ func TestCheckResponseSnapshot_DescribeTopicsDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTopicsDetectionJob(context.Background(), &DescribeTopicsDetectionJobInput{})
+	got, err := svc.DescribeTopicsDetectionJob(context.Background(), &DescribeTopicsDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2095,7 +2469,9 @@ func TestCheckResponseSnapshot_DetectDominantLanguage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectDominantLanguage(context.Background(), &DetectDominantLanguageInput{})
+	got, err := svc.DetectDominantLanguage(context.Background(), &DetectDominantLanguageInput{
+		Text: ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2320,7 +2696,20 @@ func TestCheckResponseSnapshot_DetectEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectEntities(context.Background(), &DetectEntitiesInput{})
+	got, err := svc.DetectEntities(context.Background(), &DetectEntitiesInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+		EndpointArn:  ptr.String("__EndpointArn__"),
+		Bytes:        []byte("blob"),
+		DocumentReaderConfig: &types.DocumentReaderConfig{
+			DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+			DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+			FeatureTypes: []types.DocumentReadFeatureTypes{
+				types.DocumentReadFeatureTypes("TABLES"),
+				types.DocumentReadFeatureTypes("TABLES"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2354,7 +2743,10 @@ func TestCheckResponseSnapshot_DetectKeyPhrases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectKeyPhrases(context.Background(), &DetectKeyPhrasesInput{})
+	got, err := svc.DetectKeyPhrases(context.Background(), &DetectKeyPhrasesInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2388,7 +2780,10 @@ func TestCheckResponseSnapshot_DetectPiiEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectPiiEntities(context.Background(), &DetectPiiEntitiesInput{})
+	got, err := svc.DetectPiiEntities(context.Background(), &DetectPiiEntitiesInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2415,7 +2810,10 @@ func TestCheckResponseSnapshot_DetectSentiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectSentiment(context.Background(), &DetectSentimentInput{})
+	got, err := svc.DetectSentiment(context.Background(), &DetectSentimentInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2457,7 +2855,10 @@ func TestCheckResponseSnapshot_DetectSyntax(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectSyntax(context.Background(), &DetectSyntaxInput{})
+	got, err := svc.DetectSyntax(context.Background(), &DetectSyntaxInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.SyntaxLanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2563,7 +2964,10 @@ func TestCheckResponseSnapshot_DetectTargetedSentiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectTargetedSentiment(context.Background(), &DetectTargetedSentimentInput{})
+	got, err := svc.DetectTargetedSentiment(context.Background(), &DetectTargetedSentimentInput{
+		Text:         ptr.String("__Text__"),
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2611,7 +3015,17 @@ func TestCheckResponseSnapshot_DetectToxicContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectToxicContent(context.Background(), &DetectToxicContentInput{})
+	got, err := svc.DetectToxicContent(context.Background(), &DetectToxicContentInput{
+		TextSegments: []types.TextSegment{
+			{
+				Text: ptr.String("__Text__"),
+			},
+			{
+				Text: ptr.String("__Text__"),
+			},
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2632,7 +3046,23 @@ func TestCheckResponseSnapshot_ImportModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportModel(context.Background(), &ImportModelInput{})
+	got, err := svc.ImportModel(context.Background(), &ImportModelInput{
+		SourceModelArn:    ptr.String("__SourceModelArn__"),
+		ModelName:         ptr.String("__ModelName__"),
+		VersionName:       ptr.String("__VersionName__"),
+		ModelKmsKeyId:     ptr.String("__ModelKmsKeyId__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2679,7 +3109,17 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		Filter: &types.DatasetFilter{
+			Status:             types.DatasetStatus("CREATING"),
+			DatasetType:        types.DatasetType("TRAIN"),
+			CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2780,7 +3220,16 @@ func TestCheckResponseSnapshot_ListDocumentClassificationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDocumentClassificationJobs(context.Background(), &ListDocumentClassificationJobsInput{})
+	got, err := svc.ListDocumentClassificationJobs(context.Background(), &ListDocumentClassificationJobsInput{
+		Filter: &types.DocumentClassificationJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2817,7 +3266,10 @@ func TestCheckResponseSnapshot_ListDocumentClassifierSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDocumentClassifierSummaries(context.Background(), &ListDocumentClassifierSummariesInput{})
+	got, err := svc.ListDocumentClassifierSummaries(context.Background(), &ListDocumentClassifierSummariesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3020,7 +3472,16 @@ func TestCheckResponseSnapshot_ListDocumentClassifiers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDocumentClassifiers(context.Background(), &ListDocumentClassifiersInput{})
+	got, err := svc.ListDocumentClassifiers(context.Background(), &ListDocumentClassifiersInput{
+		Filter: &types.DocumentClassifierFilter{
+			Status:                 types.ModelStatus("SUBMITTED"),
+			DocumentClassifierName: ptr.String("__DocumentClassifierName__"),
+			SubmitTimeBefore:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3117,7 +3578,16 @@ func TestCheckResponseSnapshot_ListDominantLanguageDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDominantLanguageDetectionJobs(context.Background(), &ListDominantLanguageDetectionJobsInput{})
+	got, err := svc.ListDominantLanguageDetectionJobs(context.Background(), &ListDominantLanguageDetectionJobsInput{
+		Filter: &types.DominantLanguageDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3168,7 +3638,16 @@ func TestCheckResponseSnapshot_ListEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{})
+	got, err := svc.ListEndpoints(context.Background(), &ListEndpointsInput{
+		Filter: &types.EndpointFilter{
+			ModelArn:           ptr.String("__ModelArn__"),
+			Status:             types.EndpointStatus("CREATING"),
+			CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3271,7 +3750,16 @@ func TestCheckResponseSnapshot_ListEntitiesDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntitiesDetectionJobs(context.Background(), &ListEntitiesDetectionJobsInput{})
+	got, err := svc.ListEntitiesDetectionJobs(context.Background(), &ListEntitiesDetectionJobsInput{
+		Filter: &types.EntitiesDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3308,7 +3796,10 @@ func TestCheckResponseSnapshot_ListEntityRecognizerSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntityRecognizerSummaries(context.Background(), &ListEntityRecognizerSummariesInput{})
+	got, err := svc.ListEntityRecognizerSummaries(context.Background(), &ListEntityRecognizerSummariesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3541,7 +4032,16 @@ func TestCheckResponseSnapshot_ListEntityRecognizers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntityRecognizers(context.Background(), &ListEntityRecognizersInput{})
+	got, err := svc.ListEntityRecognizers(context.Background(), &ListEntityRecognizersInput{
+		Filter: &types.EntityRecognizerFilter{
+			Status:           types.ModelStatus("SUBMITTED"),
+			RecognizerName:   ptr.String("__RecognizerName__"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3626,7 +4126,16 @@ func TestCheckResponseSnapshot_ListEventsDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventsDetectionJobs(context.Background(), &ListEventsDetectionJobsInput{})
+	got, err := svc.ListEventsDetectionJobs(context.Background(), &ListEventsDetectionJobsInput{
+		Filter: &types.EventsDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3695,7 +4204,15 @@ func TestCheckResponseSnapshot_ListFlywheelIterationHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlywheelIterationHistory(context.Background(), &ListFlywheelIterationHistoryInput{})
+	got, err := svc.ListFlywheelIterationHistory(context.Background(), &ListFlywheelIterationHistoryInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		Filter: &types.FlywheelIterationFilter{
+			CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3740,7 +4257,15 @@ func TestCheckResponseSnapshot_ListFlywheels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlywheels(context.Background(), &ListFlywheelsInput{})
+	got, err := svc.ListFlywheels(context.Background(), &ListFlywheelsInput{
+		Filter: &types.FlywheelFilter{
+			Status:             types.FlywheelStatus("CREATING"),
+			CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3839,7 +4364,16 @@ func TestCheckResponseSnapshot_ListKeyPhrasesDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyPhrasesDetectionJobs(context.Background(), &ListKeyPhrasesDetectionJobsInput{})
+	got, err := svc.ListKeyPhrasesDetectionJobs(context.Background(), &ListKeyPhrasesDetectionJobsInput{
+		Filter: &types.KeyPhrasesDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3934,7 +4468,16 @@ func TestCheckResponseSnapshot_ListPiiEntitiesDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPiiEntitiesDetectionJobs(context.Background(), &ListPiiEntitiesDetectionJobsInput{})
+	got, err := svc.ListPiiEntitiesDetectionJobs(context.Background(), &ListPiiEntitiesDetectionJobsInput{
+		Filter: &types.PiiEntitiesDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4033,7 +4576,16 @@ func TestCheckResponseSnapshot_ListSentimentDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSentimentDetectionJobs(context.Background(), &ListSentimentDetectionJobsInput{})
+	got, err := svc.ListSentimentDetectionJobs(context.Background(), &ListSentimentDetectionJobsInput{
+		Filter: &types.SentimentDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4064,7 +4616,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4163,7 +4717,16 @@ func TestCheckResponseSnapshot_ListTargetedSentimentDetectionJobs(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetedSentimentDetectionJobs(context.Background(), &ListTargetedSentimentDetectionJobsInput{})
+	got, err := svc.ListTargetedSentimentDetectionJobs(context.Background(), &ListTargetedSentimentDetectionJobsInput{
+		Filter: &types.TargetedSentimentDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4262,7 +4825,16 @@ func TestCheckResponseSnapshot_ListTopicsDetectionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTopicsDetectionJobs(context.Background(), &ListTopicsDetectionJobsInput{})
+	got, err := svc.ListTopicsDetectionJobs(context.Background(), &ListTopicsDetectionJobsInput{
+		Filter: &types.TopicsDetectionJobFilter{
+			JobName:          ptr.String("__JobName__"),
+			JobStatus:        types.JobStatus("SUBMITTED"),
+			SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4283,7 +4855,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:      ptr.String("__ResourceArn__"),
+		ResourcePolicy:   ptr.String("__ResourcePolicy__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4307,7 +4883,50 @@ func TestCheckResponseSnapshot_StartDocumentClassificationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDocumentClassificationJob(context.Background(), &StartDocumentClassificationJobInput{})
+	got, err := svc.StartDocumentClassificationJob(context.Background(), &StartDocumentClassificationJobInput{
+		JobName:               ptr.String("__JobName__"),
+		DocumentClassifierArn: ptr.String("__DocumentClassifierArn__"),
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4330,7 +4949,48 @@ func TestCheckResponseSnapshot_StartDominantLanguageDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDominantLanguageDetectionJob(context.Background(), &StartDominantLanguageDetectionJobInput{})
+	got, err := svc.StartDominantLanguageDetectionJob(context.Background(), &StartDominantLanguageDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4354,7 +5014,51 @@ func TestCheckResponseSnapshot_StartEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEntitiesDetectionJob(context.Background(), &StartEntitiesDetectionJobInput{})
+	got, err := svc.StartEntitiesDetectionJob(context.Background(), &StartEntitiesDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:   ptr.String("__DataAccessRoleArn__"),
+		JobName:             ptr.String("__JobName__"),
+		EntityRecognizerArn: ptr.String("__EntityRecognizerArn__"),
+		LanguageCode:        types.LanguageCode("en"),
+		ClientRequestToken:  ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:      ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4377,7 +5081,42 @@ func TestCheckResponseSnapshot_StartEventsDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEventsDetectionJob(context.Background(), &StartEventsDetectionJobInput{})
+	got, err := svc.StartEventsDetectionJob(context.Background(), &StartEventsDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		LanguageCode:       types.LanguageCode("en"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		TargetEventTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4399,7 +5138,10 @@ func TestCheckResponseSnapshot_StartFlywheelIteration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlywheelIteration(context.Background(), &StartFlywheelIterationInput{})
+	got, err := svc.StartFlywheelIteration(context.Background(), &StartFlywheelIterationInput{
+		FlywheelArn:        ptr.String("__FlywheelArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4422,7 +5164,49 @@ func TestCheckResponseSnapshot_StartKeyPhrasesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartKeyPhrasesDetectionJob(context.Background(), &StartKeyPhrasesDetectionJobInput{})
+	got, err := svc.StartKeyPhrasesDetectionJob(context.Background(), &StartKeyPhrasesDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		LanguageCode:       types.LanguageCode("en"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4445,7 +5229,47 @@ func TestCheckResponseSnapshot_StartPiiEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPiiEntitiesDetectionJob(context.Background(), &StartPiiEntitiesDetectionJobInput{})
+	got, err := svc.StartPiiEntitiesDetectionJob(context.Background(), &StartPiiEntitiesDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		Mode: types.PiiEntitiesDetectionMode("ONLY_REDACTION"),
+		RedactionConfig: &types.RedactionConfig{
+			PiiEntityTypes: []types.PiiEntityType{
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+			},
+			MaskMode:      types.PiiEntitiesDetectionMaskMode("MASK"),
+			MaskCharacter: ptr.String("__MaskCharacter__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		LanguageCode:       types.LanguageCode("en"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4468,7 +5292,49 @@ func TestCheckResponseSnapshot_StartSentimentDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSentimentDetectionJob(context.Background(), &StartSentimentDetectionJobInput{})
+	got, err := svc.StartSentimentDetectionJob(context.Background(), &StartSentimentDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		LanguageCode:       types.LanguageCode("en"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4491,7 +5357,49 @@ func TestCheckResponseSnapshot_StartTargetedSentimentDetectionJob(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTargetedSentimentDetectionJob(context.Background(), &StartTargetedSentimentDetectionJobInput{})
+	got, err := svc.StartTargetedSentimentDetectionJob(context.Background(), &StartTargetedSentimentDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		LanguageCode:       types.LanguageCode("en"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4514,7 +5422,49 @@ func TestCheckResponseSnapshot_StartTopicsDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTopicsDetectionJob(context.Background(), &StartTopicsDetectionJobInput{})
+	got, err := svc.StartTopicsDetectionJob(context.Background(), &StartTopicsDetectionJobInput{
+		InputDataConfig: &types.InputDataConfig{
+			S3Uri:       ptr.String("__S3Uri__"),
+			InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.OutputDataConfig{
+			S3Uri:    ptr.String("__S3Uri__"),
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		DataAccessRoleArn:  ptr.String("__DataAccessRoleArn__"),
+		JobName:            ptr.String("__JobName__"),
+		NumberOfTopics:     ptr.Int32(1),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4536,7 +5486,9 @@ func TestCheckResponseSnapshot_StopDominantLanguageDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDominantLanguageDetectionJob(context.Background(), &StopDominantLanguageDetectionJobInput{})
+	got, err := svc.StopDominantLanguageDetectionJob(context.Background(), &StopDominantLanguageDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4558,7 +5510,9 @@ func TestCheckResponseSnapshot_StopEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEntitiesDetectionJob(context.Background(), &StopEntitiesDetectionJobInput{})
+	got, err := svc.StopEntitiesDetectionJob(context.Background(), &StopEntitiesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4580,7 +5534,9 @@ func TestCheckResponseSnapshot_StopEventsDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEventsDetectionJob(context.Background(), &StopEventsDetectionJobInput{})
+	got, err := svc.StopEventsDetectionJob(context.Background(), &StopEventsDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4602,7 +5558,9 @@ func TestCheckResponseSnapshot_StopKeyPhrasesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopKeyPhrasesDetectionJob(context.Background(), &StopKeyPhrasesDetectionJobInput{})
+	got, err := svc.StopKeyPhrasesDetectionJob(context.Background(), &StopKeyPhrasesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4624,7 +5582,9 @@ func TestCheckResponseSnapshot_StopPiiEntitiesDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopPiiEntitiesDetectionJob(context.Background(), &StopPiiEntitiesDetectionJobInput{})
+	got, err := svc.StopPiiEntitiesDetectionJob(context.Background(), &StopPiiEntitiesDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4646,7 +5606,9 @@ func TestCheckResponseSnapshot_StopSentimentDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSentimentDetectionJob(context.Background(), &StopSentimentDetectionJobInput{})
+	got, err := svc.StopSentimentDetectionJob(context.Background(), &StopSentimentDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4668,7 +5630,9 @@ func TestCheckResponseSnapshot_StopTargetedSentimentDetectionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTargetedSentimentDetectionJob(context.Background(), &StopTargetedSentimentDetectionJobInput{})
+	got, err := svc.StopTargetedSentimentDetectionJob(context.Background(), &StopTargetedSentimentDetectionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4687,7 +5651,9 @@ func TestCheckResponseSnapshot_StopTrainingDocumentClassifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTrainingDocumentClassifier(context.Background(), &StopTrainingDocumentClassifierInput{})
+	got, err := svc.StopTrainingDocumentClassifier(context.Background(), &StopTrainingDocumentClassifierInput{
+		DocumentClassifierArn: ptr.String("__DocumentClassifierArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4706,7 +5672,9 @@ func TestCheckResponseSnapshot_StopTrainingEntityRecognizer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTrainingEntityRecognizer(context.Background(), &StopTrainingEntityRecognizerInput{})
+	got, err := svc.StopTrainingEntityRecognizer(context.Background(), &StopTrainingEntityRecognizerInput{
+		EntityRecognizerArn: ptr.String("__EntityRecognizerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4725,7 +5693,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4744,7 +5724,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4765,7 +5751,13 @@ func TestCheckResponseSnapshot_UpdateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{})
+	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{
+		EndpointArn:              ptr.String("__EndpointArn__"),
+		DesiredModelArn:          ptr.String("__DesiredModelArn__"),
+		DesiredInferenceUnits:    ptr.Int32(1),
+		DesiredDataAccessRoleArn: ptr.String("__DesiredDataAccessRoleArn__"),
+		FlywheelArn:              ptr.String("__FlywheelArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4832,7 +5824,25 @@ func TestCheckResponseSnapshot_UpdateFlywheel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlywheel(context.Background(), &UpdateFlywheelInput{})
+	got, err := svc.UpdateFlywheel(context.Background(), &UpdateFlywheelInput{
+		FlywheelArn:       ptr.String("__FlywheelArn__"),
+		ActiveModelArn:    ptr.String("__ActiveModelArn__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		DataSecurityConfig: &types.UpdateDataSecurityConfig{
+			ModelKmsKeyId:  ptr.String("__ModelKmsKeyId__"),
+			VolumeKmsKeyId: ptr.String("__VolumeKmsKeyId__"),
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4853,7 +5863,12 @@ func TestCheckResponseSnapshot_Error_BatchSizeLimitExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{})
+	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4878,7 +5893,19 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4903,7 +5930,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{})
+	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4928,7 +5960,17 @@ func TestCheckResponseSnapshot_Error_InvalidFilterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	_, opErr := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		Filter: &types.DatasetFilter{
+			Status:             types.DatasetStatus("CREATING"),
+			DatasetType:        types.DatasetType("TRAIN"),
+			CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4957,7 +5999,12 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{})
+	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4982,7 +6029,9 @@ func TestCheckResponseSnapshot_Error_JobNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeDocumentClassificationJob(context.Background(), &DescribeDocumentClassificationJobInput{})
+	_, opErr := svc.DescribeDocumentClassificationJob(context.Background(), &DescribeDocumentClassificationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5007,7 +6056,85 @@ func TestCheckResponseSnapshot_Error_KmsKeyValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDocumentClassifier(context.Background(), &CreateDocumentClassifierInput{})
+	_, opErr := svc.CreateDocumentClassifier(context.Background(), &CreateDocumentClassifierInput{
+		DocumentClassifierName: ptr.String("__DocumentClassifierName__"),
+		VersionName:            ptr.String("__VersionName__"),
+		DataAccessRoleArn:      ptr.String("__DataAccessRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InputDataConfig: &types.DocumentClassifierInputDataConfig{
+			DataFormat:     types.DocumentClassifierDataFormat("COMPREHEND_CSV"),
+			S3Uri:          ptr.String("__S3Uri__"),
+			TestS3Uri:      ptr.String("__TestS3Uri__"),
+			LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			AugmentedManifests: []types.AugmentedManifestsListItem{
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					S3Uri: ptr.String("__S3Uri__"),
+					Split: types.Split("TRAIN"),
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DocumentType: types.DocumentClassifierDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+			Documents: &types.DocumentClassifierDocuments{
+				S3Uri:     ptr.String("__S3Uri__"),
+				TestS3Uri: ptr.String("__TestS3Uri__"),
+			},
+			DocumentReaderConfig: &types.DocumentReaderConfig{
+				DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+				DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+				FeatureTypes: []types.DocumentReadFeatureTypes{
+					types.DocumentReadFeatureTypes("TABLES"),
+					types.DocumentReadFeatureTypes("TABLES"),
+				},
+			},
+		},
+		OutputDataConfig: &types.DocumentClassifierOutputDataConfig{
+			S3Uri:                 ptr.String("__S3Uri__"),
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			FlywheelStatsS3Prefix: ptr.String("__FlywheelStatsS3Prefix__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LanguageCode:       types.LanguageCode("en"),
+		VolumeKmsKeyId:     ptr.String("__VolumeKmsKeyId__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Mode:          types.DocumentClassifierMode("MULTI_CLASS"),
+		ModelKmsKeyId: ptr.String("__ModelKmsKeyId__"),
+		ModelPolicy:   ptr.String("__ModelPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5032,7 +6159,64 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5057,7 +6241,64 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5082,7 +6323,64 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5107,7 +6405,19 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ClassifyDocument(context.Background(), &ClassifyDocumentInput{})
+	_, opErr := svc.ClassifyDocument(context.Background(), &ClassifyDocumentInput{
+		Text:        ptr.String("__Text__"),
+		EndpointArn: ptr.String("__EndpointArn__"),
+		Bytes:       []byte("blob"),
+		DocumentReaderConfig: &types.DocumentReaderConfig{
+			DocumentReadAction: types.DocumentReadAction("TEXTRACT_DETECT_DOCUMENT_TEXT"),
+			DocumentReadMode:   types.DocumentReadMode("SERVICE_DEFAULT"),
+			FeatureTypes: []types.DocumentReadFeatureTypes{
+				types.DocumentReadFeatureTypes("TABLES"),
+				types.DocumentReadFeatureTypes("TABLES"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5132,7 +6442,12 @@ func TestCheckResponseSnapshot_Error_TextSizeLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{})
+	_, opErr := svc.BatchDetectDominantLanguage(context.Background(), &BatchDetectDominantLanguageInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5157,7 +6472,64 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5182,7 +6554,13 @@ func TestCheckResponseSnapshot_Error_TooManyTagKeysException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5207,7 +6585,64 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		FlywheelArn: ptr.String("__FlywheelArn__"),
+		DatasetName: ptr.String("__DatasetName__"),
+		DatasetType: types.DatasetType("TRAIN"),
+		Description: ptr.String("__Description__"),
+		InputDataConfig: &types.DatasetInputDataConfig{
+			AugmentedManifests: []types.DatasetAugmentedManifestsListItem{
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+				{
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3Uri:                ptr.String("__S3Uri__"),
+					AnnotationDataS3Uri:  ptr.String("__AnnotationDataS3Uri__"),
+					SourceDocumentsS3Uri: ptr.String("__SourceDocumentsS3Uri__"),
+					DocumentType:         types.AugmentedManifestsDocumentTypeFormat("PLAIN_TEXT_DOCUMENT"),
+				},
+			},
+			DataFormat: types.DatasetDataFormat("COMPREHEND_CSV"),
+			DocumentClassifierInputDataConfig: &types.DatasetDocumentClassifierInputDataConfig{
+				S3Uri:          ptr.String("__S3Uri__"),
+				LabelDelimiter: ptr.String("__LabelDelimiter__"),
+			},
+			EntityRecognizerInputDataConfig: &types.DatasetEntityRecognizerInputDataConfig{
+				Annotations: &types.DatasetEntityRecognizerAnnotations{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+				Documents: &types.DatasetEntityRecognizerDocuments{
+					S3Uri:       ptr.String("__S3Uri__"),
+					InputFormat: types.InputFormat("ONE_DOC_PER_FILE"),
+				},
+				EntityList: &types.DatasetEntityRecognizerEntityList{
+					S3Uri: ptr.String("__S3Uri__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5232,7 +6667,13 @@ func TestCheckResponseSnapshot_Error_UnsupportedLanguageException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDetectEntities(context.Background(), &BatchDetectEntitiesInput{})
+	_, opErr := svc.BatchDetectEntities(context.Background(), &BatchDetectEntitiesInput{
+		TextList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LanguageCode: types.LanguageCode("en"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

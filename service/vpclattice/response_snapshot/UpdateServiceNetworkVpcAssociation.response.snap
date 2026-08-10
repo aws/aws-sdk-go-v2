@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdBy":"__CreatedBy__","id":"__Id__","securityGroupIds":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS"}

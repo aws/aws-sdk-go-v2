@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"indices":[{"createdAt":946684800,"displayName":"__DisplayName__","indexId":"__IndexId__","status":"CREATING","updatedAt":946684800},{"createdAt":946684800,"displayName":"__DisplayName__","indexId":"__IndexId__","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

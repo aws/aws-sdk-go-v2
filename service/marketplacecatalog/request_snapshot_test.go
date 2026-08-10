@@ -7,8 +7,10 @@ package marketplacecatalog
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_BatchDescribeEntities(t *testing.T) {
 	input := &BatchDescribeEntitiesInput{
@@ -567,7 +591,7 @@ func TestCheckRequestSnapshot_StartChangeSet(t *testing.T) {
 					},
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ChangeName:      ptr.String("__ChangeName__"),
 			},
 			{
@@ -587,7 +611,7 @@ func TestCheckRequestSnapshot_StartChangeSet(t *testing.T) {
 					},
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ChangeName:      ptr.String("__ChangeName__"),
 			},
 		},
@@ -1080,7 +1104,7 @@ func TestUpdateRequestSnapshot_StartChangeSet(t *testing.T) {
 					},
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ChangeName:      ptr.String("__ChangeName__"),
 			},
 			{
@@ -1100,7 +1124,7 @@ func TestUpdateRequestSnapshot_StartChangeSet(t *testing.T) {
 					},
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ChangeName:      ptr.String("__ChangeName__"),
 			},
 		},

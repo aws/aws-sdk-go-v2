@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeParameters
+
+{"NextToken":"__NextToken__","Parameters":[{"AllowedValues":"__AllowedValues__","DataType":"__DataType__","Description":"__Description__","MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Value":"__Value__"},{"AllowedValues":"__AllowedValues__","DataType":"__DataType__","Description":"__Description__","MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Value":"__Value__"}]}

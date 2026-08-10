@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudHsmFrontendService.DescribeHsm
+
+{"AvailabilityZone":"__AvailabilityZone__","EniId":"__EniId__","EniIp":"__EniIp__","HsmArn":"__HsmArn__","HsmType":"__HsmType__","IamRoleArn":"__IamRoleArn__","Partitions":["__Member__","__Member__"],"SerialNumber":"__SerialNumber__","ServerCertLastUpdated":"__ServerCertLastUpdated__","ServerCertUri":"__ServerCertUri__","SoftwareVersion":"__SoftwareVersion__","SshKeyLastUpdated":"__SshKeyLastUpdated__","SshPublicKey":"__SshPublicKey__","Status":"PENDING","StatusDetails":"__StatusDetails__","SubnetId":"__SubnetId__","SubscriptionEndDate":"__SubscriptionEndDate__","SubscriptionStartDate":"__SubscriptionStartDate__","SubscriptionType":"PRODUCTION","VendorName":"__VendorName__","VpcId":"__VpcId__"}

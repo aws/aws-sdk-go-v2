@@ -151,7 +151,31 @@ func TestCheckResponseSnapshot_AddBridgeOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	got, err := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -214,7 +238,49 @@ func TestCheckResponseSnapshot_AddBridgeSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddBridgeSources(context.Background(), &AddBridgeSourcesInput{})
+	got, err := svc.AddBridgeSources(context.Background(), &AddBridgeSourcesInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Sources: []types.AddBridgeSourceRequest{
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +345,57 @@ func TestCheckResponseSnapshot_AddFlowMediaStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddFlowMediaStreams(context.Background(), &AddFlowMediaStreamsInput{})
+	got, err := svc.AddFlowMediaStreams(context.Background(), &AddFlowMediaStreamsInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		MediaStreams: []types.AddMediaStreamRequest{
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +660,207 @@ func TestCheckResponseSnapshot_AddFlowOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddFlowOutputs(context.Background(), &AddFlowOutputsInput{})
+	got, err := svc.AddFlowOutputs(context.Background(), &AddFlowOutputsInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		Outputs: []types.AddOutputRequest{
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +1099,189 @@ func TestCheckResponseSnapshot_AddFlowSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddFlowSources(context.Background(), &AddFlowSourcesInput{})
+	got, err := svc.AddFlowSources(context.Background(), &AddFlowSourcesInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		Sources: []types.SetSourceRequest{
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +1332,37 @@ func TestCheckResponseSnapshot_AddFlowVpcInterfaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddFlowVpcInterfaces(context.Background(), &AddFlowVpcInterfacesInput{})
+	got, err := svc.AddFlowVpcInterfaces(context.Background(), &AddFlowVpcInterfacesInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		VpcInterfaces: []types.VpcInterfaceRequest{
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1572,12 @@ func TestCheckResponseSnapshot_BatchGetRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRouterInput(context.Background(), &BatchGetRouterInputInput{})
+	got, err := svc.BatchGetRouterInput(context.Background(), &BatchGetRouterInputInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1132,7 +1665,12 @@ func TestCheckResponseSnapshot_BatchGetRouterNetworkInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRouterNetworkInterface(context.Background(), &BatchGetRouterNetworkInterfaceInput{})
+	got, err := svc.BatchGetRouterNetworkInterface(context.Background(), &BatchGetRouterNetworkInterfaceInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1828,12 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetRouterOutput(context.Background(), &BatchGetRouterOutputInput{})
+	got, err := svc.BatchGetRouterOutput(context.Background(), &BatchGetRouterOutputInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1419,7 +1962,87 @@ func TestCheckResponseSnapshot_CreateBridge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBridge(context.Background(), &CreateBridgeInput{})
+	got, err := svc.CreateBridge(context.Background(), &CreateBridgeInput{
+		EgressGatewayBridge: &types.AddEgressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+		},
+		IngressGatewayBridge: &types.AddIngressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+			MaxOutputs: ptr.Int32(1),
+		},
+		Name: ptr.String("__Name__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+		PlacementArn: ptr.String("__PlacementArn__"),
+		SourceFailoverConfig: &types.FailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+		Sources: []types.AddBridgeSourceRequest{
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2212,7 +2835,679 @@ func TestCheckResponseSnapshot_CreateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{})
+	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		Entitlements: []types.GrantEntitlementRequest{
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MediaStreams: []types.AddMediaStreamRequest{
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Outputs: []types.AddOutputRequest{
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+		},
+		Source: &types.SetSourceRequest{
+			Decryption: &types.Encryption{
+				Algorithm:                    types.Algorithm("aes128"),
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				DeviceId:                     ptr.String("__DeviceId__"),
+				KeyType:                      types.KeyType("speke"),
+				Region:                       ptr.String("__Region__"),
+				ResourceId:                   ptr.String("__ResourceId__"),
+				RoleArn:                      ptr.String("__RoleArn__"),
+				SecretArn:                    ptr.String("__SecretArn__"),
+				Url:                          ptr.String("__Url__"),
+			},
+			Description:    ptr.String("__Description__"),
+			EntitlementArn: ptr.String("__EntitlementArn__"),
+			IngestPort:     ptr.Int32(1),
+			MaxBitrate:     ptr.Int32(1),
+			MaxLatency:     ptr.Int32(1),
+			MaxSyncBuffer:  ptr.Int32(1),
+			MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+				{
+					EncodingName: types.EncodingName("jxsv"),
+					InputConfigurations: []types.InputConfigurationRequest{
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					MediaStreamName: ptr.String("__MediaStreamName__"),
+				},
+				{
+					EncodingName: types.EncodingName("jxsv"),
+					InputConfigurations: []types.InputConfigurationRequest{
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					MediaStreamName: ptr.String("__MediaStreamName__"),
+				},
+			},
+			MinLatency:            ptr.Int32(1),
+			Name:                  ptr.String("__Name__"),
+			Protocol:              types.Protocol("zixi-push"),
+			SenderControlPort:     ptr.Int32(1),
+			SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+			SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+			SourceListenerPort:    ptr.Int32(1),
+			StreamId:              ptr.String("__StreamId__"),
+			VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+			WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+			GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+				BridgeArn: ptr.String("__BridgeArn__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+			},
+			NdiSourceSettings: &types.NdiSourceSettings{
+				SourceName: ptr.String("__SourceName__"),
+			},
+			SourceTags: map[string]string{
+				"key0": "__Value__",
+			},
+			RouterIntegrationState: types.State("ENABLED"),
+			RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+				EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+				EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEncryptionKeyConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+						RoleArn:   ptr.String("__RoleArn__"),
+					},
+				},
+			},
+		},
+		SourceFailoverConfig: &types.FailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+		Sources: []types.SetSourceRequest{
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+		},
+		VpcInterfaces: []types.VpcInterfaceRequest{
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Maintenance: &types.AddMaintenance{
+			MaintenanceDay:       types.MaintenanceDay("Monday"),
+			MaintenanceStartHour: ptr.String("__MaintenanceStartHour__"),
+		},
+		SourceMonitoringConfig: &types.MonitoringConfig{
+			ThumbnailState: types.ThumbnailState("ENABLED"),
+			AudioMonitoringSettings: []types.AudioMonitoringSetting{
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+			ContentQualityAnalysisState: types.ContentQualityAnalysisState("ENABLED"),
+			VideoMonitoringSettings: []types.VideoMonitoringSetting{
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FlowSize: types.FlowSize("MEDIUM"),
+		NdiConfig: &types.NdiConfig{
+			NdiState:    types.NdiState("ENABLED"),
+			MachineName: ptr.String("__MachineName__"),
+			NdiDiscoveryServers: []types.NdiDiscoveryServerConfig{
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+			},
+		},
+		EncodingConfig: &types.EncodingConfig{
+			EncodingProfile: types.EncodingProfile("DISTRIBUTION_H264_DEFAULT"),
+			VideoMaxBitrate: ptr.Int32(1),
+		},
+		FlowTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2263,7 +3558,23 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{})
+	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{
+		EgressCidrBlocks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name: ptr.String("__Name__"),
+		Networks: []types.GatewayNetwork{
+			{
+				CidrBlock: ptr.String("__CidrBlock__"),
+				Name:      ptr.String("__Name__"),
+			},
+			{
+				CidrBlock: ptr.String("__CidrBlock__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2371,7 +3682,61 @@ func TestCheckResponseSnapshot_CreateRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{})
+	got, err := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterInputConfigurationMemberStandard{
+			Value: types.StandardRouterInputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
+					Value: types.RistRouterInputConfiguration{
+						Port:                        ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				Protocol: types.RouterInputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate:   ptr.Int64(1),
+		RoutingScope:     types.RoutingScope("REGIONAL"),
+		Tier:             types.RouterInputTier("INPUT_100"),
+		RegionName:       ptr.String("__RegionName__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		TransitEncryption: &types.RouterInputTransitEncryption{
+			EncryptionKeyType: types.RouterInputTransitEncryptionKeyType("SECRETS_MANAGER"),
+			EncryptionKeyConfiguration: &types.RouterInputTransitEncryptionKeyConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEncryptionKeyConfiguration{
+					SecretArn: ptr.String("__SecretArn__"),
+					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ContentQualityAnalysisConfiguration: &types.RouterContentQualityAnalysisConfigurationMemberContentLevel{
+			Value: types.ContentQualityAnalysisFeatureConfiguration{
+				BlackFrames: &types.BlackFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				FrozenFrames: &types.FrozenFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				SilentAudio: &types.SilentAudioConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2418,7 +3783,26 @@ func TestCheckResponseSnapshot_CreateRouterNetworkInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRouterNetworkInterface(context.Background(), &CreateRouterNetworkInterfaceInput{})
+	got, err := svc.CreateRouterNetworkInterface(context.Background(), &CreateRouterNetworkInterfaceInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterNetworkInterfaceConfigurationMemberPublic{
+			Value: types.PublicRouterNetworkInterfaceConfiguration{
+				AllowRules: []types.PublicRouterNetworkInterfaceRule{
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+				},
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2500,7 +3884,36 @@ func TestCheckResponseSnapshot_CreateRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRouterOutput(context.Background(), &CreateRouterOutputInput{})
+	got, err := svc.CreateRouterOutput(context.Background(), &CreateRouterOutputInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterOutputConfigurationMemberStandard{
+			Value: types.StandardRouterOutputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterOutputProtocolConfigurationMemberRist{
+					Value: types.RistRouterOutputConfiguration{
+						DestinationAddress: ptr.String("__DestinationAddress__"),
+						DestinationPort:    ptr.Int32(1),
+					},
+				},
+				Protocol: types.RouterOutputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate:   ptr.Int64(1),
+		RoutingScope:     types.RoutingScope("REGIONAL"),
+		Tier:             types.RouterOutputTier("OUTPUT_100"),
+		RegionName:       ptr.String("__RegionName__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2521,7 +3934,9 @@ func TestCheckResponseSnapshot_DeleteBridge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBridge(context.Background(), &DeleteBridgeInput{})
+	got, err := svc.DeleteBridge(context.Background(), &DeleteBridgeInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2543,7 +3958,9 @@ func TestCheckResponseSnapshot_DeleteFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{})
+	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2564,7 +3981,9 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{})
+	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2587,7 +4006,9 @@ func TestCheckResponseSnapshot_DeleteRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouterInput(context.Background(), &DeleteRouterInputInput{})
+	got, err := svc.DeleteRouterInput(context.Background(), &DeleteRouterInputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2610,7 +4031,9 @@ func TestCheckResponseSnapshot_DeleteRouterNetworkInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouterNetworkInterface(context.Background(), &DeleteRouterNetworkInterfaceInput{})
+	got, err := svc.DeleteRouterNetworkInterface(context.Background(), &DeleteRouterNetworkInterfaceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2633,7 +4056,9 @@ func TestCheckResponseSnapshot_DeleteRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRouterOutput(context.Background(), &DeleteRouterOutputInput{})
+	got, err := svc.DeleteRouterOutput(context.Background(), &DeleteRouterOutputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2655,7 +4080,10 @@ func TestCheckResponseSnapshot_DeregisterGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterGatewayInstance(context.Background(), &DeregisterGatewayInstanceInput{})
+	got, err := svc.DeregisterGatewayInstance(context.Background(), &DeregisterGatewayInstanceInput{
+		Force:              ptr.Bool(true),
+		GatewayInstanceArn: ptr.String("__GatewayInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2784,7 +4212,9 @@ func TestCheckResponseSnapshot_DescribeBridge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBridge(context.Background(), &DescribeBridgeInput{})
+	got, err := svc.DescribeBridge(context.Background(), &DescribeBridgeInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3583,7 +5013,9 @@ func TestCheckResponseSnapshot_DescribeFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlow(context.Background(), &DescribeFlowInput{})
+	got, err := svc.DescribeFlow(context.Background(), &DescribeFlowInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3744,7 +5176,9 @@ func TestCheckResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlowSourceMetadata(context.Background(), &DescribeFlowSourceMetadataInput{})
+	got, err := svc.DescribeFlowSourceMetadata(context.Background(), &DescribeFlowSourceMetadataInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3782,7 +5216,9 @@ func TestCheckResponseSnapshot_DescribeFlowSourceThumbnail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlowSourceThumbnail(context.Background(), &DescribeFlowSourceThumbnailInput{})
+	got, err := svc.DescribeFlowSourceThumbnail(context.Background(), &DescribeFlowSourceThumbnailInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3833,7 +5269,9 @@ func TestCheckResponseSnapshot_DescribeGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGateway(context.Background(), &DescribeGatewayInput{})
+	got, err := svc.DescribeGateway(context.Background(), &DescribeGatewayInput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3874,7 +5312,9 @@ func TestCheckResponseSnapshot_DescribeGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGatewayInstance(context.Background(), &DescribeGatewayInstanceInput{})
+	got, err := svc.DescribeGatewayInstance(context.Background(), &DescribeGatewayInstanceInput{
+		GatewayInstanceArn: ptr.String("__GatewayInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3907,7 +5347,9 @@ func TestCheckResponseSnapshot_DescribeOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOffering(context.Background(), &DescribeOfferingInput{})
+	got, err := svc.DescribeOffering(context.Background(), &DescribeOfferingInput{
+		OfferingArn: ptr.String("__OfferingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3945,7 +5387,9 @@ func TestCheckResponseSnapshot_DescribeReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservation(context.Background(), &DescribeReservationInput{})
+	got, err := svc.DescribeReservation(context.Background(), &DescribeReservationInput{
+		ReservationArn: ptr.String("__ReservationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4053,7 +5497,9 @@ func TestCheckResponseSnapshot_GetRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouterInput(context.Background(), &GetRouterInputInput{})
+	got, err := svc.GetRouterInput(context.Background(), &GetRouterInputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4162,7 +5608,9 @@ func TestCheckResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouterInputSourceMetadata(context.Background(), &GetRouterInputSourceMetadataInput{})
+	got, err := svc.GetRouterInputSourceMetadata(context.Background(), &GetRouterInputSourceMetadataInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4199,7 +5647,9 @@ func TestCheckResponseSnapshot_GetRouterInputThumbnail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouterInputThumbnail(context.Background(), &GetRouterInputThumbnailInput{})
+	got, err := svc.GetRouterInputThumbnail(context.Background(), &GetRouterInputThumbnailInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4246,7 +5696,9 @@ func TestCheckResponseSnapshot_GetRouterNetworkInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouterNetworkInterface(context.Background(), &GetRouterNetworkInterfaceInput{})
+	got, err := svc.GetRouterNetworkInterface(context.Background(), &GetRouterNetworkInterfaceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4328,7 +5780,9 @@ func TestCheckResponseSnapshot_GetRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRouterOutput(context.Background(), &GetRouterOutputInput{})
+	got, err := svc.GetRouterOutput(context.Background(), &GetRouterOutputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4395,7 +5849,59 @@ func TestCheckResponseSnapshot_GrantFlowEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GrantFlowEntitlements(context.Background(), &GrantFlowEntitlementsInput{})
+	got, err := svc.GrantFlowEntitlements(context.Background(), &GrantFlowEntitlementsInput{
+		Entitlements: []types.GrantEntitlementRequest{
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4432,7 +5938,11 @@ func TestCheckResponseSnapshot_ListBridges(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBridges(context.Background(), &ListBridgesInput{})
+	got, err := svc.ListBridges(context.Background(), &ListBridgesInput{
+		FilterArn:  ptr.String("__FilterArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4465,7 +5975,10 @@ func TestCheckResponseSnapshot_ListEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntitlements(context.Background(), &ListEntitlementsInput{})
+	got, err := svc.ListEntitlements(context.Background(), &ListEntitlementsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4516,7 +6029,10 @@ func TestCheckResponseSnapshot_ListFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{})
+	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4551,7 +6067,11 @@ func TestCheckResponseSnapshot_ListGatewayInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGatewayInstances(context.Background(), &ListGatewayInstancesInput{})
+	got, err := svc.ListGatewayInstances(context.Background(), &ListGatewayInstancesInput{
+		FilterArn:  ptr.String("__FilterArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4584,7 +6104,10 @@ func TestCheckResponseSnapshot_ListGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{})
+	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4633,7 +6156,10 @@ func TestCheckResponseSnapshot_ListOfferings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOfferings(context.Background(), &ListOfferingsInput{})
+	got, err := svc.ListOfferings(context.Background(), &ListOfferingsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4692,7 +6218,10 @@ func TestCheckResponseSnapshot_ListReservations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReservations(context.Background(), &ListReservationsInput{})
+	got, err := svc.ListReservations(context.Background(), &ListReservationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4763,7 +6292,24 @@ func TestCheckResponseSnapshot_ListRouterInputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRouterInputs(context.Background(), &ListRouterInputsInput{})
+	got, err := svc.ListRouterInputs(context.Background(), &ListRouterInputsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RouterInputFilter{
+			&types.RouterInputFilterMemberNameContains{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.RouterInputFilterMemberNameContains{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4810,7 +6356,24 @@ func TestCheckResponseSnapshot_ListRouterNetworkInterfaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRouterNetworkInterfaces(context.Background(), &ListRouterNetworkInterfacesInput{})
+	got, err := svc.ListRouterNetworkInterfaces(context.Background(), &ListRouterNetworkInterfacesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RouterNetworkInterfaceFilter{
+			&types.RouterNetworkInterfaceFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.RouterNetworkInterfaceFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4883,7 +6446,24 @@ func TestCheckResponseSnapshot_ListRouterOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRouterOutputs(context.Background(), &ListRouterOutputsInput{})
+	got, err := svc.ListRouterOutputs(context.Background(), &ListRouterOutputsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RouterOutputFilter{
+			&types.RouterOutputFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			&types.RouterOutputFilterMemberRegionNames{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4906,7 +6486,9 @@ func TestCheckResponseSnapshot_ListTagsForGlobalResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForGlobalResource(context.Background(), &ListTagsForGlobalResourceInput{})
+	got, err := svc.ListTagsForGlobalResource(context.Background(), &ListTagsForGlobalResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4929,7 +6511,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4967,7 +6551,11 @@ func TestCheckResponseSnapshot_PurchaseOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseOffering(context.Background(), &PurchaseOfferingInput{})
+	got, err := svc.PurchaseOffering(context.Background(), &PurchaseOfferingInput{
+		OfferingArn:     ptr.String("__OfferingArn__"),
+		ReservationName: ptr.String("__ReservationName__"),
+		Start:           ptr.String("__Start__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4989,7 +6577,10 @@ func TestCheckResponseSnapshot_RemoveBridgeOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveBridgeOutput(context.Background(), &RemoveBridgeOutputInput{})
+	got, err := svc.RemoveBridgeOutput(context.Background(), &RemoveBridgeOutputInput{
+		BridgeArn:  ptr.String("__BridgeArn__"),
+		OutputName: ptr.String("__OutputName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5011,7 +6602,10 @@ func TestCheckResponseSnapshot_RemoveBridgeSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveBridgeSource(context.Background(), &RemoveBridgeSourceInput{})
+	got, err := svc.RemoveBridgeSource(context.Background(), &RemoveBridgeSourceInput{
+		BridgeArn:  ptr.String("__BridgeArn__"),
+		SourceName: ptr.String("__SourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5033,7 +6627,10 @@ func TestCheckResponseSnapshot_RemoveFlowMediaStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveFlowMediaStream(context.Background(), &RemoveFlowMediaStreamInput{})
+	got, err := svc.RemoveFlowMediaStream(context.Background(), &RemoveFlowMediaStreamInput{
+		FlowArn:         ptr.String("__FlowArn__"),
+		MediaStreamName: ptr.String("__MediaStreamName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5055,7 +6652,10 @@ func TestCheckResponseSnapshot_RemoveFlowOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveFlowOutput(context.Background(), &RemoveFlowOutputInput{})
+	got, err := svc.RemoveFlowOutput(context.Background(), &RemoveFlowOutputInput{
+		FlowArn:   ptr.String("__FlowArn__"),
+		OutputArn: ptr.String("__OutputArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5077,7 +6677,10 @@ func TestCheckResponseSnapshot_RemoveFlowSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveFlowSource(context.Background(), &RemoveFlowSourceInput{})
+	got, err := svc.RemoveFlowSource(context.Background(), &RemoveFlowSourceInput{
+		FlowArn:   ptr.String("__FlowArn__"),
+		SourceArn: ptr.String("__SourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5103,7 +6706,10 @@ func TestCheckResponseSnapshot_RemoveFlowVpcInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveFlowVpcInterface(context.Background(), &RemoveFlowVpcInterfaceInput{})
+	got, err := svc.RemoveFlowVpcInterface(context.Background(), &RemoveFlowVpcInterfaceInput{
+		FlowArn:          ptr.String("__FlowArn__"),
+		VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5126,7 +6732,9 @@ func TestCheckResponseSnapshot_RestartRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestartRouterInput(context.Background(), &RestartRouterInputInput{})
+	got, err := svc.RestartRouterInput(context.Background(), &RestartRouterInputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5149,7 +6757,9 @@ func TestCheckResponseSnapshot_RestartRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestartRouterOutput(context.Background(), &RestartRouterOutputInput{})
+	got, err := svc.RestartRouterOutput(context.Background(), &RestartRouterOutputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5171,7 +6781,10 @@ func TestCheckResponseSnapshot_RevokeFlowEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeFlowEntitlement(context.Background(), &RevokeFlowEntitlementInput{})
+	got, err := svc.RevokeFlowEntitlement(context.Background(), &RevokeFlowEntitlementInput{
+		EntitlementArn: ptr.String("__EntitlementArn__"),
+		FlowArn:        ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5193,7 +6806,9 @@ func TestCheckResponseSnapshot_StartFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlow(context.Background(), &StartFlowInput{})
+	got, err := svc.StartFlow(context.Background(), &StartFlowInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5224,7 +6839,9 @@ func TestCheckResponseSnapshot_StartRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRouterInput(context.Background(), &StartRouterInputInput{})
+	got, err := svc.StartRouterInput(context.Background(), &StartRouterInputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5255,7 +6872,9 @@ func TestCheckResponseSnapshot_StartRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRouterOutput(context.Background(), &StartRouterOutputInput{})
+	got, err := svc.StartRouterOutput(context.Background(), &StartRouterOutputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5277,7 +6896,9 @@ func TestCheckResponseSnapshot_StopFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopFlow(context.Background(), &StopFlowInput{})
+	got, err := svc.StopFlow(context.Background(), &StopFlowInput{
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5300,7 +6921,9 @@ func TestCheckResponseSnapshot_StopRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRouterInput(context.Background(), &StopRouterInputInput{})
+	got, err := svc.StopRouterInput(context.Background(), &StopRouterInputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5323,7 +6946,9 @@ func TestCheckResponseSnapshot_StopRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRouterOutput(context.Background(), &StopRouterOutputInput{})
+	got, err := svc.StopRouterOutput(context.Background(), &StopRouterOutputInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5342,7 +6967,12 @@ func TestCheckResponseSnapshot_TagGlobalResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagGlobalResource(context.Background(), &TagGlobalResourceInput{})
+	got, err := svc.TagGlobalResource(context.Background(), &TagGlobalResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5361,7 +6991,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5386,7 +7021,10 @@ func TestCheckResponseSnapshot_TakeRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TakeRouterInput(context.Background(), &TakeRouterInputInput{})
+	got, err := svc.TakeRouterInput(context.Background(), &TakeRouterInputInput{
+		RouterOutputArn: ptr.String("__RouterOutputArn__"),
+		RouterInputArn:  ptr.String("__RouterInputArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5405,7 +7043,13 @@ func TestCheckResponseSnapshot_UntagGlobalResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagGlobalResource(context.Background(), &UntagGlobalResourceInput{})
+	got, err := svc.UntagGlobalResource(context.Background(), &UntagGlobalResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5424,7 +7068,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5553,7 +7203,24 @@ func TestCheckResponseSnapshot_UpdateBridge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBridge(context.Background(), &UpdateBridgeInput{})
+	got, err := svc.UpdateBridge(context.Background(), &UpdateBridgeInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		EgressGatewayBridge: &types.UpdateEgressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+		},
+		IngressGatewayBridge: &types.UpdateIngressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+			MaxOutputs: ptr.Int32(1),
+		},
+		SourceFailoverConfig: &types.UpdateFailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5589,7 +7256,17 @@ func TestCheckResponseSnapshot_UpdateBridgeOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBridgeOutput(context.Background(), &UpdateBridgeOutputInput{})
+	got, err := svc.UpdateBridgeOutput(context.Background(), &UpdateBridgeOutputInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		NetworkOutput: &types.UpdateBridgeNetworkOutputRequest{
+			IpAddress:   ptr.String("__IpAddress__"),
+			NetworkName: ptr.String("__NetworkName__"),
+			Port:        ptr.Int32(1),
+			Protocol:    types.Protocol("zixi-push"),
+			Ttl:         ptr.Int32(1),
+		},
+		OutputName: ptr.String("__OutputName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5630,7 +7307,25 @@ func TestCheckResponseSnapshot_UpdateBridgeSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBridgeSource(context.Background(), &UpdateBridgeSourceInput{})
+	got, err := svc.UpdateBridgeSource(context.Background(), &UpdateBridgeSourceInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		FlowSource: &types.UpdateBridgeFlowSourceRequest{
+			FlowArn: ptr.String("__FlowArn__"),
+			FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+			},
+		},
+		NetworkSource: &types.UpdateBridgeNetworkSourceRequest{
+			MulticastIp: ptr.String("__MulticastIp__"),
+			MulticastSourceSettings: &types.MulticastSourceSettings{
+				MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+			},
+			NetworkName: ptr.String("__NetworkName__"),
+			Port:        ptr.Int32(1),
+			Protocol:    types.Protocol("zixi-push"),
+		},
+		SourceName: ptr.String("__SourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5652,7 +7347,10 @@ func TestCheckResponseSnapshot_UpdateBridgeState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBridgeState(context.Background(), &UpdateBridgeStateInput{})
+	got, err := svc.UpdateBridgeState(context.Background(), &UpdateBridgeStateInput{
+		BridgeArn:    ptr.String("__BridgeArn__"),
+		DesiredState: types.DesiredState("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6445,7 +8143,83 @@ func TestCheckResponseSnapshot_UpdateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{})
+	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		SourceFailoverConfig: &types.UpdateFailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+		Maintenance: &types.UpdateMaintenance{
+			MaintenanceDay:           types.MaintenanceDay("Monday"),
+			MaintenanceScheduledDate: ptr.String("__MaintenanceScheduledDate__"),
+			MaintenanceStartHour:     ptr.String("__MaintenanceStartHour__"),
+		},
+		SourceMonitoringConfig: &types.MonitoringConfig{
+			ThumbnailState: types.ThumbnailState("ENABLED"),
+			AudioMonitoringSettings: []types.AudioMonitoringSetting{
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+			ContentQualityAnalysisState: types.ContentQualityAnalysisState("ENABLED"),
+			VideoMonitoringSettings: []types.VideoMonitoringSetting{
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		NdiConfig: &types.NdiConfig{
+			NdiState:    types.NdiState("ENABLED"),
+			MachineName: ptr.String("__MachineName__"),
+			NdiDiscoveryServers: []types.NdiDiscoveryServerConfig{
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+			},
+		},
+		FlowSize: types.FlowSize("MEDIUM"),
+		EncodingConfig: &types.EncodingConfig{
+			EncodingProfile: types.EncodingProfile("DISTRIBUTION_H264_DEFAULT"),
+			VideoMaxBitrate: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6488,7 +8262,27 @@ func TestCheckResponseSnapshot_UpdateFlowEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowEntitlement(context.Background(), &UpdateFlowEntitlementInput{})
+	got, err := svc.UpdateFlowEntitlement(context.Background(), &UpdateFlowEntitlementInput{
+		Description: ptr.String("__Description__"),
+		Encryption: &types.UpdateEncryption{
+			Algorithm:                    types.Algorithm("aes128"),
+			ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+			DeviceId:                     ptr.String("__DeviceId__"),
+			KeyType:                      types.KeyType("speke"),
+			Region:                       ptr.String("__Region__"),
+			ResourceId:                   ptr.String("__ResourceId__"),
+			RoleArn:                      ptr.String("__RoleArn__"),
+			SecretArn:                    ptr.String("__SecretArn__"),
+			Url:                          ptr.String("__Url__"),
+		},
+		EntitlementArn:    ptr.String("__EntitlementArn__"),
+		EntitlementStatus: types.EntitlementStatus("ENABLED"),
+		FlowArn:           ptr.String("__FlowArn__"),
+		Subscribers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6530,7 +8324,26 @@ func TestCheckResponseSnapshot_UpdateFlowMediaStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowMediaStream(context.Background(), &UpdateFlowMediaStreamInput{})
+	got, err := svc.UpdateFlowMediaStream(context.Background(), &UpdateFlowMediaStreamInput{
+		Attributes: &types.MediaStreamAttributesRequest{
+			Fmtp: &types.FmtpRequest{
+				ChannelOrder:   ptr.String("__ChannelOrder__"),
+				Colorimetry:    types.Colorimetry("BT601"),
+				ExactFramerate: ptr.String("__ExactFramerate__"),
+				Par:            ptr.String("__Par__"),
+				Range:          types.Range("NARROW"),
+				ScanMode:       types.ScanMode("progressive"),
+				Tcs:            types.Tcs("SDR"),
+			},
+			Lang: ptr.String("__Lang__"),
+		},
+		ClockRate:       ptr.Int32(1),
+		Description:     ptr.String("__Description__"),
+		FlowArn:         ptr.String("__FlowArn__"),
+		MediaStreamName: ptr.String("__MediaStreamName__"),
+		MediaStreamType: types.MediaStreamType("video"),
+		VideoFormat:     ptr.String("__VideoFormat__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6672,7 +8485,103 @@ func TestCheckResponseSnapshot_UpdateFlowOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowOutput(context.Background(), &UpdateFlowOutputInput{})
+	got, err := svc.UpdateFlowOutput(context.Background(), &UpdateFlowOutputInput{
+		CidrAllowList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description: ptr.String("__Description__"),
+		Destination: ptr.String("__Destination__"),
+		Encryption: &types.UpdateEncryption{
+			Algorithm:                    types.Algorithm("aes128"),
+			ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+			DeviceId:                     ptr.String("__DeviceId__"),
+			KeyType:                      types.KeyType("speke"),
+			Region:                       ptr.String("__Region__"),
+			ResourceId:                   ptr.String("__ResourceId__"),
+			RoleArn:                      ptr.String("__RoleArn__"),
+			SecretArn:                    ptr.String("__SecretArn__"),
+			Url:                          ptr.String("__Url__"),
+		},
+		FlowArn:    ptr.String("__FlowArn__"),
+		MaxLatency: ptr.Int32(1),
+		MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+			{
+				DestinationConfigurations: []types.DestinationConfigurationRequest{
+					{
+						DestinationIp:   ptr.String("__DestinationIp__"),
+						DestinationPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					{
+						DestinationIp:   ptr.String("__DestinationIp__"),
+						DestinationPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+				},
+				EncodingName: types.EncodingName("jxsv"),
+				EncodingParameters: &types.EncodingParametersRequest{
+					CompressionFactor: ptr.Float64(1.0),
+					EncoderProfile:    types.EncoderProfile("main"),
+				},
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+			},
+			{
+				DestinationConfigurations: []types.DestinationConfigurationRequest{
+					{
+						DestinationIp:   ptr.String("__DestinationIp__"),
+						DestinationPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					{
+						DestinationIp:   ptr.String("__DestinationIp__"),
+						DestinationPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+				},
+				EncodingName: types.EncodingName("jxsv"),
+				EncodingParameters: &types.EncodingParametersRequest{
+					CompressionFactor: ptr.Float64(1.0),
+					EncoderProfile:    types.EncoderProfile("main"),
+				},
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+			},
+		},
+		MinLatency:        ptr.Int32(1),
+		OutputArn:         ptr.String("__OutputArn__"),
+		Port:              ptr.Int32(1),
+		Protocol:          types.Protocol("zixi-push"),
+		RemoteId:          ptr.String("__RemoteId__"),
+		SenderControlPort: ptr.Int32(1),
+		SenderIpAddress:   ptr.String("__SenderIpAddress__"),
+		SmoothingLatency:  ptr.Int32(1),
+		StreamId:          ptr.String("__StreamId__"),
+		VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+			VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+		},
+		OutputStatus:           types.OutputStatus("ENABLED"),
+		NdiProgramName:         ptr.String("__NdiProgramName__"),
+		NdiSpeedHqQuality:      ptr.Int32(1),
+		RouterIntegrationState: types.State("ENABLED"),
+		RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+			EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+			EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEncryptionKeyConfiguration{
+					SecretArn: ptr.String("__SecretArn__"),
+					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6801,7 +8710,93 @@ func TestCheckResponseSnapshot_UpdateFlowSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowSource(context.Background(), &UpdateFlowSourceInput{})
+	got, err := svc.UpdateFlowSource(context.Background(), &UpdateFlowSourceInput{
+		Decryption: &types.UpdateEncryption{
+			Algorithm:                    types.Algorithm("aes128"),
+			ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+			DeviceId:                     ptr.String("__DeviceId__"),
+			KeyType:                      types.KeyType("speke"),
+			Region:                       ptr.String("__Region__"),
+			ResourceId:                   ptr.String("__ResourceId__"),
+			RoleArn:                      ptr.String("__RoleArn__"),
+			SecretArn:                    ptr.String("__SecretArn__"),
+			Url:                          ptr.String("__Url__"),
+		},
+		Description:    ptr.String("__Description__"),
+		EntitlementArn: ptr.String("__EntitlementArn__"),
+		FlowArn:        ptr.String("__FlowArn__"),
+		IngestPort:     ptr.Int32(1),
+		MaxBitrate:     ptr.Int32(1),
+		MaxLatency:     ptr.Int32(1),
+		MaxSyncBuffer:  ptr.Int32(1),
+		MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+			{
+				EncodingName: types.EncodingName("jxsv"),
+				InputConfigurations: []types.InputConfigurationRequest{
+					{
+						InputPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					{
+						InputPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+				},
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+			},
+			{
+				EncodingName: types.EncodingName("jxsv"),
+				InputConfigurations: []types.InputConfigurationRequest{
+					{
+						InputPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+					{
+						InputPort: ptr.Int32(1),
+						Interface: &types.InterfaceRequest{
+							Name: ptr.String("__Name__"),
+						},
+					},
+				},
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+			},
+		},
+		MinLatency:            ptr.Int32(1),
+		Protocol:              types.Protocol("zixi-push"),
+		SenderControlPort:     ptr.Int32(1),
+		SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+		SourceArn:             ptr.String("__SourceArn__"),
+		SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+		SourceListenerPort:    ptr.Int32(1),
+		StreamId:              ptr.String("__StreamId__"),
+		VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+		WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+		GatewayBridgeSource: &types.UpdateGatewayBridgeSourceRequest{
+			BridgeArn: ptr.String("__BridgeArn__"),
+			VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+			},
+		},
+		NdiSourceSettings: &types.NdiSourceSettings{
+			SourceName: ptr.String("__SourceName__"),
+		},
+		RouterIntegrationState: types.State("ENABLED"),
+		RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+			EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+			EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEncryptionKeyConfiguration{
+					SecretArn: ptr.String("__SecretArn__"),
+					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6823,7 +8818,10 @@ func TestCheckResponseSnapshot_UpdateGatewayInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayInstance(context.Background(), &UpdateGatewayInstanceInput{})
+	got, err := svc.UpdateGatewayInstance(context.Background(), &UpdateGatewayInstanceInput{
+		BridgePlacement:    types.BridgePlacement("AVAILABLE"),
+		GatewayInstanceArn: ptr.String("__GatewayInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6931,7 +8929,56 @@ func TestCheckResponseSnapshot_UpdateRouterInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRouterInput(context.Background(), &UpdateRouterInputInput{})
+	got, err := svc.UpdateRouterInput(context.Background(), &UpdateRouterInputInput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterInputConfigurationMemberStandard{
+			Value: types.StandardRouterInputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
+					Value: types.RistRouterInputConfiguration{
+						Port:                        ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				Protocol: types.RouterInputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate: ptr.Int64(1),
+		RoutingScope:   types.RoutingScope("REGIONAL"),
+		Tier:           types.RouterInputTier("INPUT_100"),
+		TransitEncryption: &types.RouterInputTransitEncryption{
+			EncryptionKeyType: types.RouterInputTransitEncryptionKeyType("SECRETS_MANAGER"),
+			EncryptionKeyConfiguration: &types.RouterInputTransitEncryptionKeyConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEncryptionKeyConfiguration{
+					SecretArn: ptr.String("__SecretArn__"),
+					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+		ContentQualityAnalysisConfiguration: &types.RouterContentQualityAnalysisConfigurationMemberContentLevel{
+			Value: types.ContentQualityAnalysisFeatureConfiguration{
+				BlackFrames: &types.BlackFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				FrozenFrames: &types.FrozenFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				SilentAudio: &types.SilentAudioConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6978,7 +9025,22 @@ func TestCheckResponseSnapshot_UpdateRouterNetworkInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRouterNetworkInterface(context.Background(), &UpdateRouterNetworkInterfaceInput{})
+	got, err := svc.UpdateRouterNetworkInterface(context.Background(), &UpdateRouterNetworkInterfaceInput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterNetworkInterfaceConfigurationMemberPublic{
+			Value: types.PublicRouterNetworkInterfaceConfiguration{
+				AllowRules: []types.PublicRouterNetworkInterfaceRule{
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7060,7 +9122,31 @@ func TestCheckResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRouterOutput(context.Background(), &UpdateRouterOutputInput{})
+	got, err := svc.UpdateRouterOutput(context.Background(), &UpdateRouterOutputInput{
+		Arn:  ptr.String("__Arn__"),
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterOutputConfigurationMemberStandard{
+			Value: types.StandardRouterOutputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterOutputProtocolConfigurationMemberRist{
+					Value: types.RistRouterOutputConfiguration{
+						DestinationAddress: ptr.String("__DestinationAddress__"),
+						DestinationPort:    ptr.Int32(1),
+					},
+				},
+				Protocol: types.RouterOutputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate: ptr.Int64(1),
+		RoutingScope:   types.RoutingScope("REGIONAL"),
+		Tier:           types.RouterOutputTier("OUTPUT_100"),
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7081,7 +9167,207 @@ func TestCheckResponseSnapshot_Error_AddFlowOutputs420Exception(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFlowOutputs(context.Background(), &AddFlowOutputsInput{})
+	_, opErr := svc.AddFlowOutputs(context.Background(), &AddFlowOutputsInput{
+		FlowArn: ptr.String("__FlowArn__"),
+		Outputs: []types.AddOutputRequest{
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7106,7 +9392,31 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7131,7 +9441,31 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7156,7 +9490,87 @@ func TestCheckResponseSnapshot_Error_CreateBridge420Exception(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBridge(context.Background(), &CreateBridgeInput{})
+	_, opErr := svc.CreateBridge(context.Background(), &CreateBridgeInput{
+		EgressGatewayBridge: &types.AddEgressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+		},
+		IngressGatewayBridge: &types.AddIngressGatewayBridgeRequest{
+			MaxBitrate: ptr.Int32(1),
+			MaxOutputs: ptr.Int32(1),
+		},
+		Name: ptr.String("__Name__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+		PlacementArn: ptr.String("__PlacementArn__"),
+		SourceFailoverConfig: &types.FailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+		Sources: []types.AddBridgeSourceRequest{
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+			{
+				FlowSource: &types.AddBridgeFlowSourceRequest{
+					FlowArn: ptr.String("__FlowArn__"),
+					FlowVpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+					Name: ptr.String("__Name__"),
+				},
+				NetworkSource: &types.AddBridgeNetworkSourceRequest{
+					MulticastIp: ptr.String("__MulticastIp__"),
+					MulticastSourceSettings: &types.MulticastSourceSettings{
+						MulticastSourceIp: ptr.String("__MulticastSourceIp__"),
+					},
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7181,7 +9595,679 @@ func TestCheckResponseSnapshot_Error_CreateFlow420Exception(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFlow(context.Background(), &CreateFlowInput{})
+	_, opErr := svc.CreateFlow(context.Background(), &CreateFlowInput{
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		Entitlements: []types.GrantEntitlementRequest{
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MediaStreams: []types.AddMediaStreamRequest{
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Attributes: &types.MediaStreamAttributesRequest{
+					Fmtp: &types.FmtpRequest{
+						ChannelOrder:   ptr.String("__ChannelOrder__"),
+						Colorimetry:    types.Colorimetry("BT601"),
+						ExactFramerate: ptr.String("__ExactFramerate__"),
+						Par:            ptr.String("__Par__"),
+						Range:          types.Range("NARROW"),
+						ScanMode:       types.ScanMode("progressive"),
+						Tcs:            types.Tcs("SDR"),
+					},
+					Lang: ptr.String("__Lang__"),
+				},
+				ClockRate:       ptr.Int32(1),
+				Description:     ptr.String("__Description__"),
+				MediaStreamId:   ptr.Int32(1),
+				MediaStreamName: ptr.String("__MediaStreamName__"),
+				MediaStreamType: types.MediaStreamType("video"),
+				VideoFormat:     ptr.String("__VideoFormat__"),
+				MediaStreamTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Outputs: []types.AddOutputRequest{
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+			{
+				CidrAllowList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Description: ptr.String("__Description__"),
+				Destination: ptr.String("__Destination__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				MaxLatency: ptr.Int32(1),
+				MediaStreamOutputConfigurations: []types.MediaStreamOutputConfigurationRequest{
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						DestinationConfigurations: []types.DestinationConfigurationRequest{
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								DestinationIp:   ptr.String("__DestinationIp__"),
+								DestinationPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						EncodingName: types.EncodingName("jxsv"),
+						EncodingParameters: &types.EncodingParametersRequest{
+							CompressionFactor: ptr.Float64(1.0),
+							EncoderProfile:    types.EncoderProfile("main"),
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:        ptr.Int32(1),
+				Name:              ptr.String("__Name__"),
+				Port:              ptr.Int32(1),
+				Protocol:          types.Protocol("zixi-push"),
+				RemoteId:          ptr.String("__RemoteId__"),
+				SenderControlPort: ptr.Int32(1),
+				SmoothingLatency:  ptr.Int32(1),
+				StreamId:          ptr.String("__StreamId__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+				OutputStatus:      types.OutputStatus("ENABLED"),
+				NdiSpeedHqQuality: ptr.Int32(1),
+				NdiProgramName:    ptr.String("__NdiProgramName__"),
+				OutputTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitEncryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+			},
+		},
+		Source: &types.SetSourceRequest{
+			Decryption: &types.Encryption{
+				Algorithm:                    types.Algorithm("aes128"),
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				DeviceId:                     ptr.String("__DeviceId__"),
+				KeyType:                      types.KeyType("speke"),
+				Region:                       ptr.String("__Region__"),
+				ResourceId:                   ptr.String("__ResourceId__"),
+				RoleArn:                      ptr.String("__RoleArn__"),
+				SecretArn:                    ptr.String("__SecretArn__"),
+				Url:                          ptr.String("__Url__"),
+			},
+			Description:    ptr.String("__Description__"),
+			EntitlementArn: ptr.String("__EntitlementArn__"),
+			IngestPort:     ptr.Int32(1),
+			MaxBitrate:     ptr.Int32(1),
+			MaxLatency:     ptr.Int32(1),
+			MaxSyncBuffer:  ptr.Int32(1),
+			MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+				{
+					EncodingName: types.EncodingName("jxsv"),
+					InputConfigurations: []types.InputConfigurationRequest{
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					MediaStreamName: ptr.String("__MediaStreamName__"),
+				},
+				{
+					EncodingName: types.EncodingName("jxsv"),
+					InputConfigurations: []types.InputConfigurationRequest{
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						{
+							InputPort: ptr.Int32(1),
+							Interface: &types.InterfaceRequest{
+								Name: ptr.String("__Name__"),
+							},
+						},
+					},
+					MediaStreamName: ptr.String("__MediaStreamName__"),
+				},
+			},
+			MinLatency:            ptr.Int32(1),
+			Name:                  ptr.String("__Name__"),
+			Protocol:              types.Protocol("zixi-push"),
+			SenderControlPort:     ptr.Int32(1),
+			SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+			SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+			SourceListenerPort:    ptr.Int32(1),
+			StreamId:              ptr.String("__StreamId__"),
+			VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+			WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+			GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+				BridgeArn: ptr.String("__BridgeArn__"),
+				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+				},
+			},
+			NdiSourceSettings: &types.NdiSourceSettings{
+				SourceName: ptr.String("__SourceName__"),
+			},
+			SourceTags: map[string]string{
+				"key0": "__Value__",
+			},
+			RouterIntegrationState: types.State("ENABLED"),
+			RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+				EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+				EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+					Value: types.SecretsManagerEncryptionKeyConfiguration{
+						SecretArn: ptr.String("__SecretArn__"),
+						RoleArn:   ptr.String("__RoleArn__"),
+					},
+				},
+			},
+		},
+		SourceFailoverConfig: &types.FailoverConfig{
+			FailoverMode:   types.FailoverMode("MERGE"),
+			RecoveryWindow: ptr.Int32(1),
+			SourcePriority: &types.SourcePriority{
+				PrimarySource: ptr.String("__PrimarySource__"),
+			},
+			State: types.State("ENABLED"),
+		},
+		Sources: []types.SetSourceRequest{
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+			{
+				Decryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				Description:    ptr.String("__Description__"),
+				EntitlementArn: ptr.String("__EntitlementArn__"),
+				IngestPort:     ptr.Int32(1),
+				MaxBitrate:     ptr.Int32(1),
+				MaxLatency:     ptr.Int32(1),
+				MaxSyncBuffer:  ptr.Int32(1),
+				MediaStreamSourceConfigurations: []types.MediaStreamSourceConfigurationRequest{
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+					{
+						EncodingName: types.EncodingName("jxsv"),
+						InputConfigurations: []types.InputConfigurationRequest{
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+							{
+								InputPort: ptr.Int32(1),
+								Interface: &types.InterfaceRequest{
+									Name: ptr.String("__Name__"),
+								},
+							},
+						},
+						MediaStreamName: ptr.String("__MediaStreamName__"),
+					},
+				},
+				MinLatency:            ptr.Int32(1),
+				Name:                  ptr.String("__Name__"),
+				Protocol:              types.Protocol("zixi-push"),
+				SenderControlPort:     ptr.Int32(1),
+				SenderIpAddress:       ptr.String("__SenderIpAddress__"),
+				SourceListenerAddress: ptr.String("__SourceListenerAddress__"),
+				SourceListenerPort:    ptr.Int32(1),
+				StreamId:              ptr.String("__StreamId__"),
+				VpcInterfaceName:      ptr.String("__VpcInterfaceName__"),
+				WhitelistCidr:         ptr.String("__WhitelistCidr__"),
+				GatewayBridgeSource: &types.SetGatewayBridgeSourceRequest{
+					BridgeArn: ptr.String("__BridgeArn__"),
+					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
+						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
+					},
+				},
+				NdiSourceSettings: &types.NdiSourceSettings{
+					SourceName: ptr.String("__SourceName__"),
+				},
+				SourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				RouterIntegrationState: types.State("ENABLED"),
+				RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
+					EncryptionKeyType: types.FlowTransitEncryptionKeyType("SECRETS_MANAGER"),
+					EncryptionKeyConfiguration: &types.FlowTransitEncryptionKeyConfigurationMemberSecretsManager{
+						Value: types.SecretsManagerEncryptionKeyConfiguration{
+							SecretArn: ptr.String("__SecretArn__"),
+							RoleArn:   ptr.String("__RoleArn__"),
+						},
+					},
+				},
+			},
+		},
+		VpcInterfaces: []types.VpcInterfaceRequest{
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				NetworkInterfaceType: types.NetworkInterfaceType("ena"),
+				RoleArn:              ptr.String("__RoleArn__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetId: ptr.String("__SubnetId__"),
+				VpcInterfaceTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Maintenance: &types.AddMaintenance{
+			MaintenanceDay:       types.MaintenanceDay("Monday"),
+			MaintenanceStartHour: ptr.String("__MaintenanceStartHour__"),
+		},
+		SourceMonitoringConfig: &types.MonitoringConfig{
+			ThumbnailState: types.ThumbnailState("ENABLED"),
+			AudioMonitoringSettings: []types.AudioMonitoringSetting{
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					SilentAudio: &types.SilentAudio{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+			ContentQualityAnalysisState: types.ContentQualityAnalysisState("ENABLED"),
+			VideoMonitoringSettings: []types.VideoMonitoringSetting{
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+				{
+					BlackFrames: &types.BlackFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+					FrozenFrames: &types.FrozenFrames{
+						State:            types.State("ENABLED"),
+						ThresholdSeconds: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		FlowSize: types.FlowSize("MEDIUM"),
+		NdiConfig: &types.NdiConfig{
+			NdiState:    types.NdiState("ENABLED"),
+			MachineName: ptr.String("__MachineName__"),
+			NdiDiscoveryServers: []types.NdiDiscoveryServerConfig{
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+				{
+					DiscoveryServerAddress: ptr.String("__DiscoveryServerAddress__"),
+					DiscoveryServerPort:    ptr.Int32(1),
+					VpcInterfaceAdapter:    ptr.String("__VpcInterfaceAdapter__"),
+				},
+			},
+		},
+		EncodingConfig: &types.EncodingConfig{
+			EncodingProfile: types.EncodingProfile("DISTRIBUTION_H264_DEFAULT"),
+			VideoMaxBitrate: ptr.Int32(1),
+		},
+		FlowTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7206,7 +10292,23 @@ func TestCheckResponseSnapshot_Error_CreateGateway420Exception(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGateway(context.Background(), &CreateGatewayInput{})
+	_, opErr := svc.CreateGateway(context.Background(), &CreateGatewayInput{
+		EgressCidrBlocks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name: ptr.String("__Name__"),
+		Networks: []types.GatewayNetwork{
+			{
+				CidrBlock: ptr.String("__CidrBlock__"),
+				Name:      ptr.String("__Name__"),
+			},
+			{
+				CidrBlock: ptr.String("__CidrBlock__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7231,7 +10333,31 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7256,7 +10382,59 @@ func TestCheckResponseSnapshot_Error_GrantFlowEntitlements420Exception(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GrantFlowEntitlements(context.Background(), &GrantFlowEntitlementsInput{})
+	_, opErr := svc.GrantFlowEntitlements(context.Background(), &GrantFlowEntitlementsInput{
+		Entitlements: []types.GrantEntitlementRequest{
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				DataTransferSubscriberFeePercent: ptr.Int32(1),
+				Description:                      ptr.String("__Description__"),
+				Encryption: &types.Encryption{
+					Algorithm:                    types.Algorithm("aes128"),
+					ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+					DeviceId:                     ptr.String("__DeviceId__"),
+					KeyType:                      types.KeyType("speke"),
+					Region:                       ptr.String("__Region__"),
+					ResourceId:                   ptr.String("__ResourceId__"),
+					RoleArn:                      ptr.String("__RoleArn__"),
+					SecretArn:                    ptr.String("__SecretArn__"),
+					Url:                          ptr.String("__Url__"),
+				},
+				EntitlementStatus: types.EntitlementStatus("ENABLED"),
+				Name:              ptr.String("__Name__"),
+				Subscribers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EntitlementTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		FlowArn: ptr.String("__FlowArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7281,7 +10459,31 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7306,7 +10508,31 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7331,7 +10557,61 @@ func TestCheckResponseSnapshot_Error_RouterInputServiceQuotaExceededException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{})
+	_, opErr := svc.CreateRouterInput(context.Background(), &CreateRouterInputInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterInputConfigurationMemberStandard{
+			Value: types.StandardRouterInputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterInputProtocolConfigurationMemberRist{
+					Value: types.RistRouterInputConfiguration{
+						Port:                        ptr.Int32(1),
+						RecoveryLatencyMilliseconds: ptr.Int64(1),
+					},
+				},
+				Protocol: types.RouterInputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate:   ptr.Int64(1),
+		RoutingScope:     types.RoutingScope("REGIONAL"),
+		Tier:             types.RouterInputTier("INPUT_100"),
+		RegionName:       ptr.String("__RegionName__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		TransitEncryption: &types.RouterInputTransitEncryption{
+			EncryptionKeyType: types.RouterInputTransitEncryptionKeyType("SECRETS_MANAGER"),
+			EncryptionKeyConfiguration: &types.RouterInputTransitEncryptionKeyConfigurationMemberSecretsManager{
+				Value: types.SecretsManagerEncryptionKeyConfiguration{
+					SecretArn: ptr.String("__SecretArn__"),
+					RoleArn:   ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ContentQualityAnalysisConfiguration: &types.RouterContentQualityAnalysisConfigurationMemberContentLevel{
+			Value: types.ContentQualityAnalysisFeatureConfiguration{
+				BlackFrames: &types.BlackFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				FrozenFrames: &types.FrozenFramesConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+				SilentAudio: &types.SilentAudioConfiguration{
+					State:            types.ContentQualityAnalysisState("ENABLED"),
+					ThresholdSeconds: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7356,7 +10636,26 @@ func TestCheckResponseSnapshot_Error_RouterNetworkInterfaceServiceQuotaExceededE
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRouterNetworkInterface(context.Background(), &CreateRouterNetworkInterfaceInput{})
+	_, opErr := svc.CreateRouterNetworkInterface(context.Background(), &CreateRouterNetworkInterfaceInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterNetworkInterfaceConfigurationMemberPublic{
+			Value: types.PublicRouterNetworkInterfaceConfiguration{
+				AllowRules: []types.PublicRouterNetworkInterfaceRule{
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+					{
+						Cidr: ptr.String("__Cidr__"),
+					},
+				},
+			},
+		},
+		RegionName: ptr.String("__RegionName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7381,7 +10680,36 @@ func TestCheckResponseSnapshot_Error_RouterOutputServiceQuotaExceededException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRouterOutput(context.Background(), &CreateRouterOutputInput{})
+	_, opErr := svc.CreateRouterOutput(context.Background(), &CreateRouterOutputInput{
+		Name: ptr.String("__Name__"),
+		Configuration: &types.RouterOutputConfigurationMemberStandard{
+			Value: types.StandardRouterOutputConfiguration{
+				NetworkInterfaceArn: ptr.String("__NetworkInterfaceArn__"),
+				ProtocolConfiguration: &types.RouterOutputProtocolConfigurationMemberRist{
+					Value: types.RistRouterOutputConfiguration{
+						DestinationAddress: ptr.String("__DestinationAddress__"),
+						DestinationPort:    ptr.Int32(1),
+					},
+				},
+				Protocol: types.RouterOutputProtocol("RTP"),
+			},
+		},
+		MaximumBitrate:   ptr.Int64(1),
+		RoutingScope:     types.RoutingScope("REGIONAL"),
+		Tier:             types.RouterOutputTier("OUTPUT_100"),
+		RegionName:       ptr.String("__RegionName__"),
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		MaintenanceConfiguration: &types.MaintenanceConfigurationMemberPreferredDayTime{
+			Value: types.PreferredDayTimeMaintenanceConfiguration{
+				Day:  types.Day("MONDAY"),
+				Time: ptr.String("__Time__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7406,7 +10734,31 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7431,7 +10783,31 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{})
+	_, opErr := svc.AddBridgeOutputs(context.Background(), &AddBridgeOutputsInput{
+		BridgeArn: ptr.String("__BridgeArn__"),
+		Outputs: []types.AddBridgeOutputRequest{
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+			{
+				NetworkOutput: &types.AddBridgeNetworkOutputRequest{
+					IpAddress:   ptr.String("__IpAddress__"),
+					Name:        ptr.String("__Name__"),
+					NetworkName: ptr.String("__NetworkName__"),
+					Port:        ptr.Int32(1),
+					Protocol:    types.Protocol("zixi-push"),
+					Ttl:         ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeEvents
+
+{"Events":[{"Date":946684800,"EventCategories":["__Member__","__Member__"],"Message":"__Message__","SourceIdentifier":"__SourceIdentifier__","SourceType":"replication-instance"},{"Date":946684800,"EventCategories":["__Member__","__Member__"],"Message":"__Message__","SourceIdentifier":"__SourceIdentifier__","SourceType":"replication-instance"}],"Marker":"__Marker__"}

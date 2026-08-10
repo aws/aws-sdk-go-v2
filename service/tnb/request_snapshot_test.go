@@ -7,8 +7,10 @@ package tnb
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/document"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_CancelSolNetworkOperation(t *testing.T) {
 	input := &CancelSolNetworkOperationInput{
@@ -630,7 +654,7 @@ func TestCheckRequestSnapshot_InstantiateSolNetworkInstance(t *testing.T) {
 	input := &InstantiateSolNetworkInstanceInput{
 		NsInstanceId:          ptr.String("__NsInstanceId__"),
 		DryRun:                ptr.Bool(true),
-		AdditionalParamsForNs: nil,
+		AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1009,11 +1033,11 @@ func TestCheckRequestSnapshot_UpdateSolNetworkInstance(t *testing.T) {
 		UpdateType:   types.UpdateSolNetworkType("MODIFY_VNF_INFORMATION"),
 		ModifyVnfInfoData: &types.UpdateSolNetworkModify{
 			VnfInstanceId:             ptr.String("__VnfInstanceId__"),
-			VnfConfigurableProperties: nil,
+			VnfConfigurableProperties: document.NewLazyDocument("__Document__"),
 		},
 		UpdateNs: &types.UpdateSolNetworkServiceData{
 			NsdInfoId:             ptr.String("__NsdInfoId__"),
-			AdditionalParamsForNs: nil,
+			AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1575,7 +1599,7 @@ func TestUpdateRequestSnapshot_InstantiateSolNetworkInstance(t *testing.T) {
 	input := &InstantiateSolNetworkInstanceInput{
 		NsInstanceId:          ptr.String("__NsInstanceId__"),
 		DryRun:                ptr.Bool(true),
-		AdditionalParamsForNs: nil,
+		AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1954,11 +1978,11 @@ func TestUpdateRequestSnapshot_UpdateSolNetworkInstance(t *testing.T) {
 		UpdateType:   types.UpdateSolNetworkType("MODIFY_VNF_INFORMATION"),
 		ModifyVnfInfoData: &types.UpdateSolNetworkModify{
 			VnfInstanceId:             ptr.String("__VnfInstanceId__"),
-			VnfConfigurableProperties: nil,
+			VnfConfigurableProperties: document.NewLazyDocument("__Document__"),
 		},
 		UpdateNs: &types.UpdateSolNetworkServiceData{
 			NsdInfoId:             ptr.String("__NsdInfoId__"),
-			AdditionalParamsForNs: nil,
+			AdditionalParamsForNs: document.NewLazyDocument("__Document__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",

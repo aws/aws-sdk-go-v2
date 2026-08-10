@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appId":"__AppId__","permissions":[{"action":"read","principal":{"email":"__Email__","userId":"__UserId__","userType":"owner"}},{"action":"read","principal":{"email":"__Email__","userId":"__UserId__","userType":"owner"}}],"resourceArn":"__ResourceArn__"}

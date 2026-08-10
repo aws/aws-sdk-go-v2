@@ -218,7 +218,37 @@ func TestCheckResponseSnapshot_BatchExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	got, err := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Statements: []types.BatchStatementRequest{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +371,34 @@ func TestCheckResponseSnapshot_BatchGetItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetItem(context.Background(), &BatchGetItemInput{})
+	got, err := svc.BatchGetItem(context.Background(), &BatchGetItemInput{
+		RequestItems: map[string]types.KeysAndAttributes{
+			"key0": {
+				Keys: []map[string]types.AttributeValue{
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+				},
+				AttributesToGet: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConsistentRead:       ptr.Bool(true),
+				ProjectionExpression: ptr.String("__ProjectionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +544,46 @@ func TestCheckResponseSnapshot_BatchWriteItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{})
+	got, err := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{
+		RequestItems: map[string][]types.WriteRequest{
+			"key0": {
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +612,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	got, err := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -654,7 +753,17 @@ func TestCheckResponseSnapshot_CreateGlobalTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGlobalTable(context.Background(), &CreateGlobalTableInput{})
+	got, err := svc.CreateGlobalTable(context.Background(), &CreateGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+		ReplicationGroup: []types.Replica{
+			{
+				RegionName: ptr.String("__RegionName__"),
+			},
+			{
+				RegionName: ptr.String("__RegionName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1070,7 +1179,226 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTable(context.Background(), &CreateTableInput{})
+	got, err := svc.CreateTable(context.Background(), &CreateTableInput{
+		AttributeDefinitions: []types.AttributeDefinition{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+		},
+		TableName: ptr.String("__TableName__"),
+		KeySchema: []types.KeySchemaElement{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				KeyType:       types.KeyType("HASH"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				KeyType:       types.KeyType("HASH"),
+			},
+		},
+		LocalSecondaryIndexes: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		GlobalSecondaryIndexes: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		BillingMode: types.BillingMode("PROVISIONED"),
+		ProvisionedThroughput: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		StreamSpecification: &types.StreamSpecification{
+			StreamEnabled:  ptr.Bool(true),
+			StreamViewType: types.StreamViewType("NEW_IMAGE"),
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TableClass:                types.TableClass("STANDARD"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+		WarmThroughput: &types.WarmThroughput{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+		OnDemandThroughput: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		GlobalTableSourceArn:               ptr.String("__GlobalTableSourceArn__"),
+		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		VectorIndexes: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1296,7 +1624,9 @@ func TestCheckResponseSnapshot_DeleteBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupArn: ptr.String("__BackupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1363,7 +1693,45 @@ func TestCheckResponseSnapshot_DeleteItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteItem(context.Background(), &DeleteItemInput{})
+	got, err := svc.DeleteItem(context.Background(), &DeleteItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ConditionalOperator:         types.ConditionalOperator("AND"),
+		ReturnValues:                types.ReturnValue("NONE"),
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1384,7 +1752,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1800,7 +2171,9 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{})
+	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2026,7 +2399,9 @@ func TestCheckResponseSnapshot_DescribeBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBackup(context.Background(), &DescribeBackupInput{})
+	got, err := svc.DescribeBackup(context.Background(), &DescribeBackupInput{
+		BackupArn: ptr.String("__BackupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2055,7 +2430,9 @@ func TestCheckResponseSnapshot_DescribeContinuousBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContinuousBackups(context.Background(), &DescribeContinuousBackupsInput{})
+	got, err := svc.DescribeContinuousBackups(context.Background(), &DescribeContinuousBackupsInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2088,7 +2465,10 @@ func TestCheckResponseSnapshot_DescribeContributorInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContributorInsights(context.Background(), &DescribeContributorInsightsInput{})
+	got, err := svc.DescribeContributorInsights(context.Background(), &DescribeContributorInsightsInput{
+		TableName: ptr.String("__TableName__"),
+		IndexName: ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2165,7 +2545,9 @@ func TestCheckResponseSnapshot_DescribeExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExport(context.Background(), &DescribeExportInput{})
+	got, err := svc.DescribeExport(context.Background(), &DescribeExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2303,7 +2685,9 @@ func TestCheckResponseSnapshot_DescribeGlobalTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGlobalTable(context.Background(), &DescribeGlobalTableInput{})
+	got, err := svc.DescribeGlobalTable(context.Background(), &DescribeGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2694,7 +3078,9 @@ func TestCheckResponseSnapshot_DescribeGlobalTableSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGlobalTableSettings(context.Background(), &DescribeGlobalTableSettingsInput{})
+	got, err := svc.DescribeGlobalTableSettings(context.Background(), &DescribeGlobalTableSettingsInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2901,7 +3287,9 @@ func TestCheckResponseSnapshot_DescribeImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImport(context.Background(), &DescribeImportInput{})
+	got, err := svc.DescribeImport(context.Background(), &DescribeImportInput{
+		ImportArn: ptr.String("__ImportArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2936,7 +3324,9 @@ func TestCheckResponseSnapshot_DescribeKinesisStreamingDestination(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKinesisStreamingDestination(context.Background(), &DescribeKinesisStreamingDestinationInput{})
+	got, err := svc.DescribeKinesisStreamingDestination(context.Background(), &DescribeKinesisStreamingDestinationInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3376,7 +3766,9 @@ func TestCheckResponseSnapshot_DescribeTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{})
+	got, err := svc.DescribeTable(context.Background(), &DescribeTableInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3742,7 +4134,9 @@ func TestCheckResponseSnapshot_DescribeTableReplicaAutoScaling(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTableReplicaAutoScaling(context.Background(), &DescribeTableReplicaAutoScalingInput{})
+	got, err := svc.DescribeTableReplicaAutoScaling(context.Background(), &DescribeTableReplicaAutoScalingInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3766,7 +4160,9 @@ func TestCheckResponseSnapshot_DescribeTimeToLive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTimeToLive(context.Background(), &DescribeTimeToLiveInput{})
+	got, err := svc.DescribeTimeToLive(context.Background(), &DescribeTimeToLiveInput{
+		TableName: ptr.String("__TableName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3792,7 +4188,13 @@ func TestCheckResponseSnapshot_DisableKinesisStreamingDestination(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableKinesisStreamingDestination(context.Background(), &DisableKinesisStreamingDestinationInput{})
+	got, err := svc.DisableKinesisStreamingDestination(context.Background(), &DisableKinesisStreamingDestinationInput{
+		TableName: ptr.String("__TableName__"),
+		StreamArn: ptr.String("__StreamArn__"),
+		EnableKinesisStreamingConfiguration: &types.EnableKinesisStreamingConfiguration{
+			ApproximateCreationDateTimePrecision: types.ApproximateCreationDateTimePrecision("MILLISECOND"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3818,7 +4220,13 @@ func TestCheckResponseSnapshot_EnableKinesisStreamingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableKinesisStreamingDestination(context.Background(), &EnableKinesisStreamingDestinationInput{})
+	got, err := svc.EnableKinesisStreamingDestination(context.Background(), &EnableKinesisStreamingDestinationInput{
+		TableName: ptr.String("__TableName__"),
+		StreamArn: ptr.String("__StreamArn__"),
+		EnableKinesisStreamingConfiguration: &types.EnableKinesisStreamingConfiguration{
+			ApproximateCreationDateTimePrecision: types.ApproximateCreationDateTimePrecision("MILLISECOND"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3887,7 +4295,22 @@ func TestCheckResponseSnapshot_ExecuteStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	got, err := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		Statement: ptr.String("__Statement__"),
+		Parameters: []types.AttributeValue{
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ConsistentRead:                      ptr.Bool(true),
+		NextToken:                           ptr.String("__NextToken__"),
+		ReturnConsumedCapacity:              types.ReturnConsumedCapacity("INDEXES"),
+		Limit:                               ptr.Int32(1),
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3987,7 +4410,36 @@ func TestCheckResponseSnapshot_ExecuteTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{})
+	got, err := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{
+		TransactStatements: []types.ParameterizedStatement{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4034,7 +4486,23 @@ func TestCheckResponseSnapshot_ExportTableToPointInTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{})
+	got, err := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{
+		TableArn:       ptr.String("__TableArn__"),
+		ExportTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:    ptr.String("__ClientToken__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+		S3Prefix:       ptr.String("__S3Prefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		ExportFormat:   types.ExportFormat("DYNAMODB_JSON"),
+		ExportType:     types.ExportType("FULL_EXPORT"),
+		IncrementalExportSpecification: &types.IncrementalExportSpecification{
+			ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportViewType: types.ExportViewType("NEW_IMAGE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4090,7 +4558,24 @@ func TestCheckResponseSnapshot_GetItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetItem(context.Background(), &GetItemInput{})
+	got, err := svc.GetItem(context.Background(), &GetItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		AttributesToGet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConsistentRead:         ptr.Bool(true),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+		ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4112,7 +4597,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4319,7 +4806,180 @@ func TestCheckResponseSnapshot_ImportTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportTable(context.Background(), &ImportTableInput{})
+	got, err := svc.ImportTable(context.Background(), &ImportTableInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		S3BucketSource: &types.S3BucketSource{
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+			S3Bucket:      ptr.String("__S3Bucket__"),
+			S3KeyPrefix:   ptr.String("__S3KeyPrefix__"),
+		},
+		InputFormat: types.InputFormat("DYNAMODB_JSON"),
+		InputFormatOptions: &types.InputFormatOptions{
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		InputCompressionType: types.InputCompressionType("GZIP"),
+		TableCreationParameters: &types.TableCreationParameters{
+			TableName: ptr.String("__TableName__"),
+			AttributeDefinitions: []types.AttributeDefinition{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.ScalarAttributeType("S"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.ScalarAttributeType("S"),
+				},
+			},
+			KeySchema: []types.KeySchemaElement{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					KeyType:       types.KeyType("HASH"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					KeyType:       types.KeyType("HASH"),
+				},
+			},
+			BillingMode: types.BillingMode("PROVISIONED"),
+			ProvisionedThroughput: &types.ProvisionedThroughput{
+				ReadCapacityUnits:  ptr.Int64(1),
+				WriteCapacityUnits: ptr.Int64(1),
+			},
+			OnDemandThroughput: &types.OnDemandThroughput{
+				MaxReadRequestUnits:  ptr.Int64(1),
+				MaxWriteRequestUnits: ptr.Int64(1),
+			},
+			SSESpecification: &types.SSESpecification{
+				Enabled:        ptr.Bool(true),
+				SSEType:        types.SSEType("AES256"),
+				KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+			},
+			GlobalSecondaryIndexes: []types.GlobalSecondaryIndex{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+			},
+			VectorIndexes: []types.VectorIndex{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4366,7 +5026,14 @@ func TestCheckResponseSnapshot_ListBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBackups(context.Background(), &ListBackupsInput{})
+	got, err := svc.ListBackups(context.Background(), &ListBackupsInput{
+		TableName:               ptr.String("__TableName__"),
+		Limit:                   ptr.Int32(1),
+		TimeRangeLowerBound:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimeRangeUpperBound:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExclusiveStartBackupArn: ptr.String("__ExclusiveStartBackupArn__"),
+		BackupType:              types.BackupTypeFilter("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4401,7 +5068,11 @@ func TestCheckResponseSnapshot_ListContributorInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContributorInsights(context.Background(), &ListContributorInsightsInput{})
+	got, err := svc.ListContributorInsights(context.Background(), &ListContributorInsightsInput{
+		TableName:  ptr.String("__TableName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4434,7 +5105,11 @@ func TestCheckResponseSnapshot_ListExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExports(context.Background(), &ListExportsInput{})
+	got, err := svc.ListExports(context.Background(), &ListExportsInput{
+		TableArn:   ptr.String("__TableArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4479,7 +5154,11 @@ func TestCheckResponseSnapshot_ListGlobalTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGlobalTables(context.Background(), &ListGlobalTablesInput{})
+	got, err := svc.ListGlobalTables(context.Background(), &ListGlobalTablesInput{
+		ExclusiveStartGlobalTableName: ptr.String("__ExclusiveStartGlobalTableName__"),
+		Limit:                         ptr.Int32(1),
+		RegionName:                    ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4530,7 +5209,11 @@ func TestCheckResponseSnapshot_ListImports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImports(context.Background(), &ListImportsInput{})
+	got, err := svc.ListImports(context.Background(), &ListImportsInput{
+		TableArn:  ptr.String("__TableArn__"),
+		PageSize:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4555,7 +5238,10 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		ExclusiveStartTableName: ptr.String("__ExclusiveStartTableName__"),
+		Limit:                   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4586,7 +5272,10 @@ func TestCheckResponseSnapshot_ListTagsOfResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsOfResource(context.Background(), &ListTagsOfResourceInput{})
+	got, err := svc.ListTagsOfResource(context.Background(), &ListTagsOfResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4653,7 +5342,45 @@ func TestCheckResponseSnapshot_PutItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutItem(context.Background(), &PutItemInput{})
+	got, err := svc.PutItem(context.Background(), &PutItemInput{
+		TableName: ptr.String("__TableName__"),
+		Item: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ReturnValues:                types.ReturnValue("NONE"),
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		ConditionalOperator:         types.ConditionalOperator("AND"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4674,7 +5401,12 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn:                     ptr.String("__ResourceArn__"),
+		Policy:                          ptr.String("__Policy__"),
+		ExpectedRevisionId:              ptr.String("__ExpectedRevisionId__"),
+		ConfirmRemoveSelfResourceAccess: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4744,7 +5476,62 @@ func TestCheckResponseSnapshot_Query(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Query(context.Background(), &QueryInput{})
+	got, err := svc.Query(context.Background(), &QueryInput{
+		TableName: ptr.String("__TableName__"),
+		IndexName: ptr.String("__IndexName__"),
+		Select:    types.Select("ALL_ATTRIBUTES"),
+		AttributesToGet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:          ptr.Int32(1),
+		ConsistentRead: ptr.Bool(true),
+		KeyConditions: map[string]types.Condition{
+			"key0": {
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+			},
+		},
+		QueryFilter: map[string]types.Condition{
+			"key0": {
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+			},
+		},
+		ConditionalOperator: types.ConditionalOperator("AND"),
+		ScanIndexForward:    ptr.Bool(true),
+		ExclusiveStartKey: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+		ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+		FilterExpression:       ptr.String("__FilterExpression__"),
+		KeyConditionExpression: ptr.String("__KeyConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5160,7 +5947,184 @@ func TestCheckResponseSnapshot_RestoreTableFromBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreTableFromBackup(context.Background(), &RestoreTableFromBackupInput{})
+	got, err := svc.RestoreTableFromBackup(context.Background(), &RestoreTableFromBackupInput{
+		TargetTableName:     ptr.String("__TargetTableName__"),
+		BackupArn:           ptr.String("__BackupArn__"),
+		BillingModeOverride: types.BillingMode("PROVISIONED"),
+		GlobalSecondaryIndexOverride: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		LocalSecondaryIndexOverride: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ProvisionedThroughputOverride: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		OnDemandThroughputOverride: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		SSESpecificationOverride: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		VectorIndexOverride: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5576,7 +6540,187 @@ func TestCheckResponseSnapshot_RestoreTableToPointInTime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreTableToPointInTime(context.Background(), &RestoreTableToPointInTimeInput{})
+	got, err := svc.RestoreTableToPointInTime(context.Background(), &RestoreTableToPointInTimeInput{
+		SourceTableArn:          ptr.String("__SourceTableArn__"),
+		SourceTableName:         ptr.String("__SourceTableName__"),
+		TargetTableName:         ptr.String("__TargetTableName__"),
+		UseLatestRestorableTime: ptr.Bool(true),
+		RestoreDateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BillingModeOverride:     types.BillingMode("PROVISIONED"),
+		GlobalSecondaryIndexOverride: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		LocalSecondaryIndexOverride: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ProvisionedThroughputOverride: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		OnDemandThroughputOverride: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		SSESpecificationOverride: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		VectorIndexOverride: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5646,7 +6790,49 @@ func TestCheckResponseSnapshot_Scan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Scan(context.Background(), &ScanInput{})
+	got, err := svc.Scan(context.Background(), &ScanInput{
+		TableName: ptr.String("__TableName__"),
+		IndexName: ptr.String("__IndexName__"),
+		AttributesToGet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:  ptr.Int32(1),
+		Select: types.Select("ALL_ATTRIBUTES"),
+		ScanFilter: map[string]types.Condition{
+			"key0": {
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+			},
+		},
+		ConditionalOperator: types.ConditionalOperator("AND"),
+		ExclusiveStartKey: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+		TotalSegments:          ptr.Int32(1),
+		Segment:                ptr.Int32(1),
+		ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+		FilterExpression:       ptr.String("__FilterExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ConsistentRead: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5688,7 +6874,30 @@ func TestCheckResponseSnapshot_SearchVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchVectors(context.Background(), &SearchVectorsInput{})
+	got, err := svc.SearchVectors(context.Background(), &SearchVectorsInput{
+		TableName:              ptr.String("__TableName__"),
+		IndexName:              ptr.String("__IndexName__"),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ProjectionExpression: ptr.String("__ProjectionExpression__"),
+		SearchVector: []types.AttributeValue{
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		SearchConditionExpression: ptr.String("__SearchConditionExpression__"),
+		TopK:                      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5707,7 +6916,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5807,7 +7028,39 @@ func TestCheckResponseSnapshot_TransactGetItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransactGetItems(context.Background(), &TransactGetItemsInput{})
+	got, err := svc.TransactGetItems(context.Background(), &TransactGetItemsInput{
+		TransactItems: []types.TransactGetItem{
+			{
+				Get: &types.Get{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:            ptr.String("__TableName__"),
+					ProjectionExpression: ptr.String("__ProjectionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			{
+				Get: &types.Get{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:            ptr.String("__TableName__"),
+					ProjectionExpression: ptr.String("__ProjectionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5917,7 +7170,163 @@ func TestCheckResponseSnapshot_TransactWriteItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransactWriteItems(context.Background(), &TransactWriteItemsInput{})
+	got, err := svc.TransactWriteItems(context.Background(), &TransactWriteItemsInput{
+		TransactItems: []types.TransactWriteItem{
+			{
+				ConditionCheck: &types.ConditionCheck{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Put: &types.Put{
+					Item: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Delete: &types.Delete{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Update: &types.Update{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					UpdateExpression:    ptr.String("__UpdateExpression__"),
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+			},
+			{
+				ConditionCheck: &types.ConditionCheck{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Put: &types.Put{
+					Item: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Delete: &types.Delete{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+				Update: &types.Update{
+					Key: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					UpdateExpression:    ptr.String("__UpdateExpression__"),
+					TableName:           ptr.String("__TableName__"),
+					ConditionExpression: ptr.String("__ConditionExpression__"),
+					ExpressionAttributeNames: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpressionAttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+				},
+			},
+		},
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5936,7 +7345,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5965,7 +7380,13 @@ func TestCheckResponseSnapshot_UpdateContinuousBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContinuousBackups(context.Background(), &UpdateContinuousBackupsInput{})
+	got, err := svc.UpdateContinuousBackups(context.Background(), &UpdateContinuousBackupsInput{
+		TableName: ptr.String("__TableName__"),
+		PointInTimeRecoverySpecification: &types.PointInTimeRecoverySpecification{
+			PointInTimeRecoveryEnabled: ptr.Bool(true),
+			RecoveryPeriodInDays:       ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5989,7 +7410,12 @@ func TestCheckResponseSnapshot_UpdateContributorInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContributorInsights(context.Background(), &UpdateContributorInsightsInput{})
+	got, err := svc.UpdateContributorInsights(context.Background(), &UpdateContributorInsightsInput{
+		TableName:                 ptr.String("__TableName__"),
+		IndexName:                 ptr.String("__IndexName__"),
+		ContributorInsightsAction: types.ContributorInsightsAction("ENABLE"),
+		ContributorInsightsMode:   types.ContributorInsightsMode("ACCESSED_AND_THROTTLED_KEYS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6127,7 +7553,27 @@ func TestCheckResponseSnapshot_UpdateGlobalTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{})
+	got, err := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+		ReplicaUpdates: []types.ReplicaUpdate{
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6518,7 +7964,188 @@ func TestCheckResponseSnapshot_UpdateGlobalTableSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalTableSettings(context.Background(), &UpdateGlobalTableSettingsInput{})
+	got, err := svc.UpdateGlobalTableSettings(context.Background(), &UpdateGlobalTableSettingsInput{
+		GlobalTableName:                          ptr.String("__GlobalTableName__"),
+		GlobalTableBillingMode:                   types.BillingMode("PROVISIONED"),
+		GlobalTableProvisionedWriteCapacityUnits: ptr.Int64(1),
+		GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+			MinimumUnits:        ptr.Int64(1),
+			MaximumUnits:        ptr.Int64(1),
+			AutoScalingDisabled: ptr.Bool(true),
+			AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+			ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+				PolicyName: ptr.String("__PolicyName__"),
+				TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+					DisableScaleIn:   ptr.Bool(true),
+					ScaleInCooldown:  ptr.Int32(1),
+					ScaleOutCooldown: ptr.Int32(1),
+					TargetValue:      ptr.Float64(1.0),
+				},
+			},
+		},
+		GlobalTableGlobalSecondaryIndexSettingsUpdate: []types.GlobalTableGlobalSecondaryIndexSettingsUpdate{
+			{
+				IndexName:                     ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityUnits: ptr.Int64(1),
+				ProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+			{
+				IndexName:                     ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityUnits: ptr.Int64(1),
+				ProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+		},
+		ReplicaSettingsUpdate: []types.ReplicaSettingsUpdate{
+			{
+				RegionName:                          ptr.String("__RegionName__"),
+				ReplicaProvisionedReadCapacityUnits: ptr.Int64(1),
+				ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+				ReplicaGlobalSecondaryIndexSettingsUpdate: []types.ReplicaGlobalSecondaryIndexSettingsUpdate{
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaTableClass: types.TableClass("STANDARD"),
+			},
+			{
+				RegionName:                          ptr.String("__RegionName__"),
+				ReplicaProvisionedReadCapacityUnits: ptr.Int64(1),
+				ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+				ReplicaGlobalSecondaryIndexSettingsUpdate: []types.ReplicaGlobalSecondaryIndexSettingsUpdate{
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaTableClass: types.TableClass("STANDARD"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6585,7 +8212,54 @@ func TestCheckResponseSnapshot_UpdateItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateItem(context.Background(), &UpdateItemInput{})
+	got, err := svc.UpdateItem(context.Background(), &UpdateItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		AttributeUpdates: map[string]types.AttributeValueUpdate{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Action: types.AttributeAction("ADD"),
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ConditionalOperator:         types.ConditionalOperator("AND"),
+		ReturnValues:                types.ReturnValue("NONE"),
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		UpdateExpression:            ptr.String("__UpdateExpression__"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6611,7 +8285,13 @@ func TestCheckResponseSnapshot_UpdateKinesisStreamingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKinesisStreamingDestination(context.Background(), &UpdateKinesisStreamingDestinationInput{})
+	got, err := svc.UpdateKinesisStreamingDestination(context.Background(), &UpdateKinesisStreamingDestinationInput{
+		TableName: ptr.String("__TableName__"),
+		StreamArn: ptr.String("__StreamArn__"),
+		UpdateKinesisStreamingConfiguration: &types.UpdateKinesisStreamingConfiguration{
+			ApproximateCreationDateTimePrecision: types.ApproximateCreationDateTimePrecision("MILLISECOND"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7027,7 +8707,367 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{})
+	got, err := svc.UpdateTable(context.Background(), &UpdateTableInput{
+		AttributeDefinitions: []types.AttributeDefinition{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+		},
+		TableName:   ptr.String("__TableName__"),
+		BillingMode: types.BillingMode("PROVISIONED"),
+		ProvisionedThroughput: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		GlobalSecondaryIndexUpdates: []types.GlobalSecondaryIndexUpdate{
+			{
+				Update: &types.UpdateGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				Create: &types.CreateGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				Delete: &types.DeleteGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+				},
+			},
+			{
+				Update: &types.UpdateGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				Create: &types.CreateGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				Delete: &types.DeleteGlobalSecondaryIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+				},
+			},
+		},
+		StreamSpecification: &types.StreamSpecification{
+			StreamEnabled:  ptr.Bool(true),
+			StreamViewType: types.StreamViewType("NEW_IMAGE"),
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		ReplicaUpdates: []types.ReplicationGroupUpdate{
+			{
+				Create: &types.CreateReplicationGroupMemberAction{
+					RegionName:     ptr.String("__RegionName__"),
+					KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+					ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+						ReadCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+						MaxReadRequestUnits: ptr.Int64(1),
+					},
+					GlobalSecondaryIndexes: []types.ReplicaGlobalSecondaryIndex{
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+					},
+					TableClassOverride: types.TableClass("STANDARD"),
+				},
+				Update: &types.UpdateReplicationGroupMemberAction{
+					RegionName:     ptr.String("__RegionName__"),
+					KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+					ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+						ReadCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+						MaxReadRequestUnits: ptr.Int64(1),
+					},
+					GlobalSecondaryIndexes: []types.ReplicaGlobalSecondaryIndex{
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+					},
+					TableClassOverride: types.TableClass("STANDARD"),
+				},
+				Delete: &types.DeleteReplicationGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+			{
+				Create: &types.CreateReplicationGroupMemberAction{
+					RegionName:     ptr.String("__RegionName__"),
+					KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+					ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+						ReadCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+						MaxReadRequestUnits: ptr.Int64(1),
+					},
+					GlobalSecondaryIndexes: []types.ReplicaGlobalSecondaryIndex{
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+					},
+					TableClassOverride: types.TableClass("STANDARD"),
+				},
+				Update: &types.UpdateReplicationGroupMemberAction{
+					RegionName:     ptr.String("__RegionName__"),
+					KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+					ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+						ReadCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+						MaxReadRequestUnits: ptr.Int64(1),
+					},
+					GlobalSecondaryIndexes: []types.ReplicaGlobalSecondaryIndex{
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+						{
+							IndexName: ptr.String("__IndexName__"),
+							ProvisionedThroughputOverride: &types.ProvisionedThroughputOverride{
+								ReadCapacityUnits: ptr.Int64(1),
+							},
+							OnDemandThroughputOverride: &types.OnDemandThroughputOverride{
+								MaxReadRequestUnits: ptr.Int64(1),
+							},
+						},
+					},
+					TableClassOverride: types.TableClass("STANDARD"),
+				},
+				Delete: &types.DeleteReplicationGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+		},
+		TableClass:                types.TableClass("STANDARD"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+		MultiRegionConsistency:    types.MultiRegionConsistency("EVENTUAL"),
+		GlobalTableWitnessUpdates: []types.GlobalTableWitnessGroupUpdate{
+			{
+				Create: &types.CreateGlobalTableWitnessGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteGlobalTableWitnessGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+			{
+				Create: &types.CreateGlobalTableWitnessGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteGlobalTableWitnessGroupMemberAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+		},
+		OnDemandThroughput: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		WarmThroughput: &types.WarmThroughput{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		VectorIndexUpdates: []types.VectorIndexUpdate{
+			{
+				Create: &types.CreateVectorIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+				Delete: &types.DeleteVectorIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+				},
+			},
+			{
+				Create: &types.CreateVectorIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+				Delete: &types.DeleteVectorIndexAction{
+					IndexName: ptr.String("__IndexName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7393,7 +9433,176 @@ func TestCheckResponseSnapshot_UpdateTableReplicaAutoScaling(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTableReplicaAutoScaling(context.Background(), &UpdateTableReplicaAutoScalingInput{})
+	got, err := svc.UpdateTableReplicaAutoScaling(context.Background(), &UpdateTableReplicaAutoScalingInput{
+		GlobalSecondaryIndexUpdates: []types.GlobalSecondaryIndexAutoScalingUpdate{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+		},
+		TableName: ptr.String("__TableName__"),
+		ProvisionedWriteCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+			MinimumUnits:        ptr.Int64(1),
+			MaximumUnits:        ptr.Int64(1),
+			AutoScalingDisabled: ptr.Bool(true),
+			AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+			ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+				PolicyName: ptr.String("__PolicyName__"),
+				TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+					DisableScaleIn:   ptr.Bool(true),
+					ScaleInCooldown:  ptr.Int32(1),
+					ScaleOutCooldown: ptr.Int32(1),
+					TargetValue:      ptr.Float64(1.0),
+				},
+			},
+		},
+		ReplicaUpdates: []types.ReplicaAutoScalingUpdate{
+			{
+				RegionName: ptr.String("__RegionName__"),
+				ReplicaGlobalSecondaryIndexUpdates: []types.ReplicaGlobalSecondaryIndexAutoScalingUpdate{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						ProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						ProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+			{
+				RegionName: ptr.String("__RegionName__"),
+				ReplicaGlobalSecondaryIndexUpdates: []types.ReplicaGlobalSecondaryIndexAutoScalingUpdate{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						ProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						ProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaProvisionedReadCapacityAutoScalingUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7417,7 +9626,13 @@ func TestCheckResponseSnapshot_UpdateTimeToLive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTimeToLive(context.Background(), &UpdateTimeToLiveInput{})
+	got, err := svc.UpdateTimeToLive(context.Background(), &UpdateTimeToLiveInput{
+		TableName: ptr.String("__TableName__"),
+		TimeToLiveSpecification: &types.TimeToLiveSpecification{
+			Enabled:       ptr.Bool(true),
+			AttributeName: ptr.String("__AttributeName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7438,7 +9653,10 @@ func TestCheckResponseSnapshot_Error_BackupInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7463,7 +9681,9 @@ func TestCheckResponseSnapshot_Error_BackupNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupArn: ptr.String("__BackupArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7493,7 +9713,45 @@ func TestCheckResponseSnapshot_Error_ConditionalCheckFailedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteItem(context.Background(), &DeleteItemInput{})
+	_, opErr := svc.DeleteItem(context.Background(), &DeleteItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ConditionalOperator:         types.ConditionalOperator("AND"),
+		ReturnValues:                types.ReturnValue("NONE"),
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7518,7 +9776,10 @@ func TestCheckResponseSnapshot_Error_ContinuousBackupsUnavailableException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7543,7 +9804,22 @@ func TestCheckResponseSnapshot_Error_DuplicateItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{})
+	_, opErr := svc.ExecuteStatement(context.Background(), &ExecuteStatementInput{
+		Statement: ptr.String("__Statement__"),
+		Parameters: []types.AttributeValue{
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+			&types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ConsistentRead:                      ptr.Bool(true),
+		NextToken:                           ptr.String("__NextToken__"),
+		ReturnConsumedCapacity:              types.ReturnConsumedCapacity("INDEXES"),
+		Limit:                               ptr.Int32(1),
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7568,7 +9844,23 @@ func TestCheckResponseSnapshot_Error_ExportConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{})
+	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{
+		TableArn:       ptr.String("__TableArn__"),
+		ExportTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:    ptr.String("__ClientToken__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+		S3Prefix:       ptr.String("__S3Prefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		ExportFormat:   types.ExportFormat("DYNAMODB_JSON"),
+		ExportType:     types.ExportType("FULL_EXPORT"),
+		IncrementalExportSpecification: &types.IncrementalExportSpecification{
+			ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportViewType: types.ExportViewType("NEW_IMAGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7593,7 +9885,9 @@ func TestCheckResponseSnapshot_Error_ExportNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeExport(context.Background(), &DescribeExportInput{})
+	_, opErr := svc.DescribeExport(context.Background(), &DescribeExportInput{
+		ExportArn: ptr.String("__ExportArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7618,7 +9912,17 @@ func TestCheckResponseSnapshot_Error_GlobalTableAlreadyExistsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGlobalTable(context.Background(), &CreateGlobalTableInput{})
+	_, opErr := svc.CreateGlobalTable(context.Background(), &CreateGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+		ReplicationGroup: []types.Replica{
+			{
+				RegionName: ptr.String("__RegionName__"),
+			},
+			{
+				RegionName: ptr.String("__RegionName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7643,7 +9947,9 @@ func TestCheckResponseSnapshot_Error_GlobalTableNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeGlobalTable(context.Background(), &DescribeGlobalTableInput{})
+	_, opErr := svc.DescribeGlobalTable(context.Background(), &DescribeGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7668,7 +9974,36 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{})
+	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{
+		TransactStatements: []types.ParameterizedStatement{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7693,7 +10028,180 @@ func TestCheckResponseSnapshot_Error_ImportConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportTable(context.Background(), &ImportTableInput{})
+	_, opErr := svc.ImportTable(context.Background(), &ImportTableInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		S3BucketSource: &types.S3BucketSource{
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+			S3Bucket:      ptr.String("__S3Bucket__"),
+			S3KeyPrefix:   ptr.String("__S3KeyPrefix__"),
+		},
+		InputFormat: types.InputFormat("DYNAMODB_JSON"),
+		InputFormatOptions: &types.InputFormatOptions{
+			Csv: &types.CsvOptions{
+				Delimiter: ptr.String("__Delimiter__"),
+				HeaderList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		InputCompressionType: types.InputCompressionType("GZIP"),
+		TableCreationParameters: &types.TableCreationParameters{
+			TableName: ptr.String("__TableName__"),
+			AttributeDefinitions: []types.AttributeDefinition{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.ScalarAttributeType("S"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					AttributeType: types.ScalarAttributeType("S"),
+				},
+			},
+			KeySchema: []types.KeySchemaElement{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					KeyType:       types.KeyType("HASH"),
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					KeyType:       types.KeyType("HASH"),
+				},
+			},
+			BillingMode: types.BillingMode("PROVISIONED"),
+			ProvisionedThroughput: &types.ProvisionedThroughput{
+				ReadCapacityUnits:  ptr.Int64(1),
+				WriteCapacityUnits: ptr.Int64(1),
+			},
+			OnDemandThroughput: &types.OnDemandThroughput{
+				MaxReadRequestUnits:  ptr.Int64(1),
+				MaxWriteRequestUnits: ptr.Int64(1),
+			},
+			SSESpecification: &types.SSESpecification{
+				Enabled:        ptr.Bool(true),
+				SSEType:        types.SSEType("AES256"),
+				KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+			},
+			GlobalSecondaryIndexes: []types.GlobalSecondaryIndex{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					KeySchema: []types.KeySchemaElement{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							KeyType:       types.KeyType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ProvisionedThroughput: &types.ProvisionedThroughput{
+						ReadCapacityUnits:  ptr.Int64(1),
+						WriteCapacityUnits: ptr.Int64(1),
+					},
+					OnDemandThroughput: &types.OnDemandThroughput{
+						MaxReadRequestUnits:  ptr.Int64(1),
+						MaxWriteRequestUnits: ptr.Int64(1),
+					},
+					WarmThroughput: &types.WarmThroughput{
+						ReadUnitsPerSecond:  ptr.Int64(1),
+						WriteUnitsPerSecond: ptr.Int64(1),
+					},
+				},
+			},
+			VectorIndexes: []types.VectorIndex{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7718,7 +10226,9 @@ func TestCheckResponseSnapshot_Error_ImportNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeImport(context.Background(), &DescribeImportInput{})
+	_, opErr := svc.DescribeImport(context.Background(), &DescribeImportInput{
+		ImportArn: ptr.String("__ImportArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7743,7 +10253,188 @@ func TestCheckResponseSnapshot_Error_IndexNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateGlobalTableSettings(context.Background(), &UpdateGlobalTableSettingsInput{})
+	_, opErr := svc.UpdateGlobalTableSettings(context.Background(), &UpdateGlobalTableSettingsInput{
+		GlobalTableName:                          ptr.String("__GlobalTableName__"),
+		GlobalTableBillingMode:                   types.BillingMode("PROVISIONED"),
+		GlobalTableProvisionedWriteCapacityUnits: ptr.Int64(1),
+		GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+			MinimumUnits:        ptr.Int64(1),
+			MaximumUnits:        ptr.Int64(1),
+			AutoScalingDisabled: ptr.Bool(true),
+			AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+			ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+				PolicyName: ptr.String("__PolicyName__"),
+				TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+					DisableScaleIn:   ptr.Bool(true),
+					ScaleInCooldown:  ptr.Int32(1),
+					ScaleOutCooldown: ptr.Int32(1),
+					TargetValue:      ptr.Float64(1.0),
+				},
+			},
+		},
+		GlobalTableGlobalSecondaryIndexSettingsUpdate: []types.GlobalTableGlobalSecondaryIndexSettingsUpdate{
+			{
+				IndexName:                     ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityUnits: ptr.Int64(1),
+				ProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+			{
+				IndexName:                     ptr.String("__IndexName__"),
+				ProvisionedWriteCapacityUnits: ptr.Int64(1),
+				ProvisionedWriteCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+			},
+		},
+		ReplicaSettingsUpdate: []types.ReplicaSettingsUpdate{
+			{
+				RegionName:                          ptr.String("__RegionName__"),
+				ReplicaProvisionedReadCapacityUnits: ptr.Int64(1),
+				ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+				ReplicaGlobalSecondaryIndexSettingsUpdate: []types.ReplicaGlobalSecondaryIndexSettingsUpdate{
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaTableClass: types.TableClass("STANDARD"),
+			},
+			{
+				RegionName:                          ptr.String("__RegionName__"),
+				ReplicaProvisionedReadCapacityUnits: ptr.Int64(1),
+				ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+					MinimumUnits:        ptr.Int64(1),
+					MaximumUnits:        ptr.Int64(1),
+					AutoScalingDisabled: ptr.Bool(true),
+					AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+					ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+						PolicyName: ptr.String("__PolicyName__"),
+						TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+							DisableScaleIn:   ptr.Bool(true),
+							ScaleInCooldown:  ptr.Int32(1),
+							ScaleOutCooldown: ptr.Int32(1),
+							TargetValue:      ptr.Float64(1.0),
+						},
+					},
+				},
+				ReplicaGlobalSecondaryIndexSettingsUpdate: []types.ReplicaGlobalSecondaryIndexSettingsUpdate{
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+					{
+						IndexName:                    ptr.String("__IndexName__"),
+						ProvisionedReadCapacityUnits: ptr.Int64(1),
+						ProvisionedReadCapacityAutoScalingSettingsUpdate: &types.AutoScalingSettingsUpdate{
+							MinimumUnits:        ptr.Int64(1),
+							MaximumUnits:        ptr.Int64(1),
+							AutoScalingDisabled: ptr.Bool(true),
+							AutoScalingRoleArn:  ptr.String("__AutoScalingRoleArn__"),
+							ScalingPolicyUpdate: &types.AutoScalingPolicyUpdate{
+								PolicyName: ptr.String("__PolicyName__"),
+								TargetTrackingScalingPolicyConfiguration: &types.AutoScalingTargetTrackingScalingPolicyConfigurationUpdate{
+									DisableScaleIn:   ptr.Bool(true),
+									ScaleInCooldown:  ptr.Int32(1),
+									ScaleOutCooldown: ptr.Int32(1),
+									TargetValue:      ptr.Float64(1.0),
+								},
+							},
+						},
+					},
+				},
+				ReplicaTableClass: types.TableClass("STANDARD"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7768,7 +10459,37 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Statements: []types.BatchStatementRequest{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7793,7 +10514,34 @@ func TestCheckResponseSnapshot_Error_InvalidEndpointException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{})
+	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{
+		RequestItems: map[string]types.KeysAndAttributes{
+			"key0": {
+				Keys: []map[string]types.AttributeValue{
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+				},
+				AttributesToGet: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConsistentRead:       ptr.Bool(true),
+				ProjectionExpression: ptr.String("__ProjectionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7818,7 +10566,23 @@ func TestCheckResponseSnapshot_Error_InvalidExportTimeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{})
+	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{
+		TableArn:       ptr.String("__TableArn__"),
+		ExportTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:    ptr.String("__ClientToken__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+		S3Prefix:       ptr.String("__S3Prefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		ExportFormat:   types.ExportFormat("DYNAMODB_JSON"),
+		ExportType:     types.ExportType("FULL_EXPORT"),
+		IncrementalExportSpecification: &types.IncrementalExportSpecification{
+			ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportViewType: types.ExportViewType("NEW_IMAGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7843,7 +10607,187 @@ func TestCheckResponseSnapshot_Error_InvalidRestoreTimeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RestoreTableToPointInTime(context.Background(), &RestoreTableToPointInTimeInput{})
+	_, opErr := svc.RestoreTableToPointInTime(context.Background(), &RestoreTableToPointInTimeInput{
+		SourceTableArn:          ptr.String("__SourceTableArn__"),
+		SourceTableName:         ptr.String("__SourceTableName__"),
+		TargetTableName:         ptr.String("__TargetTableName__"),
+		UseLatestRestorableTime: ptr.Bool(true),
+		RestoreDateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BillingModeOverride:     types.BillingMode("PROVISIONED"),
+		GlobalSecondaryIndexOverride: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		LocalSecondaryIndexOverride: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ProvisionedThroughputOverride: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		OnDemandThroughputOverride: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		SSESpecificationOverride: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		VectorIndexOverride: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7868,7 +10812,46 @@ func TestCheckResponseSnapshot_Error_ItemCollectionSizeLimitExceededException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{})
+	_, opErr := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{
+		RequestItems: map[string][]types.WriteRequest{
+			"key0": {
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7893,7 +10876,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7918,7 +10904,23 @@ func TestCheckResponseSnapshot_Error_PointInTimeRecoveryUnavailableException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{})
+	_, opErr := svc.ExportTableToPointInTime(context.Background(), &ExportTableToPointInTimeInput{
+		TableArn:       ptr.String("__TableArn__"),
+		ExportTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:    ptr.String("__ClientToken__"),
+		S3Bucket:       ptr.String("__S3Bucket__"),
+		S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+		S3Prefix:       ptr.String("__S3Prefix__"),
+		S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+		S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+		ExportFormat:   types.ExportFormat("DYNAMODB_JSON"),
+		ExportType:     types.ExportType("FULL_EXPORT"),
+		IncrementalExportSpecification: &types.IncrementalExportSpecification{
+			ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExportViewType: types.ExportViewType("NEW_IMAGE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7943,7 +10945,10 @@ func TestCheckResponseSnapshot_Error_PolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn:        ptr.String("__ResourceArn__"),
+		ExpectedRevisionId: ptr.String("__ExpectedRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7978,7 +10983,34 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{})
+	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{
+		RequestItems: map[string]types.KeysAndAttributes{
+			"key0": {
+				Keys: []map[string]types.AttributeValue{
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+				},
+				AttributesToGet: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConsistentRead:       ptr.Bool(true),
+				ProjectionExpression: ptr.String("__ProjectionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8003,7 +11035,27 @@ func TestCheckResponseSnapshot_Error_ReplicaAlreadyExistsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{})
+	_, opErr := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+		ReplicaUpdates: []types.ReplicaUpdate{
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8028,7 +11080,27 @@ func TestCheckResponseSnapshot_Error_ReplicaNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{})
+	_, opErr := svc.UpdateGlobalTable(context.Background(), &UpdateGlobalTableInput{
+		GlobalTableName: ptr.String("__GlobalTableName__"),
+		ReplicaUpdates: []types.ReplicaUpdate{
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+			{
+				Create: &types.CreateReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+				Delete: &types.DeleteReplicaAction{
+					RegionName: ptr.String("__RegionName__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8053,7 +11125,46 @@ func TestCheckResponseSnapshot_Error_ReplicatedWriteConflictException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{})
+	_, opErr := svc.BatchWriteItem(context.Background(), &BatchWriteItemInput{
+		RequestItems: map[string][]types.WriteRequest{
+			"key0": {
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+				{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+					DeleteRequest: &types.DeleteRequest{
+						Key: map[string]types.AttributeValue{
+							"key0": &types.AttributeValueMemberS{
+								Value: "__AttributeValueMemberS__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8088,7 +11199,37 @@ func TestCheckResponseSnapshot_Error_RequestLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Statements: []types.BatchStatementRequest{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8113,7 +11254,226 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTable(context.Background(), &CreateTableInput{})
+	_, opErr := svc.CreateTable(context.Background(), &CreateTableInput{
+		AttributeDefinitions: []types.AttributeDefinition{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				AttributeType: types.ScalarAttributeType("S"),
+			},
+		},
+		TableName: ptr.String("__TableName__"),
+		KeySchema: []types.KeySchemaElement{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				KeyType:       types.KeyType("HASH"),
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				KeyType:       types.KeyType("HASH"),
+			},
+		},
+		LocalSecondaryIndexes: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		GlobalSecondaryIndexes: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		BillingMode: types.BillingMode("PROVISIONED"),
+		ProvisionedThroughput: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		StreamSpecification: &types.StreamSpecification{
+			StreamEnabled:  ptr.Bool(true),
+			StreamViewType: types.StreamViewType("NEW_IMAGE"),
+		},
+		SSESpecification: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TableClass:                types.TableClass("STANDARD"),
+		DeletionProtectionEnabled: ptr.Bool(true),
+		WarmThroughput: &types.WarmThroughput{
+			ReadUnitsPerSecond:  ptr.Int64(1),
+			WriteUnitsPerSecond: ptr.Int64(1),
+		},
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+		OnDemandThroughput: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		GlobalTableSourceArn:               ptr.String("__GlobalTableSourceArn__"),
+		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		VectorIndexes: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8138,7 +11498,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{})
+	_, opErr := svc.BatchGetItem(context.Background(), &BatchGetItemInput{
+		RequestItems: map[string]types.KeysAndAttributes{
+			"key0": {
+				Keys: []map[string]types.AttributeValue{
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+					{
+						"key0": &types.AttributeValueMemberS{
+							Value: "__AttributeValueMemberS__",
+						},
+					},
+				},
+				AttributesToGet: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConsistentRead:       ptr.Bool(true),
+				ProjectionExpression: ptr.String("__ProjectionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8163,7 +11550,184 @@ func TestCheckResponseSnapshot_Error_TableAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RestoreTableFromBackup(context.Background(), &RestoreTableFromBackupInput{})
+	_, opErr := svc.RestoreTableFromBackup(context.Background(), &RestoreTableFromBackupInput{
+		TargetTableName:     ptr.String("__TargetTableName__"),
+		BackupArn:           ptr.String("__BackupArn__"),
+		BillingModeOverride: types.BillingMode("PROVISIONED"),
+		GlobalSecondaryIndexOverride: []types.GlobalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProvisionedThroughput: &types.ProvisionedThroughput{
+					ReadCapacityUnits:  ptr.Int64(1),
+					WriteCapacityUnits: ptr.Int64(1),
+				},
+				OnDemandThroughput: &types.OnDemandThroughput{
+					MaxReadRequestUnits:  ptr.Int64(1),
+					MaxWriteRequestUnits: ptr.Int64(1),
+				},
+				WarmThroughput: &types.WarmThroughput{
+					ReadUnitsPerSecond:  ptr.Int64(1),
+					WriteUnitsPerSecond: ptr.Int64(1),
+				},
+			},
+		},
+		LocalSecondaryIndexOverride: []types.LocalSecondaryIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				KeySchema: []types.KeySchemaElement{
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+					{
+						AttributeName: ptr.String("__AttributeName__"),
+						KeyType:       types.KeyType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ProvisionedThroughputOverride: &types.ProvisionedThroughput{
+			ReadCapacityUnits:  ptr.Int64(1),
+			WriteCapacityUnits: ptr.Int64(1),
+		},
+		OnDemandThroughputOverride: &types.OnDemandThroughput{
+			MaxReadRequestUnits:  ptr.Int64(1),
+			MaxWriteRequestUnits: ptr.Int64(1),
+		},
+		SSESpecificationOverride: &types.SSESpecification{
+			Enabled:        ptr.Bool(true),
+			SSEType:        types.SSEType("AES256"),
+			KMSMasterKeyId: ptr.String("__KMSMasterKeyId__"),
+		},
+		VectorIndexOverride: []types.VectorIndex{
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+			{
+				IndexName: ptr.String("__IndexName__"),
+				VectorAttribute: &types.VectorAttributeDefinition{
+					AttributeName: ptr.String("__AttributeName__"),
+				},
+				SearchSchema: []types.SearchSchemaElement{
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+					{
+						AttributeName:           ptr.String("__AttributeName__"),
+						SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+					},
+				},
+				Projection: &types.Projection{
+					ProjectionType: types.ProjectionType("ALL"),
+					NonKeyAttributes: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Dimensions:       ptr.Int64(1),
+				DistanceFunction: types.VectorDistanceFunction("COSINE"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8188,7 +11752,10 @@ func TestCheckResponseSnapshot_Error_TableInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8213,7 +11780,10 @@ func TestCheckResponseSnapshot_Error_TableNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		TableName:  ptr.String("__TableName__"),
+		BackupName: ptr.String("__BackupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8248,7 +11818,37 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{})
+	_, opErr := svc.BatchExecuteStatement(context.Background(), &BatchExecuteStatementInput{
+		Statements: []types.BatchStatementRequest{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ConsistentRead:                      ptr.Bool(true),
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8293,7 +11893,36 @@ func TestCheckResponseSnapshot_Error_TransactionCanceledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{})
+	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{
+		TransactStatements: []types.ParameterizedStatement{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8318,7 +11947,45 @@ func TestCheckResponseSnapshot_Error_TransactionConflictException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteItem(context.Background(), &DeleteItemInput{})
+	_, opErr := svc.DeleteItem(context.Background(), &DeleteItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ConditionalOperator:         types.ConditionalOperator("AND"),
+		ReturnValues:                types.ReturnValue("NONE"),
+		ReturnConsumedCapacity:      types.ReturnConsumedCapacity("INDEXES"),
+		ReturnItemCollectionMetrics: types.ReturnItemCollectionMetrics("SIZE"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8343,7 +12010,36 @@ func TestCheckResponseSnapshot_Error_TransactionInProgressException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{})
+	_, opErr := svc.ExecuteTransaction(context.Background(), &ExecuteTransactionInput{
+		TransactStatements: []types.ParameterizedStatement{
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+			{
+				Statement: ptr.String("__Statement__"),
+				Parameters: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				ReturnValuesOnConditionCheckFailure: types.ReturnValuesOnConditionCheckFailure("ALL_OLD"),
+			},
+		},
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		ReturnConsumedCapacity: types.ReturnConsumedCapacity("INDEXES"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

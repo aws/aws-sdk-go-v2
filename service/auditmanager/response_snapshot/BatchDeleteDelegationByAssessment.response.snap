@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"delegationId":"__DelegationId__","errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},{"delegationId":"__DelegationId__","errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"}]}

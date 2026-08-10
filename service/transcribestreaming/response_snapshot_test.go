@@ -162,13 +162,31 @@ func TestCheckResponseSnapshot_GetMedicalScribeStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{})
+	got, err := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetMedicalScribeStream.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_StartCallAnalyticsStreamTranscription(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_StartMedicalScribeStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_StartMedicalStreamTranscription(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_StartStreamTranscription(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
@@ -183,7 +201,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{})
+	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -208,7 +228,9 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{})
+	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -233,7 +255,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{})
+	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -258,7 +282,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{})
+	_, opErr := svc.GetMedicalScribeStream(context.Background(), &GetMedicalScribeStreamInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

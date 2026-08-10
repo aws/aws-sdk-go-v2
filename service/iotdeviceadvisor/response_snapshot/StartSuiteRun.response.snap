@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"endpoint":"__Endpoint__","suiteRunArn":"__SuiteRunArn__","suiteRunId":"__SuiteRunId__"}

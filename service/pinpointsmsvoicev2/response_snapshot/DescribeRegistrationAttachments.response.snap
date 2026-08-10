@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRegistrationAttachments
+
+{"NextToken":"__NextToken__","RegistrationAttachments":[{"AttachmentStatus":"UPLOAD_IN_PROGRESS","AttachmentUploadErrorReason":"INTERNAL_ERROR","AttachmentUrl":"__AttachmentUrl__","CreatedTimestamp":946684800,"RegistrationAttachmentArn":"__RegistrationAttachmentArn__","RegistrationAttachmentId":"__RegistrationAttachmentId__"},{"AttachmentStatus":"UPLOAD_IN_PROGRESS","AttachmentUploadErrorReason":"INTERNAL_ERROR","AttachmentUrl":"__AttachmentUrl__","CreatedTimestamp":946684800,"RegistrationAttachmentArn":"__RegistrationAttachmentArn__","RegistrationAttachmentId":"__RegistrationAttachmentId__"}]}

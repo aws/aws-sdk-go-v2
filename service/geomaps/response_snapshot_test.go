@@ -121,7 +121,10 @@ func TestCheckResponseSnapshot_GetGlyphs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGlyphs(context.Background(), &GetGlyphsInput{})
+	got, err := svc.GetGlyphs(context.Background(), &GetGlyphsInput{
+		FontStack:        ptr.String("__FontStack__"),
+		FontUnicodeRange: ptr.String("__FontUnicodeRange__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +148,12 @@ func TestCheckResponseSnapshot_GetSprites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSprites(context.Background(), &GetSpritesInput{})
+	got, err := svc.GetSprites(context.Background(), &GetSpritesInput{
+		FileName:    ptr.String("__FileName__"),
+		Style:       types.MapStyle("Standard"),
+		ColorScheme: types.ColorScheme("Light"),
+		Variant:     types.Variant("Default"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +178,28 @@ func TestCheckResponseSnapshot_GetStaticMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStaticMap(context.Background(), &GetStaticMapInput{})
+	got, err := svc.GetStaticMap(context.Background(), &GetStaticMapInput{
+		BoundingBox:       ptr.String("__BoundingBox__"),
+		BoundedPositions:  ptr.String("__BoundedPositions__"),
+		Center:            ptr.String("__Center__"),
+		ColorScheme:       types.ColorScheme("Light"),
+		CompactOverlay:    ptr.String("__CompactOverlay__"),
+		CropLabels:        ptr.Bool(true),
+		GeoJsonOverlay:    ptr.String("__GeoJsonOverlay__"),
+		Height:            ptr.Int32(1),
+		Key:               ptr.String("__Key__"),
+		LabelSize:         types.LabelSize("Small"),
+		Language:          ptr.String("__Language__"),
+		Padding:           ptr.Int32(1),
+		PoliticalView:     ptr.String("__PoliticalView__"),
+		PointsOfInterests: types.MapFeatureMode("Enabled"),
+		Radius:            ptr.Int64(1),
+		FileName:          ptr.String("__FileName__"),
+		ScaleBarUnit:      types.ScaleBarUnit("Kilometers"),
+		Style:             types.StaticMapStyle("Satellite"),
+		Width:             ptr.Int32(1),
+		Zoom:              ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +223,20 @@ func TestCheckResponseSnapshot_GetStyleDescriptor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStyleDescriptor(context.Background(), &GetStyleDescriptorInput{})
+	got, err := svc.GetStyleDescriptor(context.Background(), &GetStyleDescriptorInput{
+		Style:          types.MapStyle("Standard"),
+		ColorScheme:    types.ColorScheme("Light"),
+		PoliticalView:  ptr.String("__PoliticalView__"),
+		Terrain:        types.Terrain("Hillshade"),
+		ContourDensity: types.ContourDensity("Low"),
+		Traffic:        types.Traffic("All"),
+		TravelModes: []types.TravelMode{
+			types.TravelMode("Transit"),
+			types.TravelMode("Transit"),
+		},
+		Buildings: types.Buildings("Buildings3D"),
+		Key:       ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +261,17 @@ func TestCheckResponseSnapshot_GetTile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTile(context.Background(), &GetTileInput{})
+	got, err := svc.GetTile(context.Background(), &GetTileInput{
+		AdditionalFeatures: []types.TileAdditionalFeature{
+			types.TileAdditionalFeature("ContourLines"),
+			types.TileAdditionalFeature("ContourLines"),
+		},
+		Tileset: ptr.String("__Tileset__"),
+		Z:       ptr.String("__Z__"),
+		X:       ptr.String("__X__"),
+		Y:       ptr.String("__Y__"),
+		Key:     ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +292,28 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{})
+	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{
+		BoundingBox:       ptr.String("__BoundingBox__"),
+		BoundedPositions:  ptr.String("__BoundedPositions__"),
+		Center:            ptr.String("__Center__"),
+		ColorScheme:       types.ColorScheme("Light"),
+		CompactOverlay:    ptr.String("__CompactOverlay__"),
+		CropLabels:        ptr.Bool(true),
+		GeoJsonOverlay:    ptr.String("__GeoJsonOverlay__"),
+		Height:            ptr.Int32(1),
+		Key:               ptr.String("__Key__"),
+		LabelSize:         types.LabelSize("Small"),
+		Language:          ptr.String("__Language__"),
+		Padding:           ptr.Int32(1),
+		PoliticalView:     ptr.String("__PoliticalView__"),
+		PointsOfInterests: types.MapFeatureMode("Enabled"),
+		Radius:            ptr.Int64(1),
+		FileName:          ptr.String("__FileName__"),
+		ScaleBarUnit:      types.ScaleBarUnit("Kilometers"),
+		Style:             types.StaticMapStyle("Satellite"),
+		Width:             ptr.Int32(1),
+		Zoom:              ptr.Float32(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -265,7 +338,28 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{})
+	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{
+		BoundingBox:       ptr.String("__BoundingBox__"),
+		BoundedPositions:  ptr.String("__BoundedPositions__"),
+		Center:            ptr.String("__Center__"),
+		ColorScheme:       types.ColorScheme("Light"),
+		CompactOverlay:    ptr.String("__CompactOverlay__"),
+		CropLabels:        ptr.Bool(true),
+		GeoJsonOverlay:    ptr.String("__GeoJsonOverlay__"),
+		Height:            ptr.Int32(1),
+		Key:               ptr.String("__Key__"),
+		LabelSize:         types.LabelSize("Small"),
+		Language:          ptr.String("__Language__"),
+		Padding:           ptr.Int32(1),
+		PoliticalView:     ptr.String("__PoliticalView__"),
+		PointsOfInterests: types.MapFeatureMode("Enabled"),
+		Radius:            ptr.Int64(1),
+		FileName:          ptr.String("__FileName__"),
+		ScaleBarUnit:      types.ScaleBarUnit("Kilometers"),
+		Style:             types.StaticMapStyle("Satellite"),
+		Width:             ptr.Int32(1),
+		Zoom:              ptr.Float32(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -290,7 +384,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTile(context.Background(), &GetTileInput{})
+	_, opErr := svc.GetTile(context.Background(), &GetTileInput{
+		AdditionalFeatures: []types.TileAdditionalFeature{
+			types.TileAdditionalFeature("ContourLines"),
+			types.TileAdditionalFeature("ContourLines"),
+		},
+		Tileset: ptr.String("__Tileset__"),
+		Z:       ptr.String("__Z__"),
+		X:       ptr.String("__X__"),
+		Y:       ptr.String("__Y__"),
+		Key:     ptr.String("__Key__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -315,7 +419,28 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{})
+	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{
+		BoundingBox:       ptr.String("__BoundingBox__"),
+		BoundedPositions:  ptr.String("__BoundedPositions__"),
+		Center:            ptr.String("__Center__"),
+		ColorScheme:       types.ColorScheme("Light"),
+		CompactOverlay:    ptr.String("__CompactOverlay__"),
+		CropLabels:        ptr.Bool(true),
+		GeoJsonOverlay:    ptr.String("__GeoJsonOverlay__"),
+		Height:            ptr.Int32(1),
+		Key:               ptr.String("__Key__"),
+		LabelSize:         types.LabelSize("Small"),
+		Language:          ptr.String("__Language__"),
+		Padding:           ptr.Int32(1),
+		PoliticalView:     ptr.String("__PoliticalView__"),
+		PointsOfInterests: types.MapFeatureMode("Enabled"),
+		Radius:            ptr.Int64(1),
+		FileName:          ptr.String("__FileName__"),
+		ScaleBarUnit:      types.ScaleBarUnit("Kilometers"),
+		Style:             types.StaticMapStyle("Satellite"),
+		Width:             ptr.Int32(1),
+		Zoom:              ptr.Float32(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -351,7 +476,28 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{})
+	_, opErr := svc.GetStaticMap(context.Background(), &GetStaticMapInput{
+		BoundingBox:       ptr.String("__BoundingBox__"),
+		BoundedPositions:  ptr.String("__BoundedPositions__"),
+		Center:            ptr.String("__Center__"),
+		ColorScheme:       types.ColorScheme("Light"),
+		CompactOverlay:    ptr.String("__CompactOverlay__"),
+		CropLabels:        ptr.Bool(true),
+		GeoJsonOverlay:    ptr.String("__GeoJsonOverlay__"),
+		Height:            ptr.Int32(1),
+		Key:               ptr.String("__Key__"),
+		LabelSize:         types.LabelSize("Small"),
+		Language:          ptr.String("__Language__"),
+		Padding:           ptr.Int32(1),
+		PoliticalView:     ptr.String("__PoliticalView__"),
+		PointsOfInterests: types.MapFeatureMode("Enabled"),
+		Radius:            ptr.Int64(1),
+		FileName:          ptr.String("__FileName__"),
+		ScaleBarUnit:      types.ScaleBarUnit("Kilometers"),
+		Style:             types.StaticMapStyle("Satellite"),
+		Width:             ptr.Int32(1),
+		Zoom:              ptr.Float32(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

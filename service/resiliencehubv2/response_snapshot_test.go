@@ -126,7 +126,11 @@ func TestCheckResponseSnapshot_CreateAssertion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	got, err := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -148,7 +152,28 @@ func TestCheckResponseSnapshot_CreateInputSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInputSource(context.Background(), &CreateInputSourceInput{})
+	got, err := svc.CreateInputSource(context.Background(), &CreateInputSourceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		ResourceConfiguration: &types.ResourceConfigurationMemberResourceTags{
+			Value: []types.ResourceTag{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +221,31 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{})
+	got, err := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		AvailabilitySlo: &types.AvailabilitySlo{
+			Target: ptr.Float64(1.0),
+		},
+		MultiAz: &types.MultiAzTargets{
+			RtoInMinutes:             ptr.Int32(1),
+			RpoInMinutes:             ptr.Int32(1),
+			DisasterRecoveryApproach: types.MultiAzDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		},
+		MultiRegion: &types.MultiRegionTargets{
+			RtoInMinutes:             ptr.Int32(1),
+			RpoInMinutes:             ptr.Int32(1),
+			DisasterRecoveryApproach: types.MultiRegionDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		},
+		DataRecovery: &types.DataRecoveryTargets{
+			TimeBetweenBackupsInMinutes: ptr.Int32(1),
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +279,11 @@ func TestCheckResponseSnapshot_CreateReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReport(context.Background(), &CreateReportInput{})
+	got, err := svc.CreateReport(context.Background(), &CreateReportInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ReportType:  types.ReportType("FAILURE_MODE"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +437,68 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		AssociatedSystems: []types.AssociatedSystem{
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermissionModel: &types.PermissionModel{
+			InvokerRoleName: ptr.String("__InvokerRoleName__"),
+			CrossAccountRoles: []types.CrossAccountRole{
+				{
+					CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+					ExternalId:          ptr.String("__ExternalId__"),
+				},
+				{
+					CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+					ExternalId:          ptr.String("__ExternalId__"),
+				},
+			},
+		},
+		DependencyDiscovery: types.DependencyDiscoveryInput("ENABLED"),
+		ReportConfiguration: &types.ServiceReportConfiguration{
+			ReportOutputs: []types.ReportOutputConfiguration{
+				&types.ReportOutputConfigurationMemberS3{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				&types.ReportOutputConfigurationMemberS3{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +529,13 @@ func TestCheckResponseSnapshot_CreateServiceFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceFunction(context.Background(), &CreateServiceFunctionInput{})
+	got, err := svc.CreateServiceFunction(context.Background(), &CreateServiceFunctionInput{
+		Name:        ptr.String("__Name__"),
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Description: ptr.String("__Description__"),
+		Criticality: types.ServiceFunctionCriticality("PRIMARY"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +561,14 @@ func TestCheckResponseSnapshot_CreateServiceFunctionResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceFunctionResources(context.Background(), &CreateServiceFunctionResourcesInput{})
+	got, err := svc.CreateServiceFunctionResources(context.Background(), &CreateServiceFunctionResourcesInput{
+		ServiceArn:        ptr.String("__ServiceArn__"),
+		ServiceFunctionId: ptr.String("__ServiceFunctionId__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -476,7 +603,16 @@ func TestCheckResponseSnapshot_CreateSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSystem(context.Background(), &CreateSystemInput{})
+	got, err := svc.CreateSystem(context.Background(), &CreateSystemInput{
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		SharingEnabled: ptr.Bool(true),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +675,32 @@ func TestCheckResponseSnapshot_CreateTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTest(context.Background(), &CreateTestInput{})
+	got, err := svc.CreateTest(context.Background(), &CreateTestInput{
+		ServiceArn:      ptr.String("__ServiceArn__"),
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +728,13 @@ func TestCheckResponseSnapshot_CreateUserJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUserJourney(context.Background(), &CreateUserJourneyInput{})
+	got, err := svc.CreateUserJourney(context.Background(), &CreateUserJourneyInput{
+		SystemArn:   ptr.String("__SystemArn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		PolicyArn:   ptr.String("__PolicyArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +755,10 @@ func TestCheckResponseSnapshot_DeleteAssertion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssertion(context.Background(), &DeleteAssertionInput{})
+	got, err := svc.DeleteAssertion(context.Background(), &DeleteAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		AssertionId: ptr.String("__AssertionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -610,7 +780,10 @@ func TestCheckResponseSnapshot_DeleteInputSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInputSource(context.Background(), &DeleteInputSourceInput{})
+	got, err := svc.DeleteInputSource(context.Background(), &DeleteInputSourceInput{
+		ServiceArn:    ptr.String("__ServiceArn__"),
+		InputSourceId: ptr.String("__InputSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -631,7 +804,9 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +827,9 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +850,10 @@ func TestCheckResponseSnapshot_DeleteServiceFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceFunction(context.Background(), &DeleteServiceFunctionInput{})
+	got, err := svc.DeleteServiceFunction(context.Background(), &DeleteServiceFunctionInput{
+		ServiceArn:        ptr.String("__ServiceArn__"),
+		ServiceFunctionId: ptr.String("__ServiceFunctionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +879,14 @@ func TestCheckResponseSnapshot_DeleteServiceFunctionResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceFunctionResources(context.Background(), &DeleteServiceFunctionResourcesInput{})
+	got, err := svc.DeleteServiceFunctionResources(context.Background(), &DeleteServiceFunctionResourcesInput{
+		ServiceArn:        ptr.String("__ServiceArn__"),
+		ServiceFunctionId: ptr.String("__ServiceFunctionId__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -720,7 +907,9 @@ func TestCheckResponseSnapshot_DeleteSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSystem(context.Background(), &DeleteSystemInput{})
+	got, err := svc.DeleteSystem(context.Background(), &DeleteSystemInput{
+		SystemArn: ptr.String("__SystemArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +930,10 @@ func TestCheckResponseSnapshot_DeleteTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTest(context.Background(), &DeleteTestInput{})
+	got, err := svc.DeleteTest(context.Background(), &DeleteTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -760,7 +952,22 @@ func TestCheckResponseSnapshot_DeleteTestSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTestSources(context.Background(), &DeleteTestSourcesInput{})
+	got, err := svc.DeleteTestSources(context.Background(), &DeleteTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -781,7 +988,10 @@ func TestCheckResponseSnapshot_DeleteUserJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserJourney(context.Background(), &DeleteUserJourneyInput{})
+	got, err := svc.DeleteUserJourney(context.Background(), &DeleteUserJourneyInput{
+		SystemArn:     ptr.String("__SystemArn__"),
+		UserJourneyId: ptr.String("__UserJourneyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1069,10 @@ func TestCheckResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFailureModeFinding(context.Background(), &GetFailureModeFindingInput{})
+	got, err := svc.GetFailureModeFinding(context.Background(), &GetFailureModeFindingInput{
+		FindingId:  ptr.String("__FindingId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +1120,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1061,7 +1276,9 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1313,9 @@ func TestCheckResponseSnapshot_GetSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSystem(context.Background(), &GetSystemInput{})
+	got, err := svc.GetSystem(context.Background(), &GetSystemInput{
+		SystemArn: ptr.String("__SystemArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1378,10 @@ func TestCheckResponseSnapshot_GetTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTest(context.Background(), &GetTestInput{})
+	got, err := svc.GetTest(context.Background(), &GetTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1292,7 +1514,10 @@ func TestCheckResponseSnapshot_GetTestRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTestRun(context.Background(), &GetTestRunInput{})
+	got, err := svc.GetTestRun(context.Background(), &GetTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1347,7 +1572,9 @@ func TestCheckResponseSnapshot_GetTestTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTestTemplate(context.Background(), &GetTestTemplateInput{})
+	got, err := svc.GetTestTemplate(context.Background(), &GetTestTemplateInput{
+		TestTemplateArn: ptr.String("__TestTemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1602,10 @@ func TestCheckResponseSnapshot_GetUserJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserJourney(context.Background(), &GetUserJourneyInput{})
+	got, err := svc.GetUserJourney(context.Background(), &GetUserJourneyInput{
+		SystemArn:     ptr.String("__SystemArn__"),
+		UserJourneyId: ptr.String("__UserJourneyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,7 +1759,34 @@ func TestCheckResponseSnapshot_ImportApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportApp(context.Background(), &ImportAppInput{})
+	got, err := svc.ImportApp(context.Background(), &ImportAppInput{
+		V1AppArn:                   ptr.String("__V1AppArn__"),
+		PolicyArn:                  ptr.String("__PolicyArn__"),
+		KmsKeyId:                   ptr.String("__KmsKeyId__"),
+		SkipManuallyAddedResources: ptr.Bool(true),
+		AssociatedSystems: []types.AssociatedSystem{
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1577,7 +1834,19 @@ func TestCheckResponseSnapshot_ImportPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportPolicy(context.Background(), &ImportPolicyInput{})
+	got, err := svc.ImportPolicy(context.Background(), &ImportPolicyInput{
+		V1PolicyArn: ptr.String("__V1PolicyArn__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		AvailabilitySlo: &types.AvailabilitySlo{
+			Target: ptr.Float64(1.0),
+		},
+		MultiAzDisasterRecoveryApproach:     types.MultiAzDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		MultiRegionDisasterRecoveryApproach: types.MultiRegionDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1616,7 +1885,12 @@ func TestCheckResponseSnapshot_ListAssertions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssertions(context.Background(), &ListAssertionsInput{})
+	got, err := svc.ListAssertions(context.Background(), &ListAssertionsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Source:     types.AssertionSource("AI_GENERATED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1699,7 +1973,14 @@ func TestCheckResponseSnapshot_ListDependencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDependencies(context.Background(), &ListDependenciesInput{})
+	got, err := svc.ListDependencies(context.Background(), &ListDependenciesInput{
+		ServiceArn:            ptr.String("__ServiceArn__"),
+		QueryRangeStartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryRangeEndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryRangeGranularity: types.QueryGranularity("HOURLY"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1766,7 +2047,19 @@ func TestCheckResponseSnapshot_ListFailureModeAssessments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFailureModeAssessments(context.Background(), &ListFailureModeAssessmentsInput{})
+	got, err := svc.ListFailureModeAssessments(context.Background(), &ListFailureModeAssessmentsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		AssessmentStatuses: []types.AssessmentStatus{
+			types.AssessmentStatus("NOT_STARTED"),
+			types.AssessmentStatus("NOT_STARTED"),
+		},
+		StartedAfter: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedBefore:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:       types.AssessmentSortField("STARTED_AT"),
+		SortOrder:    types.SortOrder("ASC"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1811,7 +2104,14 @@ func TestCheckResponseSnapshot_ListFailureModeFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFailureModeFindings(context.Background(), &ListFailureModeFindingsInput{})
+	got, err := svc.ListFailureModeFindings(context.Background(), &ListFailureModeFindingsInput{
+		ServiceArn:      ptr.String("__ServiceArn__"),
+		Severity:        types.FindingSeverity("LOW"),
+		FailureCategory: types.FailureCategory("SHARED_FATE"),
+		Status:          types.FindingStatus("OPEN"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1896,7 +2196,12 @@ func TestCheckResponseSnapshot_ListInputSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInputSources(context.Background(), &ListInputSourcesInput{})
+	got, err := svc.ListInputSources(context.Background(), &ListInputSourcesInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.InputSourceType("CFN_STACK"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1965,7 +2270,10 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{})
+	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2016,7 +2324,13 @@ func TestCheckResponseSnapshot_ListReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReports(context.Background(), &ListReportsInput{})
+	got, err := svc.ListReports(context.Background(), &ListReportsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		ReportType: types.ReportType("FAILURE_MODE"),
+		TestRunId:  ptr.String("__TestRunId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2053,7 +2367,12 @@ func TestCheckResponseSnapshot_ListResolvedTestRunTargetResources(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolvedTestRunTargetResources(context.Background(), &ListResolvedTestRunTargetResourcesInput{})
+	got, err := svc.ListResolvedTestRunTargetResources(context.Background(), &ListResolvedTestRunTargetResourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2103,7 +2422,18 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		ServiceArn:        ptr.String("__ServiceArn__"),
+		ServiceFunctionId: ptr.String("__ServiceFunctionId__"),
+		AwsRegion:         ptr.String("__AwsRegion__"),
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Billable:   ptr.Bool(true),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2164,7 +2494,17 @@ func TestCheckResponseSnapshot_ListServiceEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceEvents(context.Background(), &ListServiceEventsInput{})
+	got, err := svc.ListServiceEvents(context.Background(), &ListServiceEventsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		EventTypes: []types.ServiceEventType{
+			types.ServiceEventType("SERVICE_CREATED"),
+			types.ServiceEventType("SERVICE_CREATED"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2209,7 +2549,11 @@ func TestCheckResponseSnapshot_ListServiceFunctions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceFunctions(context.Background(), &ListServiceFunctionsInput{})
+	got, err := svc.ListServiceFunctions(context.Background(), &ListServiceFunctionsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2268,7 +2612,11 @@ func TestCheckResponseSnapshot_ListServiceTopologyEdges(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceTopologyEdges(context.Background(), &ListServiceTopologyEdgesInput{})
+	got, err := svc.ListServiceTopologyEdges(context.Background(), &ListServiceTopologyEdgesInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2385,7 +2733,16 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		SystemArn:        ptr.String("__SystemArn__"),
+		UserJourneyId:    ptr.String("__UserJourneyId__"),
+		OuId:             ptr.String("__OuId__"),
+		AccountId:        ptr.String("__AccountId__"),
+		AssessmentStatus: types.AssessmentStatus("NOT_STARTED"),
+		PolicyArn:        ptr.String("__PolicyArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2446,7 +2803,17 @@ func TestCheckResponseSnapshot_ListSystemEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSystemEvents(context.Background(), &ListSystemEventsInput{})
+	got, err := svc.ListSystemEvents(context.Background(), &ListSystemEventsInput{
+		SystemArn: ptr.String("__SystemArn__"),
+		EventTypes: []types.SystemEventType{
+			types.SystemEventType("SYSTEM_CREATED"),
+			types.SystemEventType("SYSTEM_CREATED"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2491,7 +2858,11 @@ func TestCheckResponseSnapshot_ListSystems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSystems(context.Background(), &ListSystemsInput{})
+	got, err := svc.ListSystems(context.Background(), &ListSystemsInput{
+		OuId:       ptr.String("__OuId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2514,7 +2885,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2555,7 +2928,14 @@ func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestRunEvents(context.Background(), &ListTestRunEventsInput{})
+	got, err := svc.ListTestRunEvents(context.Background(), &ListTestRunEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		StartedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2598,7 +2978,13 @@ func TestCheckResponseSnapshot_ListTestRunSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestRunSources(context.Background(), &ListTestRunSourcesInput{})
+	got, err := svc.ListTestRunSources(context.Background(), &ListTestRunSourcesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestRunSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2641,7 +3027,12 @@ func TestCheckResponseSnapshot_ListTestRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestRuns(context.Background(), &ListTestRunsInput{})
+	got, err := svc.ListTestRuns(context.Background(), &ListTestRunsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestId:     ptr.String("__TestId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2682,7 +3073,13 @@ func TestCheckResponseSnapshot_ListTestSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestSources(context.Background(), &ListTestSourcesInput{})
+	got, err := svc.ListTestSources(context.Background(), &ListTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Type:       types.TestSourceType("SUCCESS_CRITERIA"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2753,7 +3150,11 @@ func TestCheckResponseSnapshot_ListTests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTests(context.Background(), &ListTestsInput{})
+	got, err := svc.ListTests(context.Background(), &ListTestsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2788,7 +3189,11 @@ func TestCheckResponseSnapshot_ListUserJourneys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUserJourneys(context.Background(), &ListUserJourneysInput{})
+	got, err := svc.ListUserJourneys(context.Background(), &ListUserJourneysInput{
+		SystemArn:  ptr.String("__SystemArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2807,7 +3212,22 @@ func TestCheckResponseSnapshot_PutTestSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTestSources(context.Background(), &PutTestSourcesInput{})
+	got, err := svc.PutTestSources(context.Background(), &PutTestSourcesInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		TestSources: []types.TestSourceInput{
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+			&types.TestSourceInputMemberSuccessCriteriaAlarm{
+				Value: types.SuccessCriteriaAlarmInput{
+					AlarmArn: ptr.String("__AlarmArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2831,7 +3251,10 @@ func TestCheckResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFailureModeAssessment(context.Background(), &StartFailureModeAssessmentInput{})
+	got, err := svc.StartFailureModeAssessment(context.Background(), &StartFailureModeAssessmentInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2857,7 +3280,10 @@ func TestCheckResponseSnapshot_StartTestRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTestRun(context.Background(), &StartTestRunInput{})
+	got, err := svc.StartTestRun(context.Background(), &StartTestRunInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2879,7 +3305,10 @@ func TestCheckResponseSnapshot_StopTestRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopTestRun(context.Background(), &StopTestRunInput{})
+	got, err := svc.StopTestRun(context.Background(), &StopTestRunInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2898,7 +3327,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2917,7 +3351,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2945,7 +3385,11 @@ func TestCheckResponseSnapshot_UpdateAssertion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssertion(context.Background(), &UpdateAssertionInput{})
+	got, err := svc.UpdateAssertion(context.Background(), &UpdateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		AssertionId: ptr.String("__AssertionId__"),
+		Text:        ptr.String("__Text__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2972,7 +3416,12 @@ func TestCheckResponseSnapshot_UpdateDependency(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDependency(context.Background(), &UpdateDependencyInput{})
+	got, err := svc.UpdateDependency(context.Background(), &UpdateDependencyInput{
+		ServiceArn:   ptr.String("__ServiceArn__"),
+		DependencyId: ptr.String("__DependencyId__"),
+		Criticality:  types.DependencyCriticality("HARD"),
+		Comment:      ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3050,7 +3499,12 @@ func TestCheckResponseSnapshot_UpdateFailureModeFinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFailureModeFinding(context.Background(), &UpdateFailureModeFindingInput{})
+	got, err := svc.UpdateFailureModeFinding(context.Background(), &UpdateFailureModeFindingInput{
+		FindingId:  ptr.String("__FindingId__"),
+		Status:     types.FindingStatus("OPEN"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		Comment:    ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3098,7 +3552,26 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{})
+	got, err := svc.UpdatePolicy(context.Background(), &UpdatePolicyInput{
+		PolicyArn:   ptr.String("__PolicyArn__"),
+		Description: ptr.String("__Description__"),
+		AvailabilitySlo: &types.AvailabilitySlo{
+			Target: ptr.Float64(1.0),
+		},
+		MultiAz: &types.MultiAzTargets{
+			RtoInMinutes:             ptr.Int32(1),
+			RpoInMinutes:             ptr.Int32(1),
+			DisasterRecoveryApproach: types.MultiAzDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		},
+		MultiRegion: &types.MultiRegionTargets{
+			RtoInMinutes:             ptr.Int32(1),
+			RpoInMinutes:             ptr.Int32(1),
+			DisasterRecoveryApproach: types.MultiRegionDisasterRecoveryApproach("ACTIVE_ACTIVE"),
+		},
+		DataRecovery: &types.DataRecoveryTargets{
+			TimeBetweenBackupsInMinutes: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3252,7 +3725,63 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Description: ptr.String("__Description__"),
+		AssociatedSystems: []types.AssociatedSystem{
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SystemArn:  ptr.String("__SystemArn__"),
+				SystemName: ptr.String("__SystemName__"),
+				UserJourneyIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PermissionModel: &types.PermissionModel{
+			InvokerRoleName: ptr.String("__InvokerRoleName__"),
+			CrossAccountRoles: []types.CrossAccountRole{
+				{
+					CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+					ExternalId:          ptr.String("__ExternalId__"),
+				},
+				{
+					CrossAccountRoleArn: ptr.String("__CrossAccountRoleArn__"),
+					ExternalId:          ptr.String("__ExternalId__"),
+				},
+			},
+		},
+		DependencyDiscovery: types.DependencyDiscoveryInput("ENABLED"),
+		ReportConfiguration: &types.ServiceReportConfiguration{
+			ReportOutputs: []types.ReportOutputConfiguration{
+				&types.ReportOutputConfigurationMemberS3{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				&types.ReportOutputConfigurationMemberS3{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3283,7 +3812,13 @@ func TestCheckResponseSnapshot_UpdateServiceFunction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceFunction(context.Background(), &UpdateServiceFunctionInput{})
+	got, err := svc.UpdateServiceFunction(context.Background(), &UpdateServiceFunctionInput{
+		ServiceArn:        ptr.String("__ServiceArn__"),
+		ServiceFunctionId: ptr.String("__ServiceFunctionId__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		Criticality:       types.ServiceFunctionCriticality("PRIMARY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3318,7 +3853,11 @@ func TestCheckResponseSnapshot_UpdateSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSystem(context.Background(), &UpdateSystemInput{})
+	got, err := svc.UpdateSystem(context.Background(), &UpdateSystemInput{
+		SystemArn:      ptr.String("__SystemArn__"),
+		Description:    ptr.String("__Description__"),
+		SharingEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3381,7 +3920,32 @@ func TestCheckResponseSnapshot_UpdateTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTest(context.Background(), &UpdateTestInput{})
+	got, err := svc.UpdateTest(context.Background(), &UpdateTestInput{
+		TestId:     ptr.String("__TestId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		LoggingConfiguration: &types.LoggingConfiguration{
+			S3BucketName:          ptr.String("__S3BucketName__"),
+			CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+			LogSchemaVersion:      ptr.String("__LogSchemaVersion__"),
+		},
+		StopConditions: []types.StopCondition{
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: types.StopConditionSource("aws:cloudwatch:alarm"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		RoleName: ptr.String("__RoleName__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3409,7 +3973,13 @@ func TestCheckResponseSnapshot_UpdateUserJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUserJourney(context.Background(), &UpdateUserJourneyInput{})
+	got, err := svc.UpdateUserJourney(context.Background(), &UpdateUserJourneyInput{
+		SystemArn:     ptr.String("__SystemArn__"),
+		UserJourneyId: ptr.String("__UserJourneyId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		PolicyArn:     ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3430,7 +4000,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3455,7 +4029,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3480,7 +4058,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3507,7 +4089,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3532,7 +4118,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3558,7 +4148,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReport(context.Background(), &CreateReportInput{})
+	_, opErr := svc.CreateReport(context.Background(), &CreateReportInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ReportType:  types.ReportType("FAILURE_MODE"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3594,7 +4188,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{})
+	_, opErr := svc.CreateAssertion(context.Background(), &CreateAssertionInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		Text:        ptr.String("__Text__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

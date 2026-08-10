@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	got, err := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +350,117 @@ func TestCheckResponseSnapshot_CreateCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCanary(context.Background(), &CreateCanaryInput{})
+	got, err := svc.CreateCanary(context.Background(), &CreateCanaryInput{
+		Name: ptr.String("__Name__"),
+		Code: &types.CanaryCodeInput{
+			S3Bucket:  ptr.String("__S3Bucket__"),
+			S3Key:     ptr.String("__S3Key__"),
+			S3Version: ptr.String("__S3Version__"),
+			ZipFile:   []byte("blob"),
+			Handler:   ptr.String("__Handler__"),
+			BlueprintTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Dependencies: []types.Dependency{
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+			},
+		},
+		ArtifactS3Location: ptr.String("__ArtifactS3Location__"),
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+		Schedule: &types.CanaryScheduleInput{
+			Expression:        ptr.String("__Expression__"),
+			DurationInSeconds: ptr.Int64(1),
+			RetryConfig: &types.RetryConfigInput{
+				MaxRetries: ptr.Int32(1),
+			},
+		},
+		RunConfig: &types.CanaryRunConfigInput{
+			TimeoutInSeconds: ptr.Int32(1),
+			MemoryInMB:       ptr.Int32(1),
+			ActiveTracing:    ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EphemeralStorage: ptr.Int32(1),
+		},
+		SuccessRetentionPeriodInDays: ptr.Int32(1),
+		FailureRetentionPeriodInDays: ptr.Int32(1),
+		RuntimeVersion:               ptr.String("__RuntimeVersion__"),
+		VpcConfig: &types.VpcConfigInput{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		ResourcesToReplicateTags: []types.ResourceToTag{
+			types.ResourceToTag("lambda-function"),
+			types.ResourceToTag("lambda-function"),
+		},
+		ProvisionedResourceCleanup: types.ProvisionedResourceCleanupSetting("AUTOMATIC"),
+		BrowserConfigs: []types.BrowserConfig{
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+		},
+		AddReplicaLocations: []types.AddReplicaLocationInput{
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ArtifactConfig: &types.ArtifactConfigInput{
+			S3Encryption: &types.S3EncryptionConfig{
+				EncryptionMode: types.EncryptionMode("SSE_S3"),
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			},
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +490,12 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +514,10 @@ func TestCheckResponseSnapshot_DeleteCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCanary(context.Background(), &DeleteCanaryInput{})
+	got, err := svc.DeleteCanary(context.Background(), &DeleteCanaryInput{
+		Name:         ptr.String("__Name__"),
+		DeleteLambda: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +536,9 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +981,14 @@ func TestCheckResponseSnapshot_DescribeCanaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCanaries(context.Background(), &DescribeCanariesInput{})
+	got, err := svc.DescribeCanaries(context.Background(), &DescribeCanariesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -933,7 +1063,15 @@ func TestCheckResponseSnapshot_DescribeCanariesLastRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCanariesLastRun(context.Background(), &DescribeCanariesLastRunInput{})
+	got, err := svc.DescribeCanariesLastRun(context.Background(), &DescribeCanariesLastRunInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BrowserType: types.BrowserType("CHROME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -968,7 +1106,10 @@ func TestCheckResponseSnapshot_DescribeRuntimeVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRuntimeVersions(context.Background(), &DescribeRuntimeVersionsInput{})
+	got, err := svc.DescribeRuntimeVersions(context.Background(), &DescribeRuntimeVersionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -987,7 +1128,10 @@ func TestCheckResponseSnapshot_DisassociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResource(context.Background(), &DisassociateResourceInput{})
+	got, err := svc.DisassociateResource(context.Background(), &DisassociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1217,7 +1361,10 @@ func TestCheckResponseSnapshot_GetCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCanary(context.Background(), &GetCanaryInput{})
+	got, err := svc.GetCanary(context.Background(), &GetCanaryInput{
+		Name:     ptr.String("__Name__"),
+		DryRunId: ptr.String("__DryRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1286,7 +1433,13 @@ func TestCheckResponseSnapshot_GetCanaryRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCanaryRuns(context.Background(), &GetCanaryRunsInput{})
+	got, err := svc.GetCanaryRuns(context.Background(), &GetCanaryRunsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		DryRunId:   ptr.String("__DryRunId__"),
+		RunType:    types.RunType("CANARY_RUN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1316,7 +1469,9 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1349,7 +1504,11 @@ func TestCheckResponseSnapshot_ListAssociatedGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedGroups(context.Background(), &ListAssociatedGroupsInput{})
+	got, err := svc.ListAssociatedGroups(context.Background(), &ListAssociatedGroupsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1374,7 +1533,11 @@ func TestCheckResponseSnapshot_ListGroupResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupResources(context.Background(), &ListGroupResourcesInput{})
+	got, err := svc.ListGroupResources(context.Background(), &ListGroupResourcesInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1570,10 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1430,7 +1596,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +1617,9 @@ func TestCheckResponseSnapshot_StartCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCanary(context.Background(), &StartCanaryInput{})
+	got, err := svc.StartCanary(context.Background(), &StartCanaryInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1473,7 +1643,132 @@ func TestCheckResponseSnapshot_StartCanaryDryRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCanaryDryRun(context.Background(), &StartCanaryDryRunInput{})
+	got, err := svc.StartCanaryDryRun(context.Background(), &StartCanaryDryRunInput{
+		Name: ptr.String("__Name__"),
+		Code: &types.CanaryCodeInput{
+			S3Bucket:  ptr.String("__S3Bucket__"),
+			S3Key:     ptr.String("__S3Key__"),
+			S3Version: ptr.String("__S3Version__"),
+			ZipFile:   []byte("blob"),
+			Handler:   ptr.String("__Handler__"),
+			BlueprintTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Dependencies: []types.Dependency{
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+			},
+		},
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		RunConfig: &types.CanaryRunConfigInput{
+			TimeoutInSeconds: ptr.Int32(1),
+			MemoryInMB:       ptr.Int32(1),
+			ActiveTracing:    ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EphemeralStorage: ptr.Int32(1),
+		},
+		VpcConfig: &types.VpcConfigInput{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		ExecutionRoleArn:             ptr.String("__ExecutionRoleArn__"),
+		SuccessRetentionPeriodInDays: ptr.Int32(1),
+		FailureRetentionPeriodInDays: ptr.Int32(1),
+		VisualReference: &types.VisualReferenceInput{
+			BaseScreenshots: []types.BaseScreenshot{
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+			BrowserType:     types.BrowserType("CHROME"),
+		},
+		ArtifactS3Location: ptr.String("__ArtifactS3Location__"),
+		ArtifactConfig: &types.ArtifactConfigInput{
+			S3Encryption: &types.S3EncryptionConfig{
+				EncryptionMode: types.EncryptionMode("SSE_S3"),
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			},
+		},
+		ProvisionedResourceCleanup: types.ProvisionedResourceCleanupSetting("AUTOMATIC"),
+		BrowserConfigs: []types.BrowserConfig{
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+		},
+		VisualReferences: []types.VisualReferenceInput{
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1492,7 +1787,9 @@ func TestCheckResponseSnapshot_StopCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCanary(context.Background(), &StopCanaryInput{})
+	got, err := svc.StopCanary(context.Background(), &StopCanaryInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1511,7 +1808,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1530,7 +1832,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1549,7 +1857,177 @@ func TestCheckResponseSnapshot_UpdateCanary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCanary(context.Background(), &UpdateCanaryInput{})
+	got, err := svc.UpdateCanary(context.Background(), &UpdateCanaryInput{
+		Name: ptr.String("__Name__"),
+		Code: &types.CanaryCodeInput{
+			S3Bucket:  ptr.String("__S3Bucket__"),
+			S3Key:     ptr.String("__S3Key__"),
+			S3Version: ptr.String("__S3Version__"),
+			ZipFile:   []byte("blob"),
+			Handler:   ptr.String("__Handler__"),
+			BlueprintTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Dependencies: []types.Dependency{
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		RuntimeVersion:   ptr.String("__RuntimeVersion__"),
+		Schedule: &types.CanaryScheduleInput{
+			Expression:        ptr.String("__Expression__"),
+			DurationInSeconds: ptr.Int64(1),
+			RetryConfig: &types.RetryConfigInput{
+				MaxRetries: ptr.Int32(1),
+			},
+		},
+		RunConfig: &types.CanaryRunConfigInput{
+			TimeoutInSeconds: ptr.Int32(1),
+			MemoryInMB:       ptr.Int32(1),
+			ActiveTracing:    ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EphemeralStorage: ptr.Int32(1),
+		},
+		SuccessRetentionPeriodInDays: ptr.Int32(1),
+		FailureRetentionPeriodInDays: ptr.Int32(1),
+		VpcConfig: &types.VpcConfigInput{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		VisualReference: &types.VisualReferenceInput{
+			BaseScreenshots: []types.BaseScreenshot{
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+			BrowserType:     types.BrowserType("CHROME"),
+		},
+		ArtifactS3Location: ptr.String("__ArtifactS3Location__"),
+		ArtifactConfig: &types.ArtifactConfigInput{
+			S3Encryption: &types.S3EncryptionConfig{
+				EncryptionMode: types.EncryptionMode("SSE_S3"),
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			},
+		},
+		ProvisionedResourceCleanup: types.ProvisionedResourceCleanupSetting("AUTOMATIC"),
+		DryRunId:                   ptr.String("__DryRunId__"),
+		VisualReferences: []types.VisualReferenceInput{
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+		},
+		BrowserConfigs: []types.BrowserConfig{
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+		},
+		AddReplicaLocations: []types.AddReplicaLocationInput{
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RemoveReplicaLocations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1570,7 +2048,132 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCanaryDryRun(context.Background(), &StartCanaryDryRunInput{})
+	_, opErr := svc.StartCanaryDryRun(context.Background(), &StartCanaryDryRunInput{
+		Name: ptr.String("__Name__"),
+		Code: &types.CanaryCodeInput{
+			S3Bucket:  ptr.String("__S3Bucket__"),
+			S3Key:     ptr.String("__S3Key__"),
+			S3Version: ptr.String("__S3Version__"),
+			ZipFile:   []byte("blob"),
+			Handler:   ptr.String("__Handler__"),
+			BlueprintTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Dependencies: []types.Dependency{
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+			},
+		},
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		RunConfig: &types.CanaryRunConfigInput{
+			TimeoutInSeconds: ptr.Int32(1),
+			MemoryInMB:       ptr.Int32(1),
+			ActiveTracing:    ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EphemeralStorage: ptr.Int32(1),
+		},
+		VpcConfig: &types.VpcConfigInput{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		ExecutionRoleArn:             ptr.String("__ExecutionRoleArn__"),
+		SuccessRetentionPeriodInDays: ptr.Int32(1),
+		FailureRetentionPeriodInDays: ptr.Int32(1),
+		VisualReference: &types.VisualReferenceInput{
+			BaseScreenshots: []types.BaseScreenshot{
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ScreenshotName: ptr.String("__ScreenshotName__"),
+					IgnoreCoordinates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+			BrowserType:     types.BrowserType("CHROME"),
+		},
+		ArtifactS3Location: ptr.String("__ArtifactS3Location__"),
+		ArtifactConfig: &types.ArtifactConfigInput{
+			S3Encryption: &types.S3EncryptionConfig{
+				EncryptionMode: types.EncryptionMode("SSE_S3"),
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			},
+		},
+		ProvisionedResourceCleanup: types.ProvisionedResourceCleanupSetting("AUTOMATIC"),
+		BrowserConfigs: []types.BrowserConfig{
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+		},
+		VisualReferences: []types.VisualReferenceInput{
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+			{
+				BaseScreenshots: []types.BaseScreenshot{
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ScreenshotName: ptr.String("__ScreenshotName__"),
+						IgnoreCoordinates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				BaseCanaryRunId: ptr.String("__BaseCanaryRunId__"),
+				BrowserType:     types.BrowserType("CHROME"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1595,7 +2198,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1620,7 +2225,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1645,7 +2253,9 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1670,7 +2280,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1695,7 +2308,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1720,7 +2335,117 @@ func TestCheckResponseSnapshot_Error_RequestEntityTooLargeException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCanary(context.Background(), &CreateCanaryInput{})
+	_, opErr := svc.CreateCanary(context.Background(), &CreateCanaryInput{
+		Name: ptr.String("__Name__"),
+		Code: &types.CanaryCodeInput{
+			S3Bucket:  ptr.String("__S3Bucket__"),
+			S3Key:     ptr.String("__S3Key__"),
+			S3Version: ptr.String("__S3Version__"),
+			ZipFile:   []byte("blob"),
+			Handler:   ptr.String("__Handler__"),
+			BlueprintTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Dependencies: []types.Dependency{
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+				{
+					Type:      types.DependencyType("LambdaLayer"),
+					Reference: ptr.String("__Reference__"),
+				},
+			},
+		},
+		ArtifactS3Location: ptr.String("__ArtifactS3Location__"),
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+		Schedule: &types.CanaryScheduleInput{
+			Expression:        ptr.String("__Expression__"),
+			DurationInSeconds: ptr.Int64(1),
+			RetryConfig: &types.RetryConfigInput{
+				MaxRetries: ptr.Int32(1),
+			},
+		},
+		RunConfig: &types.CanaryRunConfigInput{
+			TimeoutInSeconds: ptr.Int32(1),
+			MemoryInMB:       ptr.Int32(1),
+			ActiveTracing:    ptr.Bool(true),
+			EnvironmentVariables: map[string]string{
+				"key0": "__Value__",
+			},
+			EphemeralStorage: ptr.Int32(1),
+		},
+		SuccessRetentionPeriodInDays: ptr.Int32(1),
+		FailureRetentionPeriodInDays: ptr.Int32(1),
+		RuntimeVersion:               ptr.String("__RuntimeVersion__"),
+		VpcConfig: &types.VpcConfigInput{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ipv6AllowedForDualStack: ptr.Bool(true),
+		},
+		ResourcesToReplicateTags: []types.ResourceToTag{
+			types.ResourceToTag("lambda-function"),
+			types.ResourceToTag("lambda-function"),
+		},
+		ProvisionedResourceCleanup: types.ProvisionedResourceCleanupSetting("AUTOMATIC"),
+		BrowserConfigs: []types.BrowserConfig{
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+			{
+				BrowserType: types.BrowserType("CHROME"),
+			},
+		},
+		AddReplicaLocations: []types.AddReplicaLocationInput{
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			{
+				Location: ptr.String("__Location__"),
+				VpcConfig: &types.VpcConfigInput{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Ipv6AllowedForDualStack: ptr.Bool(true),
+				},
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ArtifactConfig: &types.ArtifactConfigInput{
+			S3Encryption: &types.S3EncryptionConfig{
+				EncryptionMode: types.EncryptionMode("SSE_S3"),
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			},
+		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1745,7 +2470,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1770,7 +2498,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1795,7 +2526,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1820,7 +2553,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{})
+	_, opErr := svc.AssociateResource(context.Background(), &AssociateResourceInput{
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		ResourceArn:     ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

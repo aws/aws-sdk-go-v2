@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationTime":946684800,"TieringConfigurationArn":"__TieringConfigurationArn__","TieringConfigurationName":"__TieringConfigurationName__"}

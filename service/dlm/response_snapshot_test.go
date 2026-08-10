@@ -119,7 +119,459 @@ func TestCheckResponseSnapshot_CreateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		State:            types.SettablePolicyStateValues("ENABLED"),
+		PolicyDetails: &types.PolicyDetails{
+			PolicyType: types.PolicyTypeValues("EBS_SNAPSHOT_MANAGEMENT"),
+			ResourceTypes: []types.ResourceTypeValues{
+				types.ResourceTypeValues("VOLUME"),
+				types.ResourceTypeValues("VOLUME"),
+			},
+			ResourceLocations: []types.ResourceLocationValues{
+				types.ResourceLocationValues("CLOUD"),
+				types.ResourceLocationValues("CLOUD"),
+			},
+			TargetTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Schedules: []types.Schedule{
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			Parameters: &types.Parameters{
+				ExcludeBootVolume: ptr.Bool(true),
+				NoReboot:          ptr.Bool(true),
+				ExcludeDataVolumeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventSource: &types.EventSource{
+				Type: types.EventSourceValues("MANAGED_CWE"),
+				Parameters: &types.EventParameters{
+					EventType: types.EventTypeValues("shareSnapshot"),
+					SnapshotOwner: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DescriptionRegex: ptr.String("__DescriptionRegex__"),
+				},
+			},
+			Actions: []types.Action{
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			PolicyLanguage: types.PolicyLanguageValues("SIMPLIFIED"),
+			ResourceType:   types.ResourceTypeValues("VOLUME"),
+			CreateInterval: ptr.Int32(1),
+			RetainInterval: ptr.Int32(1),
+			CopyTags:       ptr.Bool(true),
+			CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+			},
+			ExtendDeletion: ptr.Bool(true),
+			Exclusions: &types.Exclusions{
+				ExcludeBootVolumes: ptr.Bool(true),
+				ExcludeVolumeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultPolicy:  types.DefaultPolicyTypeValues("VOLUME"),
+		CreateInterval: ptr.Int32(1),
+		RetainInterval: ptr.Int32(1),
+		CopyTags:       ptr.Bool(true),
+		ExtendDeletion: ptr.Bool(true),
+		CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+		},
+		Exclusions: &types.Exclusions{
+			ExcludeBootVolumes: ptr.Bool(true),
+			ExcludeVolumeTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +590,9 @@ func TestCheckResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{})
+	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +634,26 @@ func TestCheckResponseSnapshot_GetLifecyclePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLifecyclePolicies(context.Background(), &GetLifecyclePoliciesInput{})
+	got, err := svc.GetLifecyclePolicies(context.Background(), &GetLifecyclePoliciesInput{
+		PolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		State: types.GettablePolicyStateValues("ENABLED"),
+		ResourceTypes: []types.ResourceTypeValues{
+			types.ResourceTypeValues("VOLUME"),
+			types.ResourceTypeValues("VOLUME"),
+		},
+		TargetTags: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DefaultPolicyType: types.DefaultPoliciesTypeValues("VOLUME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -629,7 +1102,9 @@ func TestCheckResponseSnapshot_GetLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{})
+	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +1127,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +1148,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +1172,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +1197,456 @@ func TestCheckResponseSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{})
+	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{
+		PolicyId:         ptr.String("__PolicyId__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		State:            types.SettablePolicyStateValues("ENABLED"),
+		Description:      ptr.String("__Description__"),
+		PolicyDetails: &types.PolicyDetails{
+			PolicyType: types.PolicyTypeValues("EBS_SNAPSHOT_MANAGEMENT"),
+			ResourceTypes: []types.ResourceTypeValues{
+				types.ResourceTypeValues("VOLUME"),
+				types.ResourceTypeValues("VOLUME"),
+			},
+			ResourceLocations: []types.ResourceLocationValues{
+				types.ResourceLocationValues("CLOUD"),
+				types.ResourceLocationValues("CLOUD"),
+			},
+			TargetTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Schedules: []types.Schedule{
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			Parameters: &types.Parameters{
+				ExcludeBootVolume: ptr.Bool(true),
+				NoReboot:          ptr.Bool(true),
+				ExcludeDataVolumeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventSource: &types.EventSource{
+				Type: types.EventSourceValues("MANAGED_CWE"),
+				Parameters: &types.EventParameters{
+					EventType: types.EventTypeValues("shareSnapshot"),
+					SnapshotOwner: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DescriptionRegex: ptr.String("__DescriptionRegex__"),
+				},
+			},
+			Actions: []types.Action{
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			PolicyLanguage: types.PolicyLanguageValues("SIMPLIFIED"),
+			ResourceType:   types.ResourceTypeValues("VOLUME"),
+			CreateInterval: ptr.Int32(1),
+			RetainInterval: ptr.Int32(1),
+			CopyTags:       ptr.Bool(true),
+			CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+			},
+			ExtendDeletion: ptr.Bool(true),
+			Exclusions: &types.Exclusions{
+				ExcludeBootVolumes: ptr.Bool(true),
+				ExcludeVolumeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		CreateInterval: ptr.Int32(1),
+		RetainInterval: ptr.Int32(1),
+		CopyTags:       ptr.Bool(true),
+		ExtendDeletion: ptr.Bool(true),
+		CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+		},
+		Exclusions: &types.Exclusions{
+			ExcludeBootVolumes: ptr.Bool(true),
+			ExcludeVolumeTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +1658,7 @@ func TestCheckResponseSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServerException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -731,7 +1668,459 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		State:            types.SettablePolicyStateValues("ENABLED"),
+		PolicyDetails: &types.PolicyDetails{
+			PolicyType: types.PolicyTypeValues("EBS_SNAPSHOT_MANAGEMENT"),
+			ResourceTypes: []types.ResourceTypeValues{
+				types.ResourceTypeValues("VOLUME"),
+				types.ResourceTypeValues("VOLUME"),
+			},
+			ResourceLocations: []types.ResourceLocationValues{
+				types.ResourceLocationValues("CLOUD"),
+				types.ResourceLocationValues("CLOUD"),
+			},
+			TargetTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Schedules: []types.Schedule{
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			Parameters: &types.Parameters{
+				ExcludeBootVolume: ptr.Bool(true),
+				NoReboot:          ptr.Bool(true),
+				ExcludeDataVolumeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventSource: &types.EventSource{
+				Type: types.EventSourceValues("MANAGED_CWE"),
+				Parameters: &types.EventParameters{
+					EventType: types.EventTypeValues("shareSnapshot"),
+					SnapshotOwner: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DescriptionRegex: ptr.String("__DescriptionRegex__"),
+				},
+			},
+			Actions: []types.Action{
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			PolicyLanguage: types.PolicyLanguageValues("SIMPLIFIED"),
+			ResourceType:   types.ResourceTypeValues("VOLUME"),
+			CreateInterval: ptr.Int32(1),
+			RetainInterval: ptr.Int32(1),
+			CopyTags:       ptr.Bool(true),
+			CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+			},
+			ExtendDeletion: ptr.Bool(true),
+			Exclusions: &types.Exclusions{
+				ExcludeBootVolumes: ptr.Bool(true),
+				ExcludeVolumeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultPolicy:  types.DefaultPolicyTypeValues("VOLUME"),
+		CreateInterval: ptr.Int32(1),
+		RetainInterval: ptr.Int32(1),
+		CopyTags:       ptr.Bool(true),
+		ExtendDeletion: ptr.Bool(true),
+		CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+		},
+		Exclusions: &types.Exclusions{
+			ExcludeBootVolumes: ptr.Bool(true),
+			ExcludeVolumeTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -747,7 +2136,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 	want := &types.InvalidRequestException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidRequestException"),
 		RequiredParameters: []string{
 			"__Member__",
 			"__Member__",
@@ -765,7 +2154,459 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		State:            types.SettablePolicyStateValues("ENABLED"),
+		PolicyDetails: &types.PolicyDetails{
+			PolicyType: types.PolicyTypeValues("EBS_SNAPSHOT_MANAGEMENT"),
+			ResourceTypes: []types.ResourceTypeValues{
+				types.ResourceTypeValues("VOLUME"),
+				types.ResourceTypeValues("VOLUME"),
+			},
+			ResourceLocations: []types.ResourceLocationValues{
+				types.ResourceLocationValues("CLOUD"),
+				types.ResourceLocationValues("CLOUD"),
+			},
+			TargetTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Schedules: []types.Schedule{
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			Parameters: &types.Parameters{
+				ExcludeBootVolume: ptr.Bool(true),
+				NoReboot:          ptr.Bool(true),
+				ExcludeDataVolumeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventSource: &types.EventSource{
+				Type: types.EventSourceValues("MANAGED_CWE"),
+				Parameters: &types.EventParameters{
+					EventType: types.EventTypeValues("shareSnapshot"),
+					SnapshotOwner: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DescriptionRegex: ptr.String("__DescriptionRegex__"),
+				},
+			},
+			Actions: []types.Action{
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			PolicyLanguage: types.PolicyLanguageValues("SIMPLIFIED"),
+			ResourceType:   types.ResourceTypeValues("VOLUME"),
+			CreateInterval: ptr.Int32(1),
+			RetainInterval: ptr.Int32(1),
+			CopyTags:       ptr.Bool(true),
+			CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+			},
+			ExtendDeletion: ptr.Bool(true),
+			Exclusions: &types.Exclusions{
+				ExcludeBootVolumes: ptr.Bool(true),
+				ExcludeVolumeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultPolicy:  types.DefaultPolicyTypeValues("VOLUME"),
+		CreateInterval: ptr.Int32(1),
+		RetainInterval: ptr.Int32(1),
+		CopyTags:       ptr.Bool(true),
+		ExtendDeletion: ptr.Bool(true),
+		CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+		},
+		Exclusions: &types.Exclusions{
+			ExcludeBootVolumes: ptr.Bool(true),
+			ExcludeVolumeTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -781,7 +2622,7 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("LimitExceededException"),
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
@@ -792,7 +2633,459 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	_, opErr := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		State:            types.SettablePolicyStateValues("ENABLED"),
+		PolicyDetails: &types.PolicyDetails{
+			PolicyType: types.PolicyTypeValues("EBS_SNAPSHOT_MANAGEMENT"),
+			ResourceTypes: []types.ResourceTypeValues{
+				types.ResourceTypeValues("VOLUME"),
+				types.ResourceTypeValues("VOLUME"),
+			},
+			ResourceLocations: []types.ResourceLocationValues{
+				types.ResourceLocationValues("CLOUD"),
+				types.ResourceLocationValues("CLOUD"),
+			},
+			TargetTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Schedules: []types.Schedule{
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name:     ptr.String("__Name__"),
+					CopyTags: ptr.Bool(true),
+					TagsToAdd: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					VariableTags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					CreateRule: &types.CreateRule{
+						Location:     types.LocationValues("CLOUD"),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.IntervalUnitValues("HOURS"),
+						Times: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CronExpression: ptr.String("__CronExpression__"),
+						Scripts: []types.Script{
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+							{
+								Stages: []types.StageValues{
+									types.StageValues("PRE"),
+									types.StageValues("PRE"),
+								},
+								ExecutionHandlerService:         types.ExecutionHandlerServiceValues("AWS_SYSTEMS_MANAGER"),
+								ExecutionHandler:                ptr.String("__ExecutionHandler__"),
+								ExecuteOperationOnScriptFailure: ptr.Bool(true),
+								ExecutionTimeout:                ptr.Int32(1),
+								MaximumRetryCount:               ptr.Int32(1),
+							},
+						},
+					},
+					RetainRule: &types.RetainRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					FastRestoreRule: &types.FastRestoreRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						AvailabilityZones: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AvailabilityZoneIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CrossRegionCopyRules: []types.CrossRegionCopyRule{
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							TargetRegion: ptr.String("__TargetRegion__"),
+							Target:       ptr.String("__Target__"),
+							Encrypted:    ptr.Bool(true),
+							CmkArn:       ptr.String("__CmkArn__"),
+							CopyTags:     ptr.Bool(true),
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+							DeprecateRule: &types.CrossRegionCopyDeprecateRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+					ShareRules: []types.ShareRule{
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+						{
+							TargetAccounts: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UnshareInterval:     ptr.Int32(1),
+							UnshareIntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+						},
+					},
+					DeprecateRule: &types.DeprecateRule{
+						Count:        ptr.Int32(1),
+						Interval:     ptr.Int32(1),
+						IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+					},
+					ArchiveRule: &types.ArchiveRule{
+						RetainRule: &types.ArchiveRetainRule{
+							RetentionArchiveTier: &types.RetentionArchiveTier{
+								Count:        ptr.Int32(1),
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			Parameters: &types.Parameters{
+				ExcludeBootVolume: ptr.Bool(true),
+				NoReboot:          ptr.Bool(true),
+				ExcludeDataVolumeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			EventSource: &types.EventSource{
+				Type: types.EventSourceValues("MANAGED_CWE"),
+				Parameters: &types.EventParameters{
+					EventType: types.EventTypeValues("shareSnapshot"),
+					SnapshotOwner: []string{
+						"__Member__",
+						"__Member__",
+					},
+					DescriptionRegex: ptr.String("__DescriptionRegex__"),
+				},
+			},
+			Actions: []types.Action{
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					CrossRegionCopy: []types.CrossRegionCopyAction{
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+						{
+							Target: ptr.String("__Target__"),
+							EncryptionConfiguration: &types.EncryptionConfiguration{
+								Encrypted: ptr.Bool(true),
+								CmkArn:    ptr.String("__CmkArn__"),
+							},
+							RetainRule: &types.CrossRegionCopyRetainRule{
+								Interval:     ptr.Int32(1),
+								IntervalUnit: types.RetentionIntervalUnitValues("DAYS"),
+							},
+						},
+					},
+				},
+			},
+			PolicyLanguage: types.PolicyLanguageValues("SIMPLIFIED"),
+			ResourceType:   types.ResourceTypeValues("VOLUME"),
+			CreateInterval: ptr.Int32(1),
+			RetainInterval: ptr.Int32(1),
+			CopyTags:       ptr.Bool(true),
+			CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+				{
+					TargetRegion: ptr.String("__TargetRegion__"),
+				},
+			},
+			ExtendDeletion: ptr.Bool(true),
+			Exclusions: &types.Exclusions{
+				ExcludeBootVolumes: ptr.Bool(true),
+				ExcludeVolumeTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludeTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultPolicy:  types.DefaultPolicyTypeValues("VOLUME"),
+		CreateInterval: ptr.Int32(1),
+		RetainInterval: ptr.Int32(1),
+		CopyTags:       ptr.Bool(true),
+		ExtendDeletion: ptr.Bool(true),
+		CrossRegionCopyTargets: []types.CrossRegionCopyTarget{
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+			{
+				TargetRegion: ptr.String("__TargetRegion__"),
+			},
+		},
+		Exclusions: &types.Exclusions{
+			ExcludeBootVolumes: ptr.Bool(true),
+			ExcludeVolumeTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -808,7 +3101,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("ResourceNotFoundException"),
 		ResourceType: ptr.String("__ResourceType__"),
 		ResourceIds: []string{
 			"__Member__",
@@ -823,7 +3116,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{})
+	_, opErr := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceUserArn":"__AppInstanceUserArn__","ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1}}

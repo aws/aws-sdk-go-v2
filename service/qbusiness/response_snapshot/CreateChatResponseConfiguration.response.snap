@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"chatResponseConfigurationArn":"__ChatResponseConfigurationArn__","chatResponseConfigurationId":"__ChatResponseConfigurationId__"}

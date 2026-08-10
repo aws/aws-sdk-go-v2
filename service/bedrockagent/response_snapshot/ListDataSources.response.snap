@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataSourceSummaries":[{"dataSourceId":"__DataSourceId__","description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","name":"__Name__","status":"AVAILABLE","updatedAt":"2000-01-01T00:00:00Z"},{"dataSourceId":"__DataSourceId__","description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","name":"__Name__","status":"AVAILABLE","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

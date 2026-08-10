@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DataIntegrations":[{"Arn":"__Arn__","Name":"__Name__","SourceURI":"__SourceURI__"},{"Arn":"__Arn__","Name":"__Name__","SourceURI":"__SourceURI__"}],"NextToken":"__NextToken__"}

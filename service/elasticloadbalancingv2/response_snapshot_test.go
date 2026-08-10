@@ -128,7 +128,19 @@ func TestCheckResponseSnapshot_AddListenerCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{})
+	got, err := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -147,7 +159,22 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +208,23 @@ func TestCheckResponseSnapshot_AddTrustStoreRevocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{})
+	got, err := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationContents: []types.RevocationContent{
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -599,7 +642,213 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	got, err := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -767,7 +1016,51 @@ func TestCheckResponseSnapshot_CreateLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	got, err := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1816,382 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Conditions: []types.RuleCondition{
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Actions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Transforms: []types.RuleTransform{
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1599,7 +2267,38 @@ func TestCheckResponseSnapshot_CreateTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{})
+	got, err := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{
+		Name:                       ptr.String("__Name__"),
+		Protocol:                   types.ProtocolEnum("HTTP"),
+		ProtocolVersion:            ptr.String("__ProtocolVersion__"),
+		Port:                       ptr.Int32(1),
+		VpcId:                      ptr.String("__VpcId__"),
+		HealthCheckProtocol:        types.ProtocolEnum("HTTP"),
+		HealthCheckPort:            ptr.String("__HealthCheckPort__"),
+		HealthCheckEnabled:         ptr.Bool(true),
+		HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+		HealthCheckIntervalSeconds: ptr.Int32(1),
+		HealthCheckTimeoutSeconds:  ptr.Int32(1),
+		HealthyThresholdCount:      ptr.Int32(1),
+		UnhealthyThresholdCount:    ptr.Int32(1),
+		Matcher: &types.Matcher{
+			HttpCode: ptr.String("__HttpCode__"),
+			GrpcCode: ptr.String("__GrpcCode__"),
+		},
+		TargetType: types.TargetTypeEnum("instance"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IpAddressType:     types.TargetGroupIpAddressTypeEnum("ipv4"),
+		TargetControlPort: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1635,7 +2334,22 @@ func TestCheckResponseSnapshot_CreateTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	got, err := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name:                                ptr.String("__Name__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1654,7 +2368,9 @@ func TestCheckResponseSnapshot_DeleteListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{})
+	got, err := svc.DeleteListener(context.Background(), &DeleteListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1673,7 +2389,9 @@ func TestCheckResponseSnapshot_DeleteLoadBalancer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoadBalancer(context.Background(), &DeleteLoadBalancerInput{})
+	got, err := svc.DeleteLoadBalancer(context.Background(), &DeleteLoadBalancerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1692,7 +2410,9 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		RuleArn: ptr.String("__RuleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1711,7 +2431,10 @@ func TestCheckResponseSnapshot_DeleteSharedTrustStoreAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{})
+	got, err := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		ResourceArn:   ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1730,7 +2453,9 @@ func TestCheckResponseSnapshot_DeleteTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTargetGroup(context.Background(), &DeleteTargetGroupInput{})
+	got, err := svc.DeleteTargetGroup(context.Background(), &DeleteTargetGroupInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1749,7 +2474,9 @@ func TestCheckResponseSnapshot_DeleteTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{})
+	got, err := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1768,7 +2495,23 @@ func TestCheckResponseSnapshot_DeregisterTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{})
+	got, err := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Targets: []types.TargetDescription{
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2542,10 @@ func TestCheckResponseSnapshot_DescribeAccountLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{})
+	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1842,7 +2588,9 @@ func TestCheckResponseSnapshot_DescribeCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCapacityReservation(context.Background(), &DescribeCapacityReservationInput{})
+	got, err := svc.DescribeCapacityReservation(context.Background(), &DescribeCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1872,7 +2620,9 @@ func TestCheckResponseSnapshot_DescribeListenerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeListenerAttributes(context.Background(), &DescribeListenerAttributesInput{})
+	got, err := svc.DescribeListenerAttributes(context.Background(), &DescribeListenerAttributesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1903,7 +2653,11 @@ func TestCheckResponseSnapshot_DescribeListenerCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeListenerCertificates(context.Background(), &DescribeListenerCertificatesInput{})
+	got, err := svc.DescribeListenerCertificates(context.Background(), &DescribeListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Marker:      ptr.String("__Marker__"),
+		PageSize:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2322,7 +3076,15 @@ func TestCheckResponseSnapshot_DescribeListeners(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeListeners(context.Background(), &DescribeListenersInput{})
+	got, err := svc.DescribeListeners(context.Background(), &DescribeListenersInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		ListenerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2352,7 +3114,9 @@ func TestCheckResponseSnapshot_DescribeLoadBalancerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{})
+	got, err := svc.DescribeLoadBalancerAttributes(context.Background(), &DescribeLoadBalancerAttributesInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2521,7 +3285,18 @@ func TestCheckResponseSnapshot_DescribeLoadBalancers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{})
+	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{
+		LoadBalancerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3278,7 +4053,15 @@ func TestCheckResponseSnapshot_DescribeRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRules(context.Background(), &DescribeRulesInput{})
+	got, err := svc.DescribeRules(context.Background(), &DescribeRulesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		RuleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3343,7 +4126,15 @@ func TestCheckResponseSnapshot_DescribeSSLPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSSLPolicies(context.Background(), &DescribeSSLPoliciesInput{})
+	got, err := svc.DescribeSSLPolicies(context.Background(), &DescribeSSLPoliciesInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:           ptr.String("__Marker__"),
+		PageSize:         ptr.Int32(1),
+		LoadBalancerType: types.LoadBalancerTypeEnum("application"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3391,7 +4182,12 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3421,7 +4217,9 @@ func TestCheckResponseSnapshot_DescribeTargetGroupAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTargetGroupAttributes(context.Background(), &DescribeTargetGroupAttributesInput{})
+	got, err := svc.DescribeTargetGroupAttributes(context.Background(), &DescribeTargetGroupAttributesInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3498,7 +4296,19 @@ func TestCheckResponseSnapshot_DescribeTargetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTargetGroups(context.Background(), &DescribeTargetGroupsInput{})
+	got, err := svc.DescribeTargetGroups(context.Background(), &DescribeTargetGroupsInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		TargetGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3566,7 +4376,27 @@ func TestCheckResponseSnapshot_DescribeTargetHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTargetHealth(context.Background(), &DescribeTargetHealthInput{})
+	got, err := svc.DescribeTargetHealth(context.Background(), &DescribeTargetHealthInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Targets: []types.TargetDescription{
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+		},
+		Include: []types.DescribeTargetHealthInputIncludeEnum{
+			types.DescribeTargetHealthInputIncludeEnum("AnomalyDetection"),
+			types.DescribeTargetHealthInputIncludeEnum("AnomalyDetection"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3595,7 +4425,11 @@ func TestCheckResponseSnapshot_DescribeTrustStoreAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustStoreAssociations(context.Background(), &DescribeTrustStoreAssociationsInput{})
+	got, err := svc.DescribeTrustStoreAssociations(context.Background(), &DescribeTrustStoreAssociationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		Marker:        ptr.String("__Marker__"),
+		PageSize:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3630,7 +4464,15 @@ func TestCheckResponseSnapshot_DescribeTrustStoreRevocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustStoreRevocations(context.Background(), &DescribeTrustStoreRevocationsInput{})
+	got, err := svc.DescribeTrustStoreRevocations(context.Background(), &DescribeTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationIds: []int64{
+			1,
+			1,
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3667,7 +4509,18 @@ func TestCheckResponseSnapshot_DescribeTrustStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustStores(context.Background(), &DescribeTrustStoresInput{})
+	got, err := svc.DescribeTrustStores(context.Background(), &DescribeTrustStoresInput{
+		TrustStoreArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3688,7 +4541,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3709,7 +4564,9 @@ func TestCheckResponseSnapshot_GetTrustStoreCaCertificatesBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustStoreCaCertificatesBundle(context.Background(), &GetTrustStoreCaCertificatesBundleInput{})
+	got, err := svc.GetTrustStoreCaCertificatesBundle(context.Background(), &GetTrustStoreCaCertificatesBundleInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3730,7 +4587,10 @@ func TestCheckResponseSnapshot_GetTrustStoreRevocationContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustStoreRevocationContent(context.Background(), &GetTrustStoreRevocationContentInput{})
+	got, err := svc.GetTrustStoreRevocationContent(context.Background(), &GetTrustStoreRevocationContentInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationId:  ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3773,7 +4633,13 @@ func TestCheckResponseSnapshot_ModifyCapacityReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	got, err := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3796,7 +4662,16 @@ func TestCheckResponseSnapshot_ModifyIpPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyIpPools(context.Background(), &ModifyIpPoolsInput{})
+	got, err := svc.ModifyIpPools(context.Background(), &ModifyIpPoolsInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+		RemoveIpamPools: []types.RemoveIpamPoolEnum{
+			types.RemoveIpamPoolEnum("ipv4"),
+			types.RemoveIpamPoolEnum("ipv4"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4214,7 +5089,203 @@ func TestCheckResponseSnapshot_ModifyListener(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyListener(context.Background(), &ModifyListenerInput{})
+	got, err := svc.ModifyListener(context.Background(), &ModifyListenerInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Port:        ptr.Int32(1),
+		Protocol:    types.ProtocolEnum("HTTP"),
+		SslPolicy:   ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4244,7 +5315,19 @@ func TestCheckResponseSnapshot_ModifyListenerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyListenerAttributes(context.Background(), &ModifyListenerAttributesInput{})
+	got, err := svc.ModifyListenerAttributes(context.Background(), &ModifyListenerAttributesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Attributes: []types.ListenerAttribute{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4274,7 +5357,19 @@ func TestCheckResponseSnapshot_ModifyLoadBalancerAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyLoadBalancerAttributes(context.Background(), &ModifyLoadBalancerAttributesInput{})
+	got, err := svc.ModifyLoadBalancerAttributes(context.Background(), &ModifyLoadBalancerAttributesInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Attributes: []types.LoadBalancerAttribute{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5030,7 +6125,372 @@ func TestCheckResponseSnapshot_ModifyRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyRule(context.Background(), &ModifyRuleInput{})
+	got, err := svc.ModifyRule(context.Background(), &ModifyRuleInput{
+		RuleArn: ptr.String("__RuleArn__"),
+		Conditions: []types.RuleCondition{
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Actions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Transforms: []types.RuleTransform{
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+		},
+		ResetTransforms: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5106,7 +6566,21 @@ func TestCheckResponseSnapshot_ModifyTargetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyTargetGroup(context.Background(), &ModifyTargetGroupInput{})
+	got, err := svc.ModifyTargetGroup(context.Background(), &ModifyTargetGroupInput{
+		TargetGroupArn:             ptr.String("__TargetGroupArn__"),
+		HealthCheckProtocol:        types.ProtocolEnum("HTTP"),
+		HealthCheckPort:            ptr.String("__HealthCheckPort__"),
+		HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+		HealthCheckEnabled:         ptr.Bool(true),
+		HealthCheckIntervalSeconds: ptr.Int32(1),
+		HealthCheckTimeoutSeconds:  ptr.Int32(1),
+		HealthyThresholdCount:      ptr.Int32(1),
+		UnhealthyThresholdCount:    ptr.Int32(1),
+		Matcher: &types.Matcher{
+			HttpCode: ptr.String("__HttpCode__"),
+			GrpcCode: ptr.String("__GrpcCode__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5136,7 +6610,19 @@ func TestCheckResponseSnapshot_ModifyTargetGroupAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyTargetGroupAttributes(context.Background(), &ModifyTargetGroupAttributesInput{})
+	got, err := svc.ModifyTargetGroupAttributes(context.Background(), &ModifyTargetGroupAttributesInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Attributes: []types.TargetGroupAttribute{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5172,7 +6658,12 @@ func TestCheckResponseSnapshot_ModifyTrustStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyTrustStore(context.Background(), &ModifyTrustStoreInput{})
+	got, err := svc.ModifyTrustStore(context.Background(), &ModifyTrustStoreInput{
+		TrustStoreArn:                       ptr.String("__TrustStoreArn__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5191,7 +6682,23 @@ func TestCheckResponseSnapshot_RegisterTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterTargets(context.Background(), &RegisterTargetsInput{})
+	got, err := svc.RegisterTargets(context.Background(), &RegisterTargetsInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Targets: []types.TargetDescription{
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5210,7 +6717,19 @@ func TestCheckResponseSnapshot_RemoveListenerCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveListenerCertificates(context.Background(), &RemoveListenerCertificatesInput{})
+	got, err := svc.RemoveListenerCertificates(context.Background(), &RemoveListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5229,7 +6748,16 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5248,7 +6776,13 @@ func TestCheckResponseSnapshot_RemoveTrustStoreRevocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTrustStoreRevocations(context.Background(), &RemoveTrustStoreRevocationsInput{})
+	got, err := svc.RemoveTrustStoreRevocations(context.Background(), &RemoveTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationIds: []int64{
+			1,
+			1,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5269,7 +6803,10 @@ func TestCheckResponseSnapshot_SetIpAddressType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIpAddressType(context.Background(), &SetIpAddressTypeInput{})
+	got, err := svc.SetIpAddressType(context.Background(), &SetIpAddressTypeInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		IpAddressType:   types.IpAddressType("ipv4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6025,7 +7562,18 @@ func TestCheckResponseSnapshot_SetRulePriorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetRulePriorities(context.Background(), &SetRulePrioritiesInput{})
+	got, err := svc.SetRulePriorities(context.Background(), &SetRulePrioritiesInput{
+		RulePriorities: []types.RulePriorityPair{
+			{
+				RuleArn:  ptr.String("__RuleArn__"),
+				Priority: ptr.Int32(1),
+			},
+			{
+				RuleArn:  ptr.String("__RuleArn__"),
+				Priority: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6050,7 +7598,14 @@ func TestCheckResponseSnapshot_SetSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetSecurityGroups(context.Background(), &SetSecurityGroupsInput{})
+	got, err := svc.SetSecurityGroups(context.Background(), &SetSecurityGroupsInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic: types.EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum("on"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6120,7 +7675,31 @@ func TestCheckResponseSnapshot_SetSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetSubnets(context.Background(), &SetSubnetsInput{})
+	got, err := svc.SetSubnets(context.Background(), &SetSubnetsInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		IpAddressType:                types.IpAddressType("ipv4"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6141,7 +7720,213 @@ func TestCheckResponseSnapshot_Error_ALPNPolicyNotSupportedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6166,7 +7951,51 @@ func TestCheckResponseSnapshot_Error_AllocationIdNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6191,7 +8020,51 @@ func TestCheckResponseSnapshot_Error_AvailabilityZoneNotSupportedException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6216,7 +8089,22 @@ func TestCheckResponseSnapshot_Error_CaCertificatesBundleNotFoundException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name:                                ptr.String("__Name__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6241,7 +8129,13 @@ func TestCheckResponseSnapshot_Error_CapacityDecreaseRequestsLimitExceededExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6266,7 +8160,13 @@ func TestCheckResponseSnapshot_Error_CapacityReservationPendingException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6291,7 +8191,13 @@ func TestCheckResponseSnapshot_Error_CapacityUnitsLimitExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6316,7 +8222,19 @@ func TestCheckResponseSnapshot_Error_CertificateNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{})
+	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6341,7 +8259,10 @@ func TestCheckResponseSnapshot_Error_DeleteAssociationSameAccountException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{})
+	_, opErr := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		ResourceArn:   ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6366,7 +8287,213 @@ func TestCheckResponseSnapshot_Error_DuplicateListenerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6391,7 +8518,51 @@ func TestCheckResponseSnapshot_Error_DuplicateLoadBalancerNameException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6416,7 +8587,22 @@ func TestCheckResponseSnapshot_Error_DuplicateTagKeysException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6441,7 +8627,38 @@ func TestCheckResponseSnapshot_Error_DuplicateTargetGroupNameException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{})
+	_, opErr := svc.CreateTargetGroup(context.Background(), &CreateTargetGroupInput{
+		Name:                       ptr.String("__Name__"),
+		Protocol:                   types.ProtocolEnum("HTTP"),
+		ProtocolVersion:            ptr.String("__ProtocolVersion__"),
+		Port:                       ptr.Int32(1),
+		VpcId:                      ptr.String("__VpcId__"),
+		HealthCheckProtocol:        types.ProtocolEnum("HTTP"),
+		HealthCheckPort:            ptr.String("__HealthCheckPort__"),
+		HealthCheckEnabled:         ptr.Bool(true),
+		HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+		HealthCheckIntervalSeconds: ptr.Int32(1),
+		HealthCheckTimeoutSeconds:  ptr.Int32(1),
+		HealthyThresholdCount:      ptr.Int32(1),
+		UnhealthyThresholdCount:    ptr.Int32(1),
+		Matcher: &types.Matcher{
+			HttpCode: ptr.String("__HttpCode__"),
+			GrpcCode: ptr.String("__GrpcCode__"),
+		},
+		TargetType: types.TargetTypeEnum("instance"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IpAddressType:     types.TargetGroupIpAddressTypeEnum("ipv4"),
+		TargetControlPort: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6466,7 +8683,22 @@ func TestCheckResponseSnapshot_Error_DuplicateTrustStoreNameException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name:                                ptr.String("__Name__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6491,7 +8723,27 @@ func TestCheckResponseSnapshot_Error_HealthUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeTargetHealth(context.Background(), &DescribeTargetHealthInput{})
+	_, opErr := svc.DescribeTargetHealth(context.Background(), &DescribeTargetHealthInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Targets: []types.TargetDescription{
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+		},
+		Include: []types.DescribeTargetHealthInputIncludeEnum{
+			types.DescribeTargetHealthInputIncludeEnum("AnomalyDetection"),
+			types.DescribeTargetHealthInputIncludeEnum("AnomalyDetection"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6516,7 +8768,213 @@ func TestCheckResponseSnapshot_Error_IncompatibleProtocolsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6541,7 +8999,13 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6566,7 +9030,22 @@ func TestCheckResponseSnapshot_Error_InvalidCaCertificatesBundleException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name:                                ptr.String("__Name__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6591,7 +9070,213 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationRequestException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6616,7 +9301,213 @@ func TestCheckResponseSnapshot_Error_InvalidLoadBalancerActionException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6641,7 +9532,23 @@ func TestCheckResponseSnapshot_Error_InvalidRevocationContentException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{})
+	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationContents: []types.RevocationContent{
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6666,7 +9573,51 @@ func TestCheckResponseSnapshot_Error_InvalidSchemeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6691,7 +9642,51 @@ func TestCheckResponseSnapshot_Error_InvalidSecurityGroupException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6716,7 +9711,51 @@ func TestCheckResponseSnapshot_Error_InvalidSubnetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6741,7 +9780,23 @@ func TestCheckResponseSnapshot_Error_InvalidTargetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{})
+	_, opErr := svc.DeregisterTargets(context.Background(), &DeregisterTargetsInput{
+		TargetGroupArn: ptr.String("__TargetGroupArn__"),
+		Targets: []types.TargetDescription{
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Port:             ptr.Int32(1),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				QuicServerId:     ptr.String("__QuicServerId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6766,7 +9821,19 @@ func TestCheckResponseSnapshot_Error_ListenerNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{})
+	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6791,7 +9858,22 @@ func TestCheckResponseSnapshot_Error_LoadBalancerNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6816,7 +9898,51 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6841,7 +9967,13 @@ func TestCheckResponseSnapshot_Error_PriorRequestNotCompleteException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{})
+	_, opErr := svc.ModifyCapacityReservation(context.Background(), &ModifyCapacityReservationInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		MinimumLoadBalancerCapacity: &types.MinimumLoadBalancerCapacity{
+			CapacityUnits: ptr.Int32(1),
+		},
+		ResetCapacityReservation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6866,7 +9998,382 @@ func TestCheckResponseSnapshot_Error_PriorityInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Conditions: []types.RuleCondition{
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Actions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Transforms: []types.RuleTransform{
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6891,7 +10398,51 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6916,7 +10467,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	_, opErr := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6941,7 +10494,23 @@ func TestCheckResponseSnapshot_Error_RevocationContentNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{})
+	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationContents: []types.RevocationContent{
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6966,7 +10535,15 @@ func TestCheckResponseSnapshot_Error_RevocationIdNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeTrustStoreRevocations(context.Background(), &DescribeTrustStoreRevocationsInput{})
+	_, opErr := svc.DescribeTrustStoreRevocations(context.Background(), &DescribeTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationIds: []int64{
+			1,
+			1,
+		},
+		Marker:   ptr.String("__Marker__"),
+		PageSize: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6991,7 +10568,22 @@ func TestCheckResponseSnapshot_Error_RuleNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7016,7 +10608,213 @@ func TestCheckResponseSnapshot_Error_SSLPolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7041,7 +10839,51 @@ func TestCheckResponseSnapshot_Error_SubnetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7066,7 +10908,213 @@ func TestCheckResponseSnapshot_Error_TargetGroupAssociationLimitException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7091,7 +11139,22 @@ func TestCheckResponseSnapshot_Error_TargetGroupNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7116,7 +11179,213 @@ func TestCheckResponseSnapshot_Error_TooManyActionsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7141,7 +11410,19 @@ func TestCheckResponseSnapshot_Error_TooManyCertificatesException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{})
+	_, opErr := svc.AddListenerCertificates(context.Background(), &AddListenerCertificatesInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7166,7 +11447,213 @@ func TestCheckResponseSnapshot_Error_TooManyListenersException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7191,7 +11678,51 @@ func TestCheckResponseSnapshot_Error_TooManyLoadBalancersException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{})
+	_, opErr := svc.CreateLoadBalancer(context.Background(), &CreateLoadBalancerInput{
+		Name: ptr.String("__Name__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetMappings: []types.SubnetMapping{
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+			{
+				SubnetId:            ptr.String("__SubnetId__"),
+				AllocationId:        ptr.String("__AllocationId__"),
+				PrivateIPv4Address:  ptr.String("__PrivateIPv4Address__"),
+				IPv6Address:         ptr.String("__IPv6Address__"),
+				SourceNatIpv6Prefix: ptr.String("__SourceNatIpv6Prefix__"),
+			},
+		},
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Scheme: types.LoadBalancerSchemeEnum("internet-facing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type:                         types.LoadBalancerTypeEnum("application"),
+		IpAddressType:                types.IpAddressType("ipv4"),
+		CustomerOwnedIpv4Pool:        ptr.String("__CustomerOwnedIpv4Pool__"),
+		EnablePrefixForIpv6SourceNat: types.EnablePrefixForIpv6SourceNatEnum("on"),
+		IpamPools: &types.IpamPools{
+			Ipv4IpamPoolId: ptr.String("__Ipv4IpamPoolId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7216,7 +11747,213 @@ func TestCheckResponseSnapshot_Error_TooManyRegistrationsForTargetIdException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7241,7 +11978,382 @@ func TestCheckResponseSnapshot_Error_TooManyRulesException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Conditions: []types.RuleCondition{
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Actions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Transforms: []types.RuleTransform{
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7266,7 +12378,22 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7291,7 +12418,382 @@ func TestCheckResponseSnapshot_Error_TooManyTargetGroupsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	_, opErr := svc.CreateRule(context.Background(), &CreateRuleInput{
+		ListenerArn: ptr.String("__ListenerArn__"),
+		Conditions: []types.RuleCondition{
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field: ptr.String("__Field__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				HostHeaderConfig: &types.HostHeaderConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				PathPatternConfig: &types.PathPatternConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				HttpHeaderConfig: &types.HttpHeaderConditionConfig{
+					HttpHeaderName: ptr.String("__HttpHeaderName__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				QueryStringConfig: &types.QueryStringConditionConfig{
+					Values: []types.QueryStringKeyValuePair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HttpRequestMethodConfig: &types.HttpRequestMethodConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				SourceIpConfig: &types.SourceIpConditionConfig{
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.SourceIpAddressTypeEnum("ipv4"),
+				},
+				RegexValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Priority: ptr.Int32(1),
+		Actions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Transforms: []types.RuleTransform{
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+			{
+				Type: types.TransformTypeEnum("host-header-rewrite"),
+				HostHeaderRewriteConfig: &types.HostHeaderRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+				UrlRewriteConfig: &types.UrlRewriteConfig{
+					Rewrites: []types.RewriteConfig{
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+						{
+							Regex:   ptr.String("__Regex__"),
+							Replace: ptr.String("__Replace__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7316,7 +12818,213 @@ func TestCheckResponseSnapshot_Error_TooManyTargetsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7341,7 +13049,23 @@ func TestCheckResponseSnapshot_Error_TooManyTrustStoreRevocationEntriesException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{})
+	_, opErr := svc.AddTrustStoreRevocations(context.Background(), &AddTrustStoreRevocationsInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		RevocationContents: []types.RevocationContent{
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+			{
+				S3Bucket:        ptr.String("__S3Bucket__"),
+				S3Key:           ptr.String("__S3Key__"),
+				S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+				RevocationType:  types.RevocationType("CRL"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7366,7 +13090,22 @@ func TestCheckResponseSnapshot_Error_TooManyTrustStoresException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{})
+	_, opErr := svc.CreateTrustStore(context.Background(), &CreateTrustStoreInput{
+		Name:                                ptr.String("__Name__"),
+		CaCertificatesBundleS3Bucket:        ptr.String("__CaCertificatesBundleS3Bucket__"),
+		CaCertificatesBundleS3Key:           ptr.String("__CaCertificatesBundleS3Key__"),
+		CaCertificatesBundleS3ObjectVersion: ptr.String("__CaCertificatesBundleS3ObjectVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7391,7 +13130,213 @@ func TestCheckResponseSnapshot_Error_TooManyUniqueTargetGroupsPerLoadBalancerExc
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7416,7 +13361,10 @@ func TestCheckResponseSnapshot_Error_TrustStoreAssociationNotFoundException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{})
+	_, opErr := svc.DeleteSharedTrustStoreAssociation(context.Background(), &DeleteSharedTrustStoreAssociationInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+		ResourceArn:   ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7441,7 +13389,9 @@ func TestCheckResponseSnapshot_Error_TrustStoreInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{})
+	_, opErr := svc.DeleteTrustStore(context.Background(), &DeleteTrustStoreInput{
+		TrustStoreArn: ptr.String("__TrustStoreArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7466,7 +13416,22 @@ func TestCheckResponseSnapshot_Error_TrustStoreNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{})
+	_, opErr := svc.AddTags(context.Background(), &AddTagsInput{
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7491,7 +13456,213 @@ func TestCheckResponseSnapshot_Error_TrustStoreNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7516,7 +13687,213 @@ func TestCheckResponseSnapshot_Error_UnsupportedProtocolException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{})
+	_, opErr := svc.CreateListener(context.Background(), &CreateListenerInput{
+		LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+		Protocol:        types.ProtocolEnum("HTTP"),
+		Port:            ptr.Int32(1),
+		SslPolicy:       ptr.String("__SslPolicy__"),
+		Certificates: []types.Certificate{
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+			{
+				CertificateArn: ptr.String("__CertificateArn__"),
+				IsDefault:      ptr.Bool(true),
+			},
+		},
+		DefaultActions: []types.Action{
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:           types.ActionTypeEnum("forward"),
+				TargetGroupArn: ptr.String("__TargetGroupArn__"),
+				AuthenticateOidcConfig: &types.AuthenticateOidcActionConfig{
+					Issuer:                ptr.String("__Issuer__"),
+					AuthorizationEndpoint: ptr.String("__AuthorizationEndpoint__"),
+					TokenEndpoint:         ptr.String("__TokenEndpoint__"),
+					UserInfoEndpoint:      ptr.String("__UserInfoEndpoint__"),
+					ClientId:              ptr.String("__ClientId__"),
+					ClientSecret:          ptr.String("__ClientSecret__"),
+					SessionCookieName:     ptr.String("__SessionCookieName__"),
+					Scope:                 ptr.String("__Scope__"),
+					SessionTimeout:        ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateOidcActionConditionalBehaviorEnum("deny"),
+					UseExistingClientSecret:  ptr.Bool(true),
+				},
+				AuthenticateCognitoConfig: &types.AuthenticateCognitoActionConfig{
+					UserPoolArn:       ptr.String("__UserPoolArn__"),
+					UserPoolClientId:  ptr.String("__UserPoolClientId__"),
+					UserPoolDomain:    ptr.String("__UserPoolDomain__"),
+					SessionCookieName: ptr.String("__SessionCookieName__"),
+					Scope:             ptr.String("__Scope__"),
+					SessionTimeout:    ptr.Int64(1),
+					AuthenticationRequestExtraParams: map[string]string{
+						"key0": "__Value__",
+					},
+					OnUnauthenticatedRequest: types.AuthenticateCognitoActionConditionalBehaviorEnum("deny"),
+				},
+				Order: ptr.Int32(1),
+				RedirectConfig: &types.RedirectActionConfig{
+					Protocol:   ptr.String("__Protocol__"),
+					Port:       ptr.String("__Port__"),
+					Host:       ptr.String("__Host__"),
+					Path:       ptr.String("__Path__"),
+					Query:      ptr.String("__Query__"),
+					StatusCode: types.RedirectActionStatusCodeEnum("HTTP_301"),
+				},
+				FixedResponseConfig: &types.FixedResponseActionConfig{
+					MessageBody: ptr.String("__MessageBody__"),
+					StatusCode:  ptr.String("__StatusCode__"),
+					ContentType: ptr.String("__ContentType__"),
+				},
+				ForwardConfig: &types.ForwardActionConfig{
+					TargetGroups: []types.TargetGroupTuple{
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+						{
+							TargetGroupArn: ptr.String("__TargetGroupArn__"),
+							Weight:         ptr.Int32(1),
+						},
+					},
+					TargetGroupStickinessConfig: &types.TargetGroupStickinessConfig{
+						Enabled:         ptr.Bool(true),
+						DurationSeconds: ptr.Int32(1),
+					},
+				},
+				JwtValidationConfig: &types.JwtValidationActionConfig{
+					JwksEndpoint: ptr.String("__JwksEndpoint__"),
+					Issuer:       ptr.String("__Issuer__"),
+					AdditionalClaims: []types.JwtValidationActionAdditionalClaim{
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Format: types.JwtValidationActionAdditionalClaimFormatEnum("single-string"),
+							Name:   ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AlpnPolicy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MutualAuthentication: &types.MutualAuthenticationAttributes{
+			Mode:                          ptr.String("__Mode__"),
+			TrustStoreArn:                 ptr.String("__TrustStoreArn__"),
+			IgnoreClientCertificateExpiry: ptr.Bool(true),
+			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
+			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

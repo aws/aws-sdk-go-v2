@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.RestoreFromDbBackup
+
+{"deploymentType":"SINGLE_AZ","engineType":"INFLUXDB_V2","resourceType":"DB_INSTANCE","restoreStatus":"RESTORING","restoredDbResourceId":"__RestoredDbResourceId__"}

@@ -129,7 +129,36 @@ func TestCheckResponseSnapshot_BatchCreateVariable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{})
+	got, err := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{
+		VariableEntries: []types.VariableEntry{
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +214,12 @@ func TestCheckResponseSnapshot_BatchGetVariable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetVariable(context.Background(), &BatchGetVariableInput{})
+	got, err := svc.BatchGetVariable(context.Background(), &BatchGetVariableInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +238,9 @@ func TestCheckResponseSnapshot_CancelBatchImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelBatchImportJob(context.Background(), &CancelBatchImportJobInput{})
+	got, err := svc.CancelBatchImportJob(context.Background(), &CancelBatchImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +259,9 @@ func TestCheckResponseSnapshot_CancelBatchPredictionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelBatchPredictionJob(context.Background(), &CancelBatchPredictionJobInput{})
+	got, err := svc.CancelBatchPredictionJob(context.Background(), &CancelBatchPredictionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +280,23 @@ func TestCheckResponseSnapshot_CreateBatchImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchImportJob(context.Background(), &CreateBatchImportJobInput{})
+	got, err := svc.CreateBatchImportJob(context.Background(), &CreateBatchImportJobInput{
+		JobId:         ptr.String("__JobId__"),
+		InputPath:     ptr.String("__InputPath__"),
+		OutputPath:    ptr.String("__OutputPath__"),
+		EventTypeName: ptr.String("__EventTypeName__"),
+		IamRoleArn:    ptr.String("__IamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +315,25 @@ func TestCheckResponseSnapshot_CreateBatchPredictionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchPredictionJob(context.Background(), &CreateBatchPredictionJobInput{})
+	got, err := svc.CreateBatchPredictionJob(context.Background(), &CreateBatchPredictionJobInput{
+		JobId:           ptr.String("__JobId__"),
+		InputPath:       ptr.String("__InputPath__"),
+		OutputPath:      ptr.String("__OutputPath__"),
+		EventTypeName:   ptr.String("__EventTypeName__"),
+		DetectorName:    ptr.String("__DetectorName__"),
+		DetectorVersion: ptr.String("__DetectorVersion__"),
+		IamRoleArn:      ptr.String("__IamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +356,51 @@ func TestCheckResponseSnapshot_CreateDetectorVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDetectorVersion(context.Background(), &CreateDetectorVersionInput{})
+	got, err := svc.CreateDetectorVersion(context.Background(), &CreateDetectorVersionInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		Description: ptr.String("__Description__"),
+		ExternalModelEndpoints: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Rules: []types.Rule{
+			{
+				DetectorId:  ptr.String("__DetectorId__"),
+				RuleId:      ptr.String("__RuleId__"),
+				RuleVersion: ptr.String("__RuleVersion__"),
+			},
+			{
+				DetectorId:  ptr.String("__DetectorId__"),
+				RuleId:      ptr.String("__RuleId__"),
+				RuleVersion: ptr.String("__RuleVersion__"),
+			},
+		},
+		ModelVersions: []types.ModelVersion{
+			{
+				ModelId:            ptr.String("__ModelId__"),
+				ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+				ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+				Arn:                ptr.String("__Arn__"),
+			},
+			{
+				ModelId:            ptr.String("__ModelId__"),
+				ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+				ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+				Arn:                ptr.String("__Arn__"),
+			},
+		},
+		RuleExecutionMode: types.RuleExecutionMode("ALL_MATCHED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +419,25 @@ func TestCheckResponseSnapshot_CreateList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateList(context.Background(), &CreateListInput{})
+	got, err := svc.CreateList(context.Background(), &CreateListInput{
+		Name: ptr.String("__Name__"),
+		Elements: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VariableType: ptr.String("__VariableType__"),
+		Description:  ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +456,22 @@ func TestCheckResponseSnapshot_CreateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModel(context.Background(), &CreateModelInput{})
+	got, err := svc.CreateModel(context.Background(), &CreateModelInput{
+		ModelId:       ptr.String("__ModelId__"),
+		ModelType:     types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		Description:   ptr.String("__Description__"),
+		EventTypeName: ptr.String("__EventTypeName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +495,46 @@ func TestCheckResponseSnapshot_CreateModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelVersion(context.Background(), &CreateModelVersionInput{})
+	got, err := svc.CreateModelVersion(context.Background(), &CreateModelVersionInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		TrainingDataSource: types.TrainingDataSourceEnum("EXTERNAL_EVENTS"),
+		TrainingDataSchema: &types.TrainingDataSchema{
+			ModelVariables: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LabelSchema: &types.LabelSchema{
+				LabelMapper: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				UnlabeledEventsTreatment: types.UnlabeledEventsTreatment("IGNORE"),
+			},
+		},
+		ExternalEventsDetail: &types.ExternalEventsDetail{
+			DataLocation:      ptr.String("__DataLocation__"),
+			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		},
+		IngestedEventsDetail: &types.IngestedEventsDetail{
+			IngestedEventsTimeWindow: &types.IngestedEventsTimeWindow{
+				StartTime: ptr.String("__StartTime__"),
+				EndTime:   ptr.String("__EndTime__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +559,27 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{})
+	got, err := svc.CreateRule(context.Background(), &CreateRuleInput{
+		RuleId:      ptr.String("__RuleId__"),
+		DetectorId:  ptr.String("__DetectorId__"),
+		Description: ptr.String("__Description__"),
+		Expression:  ptr.String("__Expression__"),
+		Language:    types.Language("DETECTORPL"),
+		Outcomes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +598,24 @@ func TestCheckResponseSnapshot_CreateVariable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVariable(context.Background(), &CreateVariableInput{})
+	got, err := svc.CreateVariable(context.Background(), &CreateVariableInput{
+		Name:         ptr.String("__Name__"),
+		DataType:     types.DataType("STRING"),
+		DataSource:   types.DataSource("EVENT"),
+		DefaultValue: ptr.String("__DefaultValue__"),
+		Description:  ptr.String("__Description__"),
+		VariableType: ptr.String("__VariableType__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +634,9 @@ func TestCheckResponseSnapshot_DeleteBatchImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBatchImportJob(context.Background(), &DeleteBatchImportJobInput{})
+	got, err := svc.DeleteBatchImportJob(context.Background(), &DeleteBatchImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +655,9 @@ func TestCheckResponseSnapshot_DeleteBatchPredictionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBatchPredictionJob(context.Background(), &DeleteBatchPredictionJobInput{})
+	got, err := svc.DeleteBatchPredictionJob(context.Background(), &DeleteBatchPredictionJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +676,9 @@ func TestCheckResponseSnapshot_DeleteDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{})
+	got, err := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -466,7 +697,10 @@ func TestCheckResponseSnapshot_DeleteDetectorVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDetectorVersion(context.Background(), &DeleteDetectorVersionInput{})
+	got, err := svc.DeleteDetectorVersion(context.Background(), &DeleteDetectorVersionInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -485,7 +719,9 @@ func TestCheckResponseSnapshot_DeleteEntityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEntityType(context.Background(), &DeleteEntityTypeInput{})
+	got, err := svc.DeleteEntityType(context.Background(), &DeleteEntityTypeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +740,11 @@ func TestCheckResponseSnapshot_DeleteEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEvent(context.Background(), &DeleteEventInput{})
+	got, err := svc.DeleteEvent(context.Background(), &DeleteEventInput{
+		EventId:            ptr.String("__EventId__"),
+		EventTypeName:      ptr.String("__EventTypeName__"),
+		DeleteAuditHistory: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +763,9 @@ func TestCheckResponseSnapshot_DeleteEventType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventType(context.Background(), &DeleteEventTypeInput{})
+	got, err := svc.DeleteEventType(context.Background(), &DeleteEventTypeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +787,9 @@ func TestCheckResponseSnapshot_DeleteEventsByEventType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventsByEventType(context.Background(), &DeleteEventsByEventTypeInput{})
+	got, err := svc.DeleteEventsByEventType(context.Background(), &DeleteEventsByEventTypeInput{
+		EventTypeName: ptr.String("__EventTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +808,9 @@ func TestCheckResponseSnapshot_DeleteExternalModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExternalModel(context.Background(), &DeleteExternalModelInput{})
+	got, err := svc.DeleteExternalModel(context.Background(), &DeleteExternalModelInput{
+		ModelEndpoint: ptr.String("__ModelEndpoint__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +829,9 @@ func TestCheckResponseSnapshot_DeleteLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLabel(context.Background(), &DeleteLabelInput{})
+	got, err := svc.DeleteLabel(context.Background(), &DeleteLabelInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +850,9 @@ func TestCheckResponseSnapshot_DeleteList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteList(context.Background(), &DeleteListInput{})
+	got, err := svc.DeleteList(context.Background(), &DeleteListInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +871,10 @@ func TestCheckResponseSnapshot_DeleteModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{})
+	got, err := svc.DeleteModel(context.Background(), &DeleteModelInput{
+		ModelId:   ptr.String("__ModelId__"),
+		ModelType: types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +893,11 @@ func TestCheckResponseSnapshot_DeleteModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModelVersion(context.Background(), &DeleteModelVersionInput{})
+	got, err := svc.DeleteModelVersion(context.Background(), &DeleteModelVersionInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +916,9 @@ func TestCheckResponseSnapshot_DeleteOutcome(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutcome(context.Background(), &DeleteOutcomeInput{})
+	got, err := svc.DeleteOutcome(context.Background(), &DeleteOutcomeInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -678,7 +937,13 @@ func TestCheckResponseSnapshot_DeleteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{})
+	got, err := svc.DeleteRule(context.Background(), &DeleteRuleInput{
+		Rule: &types.Rule{
+			DetectorId:  ptr.String("__DetectorId__"),
+			RuleId:      ptr.String("__RuleId__"),
+			RuleVersion: ptr.String("__RuleVersion__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +962,9 @@ func TestCheckResponseSnapshot_DeleteVariable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVariable(context.Background(), &DeleteVariableInput{})
+	got, err := svc.DeleteVariable(context.Background(), &DeleteVariableInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -734,7 +1001,11 @@ func TestCheckResponseSnapshot_DescribeDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDetector(context.Background(), &DescribeDetectorInput{})
+	got, err := svc.DescribeDetector(context.Background(), &DescribeDetectorInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1486,13 @@ func TestCheckResponseSnapshot_DescribeModelVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeModelVersions(context.Background(), &DescribeModelVersionsInput{})
+	got, err := svc.DescribeModelVersions(context.Background(), &DescribeModelVersionsInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1268,7 +1545,11 @@ func TestCheckResponseSnapshot_GetBatchImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBatchImportJobs(context.Background(), &GetBatchImportJobsInput{})
+	got, err := svc.GetBatchImportJobs(context.Background(), &GetBatchImportJobsInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1325,7 +1606,11 @@ func TestCheckResponseSnapshot_GetBatchPredictionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBatchPredictionJobs(context.Background(), &GetBatchPredictionJobsInput{})
+	got, err := svc.GetBatchPredictionJobs(context.Background(), &GetBatchPredictionJobsInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1347,7 +1632,9 @@ func TestCheckResponseSnapshot_GetDeleteEventsByEventTypeStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeleteEventsByEventTypeStatus(context.Background(), &GetDeleteEventsByEventTypeStatusInput{})
+	got, err := svc.GetDeleteEventsByEventTypeStatus(context.Background(), &GetDeleteEventsByEventTypeStatusInput{
+		EventTypeName: ptr.String("__EventTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1692,10 @@ func TestCheckResponseSnapshot_GetDetectorVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDetectorVersion(context.Background(), &GetDetectorVersionInput{})
+	got, err := svc.GetDetectorVersion(context.Background(), &GetDetectorVersionInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1444,7 +1734,11 @@ func TestCheckResponseSnapshot_GetDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDetectors(context.Background(), &GetDetectorsInput{})
+	got, err := svc.GetDetectors(context.Background(), &GetDetectorsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1481,7 +1775,11 @@ func TestCheckResponseSnapshot_GetEntityTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEntityTypes(context.Background(), &GetEntityTypesInput{})
+	got, err := svc.GetEntityTypes(context.Background(), &GetEntityTypesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1521,7 +1819,10 @@ func TestCheckResponseSnapshot_GetEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEvent(context.Background(), &GetEventInput{})
+	got, err := svc.GetEvent(context.Background(), &GetEventInput{
+		EventId:       ptr.String("__EventId__"),
+		EventTypeName: ptr.String("__EventTypeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1601,7 +1902,32 @@ func TestCheckResponseSnapshot_GetEventPrediction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventPrediction(context.Background(), &GetEventPredictionInput{})
+	got, err := svc.GetEventPrediction(context.Background(), &GetEventPredictionInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+		EventId:           ptr.String("__EventId__"),
+		EventTypeName:     ptr.String("__EventTypeName__"),
+		Entities: []types.Entity{
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+		},
+		EventTimestamp: ptr.String("__EventTimestamp__"),
+		EventVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		ExternalModelEndpointDataBlobs: map[string]types.ModelEndpointDataBlob{
+			"key0": {
+				ByteBuffer:  []byte("blob"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1855,7 +2181,13 @@ func TestCheckResponseSnapshot_GetEventPredictionMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventPredictionMetadata(context.Background(), &GetEventPredictionMetadataInput{})
+	got, err := svc.GetEventPredictionMetadata(context.Background(), &GetEventPredictionMetadataInput{
+		EventId:             ptr.String("__EventId__"),
+		EventTypeName:       ptr.String("__EventTypeName__"),
+		DetectorId:          ptr.String("__DetectorId__"),
+		DetectorVersionId:   ptr.String("__DetectorVersionId__"),
+		PredictionTimestamp: ptr.String("__PredictionTimestamp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1938,7 +2270,11 @@ func TestCheckResponseSnapshot_GetEventTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventTypes(context.Background(), &GetEventTypesInput{})
+	got, err := svc.GetEventTypes(context.Background(), &GetEventTypesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2011,7 +2347,11 @@ func TestCheckResponseSnapshot_GetExternalModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExternalModels(context.Background(), &GetExternalModelsInput{})
+	got, err := svc.GetExternalModels(context.Background(), &GetExternalModelsInput{
+		ModelEndpoint: ptr.String("__ModelEndpoint__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2071,7 +2411,11 @@ func TestCheckResponseSnapshot_GetLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLabels(context.Background(), &GetLabelsInput{})
+	got, err := svc.GetLabels(context.Background(), &GetLabelsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2096,7 +2440,11 @@ func TestCheckResponseSnapshot_GetListElements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetListElements(context.Background(), &GetListElementsInput{})
+	got, err := svc.GetListElements(context.Background(), &GetListElementsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2135,7 +2483,11 @@ func TestCheckResponseSnapshot_GetListsMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetListsMetadata(context.Background(), &GetListsMetadataInput{})
+	got, err := svc.GetListsMetadata(context.Background(), &GetListsMetadataInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2186,7 +2538,11 @@ func TestCheckResponseSnapshot_GetModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelVersion(context.Background(), &GetModelVersionInput{})
+	got, err := svc.GetModelVersion(context.Background(), &GetModelVersionInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2227,7 +2583,12 @@ func TestCheckResponseSnapshot_GetModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModels(context.Background(), &GetModelsInput{})
+	got, err := svc.GetModels(context.Background(), &GetModelsInput{
+		ModelId:    ptr.String("__ModelId__"),
+		ModelType:  types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +2625,11 @@ func TestCheckResponseSnapshot_GetOutcomes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutcomes(context.Background(), &GetOutcomesInput{})
+	got, err := svc.GetOutcomes(context.Background(), &GetOutcomesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2317,7 +2682,13 @@ func TestCheckResponseSnapshot_GetRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRules(context.Background(), &GetRulesInput{})
+	got, err := svc.GetRules(context.Background(), &GetRulesInput{
+		RuleId:      ptr.String("__RuleId__"),
+		DetectorId:  ptr.String("__DetectorId__"),
+		RuleVersion: ptr.String("__RuleVersion__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2362,7 +2733,11 @@ func TestCheckResponseSnapshot_GetVariables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVariables(context.Background(), &GetVariablesInput{})
+	got, err := svc.GetVariables(context.Background(), &GetVariablesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2401,7 +2776,26 @@ func TestCheckResponseSnapshot_ListEventPredictions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventPredictions(context.Background(), &ListEventPredictionsInput{})
+	got, err := svc.ListEventPredictions(context.Background(), &ListEventPredictionsInput{
+		EventId: &types.FilterCondition{
+			Value: ptr.String("__Value__"),
+		},
+		EventType: &types.FilterCondition{
+			Value: ptr.String("__Value__"),
+		},
+		DetectorId: &types.FilterCondition{
+			Value: ptr.String("__Value__"),
+		},
+		DetectorVersionId: &types.FilterCondition{
+			Value: ptr.String("__Value__"),
+		},
+		PredictionTimeRange: &types.PredictionTimeRange{
+			StartTime: ptr.String("__StartTime__"),
+			EndTime:   ptr.String("__EndTime__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2432,7 +2826,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2451,7 +2849,21 @@ func TestCheckResponseSnapshot_PutDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDetector(context.Background(), &PutDetectorInput{})
+	got, err := svc.PutDetector(context.Background(), &PutDetectorInput{
+		DetectorId:    ptr.String("__DetectorId__"),
+		Description:   ptr.String("__Description__"),
+		EventTypeName: ptr.String("__EventTypeName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2470,7 +2882,20 @@ func TestCheckResponseSnapshot_PutEntityType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEntityType(context.Background(), &PutEntityTypeInput{})
+	got, err := svc.PutEntityType(context.Background(), &PutEntityTypeInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2489,7 +2914,36 @@ func TestCheckResponseSnapshot_PutEventType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEventType(context.Background(), &PutEventTypeInput{})
+	got, err := svc.PutEventType(context.Background(), &PutEventTypeInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		EventVariables: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EntityTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EventIngestion: types.EventIngestion("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		EventOrchestration: &types.EventOrchestration{
+			EventBridgeEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2508,7 +2962,38 @@ func TestCheckResponseSnapshot_PutExternalModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutExternalModel(context.Background(), &PutExternalModelInput{})
+	got, err := svc.PutExternalModel(context.Background(), &PutExternalModelInput{
+		ModelEndpoint:              ptr.String("__ModelEndpoint__"),
+		ModelSource:                types.ModelSource("SAGEMAKER"),
+		InvokeModelEndpointRoleArn: ptr.String("__InvokeModelEndpointRoleArn__"),
+		InputConfiguration: &types.ModelInputConfiguration{
+			EventTypeName:     ptr.String("__EventTypeName__"),
+			Format:            types.ModelInputDataFormat("TEXT_CSV"),
+			UseEventVariables: ptr.Bool(true),
+			JsonInputTemplate: ptr.String("__JsonInputTemplate__"),
+			CsvInputTemplate:  ptr.String("__CsvInputTemplate__"),
+		},
+		OutputConfiguration: &types.ModelOutputConfiguration{
+			Format: types.ModelOutputDataFormat("TEXT_CSV"),
+			JsonKeyToVariableMap: map[string]string{
+				"key0": "__Value__",
+			},
+			CsvIndexToVariableMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ModelEndpointStatus: types.ModelEndpointStatus("ASSOCIATED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2527,7 +3012,9 @@ func TestCheckResponseSnapshot_PutKMSEncryptionKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutKMSEncryptionKey(context.Background(), &PutKMSEncryptionKeyInput{})
+	got, err := svc.PutKMSEncryptionKey(context.Background(), &PutKMSEncryptionKeyInput{
+		KmsEncryptionKeyArn: ptr.String("__KmsEncryptionKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2546,7 +3033,20 @@ func TestCheckResponseSnapshot_PutLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLabel(context.Background(), &PutLabelInput{})
+	got, err := svc.PutLabel(context.Background(), &PutLabelInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2565,7 +3065,20 @@ func TestCheckResponseSnapshot_PutOutcome(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutOutcome(context.Background(), &PutOutcomeInput{})
+	got, err := svc.PutOutcome(context.Background(), &PutOutcomeInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2584,7 +3097,26 @@ func TestCheckResponseSnapshot_SendEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEvent(context.Background(), &SendEventInput{})
+	got, err := svc.SendEvent(context.Background(), &SendEventInput{
+		EventId:        ptr.String("__EventId__"),
+		EventTypeName:  ptr.String("__EventTypeName__"),
+		EventTimestamp: ptr.String("__EventTimestamp__"),
+		EventVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		AssignedLabel:  ptr.String("__AssignedLabel__"),
+		LabelTimestamp: ptr.String("__LabelTimestamp__"),
+		Entities: []types.Entity{
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2603,7 +3135,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3166,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2641,7 +3191,42 @@ func TestCheckResponseSnapshot_UpdateDetectorVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDetectorVersion(context.Background(), &UpdateDetectorVersionInput{})
+	got, err := svc.UpdateDetectorVersion(context.Background(), &UpdateDetectorVersionInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+		ExternalModelEndpoints: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Rules: []types.Rule{
+			{
+				DetectorId:  ptr.String("__DetectorId__"),
+				RuleId:      ptr.String("__RuleId__"),
+				RuleVersion: ptr.String("__RuleVersion__"),
+			},
+			{
+				DetectorId:  ptr.String("__DetectorId__"),
+				RuleId:      ptr.String("__RuleId__"),
+				RuleVersion: ptr.String("__RuleVersion__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ModelVersions: []types.ModelVersion{
+			{
+				ModelId:            ptr.String("__ModelId__"),
+				ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+				ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+				Arn:                ptr.String("__Arn__"),
+			},
+			{
+				ModelId:            ptr.String("__ModelId__"),
+				ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+				ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+				Arn:                ptr.String("__Arn__"),
+			},
+		},
+		RuleExecutionMode: types.RuleExecutionMode("ALL_MATCHED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2660,7 +3245,11 @@ func TestCheckResponseSnapshot_UpdateDetectorVersionMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDetectorVersionMetadata(context.Background(), &UpdateDetectorVersionMetadataInput{})
+	got, err := svc.UpdateDetectorVersionMetadata(context.Background(), &UpdateDetectorVersionMetadataInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+		Description:       ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2679,7 +3268,11 @@ func TestCheckResponseSnapshot_UpdateDetectorVersionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDetectorVersionStatus(context.Background(), &UpdateDetectorVersionStatusInput{})
+	got, err := svc.UpdateDetectorVersionStatus(context.Background(), &UpdateDetectorVersionStatusInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+		Status:            types.DetectorVersionStatus("DRAFT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2698,7 +3291,12 @@ func TestCheckResponseSnapshot_UpdateEventLabel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventLabel(context.Background(), &UpdateEventLabelInput{})
+	got, err := svc.UpdateEventLabel(context.Background(), &UpdateEventLabelInput{
+		EventId:        ptr.String("__EventId__"),
+		EventTypeName:  ptr.String("__EventTypeName__"),
+		AssignedLabel:  ptr.String("__AssignedLabel__"),
+		LabelTimestamp: ptr.String("__LabelTimestamp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2717,7 +3315,16 @@ func TestCheckResponseSnapshot_UpdateList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateList(context.Background(), &UpdateListInput{})
+	got, err := svc.UpdateList(context.Background(), &UpdateListInput{
+		Name: ptr.String("__Name__"),
+		Elements: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description:  ptr.String("__Description__"),
+		UpdateMode:   types.ListUpdateMode("REPLACE"),
+		VariableType: ptr.String("__VariableType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2736,7 +3343,11 @@ func TestCheckResponseSnapshot_UpdateModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{})
+	got, err := svc.UpdateModel(context.Background(), &UpdateModelInput{
+		ModelId:     ptr.String("__ModelId__"),
+		ModelType:   types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2760,7 +3371,31 @@ func TestCheckResponseSnapshot_UpdateModelVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModelVersion(context.Background(), &UpdateModelVersionInput{})
+	got, err := svc.UpdateModelVersion(context.Background(), &UpdateModelVersionInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		MajorVersionNumber: ptr.String("__MajorVersionNumber__"),
+		ExternalEventsDetail: &types.ExternalEventsDetail{
+			DataLocation:      ptr.String("__DataLocation__"),
+			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		},
+		IngestedEventsDetail: &types.IngestedEventsDetail{
+			IngestedEventsTimeWindow: &types.IngestedEventsTimeWindow{
+				StartTime: ptr.String("__StartTime__"),
+				EndTime:   ptr.String("__EndTime__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2779,7 +3414,12 @@ func TestCheckResponseSnapshot_UpdateModelVersionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModelVersionStatus(context.Background(), &UpdateModelVersionStatusInput{})
+	got, err := svc.UpdateModelVersionStatus(context.Background(), &UpdateModelVersionStatusInput{
+		ModelId:            ptr.String("__ModelId__"),
+		ModelType:          types.ModelTypeEnum("ONLINE_FRAUD_INSIGHTS"),
+		ModelVersionNumber: ptr.String("__ModelVersionNumber__"),
+		Status:             types.ModelVersionStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2798,7 +3438,14 @@ func TestCheckResponseSnapshot_UpdateRuleMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleMetadata(context.Background(), &UpdateRuleMetadataInput{})
+	got, err := svc.UpdateRuleMetadata(context.Background(), &UpdateRuleMetadataInput{
+		Rule: &types.Rule{
+			DetectorId:  ptr.String("__DetectorId__"),
+			RuleId:      ptr.String("__RuleId__"),
+			RuleVersion: ptr.String("__RuleVersion__"),
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2823,7 +3470,30 @@ func TestCheckResponseSnapshot_UpdateRuleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleVersion(context.Background(), &UpdateRuleVersionInput{})
+	got, err := svc.UpdateRuleVersion(context.Background(), &UpdateRuleVersionInput{
+		Rule: &types.Rule{
+			DetectorId:  ptr.String("__DetectorId__"),
+			RuleId:      ptr.String("__RuleId__"),
+			RuleVersion: ptr.String("__RuleVersion__"),
+		},
+		Description: ptr.String("__Description__"),
+		Expression:  ptr.String("__Expression__"),
+		Language:    types.Language("DETECTORPL"),
+		Outcomes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2842,7 +3512,12 @@ func TestCheckResponseSnapshot_UpdateVariable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVariable(context.Background(), &UpdateVariableInput{})
+	got, err := svc.UpdateVariable(context.Background(), &UpdateVariableInput{
+		Name:         ptr.String("__Name__"),
+		DefaultValue: ptr.String("__DefaultValue__"),
+		Description:  ptr.String("__Description__"),
+		VariableType: ptr.String("__VariableType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2863,7 +3538,36 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{})
+	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{
+		VariableEntries: []types.VariableEntry{
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2888,7 +3592,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{})
+	_, opErr := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2913,7 +3619,36 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{})
+	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{
+		VariableEntries: []types.VariableEntry{
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2938,7 +3673,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelBatchImportJob(context.Background(), &CancelBatchImportJobInput{})
+	_, opErr := svc.CancelBatchImportJob(context.Background(), &CancelBatchImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2963,7 +3700,32 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEventPrediction(context.Background(), &GetEventPredictionInput{})
+	_, opErr := svc.GetEventPrediction(context.Background(), &GetEventPredictionInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		DetectorVersionId: ptr.String("__DetectorVersionId__"),
+		EventId:           ptr.String("__EventId__"),
+		EventTypeName:     ptr.String("__EventTypeName__"),
+		Entities: []types.Entity{
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+			{
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+			},
+		},
+		EventTimestamp: ptr.String("__EventTimestamp__"),
+		EventVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		ExternalModelEndpointDataBlobs: map[string]types.ModelEndpointDataBlob{
+			"key0": {
+				ByteBuffer:  []byte("blob"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2988,7 +3750,36 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{})
+	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{
+		VariableEntries: []types.VariableEntry{
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3013,7 +3804,36 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{})
+	_, opErr := svc.BatchCreateVariable(context.Background(), &BatchCreateVariableInput{
+		VariableEntries: []types.VariableEntry{
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+			{
+				Name:         ptr.String("__Name__"),
+				DataType:     ptr.String("__DataType__"),
+				DataSource:   ptr.String("__DataSource__"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+				Description:  ptr.String("__Description__"),
+				VariableType: ptr.String("__VariableType__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

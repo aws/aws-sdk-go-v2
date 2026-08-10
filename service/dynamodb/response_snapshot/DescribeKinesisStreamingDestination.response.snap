@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.DescribeKinesisStreamingDestination
+
+{"KinesisDataStreamDestinations":[{"ApproximateCreationDateTimePrecision":"MILLISECOND","DestinationStatus":"ENABLING","DestinationStatusDescription":"__DestinationStatusDescription__","StreamArn":"__StreamArn__"},{"ApproximateCreationDateTimePrecision":"MILLISECOND","DestinationStatus":"ENABLING","DestinationStatusDescription":"__DestinationStatusDescription__","StreamArn":"__StreamArn__"}],"TableName":"__TableName__"}

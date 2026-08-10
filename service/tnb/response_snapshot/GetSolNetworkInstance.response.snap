@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","id":"__Id__","lcmOpInfo":{"nsLcmOpOccId":"__NsLcmOpOccId__"},"metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsInstanceDescription":"__NsInstanceDescription__","nsInstanceName":"__NsInstanceName__","nsState":"INSTANTIATED","nsdId":"__NsdId__","nsdInfoId":"__NsdInfoId__","tags":{"key0":"__Value__"}}

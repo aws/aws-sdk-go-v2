@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeDatasetGroup
+
+{"datasetGroup":{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","domain":"ECOMMERCE","failureReason":"__FailureReason__","kmsKeyArn":"__KmsKeyArn__","lastUpdatedDateTime":946684800,"name":"__Name__","roleArn":"__RoleArn__","status":"__Status__"}}

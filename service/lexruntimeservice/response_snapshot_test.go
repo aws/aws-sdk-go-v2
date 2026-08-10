@@ -121,7 +121,11 @@ func TestCheckResponseSnapshot_DeleteSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	got, err := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +206,12 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		BotName:               ptr.String("__BotName__"),
+		BotAlias:              ptr.String("__BotAlias__"),
+		UserId:                ptr.String("__UserId__"),
+		CheckpointLabelFilter: ptr.String("__CheckpointLabelFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,6 +236,7 @@ func TestCheckResponseSnapshot_PostContent(t *testing.T) {
 		SlotToElicit:           ptr.String("__SlotToElicit__"),
 		InputTranscript:        ptr.String("__InputTranscript__"),
 		EncodedInputTranscript: ptr.String("__EncodedInputTranscript__"),
+		AudioStream:            io.NopCloser(bytes.NewReader([]byte("__AudioStream__"))),
 		BotVersion:             ptr.String("__BotVersion__"),
 		SessionId:              ptr.String("__SessionId__"),
 		ActiveContexts:         ptr.String("__ActiveContexts__"),
@@ -239,7 +249,17 @@ func TestCheckResponseSnapshot_PostContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostContent(context.Background(), &PostContentInput{})
+	got, err := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +379,40 @@ func TestCheckResponseSnapshot_PostText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostText(context.Background(), &PostTextInput{})
+	got, err := svc.PostText(context.Background(), &PostTextInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+		SessionAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		InputText: ptr.String("__InputText__"),
+		ActiveContexts: []types.ActiveContext{
+			{
+				Name: ptr.String("__Name__"),
+				TimeToLive: &types.ActiveContextTimeToLive{
+					TimeToLiveInSeconds: ptr.Int32(1),
+					TurnsToLive:         ptr.Int32(1),
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				TimeToLive: &types.ActiveContextTimeToLive{
+					TimeToLiveInSeconds: ptr.Int32(1),
+					TurnsToLive:         ptr.Int32(1),
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,6 +432,7 @@ func TestCheckResponseSnapshot_PutSession(t *testing.T) {
 		MessageFormat:     types.MessageFormatType("PlainText"),
 		DialogState:       types.DialogState("ElicitIntent"),
 		SlotToElicit:      ptr.String("__SlotToElicit__"),
+		AudioStream:       io.NopCloser(bytes.NewReader([]byte("__AudioStream__"))),
 		SessionId:         ptr.String("__SessionId__"),
 		ActiveContexts:    ptr.String("__ActiveContexts__"),
 	}
@@ -390,7 +444,72 @@ func TestCheckResponseSnapshot_PutSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSession(context.Background(), &PutSessionInput{})
+	got, err := svc.PutSession(context.Background(), &PutSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+		SessionAttributes: map[string]string{
+			"key0": "__Value__",
+		},
+		DialogAction: &types.DialogAction{
+			Type:       types.DialogActionType("ElicitIntent"),
+			IntentName: ptr.String("__IntentName__"),
+			Slots: map[string]string{
+				"key0": "__Value__",
+			},
+			SlotToElicit:     ptr.String("__SlotToElicit__"),
+			FulfillmentState: types.FulfillmentState("Fulfilled"),
+			Message:          ptr.String("__Message__"),
+			MessageFormat:    types.MessageFormatType("PlainText"),
+		},
+		RecentIntentSummaryView: []types.IntentSummary{
+			{
+				IntentName:      ptr.String("__IntentName__"),
+				CheckpointLabel: ptr.String("__CheckpointLabel__"),
+				Slots: map[string]string{
+					"key0": "__Value__",
+				},
+				ConfirmationStatus: types.ConfirmationStatus("None"),
+				DialogActionType:   types.DialogActionType("ElicitIntent"),
+				FulfillmentState:   types.FulfillmentState("Fulfilled"),
+				SlotToElicit:       ptr.String("__SlotToElicit__"),
+			},
+			{
+				IntentName:      ptr.String("__IntentName__"),
+				CheckpointLabel: ptr.String("__CheckpointLabel__"),
+				Slots: map[string]string{
+					"key0": "__Value__",
+				},
+				ConfirmationStatus: types.ConfirmationStatus("None"),
+				DialogActionType:   types.DialogActionType("ElicitIntent"),
+				FulfillmentState:   types.FulfillmentState("Fulfilled"),
+				SlotToElicit:       ptr.String("__SlotToElicit__"),
+			},
+		},
+		Accept: ptr.String("__Accept__"),
+		ActiveContexts: []types.ActiveContext{
+			{
+				Name: ptr.String("__Name__"),
+				TimeToLive: &types.ActiveContextTimeToLive{
+					TimeToLiveInSeconds: ptr.Int32(1),
+					TurnsToLive:         ptr.Int32(1),
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				TimeToLive: &types.ActiveContextTimeToLive{
+					TimeToLiveInSeconds: ptr.Int32(1),
+					TurnsToLive:         ptr.Int32(1),
+				},
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +530,17 @@ func TestCheckResponseSnapshot_Error_BadGatewayException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -436,7 +565,11 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -461,7 +594,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -486,7 +623,17 @@ func TestCheckResponseSnapshot_Error_DependencyFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -511,7 +658,11 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -537,7 +688,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -562,7 +717,17 @@ func TestCheckResponseSnapshot_Error_LoopDetectedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -587,7 +752,17 @@ func TestCheckResponseSnapshot_Error_NotAcceptableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -612,7 +787,11 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{})
+	_, opErr := svc.DeleteSession(context.Background(), &DeleteSessionInput{
+		BotName:  ptr.String("__BotName__"),
+		BotAlias: ptr.String("__BotAlias__"),
+		UserId:   ptr.String("__UserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +816,17 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -662,7 +851,17 @@ func TestCheckResponseSnapshot_Error_UnsupportedMediaTypeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostContent(context.Background(), &PostContentInput{})
+	_, opErr := svc.PostContent(context.Background(), &PostContentInput{
+		BotName:           ptr.String("__BotName__"),
+		BotAlias:          ptr.String("__BotAlias__"),
+		UserId:            ptr.String("__UserId__"),
+		SessionAttributes: ptr.String("__SessionAttributes__"),
+		RequestAttributes: ptr.String("__RequestAttributes__"),
+		ContentType:       ptr.String("__ContentType__"),
+		Accept:            ptr.String("__Accept__"),
+		InputStream:       io.NopCloser(bytes.NewReader([]byte("__InputStream__"))),
+		ActiveContexts:    ptr.String("__ActiveContexts__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

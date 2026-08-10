@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CompletedTimestamp":946684800,"CreatedTimestamp":946684800,"FailedRecordsCount":1,"FailureInfo":{"ErrorMessage":"__ErrorMessage__","FailedRecordsS3Url":"__FailedRecordsS3Url__"},"ImportDataSource":{"DataFormat":"CSV","S3Url":"__S3Url__"},"ImportDestination":{"ContactListDestination":{"ContactListImportAction":"DELETE","ContactListName":"__ContactListName__"},"SuppressionListDestination":{"SuppressionListImportAction":"DELETE"}},"JobId":"__JobId__","JobStatus":"CREATED","ProcessedRecordsCount":1}

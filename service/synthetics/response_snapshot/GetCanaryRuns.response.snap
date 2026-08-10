@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CanaryRuns":[{"ArtifactS3Location":"__ArtifactS3Location__","BrowserType":"CHROME","DryRunConfig":{"DryRunId":"__DryRunId__"},"Id":"__Id__","Location":"__Location__","Name":"__Name__","RetryAttempt":1,"ScheduledRunId":"__ScheduledRunId__","Status":{"State":"RUNNING","StateReason":"__StateReason__","StateReasonCode":"CANARY_FAILURE","TestResult":"PASSED"},"Timeline":{"Completed":946684800,"MetricTimestampForRunAndRetries":946684800,"Started":946684800}},{"ArtifactS3Location":"__ArtifactS3Location__","BrowserType":"CHROME","DryRunConfig":{"DryRunId":"__DryRunId__"},"Id":"__Id__","Location":"__Location__","Name":"__Name__","RetryAttempt":1,"ScheduledRunId":"__ScheduledRunId__","Status":{"State":"RUNNING","StateReason":"__StateReason__","StateReasonCode":"CANARY_FAILURE","TestResult":"PASSED"},"Timeline":{"Completed":946684800,"MetricTimestampForRunAndRetries":946684800,"Started":946684800}}],"NextToken":"__NextToken__"}

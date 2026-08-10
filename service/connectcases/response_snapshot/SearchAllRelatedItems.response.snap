@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","relatedItems":[{"associationTime":"2000-01-01T00:00:00Z","caseId":"__CaseId__","content":{"contact":{"channel":"__Channel__","connectedToSystemTime":"2000-01-01T00:00:00Z","contactArn":"__ContactArn__"}},"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"relatedItemId":"__RelatedItemId__","tags":{"key0":"__Value__"},"type":"Contact"},{"associationTime":"2000-01-01T00:00:00Z","caseId":"__CaseId__","content":{"contact":{"channel":"__Channel__","connectedToSystemTime":"2000-01-01T00:00:00Z","contactArn":"__ContactArn__"}},"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"relatedItemId":"__RelatedItemId__","tags":{"key0":"__Value__"},"type":"Contact"}]}

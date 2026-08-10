@@ -119,7 +119,33 @@ func TestCheckResponseSnapshot_CreateConfigurationManager(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	got, err := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +164,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationManager(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationManager(context.Background(), &DeleteConfigurationManagerInput{})
+	got, err := svc.DeleteConfigurationManager(context.Background(), &DeleteConfigurationManagerInput{
+		ManagerArn: ptr.String("__ManagerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +218,9 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{})
+	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{
+		ConfigurationId: ptr.String("__ConfigurationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +290,9 @@ func TestCheckResponseSnapshot_GetConfigurationManager(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfigurationManager(context.Background(), &GetConfigurationManagerInput{})
+	got, err := svc.GetConfigurationManager(context.Background(), &GetConfigurationManagerInput{
+		ManagerArn: ptr.String("__ManagerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +424,26 @@ func TestCheckResponseSnapshot_ListConfigurationManagers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationManagers(context.Background(), &ListConfigurationManagersInput{})
+	got, err := svc.ListConfigurationManagers(context.Background(), &ListConfigurationManagersInput{
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxItems:      ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +532,28 @@ func TestCheckResponseSnapshot_ListConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{})
+	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxItems:      ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ManagerArn:                ptr.String("__ManagerArn__"),
+		ConfigurationDefinitionId: ptr.String("__ConfigurationDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +613,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -560,7 +634,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +658,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +683,16 @@ func TestCheckResponseSnapshot_UpdateConfigurationDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationDefinition(context.Background(), &UpdateConfigurationDefinitionInput{})
+	got, err := svc.UpdateConfigurationDefinition(context.Background(), &UpdateConfigurationDefinitionInput{
+		ManagerArn:  ptr.String("__ManagerArn__"),
+		Id:          ptr.String("__Id__"),
+		TypeVersion: ptr.String("__TypeVersion__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+		LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +711,11 @@ func TestCheckResponseSnapshot_UpdateConfigurationManager(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationManager(context.Background(), &UpdateConfigurationManagerInput{})
+	got, err := svc.UpdateConfigurationManager(context.Background(), &UpdateConfigurationManagerInput{
+		ManagerArn:  ptr.String("__ManagerArn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -636,7 +734,9 @@ func TestCheckResponseSnapshot_UpdateServiceSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{})
+	got, err := svc.UpdateServiceSettings(context.Background(), &UpdateServiceSettingsInput{
+		ExplorerEnablingRoleArn: ptr.String("__ExplorerEnablingRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +757,33 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -682,7 +808,33 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -707,7 +859,33 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -732,7 +910,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigurationManager(context.Background(), &DeleteConfigurationManagerInput{})
+	_, opErr := svc.DeleteConfigurationManager(context.Background(), &DeleteConfigurationManagerInput{
+		ManagerArn: ptr.String("__ManagerArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -757,7 +937,33 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -782,7 +988,33 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{})
+	_, opErr := svc.CreateConfigurationManager(context.Background(), &CreateConfigurationManagerInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ConfigurationDefinitions: []types.ConfigurationDefinitionInput{
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				TypeVersion:                          ptr.String("__TypeVersion__"),
+				LocalDeploymentExecutionRoleName:     ptr.String("__LocalDeploymentExecutionRoleName__"),
+				LocalDeploymentAdministrationRoleArn: ptr.String("__LocalDeploymentAdministrationRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

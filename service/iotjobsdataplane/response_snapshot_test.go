@@ -132,7 +132,12 @@ func TestCheckResponseSnapshot_DescribeJobExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	got, err := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +193,9 @@ func TestCheckResponseSnapshot_GetPendingJobExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPendingJobExecutions(context.Background(), &GetPendingJobExecutionsInput{})
+	got, err := svc.GetPendingJobExecutions(context.Background(), &GetPendingJobExecutionsInput{
+		ThingName: ptr.String("__ThingName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +216,23 @@ func TestCheckResponseSnapshot_StartCommandExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	got, err := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		CommandArn: ptr.String("__CommandArn__"),
+		Parameters: map[string]types.CommandParameterValue{
+			"key0": {
+				S:   ptr.String("__S__"),
+				B:   ptr.Bool(true),
+				I:   ptr.Int32(1),
+				L:   ptr.Int64(1),
+				D:   ptr.Float64(1.0),
+				BIN: []byte("blob"),
+				UL:  ptr.String("__UL__"),
+			},
+		},
+		ExecutionTimeoutSeconds: ptr.Int64(1),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +267,13 @@ func TestCheckResponseSnapshot_StartNextPendingJobExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartNextPendingJobExecution(context.Background(), &StartNextPendingJobExecutionInput{})
+	got, err := svc.StartNextPendingJobExecution(context.Background(), &StartNextPendingJobExecutionInput{
+		ThingName: ptr.String("__ThingName__"),
+		StatusDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		StepTimeoutInMinutes: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +301,19 @@ func TestCheckResponseSnapshot_UpdateJobExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJobExecution(context.Background(), &UpdateJobExecutionInput{})
+	got, err := svc.UpdateJobExecution(context.Background(), &UpdateJobExecutionInput{
+		JobId:     ptr.String("__JobId__"),
+		ThingName: ptr.String("__ThingName__"),
+		Status:    types.JobExecutionStatus("QUEUED"),
+		StatusDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		StepTimeoutInMinutes:     ptr.Int64(1),
+		ExpectedVersion:          ptr.Int64(1),
+		IncludeJobExecutionState: ptr.Bool(true),
+		IncludeJobDocument:       ptr.Bool(true),
+		ExecutionNumber:          ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +334,12 @@ func TestCheckResponseSnapshot_Error_CertificateValidationException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -319,7 +365,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		CommandArn: ptr.String("__CommandArn__"),
+		Parameters: map[string]types.CommandParameterValue{
+			"key0": {
+				S:   ptr.String("__S__"),
+				B:   ptr.Bool(true),
+				I:   ptr.Int32(1),
+				L:   ptr.Int64(1),
+				D:   ptr.Float64(1.0),
+				BIN: []byte("blob"),
+				UL:  ptr.String("__UL__"),
+			},
+		},
+		ExecutionTimeoutSeconds: ptr.Int64(1),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -344,7 +406,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		CommandArn: ptr.String("__CommandArn__"),
+		Parameters: map[string]types.CommandParameterValue{
+			"key0": {
+				S:   ptr.String("__S__"),
+				B:   ptr.Bool(true),
+				I:   ptr.Int32(1),
+				L:   ptr.Int64(1),
+				D:   ptr.Float64(1.0),
+				BIN: []byte("blob"),
+				UL:  ptr.String("__UL__"),
+			},
+		},
+		ExecutionTimeoutSeconds: ptr.Int64(1),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -369,7 +447,12 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -394,7 +477,19 @@ func TestCheckResponseSnapshot_Error_InvalidStateTransitionException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateJobExecution(context.Background(), &UpdateJobExecutionInput{})
+	_, opErr := svc.UpdateJobExecution(context.Background(), &UpdateJobExecutionInput{
+		JobId:     ptr.String("__JobId__"),
+		ThingName: ptr.String("__ThingName__"),
+		Status:    types.JobExecutionStatus("QUEUED"),
+		StatusDetails: map[string]string{
+			"key0": "__Value__",
+		},
+		StepTimeoutInMinutes:     ptr.Int64(1),
+		ExpectedVersion:          ptr.Int64(1),
+		IncludeJobExecutionState: ptr.Bool(true),
+		IncludeJobDocument:       ptr.Bool(true),
+		ExecutionNumber:          ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -419,7 +514,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -444,7 +544,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		CommandArn: ptr.String("__CommandArn__"),
+		Parameters: map[string]types.CommandParameterValue{
+			"key0": {
+				S:   ptr.String("__S__"),
+				B:   ptr.Bool(true),
+				I:   ptr.Int32(1),
+				L:   ptr.Int64(1),
+				D:   ptr.Float64(1.0),
+				BIN: []byte("blob"),
+				UL:  ptr.String("__UL__"),
+			},
+		},
+		ExecutionTimeoutSeconds: ptr.Int64(1),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -469,7 +585,12 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -494,7 +615,12 @@ func TestCheckResponseSnapshot_Error_TerminalStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -520,7 +646,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{})
+	_, opErr := svc.DescribeJobExecution(context.Background(), &DescribeJobExecutionInput{
+		JobId:              ptr.String("__JobId__"),
+		ThingName:          ptr.String("__ThingName__"),
+		IncludeJobDocument: ptr.Bool(true),
+		ExecutionNumber:    ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -545,7 +676,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{})
+	_, opErr := svc.StartCommandExecution(context.Background(), &StartCommandExecutionInput{
+		TargetArn:  ptr.String("__TargetArn__"),
+		CommandArn: ptr.String("__CommandArn__"),
+		Parameters: map[string]types.CommandParameterValue{
+			"key0": {
+				S:   ptr.String("__S__"),
+				B:   ptr.Bool(true),
+				I:   ptr.Int32(1),
+				L:   ptr.Int64(1),
+				D:   ptr.Float64(1.0),
+				BIN: []byte("blob"),
+				UL:  ptr.String("__UL__"),
+			},
+		},
+		ExecutionTimeoutSeconds: ptr.Int64(1),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

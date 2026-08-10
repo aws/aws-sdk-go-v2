@@ -63,7 +63,9 @@ func (v *SearchDiscoverableRegistryRecordsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *SearchDiscoverableRegistryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.SearchDiscoverableRegistryRecordsRequest_filters, &smithydocument.Opaque{Value: v.Filters})
+	if v.Filters != nil {
+		s.WriteDocument(schemas.SearchDiscoverableRegistryRecordsRequest_filters, &smithydocument.Opaque{Value: v.Filters})
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchDiscoverableRegistryRecordsRequest_maxResults, *v.MaxResults)
 	}

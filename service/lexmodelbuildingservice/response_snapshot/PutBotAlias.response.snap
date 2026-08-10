@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botName":"__BotName__","botVersion":"__BotVersion__","checksum":"__Checksum__","conversationLogs":{"iamRoleArn":"__IamRoleArn__","logSettings":[{"destination":"CLOUDWATCH_LOGS","kmsKeyArn":"__KmsKeyArn__","logType":"AUDIO","resourceArn":"__ResourceArn__","resourcePrefix":"__ResourcePrefix__"},{"destination":"CLOUDWATCH_LOGS","kmsKeyArn":"__KmsKeyArn__","logType":"AUDIO","resourceArn":"__ResourceArn__","resourcePrefix":"__ResourcePrefix__"}]},"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

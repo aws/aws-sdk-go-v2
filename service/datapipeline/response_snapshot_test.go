@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -116,7 +117,20 @@ func TestCheckResponseSnapshot_ActivatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{})
+	got, err := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +149,19 @@ func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTags(context.Background(), &AddTagsInput{})
+	got, err := svc.AddTags(context.Background(), &AddTagsInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +182,21 @@ func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		Name:        ptr.String("__Name__"),
+		UniqueId:    ptr.String("__UniqueId__"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +215,10 @@ func TestCheckResponseSnapshot_DeactivatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivatePipeline(context.Background(), &DeactivatePipelineInput{})
+	got, err := svc.DeactivatePipeline(context.Background(), &DeactivatePipelineInput{
+		PipelineId:   ptr.String("__PipelineId__"),
+		CancelActive: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +237,9 @@ func TestCheckResponseSnapshot_DeletePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +295,15 @@ func TestCheckResponseSnapshot_DescribeObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeObjects(context.Background(), &DescribeObjectsInput{})
+	got, err := svc.DescribeObjects(context.Background(), &DescribeObjectsInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ObjectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EvaluateExpressions: true,
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +379,12 @@ func TestCheckResponseSnapshot_DescribePipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePipelines(context.Background(), &DescribePipelinesInput{})
+	got, err := svc.DescribePipelines(context.Background(), &DescribePipelinesInput{
+		PipelineIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +405,11 @@ func TestCheckResponseSnapshot_EvaluateExpression(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EvaluateExpression(context.Background(), &EvaluateExpressionInput{})
+	got, err := svc.EvaluateExpression(context.Background(), &EvaluateExpressionInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ObjectId:   ptr.String("__ObjectId__"),
+		Expression: ptr.String("__Expression__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +501,10 @@ func TestCheckResponseSnapshot_GetPipelineDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipelineDefinition(context.Background(), &GetPipelineDefinitionInput{})
+	got, err := svc.GetPipelineDefinition(context.Background(), &GetPipelineDefinitionInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		Version:    ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +536,9 @@ func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{})
+	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +581,14 @@ func TestCheckResponseSnapshot_PollForTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PollForTask(context.Background(), &PollForTaskInput{})
+	got, err := svc.PollForTask(context.Background(), &PollForTaskInput{
+		WorkerGroup: ptr.String("__WorkerGroup__"),
+		Hostname:    ptr.String("__Hostname__"),
+		InstanceIdentity: &types.InstanceIdentity{
+			Document:  ptr.String("__Document__"),
+			Signature: ptr.String("__Signature__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +641,81 @@ func TestCheckResponseSnapshot_PutPipelineDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPipelineDefinition(context.Background(), &PutPipelineDefinitionInput{})
+	got, err := svc.PutPipelineDefinition(context.Background(), &PutPipelineDefinitionInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		PipelineObjects: []types.PipelineObject{
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				Fields: []types.Field{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+				},
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				Fields: []types.Field{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+				},
+			},
+		},
+		ParameterObjects: []types.ParameterObject{
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.ParameterAttribute{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.ParameterAttribute{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+				},
+			},
+		},
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -593,7 +741,36 @@ func TestCheckResponseSnapshot_QueryObjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryObjects(context.Background(), &QueryObjectsInput{})
+	got, err := svc.QueryObjects(context.Background(), &QueryObjectsInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		Query: &types.Query{
+			Selectors: []types.Selector{
+				{
+					FieldName: ptr.String("__FieldName__"),
+					Operator: &types.Operator{
+						Type: types.OperatorType("EQ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					FieldName: ptr.String("__FieldName__"),
+					Operator: &types.Operator{
+						Type: types.OperatorType("EQ"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Sphere: ptr.String("__Sphere__"),
+		Marker: ptr.String("__Marker__"),
+		Limit:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +789,13 @@ func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{})
+	got, err := svc.RemoveTags(context.Background(), &RemoveTagsInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +816,21 @@ func TestCheckResponseSnapshot_ReportTaskProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReportTaskProgress(context.Background(), &ReportTaskProgressInput{})
+	got, err := svc.ReportTaskProgress(context.Background(), &ReportTaskProgressInput{
+		TaskId: ptr.String("__TaskId__"),
+		Fields: []types.Field{
+			{
+				Key:         ptr.String("__Key__"),
+				StringValue: ptr.String("__StringValue__"),
+				RefValue:    ptr.String("__RefValue__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				StringValue: ptr.String("__StringValue__"),
+				RefValue:    ptr.String("__RefValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -654,7 +851,11 @@ func TestCheckResponseSnapshot_ReportTaskRunnerHeartbeat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReportTaskRunnerHeartbeat(context.Background(), &ReportTaskRunnerHeartbeatInput{})
+	got, err := svc.ReportTaskRunnerHeartbeat(context.Background(), &ReportTaskRunnerHeartbeatInput{
+		TaskrunnerId: ptr.String("__TaskrunnerId__"),
+		WorkerGroup:  ptr.String("__WorkerGroup__"),
+		Hostname:     ptr.String("__Hostname__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +874,14 @@ func TestCheckResponseSnapshot_SetStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetStatus(context.Background(), &SetStatusInput{})
+	got, err := svc.SetStatus(context.Background(), &SetStatusInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ObjectIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: ptr.String("__Status__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -692,7 +900,13 @@ func TestCheckResponseSnapshot_SetTaskStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetTaskStatus(context.Background(), &SetTaskStatusInput{})
+	got, err := svc.SetTaskStatus(context.Background(), &SetTaskStatusInput{
+		TaskId:          ptr.String("__TaskId__"),
+		TaskStatus:      types.TaskStatus("FINISHED"),
+		ErrorId:         ptr.String("__ErrorId__"),
+		ErrorMessage:    ptr.String("__ErrorMessage__"),
+		ErrorStackTrace: ptr.String("__ErrorStackTrace__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -745,7 +959,81 @@ func TestCheckResponseSnapshot_ValidatePipelineDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidatePipelineDefinition(context.Background(), &ValidatePipelineDefinitionInput{})
+	got, err := svc.ValidatePipelineDefinition(context.Background(), &ValidatePipelineDefinitionInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		PipelineObjects: []types.PipelineObject{
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				Fields: []types.Field{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+				},
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Name: ptr.String("__Name__"),
+				Fields: []types.Field{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+						RefValue:    ptr.String("__RefValue__"),
+					},
+				},
+			},
+		},
+		ParameterObjects: []types.ParameterObject{
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.ParameterAttribute{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.ParameterAttribute{
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+					{
+						Key:         ptr.String("__Key__"),
+						StringValue: ptr.String("__StringValue__"),
+					},
+				},
+			},
+		},
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -766,7 +1054,20 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{})
+	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -791,7 +1092,20 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{})
+	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -816,7 +1130,20 @@ func TestCheckResponseSnapshot_Error_PipelineDeletedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{})
+	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -841,7 +1168,20 @@ func TestCheckResponseSnapshot_Error_PipelineNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{})
+	_, opErr := svc.ActivatePipeline(context.Background(), &ActivatePipelineInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ParameterValues: []types.ParameterValue{
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				StringValue: ptr.String("__StringValue__"),
+			},
+		},
+		StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -866,7 +1206,11 @@ func TestCheckResponseSnapshot_Error_TaskNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EvaluateExpression(context.Background(), &EvaluateExpressionInput{})
+	_, opErr := svc.EvaluateExpression(context.Background(), &EvaluateExpressionInput{
+		PipelineId: ptr.String("__PipelineId__"),
+		ObjectId:   ptr.String("__ObjectId__"),
+		Expression: ptr.String("__Expression__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

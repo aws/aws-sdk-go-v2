@@ -123,7 +123,13 @@ func TestCheckResponseSnapshot_GetBuyerDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{})
+	got, err := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{
+		DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+		EmbeddingDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -144,7 +150,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{})
+	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{
+		DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+		EmbeddingDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -169,7 +181,13 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{})
+	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{
+		DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+		EmbeddingDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -194,7 +212,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{})
+	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{
+		DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+		EmbeddingDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -219,7 +243,13 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{})
+	_, opErr := svc.GetBuyerDashboard(context.Background(), &GetBuyerDashboardInput{
+		DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+		EmbeddingDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

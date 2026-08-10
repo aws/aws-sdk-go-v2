@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"routedState":"ROUTED","routerInputArn":"__RouterInputArn__","routerInputName":"__RouterInputName__","routerOutputArn":"__RouterOutputArn__","routerOutputName":"__RouterOutputName__"}

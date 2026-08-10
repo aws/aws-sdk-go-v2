@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -122,7 +123,28 @@ func TestCheckResponseSnapshot_CreateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +163,9 @@ func TestCheckResponseSnapshot_DeleteCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{})
+	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +184,9 @@ func TestCheckResponseSnapshot_DeleteConnectInstanceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectInstanceConfig(context.Background(), &DeleteConnectInstanceConfigInput{})
+	got, err := svc.DeleteConnectInstanceConfig(context.Background(), &DeleteConnectInstanceConfigInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +205,9 @@ func TestCheckResponseSnapshot_DeleteInstanceOnboardingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstanceOnboardingJob(context.Background(), &DeleteInstanceOnboardingJobInput{})
+	got, err := svc.DeleteInstanceOnboardingJob(context.Background(), &DeleteInstanceOnboardingJobInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +251,9 @@ func TestCheckResponseSnapshot_DescribeCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCampaign(context.Background(), &DescribeCampaignInput{})
+	got, err := svc.DescribeCampaign(context.Background(), &DescribeCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +274,9 @@ func TestCheckResponseSnapshot_GetCampaignState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignState(context.Background(), &GetCampaignStateInput{})
+	got, err := svc.GetCampaignState(context.Background(), &GetCampaignStateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +316,12 @@ func TestCheckResponseSnapshot_GetCampaignStateBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignStateBatch(context.Background(), &GetCampaignStateBatchInput{})
+	got, err := svc.GetCampaignStateBatch(context.Background(), &GetCampaignStateBatchInput{
+		CampaignIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +350,9 @@ func TestCheckResponseSnapshot_GetConnectInstanceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnectInstanceConfig(context.Background(), &GetConnectInstanceConfigInput{})
+	got, err := svc.GetConnectInstanceConfig(context.Background(), &GetConnectInstanceConfigInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +377,9 @@ func TestCheckResponseSnapshot_GetInstanceOnboardingJobStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstanceOnboardingJobStatus(context.Background(), &GetInstanceOnboardingJobStatusInput{})
+	got, err := svc.GetInstanceOnboardingJobStatus(context.Background(), &GetInstanceOnboardingJobStatusInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +414,16 @@ func TestCheckResponseSnapshot_ListCampaigns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{})
+	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: &types.CampaignFilters{
+			InstanceIdFilter: &types.InstanceIdFilter{
+				Value:    ptr.String("__Value__"),
+				Operator: types.InstanceIdFilterOperator("Eq"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +446,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +467,9 @@ func TestCheckResponseSnapshot_PauseCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PauseCampaign(context.Background(), &PauseCampaignInput{})
+	got, err := svc.PauseCampaign(context.Background(), &PauseCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +511,27 @@ func TestCheckResponseSnapshot_PutDialRequestBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDialRequestBatch(context.Background(), &PutDialRequestBatchInput{})
+	got, err := svc.PutDialRequestBatch(context.Background(), &PutDialRequestBatchInput{
+		Id: ptr.String("__Id__"),
+		DialRequests: []types.DialRequest{
+			{
+				ClientToken:    ptr.String("__ClientToken__"),
+				PhoneNumber:    ptr.String("__PhoneNumber__"),
+				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ClientToken:    ptr.String("__ClientToken__"),
+				PhoneNumber:    ptr.String("__PhoneNumber__"),
+				ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -476,7 +550,9 @@ func TestCheckResponseSnapshot_ResumeCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeCampaign(context.Background(), &ResumeCampaignInput{})
+	got, err := svc.ResumeCampaign(context.Background(), &ResumeCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -495,7 +571,9 @@ func TestCheckResponseSnapshot_StartCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCampaign(context.Background(), &StartCampaignInput{})
+	got, err := svc.StartCampaign(context.Background(), &StartCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +598,14 @@ func TestCheckResponseSnapshot_StartInstanceOnboardingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInstanceOnboardingJob(context.Background(), &StartInstanceOnboardingJobInput{})
+	got, err := svc.StartInstanceOnboardingJob(context.Background(), &StartInstanceOnboardingJobInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			Enabled:        true,
+			EncryptionType: types.EncryptionType("KMS"),
+			KeyArn:         ptr.String("__KeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +624,9 @@ func TestCheckResponseSnapshot_StopCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCampaign(context.Background(), &StopCampaignInput{})
+	got, err := svc.StopCampaign(context.Background(), &StopCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -558,7 +645,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -577,7 +669,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -596,7 +694,15 @@ func TestCheckResponseSnapshot_UpdateCampaignDialerConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaignDialerConfig(context.Background(), &UpdateCampaignDialerConfigInput{})
+	got, err := svc.UpdateCampaignDialerConfig(context.Background(), &UpdateCampaignDialerConfigInput{
+		Id: ptr.String("__Id__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -615,7 +721,10 @@ func TestCheckResponseSnapshot_UpdateCampaignName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaignName(context.Background(), &UpdateCampaignNameInput{})
+	got, err := svc.UpdateCampaignName(context.Background(), &UpdateCampaignNameInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +743,15 @@ func TestCheckResponseSnapshot_UpdateCampaignOutboundCallConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaignOutboundCallConfig(context.Background(), &UpdateCampaignOutboundCallConfigInput{})
+	got, err := svc.UpdateCampaignOutboundCallConfig(context.Background(), &UpdateCampaignOutboundCallConfigInput{
+		Id:                       ptr.String("__Id__"),
+		ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+		ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+		AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+			EnableAnswerMachineDetection: ptr.Bool(true),
+			AwaitAnswerMachinePrompt:     ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -646,7 +763,7 @@ func TestCheckResponseSnapshot_UpdateCampaignOutboundCallConfig(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -656,7 +773,28 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -672,7 +810,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("ConflictException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -682,7 +820,28 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -698,7 +857,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("InternalServerException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -708,7 +867,28 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -725,7 +905,7 @@ func TestCheckResponseSnapshot_Error_InvalidCampaignStateException(t *testing.T)
 	want := &types.InvalidCampaignStateException{
 		State:         types.CampaignState("Initialized"),
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("InvalidCampaignStateException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidCampaignStateException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -735,7 +915,9 @@ func TestCheckResponseSnapshot_Error_InvalidCampaignStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PauseCampaign(context.Background(), &PauseCampaignInput{})
+	_, opErr := svc.PauseCampaign(context.Background(), &PauseCampaignInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +933,7 @@ func TestCheckResponseSnapshot_Error_InvalidCampaignStateException(t *testing.T)
 func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 	want := &types.InvalidStateException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("InvalidStateException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidStateException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -761,7 +943,9 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnectInstanceConfig(context.Background(), &DeleteConnectInstanceConfigInput{})
+	_, opErr := svc.DeleteConnectInstanceConfig(context.Background(), &DeleteConnectInstanceConfigInput{
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -777,7 +961,7 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("ResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -787,7 +971,28 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -803,7 +1008,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("ServiceQuotaExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -813,7 +1018,28 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -829,7 +1055,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("ThrottlingException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -839,7 +1065,28 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -855,7 +1102,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message:       ptr.String("__Message__"),
-		XAmzErrorType: ptr.String("__XAmzErrorType__"),
+		XAmzErrorType: ptr.String("ValidationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -865,7 +1112,28 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:              ptr.String("__Name__"),
+		ConnectInstanceId: ptr.String("__ConnectInstanceId__"),
+		DialerConfig: &types.DialerConfigMemberProgressiveDialerConfig{
+			Value: types.ProgressiveDialerConfig{
+				BandwidthAllocation: ptr.Float64(1.0),
+				DialingCapacity:     ptr.Float64(1.0),
+			},
+		},
+		OutboundCallConfig: &types.OutboundCallConfig{
+			ConnectContactFlowId:     ptr.String("__ConnectContactFlowId__"),
+			ConnectSourcePhoneNumber: ptr.String("__ConnectSourcePhoneNumber__"),
+			ConnectQueueId:           ptr.String("__ConnectQueueId__"),
+			AnswerMachineDetectionConfig: &types.AnswerMachineDetectionConfig{
+				EnableAnswerMachineDetection: ptr.Bool(true),
+				AwaitAnswerMachinePrompt:     ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

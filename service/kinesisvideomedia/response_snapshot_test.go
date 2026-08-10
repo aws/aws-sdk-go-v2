@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -109,6 +110,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 func TestCheckResponseSnapshot_GetMedia(t *testing.T) {
 	want := &GetMediaOutput{
 		ContentType: ptr.String("__ContentType__"),
+		Payload:     io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetMedia.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -118,7 +120,16 @@ func TestCheckResponseSnapshot_GetMedia(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedia(context.Background(), &GetMediaInput{})
+	got, err := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +150,16 @@ func TestCheckResponseSnapshot_Error_ClientLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -164,7 +184,16 @@ func TestCheckResponseSnapshot_Error_ConnectionLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -189,7 +218,16 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -214,7 +252,16 @@ func TestCheckResponseSnapshot_Error_InvalidEndpointException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -239,7 +286,16 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -264,7 +320,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StartSelector: &types.StartSelector{
+			StartSelectorType:   types.StartSelectorType("FRAGMENT_NUMBER"),
+			AfterFragmentNumber: ptr.String("__AfterFragmentNumber__"),
+			StartTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ContinuationToken:   ptr.String("__ContinuationToken__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

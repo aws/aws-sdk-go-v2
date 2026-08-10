@@ -124,7 +124,15 @@ func TestCheckResponseSnapshot_AddWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddWorkload(context.Background(), &AddWorkloadInput{})
+	got, err := svc.AddWorkload(context.Background(), &AddWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +165,27 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+		OpsCenterEnabled:   ptr.Bool(true),
+		CWEMonitorEnabled:  ptr.Bool(true),
+		OpsItemSNSTopicArn: ptr.String("__OpsItemSNSTopicArn__"),
+		SNSNotificationArn: ptr.String("__SNSNotificationArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoConfigEnabled:       ptr.Bool(true),
+		AutoCreate:              ptr.Bool(true),
+		GroupingType:            types.GroupingType("ACCOUNT_BASED"),
+		AttachMissingPermission: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -176,7 +204,14 @@ func TestCheckResponseSnapshot_CreateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		ResourceList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +238,13 @@ func TestCheckResponseSnapshot_CreateLogPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLogPattern(context.Background(), &CreateLogPatternInput{})
+	got, err := svc.CreateLogPattern(context.Background(), &CreateLogPatternInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		PatternSetName:    ptr.String("__PatternSetName__"),
+		PatternName:       ptr.String("__PatternName__"),
+		Pattern:           ptr.String("__Pattern__"),
+		Rank:              1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +263,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +284,10 @@ func TestCheckResponseSnapshot_DeleteComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +306,11 @@ func TestCheckResponseSnapshot_DeleteLogPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLogPattern(context.Background(), &DeleteLogPatternInput{})
+	got, err := svc.DeleteLogPattern(context.Background(), &DeleteLogPatternInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		PatternSetName:    ptr.String("__PatternSetName__"),
+		PatternName:       ptr.String("__PatternName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +343,10 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{})
+	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +383,11 @@ func TestCheckResponseSnapshot_DescribeComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComponent(context.Background(), &DescribeComponentInput{})
+	got, err := svc.DescribeComponent(context.Background(), &DescribeComponentInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +410,11 @@ func TestCheckResponseSnapshot_DescribeComponentConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComponentConfiguration(context.Background(), &DescribeComponentConfigurationInput{})
+	got, err := svc.DescribeComponentConfiguration(context.Background(), &DescribeComponentConfigurationInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +435,13 @@ func TestCheckResponseSnapshot_DescribeComponentConfigurationRecommendation(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComponentConfigurationRecommendation(context.Background(), &DescribeComponentConfigurationRecommendationInput{})
+	got, err := svc.DescribeComponentConfigurationRecommendation(context.Background(), &DescribeComponentConfigurationRecommendationInput{
+		ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+		ComponentName:      ptr.String("__ComponentName__"),
+		Tier:               types.Tier("CUSTOM"),
+		WorkloadName:       ptr.String("__WorkloadName__"),
+		RecommendationType: types.RecommendationType("INFRA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +469,12 @@ func TestCheckResponseSnapshot_DescribeLogPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLogPattern(context.Background(), &DescribeLogPatternInput{})
+	got, err := svc.DescribeLogPattern(context.Background(), &DescribeLogPatternInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		PatternSetName:    ptr.String("__PatternSetName__"),
+		PatternName:       ptr.String("__PatternName__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +541,10 @@ func TestCheckResponseSnapshot_DescribeObservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeObservation(context.Background(), &DescribeObservationInput{})
+	got, err := svc.DescribeObservation(context.Background(), &DescribeObservationInput{
+		ObservationId: ptr.String("__ObservationId__"),
+		AccountId:     ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +585,10 @@ func TestCheckResponseSnapshot_DescribeProblem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProblem(context.Background(), &DescribeProblemInput{})
+	got, err := svc.DescribeProblem(context.Background(), &DescribeProblemInput{
+		ProblemId: ptr.String("__ProblemId__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +706,10 @@ func TestCheckResponseSnapshot_DescribeProblemObservations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProblemObservations(context.Background(), &DescribeProblemObservationsInput{})
+	got, err := svc.DescribeProblemObservations(context.Background(), &DescribeProblemObservationsInput{
+		ProblemId: ptr.String("__ProblemId__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +736,12 @@ func TestCheckResponseSnapshot_DescribeWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkload(context.Background(), &DescribeWorkloadInput{})
+	got, err := svc.DescribeWorkload(context.Background(), &DescribeWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadId:        ptr.String("__WorkloadId__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +790,11 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountId:  ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +843,12 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -796,7 +891,15 @@ func TestCheckResponseSnapshot_ListConfigurationHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationHistory(context.Background(), &ListConfigurationHistoryInput{})
+	got, err := svc.ListConfigurationHistory(context.Background(), &ListConfigurationHistoryInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventStatus:       types.ConfigurationEventStatus("INFO"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +926,12 @@ func TestCheckResponseSnapshot_ListLogPatternSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogPatternSets(context.Background(), &ListLogPatternSetsInput{})
+	got, err := svc.ListLogPatternSets(context.Background(), &ListLogPatternSetsInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -860,7 +968,13 @@ func TestCheckResponseSnapshot_ListLogPatterns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogPatterns(context.Background(), &ListLogPatternsInput{})
+	got, err := svc.ListLogPatterns(context.Background(), &ListLogPatternsInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		PatternSetName:    ptr.String("__PatternSetName__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +1039,16 @@ func TestCheckResponseSnapshot_ListProblems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProblems(context.Background(), &ListProblemsInput{})
+	got, err := svc.ListProblems(context.Background(), &ListProblemsInput{
+		AccountId:         ptr.String("__AccountId__"),
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		Visibility:        types.Visibility("IGNORED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -955,7 +1078,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1119,13 @@ func TestCheckResponseSnapshot_ListWorkloads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{})
+	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AccountId:         ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1013,7 +1144,11 @@ func TestCheckResponseSnapshot_RemoveWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveWorkload(context.Background(), &RemoveWorkloadInput{})
+	got, err := svc.RemoveWorkload(context.Background(), &RemoveWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadId:        ptr.String("__WorkloadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1032,7 +1167,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1198,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1237,16 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ResourceGroupName:       ptr.String("__ResourceGroupName__"),
+		OpsCenterEnabled:        ptr.Bool(true),
+		CWEMonitorEnabled:       ptr.Bool(true),
+		OpsItemSNSTopicArn:      ptr.String("__OpsItemSNSTopicArn__"),
+		SNSNotificationArn:      ptr.String("__SNSNotificationArn__"),
+		RemoveSNSTopic:          ptr.Bool(true),
+		AutoConfigEnabled:       ptr.Bool(true),
+		AttachMissingPermission: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1103,7 +1265,15 @@ func TestCheckResponseSnapshot_UpdateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{})
+	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		NewComponentName:  ptr.String("__NewComponentName__"),
+		ResourceList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1122,7 +1292,14 @@ func TestCheckResponseSnapshot_UpdateComponentConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComponentConfiguration(context.Background(), &UpdateComponentConfigurationInput{})
+	got, err := svc.UpdateComponentConfiguration(context.Background(), &UpdateComponentConfigurationInput{
+		ResourceGroupName:      ptr.String("__ResourceGroupName__"),
+		ComponentName:          ptr.String("__ComponentName__"),
+		Monitor:                ptr.Bool(true),
+		Tier:                   types.Tier("CUSTOM"),
+		ComponentConfiguration: ptr.String("__ComponentConfiguration__"),
+		AutoConfigEnabled:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1149,7 +1326,13 @@ func TestCheckResponseSnapshot_UpdateLogPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLogPattern(context.Background(), &UpdateLogPatternInput{})
+	got, err := svc.UpdateLogPattern(context.Background(), &UpdateLogPatternInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		PatternSetName:    ptr.String("__PatternSetName__"),
+		PatternName:       ptr.String("__PatternName__"),
+		Pattern:           ptr.String("__Pattern__"),
+		Rank:              1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1168,7 +1351,11 @@ func TestCheckResponseSnapshot_UpdateProblem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProblem(context.Background(), &UpdateProblemInput{})
+	got, err := svc.UpdateProblem(context.Background(), &UpdateProblemInput{
+		ProblemId:    ptr.String("__ProblemId__"),
+		UpdateStatus: types.UpdateStatus("RESOLVED"),
+		Visibility:   types.Visibility("IGNORED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1194,7 +1381,16 @@ func TestCheckResponseSnapshot_UpdateWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkload(context.Background(), &UpdateWorkloadInput{})
+	got, err := svc.UpdateWorkload(context.Background(), &UpdateWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadId:        ptr.String("__WorkloadId__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1411,27 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+		OpsCenterEnabled:   ptr.Bool(true),
+		CWEMonitorEnabled:  ptr.Bool(true),
+		OpsItemSNSTopicArn: ptr.String("__OpsItemSNSTopicArn__"),
+		SNSNotificationArn: ptr.String("__SNSNotificationArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoConfigEnabled:       ptr.Bool(true),
+		AutoCreate:              ptr.Bool(true),
+		GroupingType:            types.GroupingType("ACCOUNT_BASED"),
+		AttachMissingPermission: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1240,7 +1456,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	_, opErr := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1265,7 +1483,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{})
+	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1290,7 +1516,15 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{})
+	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1315,7 +1549,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{})
+	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1340,7 +1582,27 @@ func TestCheckResponseSnapshot_Error_TagsAlreadyExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+		OpsCenterEnabled:   ptr.Bool(true),
+		CWEMonitorEnabled:  ptr.Bool(true),
+		OpsItemSNSTopicArn: ptr.String("__OpsItemSNSTopicArn__"),
+		SNSNotificationArn: ptr.String("__SNSNotificationArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AutoConfigEnabled:       ptr.Bool(true),
+		AutoCreate:              ptr.Bool(true),
+		GroupingType:            types.GroupingType("ACCOUNT_BASED"),
+		AttachMissingPermission: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1366,7 +1628,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1391,7 +1665,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{})
+	_, opErr := svc.AddWorkload(context.Background(), &AddWorkloadInput{
+		ResourceGroupName: ptr.String("__ResourceGroupName__"),
+		ComponentName:     ptr.String("__ComponentName__"),
+		WorkloadConfiguration: &types.WorkloadConfiguration{
+			WorkloadName:  ptr.String("__WorkloadName__"),
+			Tier:          types.Tier("CUSTOM"),
+			Configuration: ptr.String("__Configuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

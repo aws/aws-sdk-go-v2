@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"kxVolumeSummaries":[{"availabilityZoneIds":["__Member__","__Member__"],"azMode":"SINGLE","createdTimestamp":946684800,"description":"__Description__","lastModifiedTimestamp":946684800,"status":"CREATING","statusReason":"__StatusReason__","volumeName":"__VolumeName__","volumeType":"NAS_1"},{"availabilityZoneIds":["__Member__","__Member__"],"azMode":"SINGLE","createdTimestamp":946684800,"description":"__Description__","lastModifiedTimestamp":946684800,"status":"CREATING","statusReason":"__StatusReason__","volumeName":"__VolumeName__","volumeType":"NAS_1"}],"nextToken":"__NextToken__"}

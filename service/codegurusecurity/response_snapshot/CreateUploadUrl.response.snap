@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"codeArtifactId":"__CodeArtifactId__","requestHeaders":{"key0":"__Value__"},"s3Url":"__S3Url__"}

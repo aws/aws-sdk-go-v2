@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.ListTagsForResource
+
+{"__type":"InvalidArnException","message":"__Message__"}

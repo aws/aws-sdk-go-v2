@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","reports":[{"acceptanceType":"PASSTHROUGH","arn":"__Arn__","category":"__Category__","companyName":"__CompanyName__","description":"__Description__","id":"__Id__","name":"__Name__","periodEnd":"2000-01-01T00:00:00Z","periodStart":"2000-01-01T00:00:00Z","productName":"__ProductName__","series":"__Series__","state":"PUBLISHED","statusMessage":"__StatusMessage__","uploadState":"PROCESSING","version":1},{"acceptanceType":"PASSTHROUGH","arn":"__Arn__","category":"__Category__","companyName":"__CompanyName__","description":"__Description__","id":"__Id__","name":"__Name__","periodEnd":"2000-01-01T00:00:00Z","periodStart":"2000-01-01T00:00:00Z","productName":"__ProductName__","series":"__Series__","state":"PUBLISHED","statusMessage":"__StatusMessage__","uploadState":"PROCESSING","version":1}]}

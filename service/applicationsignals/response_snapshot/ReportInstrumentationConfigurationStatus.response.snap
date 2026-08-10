@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Environment":"__Environment__","Service":"__Service__","UnprocessedStatusEvents":[{"FailedReason":"THROTTLED","InstrumentationType":"BREAKPOINT","LocationHash":"__LocationHash__","SignalType":"SNAPSHOT","Status":"READY","Time":946684800},{"FailedReason":"THROTTLED","InstrumentationType":"BREAKPOINT","LocationHash":"__LocationHash__","SignalType":"SNAPSHOT","Status":"READY","Time":946684800}]}

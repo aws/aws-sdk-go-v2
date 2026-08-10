@@ -222,7 +222,106 @@ func TestCheckResponseSnapshot_CreateExperimentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{})
+	got, err := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.CreateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.CreateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.CreateExperimentTemplateActionInput{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.CreateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.CreateExperimentTemplateExperimentOptionsInput{
+			AccountTargeting:          types.AccountTargeting("single-account"),
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.CreateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +346,13 @@ func TestCheckResponseSnapshot_CreateTargetAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTargetAccountConfiguration(context.Background(), &CreateTargetAccountConfigurationInput{})
+	got, err := svc.CreateTargetAccountConfiguration(context.Background(), &CreateTargetAccountConfigurationInput{
+		ClientToken:          ptr.String("__ClientToken__"),
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		AccountId:            ptr.String("__AccountId__"),
+		RoleArn:              ptr.String("__RoleArn__"),
+		Description:          ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +476,9 @@ func TestCheckResponseSnapshot_DeleteExperimentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExperimentTemplate(context.Background(), &DeleteExperimentTemplateInput{})
+	got, err := svc.DeleteExperimentTemplate(context.Background(), &DeleteExperimentTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +503,10 @@ func TestCheckResponseSnapshot_DeleteTargetAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTargetAccountConfiguration(context.Background(), &DeleteTargetAccountConfigurationInput{})
+	got, err := svc.DeleteTargetAccountConfiguration(context.Background(), &DeleteTargetAccountConfigurationInput{
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		AccountId:            ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +545,9 @@ func TestCheckResponseSnapshot_GetAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAction(context.Background(), &GetActionInput{})
+	got, err := svc.GetAction(context.Background(), &GetActionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +707,9 @@ func TestCheckResponseSnapshot_GetExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExperiment(context.Background(), &GetExperimentInput{})
+	got, err := svc.GetExperiment(context.Background(), &GetExperimentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +734,10 @@ func TestCheckResponseSnapshot_GetExperimentTargetAccountConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExperimentTargetAccountConfiguration(context.Background(), &GetExperimentTargetAccountConfigurationInput{})
+	got, err := svc.GetExperimentTargetAccountConfiguration(context.Background(), &GetExperimentTargetAccountConfigurationInput{
+		ExperimentId: ptr.String("__ExperimentId__"),
+		AccountId:    ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +861,9 @@ func TestCheckResponseSnapshot_GetExperimentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExperimentTemplate(context.Background(), &GetExperimentTemplateInput{})
+	got, err := svc.GetExperimentTemplate(context.Background(), &GetExperimentTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +891,9 @@ func TestCheckResponseSnapshot_GetSafetyLever(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSafetyLever(context.Background(), &GetSafetyLeverInput{})
+	got, err := svc.GetSafetyLever(context.Background(), &GetSafetyLeverInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -797,7 +918,10 @@ func TestCheckResponseSnapshot_GetTargetAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTargetAccountConfiguration(context.Background(), &GetTargetAccountConfigurationInput{})
+	got, err := svc.GetTargetAccountConfiguration(context.Background(), &GetTargetAccountConfigurationInput{
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		AccountId:            ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +951,9 @@ func TestCheckResponseSnapshot_GetTargetResourceType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTargetResourceType(context.Background(), &GetTargetResourceTypeInput{})
+	got, err := svc.GetTargetResourceType(context.Background(), &GetTargetResourceTypeInput{
+		ResourceType: ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -876,7 +1002,10 @@ func TestCheckResponseSnapshot_ListActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActions(context.Background(), &ListActionsInput{})
+	got, err := svc.ListActions(context.Background(), &ListActionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -913,7 +1042,12 @@ func TestCheckResponseSnapshot_ListExperimentResolvedTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentResolvedTargets(context.Background(), &ListExperimentResolvedTargetsInput{})
+	got, err := svc.ListExperimentResolvedTargets(context.Background(), &ListExperimentResolvedTargetsInput{
+		ExperimentId: ptr.String("__ExperimentId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		TargetName:   ptr.String("__TargetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -946,7 +1080,10 @@ func TestCheckResponseSnapshot_ListExperimentTargetAccountConfigurations(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentTargetAccountConfigurations(context.Background(), &ListExperimentTargetAccountConfigurationsInput{})
+	got, err := svc.ListExperimentTargetAccountConfigurations(context.Background(), &ListExperimentTargetAccountConfigurationsInput{
+		ExperimentId: ptr.String("__ExperimentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -989,7 +1126,10 @@ func TestCheckResponseSnapshot_ListExperimentTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentTemplates(context.Background(), &ListExperimentTemplatesInput{})
+	got, err := svc.ListExperimentTemplates(context.Background(), &ListExperimentTemplatesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1198,11 @@ func TestCheckResponseSnapshot_ListExperiments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperiments(context.Background(), &ListExperimentsInput{})
+	got, err := svc.ListExperiments(context.Background(), &ListExperimentsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1225,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1114,7 +1260,11 @@ func TestCheckResponseSnapshot_ListTargetAccountConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetAccountConfigurations(context.Background(), &ListTargetAccountConfigurationsInput{})
+	got, err := svc.ListTargetAccountConfigurations(context.Background(), &ListTargetAccountConfigurationsInput{
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1295,10 @@ func TestCheckResponseSnapshot_ListTargetResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTargetResourceTypes(context.Background(), &ListTargetResourceTypesInput{})
+	got, err := svc.ListTargetResourceTypes(context.Background(), &ListTargetResourceTypesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1305,7 +1458,16 @@ func TestCheckResponseSnapshot_StartExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExperiment(context.Background(), &StartExperimentInput{})
+	got, err := svc.StartExperiment(context.Background(), &StartExperimentInput{
+		ClientToken:          ptr.String("__ClientToken__"),
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		ExperimentOptions: &types.StartExperimentExperimentOptionsInput{
+			ActionsMode: types.ActionsMode("skip-all"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1465,7 +1627,9 @@ func TestCheckResponseSnapshot_StopExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopExperiment(context.Background(), &StopExperimentInput{})
+	got, err := svc.StopExperiment(context.Background(), &StopExperimentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1484,7 +1648,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1503,7 +1672,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1627,7 +1802,102 @@ func TestCheckResponseSnapshot_UpdateExperimentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExperimentTemplate(context.Background(), &UpdateExperimentTemplateInput{})
+	got, err := svc.UpdateExperimentTemplate(context.Background(), &UpdateExperimentTemplateInput{
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.UpdateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.UpdateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.UpdateExperimentTemplateActionInputItem{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		LogConfiguration: &types.UpdateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.UpdateExperimentTemplateExperimentOptionsInput{
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.UpdateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1655,7 +1925,13 @@ func TestCheckResponseSnapshot_UpdateSafetyLeverState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSafetyLeverState(context.Background(), &UpdateSafetyLeverStateInput{})
+	got, err := svc.UpdateSafetyLeverState(context.Background(), &UpdateSafetyLeverStateInput{
+		Id: ptr.String("__Id__"),
+		State: &types.UpdateSafetyLeverStateInput{
+			Status: types.SafetyLeverStatusInput("disengaged"),
+			Reason: ptr.String("__Reason__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1680,7 +1956,12 @@ func TestCheckResponseSnapshot_UpdateTargetAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTargetAccountConfiguration(context.Background(), &UpdateTargetAccountConfigurationInput{})
+	got, err := svc.UpdateTargetAccountConfiguration(context.Background(), &UpdateTargetAccountConfigurationInput{
+		ExperimentTemplateId: ptr.String("__ExperimentTemplateId__"),
+		AccountId:            ptr.String("__AccountId__"),
+		RoleArn:              ptr.String("__RoleArn__"),
+		Description:          ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1701,7 +1982,106 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{})
+	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.CreateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.CreateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.CreateExperimentTemplateActionInput{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.CreateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.CreateExperimentTemplateExperimentOptionsInput{
+			AccountTargeting:          types.AccountTargeting("single-account"),
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.CreateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1726,7 +2106,106 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{})
+	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.CreateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.CreateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.CreateExperimentTemplateActionInput{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.CreateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.CreateExperimentTemplateExperimentOptionsInput{
+			AccountTargeting:          types.AccountTargeting("single-account"),
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.CreateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1751,7 +2230,106 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{})
+	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.CreateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.CreateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.CreateExperimentTemplateActionInput{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.CreateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.CreateExperimentTemplateExperimentOptionsInput{
+			AccountTargeting:          types.AccountTargeting("single-account"),
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.CreateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1776,7 +2354,106 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{})
+	_, opErr := svc.CreateExperimentTemplate(context.Background(), &CreateExperimentTemplateInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		StopConditions: []types.CreateExperimentTemplateStopConditionInput{
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+				Value:  ptr.String("__Value__"),
+			},
+		},
+		Targets: map[string]types.CreateExperimentTemplateTargetInput{
+			"key0": {
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				Filters: []types.ExperimentTemplateTargetInputFilter{
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Path: ptr.String("__Path__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectionMode: ptr.String("__SelectionMode__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Actions: map[string]types.CreateExperimentTemplateActionInput{
+			"key0": {
+				ActionId:    ptr.String("__ActionId__"),
+				Description: ptr.String("__Description__"),
+				Parameters: map[string]string{
+					"key0": "__Value__",
+				},
+				Targets: map[string]string{
+					"key0": "__Value__",
+				},
+				StartAfter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LogConfiguration: &types.CreateExperimentTemplateLogConfigurationInput{
+			CloudWatchLogsConfiguration: &types.ExperimentTemplateCloudWatchLogsLogConfigurationInput{
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			S3Configuration: &types.ExperimentTemplateS3LogConfigurationInput{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+			LogSchemaVersion: ptr.Int32(1),
+		},
+		ExperimentOptions: &types.CreateExperimentTemplateExperimentOptionsInput{
+			AccountTargeting:          types.AccountTargeting("single-account"),
+			EmptyTargetResolutionMode: types.EmptyTargetResolutionMode("fail"),
+		},
+		ExperimentReportConfiguration: &types.CreateExperimentTemplateReportConfigurationInput{
+			Outputs: &types.ExperimentTemplateReportConfigurationOutputsInput{
+				S3Configuration: &types.ReportConfigurationS3OutputInput{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+				},
+			},
+			DataSources: &types.ExperimentTemplateReportConfigurationDataSourcesInput{
+				CloudWatchDashboards: []types.ReportConfigurationCloudWatchDashboardInput{
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+					{
+						DashboardIdentifier: ptr.String("__DashboardIdentifier__"),
+					},
+				},
+			},
+			PreExperimentDuration:  ptr.String("__PreExperimentDuration__"),
+			PostExperimentDuration: ptr.String("__PostExperimentDuration__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

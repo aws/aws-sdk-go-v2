@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analyzedResources":[{"resourceArn":"__ResourceArn__","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket"},{"resourceArn":"__ResourceArn__","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket"}],"nextToken":"__NextToken__"}

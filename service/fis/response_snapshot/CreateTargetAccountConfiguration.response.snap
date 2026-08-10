@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"targetAccountConfiguration":{"accountId":"__AccountId__","description":"__Description__","roleArn":"__RoleArn__"}}

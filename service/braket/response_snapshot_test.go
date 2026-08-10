@@ -120,7 +120,9 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJob(context.Background(), &CancelJobInput{})
+	got, err := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +144,10 @@ func TestCheckResponseSnapshot_CancelQuantumTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelQuantumTask(context.Background(), &CancelQuantumTaskInput{})
+	got, err := svc.CancelQuantumTask(context.Background(), &CancelQuantumTaskInput{
+		QuantumTaskArn: ptr.String("__QuantumTaskArn__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +168,76 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJob(context.Background(), &CreateJobInput{})
+	got, err := svc.CreateJob(context.Background(), &CreateJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AlgorithmSpecification: &types.AlgorithmSpecification{
+			ScriptModeConfig: &types.ScriptModeConfig{
+				EntryPoint:      ptr.String("__EntryPoint__"),
+				S3Uri:           ptr.String("__S3Uri__"),
+				CompressionType: types.CompressionType("NONE"),
+			},
+			ContainerImage: &types.ContainerImage{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		InputDataConfig: []types.InputFileConfig{
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+		},
+		OutputDataConfig: &types.JobOutputDataConfig{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			S3Path:   ptr.String("__S3Path__"),
+		},
+		CheckpointConfig: &types.JobCheckpointConfig{
+			LocalPath: ptr.String("__LocalPath__"),
+			S3Uri:     ptr.String("__S3Uri__"),
+		},
+		JobName: ptr.String("__JobName__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		StoppingCondition: &types.JobStoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		InstanceConfig: &types.InstanceConfig{
+			InstanceType:   types.InstanceType("ml.t3.large"),
+			VolumeSizeInGb: ptr.Int32(1),
+			InstanceCount:  ptr.Int32(1),
+		},
+		HyperParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceConfig: &types.DeviceConfig{
+			Device: ptr.String("__Device__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Associations: []types.Association{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +258,32 @@ func TestCheckResponseSnapshot_CreateQuantumTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuantumTask(context.Background(), &CreateQuantumTaskInput{})
+	got, err := svc.CreateQuantumTask(context.Background(), &CreateQuantumTaskInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		DeviceArn:         ptr.String("__DeviceArn__"),
+		DeviceParameters:  ptr.String("__DeviceParameters__"),
+		Shots:             ptr.Int64(1),
+		OutputS3Bucket:    ptr.String("__OutputS3Bucket__"),
+		OutputS3KeyPrefix: ptr.String("__OutputS3KeyPrefix__"),
+		Action:            ptr.String("__Action__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		JobToken: ptr.String("__JobToken__"),
+		Associations: []types.Association{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+		},
+		ExperimentalCapabilities: &types.ExperimentalCapabilitiesMemberEnabled{
+			Value: types.ExperimentalCapabilitiesEnablementType("ALL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +304,18 @@ func TestCheckResponseSnapshot_CreateSpendingLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSpendingLimit(context.Background(), &CreateSpendingLimitInput{})
+	got, err := svc.CreateSpendingLimit(context.Background(), &CreateSpendingLimitInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		DeviceArn:     ptr.String("__DeviceArn__"),
+		SpendingLimit: ptr.String("__SpendingLimit__"),
+		TimePeriod: &types.TimePeriod{
+			StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +334,9 @@ func TestCheckResponseSnapshot_DeleteSpendingLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSpendingLimit(context.Background(), &DeleteSpendingLimitInput{})
+	got, err := svc.DeleteSpendingLimit(context.Background(), &DeleteSpendingLimitInput{
+		SpendingLimitArn: ptr.String("__SpendingLimitArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +374,9 @@ func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{})
+	got, err := svc.GetDevice(context.Background(), &GetDeviceInput{
+		DeviceArn: ptr.String("__DeviceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +487,13 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJob(context.Background(), &GetJobInput{})
+	got, err := svc.GetJob(context.Background(), &GetJobInput{
+		JobArn: ptr.String("__JobArn__"),
+		AdditionalAttributeNames: []types.HybridJobAdditionalAttributeName{
+			types.HybridJobAdditionalAttributeName("QueueInfo"),
+			types.HybridJobAdditionalAttributeName("QueueInfo"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,7 +552,13 @@ func TestCheckResponseSnapshot_GetQuantumTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuantumTask(context.Background(), &GetQuantumTaskInput{})
+	got, err := svc.GetQuantumTask(context.Background(), &GetQuantumTaskInput{
+		QuantumTaskArn: ptr.String("__QuantumTaskArn__"),
+		AdditionalAttributeNames: []types.QuantumTaskAdditionalAttributeName{
+			types.QuantumTaskAdditionalAttributeName("QueueInfo"),
+			types.QuantumTaskAdditionalAttributeName("QueueInfo"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +581,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +620,26 @@ func TestCheckResponseSnapshot_SearchDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchDevices(context.Background(), &SearchDevicesInput{})
+	got, err := svc.SearchDevices(context.Background(), &SearchDevicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.SearchDevicesFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +686,28 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchJobs(context.Background(), &SearchJobsInput{})
+	got, err := svc.SearchJobs(context.Background(), &SearchJobsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.SearchJobsFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchJobsFilterOperator("LT"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchJobsFilterOperator("LT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +756,28 @@ func TestCheckResponseSnapshot_SearchQuantumTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchQuantumTasks(context.Background(), &SearchQuantumTasksInput{})
+	got, err := svc.SearchQuantumTasks(context.Background(), &SearchQuantumTasksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.SearchQuantumTasksFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchQuantumTasksFilterOperator("LT"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchQuantumTasksFilterOperator("LT"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +832,28 @@ func TestCheckResponseSnapshot_SearchSpendingLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSpendingLimits(context.Background(), &SearchSpendingLimitsInput{})
+	got, err := svc.SearchSpendingLimits(context.Background(), &SearchSpendingLimitsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.SearchSpendingLimitsFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchSpendingLimitsFilterOperator("EQUAL"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.SearchSpendingLimitsFilterOperator("EQUAL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +872,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +896,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -700,7 +921,15 @@ func TestCheckResponseSnapshot_UpdateSpendingLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSpendingLimit(context.Background(), &UpdateSpendingLimitInput{})
+	got, err := svc.UpdateSpendingLimit(context.Background(), &UpdateSpendingLimitInput{
+		SpendingLimitArn: ptr.String("__SpendingLimitArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		SpendingLimit:    ptr.String("__SpendingLimit__"),
+		TimePeriod: &types.TimePeriod{
+			StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +950,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -746,7 +977,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -771,7 +1004,76 @@ func TestCheckResponseSnapshot_Error_DeviceOfflineException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AlgorithmSpecification: &types.AlgorithmSpecification{
+			ScriptModeConfig: &types.ScriptModeConfig{
+				EntryPoint:      ptr.String("__EntryPoint__"),
+				S3Uri:           ptr.String("__S3Uri__"),
+				CompressionType: types.CompressionType("NONE"),
+			},
+			ContainerImage: &types.ContainerImage{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		InputDataConfig: []types.InputFileConfig{
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+		},
+		OutputDataConfig: &types.JobOutputDataConfig{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			S3Path:   ptr.String("__S3Path__"),
+		},
+		CheckpointConfig: &types.JobCheckpointConfig{
+			LocalPath: ptr.String("__LocalPath__"),
+			S3Uri:     ptr.String("__S3Uri__"),
+		},
+		JobName: ptr.String("__JobName__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		StoppingCondition: &types.JobStoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		InstanceConfig: &types.InstanceConfig{
+			InstanceType:   types.InstanceType("ml.t3.large"),
+			VolumeSizeInGb: ptr.Int32(1),
+			InstanceCount:  ptr.Int32(1),
+		},
+		HyperParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceConfig: &types.DeviceConfig{
+			Device: ptr.String("__Device__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Associations: []types.Association{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -796,7 +1098,76 @@ func TestCheckResponseSnapshot_Error_DeviceRetiredException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AlgorithmSpecification: &types.AlgorithmSpecification{
+			ScriptModeConfig: &types.ScriptModeConfig{
+				EntryPoint:      ptr.String("__EntryPoint__"),
+				S3Uri:           ptr.String("__S3Uri__"),
+				CompressionType: types.CompressionType("NONE"),
+			},
+			ContainerImage: &types.ContainerImage{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		InputDataConfig: []types.InputFileConfig{
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+		},
+		OutputDataConfig: &types.JobOutputDataConfig{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			S3Path:   ptr.String("__S3Path__"),
+		},
+		CheckpointConfig: &types.JobCheckpointConfig{
+			LocalPath: ptr.String("__LocalPath__"),
+			S3Uri:     ptr.String("__S3Uri__"),
+		},
+		JobName: ptr.String("__JobName__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		StoppingCondition: &types.JobStoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		InstanceConfig: &types.InstanceConfig{
+			InstanceType:   types.InstanceType("ml.t3.large"),
+			VolumeSizeInGb: ptr.Int32(1),
+			InstanceCount:  ptr.Int32(1),
+		},
+		HyperParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceConfig: &types.DeviceConfig{
+			Device: ptr.String("__Device__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Associations: []types.Association{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -821,7 +1192,9 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -846,7 +1219,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -871,7 +1246,76 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{})
+	_, opErr := svc.CreateJob(context.Background(), &CreateJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AlgorithmSpecification: &types.AlgorithmSpecification{
+			ScriptModeConfig: &types.ScriptModeConfig{
+				EntryPoint:      ptr.String("__EntryPoint__"),
+				S3Uri:           ptr.String("__S3Uri__"),
+				CompressionType: types.CompressionType("NONE"),
+			},
+			ContainerImage: &types.ContainerImage{
+				Uri: ptr.String("__Uri__"),
+			},
+		},
+		InputDataConfig: []types.InputFileConfig{
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+			{
+				ChannelName: ptr.String("__ChannelName__"),
+				ContentType: ptr.String("__ContentType__"),
+				DataSource: &types.DataSource{
+					S3DataSource: &types.S3DataSource{
+						S3Uri: ptr.String("__S3Uri__"),
+					},
+				},
+			},
+		},
+		OutputDataConfig: &types.JobOutputDataConfig{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			S3Path:   ptr.String("__S3Path__"),
+		},
+		CheckpointConfig: &types.JobCheckpointConfig{
+			LocalPath: ptr.String("__LocalPath__"),
+			S3Uri:     ptr.String("__S3Uri__"),
+		},
+		JobName: ptr.String("__JobName__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		StoppingCondition: &types.JobStoppingCondition{
+			MaxRuntimeInSeconds: ptr.Int32(1),
+		},
+		InstanceConfig: &types.InstanceConfig{
+			InstanceType:   types.InstanceType("ml.t3.large"),
+			VolumeSizeInGb: ptr.Int32(1),
+			InstanceCount:  ptr.Int32(1),
+		},
+		HyperParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		DeviceConfig: &types.DeviceConfig{
+			Device: ptr.String("__Device__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Associations: []types.Association{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AssociationType("RESERVATION_TIME_WINDOW_ARN"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -896,7 +1340,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -940,7 +1386,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{})
+	_, opErr := svc.CancelJob(context.Background(), &CancelJobInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

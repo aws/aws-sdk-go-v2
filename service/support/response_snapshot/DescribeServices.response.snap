@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.DescribeServices
+
+{"services":[{"categories":[{"code":"__Code__","name":"__Name__"},{"code":"__Code__","name":"__Name__"}],"code":"__Code__","name":"__Name__"},{"categories":[{"code":"__Code__","name":"__Name__"},{"code":"__Code__","name":"__Name__"}],"code":"__Code__","name":"__Name__"}]}

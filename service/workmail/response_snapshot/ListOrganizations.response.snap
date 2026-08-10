@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListOrganizations
+
+{"NextToken":"__NextToken__","OrganizationSummaries":[{"Alias":"__Alias__","DefaultMailDomain":"__DefaultMailDomain__","ErrorMessage":"__ErrorMessage__","OrganizationId":"__OrganizationId__","State":"__State__"},{"Alias":"__Alias__","DefaultMailDomain":"__DefaultMailDomain__","ErrorMessage":"__ErrorMessage__","OrganizationId":"__OrganizationId__","State":"__State__"}]}

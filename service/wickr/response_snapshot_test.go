@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -180,7 +181,36 @@ func TestCheckResponseSnapshot_BatchCreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	got, err := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +251,14 @@ func TestCheckResponseSnapshot_BatchDeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteUser(context.Background(), &BatchDeleteUserInput{})
+	got, err := svc.BatchDeleteUser(context.Background(), &BatchDeleteUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +301,14 @@ func TestCheckResponseSnapshot_BatchLookupUserUname(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchLookupUserUname(context.Background(), &BatchLookupUserUnameInput{})
+	got, err := svc.BatchLookupUserUname(context.Background(), &BatchLookupUserUnameInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Unames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +349,14 @@ func TestCheckResponseSnapshot_BatchReinviteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchReinviteUser(context.Background(), &BatchReinviteUserInput{})
+	got, err := svc.BatchReinviteUser(context.Background(), &BatchReinviteUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +397,15 @@ func TestCheckResponseSnapshot_BatchResetDevicesForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchResetDevicesForUser(context.Background(), &BatchResetDevicesForUserInput{})
+	got, err := svc.BatchResetDevicesForUser(context.Background(), &BatchResetDevicesForUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		UserId:    ptr.String("__UserId__"),
+		AppIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -387,7 +446,15 @@ func TestCheckResponseSnapshot_BatchToggleUserSuspendStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchToggleUserSuspendStatus(context.Background(), &BatchToggleUserSuspendStatusInput{})
+	got, err := svc.BatchToggleUserSuspendStatus(context.Background(), &BatchToggleUserSuspendStatusInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Suspend:   ptr.Bool(true),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +480,13 @@ func TestCheckResponseSnapshot_CreateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBot(context.Background(), &CreateBotInput{})
+	got, err := svc.CreateBot(context.Background(), &CreateBotInput{
+		NetworkId:   ptr.String("__NetworkId__"),
+		Username:    ptr.String("__Username__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		GroupId:     ptr.String("__GroupId__"),
+		Challenge:   ptr.String("__Challenge__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +507,9 @@ func TestCheckResponseSnapshot_CreateDataRetentionBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataRetentionBot(context.Background(), &CreateDataRetentionBotInput{})
+	got, err := svc.CreateDataRetentionBot(context.Background(), &CreateDataRetentionBotInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +530,9 @@ func TestCheckResponseSnapshot_CreateDataRetentionBotChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataRetentionBotChallenge(context.Background(), &CreateDataRetentionBotChallengeInput{})
+	got, err := svc.CreateDataRetentionBotChallenge(context.Background(), &CreateDataRetentionBotChallengeInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +555,12 @@ func TestCheckResponseSnapshot_CreateNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{})
+	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{
+		NetworkName:            ptr.String("__NetworkName__"),
+		AccessLevel:            types.AccessLevel("STANDARD"),
+		EnablePremiumFreeTrial: ptr.Bool(true),
+		EncryptionKeyArn:       ptr.String("__EncryptionKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +667,42 @@ func TestCheckResponseSnapshot_CreateSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityGroup(context.Background(), &CreateSecurityGroupInput{})
+	got, err := svc.CreateSecurityGroup(context.Background(), &CreateSecurityGroupInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Name:      ptr.String("__Name__"),
+		SecurityGroupSettings: &types.SecurityGroupSettingsRequest{
+			LockoutThreshold: ptr.Int32(1),
+			PermittedNetworks: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EnableGuestFederation:            ptr.Bool(true),
+			GlobalFederation:                 ptr.Bool(true),
+			FederationMode:                   ptr.Int32(1),
+			EnableRestrictedGlobalFederation: ptr.Bool(true),
+			PermittedWickrAwsNetworks: []types.WickrAwsNetworks{
+				{
+					Region:    ptr.String("__Region__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+				{
+					Region:    ptr.String("__Region__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+			},
+			PermittedWickrEnterpriseNetworks: []types.PermittedWickrEnterpriseNetwork{
+				{
+					Domain:    ptr.String("__Domain__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+				{
+					Domain:    ptr.String("__Domain__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +723,10 @@ func TestCheckResponseSnapshot_DeleteBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{})
+	got, err := svc.DeleteBot(context.Background(), &DeleteBotInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +747,9 @@ func TestCheckResponseSnapshot_DeleteDataRetentionBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataRetentionBot(context.Background(), &DeleteDataRetentionBotInput{})
+	got, err := svc.DeleteDataRetentionBot(context.Background(), &DeleteDataRetentionBotInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -648,7 +770,10 @@ func TestCheckResponseSnapshot_DeleteNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetwork(context.Background(), &DeleteNetworkInput{})
+	got, err := svc.DeleteNetwork(context.Background(), &DeleteNetworkInput{
+		NetworkId:   ptr.String("__NetworkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +796,10 @@ func TestCheckResponseSnapshot_DeleteSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityGroup(context.Background(), &DeleteSecurityGroupInput{})
+	got, err := svc.DeleteSecurityGroup(context.Background(), &DeleteSecurityGroupInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		GroupId:   ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +829,10 @@ func TestCheckResponseSnapshot_GetBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBot(context.Background(), &GetBotInput{})
+	got, err := svc.GetBot(context.Background(), &GetBotInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		BotId:     ptr.String("__BotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -724,7 +855,9 @@ func TestCheckResponseSnapshot_GetBotsCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBotsCount(context.Background(), &GetBotsCountInput{})
+	got, err := svc.GetBotsCount(context.Background(), &GetBotsCountInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +883,9 @@ func TestCheckResponseSnapshot_GetDataRetentionBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataRetentionBot(context.Background(), &GetDataRetentionBotInput{})
+	got, err := svc.GetDataRetentionBot(context.Background(), &GetDataRetentionBotInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +915,9 @@ func TestCheckResponseSnapshot_GetGuestUserHistoryCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGuestUserHistoryCount(context.Background(), &GetGuestUserHistoryCountInput{})
+	got, err := svc.GetGuestUserHistoryCount(context.Background(), &GetGuestUserHistoryCountInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -809,7 +946,9 @@ func TestCheckResponseSnapshot_GetNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetwork(context.Background(), &GetNetworkInput{})
+	got, err := svc.GetNetwork(context.Background(), &GetNetworkInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +980,9 @@ func TestCheckResponseSnapshot_GetNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkSettings(context.Background(), &GetNetworkSettingsInput{})
+	got, err := svc.GetNetworkSettings(context.Background(), &GetNetworkSettingsInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -886,7 +1027,17 @@ func TestCheckResponseSnapshot_GetOidcInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOidcInfo(context.Background(), &GetOidcInfoInput{})
+	got, err := svc.GetOidcInfo(context.Background(), &GetOidcInfoInput{
+		NetworkId:    ptr.String("__NetworkId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		Code:         ptr.String("__Code__"),
+		GrantType:    ptr.String("__GrantType__"),
+		RedirectUri:  ptr.String("__RedirectUri__"),
+		Url:          ptr.String("__Url__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		CodeVerifier: ptr.String("__CodeVerifier__"),
+		Certificate:  ptr.String("__Certificate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -910,7 +1061,9 @@ func TestCheckResponseSnapshot_GetOpentdfConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOpentdfConfig(context.Background(), &GetOpentdfConfigInput{})
+	got, err := svc.GetOpentdfConfig(context.Background(), &GetOpentdfConfigInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1017,7 +1170,10 @@ func TestCheckResponseSnapshot_GetSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSecurityGroup(context.Background(), &GetSecurityGroupInput{})
+	got, err := svc.GetSecurityGroup(context.Background(), &GetSecurityGroupInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		GroupId:   ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1050,7 +1206,12 @@ func TestCheckResponseSnapshot_GetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUser(context.Background(), &GetUserInput{})
+	got, err := svc.GetUser(context.Background(), &GetUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		UserId:    ptr.String("__UserId__"),
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1075,7 +1236,9 @@ func TestCheckResponseSnapshot_GetUsersCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsersCount(context.Background(), &GetUsersCountInput{})
+	got, err := svc.GetUsersCount(context.Background(), &GetUsersCountInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1110,7 +1273,15 @@ func TestCheckResponseSnapshot_ListBlockedGuestUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBlockedGuestUsers(context.Background(), &ListBlockedGuestUsersInput{})
+	got, err := svc.ListBlockedGuestUsers(context.Background(), &ListBlockedGuestUsersInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		MaxResults:    ptr.Int32(1),
+		SortDirection: types.SortDirection("ASC"),
+		SortFields:    ptr.String("__SortFields__"),
+		Username:      ptr.String("__Username__"),
+		Admin:         ptr.String("__Admin__"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +1328,17 @@ func TestCheckResponseSnapshot_ListBots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBots(context.Background(), &ListBotsInput{})
+	got, err := svc.ListBots(context.Background(), &ListBotsInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Username:      ptr.String("__Username__"),
+		Status:        types.BotStatus(1),
+		GroupId:       ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1196,7 +1377,14 @@ func TestCheckResponseSnapshot_ListDevicesForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevicesForUser(context.Background(), &ListDevicesForUserInput{})
+	got, err := svc.ListDevicesForUser(context.Background(), &ListDevicesForUserInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		UserId:        ptr.String("__UserId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1229,7 +1417,15 @@ func TestCheckResponseSnapshot_ListGuestUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGuestUsers(context.Background(), &ListGuestUsersInput{})
+	got, err := svc.ListGuestUsers(context.Background(), &ListGuestUsersInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		MaxResults:    ptr.Int32(1),
+		SortDirection: types.SortDirection("ASC"),
+		SortFields:    ptr.String("__SortFields__"),
+		Username:      ptr.String("__Username__"),
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1274,7 +1470,12 @@ func TestCheckResponseSnapshot_ListNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{})
+	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1345,7 +1546,14 @@ func TestCheckResponseSnapshot_ListSecurityGroupUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityGroupUsers(context.Background(), &ListSecurityGroupUsersInput{})
+	got, err := svc.ListSecurityGroupUsers(context.Background(), &ListSecurityGroupUsersInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		GroupId:       ptr.String("__GroupId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1542,7 +1750,13 @@ func TestCheckResponseSnapshot_ListSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityGroups(context.Background(), &ListSecurityGroupsInput{})
+	got, err := svc.ListSecurityGroups(context.Background(), &ListSecurityGroupsInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1827,18 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		SortFields:    ptr.String("__SortFields__"),
+		SortDirection: types.SortDirection("ASC"),
+		FirstName:     ptr.String("__FirstName__"),
+		LastName:      ptr.String("__LastName__"),
+		Username:      ptr.String("__Username__"),
+		Status:        types.UserStatus(1),
+		GroupId:       ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1647,7 +1872,17 @@ func TestCheckResponseSnapshot_RegisterOidcConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterOidcConfig(context.Background(), &RegisterOidcConfigInput{})
+	got, err := svc.RegisterOidcConfig(context.Background(), &RegisterOidcConfigInput{
+		NetworkId:             ptr.String("__NetworkId__"),
+		CompanyId:             ptr.String("__CompanyId__"),
+		CustomUsername:        ptr.String("__CustomUsername__"),
+		ExtraAuthParams:       ptr.String("__ExtraAuthParams__"),
+		Issuer:                ptr.String("__Issuer__"),
+		Scopes:                ptr.String("__Scopes__"),
+		Secret:                ptr.String("__Secret__"),
+		SsoTokenBufferMinutes: ptr.Int32(1),
+		UserId:                ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1691,7 +1926,13 @@ func TestCheckResponseSnapshot_RegisterOidcConfigTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterOidcConfigTest(context.Background(), &RegisterOidcConfigTestInput{})
+	got, err := svc.RegisterOidcConfigTest(context.Background(), &RegisterOidcConfigTestInput{
+		NetworkId:       ptr.String("__NetworkId__"),
+		ExtraAuthParams: ptr.String("__ExtraAuthParams__"),
+		Issuer:          ptr.String("__Issuer__"),
+		Scopes:          ptr.String("__Scopes__"),
+		Certificate:     ptr.String("__Certificate__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1715,7 +1956,14 @@ func TestCheckResponseSnapshot_RegisterOpentdfConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterOpentdfConfig(context.Background(), &RegisterOpentdfConfigInput{})
+	got, err := svc.RegisterOpentdfConfig(context.Background(), &RegisterOpentdfConfigInput{
+		NetworkId:    ptr.String("__NetworkId__"),
+		ClientId:     ptr.String("__ClientId__"),
+		ClientSecret: ptr.String("__ClientSecret__"),
+		Domain:       ptr.String("__Domain__"),
+		Provider:     ptr.String("__Provider__"),
+		DryRun:       ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1736,7 +1984,14 @@ func TestCheckResponseSnapshot_UpdateBot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{})
+	got, err := svc.UpdateBot(context.Background(), &UpdateBotInput{
+		NetworkId:   ptr.String("__NetworkId__"),
+		BotId:       ptr.String("__BotId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		GroupId:     ptr.String("__GroupId__"),
+		Challenge:   ptr.String("__Challenge__"),
+		Suspend:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1757,7 +2012,10 @@ func TestCheckResponseSnapshot_UpdateDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataRetention(context.Background(), &UpdateDataRetentionInput{})
+	got, err := svc.UpdateDataRetention(context.Background(), &UpdateDataRetentionInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		ActionType: types.DataRetentionActionType("ENABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1778,7 +2036,11 @@ func TestCheckResponseSnapshot_UpdateGuestUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGuestUser(context.Background(), &UpdateGuestUserInput{})
+	got, err := svc.UpdateGuestUser(context.Background(), &UpdateGuestUserInput{
+		NetworkId:    ptr.String("__NetworkId__"),
+		UsernameHash: ptr.String("__UsernameHash__"),
+		Block:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2061,12 @@ func TestCheckResponseSnapshot_UpdateNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetwork(context.Background(), &UpdateNetworkInput{})
+	got, err := svc.UpdateNetwork(context.Background(), &UpdateNetworkInput{
+		NetworkId:        ptr.String("__NetworkId__"),
+		NetworkName:      ptr.String("__NetworkName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2098,23 @@ func TestCheckResponseSnapshot_UpdateNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetworkSettings(context.Background(), &UpdateNetworkSettingsInput{})
+	got, err := svc.UpdateNetworkSettings(context.Background(), &UpdateNetworkSettingsInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Settings: &types.NetworkSettings{
+			EnableClientMetrics: ptr.Bool(true),
+			ReadReceiptConfig: &types.ReadReceiptConfig{
+				Status: types.Status("DISABLED"),
+			},
+			DataRetention:           ptr.Bool(true),
+			EnableTrustedDataFormat: ptr.Bool(true),
+			ConsentPopup: &types.ConsentPopupConfig{
+				Enabled:          ptr.Bool(true),
+				Header:           ptr.String("__Header__"),
+				Content:          ptr.String("__Content__"),
+				CloseButtonLabel: ptr.String("__CloseButtonLabel__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1938,7 +2221,89 @@ func TestCheckResponseSnapshot_UpdateSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecurityGroup(context.Background(), &UpdateSecurityGroupInput{})
+	got, err := svc.UpdateSecurityGroup(context.Background(), &UpdateSecurityGroupInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		GroupId:   ptr.String("__GroupId__"),
+		Name:      ptr.String("__Name__"),
+		SecurityGroupSettings: &types.SecurityGroupSettings{
+			AlwaysReauthenticate: ptr.Bool(true),
+			AtakPackageValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Calling: &types.CallingSettings{
+				CanStart11Call: ptr.Bool(true),
+				CanVideoCall:   ptr.Bool(true),
+				ForceTcpCall:   ptr.Bool(true),
+			},
+			CheckForUpdates:                  ptr.Bool(true),
+			EnableAtak:                       ptr.Bool(true),
+			EnableCrashReports:               ptr.Bool(true),
+			EnableFileDownload:               ptr.Bool(true),
+			EnableGuestFederation:            ptr.Bool(true),
+			EnableNotificationPreview:        ptr.Bool(true),
+			EnableOpenAccessOption:           ptr.Bool(true),
+			EnableRestrictedGlobalFederation: ptr.Bool(true),
+			FilesEnabled:                     ptr.Bool(true),
+			ForceDeviceLockout:               ptr.Int32(1),
+			ForceOpenAccess:                  ptr.Bool(true),
+			ForceReadReceipts:                ptr.Bool(true),
+			GlobalFederation:                 ptr.Bool(true),
+			IsAtoEnabled:                     ptr.Bool(true),
+			IsLinkPreviewEnabled:             ptr.Bool(true),
+			LocationAllowMaps:                ptr.Bool(true),
+			LocationEnabled:                  ptr.Bool(true),
+			MaxAutoDownloadSize:              ptr.Int64(1),
+			MaxBor:                           ptr.Int32(1),
+			MaxTtl:                           ptr.Int64(1),
+			MessageForwardingEnabled:         ptr.Bool(true),
+			PasswordRequirements: &types.PasswordRequirements{
+				Lowercase: ptr.Int32(1),
+				MinLength: ptr.Int32(1),
+				Numbers:   ptr.Int32(1),
+				Symbols:   ptr.Int32(1),
+				Uppercase: ptr.Int32(1),
+			},
+			PresenceEnabled: ptr.Bool(true),
+			QuickResponses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ShowMasterRecoveryKey: ptr.Bool(true),
+			Shredder: &types.ShredderSettings{
+				CanProcessManually: ptr.Bool(true),
+				Intensity:          ptr.Int32(1),
+			},
+			SsoMaxIdleMinutes:       ptr.Int32(1),
+			MaxNonSsoSessionMinutes: ptr.Int32(1),
+			FederationMode:          ptr.Int32(1),
+			LockoutThreshold:        ptr.Int32(1),
+			PermittedNetworks: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PermittedWickrAwsNetworks: []types.WickrAwsNetworks{
+				{
+					Region:    ptr.String("__Region__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+				{
+					Region:    ptr.String("__Region__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+			},
+			PermittedWickrEnterpriseNetworks: []types.PermittedWickrEnterpriseNetwork{
+				{
+					Domain:    ptr.String("__Domain__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+				{
+					Domain:    ptr.String("__Domain__"),
+					NetworkId: ptr.String("__NetworkId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1973,7 +2338,22 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		UserId:    ptr.String("__UserId__"),
+		UserDetails: &types.UpdateUserDetails{
+			FirstName: ptr.String("__FirstName__"),
+			LastName:  ptr.String("__LastName__"),
+			Username:  ptr.String("__Username__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InviteCode:     ptr.String("__InviteCode__"),
+			InviteCodeTtl:  ptr.Int32(1),
+			CodeValidation: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1994,7 +2374,36 @@ func TestCheckResponseSnapshot_Error_BadRequestError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2019,7 +2428,36 @@ func TestCheckResponseSnapshot_Error_ForbiddenError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2044,7 +2482,36 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2069,7 +2536,36 @@ func TestCheckResponseSnapshot_Error_RateLimitError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2094,7 +2590,36 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2119,7 +2644,36 @@ func TestCheckResponseSnapshot_Error_UnauthorizedError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2154,7 +2708,36 @@ func TestCheckResponseSnapshot_Error_ValidationError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{})
+	_, opErr := svc.BatchCreateUser(context.Background(), &BatchCreateUserInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		Users: []types.BatchCreateUserRequestItem{
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+			{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Username:       ptr.String("__Username__"),
+				InviteCode:     ptr.String("__InviteCode__"),
+				InviteCodeTtl:  ptr.Int32(1),
+				CodeValidation: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

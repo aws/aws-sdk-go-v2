@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+
+<DisassociateDistributionWebACLResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Id>__Id__</Id></DisassociateDistributionWebACLResult>

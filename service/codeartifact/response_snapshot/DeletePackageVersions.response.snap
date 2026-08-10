@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failedVersions":{"key0":{"errorCode":"ALREADY_EXISTS","errorMessage":"__ErrorMessage__"}},"successfulVersions":{"key0":{"revision":"__Revision__","status":"Published"}}}

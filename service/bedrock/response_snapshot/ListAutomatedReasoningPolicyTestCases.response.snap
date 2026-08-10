@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","testCases":[{"confidenceThreshold":1,"createdAt":"2000-01-01T00:00:00Z","expectedAggregatedFindingsResult":"VALID","guardContent":"__GuardContent__","queryContent":"__QueryContent__","testCaseId":"__TestCaseId__","updatedAt":"2000-01-01T00:00:00Z"},{"confidenceThreshold":1,"createdAt":"2000-01-01T00:00:00Z","expectedAggregatedFindingsResult":"VALID","guardContent":"__GuardContent__","queryContent":"__QueryContent__","testCaseId":"__TestCaseId__","updatedAt":"2000-01-01T00:00:00Z"}]}

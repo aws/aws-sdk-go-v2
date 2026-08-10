@@ -193,7 +193,87 @@ func TestCheckResponseSnapshot_CreateMediaCapturePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	got, err := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +378,97 @@ func TestCheckResponseSnapshot_CreateMediaConcatenationPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaConcatenationPipeline(context.Background(), &CreateMediaConcatenationPipelineInput{})
+	got, err := svc.CreateMediaConcatenationPipeline(context.Background(), &CreateMediaConcatenationPipelineInput{
+		Sources: []types.ConcatenationSource{
+			{
+				Type: types.ConcatenationSourceType("MediaCapturePipeline"),
+				MediaCapturePipelineSourceConfiguration: &types.MediaCapturePipelineSourceConfiguration{
+					MediaPipelineArn: ptr.String("__MediaPipelineArn__"),
+					ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConcatenationConfiguration{
+						ArtifactsConfiguration: &types.ArtifactsConcatenationConfiguration{
+							Audio: &types.AudioConcatenationConfiguration{
+								State: types.AudioArtifactsConcatenationState("Enabled"),
+							},
+							Video: &types.VideoConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							Content: &types.ContentConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							DataChannel: &types.DataChannelConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							TranscriptionMessages: &types.TranscriptionMessagesConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							MeetingEvents: &types.MeetingEventsConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							CompositedVideo: &types.CompositedVideoConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Type: types.ConcatenationSourceType("MediaCapturePipeline"),
+				MediaCapturePipelineSourceConfiguration: &types.MediaCapturePipelineSourceConfiguration{
+					MediaPipelineArn: ptr.String("__MediaPipelineArn__"),
+					ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConcatenationConfiguration{
+						ArtifactsConfiguration: &types.ArtifactsConcatenationConfiguration{
+							Audio: &types.AudioConcatenationConfiguration{
+								State: types.AudioArtifactsConcatenationState("Enabled"),
+							},
+							Video: &types.VideoConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							Content: &types.ContentConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							DataChannel: &types.DataChannelConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							TranscriptionMessages: &types.TranscriptionMessagesConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							MeetingEvents: &types.MeetingEventsConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+							CompositedVideo: &types.CompositedVideoConcatenationConfiguration{
+								State: types.ArtifactsConcatenationState("Enabled"),
+							},
+						},
+					},
+				},
+			},
+		},
+		Sinks: []types.ConcatenationSink{
+			{
+				Type: types.ConcatenationSinkType("S3Bucket"),
+				S3BucketSinkConfiguration: &types.S3BucketSinkConfiguration{
+					Destination: ptr.String("__Destination__"),
+				},
+			},
+			{
+				Type: types.ConcatenationSinkType("S3Bucket"),
+				S3BucketSinkConfiguration: &types.S3BucketSinkConfiguration{
+					Destination: ptr.String("__Destination__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +569,84 @@ func TestCheckResponseSnapshot_CreateMediaInsightsPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaInsightsPipeline(context.Background(), &CreateMediaInsightsPipelineInput{})
+	got, err := svc.CreateMediaInsightsPipeline(context.Background(), &CreateMediaInsightsPipelineInput{
+		MediaInsightsPipelineConfigurationArn: ptr.String("__MediaInsightsPipelineConfigurationArn__"),
+		KinesisVideoStreamSourceRuntimeConfiguration: &types.KinesisVideoStreamSourceRuntimeConfiguration{
+			Streams: []types.StreamConfiguration{
+				{
+					StreamArn:      ptr.String("__StreamArn__"),
+					FragmentNumber: ptr.String("__FragmentNumber__"),
+					StreamChannelDefinition: &types.StreamChannelDefinition{
+						NumberOfChannels: ptr.Int32(1),
+						ChannelDefinitions: []types.ChannelDefinition{
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+						},
+					},
+				},
+				{
+					StreamArn:      ptr.String("__StreamArn__"),
+					FragmentNumber: ptr.String("__FragmentNumber__"),
+					StreamChannelDefinition: &types.StreamChannelDefinition{
+						NumberOfChannels: ptr.Int32(1),
+						ChannelDefinitions: []types.ChannelDefinition{
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+						},
+					},
+				},
+			},
+			MediaEncoding:   types.MediaEncoding("pcm"),
+			MediaSampleRate: ptr.Int32(1),
+		},
+		MediaInsightsRuntimeMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		KinesisVideoStreamRecordingSourceRuntimeConfiguration: &types.KinesisVideoStreamRecordingSourceRuntimeConfiguration{
+			Streams: []types.RecordingStreamConfiguration{
+				{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+				{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+			},
+			FragmentSelector: &types.FragmentSelector{
+				FragmentSelectorType: types.FragmentSelectorType("ProducerTimestamp"),
+				TimestampRange: &types.TimestampRange{
+					StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		S3RecordingSinkRuntimeConfiguration: &types.S3RecordingSinkRuntimeConfiguration{
+			Destination:         ptr.String("__Destination__"),
+			RecordingFileFormat: types.RecordingFileFormat("Wav"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -610,7 +857,204 @@ func TestCheckResponseSnapshot_CreateMediaInsightsPipelineConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaInsightsPipelineConfiguration(context.Background(), &CreateMediaInsightsPipelineConfigurationInput{})
+	got, err := svc.CreateMediaInsightsPipelineConfiguration(context.Background(), &CreateMediaInsightsPipelineConfigurationInput{
+		MediaInsightsPipelineConfigurationName: ptr.String("__MediaInsightsPipelineConfigurationName__"),
+		ResourceAccessRoleArn:                  ptr.String("__ResourceAccessRoleArn__"),
+		RealTimeAlertConfiguration: &types.RealTimeAlertConfiguration{
+			Disabled: true,
+			Rules: []types.RealTimeAlertRule{
+				{
+					Type: types.RealTimeAlertRuleType("KeywordMatch"),
+					KeywordMatchConfiguration: &types.KeywordMatchConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+						Keywords: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					SentimentConfiguration: &types.SentimentConfiguration{
+						RuleName:      ptr.String("__RuleName__"),
+						SentimentType: types.SentimentType("NEGATIVE"),
+						TimePeriod:    ptr.Int32(1),
+					},
+					IssueDetectionConfiguration: &types.IssueDetectionConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+					},
+				},
+				{
+					Type: types.RealTimeAlertRuleType("KeywordMatch"),
+					KeywordMatchConfiguration: &types.KeywordMatchConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+						Keywords: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					SentimentConfiguration: &types.SentimentConfiguration{
+						RuleName:      ptr.String("__RuleName__"),
+						SentimentType: types.SentimentType("NEGATIVE"),
+						TimePeriod:    ptr.Int32(1),
+					},
+					IssueDetectionConfiguration: &types.IssueDetectionConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+					},
+				},
+			},
+		},
+		Elements: []types.MediaInsightsPipelineConfigurationElement{
+			{
+				Type: types.MediaInsightsPipelineConfigurationElementType("AmazonTranscribeCallAnalyticsProcessor"),
+				AmazonTranscribeCallAnalyticsProcessorConfiguration: &types.AmazonTranscribeCallAnalyticsProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					FilterPartialResults:              true,
+					PostCallAnalyticsSettings: &types.PostCallAnalyticsSettings{
+						OutputLocation:           ptr.String("__OutputLocation__"),
+						DataAccessRoleArn:        ptr.String("__DataAccessRoleArn__"),
+						ContentRedactionOutput:   types.ContentRedactionOutput("redacted"),
+						OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+					},
+					CallAnalyticsStreamCategories: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AmazonTranscribeProcessorConfiguration: &types.AmazonTranscribeProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					ShowSpeakerLabel:                  true,
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					FilterPartialResults:              true,
+					IdentifyLanguage:                  true,
+					IdentifyMultipleLanguages:         true,
+					LanguageOptions:                   ptr.String("__LanguageOptions__"),
+					PreferredLanguage:                 types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyNames:                   ptr.String("__VocabularyNames__"),
+					VocabularyFilterNames:             ptr.String("__VocabularyFilterNames__"),
+				},
+				KinesisDataStreamSinkConfiguration: &types.KinesisDataStreamSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				S3RecordingSinkConfiguration: &types.S3RecordingSinkConfiguration{
+					Destination:         ptr.String("__Destination__"),
+					RecordingFileFormat: types.RecordingFileFormat("Wav"),
+				},
+				VoiceAnalyticsProcessorConfiguration: &types.VoiceAnalyticsProcessorConfiguration{
+					SpeakerSearchStatus:     types.VoiceAnalyticsConfigurationStatus("Enabled"),
+					VoiceToneAnalysisStatus: types.VoiceAnalyticsConfigurationStatus("Enabled"),
+				},
+				LambdaFunctionSinkConfiguration: &types.LambdaFunctionSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SqsQueueSinkConfiguration: &types.SqsQueueSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SnsTopicSinkConfiguration: &types.SnsTopicSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				VoiceEnhancementSinkConfiguration: &types.VoiceEnhancementSinkConfiguration{
+					Disabled: true,
+				},
+			},
+			{
+				Type: types.MediaInsightsPipelineConfigurationElementType("AmazonTranscribeCallAnalyticsProcessor"),
+				AmazonTranscribeCallAnalyticsProcessorConfiguration: &types.AmazonTranscribeCallAnalyticsProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					FilterPartialResults:              true,
+					PostCallAnalyticsSettings: &types.PostCallAnalyticsSettings{
+						OutputLocation:           ptr.String("__OutputLocation__"),
+						DataAccessRoleArn:        ptr.String("__DataAccessRoleArn__"),
+						ContentRedactionOutput:   types.ContentRedactionOutput("redacted"),
+						OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+					},
+					CallAnalyticsStreamCategories: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AmazonTranscribeProcessorConfiguration: &types.AmazonTranscribeProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					ShowSpeakerLabel:                  true,
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					FilterPartialResults:              true,
+					IdentifyLanguage:                  true,
+					IdentifyMultipleLanguages:         true,
+					LanguageOptions:                   ptr.String("__LanguageOptions__"),
+					PreferredLanguage:                 types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyNames:                   ptr.String("__VocabularyNames__"),
+					VocabularyFilterNames:             ptr.String("__VocabularyFilterNames__"),
+				},
+				KinesisDataStreamSinkConfiguration: &types.KinesisDataStreamSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				S3RecordingSinkConfiguration: &types.S3RecordingSinkConfiguration{
+					Destination:         ptr.String("__Destination__"),
+					RecordingFileFormat: types.RecordingFileFormat("Wav"),
+				},
+				VoiceAnalyticsProcessorConfiguration: &types.VoiceAnalyticsProcessorConfiguration{
+					SpeakerSearchStatus:     types.VoiceAnalyticsConfigurationStatus("Enabled"),
+					VoiceToneAnalysisStatus: types.VoiceAnalyticsConfigurationStatus("Enabled"),
+				},
+				LambdaFunctionSinkConfiguration: &types.LambdaFunctionSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SqsQueueSinkConfiguration: &types.SqsQueueSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SnsTopicSinkConfiguration: &types.SnsTopicSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				VoiceEnhancementSinkConfiguration: &types.VoiceEnhancementSinkConfiguration{
+					Disabled: true,
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +1203,141 @@ func TestCheckResponseSnapshot_CreateMediaLiveConnectorPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaLiveConnectorPipeline(context.Background(), &CreateMediaLiveConnectorPipelineInput{})
+	got, err := svc.CreateMediaLiveConnectorPipeline(context.Background(), &CreateMediaLiveConnectorPipelineInput{
+		Sources: []types.LiveConnectorSourceConfiguration{
+			{
+				SourceType: types.LiveConnectorSourceType("ChimeSdkMeeting"),
+				ChimeSdkMeetingLiveConnectorConfiguration: &types.ChimeSdkMeetingLiveConnectorConfiguration{
+					Arn:     ptr.String("__Arn__"),
+					MuxType: types.LiveConnectorMuxType("AudioWithCompositedVideo"),
+					CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+						Layout:     types.LayoutOption("GridView"),
+						Resolution: types.ResolutionOption("HD"),
+						GridViewConfiguration: &types.GridViewConfiguration{
+							ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+							PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+								PresenterPosition: types.PresenterPosition("TopLeft"),
+							},
+							ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+								ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+							},
+							HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+								TileOrder:       types.TileOrder("JoinSequence"),
+								TilePosition:    types.HorizontalTilePosition("Top"),
+								TileCount:       ptr.Int32(1),
+								TileAspectRatio: ptr.String("__TileAspectRatio__"),
+							},
+							VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+								TileOrder:       types.TileOrder("JoinSequence"),
+								TilePosition:    types.VerticalTilePosition("Left"),
+								TileCount:       ptr.Int32(1),
+								TileAspectRatio: ptr.String("__TileAspectRatio__"),
+							},
+							VideoAttribute: &types.VideoAttribute{
+								CornerRadius:    ptr.Int32(1),
+								BorderColor:     types.BorderColor("Black"),
+								HighlightColor:  types.HighlightColor("Black"),
+								BorderThickness: ptr.Int32(1),
+							},
+							CanvasOrientation: types.CanvasOrientation("Landscape"),
+						},
+					},
+					SourceConfiguration: &types.SourceConfiguration{
+						SelectedVideoStreams: &types.SelectedVideoStreams{
+							AttendeeIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExternalUserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			{
+				SourceType: types.LiveConnectorSourceType("ChimeSdkMeeting"),
+				ChimeSdkMeetingLiveConnectorConfiguration: &types.ChimeSdkMeetingLiveConnectorConfiguration{
+					Arn:     ptr.String("__Arn__"),
+					MuxType: types.LiveConnectorMuxType("AudioWithCompositedVideo"),
+					CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+						Layout:     types.LayoutOption("GridView"),
+						Resolution: types.ResolutionOption("HD"),
+						GridViewConfiguration: &types.GridViewConfiguration{
+							ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+							PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+								PresenterPosition: types.PresenterPosition("TopLeft"),
+							},
+							ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+								ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+							},
+							HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+								TileOrder:       types.TileOrder("JoinSequence"),
+								TilePosition:    types.HorizontalTilePosition("Top"),
+								TileCount:       ptr.Int32(1),
+								TileAspectRatio: ptr.String("__TileAspectRatio__"),
+							},
+							VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+								TileOrder:       types.TileOrder("JoinSequence"),
+								TilePosition:    types.VerticalTilePosition("Left"),
+								TileCount:       ptr.Int32(1),
+								TileAspectRatio: ptr.String("__TileAspectRatio__"),
+							},
+							VideoAttribute: &types.VideoAttribute{
+								CornerRadius:    ptr.Int32(1),
+								BorderColor:     types.BorderColor("Black"),
+								HighlightColor:  types.HighlightColor("Black"),
+								BorderThickness: ptr.Int32(1),
+							},
+							CanvasOrientation: types.CanvasOrientation("Landscape"),
+						},
+					},
+					SourceConfiguration: &types.SourceConfiguration{
+						SelectedVideoStreams: &types.SelectedVideoStreams{
+							AttendeeIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExternalUserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		Sinks: []types.LiveConnectorSinkConfiguration{
+			{
+				SinkType: types.LiveConnectorSinkType("RTMP"),
+				RTMPConfiguration: &types.LiveConnectorRTMPConfiguration{
+					Url:             ptr.String("__Url__"),
+					AudioChannels:   types.AudioChannelsOption("Stereo"),
+					AudioSampleRate: ptr.String("__AudioSampleRate__"),
+				},
+			},
+			{
+				SinkType: types.LiveConnectorSinkType("RTMP"),
+				RTMPConfiguration: &types.LiveConnectorRTMPConfiguration{
+					Url:             ptr.String("__Url__"),
+					AudioChannels:   types.AudioChannelsOption("Stereo"),
+					AudioSampleRate: ptr.String("__AudioSampleRate__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +1370,24 @@ func TestCheckResponseSnapshot_CreateMediaPipelineKinesisVideoStreamPool(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaPipelineKinesisVideoStreamPool(context.Background(), &CreateMediaPipelineKinesisVideoStreamPoolInput{})
+	got, err := svc.CreateMediaPipelineKinesisVideoStreamPool(context.Background(), &CreateMediaPipelineKinesisVideoStreamPoolInput{
+		StreamConfiguration: &types.KinesisVideoStreamConfiguration{
+			Region:               ptr.String("__Region__"),
+			DataRetentionInHours: ptr.Int32(1),
+		},
+		PoolName:           ptr.String("__PoolName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -843,7 +1438,43 @@ func TestCheckResponseSnapshot_CreateMediaStreamPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMediaStreamPipeline(context.Background(), &CreateMediaStreamPipelineInput{})
+	got, err := svc.CreateMediaStreamPipeline(context.Background(), &CreateMediaStreamPipelineInput{
+		Sources: []types.MediaStreamSource{
+			{
+				SourceType: types.MediaPipelineSourceType("ChimeSdkMeeting"),
+				SourceArn:  ptr.String("__SourceArn__"),
+			},
+			{
+				SourceType: types.MediaPipelineSourceType("ChimeSdkMeeting"),
+				SourceArn:  ptr.String("__SourceArn__"),
+			},
+		},
+		Sinks: []types.MediaStreamSink{
+			{
+				SinkArn:                ptr.String("__SinkArn__"),
+				SinkType:               types.MediaStreamPipelineSinkType("KinesisVideoStreamPool"),
+				ReservedStreamCapacity: ptr.Int32(1),
+				MediaStreamType:        types.MediaStreamType("MixedAudio"),
+			},
+			{
+				SinkArn:                ptr.String("__SinkArn__"),
+				SinkType:               types.MediaStreamPipelineSinkType("KinesisVideoStreamPool"),
+				ReservedStreamCapacity: ptr.Int32(1),
+				MediaStreamType:        types.MediaStreamType("MixedAudio"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -862,7 +1493,9 @@ func TestCheckResponseSnapshot_DeleteMediaCapturePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMediaCapturePipeline(context.Background(), &DeleteMediaCapturePipelineInput{})
+	got, err := svc.DeleteMediaCapturePipeline(context.Background(), &DeleteMediaCapturePipelineInput{
+		MediaPipelineId: ptr.String("__MediaPipelineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -881,7 +1514,9 @@ func TestCheckResponseSnapshot_DeleteMediaInsightsPipelineConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMediaInsightsPipelineConfiguration(context.Background(), &DeleteMediaInsightsPipelineConfigurationInput{})
+	got, err := svc.DeleteMediaInsightsPipelineConfiguration(context.Background(), &DeleteMediaInsightsPipelineConfigurationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1535,9 @@ func TestCheckResponseSnapshot_DeleteMediaPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMediaPipeline(context.Background(), &DeleteMediaPipelineInput{})
+	got, err := svc.DeleteMediaPipeline(context.Background(), &DeleteMediaPipelineInput{
+		MediaPipelineId: ptr.String("__MediaPipelineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -919,7 +1556,9 @@ func TestCheckResponseSnapshot_DeleteMediaPipelineKinesisVideoStreamPool(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMediaPipelineKinesisVideoStreamPool(context.Background(), &DeleteMediaPipelineKinesisVideoStreamPoolInput{})
+	got, err := svc.DeleteMediaPipelineKinesisVideoStreamPool(context.Background(), &DeleteMediaPipelineKinesisVideoStreamPoolInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1653,9 @@ func TestCheckResponseSnapshot_GetMediaCapturePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaCapturePipeline(context.Background(), &GetMediaCapturePipelineInput{})
+	got, err := svc.GetMediaCapturePipeline(context.Background(), &GetMediaCapturePipelineInput{
+		MediaPipelineId: ptr.String("__MediaPipelineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1866,9 @@ func TestCheckResponseSnapshot_GetMediaInsightsPipelineConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaInsightsPipelineConfiguration(context.Background(), &GetMediaInsightsPipelineConfigurationInput{})
+	got, err := svc.GetMediaInsightsPipelineConfiguration(context.Background(), &GetMediaInsightsPipelineConfigurationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1648,7 +2291,9 @@ func TestCheckResponseSnapshot_GetMediaPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaPipeline(context.Background(), &GetMediaPipelineInput{})
+	got, err := svc.GetMediaPipeline(context.Background(), &GetMediaPipelineInput{
+		MediaPipelineId: ptr.String("__MediaPipelineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1681,7 +2326,9 @@ func TestCheckResponseSnapshot_GetMediaPipelineKinesisVideoStreamPool(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaPipelineKinesisVideoStreamPool(context.Background(), &GetMediaPipelineKinesisVideoStreamPoolInput{})
+	got, err := svc.GetMediaPipelineKinesisVideoStreamPool(context.Background(), &GetMediaPipelineKinesisVideoStreamPoolInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +2354,10 @@ func TestCheckResponseSnapshot_GetSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSpeakerSearchTask(context.Background(), &GetSpeakerSearchTaskInput{})
+	got, err := svc.GetSpeakerSearchTask(context.Background(), &GetSpeakerSearchTaskInput{
+		Identifier:          ptr.String("__Identifier__"),
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1733,7 +2383,10 @@ func TestCheckResponseSnapshot_GetVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceToneAnalysisTask(context.Background(), &GetVoiceToneAnalysisTaskInput{})
+	got, err := svc.GetVoiceToneAnalysisTask(context.Background(), &GetVoiceToneAnalysisTaskInput{
+		Identifier:              ptr.String("__Identifier__"),
+		VoiceToneAnalysisTaskId: ptr.String("__VoiceToneAnalysisTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1764,7 +2417,10 @@ func TestCheckResponseSnapshot_ListMediaCapturePipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMediaCapturePipelines(context.Background(), &ListMediaCapturePipelinesInput{})
+	got, err := svc.ListMediaCapturePipelines(context.Background(), &ListMediaCapturePipelinesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1797,7 +2453,10 @@ func TestCheckResponseSnapshot_ListMediaInsightsPipelineConfigurations(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMediaInsightsPipelineConfigurations(context.Background(), &ListMediaInsightsPipelineConfigurationsInput{})
+	got, err := svc.ListMediaInsightsPipelineConfigurations(context.Background(), &ListMediaInsightsPipelineConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1830,7 +2489,10 @@ func TestCheckResponseSnapshot_ListMediaPipelineKinesisVideoStreamPools(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMediaPipelineKinesisVideoStreamPools(context.Background(), &ListMediaPipelineKinesisVideoStreamPoolsInput{})
+	got, err := svc.ListMediaPipelineKinesisVideoStreamPools(context.Background(), &ListMediaPipelineKinesisVideoStreamPoolsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1861,7 +2523,10 @@ func TestCheckResponseSnapshot_ListMediaPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMediaPipelines(context.Background(), &ListMediaPipelinesInput{})
+	got, err := svc.ListMediaPipelines(context.Background(), &ListMediaPipelinesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2556,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1917,7 +2584,16 @@ func TestCheckResponseSnapshot_StartSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{})
+	got, err := svc.StartSpeakerSearchTask(context.Background(), &StartSpeakerSearchTaskInput{
+		Identifier:            ptr.String("__Identifier__"),
+		VoiceProfileDomainArn: ptr.String("__VoiceProfileDomainArn__"),
+		KinesisVideoStreamSourceTaskConfiguration: &types.KinesisVideoStreamSourceTaskConfiguration{
+			StreamArn:      ptr.String("__StreamArn__"),
+			ChannelId:      1,
+			FragmentNumber: ptr.String("__FragmentNumber__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1943,7 +2619,16 @@ func TestCheckResponseSnapshot_StartVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVoiceToneAnalysisTask(context.Background(), &StartVoiceToneAnalysisTaskInput{})
+	got, err := svc.StartVoiceToneAnalysisTask(context.Background(), &StartVoiceToneAnalysisTaskInput{
+		Identifier:   ptr.String("__Identifier__"),
+		LanguageCode: types.VoiceAnalyticsLanguageCode("en-US"),
+		KinesisVideoStreamSourceTaskConfiguration: &types.KinesisVideoStreamSourceTaskConfiguration{
+			StreamArn:      ptr.String("__StreamArn__"),
+			ChannelId:      1,
+			FragmentNumber: ptr.String("__FragmentNumber__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1962,7 +2647,10 @@ func TestCheckResponseSnapshot_StopSpeakerSearchTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSpeakerSearchTask(context.Background(), &StopSpeakerSearchTaskInput{})
+	got, err := svc.StopSpeakerSearchTask(context.Background(), &StopSpeakerSearchTaskInput{
+		Identifier:          ptr.String("__Identifier__"),
+		SpeakerSearchTaskId: ptr.String("__SpeakerSearchTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1981,7 +2669,10 @@ func TestCheckResponseSnapshot_StopVoiceToneAnalysisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopVoiceToneAnalysisTask(context.Background(), &StopVoiceToneAnalysisTaskInput{})
+	got, err := svc.StopVoiceToneAnalysisTask(context.Background(), &StopVoiceToneAnalysisTaskInput{
+		Identifier:              ptr.String("__Identifier__"),
+		VoiceToneAnalysisTaskId: ptr.String("__VoiceToneAnalysisTaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2000,7 +2691,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2019,7 +2722,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2230,7 +2939,193 @@ func TestCheckResponseSnapshot_UpdateMediaInsightsPipelineConfiguration(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMediaInsightsPipelineConfiguration(context.Background(), &UpdateMediaInsightsPipelineConfigurationInput{})
+	got, err := svc.UpdateMediaInsightsPipelineConfiguration(context.Background(), &UpdateMediaInsightsPipelineConfigurationInput{
+		Identifier:            ptr.String("__Identifier__"),
+		ResourceAccessRoleArn: ptr.String("__ResourceAccessRoleArn__"),
+		RealTimeAlertConfiguration: &types.RealTimeAlertConfiguration{
+			Disabled: true,
+			Rules: []types.RealTimeAlertRule{
+				{
+					Type: types.RealTimeAlertRuleType("KeywordMatch"),
+					KeywordMatchConfiguration: &types.KeywordMatchConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+						Keywords: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					SentimentConfiguration: &types.SentimentConfiguration{
+						RuleName:      ptr.String("__RuleName__"),
+						SentimentType: types.SentimentType("NEGATIVE"),
+						TimePeriod:    ptr.Int32(1),
+					},
+					IssueDetectionConfiguration: &types.IssueDetectionConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+					},
+				},
+				{
+					Type: types.RealTimeAlertRuleType("KeywordMatch"),
+					KeywordMatchConfiguration: &types.KeywordMatchConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+						Keywords: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Negate: true,
+					},
+					SentimentConfiguration: &types.SentimentConfiguration{
+						RuleName:      ptr.String("__RuleName__"),
+						SentimentType: types.SentimentType("NEGATIVE"),
+						TimePeriod:    ptr.Int32(1),
+					},
+					IssueDetectionConfiguration: &types.IssueDetectionConfiguration{
+						RuleName: ptr.String("__RuleName__"),
+					},
+				},
+			},
+		},
+		Elements: []types.MediaInsightsPipelineConfigurationElement{
+			{
+				Type: types.MediaInsightsPipelineConfigurationElementType("AmazonTranscribeCallAnalyticsProcessor"),
+				AmazonTranscribeCallAnalyticsProcessorConfiguration: &types.AmazonTranscribeCallAnalyticsProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					FilterPartialResults:              true,
+					PostCallAnalyticsSettings: &types.PostCallAnalyticsSettings{
+						OutputLocation:           ptr.String("__OutputLocation__"),
+						DataAccessRoleArn:        ptr.String("__DataAccessRoleArn__"),
+						ContentRedactionOutput:   types.ContentRedactionOutput("redacted"),
+						OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+					},
+					CallAnalyticsStreamCategories: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AmazonTranscribeProcessorConfiguration: &types.AmazonTranscribeProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					ShowSpeakerLabel:                  true,
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					FilterPartialResults:              true,
+					IdentifyLanguage:                  true,
+					IdentifyMultipleLanguages:         true,
+					LanguageOptions:                   ptr.String("__LanguageOptions__"),
+					PreferredLanguage:                 types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyNames:                   ptr.String("__VocabularyNames__"),
+					VocabularyFilterNames:             ptr.String("__VocabularyFilterNames__"),
+				},
+				KinesisDataStreamSinkConfiguration: &types.KinesisDataStreamSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				S3RecordingSinkConfiguration: &types.S3RecordingSinkConfiguration{
+					Destination:         ptr.String("__Destination__"),
+					RecordingFileFormat: types.RecordingFileFormat("Wav"),
+				},
+				VoiceAnalyticsProcessorConfiguration: &types.VoiceAnalyticsProcessorConfiguration{
+					SpeakerSearchStatus:     types.VoiceAnalyticsConfigurationStatus("Enabled"),
+					VoiceToneAnalysisStatus: types.VoiceAnalyticsConfigurationStatus("Enabled"),
+				},
+				LambdaFunctionSinkConfiguration: &types.LambdaFunctionSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SqsQueueSinkConfiguration: &types.SqsQueueSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SnsTopicSinkConfiguration: &types.SnsTopicSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				VoiceEnhancementSinkConfiguration: &types.VoiceEnhancementSinkConfiguration{
+					Disabled: true,
+				},
+			},
+			{
+				Type: types.MediaInsightsPipelineConfigurationElementType("AmazonTranscribeCallAnalyticsProcessor"),
+				AmazonTranscribeCallAnalyticsProcessorConfiguration: &types.AmazonTranscribeCallAnalyticsProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					FilterPartialResults:              true,
+					PostCallAnalyticsSettings: &types.PostCallAnalyticsSettings{
+						OutputLocation:           ptr.String("__OutputLocation__"),
+						DataAccessRoleArn:        ptr.String("__DataAccessRoleArn__"),
+						ContentRedactionOutput:   types.ContentRedactionOutput("redacted"),
+						OutputEncryptionKMSKeyId: ptr.String("__OutputEncryptionKMSKeyId__"),
+					},
+					CallAnalyticsStreamCategories: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				AmazonTranscribeProcessorConfiguration: &types.AmazonTranscribeProcessorConfiguration{
+					LanguageCode:                      types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyName:                    ptr.String("__VocabularyName__"),
+					VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+					VocabularyFilterMethod:            types.VocabularyFilterMethod("remove"),
+					ShowSpeakerLabel:                  true,
+					EnablePartialResultsStabilization: true,
+					PartialResultsStability:           types.PartialResultsStability("high"),
+					ContentIdentificationType:         types.ContentType("PII"),
+					ContentRedactionType:              types.ContentType("PII"),
+					PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+					LanguageModelName:                 ptr.String("__LanguageModelName__"),
+					FilterPartialResults:              true,
+					IdentifyLanguage:                  true,
+					IdentifyMultipleLanguages:         true,
+					LanguageOptions:                   ptr.String("__LanguageOptions__"),
+					PreferredLanguage:                 types.CallAnalyticsLanguageCode("en-US"),
+					VocabularyNames:                   ptr.String("__VocabularyNames__"),
+					VocabularyFilterNames:             ptr.String("__VocabularyFilterNames__"),
+				},
+				KinesisDataStreamSinkConfiguration: &types.KinesisDataStreamSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				S3RecordingSinkConfiguration: &types.S3RecordingSinkConfiguration{
+					Destination:         ptr.String("__Destination__"),
+					RecordingFileFormat: types.RecordingFileFormat("Wav"),
+				},
+				VoiceAnalyticsProcessorConfiguration: &types.VoiceAnalyticsProcessorConfiguration{
+					SpeakerSearchStatus:     types.VoiceAnalyticsConfigurationStatus("Enabled"),
+					VoiceToneAnalysisStatus: types.VoiceAnalyticsConfigurationStatus("Enabled"),
+				},
+				LambdaFunctionSinkConfiguration: &types.LambdaFunctionSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SqsQueueSinkConfiguration: &types.SqsQueueSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				SnsTopicSinkConfiguration: &types.SnsTopicSinkConfiguration{
+					InsightsTarget: ptr.String("__InsightsTarget__"),
+				},
+				VoiceEnhancementSinkConfiguration: &types.VoiceEnhancementSinkConfiguration{
+					Disabled: true,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2249,7 +3144,10 @@ func TestCheckResponseSnapshot_UpdateMediaInsightsPipelineStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMediaInsightsPipelineStatus(context.Background(), &UpdateMediaInsightsPipelineStatusInput{})
+	got, err := svc.UpdateMediaInsightsPipelineStatus(context.Background(), &UpdateMediaInsightsPipelineStatusInput{
+		Identifier:   ptr.String("__Identifier__"),
+		UpdateStatus: types.MediaPipelineStatusUpdate("Pause"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2282,7 +3180,12 @@ func TestCheckResponseSnapshot_UpdateMediaPipelineKinesisVideoStreamPool(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMediaPipelineKinesisVideoStreamPool(context.Background(), &UpdateMediaPipelineKinesisVideoStreamPoolInput{})
+	got, err := svc.UpdateMediaPipelineKinesisVideoStreamPool(context.Background(), &UpdateMediaPipelineKinesisVideoStreamPoolInput{
+		Identifier: ptr.String("__Identifier__"),
+		StreamConfiguration: &types.KinesisVideoStreamConfigurationUpdate{
+			DataRetentionInHours: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2293,7 +3196,7 @@ func TestCheckResponseSnapshot_UpdateMediaPipelineKinesisVideoStreamPool(t *test
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("BadRequestException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2305,7 +3208,87 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2320,7 +3303,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ConflictException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2332,7 +3315,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaPipelineKinesisVideoStreamPool(context.Background(), &CreateMediaPipelineKinesisVideoStreamPoolInput{})
+	_, opErr := svc.CreateMediaPipelineKinesisVideoStreamPool(context.Background(), &CreateMediaPipelineKinesisVideoStreamPoolInput{
+		StreamConfiguration: &types.KinesisVideoStreamConfiguration{
+			Region:               ptr.String("__Region__"),
+			DataRetentionInHours: ptr.Int32(1),
+		},
+		PoolName:           ptr.String("__PoolName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2347,7 +3347,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ForbiddenException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2359,7 +3359,87 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2374,7 +3454,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("NotFoundException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2386,7 +3466,84 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaInsightsPipeline(context.Background(), &CreateMediaInsightsPipelineInput{})
+	_, opErr := svc.CreateMediaInsightsPipeline(context.Background(), &CreateMediaInsightsPipelineInput{
+		MediaInsightsPipelineConfigurationArn: ptr.String("__MediaInsightsPipelineConfigurationArn__"),
+		KinesisVideoStreamSourceRuntimeConfiguration: &types.KinesisVideoStreamSourceRuntimeConfiguration{
+			Streams: []types.StreamConfiguration{
+				{
+					StreamArn:      ptr.String("__StreamArn__"),
+					FragmentNumber: ptr.String("__FragmentNumber__"),
+					StreamChannelDefinition: &types.StreamChannelDefinition{
+						NumberOfChannels: ptr.Int32(1),
+						ChannelDefinitions: []types.ChannelDefinition{
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+						},
+					},
+				},
+				{
+					StreamArn:      ptr.String("__StreamArn__"),
+					FragmentNumber: ptr.String("__FragmentNumber__"),
+					StreamChannelDefinition: &types.StreamChannelDefinition{
+						NumberOfChannels: ptr.Int32(1),
+						ChannelDefinitions: []types.ChannelDefinition{
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+							{
+								ChannelId:       1,
+								ParticipantRole: types.ParticipantRole("AGENT"),
+							},
+						},
+					},
+				},
+			},
+			MediaEncoding:   types.MediaEncoding("pcm"),
+			MediaSampleRate: ptr.Int32(1),
+		},
+		MediaInsightsRuntimeMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		KinesisVideoStreamRecordingSourceRuntimeConfiguration: &types.KinesisVideoStreamRecordingSourceRuntimeConfiguration{
+			Streams: []types.RecordingStreamConfiguration{
+				{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+				{
+					StreamArn: ptr.String("__StreamArn__"),
+				},
+			},
+			FragmentSelector: &types.FragmentSelector{
+				FragmentSelectorType: types.FragmentSelectorType("ProducerTimestamp"),
+				TimestampRange: &types.TimestampRange{
+					StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		S3RecordingSinkRuntimeConfiguration: &types.S3RecordingSinkRuntimeConfiguration{
+			Destination:         ptr.String("__Destination__"),
+			RecordingFileFormat: types.RecordingFileFormat("Wav"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2401,7 +3558,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T) {
 	want := &types.ResourceLimitExceededException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ResourceLimitExceededException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2413,7 +3570,87 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2428,7 +3665,7 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ServiceFailureException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2440,7 +3677,87 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2455,7 +3772,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ServiceUnavailableException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2467,7 +3784,87 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2482,7 +3879,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 	want := &types.ThrottledClientException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("ThrottledClientException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2494,7 +3891,87 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2509,7 +3986,7 @@ func TestCheckResponseSnapshot_Error_ThrottledClientException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 	want := &types.UnauthorizedClientException{
-		Code:      types.ErrorCode("BadRequest"),
+		Code:      types.ErrorCode("UnauthorizedClientException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -2521,7 +3998,87 @@ func TestCheckResponseSnapshot_Error_UnauthorizedClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{})
+	_, opErr := svc.CreateMediaCapturePipeline(context.Background(), &CreateMediaCapturePipelineInput{
+		SourceType:         types.MediaPipelineSourceType("ChimeSdkMeeting"),
+		SourceArn:          ptr.String("__SourceArn__"),
+		SinkType:           types.MediaPipelineSinkType("S3Bucket"),
+		SinkArn:            ptr.String("__SinkArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChimeSdkMeetingConfiguration: &types.ChimeSdkMeetingConfiguration{
+			SourceConfiguration: &types.SourceConfiguration{
+				SelectedVideoStreams: &types.SelectedVideoStreams{
+					AttendeeIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExternalUserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ArtifactsConfiguration: &types.ArtifactsConfiguration{
+				Audio: &types.AudioArtifactsConfiguration{
+					MuxType: types.AudioMuxType("AudioOnly"),
+				},
+				Video: &types.VideoArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.VideoMuxType("VideoOnly"),
+				},
+				Content: &types.ContentArtifactsConfiguration{
+					State:   types.ArtifactsState("Enabled"),
+					MuxType: types.ContentMuxType("ContentOnly"),
+				},
+				CompositedVideo: &types.CompositedVideoArtifactsConfiguration{
+					Layout:     types.LayoutOption("GridView"),
+					Resolution: types.ResolutionOption("HD"),
+					GridViewConfiguration: &types.GridViewConfiguration{
+						ContentShareLayout: types.ContentShareLayoutOption("PresenterOnly"),
+						PresenterOnlyConfiguration: &types.PresenterOnlyConfiguration{
+							PresenterPosition: types.PresenterPosition("TopLeft"),
+						},
+						ActiveSpeakerOnlyConfiguration: &types.ActiveSpeakerOnlyConfiguration{
+							ActiveSpeakerPosition: types.ActiveSpeakerPosition("TopLeft"),
+						},
+						HorizontalLayoutConfiguration: &types.HorizontalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.HorizontalTilePosition("Top"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VerticalLayoutConfiguration: &types.VerticalLayoutConfiguration{
+							TileOrder:       types.TileOrder("JoinSequence"),
+							TilePosition:    types.VerticalTilePosition("Left"),
+							TileCount:       ptr.Int32(1),
+							TileAspectRatio: ptr.String("__TileAspectRatio__"),
+						},
+						VideoAttribute: &types.VideoAttribute{
+							CornerRadius:    ptr.Int32(1),
+							BorderColor:     types.BorderColor("Black"),
+							HighlightColor:  types.HighlightColor("Black"),
+							BorderThickness: ptr.Int32(1),
+						},
+						CanvasOrientation: types.CanvasOrientation("Landscape"),
+					},
+				},
+			},
+		},
+		SseAwsKeyManagementParams: &types.SseAwsKeyManagementParams{
+			AwsKmsKeyId:             ptr.String("__AwsKmsKeyId__"),
+			AwsKmsEncryptionContext: ptr.String("__AwsKmsEncryptionContext__"),
+		},
+		SinkIamRoleArn: ptr.String("__SinkIamRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

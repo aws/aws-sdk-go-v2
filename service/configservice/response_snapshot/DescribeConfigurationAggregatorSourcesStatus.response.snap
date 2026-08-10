@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeConfigurationAggregatorSourcesStatus
+
+{"AggregatedSourceStatusList":[{"AwsRegion":"__AwsRegion__","LastErrorCode":"__LastErrorCode__","LastErrorMessage":"__LastErrorMessage__","LastUpdateStatus":"FAILED","LastUpdateTime":946684800,"SourceId":"__SourceId__","SourceType":"ACCOUNT"},{"AwsRegion":"__AwsRegion__","LastErrorCode":"__LastErrorCode__","LastErrorMessage":"__LastErrorMessage__","LastUpdateStatus":"FAILED","LastUpdateTime":946684800,"SourceId":"__SourceId__","SourceType":"ACCOUNT"}],"NextToken":"__NextToken__"}

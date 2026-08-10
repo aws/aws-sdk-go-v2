@@ -138,7 +138,21 @@ func TestCheckResponseSnapshot_ActivateType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateType(context.Background(), &ActivateTypeInput{})
+	got, err := svc.ActivateType(context.Background(), &ActivateTypeInput{
+		Type:          types.ThirdPartyType("RESOURCE"),
+		PublicTypeArn: ptr.String("__PublicTypeArn__"),
+		PublisherId:   ptr.String("__PublisherId__"),
+		TypeName:      ptr.String("__TypeName__"),
+		TypeNameAlias: ptr.String("__TypeNameAlias__"),
+		AutoUpdate:    ptr.Bool(true),
+		LoggingConfig: &types.LoggingConfig{
+			LogRoleArn:   ptr.String("__LogRoleArn__"),
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		VersionBump:      types.VersionBump("MAJOR"),
+		MajorVersion:     ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +232,24 @@ func TestCheckResponseSnapshot_BatchDescribeTypeConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDescribeTypeConfigurations(context.Background(), &BatchDescribeTypeConfigurationsInput{})
+	got, err := svc.BatchDescribeTypeConfigurations(context.Background(), &BatchDescribeTypeConfigurationsInput{
+		TypeConfigurationIdentifiers: []types.TypeConfigurationIdentifier{
+			{
+				TypeArn:                ptr.String("__TypeArn__"),
+				TypeConfigurationAlias: ptr.String("__TypeConfigurationAlias__"),
+				TypeConfigurationArn:   ptr.String("__TypeConfigurationArn__"),
+				Type:                   types.ThirdPartyType("RESOURCE"),
+				TypeName:               ptr.String("__TypeName__"),
+			},
+			{
+				TypeArn:                ptr.String("__TypeArn__"),
+				TypeConfigurationAlias: ptr.String("__TypeConfigurationAlias__"),
+				TypeConfigurationArn:   ptr.String("__TypeConfigurationArn__"),
+				Type:                   types.ThirdPartyType("RESOURCE"),
+				TypeName:               ptr.String("__TypeName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +268,10 @@ func TestCheckResponseSnapshot_CancelUpdateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelUpdateStack(context.Background(), &CancelUpdateStackInput{})
+	got, err := svc.CancelUpdateStack(context.Background(), &CancelUpdateStackInput{
+		StackName:          ptr.String("__StackName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +290,15 @@ func TestCheckResponseSnapshot_ContinueUpdateRollback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ContinueUpdateRollback(context.Background(), &ContinueUpdateRollbackInput{})
+	got, err := svc.ContinueUpdateRollback(context.Background(), &ContinueUpdateRollbackInput{
+		StackName: ptr.String("__StackName__"),
+		RoleARN:   ptr.String("__RoleARN__"),
+		ResourcesToSkip: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +320,91 @@ func TestCheckResponseSnapshot_CreateChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{})
+	got, err := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{
+		StackName:           ptr.String("__StackName__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		TemplateURL:         ptr.String("__TemplateURL__"),
+		UsePreviousTemplate: ptr.Bool(true),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN: ptr.String("__RoleARN__"),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Description:   ptr.String("__Description__"),
+		ChangeSetType: types.ChangeSetType("CREATE"),
+		ResourcesToImport: []types.ResourceToImport{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		IncludeNestedStacks:     ptr.Bool(true),
+		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
+		ImportExistingResources: ptr.Bool(true),
+		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +425,30 @@ func TestCheckResponseSnapshot_CreateGeneratedTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGeneratedTemplate(context.Background(), &CreateGeneratedTemplateInput{})
+	got, err := svc.CreateGeneratedTemplate(context.Background(), &CreateGeneratedTemplateInput{
+		Resources: []types.ResourceDefinition{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+		StackName:             ptr.String("__StackName__"),
+		TemplateConfiguration: &types.TemplateConfiguration{
+			DeletionPolicy:      types.GeneratedTemplateDeletionPolicy("DELETE"),
+			UpdateReplacePolicy: types.GeneratedTemplateUpdateReplacePolicy("DELETE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +470,74 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStack(context.Background(), &CreateStackInput{})
+	got, err := svc.CreateStack(context.Background(), &CreateStackInput{
+		StackName:    ptr.String("__StackName__"),
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		DisableRollback: ptr.Bool(true),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		TimeoutInMinutes: ptr.Int32(1),
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN:         ptr.String("__RoleARN__"),
+		OnFailure:       types.OnFailure("DO_NOTHING"),
+		StackPolicyBody: ptr.String("__StackPolicyBody__"),
+		StackPolicyURL:  ptr.String("__StackPolicyURL__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		EnableTerminationProtection: ptr.Bool(true),
+		RetainExceptOnCreate:        ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -342,7 +558,57 @@ func TestCheckResponseSnapshot_CreateStackInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{})
+	got, err := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +629,44 @@ func TestCheckResponseSnapshot_CreateStackRefactor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStackRefactor(context.Background(), &CreateStackRefactorInput{})
+	got, err := svc.CreateStackRefactor(context.Background(), &CreateStackRefactorInput{
+		Description:         ptr.String("__Description__"),
+		EnableStackCreation: ptr.Bool(true),
+		ResourceMappings: []types.ResourceMapping{
+			{
+				Source: &types.ResourceLocation{
+					StackName:         ptr.String("__StackName__"),
+					LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				},
+				Destination: &types.ResourceLocation{
+					StackName:         ptr.String("__StackName__"),
+					LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				},
+			},
+			{
+				Source: &types.ResourceLocation{
+					StackName:         ptr.String("__StackName__"),
+					LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				},
+				Destination: &types.ResourceLocation{
+					StackName:         ptr.String("__StackName__"),
+					LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				},
+			},
+		},
+		StackDefinitions: []types.StackDefinition{
+			{
+				StackName:    ptr.String("__StackName__"),
+				TemplateBody: ptr.String("__TemplateBody__"),
+				TemplateURL:  ptr.String("__TemplateURL__"),
+			},
+			{
+				StackName:    ptr.String("__StackName__"),
+				TemplateBody: ptr.String("__TemplateBody__"),
+				TemplateURL:  ptr.String("__TemplateURL__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +687,57 @@ func TestCheckResponseSnapshot_CreateStackSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStackSet(context.Background(), &CreateStackSetInput{})
+	got, err := svc.CreateStackSet(context.Background(), &CreateStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Description:  ptr.String("__Description__"),
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		StackId:      ptr.String("__StackId__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AdministrationRoleARN: ptr.String("__AdministrationRoleARN__"),
+		ExecutionRoleName:     ptr.String("__ExecutionRoleName__"),
+		PermissionModel:       types.PermissionModels("SERVICE_MANAGED"),
+		AutoDeployment: &types.AutoDeployment{
+			Enabled:                      ptr.Bool(true),
+			RetainStacksOnAccountRemoval: ptr.Bool(true),
+			DependsOn: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CallAs:             types.CallAs("SELF"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ManagedExecution: &types.ManagedExecution{
+			Active: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +775,11 @@ func TestCheckResponseSnapshot_DeactivateType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateType(context.Background(), &DeactivateTypeInput{})
+	got, err := svc.DeactivateType(context.Background(), &DeactivateTypeInput{
+		TypeName: ptr.String("__TypeName__"),
+		Type:     types.ThirdPartyType("RESOURCE"),
+		Arn:      ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +798,10 @@ func TestCheckResponseSnapshot_DeleteChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChangeSet(context.Background(), &DeleteChangeSetInput{})
+	got, err := svc.DeleteChangeSet(context.Background(), &DeleteChangeSetInput{
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		StackName:     ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +820,9 @@ func TestCheckResponseSnapshot_DeleteGeneratedTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGeneratedTemplate(context.Background(), &DeleteGeneratedTemplateInput{})
+	got, err := svc.DeleteGeneratedTemplate(context.Background(), &DeleteGeneratedTemplateInput{
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -479,7 +841,20 @@ func TestCheckResponseSnapshot_DeleteStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStack(context.Background(), &DeleteStackInput{})
+	got, err := svc.DeleteStack(context.Background(), &DeleteStackInput{
+		StackName: ptr.String("__StackName__"),
+		RetainResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN:            ptr.String("__RoleARN__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DeletionMode:       types.DeletionMode("STANDARD"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -500,7 +875,44 @@ func TestCheckResponseSnapshot_DeleteStackInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStackInstances(context.Background(), &DeleteStackInstancesInput{})
+	got, err := svc.DeleteStackInstances(context.Background(), &DeleteStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		RetainStacks: ptr.Bool(true),
+		OperationId:  ptr.String("__OperationId__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +931,10 @@ func TestCheckResponseSnapshot_DeleteStackSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStackSet(context.Background(), &DeleteStackSetInput{})
+	got, err := svc.DeleteStackSet(context.Background(), &DeleteStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +953,12 @@ func TestCheckResponseSnapshot_DeregisterType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterType(context.Background(), &DeregisterTypeInput{})
+	got, err := svc.DeregisterType(context.Background(), &DeregisterTypeInput{
+		Arn:       ptr.String("__Arn__"),
+		Type:      types.RegistryType("RESOURCE"),
+		TypeName:  ptr.String("__TypeName__"),
+		VersionId: ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -569,7 +989,9 @@ func TestCheckResponseSnapshot_DescribeAccountLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{})
+	got, err := svc.DescribeAccountLimits(context.Background(), &DescribeAccountLimitsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -815,7 +1237,12 @@ func TestCheckResponseSnapshot_DescribeChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{})
+	got, err := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{
+		ChangeSetName:         ptr.String("__ChangeSetName__"),
+		StackName:             ptr.String("__StackName__"),
+		NextToken:             ptr.String("__NextToken__"),
+		IncludePropertyValues: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -873,7 +1300,12 @@ func TestCheckResponseSnapshot_DescribeChangeSetHooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChangeSetHooks(context.Background(), &DescribeChangeSetHooksInput{})
+	got, err := svc.DescribeChangeSetHooks(context.Background(), &DescribeChangeSetHooksInput{
+		ChangeSetName:     ptr.String("__ChangeSetName__"),
+		StackName:         ptr.String("__StackName__"),
+		NextToken:         ptr.String("__NextToken__"),
+		LogicalResourceId: ptr.String("__LogicalResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1386,15 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		StackName:     ptr.String("__StackName__"),
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		OperationId:   ptr.String("__OperationId__"),
+		Filters: &types.EventFilter{
+			FailedEvents: ptr.Bool(true),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1516,9 @@ func TestCheckResponseSnapshot_DescribeGeneratedTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGeneratedTemplate(context.Background(), &DescribeGeneratedTemplateInput{})
+	got, err := svc.DescribeGeneratedTemplate(context.Background(), &DescribeGeneratedTemplateInput{
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1539,9 @@ func TestCheckResponseSnapshot_DescribeOrganizationsAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationsAccess(context.Background(), &DescribeOrganizationsAccessInput{})
+	got, err := svc.DescribeOrganizationsAccess(context.Background(), &DescribeOrganizationsAccessInput{
+		CallAs: types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1121,7 +1565,9 @@ func TestCheckResponseSnapshot_DescribePublisher(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePublisher(context.Background(), &DescribePublisherInput{})
+	got, err := svc.DescribePublisher(context.Background(), &DescribePublisherInput{
+		PublisherId: ptr.String("__PublisherId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1167,7 +1613,9 @@ func TestCheckResponseSnapshot_DescribeResourceScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourceScan(context.Background(), &DescribeResourceScanInput{})
+	got, err := svc.DescribeResourceScan(context.Background(), &DescribeResourceScanInput{
+		ResourceScanId: ptr.String("__ResourceScanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1194,7 +1642,9 @@ func TestCheckResponseSnapshot_DescribeStackDriftDetectionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackDriftDetectionStatus(context.Background(), &DescribeStackDriftDetectionStatusInput{})
+	got, err := svc.DescribeStackDriftDetectionStatus(context.Background(), &DescribeStackDriftDetectionStatusInput{
+		StackDriftDetectionId: ptr.String("__StackDriftDetectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1259,7 +1709,10 @@ func TestCheckResponseSnapshot_DescribeStackEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackEvents(context.Background(), &DescribeStackEventsInput{})
+	got, err := svc.DescribeStackEvents(context.Background(), &DescribeStackEventsInput{
+		StackName: ptr.String("__StackName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1308,7 +1761,12 @@ func TestCheckResponseSnapshot_DescribeStackInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackInstance(context.Background(), &DescribeStackInstanceInput{})
+	got, err := svc.DescribeStackInstance(context.Background(), &DescribeStackInstanceInput{
+		StackSetName:         ptr.String("__StackSetName__"),
+		StackInstanceAccount: ptr.String("__StackInstanceAccount__"),
+		StackInstanceRegion:  ptr.String("__StackInstanceRegion__"),
+		CallAs:               types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +1796,9 @@ func TestCheckResponseSnapshot_DescribeStackRefactor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackRefactor(context.Background(), &DescribeStackRefactorInput{})
+	got, err := svc.DescribeStackRefactor(context.Background(), &DescribeStackRefactorInput{
+		StackRefactorId: ptr.String("__StackRefactorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1378,7 +1838,10 @@ func TestCheckResponseSnapshot_DescribeStackResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackResource(context.Background(), &DescribeStackResourceInput{})
+	got, err := svc.DescribeStackResource(context.Background(), &DescribeStackResourceInput{
+		StackName:         ptr.String("__StackName__"),
+		LogicalResourceId: ptr.String("__LogicalResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +1942,15 @@ func TestCheckResponseSnapshot_DescribeStackResourceDrifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackResourceDrifts(context.Background(), &DescribeStackResourceDriftsInput{})
+	got, err := svc.DescribeStackResourceDrifts(context.Background(), &DescribeStackResourceDriftsInput{
+		StackName: ptr.String("__StackName__"),
+		StackResourceDriftStatusFilters: []types.StackResourceDriftStatus{
+			types.StackResourceDriftStatus("IN_SYNC"),
+			types.StackResourceDriftStatus("IN_SYNC"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1539,7 +2010,11 @@ func TestCheckResponseSnapshot_DescribeStackResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackResources(context.Background(), &DescribeStackResourcesInput{})
+	got, err := svc.DescribeStackResources(context.Background(), &DescribeStackResourcesInput{
+		StackName:          ptr.String("__StackName__"),
+		LogicalResourceId:  ptr.String("__LogicalResourceId__"),
+		PhysicalResourceId: ptr.String("__PhysicalResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1627,7 +2102,10 @@ func TestCheckResponseSnapshot_DescribeStackSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackSet(context.Background(), &DescribeStackSetInput{})
+	got, err := svc.DescribeStackSet(context.Background(), &DescribeStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1696,7 +2174,11 @@ func TestCheckResponseSnapshot_DescribeStackSetOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStackSetOperation(context.Background(), &DescribeStackSetOperationInput{})
+	got, err := svc.DescribeStackSetOperation(context.Background(), &DescribeStackSetOperationInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		OperationId:  ptr.String("__OperationId__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1913,7 +2395,10 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStacks(context.Background(), &DescribeStacksInput{})
+	got, err := svc.DescribeStacks(context.Background(), &DescribeStacksInput{
+		StackName: ptr.String("__StackName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1982,7 +2467,14 @@ func TestCheckResponseSnapshot_DescribeType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeType(context.Background(), &DescribeTypeInput{})
+	got, err := svc.DescribeType(context.Background(), &DescribeTypeInput{
+		Type:                types.RegistryType("RESOURCE"),
+		TypeName:            ptr.String("__TypeName__"),
+		Arn:                 ptr.String("__Arn__"),
+		VersionId:           ptr.String("__VersionId__"),
+		PublisherId:         ptr.String("__PublisherId__"),
+		PublicVersionNumber: ptr.String("__PublicVersionNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2006,7 +2498,9 @@ func TestCheckResponseSnapshot_DescribeTypeRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTypeRegistration(context.Background(), &DescribeTypeRegistrationInput{})
+	got, err := svc.DescribeTypeRegistration(context.Background(), &DescribeTypeRegistrationInput{
+		RegistrationToken: ptr.String("__RegistrationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2027,7 +2521,13 @@ func TestCheckResponseSnapshot_DetectStackDrift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectStackDrift(context.Background(), &DetectStackDriftInput{})
+	got, err := svc.DetectStackDrift(context.Background(), &DetectStackDriftInput{
+		StackName: ptr.String("__StackName__"),
+		LogicalResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2086,7 +2586,10 @@ func TestCheckResponseSnapshot_DetectStackResourceDrift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectStackResourceDrift(context.Background(), &DetectStackResourceDriftInput{})
+	got, err := svc.DetectStackResourceDrift(context.Background(), &DetectStackResourceDriftInput{
+		StackName:         ptr.String("__StackName__"),
+		LogicalResourceId: ptr.String("__LogicalResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2107,7 +2610,23 @@ func TestCheckResponseSnapshot_DetectStackSetDrift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectStackSetDrift(context.Background(), &DetectStackSetDriftInput{})
+	got, err := svc.DetectStackSetDrift(context.Background(), &DetectStackSetDriftInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2128,7 +2647,24 @@ func TestCheckResponseSnapshot_EstimateTemplateCost(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EstimateTemplateCost(context.Background(), &EstimateTemplateCostInput{})
+	got, err := svc.EstimateTemplateCost(context.Background(), &EstimateTemplateCostInput{
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2147,7 +2683,13 @@ func TestCheckResponseSnapshot_ExecuteChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteChangeSet(context.Background(), &ExecuteChangeSetInput{})
+	got, err := svc.ExecuteChangeSet(context.Background(), &ExecuteChangeSetInput{
+		ChangeSetName:        ptr.String("__ChangeSetName__"),
+		StackName:            ptr.String("__StackName__"),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		DisableRollback:      ptr.Bool(true),
+		RetainExceptOnCreate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2166,7 +2708,9 @@ func TestCheckResponseSnapshot_ExecuteStackRefactor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteStackRefactor(context.Background(), &ExecuteStackRefactorInput{})
+	got, err := svc.ExecuteStackRefactor(context.Background(), &ExecuteStackRefactorInput{
+		StackRefactorId: ptr.String("__StackRefactorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2188,7 +2732,10 @@ func TestCheckResponseSnapshot_GetGeneratedTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGeneratedTemplate(context.Background(), &GetGeneratedTemplateInput{})
+	got, err := svc.GetGeneratedTemplate(context.Background(), &GetGeneratedTemplateInput{
+		Format:                types.TemplateFormat("JSON"),
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2243,7 +2790,9 @@ func TestCheckResponseSnapshot_GetHookResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHookResult(context.Background(), &GetHookResultInput{})
+	got, err := svc.GetHookResult(context.Background(), &GetHookResultInput{
+		HookResultId: ptr.String("__HookResultId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +2813,9 @@ func TestCheckResponseSnapshot_GetStackPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStackPolicy(context.Background(), &GetStackPolicyInput{})
+	got, err := svc.GetStackPolicy(context.Background(), &GetStackPolicyInput{
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2289,7 +2840,11 @@ func TestCheckResponseSnapshot_GetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		StackName:     ptr.String("__StackName__"),
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		TemplateStage: types.TemplateStage("Original"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2383,7 +2938,16 @@ func TestCheckResponseSnapshot_GetTemplateSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateSummary(context.Background(), &GetTemplateSummaryInput{})
+	got, err := svc.GetTemplateSummary(context.Background(), &GetTemplateSummaryInput{
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		StackName:    ptr.String("__StackName__"),
+		StackSetName: ptr.String("__StackSetName__"),
+		CallAs:       types.CallAs("SELF"),
+		TemplateSummaryConfig: &types.TemplateSummaryConfig{
+			TreatUnrecognizedResourceTypesAsWarnings: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2404,7 +2968,32 @@ func TestCheckResponseSnapshot_ImportStacksToStackSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportStacksToStackSet(context.Background(), &ImportStacksToStackSetInput{})
+	got, err := svc.ImportStacksToStackSet(context.Background(), &ImportStacksToStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		StackIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StackIdsUrl: ptr.String("__StackIdsUrl__"),
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2457,7 +3046,10 @@ func TestCheckResponseSnapshot_ListChangeSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChangeSets(context.Background(), &ListChangeSetsInput{})
+	got, err := svc.ListChangeSets(context.Background(), &ListChangeSetsInput{
+		StackName: ptr.String("__StackName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2490,7 +3082,9 @@ func TestCheckResponseSnapshot_ListExports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExports(context.Background(), &ListExportsInput{})
+	got, err := svc.ListExports(context.Background(), &ListExportsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2531,7 +3125,10 @@ func TestCheckResponseSnapshot_ListGeneratedTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGeneratedTemplates(context.Background(), &ListGeneratedTemplatesInput{})
+	got, err := svc.ListGeneratedTemplates(context.Background(), &ListGeneratedTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2586,7 +3183,13 @@ func TestCheckResponseSnapshot_ListHookResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHookResults(context.Background(), &ListHookResultsInput{})
+	got, err := svc.ListHookResults(context.Background(), &ListHookResultsInput{
+		TargetType: types.ListHookResultsTargetType("CHANGE_SET"),
+		TargetId:   ptr.String("__TargetId__"),
+		TypeArn:    ptr.String("__TypeArn__"),
+		Status:     types.HookStatus("HOOK_IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2611,7 +3214,10 @@ func TestCheckResponseSnapshot_ListImports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImports(context.Background(), &ListImportsInput{})
+	got, err := svc.ListImports(context.Background(), &ListImportsInput{
+		ExportName: ptr.String("__ExportName__"),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2648,7 +3254,25 @@ func TestCheckResponseSnapshot_ListResourceScanRelatedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceScanRelatedResources(context.Background(), &ListResourceScanRelatedResourcesInput{})
+	got, err := svc.ListResourceScanRelatedResources(context.Background(), &ListResourceScanRelatedResourcesInput{
+		ResourceScanId: ptr.String("__ResourceScanId__"),
+		Resources: []types.ScannedResourceIdentifier{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2685,7 +3309,15 @@ func TestCheckResponseSnapshot_ListResourceScanResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceScanResources(context.Background(), &ListResourceScanResourcesInput{})
+	got, err := svc.ListResourceScanResources(context.Background(), &ListResourceScanResourcesInput{
+		ResourceScanId:     ptr.String("__ResourceScanId__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceTypePrefix: ptr.String("__ResourceTypePrefix__"),
+		TagKey:             ptr.String("__TagKey__"),
+		TagValue:           ptr.String("__TagValue__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2726,7 +3358,11 @@ func TestCheckResponseSnapshot_ListResourceScans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceScans(context.Background(), &ListResourceScansInput{})
+	got, err := svc.ListResourceScans(context.Background(), &ListResourceScansInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		ScanTypeFilter: types.ScanType("FULL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2813,7 +3449,19 @@ func TestCheckResponseSnapshot_ListStackInstanceResourceDrifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackInstanceResourceDrifts(context.Background(), &ListStackInstanceResourceDriftsInput{})
+	got, err := svc.ListStackInstanceResourceDrifts(context.Background(), &ListStackInstanceResourceDriftsInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StackInstanceResourceDriftStatuses: []types.StackResourceDriftStatus{
+			types.StackResourceDriftStatus("IN_SYNC"),
+			types.StackResourceDriftStatus("IN_SYNC"),
+		},
+		StackInstanceAccount: ptr.String("__StackInstanceAccount__"),
+		StackInstanceRegion:  ptr.String("__StackInstanceRegion__"),
+		OperationId:          ptr.String("__OperationId__"),
+		CallAs:               types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2866,7 +3514,24 @@ func TestCheckResponseSnapshot_ListStackInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackInstances(context.Background(), &ListStackInstancesInput{})
+	got, err := svc.ListStackInstances(context.Background(), &ListStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		Filters: []types.StackInstanceFilter{
+			{
+				Name:   types.StackInstanceFilterName("DETAILED_STATUS"),
+				Values: ptr.String("__Values__"),
+			},
+			{
+				Name:   types.StackInstanceFilterName("DETAILED_STATUS"),
+				Values: ptr.String("__Values__"),
+			},
+		},
+		StackInstanceAccount: ptr.String("__StackInstanceAccount__"),
+		StackInstanceRegion:  ptr.String("__StackInstanceRegion__"),
+		CallAs:               types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2955,7 +3620,11 @@ func TestCheckResponseSnapshot_ListStackRefactorActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackRefactorActions(context.Background(), &ListStackRefactorActionsInput{})
+	got, err := svc.ListStackRefactorActions(context.Background(), &ListStackRefactorActionsInput{
+		StackRefactorId: ptr.String("__StackRefactorId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2994,7 +3663,14 @@ func TestCheckResponseSnapshot_ListStackRefactors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackRefactors(context.Background(), &ListStackRefactorsInput{})
+	got, err := svc.ListStackRefactors(context.Background(), &ListStackRefactorsInput{
+		ExecutionStatusFilter: []types.StackRefactorExecutionStatus{
+			types.StackRefactorExecutionStatus("UNAVAILABLE"),
+			types.StackRefactorExecutionStatus("UNAVAILABLE"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3049,7 +3725,10 @@ func TestCheckResponseSnapshot_ListStackResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackResources(context.Background(), &ListStackResourcesInput{})
+	got, err := svc.ListStackResources(context.Background(), &ListStackResourcesInput{
+		StackName: ptr.String("__StackName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3086,7 +3765,12 @@ func TestCheckResponseSnapshot_ListStackSetAutoDeploymentTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackSetAutoDeploymentTargets(context.Background(), &ListStackSetAutoDeploymentTargetsInput{})
+	got, err := svc.ListStackSetAutoDeploymentTargets(context.Background(), &ListStackSetAutoDeploymentTargetsInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3131,7 +3815,23 @@ func TestCheckResponseSnapshot_ListStackSetOperationResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackSetOperationResults(context.Background(), &ListStackSetOperationResultsInput{})
+	got, err := svc.ListStackSetOperationResults(context.Background(), &ListStackSetOperationResultsInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		OperationId:  ptr.String("__OperationId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		CallAs:       types.CallAs("SELF"),
+		Filters: []types.OperationResultFilter{
+			{
+				Name:   types.OperationResultFilterName("OPERATION_RESULT_STATUS"),
+				Values: ptr.String("__Values__"),
+			},
+			{
+				Name:   types.OperationResultFilterName("OPERATION_RESULT_STATUS"),
+				Values: ptr.String("__Values__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3200,7 +3900,12 @@ func TestCheckResponseSnapshot_ListStackSetOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackSetOperations(context.Background(), &ListStackSetOperationsInput{})
+	got, err := svc.ListStackSetOperations(context.Background(), &ListStackSetOperationsInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3263,7 +3968,12 @@ func TestCheckResponseSnapshot_ListStackSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackSets(context.Background(), &ListStackSetsInput{})
+	got, err := svc.ListStackSets(context.Background(), &ListStackSetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.StackSetStatus("ACTIVE"),
+		CallAs:     types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3338,7 +4048,13 @@ func TestCheckResponseSnapshot_ListStacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStacks(context.Background(), &ListStacksInput{})
+	got, err := svc.ListStacks(context.Background(), &ListStacksInput{
+		NextToken: ptr.String("__NextToken__"),
+		StackStatusFilter: []types.StackStatus{
+			types.StackStatus("CREATE_IN_PROGRESS"),
+			types.StackStatus("CREATE_IN_PROGRESS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3363,7 +4079,14 @@ func TestCheckResponseSnapshot_ListTypeRegistrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypeRegistrations(context.Background(), &ListTypeRegistrationsInput{})
+	got, err := svc.ListTypeRegistrations(context.Background(), &ListTypeRegistrationsInput{
+		Type:                     types.RegistryType("RESOURCE"),
+		TypeName:                 ptr.String("__TypeName__"),
+		TypeArn:                  ptr.String("__TypeArn__"),
+		RegistrationStatusFilter: types.RegistrationStatus("COMPLETE"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3406,7 +4129,15 @@ func TestCheckResponseSnapshot_ListTypeVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypeVersions(context.Background(), &ListTypeVersionsInput{})
+	got, err := svc.ListTypeVersions(context.Background(), &ListTypeVersionsInput{
+		Type:             types.RegistryType("RESOURCE"),
+		TypeName:         ptr.String("__TypeName__"),
+		Arn:              ptr.String("__Arn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		DeprecatedStatus: types.DeprecatedStatus("LIVE"),
+		PublisherId:      ptr.String("__PublisherId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3459,7 +4190,19 @@ func TestCheckResponseSnapshot_ListTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypes(context.Background(), &ListTypesInput{})
+	got, err := svc.ListTypes(context.Background(), &ListTypesInput{
+		Visibility:       types.Visibility("PUBLIC"),
+		ProvisioningType: types.ProvisioningType("NON_PROVISIONABLE"),
+		DeprecatedStatus: types.DeprecatedStatus("LIVE"),
+		Type:             types.RegistryType("RESOURCE"),
+		Filters: &types.TypeFilters{
+			Category:       types.Category("REGISTERED"),
+			PublisherId:    ptr.String("__PublisherId__"),
+			TypeNamePrefix: ptr.String("__TypeNamePrefix__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3480,7 +4223,12 @@ func TestCheckResponseSnapshot_PublishType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishType(context.Background(), &PublishTypeInput{})
+	got, err := svc.PublishType(context.Background(), &PublishTypeInput{
+		Type:                types.ThirdPartyType("RESOURCE"),
+		Arn:                 ptr.String("__Arn__"),
+		TypeName:            ptr.String("__TypeName__"),
+		PublicVersionNumber: ptr.String("__PublicVersionNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3499,7 +4247,15 @@ func TestCheckResponseSnapshot_RecordHandlerProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{})
+	got, err := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{
+		BearerToken:            ptr.String("__BearerToken__"),
+		OperationStatus:        types.OperationStatus("PENDING"),
+		CurrentOperationStatus: types.OperationStatus("PENDING"),
+		StatusMessage:          ptr.String("__StatusMessage__"),
+		ErrorCode:              types.HandlerErrorCode("NotUpdatable"),
+		ResourceModel:          ptr.String("__ResourceModel__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3520,7 +4276,10 @@ func TestCheckResponseSnapshot_RegisterPublisher(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterPublisher(context.Background(), &RegisterPublisherInput{})
+	got, err := svc.RegisterPublisher(context.Background(), &RegisterPublisherInput{
+		AcceptTermsAndConditions: ptr.Bool(true),
+		ConnectionArn:            ptr.String("__ConnectionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3541,7 +4300,17 @@ func TestCheckResponseSnapshot_RegisterType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterType(context.Background(), &RegisterTypeInput{})
+	got, err := svc.RegisterType(context.Background(), &RegisterTypeInput{
+		Type:                 types.RegistryType("RESOURCE"),
+		TypeName:             ptr.String("__TypeName__"),
+		SchemaHandlerPackage: ptr.String("__SchemaHandlerPackage__"),
+		LoggingConfig: &types.LoggingConfig{
+			LogRoleArn:   ptr.String("__LogRoleArn__"),
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3563,7 +4332,16 @@ func TestCheckResponseSnapshot_RollbackStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackStack(context.Background(), &RollbackStackInput{})
+	got, err := svc.RollbackStack(context.Background(), &RollbackStackInput{
+		StackName:            ptr.String("__StackName__"),
+		RoleARN:              ptr.String("__RoleARN__"),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3582,7 +4360,11 @@ func TestCheckResponseSnapshot_SetStackPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetStackPolicy(context.Background(), &SetStackPolicyInput{})
+	got, err := svc.SetStackPolicy(context.Background(), &SetStackPolicyInput{
+		StackName:       ptr.String("__StackName__"),
+		StackPolicyBody: ptr.String("__StackPolicyBody__"),
+		StackPolicyURL:  ptr.String("__StackPolicyURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3603,7 +4385,13 @@ func TestCheckResponseSnapshot_SetTypeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetTypeConfiguration(context.Background(), &SetTypeConfigurationInput{})
+	got, err := svc.SetTypeConfiguration(context.Background(), &SetTypeConfigurationInput{
+		TypeArn:            ptr.String("__TypeArn__"),
+		Configuration:      ptr.String("__Configuration__"),
+		ConfigurationAlias: ptr.String("__ConfigurationAlias__"),
+		TypeName:           ptr.String("__TypeName__"),
+		Type:               types.ThirdPartyType("RESOURCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3622,7 +4410,12 @@ func TestCheckResponseSnapshot_SetTypeDefaultVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetTypeDefaultVersion(context.Background(), &SetTypeDefaultVersionInput{})
+	got, err := svc.SetTypeDefaultVersion(context.Background(), &SetTypeDefaultVersionInput{
+		Arn:       ptr.String("__Arn__"),
+		Type:      types.RegistryType("RESOURCE"),
+		TypeName:  ptr.String("__TypeName__"),
+		VersionId: ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3641,7 +4434,12 @@ func TestCheckResponseSnapshot_SignalResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SignalResource(context.Background(), &SignalResourceInput{})
+	got, err := svc.SignalResource(context.Background(), &SignalResourceInput{
+		StackName:         ptr.String("__StackName__"),
+		LogicalResourceId: ptr.String("__LogicalResourceId__"),
+		UniqueId:          ptr.String("__UniqueId__"),
+		Status:            types.ResourceSignalStatus("SUCCESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3662,7 +4460,23 @@ func TestCheckResponseSnapshot_StartResourceScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceScan(context.Background(), &StartResourceScanInput{})
+	got, err := svc.StartResourceScan(context.Background(), &StartResourceScanInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ScanFilters: []types.ScanFilter{
+			{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3681,7 +4495,11 @@ func TestCheckResponseSnapshot_StopStackSetOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopStackSetOperation(context.Background(), &StopStackSetOperationInput{})
+	got, err := svc.StopStackSetOperation(context.Background(), &StopStackSetOperationInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		OperationId:  ptr.String("__OperationId__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3702,7 +4520,13 @@ func TestCheckResponseSnapshot_TestType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestType(context.Background(), &TestTypeInput{})
+	got, err := svc.TestType(context.Background(), &TestTypeInput{
+		Arn:               ptr.String("__Arn__"),
+		Type:              types.ThirdPartyType("RESOURCE"),
+		TypeName:          ptr.String("__TypeName__"),
+		VersionId:         ptr.String("__VersionId__"),
+		LogDeliveryBucket: ptr.String("__LogDeliveryBucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3723,7 +4547,35 @@ func TestCheckResponseSnapshot_UpdateGeneratedTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGeneratedTemplate(context.Background(), &UpdateGeneratedTemplateInput{})
+	got, err := svc.UpdateGeneratedTemplate(context.Background(), &UpdateGeneratedTemplateInput{
+		GeneratedTemplateName:    ptr.String("__GeneratedTemplateName__"),
+		NewGeneratedTemplateName: ptr.String("__NewGeneratedTemplateName__"),
+		AddResources: []types.ResourceDefinition{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		RemoveResources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RefreshAllResources: ptr.Bool(true),
+		TemplateConfiguration: &types.TemplateConfiguration{
+			DeletionPolicy:      types.GeneratedTemplateDeletionPolicy("DELETE"),
+			UpdateReplacePolicy: types.GeneratedTemplateUpdateReplacePolicy("DELETE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3745,7 +4597,74 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStack(context.Background(), &UpdateStackInput{})
+	got, err := svc.UpdateStack(context.Background(), &UpdateStackInput{
+		StackName:                   ptr.String("__StackName__"),
+		TemplateBody:                ptr.String("__TemplateBody__"),
+		TemplateURL:                 ptr.String("__TemplateURL__"),
+		UsePreviousTemplate:         ptr.Bool(true),
+		StackPolicyDuringUpdateBody: ptr.String("__StackPolicyDuringUpdateBody__"),
+		StackPolicyDuringUpdateURL:  ptr.String("__StackPolicyDuringUpdateURL__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN: ptr.String("__RoleARN__"),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		StackPolicyBody: ptr.String("__StackPolicyBody__"),
+		StackPolicyURL:  ptr.String("__StackPolicyURL__"),
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DisableRollback:      ptr.Bool(true),
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		RetainExceptOnCreate: ptr.Bool(true),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3766,7 +4685,57 @@ func TestCheckResponseSnapshot_UpdateStackInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStackInstances(context.Background(), &UpdateStackInstancesInput{})
+	got, err := svc.UpdateStackInstances(context.Background(), &UpdateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3787,7 +4756,89 @@ func TestCheckResponseSnapshot_UpdateStackSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStackSet(context.Background(), &UpdateStackSetInput{})
+	got, err := svc.UpdateStackSet(context.Background(), &UpdateStackSetInput{
+		StackSetName:        ptr.String("__StackSetName__"),
+		Description:         ptr.String("__Description__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		TemplateURL:         ptr.String("__TemplateURL__"),
+		UsePreviousTemplate: ptr.Bool(true),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		AdministrationRoleARN: ptr.String("__AdministrationRoleARN__"),
+		ExecutionRoleName:     ptr.String("__ExecutionRoleName__"),
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		PermissionModel: types.PermissionModels("SERVICE_MANAGED"),
+		AutoDeployment: &types.AutoDeployment{
+			Enabled:                      ptr.Bool(true),
+			RetainStacksOnAccountRemoval: ptr.Bool(true),
+			DependsOn: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		OperationId: ptr.String("__OperationId__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CallAs: types.CallAs("SELF"),
+		ManagedExecution: &types.ManagedExecution{
+			Active: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3808,7 +4859,10 @@ func TestCheckResponseSnapshot_UpdateTerminationProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTerminationProtection(context.Background(), &UpdateTerminationProtectionInput{})
+	got, err := svc.UpdateTerminationProtection(context.Background(), &UpdateTerminationProtectionInput{
+		EnableTerminationProtection: ptr.Bool(true),
+		StackName:                   ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3852,7 +4906,10 @@ func TestCheckResponseSnapshot_ValidateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateTemplate(context.Background(), &ValidateTemplateInput{})
+	got, err := svc.ValidateTemplate(context.Background(), &ValidateTemplateInput{
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3873,7 +4930,91 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{})
+	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{
+		StackName:           ptr.String("__StackName__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		TemplateURL:         ptr.String("__TemplateURL__"),
+		UsePreviousTemplate: ptr.Bool(true),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN: ptr.String("__RoleARN__"),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Description:   ptr.String("__Description__"),
+		ChangeSetType: types.ChangeSetType("CREATE"),
+		ResourcesToImport: []types.ResourceToImport{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		IncludeNestedStacks:     ptr.Bool(true),
+		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
+		ImportExistingResources: ptr.Bool(true),
+		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3898,7 +5039,21 @@ func TestCheckResponseSnapshot_Error_CFNRegistryException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateType(context.Background(), &ActivateTypeInput{})
+	_, opErr := svc.ActivateType(context.Background(), &ActivateTypeInput{
+		Type:          types.ThirdPartyType("RESOURCE"),
+		PublicTypeArn: ptr.String("__PublicTypeArn__"),
+		PublisherId:   ptr.String("__PublisherId__"),
+		TypeName:      ptr.String("__TypeName__"),
+		TypeNameAlias: ptr.String("__TypeNameAlias__"),
+		AutoUpdate:    ptr.Bool(true),
+		LoggingConfig: &types.LoggingConfig{
+			LogRoleArn:   ptr.String("__LogRoleArn__"),
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		VersionBump:      types.VersionBump("MAJOR"),
+		MajorVersion:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3923,7 +5078,12 @@ func TestCheckResponseSnapshot_Error_ChangeSetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{})
+	_, opErr := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{
+		ChangeSetName:         ptr.String("__ChangeSetName__"),
+		StackName:             ptr.String("__StackName__"),
+		NextToken:             ptr.String("__NextToken__"),
+		IncludePropertyValues: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3948,7 +5108,30 @@ func TestCheckResponseSnapshot_Error_ConcurrentResourcesLimitExceededException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGeneratedTemplate(context.Background(), &CreateGeneratedTemplateInput{})
+	_, opErr := svc.CreateGeneratedTemplate(context.Background(), &CreateGeneratedTemplateInput{
+		Resources: []types.ResourceDefinition{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+		StackName:             ptr.String("__StackName__"),
+		TemplateConfiguration: &types.TemplateConfiguration{
+			DeletionPolicy:      types.GeneratedTemplateDeletionPolicy("DELETE"),
+			UpdateReplacePolicy: types.GeneratedTemplateUpdateReplacePolicy("DELETE"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3973,7 +5156,57 @@ func TestCheckResponseSnapshot_Error_CreatedButModifiedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackSet(context.Background(), &CreateStackSetInput{})
+	_, opErr := svc.CreateStackSet(context.Background(), &CreateStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Description:  ptr.String("__Description__"),
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		StackId:      ptr.String("__StackId__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AdministrationRoleARN: ptr.String("__AdministrationRoleARN__"),
+		ExecutionRoleName:     ptr.String("__ExecutionRoleName__"),
+		PermissionModel:       types.PermissionModels("SERVICE_MANAGED"),
+		AutoDeployment: &types.AutoDeployment{
+			Enabled:                      ptr.Bool(true),
+			RetainStacksOnAccountRemoval: ptr.Bool(true),
+			DependsOn: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CallAs:             types.CallAs("SELF"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ManagedExecution: &types.ManagedExecution{
+			Active: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3998,7 +5231,9 @@ func TestCheckResponseSnapshot_Error_GeneratedTemplateNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGeneratedTemplate(context.Background(), &DeleteGeneratedTemplateInput{})
+	_, opErr := svc.DeleteGeneratedTemplate(context.Background(), &DeleteGeneratedTemplateInput{
+		GeneratedTemplateName: ptr.String("__GeneratedTemplateName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4023,7 +5258,9 @@ func TestCheckResponseSnapshot_Error_HookResultNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetHookResult(context.Background(), &GetHookResultInput{})
+	_, opErr := svc.GetHookResult(context.Background(), &GetHookResultInput{
+		HookResultId: ptr.String("__HookResultId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4048,7 +5285,91 @@ func TestCheckResponseSnapshot_Error_InsufficientCapabilitiesException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{})
+	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{
+		StackName:           ptr.String("__StackName__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		TemplateURL:         ptr.String("__TemplateURL__"),
+		UsePreviousTemplate: ptr.Bool(true),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN: ptr.String("__RoleARN__"),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Description:   ptr.String("__Description__"),
+		ChangeSetType: types.ChangeSetType("CREATE"),
+		ResourcesToImport: []types.ResourceToImport{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		IncludeNestedStacks:     ptr.Bool(true),
+		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
+		ImportExistingResources: ptr.Bool(true),
+		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4073,7 +5394,10 @@ func TestCheckResponseSnapshot_Error_InvalidChangeSetStatusException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteChangeSet(context.Background(), &DeleteChangeSetInput{})
+	_, opErr := svc.DeleteChangeSet(context.Background(), &DeleteChangeSetInput{
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		StackName:     ptr.String("__StackName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4123,7 +5447,15 @@ func TestCheckResponseSnapshot_Error_InvalidStateTransitionException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{})
+	_, opErr := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{
+		BearerToken:            ptr.String("__BearerToken__"),
+		OperationStatus:        types.OperationStatus("PENDING"),
+		CurrentOperationStatus: types.OperationStatus("PENDING"),
+		StatusMessage:          ptr.String("__StatusMessage__"),
+		ErrorCode:              types.HandlerErrorCode("NotUpdatable"),
+		ResourceModel:          ptr.String("__ResourceModel__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4148,7 +5480,91 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{})
+	_, opErr := svc.CreateChangeSet(context.Background(), &CreateChangeSetInput{
+		StackName:           ptr.String("__StackName__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		TemplateURL:         ptr.String("__TemplateURL__"),
+		UsePreviousTemplate: ptr.Bool(true),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleARN: ptr.String("__RoleARN__"),
+		RollbackConfiguration: &types.RollbackConfiguration{
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			MonitoringTimeInMinutes: ptr.Int32(1),
+		},
+		NotificationARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Description:   ptr.String("__Description__"),
+		ChangeSetType: types.ChangeSetType("CREATE"),
+		ResourcesToImport: []types.ResourceToImport{
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType:      ptr.String("__ResourceType__"),
+				LogicalResourceId: ptr.String("__LogicalResourceId__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		IncludeNestedStacks:     ptr.Bool(true),
+		OnStackFailure:          types.OnStackFailure("DO_NOTHING"),
+		ImportExistingResources: ptr.Bool(true),
+		DeploymentMode:          types.DeploymentMode("REVERT_DRIFT"),
+		DeploymentConfig: &types.DeploymentConfig{
+			Mode:            types.DeploymentConfigMode("STANDARD"),
+			DisableRollback: ptr.Bool(true),
+		},
+		DisableValidation: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4173,7 +5589,57 @@ func TestCheckResponseSnapshot_Error_NameAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackSet(context.Background(), &CreateStackSetInput{})
+	_, opErr := svc.CreateStackSet(context.Background(), &CreateStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Description:  ptr.String("__Description__"),
+		TemplateBody: ptr.String("__TemplateBody__"),
+		TemplateURL:  ptr.String("__TemplateURL__"),
+		StackId:      ptr.String("__StackId__"),
+		Parameters: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		Capabilities: []types.Capability{
+			types.Capability("CAPABILITY_IAM"),
+			types.Capability("CAPABILITY_IAM"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AdministrationRoleARN: ptr.String("__AdministrationRoleARN__"),
+		ExecutionRoleName:     ptr.String("__ExecutionRoleName__"),
+		PermissionModel:       types.PermissionModels("SERVICE_MANAGED"),
+		AutoDeployment: &types.AutoDeployment{
+			Enabled:                      ptr.Bool(true),
+			RetainStacksOnAccountRemoval: ptr.Bool(true),
+			DependsOn: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		CallAs:             types.CallAs("SELF"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ManagedExecution: &types.ManagedExecution{
+			Active: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4198,7 +5664,57 @@ func TestCheckResponseSnapshot_Error_OperationIdAlreadyExistsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{})
+	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4223,7 +5739,57 @@ func TestCheckResponseSnapshot_Error_OperationInProgressException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{})
+	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4273,7 +5839,15 @@ func TestCheckResponseSnapshot_Error_OperationStatusCheckFailedException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{})
+	_, opErr := svc.RecordHandlerProgress(context.Background(), &RecordHandlerProgressInput{
+		BearerToken:            ptr.String("__BearerToken__"),
+		OperationStatus:        types.OperationStatus("PENDING"),
+		CurrentOperationStatus: types.OperationStatus("PENDING"),
+		StatusMessage:          ptr.String("__StatusMessage__"),
+		ErrorCode:              types.HandlerErrorCode("NotUpdatable"),
+		ResourceModel:          ptr.String("__ResourceModel__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4298,7 +5872,25 @@ func TestCheckResponseSnapshot_Error_ResourceScanInProgressException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListResourceScanRelatedResources(context.Background(), &ListResourceScanRelatedResourcesInput{})
+	_, opErr := svc.ListResourceScanRelatedResources(context.Background(), &ListResourceScanRelatedResourcesInput{
+		ResourceScanId: ptr.String("__ResourceScanId__"),
+		Resources: []types.ScannedResourceIdentifier{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceIdentifier: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4323,7 +5915,23 @@ func TestCheckResponseSnapshot_Error_ResourceScanLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartResourceScan(context.Background(), &StartResourceScanInput{})
+	_, opErr := svc.StartResourceScan(context.Background(), &StartResourceScanInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ScanFilters: []types.ScanFilter{
+			{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Types: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4348,7 +5956,9 @@ func TestCheckResponseSnapshot_Error_ResourceScanNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeResourceScan(context.Background(), &DescribeResourceScanInput{})
+	_, opErr := svc.DescribeResourceScan(context.Background(), &DescribeResourceScanInput{
+		ResourceScanId: ptr.String("__ResourceScanId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4373,7 +5983,12 @@ func TestCheckResponseSnapshot_Error_StackInstanceNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStackInstance(context.Background(), &DescribeStackInstanceInput{})
+	_, opErr := svc.DescribeStackInstance(context.Background(), &DescribeStackInstanceInput{
+		StackSetName:         ptr.String("__StackSetName__"),
+		StackInstanceAccount: ptr.String("__StackInstanceAccount__"),
+		StackInstanceRegion:  ptr.String("__StackInstanceRegion__"),
+		CallAs:               types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4398,7 +6013,32 @@ func TestCheckResponseSnapshot_Error_StackNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportStacksToStackSet(context.Background(), &ImportStacksToStackSetInput{})
+	_, opErr := svc.ImportStacksToStackSet(context.Background(), &ImportStacksToStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		StackIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StackIdsUrl: ptr.String("__StackIdsUrl__"),
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4423,7 +6063,9 @@ func TestCheckResponseSnapshot_Error_StackRefactorNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeStackRefactor(context.Background(), &DescribeStackRefactorInput{})
+	_, opErr := svc.DescribeStackRefactor(context.Background(), &DescribeStackRefactorInput{
+		StackRefactorId: ptr.String("__StackRefactorId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4448,7 +6090,10 @@ func TestCheckResponseSnapshot_Error_StackSetNotEmptyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteStackSet(context.Background(), &DeleteStackSetInput{})
+	_, opErr := svc.DeleteStackSet(context.Background(), &DeleteStackSetInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		CallAs:       types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4473,7 +6118,57 @@ func TestCheckResponseSnapshot_Error_StackSetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{})
+	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4498,7 +6193,57 @@ func TestCheckResponseSnapshot_Error_StaleRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{})
+	_, opErr := svc.CreateStackInstances(context.Background(), &CreateStackInstancesInput{
+		StackSetName: ptr.String("__StackSetName__"),
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeploymentTargets: &types.DeploymentTargets{
+			Accounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountsUrl: ptr.String("__AccountsUrl__"),
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountFilterType: types.AccountFilterType("NONE"),
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.Parameter{
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+			{
+				ParameterKey:     ptr.String("__ParameterKey__"),
+				ParameterValue:   ptr.String("__ParameterValue__"),
+				UsePreviousValue: ptr.Bool(true),
+				ResolvedValue:    ptr.String("__ResolvedValue__"),
+			},
+		},
+		OperationPreferences: &types.StackSetOperationPreferences{
+			RegionConcurrencyType: types.RegionConcurrencyType("SEQUENTIAL"),
+			RegionOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+			FailureToleranceCount:      ptr.Int32(1),
+			FailureTolerancePercentage: ptr.Int32(1),
+			MaxConcurrentCount:         ptr.Int32(1),
+			MaxConcurrentPercentage:    ptr.Int32(1),
+			ConcurrencyMode:            types.ConcurrencyMode("STRICT_FAILURE_TOLERANCE"),
+		},
+		OperationId: ptr.String("__OperationId__"),
+		CallAs:      types.CallAs("SELF"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4523,7 +6268,10 @@ func TestCheckResponseSnapshot_Error_TokenAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelUpdateStack(context.Background(), &CancelUpdateStackInput{})
+	_, opErr := svc.CancelUpdateStack(context.Background(), &CancelUpdateStackInput{
+		StackName:          ptr.String("__StackName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4548,7 +6296,24 @@ func TestCheckResponseSnapshot_Error_TypeConfigurationNotFoundException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeTypeConfigurations(context.Background(), &BatchDescribeTypeConfigurationsInput{})
+	_, opErr := svc.BatchDescribeTypeConfigurations(context.Background(), &BatchDescribeTypeConfigurationsInput{
+		TypeConfigurationIdentifiers: []types.TypeConfigurationIdentifier{
+			{
+				TypeArn:                ptr.String("__TypeArn__"),
+				TypeConfigurationAlias: ptr.String("__TypeConfigurationAlias__"),
+				TypeConfigurationArn:   ptr.String("__TypeConfigurationArn__"),
+				Type:                   types.ThirdPartyType("RESOURCE"),
+				TypeName:               ptr.String("__TypeName__"),
+			},
+			{
+				TypeArn:                ptr.String("__TypeArn__"),
+				TypeConfigurationAlias: ptr.String("__TypeConfigurationAlias__"),
+				TypeConfigurationArn:   ptr.String("__TypeConfigurationArn__"),
+				Type:                   types.ThirdPartyType("RESOURCE"),
+				TypeName:               ptr.String("__TypeName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4573,7 +6338,21 @@ func TestCheckResponseSnapshot_Error_TypeNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateType(context.Background(), &ActivateTypeInput{})
+	_, opErr := svc.ActivateType(context.Background(), &ActivateTypeInput{
+		Type:          types.ThirdPartyType("RESOURCE"),
+		PublicTypeArn: ptr.String("__PublicTypeArn__"),
+		PublisherId:   ptr.String("__PublisherId__"),
+		TypeName:      ptr.String("__TypeName__"),
+		TypeNameAlias: ptr.String("__TypeNameAlias__"),
+		AutoUpdate:    ptr.Bool(true),
+		LoggingConfig: &types.LoggingConfig{
+			LogRoleArn:   ptr.String("__LogRoleArn__"),
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		VersionBump:      types.VersionBump("MAJOR"),
+		MajorVersion:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

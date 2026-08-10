@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"flowExecution":{"endTime":946684800,"executionId":"__ExecutionId__","flowName":"__FlowName__","instanceId":"__InstanceId__","message":"__Message__","outputMetadata":{"diagnosticReportsRootS3URI":"__DiagnosticReportsRootS3URI__"},"sourceInfo":{"datasetSource":{"datasetIdentifier":"__DatasetIdentifier__"},"s3Source":{"bucketName":"__BucketName__","key":"__Key__"},"sourceType":"S3"},"startTime":946684800,"status":"SUCCEEDED"}}

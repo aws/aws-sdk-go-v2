@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"inputSourceSummaries":[{"cfnStackArn":"__CfnStackArn__","createdAt":946684800,"designFileS3Url":"__DesignFileS3Url__","eks":{"clusterArn":"__ClusterArn__","namespaces":["__Member__","__Member__"]},"inputSourceId":"__InputSourceId__","resourceTags":[{"key":"__Key__","values":["__Member__","__Member__"]},{"key":"__Key__","values":["__Member__","__Member__"]}],"tfStateFileUrl":"__TfStateFileUrl__","type":"CFN_STACK"},{"cfnStackArn":"__CfnStackArn__","createdAt":946684800,"designFileS3Url":"__DesignFileS3Url__","eks":{"clusterArn":"__ClusterArn__","namespaces":["__Member__","__Member__"]},"inputSourceId":"__InputSourceId__","resourceTags":[{"key":"__Key__","values":["__Member__","__Member__"]},{"key":"__Key__","values":["__Member__","__Member__"]}],"tfStateFileUrl":"__TfStateFileUrl__","type":"CFN_STACK"}],"nextToken":"__NextToken__"}

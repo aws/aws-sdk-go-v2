@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	got, err := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,9 @@ func TestCheckResponseSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlarmMuteRule(context.Background(), &DeleteAlarmMuteRuleInput{})
+	got, err := svc.DeleteAlarmMuteRule(context.Background(), &DeleteAlarmMuteRuleInput{
+		AlarmMuteRuleName: ptr.String("__AlarmMuteRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +160,12 @@ func TestCheckResponseSnapshot_DeleteAlarms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{})
+	got, err := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +184,96 @@ func TestCheckResponseSnapshot_DeleteAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	got, err := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +292,12 @@ func TestCheckResponseSnapshot_DeleteDashboards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDashboards(context.Background(), &DeleteDashboardsInput{})
+	got, err := svc.DeleteDashboards(context.Background(), &DeleteDashboardsInput{
+		DashboardNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +331,12 @@ func TestCheckResponseSnapshot_DeleteInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInsightRules(context.Background(), &DeleteInsightRulesInput{})
+	got, err := svc.DeleteInsightRules(context.Background(), &DeleteInsightRulesInput{
+		RuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +355,9 @@ func TestCheckResponseSnapshot_DeleteMetricStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMetricStream(context.Background(), &DeleteMetricStreamInput{})
+	got, err := svc.DeleteMetricStream(context.Background(), &DeleteMetricStreamInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +396,10 @@ func TestCheckResponseSnapshot_DescribeAlarmContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlarmContributors(context.Background(), &DescribeAlarmContributorsInput{})
+	got, err := svc.DescribeAlarmContributors(context.Background(), &DescribeAlarmContributorsInput{
+		AlarmName: ptr.String("__AlarmName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +446,20 @@ func TestCheckResponseSnapshot_DescribeAlarmHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlarmHistory(context.Background(), &DescribeAlarmHistoryInput{})
+	got, err := svc.DescribeAlarmHistory(context.Background(), &DescribeAlarmHistoryInput{
+		AlarmName:          ptr.String("__AlarmName__"),
+		AlarmContributorId: ptr.String("__AlarmContributorId__"),
+		AlarmTypes: []types.AlarmType{
+			types.AlarmType("CompositeAlarm"),
+			types.AlarmType("CompositeAlarm"),
+		},
+		HistoryItemType: types.HistoryItemType("ConfigurationUpdate"),
+		StartDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxRecords:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		ScanBy:          types.ScanBy("TimestampDescending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -767,7 +894,23 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlarms(context.Background(), &DescribeAlarmsInput{})
+	got, err := svc.DescribeAlarms(context.Background(), &DescribeAlarmsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmNamePrefix: ptr.String("__AlarmNamePrefix__"),
+		AlarmTypes: []types.AlarmType{
+			types.AlarmType("CompositeAlarm"),
+			types.AlarmType("CompositeAlarm"),
+		},
+		ChildrenOfAlarmName: ptr.String("__ChildrenOfAlarmName__"),
+		ParentsOfAlarmName:  ptr.String("__ParentsOfAlarmName__"),
+		StateValue:          types.StateValue("OK"),
+		ActionPrefix:        ptr.String("__ActionPrefix__"),
+		MaxRecords:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1023,7 +1166,24 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlarmsForMetric(context.Background(), &DescribeAlarmsForMetricInput{})
+	got, err := svc.DescribeAlarmsForMetric(context.Background(), &DescribeAlarmsForMetricInput{
+		MetricName:        ptr.String("__MetricName__"),
+		Namespace:         ptr.String("__Namespace__"),
+		Statistic:         types.Statistic("SampleCount"),
+		ExtendedStatistic: ptr.String("__ExtendedStatistic__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Period: ptr.Int32(1),
+		Unit:   types.StandardUnit("Seconds"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1260,7 +1420,30 @@ func TestCheckResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAnomalyDetectors(context.Background(), &DescribeAnomalyDetectorsInput{})
+	got, err := svc.DescribeAnomalyDetectors(context.Background(), &DescribeAnomalyDetectorsInput{
+		AnomalyDetectorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Namespace:  ptr.String("__Namespace__"),
+		MetricName: ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AnomalyDetectorTypes: []types.AnomalyDetectorType{
+			types.AnomalyDetectorType("SINGLE_METRIC"),
+			types.AnomalyDetectorType("SINGLE_METRIC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1299,7 +1482,10 @@ func TestCheckResponseSnapshot_DescribeInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInsightRules(context.Background(), &DescribeInsightRulesInput{})
+	got, err := svc.DescribeInsightRules(context.Background(), &DescribeInsightRulesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1318,7 +1504,12 @@ func TestCheckResponseSnapshot_DisableAlarmActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableAlarmActions(context.Background(), &DisableAlarmActionsInput{})
+	got, err := svc.DisableAlarmActions(context.Background(), &DisableAlarmActionsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1352,7 +1543,12 @@ func TestCheckResponseSnapshot_DisableInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableInsightRules(context.Background(), &DisableInsightRulesInput{})
+	got, err := svc.DisableInsightRules(context.Background(), &DisableInsightRulesInput{
+		RuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1371,7 +1567,9 @@ func TestCheckResponseSnapshot_DisassociateDatasetKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDatasetKmsKey(context.Background(), &DisassociateDatasetKmsKeyInput{})
+	got, err := svc.DisassociateDatasetKmsKey(context.Background(), &DisassociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1588,12 @@ func TestCheckResponseSnapshot_EnableAlarmActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableAlarmActions(context.Background(), &EnableAlarmActionsInput{})
+	got, err := svc.EnableAlarmActions(context.Background(), &EnableAlarmActionsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1424,7 +1627,12 @@ func TestCheckResponseSnapshot_EnableInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableInsightRules(context.Background(), &EnableInsightRulesInput{})
+	got, err := svc.EnableInsightRules(context.Background(), &EnableInsightRulesInput{
+		RuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1465,7 +1673,9 @@ func TestCheckResponseSnapshot_GetAlarmMuteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAlarmMuteRule(context.Background(), &GetAlarmMuteRuleInput{})
+	got, err := svc.GetAlarmMuteRule(context.Background(), &GetAlarmMuteRuleInput{
+		AlarmMuteRuleName: ptr.String("__AlarmMuteRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1488,7 +1698,9 @@ func TestCheckResponseSnapshot_GetDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{})
+	got, err := svc.GetDashboard(context.Background(), &GetDashboardInput{
+		DashboardName: ptr.String("__DashboardName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1511,7 +1723,9 @@ func TestCheckResponseSnapshot_GetDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataset(context.Background(), &GetDatasetInput{})
+	got, err := svc.GetDataset(context.Background(), &GetDatasetInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1596,7 +1810,18 @@ func TestCheckResponseSnapshot_GetInsightRuleReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsightRuleReport(context.Background(), &GetInsightRuleReportInput{})
+	got, err := svc.GetInsightRuleReport(context.Background(), &GetInsightRuleReportInput{
+		RuleName:            ptr.String("__RuleName__"),
+		StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:              ptr.Int32(1),
+		MaxContributorCount: ptr.Int32(1),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrderBy: ptr.String("__OrderBy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1675,7 +1900,72 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{})
+	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{
+		MetricDataQueries: []types.MetricDataQuery{
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:     ptr.String("__NextToken__"),
+		ScanBy:        types.ScanBy("TimestampDescending"),
+		MaxDatapoints: ptr.Int32(1),
+		LabelOptions: &types.LabelOptions{
+			Timezone: ptr.String("__Timezone__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1722,7 +2012,32 @@ func TestCheckResponseSnapshot_GetMetricStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricStatistics(context.Background(), &GetMetricStatisticsInput{})
+	got, err := svc.GetMetricStatistics(context.Background(), &GetMetricStatisticsInput{
+		Namespace:  ptr.String("__Namespace__"),
+		MetricName: ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:    ptr.Int32(1),
+		Statistics: []types.Statistic{
+			types.Statistic("SampleCount"),
+			types.Statistic("SampleCount"),
+		},
+		ExtendedStatistics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Unit: types.StandardUnit("Seconds"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1817,7 +2132,9 @@ func TestCheckResponseSnapshot_GetMetricStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricStream(context.Background(), &GetMetricStreamInput{})
+	got, err := svc.GetMetricStream(context.Background(), &GetMetricStreamInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1838,7 +2155,10 @@ func TestCheckResponseSnapshot_GetMetricWidgetImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricWidgetImage(context.Background(), &GetMetricWidgetImageInput{})
+	got, err := svc.GetMetricWidgetImage(context.Background(), &GetMetricWidgetImageInput{
+		MetricWidget: ptr.String("__MetricWidget__"),
+		OutputFormat: ptr.String("__OutputFormat__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1896,7 +2216,15 @@ func TestCheckResponseSnapshot_ListAlarmMuteRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAlarmMuteRules(context.Background(), &ListAlarmMuteRulesInput{})
+	got, err := svc.ListAlarmMuteRules(context.Background(), &ListAlarmMuteRulesInput{
+		AlarmName: ptr.String("__AlarmName__"),
+		Statuses: []types.AlarmMuteRuleStatus{
+			types.AlarmMuteRuleStatus("SCHEDULED"),
+			types.AlarmMuteRuleStatus("SCHEDULED"),
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1931,7 +2259,10 @@ func TestCheckResponseSnapshot_ListDashboards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{})
+	got, err := svc.ListDashboards(context.Background(), &ListDashboardsInput{
+		DashboardNamePrefix: ptr.String("__DashboardNamePrefix__"),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1970,7 +2301,11 @@ func TestCheckResponseSnapshot_ListManagedInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedInsightRules(context.Background(), &ListManagedInsightRulesInput{})
+	got, err := svc.ListManagedInsightRules(context.Background(), &ListManagedInsightRulesInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2011,7 +2346,10 @@ func TestCheckResponseSnapshot_ListMetricStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetricStreams(context.Background(), &ListMetricStreamsInput{})
+	got, err := svc.ListMetricStreams(context.Background(), &ListMetricStreamsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2066,7 +2404,24 @@ func TestCheckResponseSnapshot_ListMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetrics(context.Background(), &ListMetricsInput{})
+	got, err := svc.ListMetrics(context.Background(), &ListMetricsInput{
+		Namespace:  ptr.String("__Namespace__"),
+		MetricName: ptr.String("__MetricName__"),
+		Dimensions: []types.DimensionFilter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:             ptr.String("__NextToken__"),
+		RecentlyActive:        types.RecentlyActive("PT3H"),
+		IncludeLinkedAccounts: ptr.Bool(true),
+		OwningAccount:         ptr.String("__OwningAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2096,7 +2451,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2115,7 +2472,35 @@ func TestCheckResponseSnapshot_PutAlarmMuteRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAlarmMuteRule(context.Background(), &PutAlarmMuteRuleInput{})
+	got, err := svc.PutAlarmMuteRule(context.Background(), &PutAlarmMuteRuleInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rule: &types.Rule{
+			Schedule: &types.Schedule{
+				Expression: ptr.String("__Expression__"),
+				Duration:   ptr.String("__Duration__"),
+				Timezone:   ptr.String("__Timezone__"),
+			},
+		},
+		MuteTargets: &types.MuteTargets{
+			AlarmNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpireDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2136,7 +2521,111 @@ func TestCheckResponseSnapshot_PutAnomalyDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAnomalyDetector(context.Background(), &PutAnomalyDetectorInput{})
+	got, err := svc.PutAnomalyDetector(context.Background(), &PutAnomalyDetectorInput{
+		Namespace:  ptr.String("__Namespace__"),
+		MetricName: ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		Configuration: &types.AnomalyDetectorConfiguration{
+			ExcludedTimeRanges: []types.Range{
+				{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			MetricTimezone: ptr.String("__MetricTimezone__"),
+		},
+		MetricCharacteristics: &types.MetricCharacteristics{
+			PeriodicSpikes: ptr.Bool(true),
+		},
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2155,7 +2644,37 @@ func TestCheckResponseSnapshot_PutCompositeAlarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCompositeAlarm(context.Background(), &PutCompositeAlarmInput{})
+	got, err := svc.PutCompositeAlarm(context.Background(), &PutCompositeAlarmInput{
+		ActionsEnabled: ptr.Bool(true),
+		AlarmActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmDescription: ptr.String("__AlarmDescription__"),
+		AlarmName:        ptr.String("__AlarmName__"),
+		AlarmRule:        ptr.String("__AlarmRule__"),
+		InsufficientDataActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OKActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
+		ActionsSuppressorWaitPeriod:      ptr.Int32(1),
+		ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2185,7 +2704,20 @@ func TestCheckResponseSnapshot_PutDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDashboard(context.Background(), &PutDashboardInput{})
+	got, err := svc.PutDashboard(context.Background(), &PutDashboardInput{
+		DashboardName: ptr.String("__DashboardName__"),
+		DashboardBody: ptr.String("__DashboardBody__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2204,7 +2736,22 @@ func TestCheckResponseSnapshot_PutInsightRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInsightRule(context.Background(), &PutInsightRuleInput{})
+	got, err := svc.PutInsightRule(context.Background(), &PutInsightRuleInput{
+		RuleName:       ptr.String("__RuleName__"),
+		RuleState:      ptr.String("__RuleState__"),
+		RuleDefinition: ptr.String("__RuleDefinition__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplyOnTransformedLogs: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2223,7 +2770,65 @@ func TestCheckResponseSnapshot_PutLogAlarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLogAlarm(context.Background(), &PutLogAlarmInput{})
+	got, err := svc.PutLogAlarm(context.Background(), &PutLogAlarmInput{
+		AlarmName:        ptr.String("__AlarmName__"),
+		AlarmDescription: ptr.String("__AlarmDescription__"),
+		ScheduledQueryConfiguration: &types.ScheduledQueryConfiguration{
+			QueryString: ptr.String("__QueryString__"),
+			LogGroupIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			QueryARN:              ptr.String("__QueryARN__"),
+			ScheduledQueryRoleARN: ptr.String("__ScheduledQueryRoleARN__"),
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+				StartTimeOffset:    ptr.Int64(1),
+				EndTimeOffset:      ptr.Int64(1),
+			},
+			AggregationExpression: ptr.String("__AggregationExpression__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		ActionLogLineCount:   ptr.Int32(1),
+		ActionLogLineRoleArn: ptr.String("__ActionLogLineRoleArn__"),
+		ActionsEnabled:       ptr.Bool(true),
+		OKActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InsufficientDataActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		QueryResultsToEvaluate: ptr.Int32(1),
+		QueryResultsToAlarm:    ptr.Int32(1),
+		Threshold:              ptr.Float64(1.0),
+		ComparisonOperator:     types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+		TreatMissingData:       ptr.String("__TreatMissingData__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2257,7 +2862,38 @@ func TestCheckResponseSnapshot_PutManagedInsightRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutManagedInsightRules(context.Background(), &PutManagedInsightRulesInput{})
+	got, err := svc.PutManagedInsightRules(context.Background(), &PutManagedInsightRulesInput{
+		ManagedRules: []types.ManagedRule{
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				ResourceARN:  ptr.String("__ResourceARN__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				ResourceARN:  ptr.String("__ResourceARN__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2276,7 +2912,125 @@ func TestCheckResponseSnapshot_PutMetricAlarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricAlarm(context.Background(), &PutMetricAlarmInput{})
+	got, err := svc.PutMetricAlarm(context.Background(), &PutMetricAlarmInput{
+		AlarmName:        ptr.String("__AlarmName__"),
+		AlarmDescription: ptr.String("__AlarmDescription__"),
+		ActionsEnabled:   ptr.Bool(true),
+		OKActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AlarmActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InsufficientDataActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricName:        ptr.String("__MetricName__"),
+		Namespace:         ptr.String("__Namespace__"),
+		Statistic:         types.Statistic("SampleCount"),
+		ExtendedStatistic: ptr.String("__ExtendedStatistic__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Period:                           ptr.Int32(1),
+		Unit:                             types.StandardUnit("Seconds"),
+		EvaluationPeriods:                ptr.Int32(1),
+		DatapointsToAlarm:                ptr.Int32(1),
+		Threshold:                        ptr.Float64(1.0),
+		ComparisonOperator:               types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+		TreatMissingData:                 ptr.String("__TreatMissingData__"),
+		EvaluateLowSampleCountPercentile: ptr.String("__EvaluateLowSampleCountPercentile__"),
+		Metrics: []types.MetricDataQuery{
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ThresholdMetricId: ptr.String("__ThresholdMetricId__"),
+		EvaluationWindow: &types.EvaluationWindowMemberWallClockWindow{
+			Value: types.WallClockWindow{
+				Timezone: ptr.String("__Timezone__"),
+			},
+		},
+		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
+			Value: types.AlarmPromQLCriteria{
+				Query:          ptr.String("__Query__"),
+				PendingPeriod:  ptr.Int32(1),
+				RecoveryPeriod: ptr.Int32(1),
+			},
+		},
+		EvaluationInterval: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2295,7 +3049,224 @@ func TestCheckResponseSnapshot_PutMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{})
+	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{
+		Namespace: ptr.String("__Namespace__"),
+		MetricData: []types.MetricDatum{
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+		},
+		EntityMetricData: []types.EntityMetricData{
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		StrictEntityValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2316,7 +3287,89 @@ func TestCheckResponseSnapshot_PutMetricStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricStream(context.Background(), &PutMetricStreamInput{})
+	got, err := svc.PutMetricStream(context.Background(), &PutMetricStreamInput{
+		Name: ptr.String("__Name__"),
+		IncludeFilters: []types.MetricStreamFilter{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.MetricStreamFilter{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FirehoseArn:  ptr.String("__FirehoseArn__"),
+		RoleArn:      ptr.String("__RoleArn__"),
+		OutputFormat: types.MetricStreamOutputFormat("json"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StatisticsConfigurations: []types.MetricStreamStatisticsConfiguration{
+			{
+				IncludeMetrics: []types.MetricStreamStatisticsMetric{
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+				},
+				AdditionalStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []types.MetricStreamStatisticsMetric{
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+				},
+				AdditionalStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		IncludeLinkedAccountsMetrics: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2335,7 +3388,12 @@ func TestCheckResponseSnapshot_SetAlarmState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetAlarmState(context.Background(), &SetAlarmStateInput{})
+	got, err := svc.SetAlarmState(context.Background(), &SetAlarmStateInput{
+		AlarmName:       ptr.String("__AlarmName__"),
+		StateValue:      types.StateValue("OK"),
+		StateReason:     ptr.String("__StateReason__"),
+		StateReasonData: ptr.String("__StateReasonData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2354,7 +3412,12 @@ func TestCheckResponseSnapshot_StartMetricStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetricStreams(context.Background(), &StartMetricStreamsInput{})
+	got, err := svc.StartMetricStreams(context.Background(), &StartMetricStreamsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2392,7 +3455,12 @@ func TestCheckResponseSnapshot_StopMetricStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopMetricStreams(context.Background(), &StopMetricStreamsInput{})
+	got, err := svc.StopMetricStreams(context.Background(), &StopMetricStreamsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2430,7 +3498,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2449,7 +3529,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2470,7 +3556,89 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutMetricStream(context.Background(), &PutMetricStreamInput{})
+	_, opErr := svc.PutMetricStream(context.Background(), &PutMetricStreamInput{
+		Name: ptr.String("__Name__"),
+		IncludeFilters: []types.MetricStreamFilter{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.MetricStreamFilter{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		FirehoseArn:  ptr.String("__FirehoseArn__"),
+		RoleArn:      ptr.String("__RoleArn__"),
+		OutputFormat: types.MetricStreamOutputFormat("json"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StatisticsConfigurations: []types.MetricStreamStatisticsConfiguration{
+			{
+				IncludeMetrics: []types.MetricStreamStatisticsMetric{
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+				},
+				AdditionalStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []types.MetricStreamStatisticsMetric{
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+					{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+					},
+				},
+				AdditionalStatistics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		IncludeLinkedAccountsMetrics: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2495,7 +3663,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2530,7 +3701,20 @@ func TestCheckResponseSnapshot_Error_DashboardInvalidInputError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDashboard(context.Background(), &PutDashboardInput{})
+	_, opErr := svc.PutDashboard(context.Background(), &PutDashboardInput{
+		DashboardName: ptr.String("__DashboardName__"),
+		DashboardBody: ptr.String("__DashboardBody__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2555,7 +3739,9 @@ func TestCheckResponseSnapshot_Error_DashboardNotFoundError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDashboard(context.Background(), &GetDashboardInput{})
+	_, opErr := svc.GetDashboard(context.Background(), &GetDashboardInput{
+		DashboardName: ptr.String("__DashboardName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2580,7 +3766,96 @@ func TestCheckResponseSnapshot_Error_InternalServiceFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2605,7 +3880,12 @@ func TestCheckResponseSnapshot_Error_InvalidFormatFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SetAlarmState(context.Background(), &SetAlarmStateInput{})
+	_, opErr := svc.SetAlarmState(context.Background(), &SetAlarmStateInput{
+		AlarmName:       ptr.String("__AlarmName__"),
+		StateValue:      types.StateValue("OK"),
+		StateReason:     ptr.String("__StateReason__"),
+		StateReasonData: ptr.String("__StateReasonData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2630,7 +3910,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAlarmContributors(context.Background(), &DescribeAlarmContributorsInput{})
+	_, opErr := svc.DescribeAlarmContributors(context.Background(), &DescribeAlarmContributorsInput{
+		AlarmName: ptr.String("__AlarmName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2655,7 +3938,96 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2680,7 +4052,96 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2705,7 +4166,10 @@ func TestCheckResponseSnapshot_Error_KmsAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2730,7 +4194,10 @@ func TestCheckResponseSnapshot_Error_KmsKeyDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2755,7 +4222,10 @@ func TestCheckResponseSnapshot_Error_KmsKeyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2780,7 +4250,12 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.EnableInsightRules(context.Background(), &EnableInsightRulesInput{})
+	_, opErr := svc.EnableInsightRules(context.Background(), &EnableInsightRulesInput{
+		RuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2805,7 +4280,35 @@ func TestCheckResponseSnapshot_Error_LimitExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAlarmMuteRule(context.Background(), &PutAlarmMuteRuleInput{})
+	_, opErr := svc.PutAlarmMuteRule(context.Background(), &PutAlarmMuteRuleInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rule: &types.Rule{
+			Schedule: &types.Schedule{
+				Expression: ptr.String("__Expression__"),
+				Duration:   ptr.String("__Duration__"),
+				Timezone:   ptr.String("__Timezone__"),
+			},
+		},
+		MuteTargets: &types.MuteTargets{
+			AlarmNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpireDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2830,7 +4333,96 @@ func TestCheckResponseSnapshot_Error_MissingRequiredParameterException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{})
+	_, opErr := svc.DeleteAnomalyDetector(context.Background(), &DeleteAnomalyDetectorInput{
+		AnomalyDetectorId: ptr.String("__AnomalyDetectorId__"),
+		Namespace:         ptr.String("__Namespace__"),
+		MetricName:        ptr.String("__MetricName__"),
+		Dimensions: []types.Dimension{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Stat: ptr.String("__Stat__"),
+		SingleMetricAnomalyDetector: &types.SingleMetricAnomalyDetector{
+			AccountId:  ptr.String("__AccountId__"),
+			Namespace:  ptr.String("__Namespace__"),
+			MetricName: ptr.String("__MetricName__"),
+			Dimensions: []types.Dimension{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Stat: ptr.String("__Stat__"),
+		},
+		MetricMathAnomalyDetector: &types.MetricMathAnomalyDetector{
+			MetricDataQueries: []types.MetricDataQuery{
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+				{
+					Id: ptr.String("__Id__"),
+					MetricStat: &types.MetricStat{
+						Metric: &types.Metric{
+							Namespace:  ptr.String("__Namespace__"),
+							MetricName: ptr.String("__MetricName__"),
+							Dimensions: []types.Dimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+						Period: ptr.Int32(1),
+						Stat:   ptr.String("__Stat__"),
+						Unit:   types.StandardUnit("Seconds"),
+					},
+					Expression: ptr.String("__Expression__"),
+					Label:      ptr.String("__Label__"),
+					ReturnData: ptr.Bool(true),
+					Period:     ptr.Int32(1),
+					AccountId:  ptr.String("__AccountId__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2855,7 +4447,12 @@ func TestCheckResponseSnapshot_Error_ResourceConflict(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{})
+	_, opErr := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2880,7 +4477,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{})
+	_, opErr := svc.DeleteAlarms(context.Background(), &DeleteAlarmsInput{
+		AlarmNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2907,7 +4509,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{})
+	_, opErr := svc.AssociateDatasetKmsKey(context.Background(), &AssociateDatasetKmsKeyInput{
+		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+		KmsKeyArn:         ptr.String("__KmsKeyArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

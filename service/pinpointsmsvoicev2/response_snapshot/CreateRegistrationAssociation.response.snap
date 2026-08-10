@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreateRegistrationAssociation
+
+{"IsoCountryCode":"__IsoCountryCode__","PhoneNumber":"__PhoneNumber__","RegistrationArn":"__RegistrationArn__","RegistrationId":"__RegistrationId__","RegistrationType":"__RegistrationType__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

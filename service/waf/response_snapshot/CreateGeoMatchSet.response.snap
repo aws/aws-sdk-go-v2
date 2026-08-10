@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.CreateGeoMatchSet
+
+{"ChangeToken":"__ChangeToken__","GeoMatchSet":{"GeoMatchConstraints":[{"Type":"Country","Value":"AF"},{"Type":"Country","Value":"AF"}],"GeoMatchSetId":"__GeoMatchSetId__","Name":"__Name__"}}

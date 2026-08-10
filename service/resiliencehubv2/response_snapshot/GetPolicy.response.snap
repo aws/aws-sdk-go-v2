@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"policy":{"associatedServiceCount":1,"availabilitySlo":{"target":1},"createdAt":946684800,"dataRecovery":{"timeBetweenBackupsInMinutes":1},"description":"__Description__","kmsKeyId":"__KmsKeyId__","multiAz":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"multiRegion":{"disasterRecoveryApproach":"ACTIVE_ACTIVE","rpoInMinutes":1,"rtoInMinutes":1},"name":"__Name__","policyArn":"__PolicyArn__","tags":{"key0":"__Value__"},"updatedAt":946684800}}

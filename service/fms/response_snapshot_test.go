@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_AssociateAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	got, err := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +140,9 @@ func TestCheckResponseSnapshot_AssociateThirdPartyFirewall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateThirdPartyFirewall(context.Background(), &AssociateThirdPartyFirewallInput{})
+	got, err := svc.AssociateThirdPartyFirewall(context.Background(), &AssociateThirdPartyFirewallInput{
+		ThirdPartyFirewall: types.ThirdPartyFirewall("PALO_ALTO_NETWORKS_CLOUD_NGFW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,7 +173,13 @@ func TestCheckResponseSnapshot_BatchAssociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateResource(context.Background(), &BatchAssociateResourceInput{})
+	got, err := svc.BatchAssociateResource(context.Background(), &BatchAssociateResourceInput{
+		ResourceSetIdentifier: ptr.String("__ResourceSetIdentifier__"),
+		Items: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +210,13 @@ func TestCheckResponseSnapshot_BatchDisassociateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateResource(context.Background(), &BatchDisassociateResourceInput{})
+	got, err := svc.BatchDisassociateResource(context.Background(), &BatchDisassociateResourceInput{
+		ResourceSetIdentifier: ptr.String("__ResourceSetIdentifier__"),
+		Items: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +235,9 @@ func TestCheckResponseSnapshot_DeleteAppsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppsList(context.Background(), &DeleteAppsListInput{})
+	got, err := svc.DeleteAppsList(context.Background(), &DeleteAppsListInput{
+		ListId: ptr.String("__ListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +275,10 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		PolicyId:                 ptr.String("__PolicyId__"),
+		DeleteAllPolicyResources: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +297,9 @@ func TestCheckResponseSnapshot_DeleteProtocolsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProtocolsList(context.Background(), &DeleteProtocolsListInput{})
+	got, err := svc.DeleteProtocolsList(context.Background(), &DeleteProtocolsListInput{
+		ListId: ptr.String("__ListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +318,9 @@ func TestCheckResponseSnapshot_DeleteResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceSet(context.Background(), &DeleteResourceSetInput{})
+	got, err := svc.DeleteResourceSet(context.Background(), &DeleteResourceSetInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +360,9 @@ func TestCheckResponseSnapshot_DisassociateThirdPartyFirewall(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateThirdPartyFirewall(context.Background(), &DisassociateThirdPartyFirewallInput{})
+	got, err := svc.DisassociateThirdPartyFirewall(context.Background(), &DisassociateThirdPartyFirewallInput{
+		ThirdPartyFirewall: types.ThirdPartyFirewall("PALO_ALTO_NETWORKS_CLOUD_NGFW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +437,9 @@ func TestCheckResponseSnapshot_GetAdminScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdminScope(context.Background(), &GetAdminScopeInput{})
+	got, err := svc.GetAdminScope(context.Background(), &GetAdminScopeInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +493,10 @@ func TestCheckResponseSnapshot_GetAppsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppsList(context.Background(), &GetAppsListInput{})
+	got, err := svc.GetAppsList(context.Background(), &GetAppsListInput{
+		ListId:      ptr.String("__ListId__"),
+		DefaultList: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +544,10 @@ func TestCheckResponseSnapshot_GetComplianceDetail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceDetail(context.Background(), &GetComplianceDetailInput{})
+	got, err := svc.GetComplianceDetail(context.Background(), &GetComplianceDetailInput{
+		PolicyId:      ptr.String("__PolicyId__"),
+		MemberAccount: ptr.String("__MemberAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +714,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +740,14 @@ func TestCheckResponseSnapshot_GetProtectionStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProtectionStatus(context.Background(), &GetProtectionStatusInput{})
+	got, err := svc.GetProtectionStatus(context.Background(), &GetProtectionStatusInput{
+		PolicyId:        ptr.String("__PolicyId__"),
+		MemberAccountId: ptr.String("__MemberAccountId__"),
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +785,10 @@ func TestCheckResponseSnapshot_GetProtocolsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProtocolsList(context.Background(), &GetProtocolsListInput{})
+	got, err := svc.GetProtocolsList(context.Background(), &GetProtocolsListInput{
+		ListId:      ptr.String("__ListId__"),
+		DefaultList: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +821,9 @@ func TestCheckResponseSnapshot_GetResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceSet(context.Background(), &GetResourceSetInput{})
+	got, err := svc.GetResourceSet(context.Background(), &GetResourceSetInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -796,7 +845,9 @@ func TestCheckResponseSnapshot_GetThirdPartyFirewallAssociationStatus(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThirdPartyFirewallAssociationStatus(context.Background(), &GetThirdPartyFirewallAssociationStatusInput{})
+	got, err := svc.GetThirdPartyFirewallAssociationStatus(context.Background(), &GetThirdPartyFirewallAssociationStatusInput{
+		ThirdPartyFirewall: types.ThirdPartyFirewall("PALO_ALTO_NETWORKS_CLOUD_NGFW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1845,7 +1896,12 @@ func TestCheckResponseSnapshot_GetViolationDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetViolationDetails(context.Background(), &GetViolationDetailsInput{})
+	got, err := svc.GetViolationDetails(context.Background(), &GetViolationDetailsInput{
+		PolicyId:      ptr.String("__PolicyId__"),
+		MemberAccount: ptr.String("__MemberAccount__"),
+		ResourceId:    ptr.String("__ResourceId__"),
+		ResourceType:  ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1878,7 +1934,10 @@ func TestCheckResponseSnapshot_ListAdminAccountsForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdminAccountsForOrganization(context.Background(), &ListAdminAccountsForOrganizationInput{})
+	got, err := svc.ListAdminAccountsForOrganization(context.Background(), &ListAdminAccountsForOrganizationInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1903,7 +1962,10 @@ func TestCheckResponseSnapshot_ListAdminsManagingAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdminsManagingAccount(context.Background(), &ListAdminsManagingAccountInput{})
+	got, err := svc.ListAdminsManagingAccount(context.Background(), &ListAdminsManagingAccountInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1960,7 +2022,11 @@ func TestCheckResponseSnapshot_ListAppsLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppsLists(context.Background(), &ListAppsListsInput{})
+	got, err := svc.ListAppsLists(context.Background(), &ListAppsListsInput{
+		DefaultLists: true,
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2027,7 +2093,11 @@ func TestCheckResponseSnapshot_ListComplianceStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComplianceStatus(context.Background(), &ListComplianceStatusInput{})
+	got, err := svc.ListComplianceStatus(context.Background(), &ListComplianceStatusInput{
+		PolicyId:   ptr.String("__PolicyId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2062,7 +2132,15 @@ func TestCheckResponseSnapshot_ListDiscoveredResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{})
+	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{
+		MemberAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2087,7 +2165,10 @@ func TestCheckResponseSnapshot_ListMemberAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemberAccounts(context.Background(), &ListMemberAccountsInput{})
+	got, err := svc.ListMemberAccounts(context.Background(), &ListMemberAccountsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2130,7 +2211,10 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{})
+	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2171,7 +2255,11 @@ func TestCheckResponseSnapshot_ListProtocolsLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProtocolsLists(context.Background(), &ListProtocolsListsInput{})
+	got, err := svc.ListProtocolsLists(context.Background(), &ListProtocolsListsInput{
+		DefaultLists: true,
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2202,7 +2290,11 @@ func TestCheckResponseSnapshot_ListResourceSetResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSetResources(context.Background(), &ListResourceSetResourcesInput{})
+	got, err := svc.ListResourceSetResources(context.Background(), &ListResourceSetResourcesInput{
+		Identifier: ptr.String("__Identifier__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2331,10 @@ func TestCheckResponseSnapshot_ListResourceSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSets(context.Background(), &ListResourceSetsInput{})
+	got, err := svc.ListResourceSets(context.Background(), &ListResourceSetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2269,7 +2364,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2300,7 +2397,11 @@ func TestCheckResponseSnapshot_ListThirdPartyFirewallFirewallPolicies(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListThirdPartyFirewallFirewallPolicies(context.Background(), &ListThirdPartyFirewallFirewallPoliciesInput{})
+	got, err := svc.ListThirdPartyFirewallFirewallPolicies(context.Background(), &ListThirdPartyFirewallFirewallPoliciesInput{
+		ThirdPartyFirewall: types.ThirdPartyFirewall("PALO_ALTO_NETWORKS_CLOUD_NGFW"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2319,7 +2420,41 @@ func TestCheckResponseSnapshot_PutAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAdminAccount(context.Background(), &PutAdminAccountInput{})
+	got, err := svc.PutAdminAccount(context.Background(), &PutAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+		AdminScope: &types.AdminScope{
+			AccountScope: &types.AccountScope{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAccountsEnabled:       true,
+				ExcludeSpecifiedAccounts: true,
+			},
+			OrganizationalUnitScope: &types.OrganizationalUnitScope{
+				OrganizationalUnits: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllOrganizationalUnitsEnabled:       true,
+				ExcludeSpecifiedOrganizationalUnits: true,
+			},
+			RegionScope: &types.RegionScope{
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllRegionsEnabled: true,
+			},
+			PolicyTypeScope: &types.PolicyTypeScope{
+				PolicyTypes: []types.SecurityServiceType{
+					types.SecurityServiceType("WAF"),
+					types.SecurityServiceType("WAF"),
+				},
+				AllPolicyTypesEnabled: true,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2373,7 +2508,51 @@ func TestCheckResponseSnapshot_PutAppsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAppsList(context.Background(), &PutAppsListInput{})
+	got, err := svc.PutAppsList(context.Background(), &PutAppsListInput{
+		AppsList: &types.AppsListData{
+			ListId:          ptr.String("__ListId__"),
+			ListName:        ptr.String("__ListName__"),
+			ListUpdateToken: ptr.String("__ListUpdateToken__"),
+			CreateTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdateTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AppsList: []types.App{
+				{
+					AppName:  ptr.String("__AppName__"),
+					Protocol: ptr.String("__Protocol__"),
+					Port:     ptr.Int64(1),
+				},
+				{
+					AppName:  ptr.String("__AppName__"),
+					Protocol: ptr.String("__Protocol__"),
+					Port:     ptr.Int64(1),
+				},
+			},
+			PreviousAppsList: map[string][]types.App{
+				"key0": {
+					{
+						AppName:  ptr.String("__AppName__"),
+						Protocol: ptr.String("__Protocol__"),
+						Port:     ptr.Int64(1),
+					},
+					{
+						AppName:  ptr.String("__AppName__"),
+						Protocol: ptr.String("__Protocol__"),
+						Port:     ptr.Int64(1),
+					},
+				},
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2392,7 +2571,10 @@ func TestCheckResponseSnapshot_PutNotificationChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutNotificationChannel(context.Background(), &PutNotificationChannelInput{})
+	got, err := svc.PutNotificationChannel(context.Background(), &PutNotificationChannelInput{
+		SnsTopicArn: ptr.String("__SnsTopicArn__"),
+		SnsRoleName: ptr.String("__SnsRoleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2537,7 +2719,142 @@ func TestCheckResponseSnapshot_PutPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{})
+	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{
+		Policy: &types.Policy{
+			PolicyId:          ptr.String("__PolicyId__"),
+			PolicyName:        ptr.String("__PolicyName__"),
+			PolicyUpdateToken: ptr.String("__PolicyUpdateToken__"),
+			SecurityServicePolicyData: &types.SecurityServicePolicyData{
+				Type:               types.SecurityServiceType("WAF"),
+				ManagedServiceData: ptr.String("__ManagedServiceData__"),
+				PolicyOption: &types.PolicyOption{
+					NetworkFirewallPolicy: &types.NetworkFirewallPolicy{
+						FirewallDeploymentModel: types.FirewallDeploymentModel("CENTRALIZED"),
+					},
+					ThirdPartyFirewallPolicy: &types.ThirdPartyFirewallPolicy{
+						FirewallDeploymentModel: types.FirewallDeploymentModel("CENTRALIZED"),
+					},
+					NetworkAclCommonPolicy: &types.NetworkAclCommonPolicy{
+						NetworkAclEntrySet: &types.NetworkAclEntrySet{
+							FirstEntries: []types.NetworkAclEntry{
+								{
+									IcmpTypeCode: &types.NetworkAclIcmpTypeCode{
+										Code: ptr.Int32(1),
+										Type: ptr.Int32(1),
+									},
+									Protocol: ptr.String("__Protocol__"),
+									PortRange: &types.NetworkAclPortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									CidrBlock:     ptr.String("__CidrBlock__"),
+									Ipv6CidrBlock: ptr.String("__Ipv6CidrBlock__"),
+									RuleAction:    types.NetworkAclRuleAction("allow"),
+									Egress:        ptr.Bool(true),
+								},
+								{
+									IcmpTypeCode: &types.NetworkAclIcmpTypeCode{
+										Code: ptr.Int32(1),
+										Type: ptr.Int32(1),
+									},
+									Protocol: ptr.String("__Protocol__"),
+									PortRange: &types.NetworkAclPortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									CidrBlock:     ptr.String("__CidrBlock__"),
+									Ipv6CidrBlock: ptr.String("__Ipv6CidrBlock__"),
+									RuleAction:    types.NetworkAclRuleAction("allow"),
+									Egress:        ptr.Bool(true),
+								},
+							},
+							ForceRemediateForFirstEntries: ptr.Bool(true),
+							LastEntries: []types.NetworkAclEntry{
+								{
+									IcmpTypeCode: &types.NetworkAclIcmpTypeCode{
+										Code: ptr.Int32(1),
+										Type: ptr.Int32(1),
+									},
+									Protocol: ptr.String("__Protocol__"),
+									PortRange: &types.NetworkAclPortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									CidrBlock:     ptr.String("__CidrBlock__"),
+									Ipv6CidrBlock: ptr.String("__Ipv6CidrBlock__"),
+									RuleAction:    types.NetworkAclRuleAction("allow"),
+									Egress:        ptr.Bool(true),
+								},
+								{
+									IcmpTypeCode: &types.NetworkAclIcmpTypeCode{
+										Code: ptr.Int32(1),
+										Type: ptr.Int32(1),
+									},
+									Protocol: ptr.String("__Protocol__"),
+									PortRange: &types.NetworkAclPortRange{
+										From: ptr.Int32(1),
+										To:   ptr.Int32(1),
+									},
+									CidrBlock:     ptr.String("__CidrBlock__"),
+									Ipv6CidrBlock: ptr.String("__Ipv6CidrBlock__"),
+									RuleAction:    types.NetworkAclRuleAction("allow"),
+									Egress:        ptr.Bool(true),
+								},
+							},
+							ForceRemediateForLastEntries: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			ResourceType: ptr.String("__ResourceType__"),
+			ResourceTypeList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTags: []types.ResourceTag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ExcludeResourceTags:            true,
+			RemediationEnabled:             true,
+			DeleteUnusedFMManagedResources: true,
+			IncludeMap: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ExcludeMap: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ResourceSetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PolicyDescription:          ptr.String("__PolicyDescription__"),
+			PolicyStatus:               types.CustomerPolicyStatus("ACTIVE"),
+			ResourceTagLogicalOperator: types.ResourceTagLogicalOperator("AND"),
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2575,7 +2892,35 @@ func TestCheckResponseSnapshot_PutProtocolsList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProtocolsList(context.Background(), &PutProtocolsListInput{})
+	got, err := svc.PutProtocolsList(context.Background(), &PutProtocolsListInput{
+		ProtocolsList: &types.ProtocolsListData{
+			ListId:          ptr.String("__ListId__"),
+			ListName:        ptr.String("__ListName__"),
+			ListUpdateToken: ptr.String("__ListUpdateToken__"),
+			CreateTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdateTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ProtocolsList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PreviousProtocolsList: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2608,7 +2953,30 @@ func TestCheckResponseSnapshot_PutResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourceSet(context.Background(), &PutResourceSetInput{})
+	got, err := svc.PutResourceSet(context.Background(), &PutResourceSetInput{
+		ResourceSet: &types.ResourceSet{
+			Id:          ptr.String("__Id__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			UpdateToken: ptr.String("__UpdateToken__"),
+			ResourceTypeList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			LastUpdateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ResourceSetStatus: types.ResourceSetStatus("ACTIVE"),
+		},
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2627,7 +2995,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagList: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2646,7 +3026,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2667,7 +3053,9 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2692,7 +3080,9 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2717,7 +3107,9 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2742,7 +3134,9 @@ func TestCheckResponseSnapshot_Error_InvalidTypeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	_, opErr := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2767,7 +3161,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2792,7 +3188,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{})
+	_, opErr := svc.AssociateAdminAccount(context.Background(), &AssociateAdminAccountInput{
+		AdminAccount: ptr.String("__AdminAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

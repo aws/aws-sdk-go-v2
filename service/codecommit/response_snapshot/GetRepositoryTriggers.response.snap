@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetRepositoryTriggers
+
+{"configurationId":"__ConfigurationId__","triggers":[{"branches":["__Member__","__Member__"],"customData":"__CustomData__","destinationArn":"__DestinationArn__","events":["all","all"],"name":"__Name__"},{"branches":["__Member__","__Member__"],"customData":"__CustomData__","destinationArn":"__DestinationArn__","events":["all","all"],"name":"__Name__"}]}

@@ -122,7 +122,10 @@ func TestCheckResponseSnapshot_AssociateAppBlockBuilderAppBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	got, err := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +149,10 @@ func TestCheckResponseSnapshot_AssociateApplicationFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApplicationFleet(context.Background(), &AssociateApplicationFleetInput{})
+	got, err := svc.AssociateApplicationFleet(context.Background(), &AssociateApplicationFleetInput{
+		FleetName:      ptr.String("__FleetName__"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +171,11 @@ func TestCheckResponseSnapshot_AssociateApplicationToEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateApplicationToEntitlement(context.Background(), &AssociateApplicationToEntitlementInput{})
+	got, err := svc.AssociateApplicationToEntitlement(context.Background(), &AssociateApplicationToEntitlementInput{
+		StackName:             ptr.String("__StackName__"),
+		EntitlementName:       ptr.String("__EntitlementName__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +194,10 @@ func TestCheckResponseSnapshot_AssociateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFleet(context.Background(), &AssociateFleetInput{})
+	got, err := svc.AssociateFleet(context.Background(), &AssociateFleetInput{
+		FleetName: ptr.String("__FleetName__"),
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +216,13 @@ func TestCheckResponseSnapshot_AssociateSoftwareToImageBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSoftwareToImageBuilder(context.Background(), &AssociateSoftwareToImageBuilderInput{})
+	got, err := svc.AssociateSoftwareToImageBuilder(context.Background(), &AssociateSoftwareToImageBuilderInput{
+		ImageBuilderName: ptr.String("__ImageBuilderName__"),
+		SoftwareNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +264,22 @@ func TestCheckResponseSnapshot_BatchAssociateUserStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateUserStack(context.Background(), &BatchAssociateUserStackInput{})
+	got, err := svc.BatchAssociateUserStack(context.Background(), &BatchAssociateUserStackInput{
+		UserStackAssociations: []types.UserStackAssociation{
+			{
+				StackName:             ptr.String("__StackName__"),
+				UserName:              ptr.String("__UserName__"),
+				AuthenticationType:    types.AuthenticationType("API"),
+				SendEmailNotification: ptr.Bool(true),
+			},
+			{
+				StackName:             ptr.String("__StackName__"),
+				UserName:              ptr.String("__UserName__"),
+				AuthenticationType:    types.AuthenticationType("API"),
+				SendEmailNotification: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +321,22 @@ func TestCheckResponseSnapshot_BatchDisassociateUserStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateUserStack(context.Background(), &BatchDisassociateUserStackInput{})
+	got, err := svc.BatchDisassociateUserStack(context.Background(), &BatchDisassociateUserStackInput{
+		UserStackAssociations: []types.UserStackAssociation{
+			{
+				StackName:             ptr.String("__StackName__"),
+				UserName:              ptr.String("__UserName__"),
+				AuthenticationType:    types.AuthenticationType("API"),
+				SendEmailNotification: ptr.Bool(true),
+			},
+			{
+				StackName:             ptr.String("__StackName__"),
+				UserName:              ptr.String("__UserName__"),
+				AuthenticationType:    types.AuthenticationType("API"),
+				SendEmailNotification: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +357,12 @@ func TestCheckResponseSnapshot_CopyImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyImage(context.Background(), &CopyImageInput{})
+	got, err := svc.CopyImage(context.Background(), &CopyImageInput{
+		SourceImageName:             ptr.String("__SourceImageName__"),
+		DestinationImageName:        ptr.String("__DestinationImageName__"),
+		DestinationRegion:           ptr.String("__DestinationRegion__"),
+		DestinationImageDescription: ptr.String("__DestinationImageDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +423,37 @@ func TestCheckResponseSnapshot_CreateAppBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppBlock(context.Background(), &CreateAppBlockInput{})
+	got, err := svc.CreateAppBlock(context.Background(), &CreateAppBlockInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		SourceS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		SetupScriptDetails: &types.ScriptDetails{
+			ScriptS3Location: &types.S3Location{
+				S3Bucket: ptr.String("__S3Bucket__"),
+				S3Key:    ptr.String("__S3Key__"),
+			},
+			ExecutablePath:       ptr.String("__ExecutablePath__"),
+			ExecutableParameters: ptr.String("__ExecutableParameters__"),
+			TimeoutInSeconds:     ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		PostSetupScriptDetails: &types.ScriptDetails{
+			ScriptS3Location: &types.S3Location{
+				S3Bucket: ptr.String("__S3Bucket__"),
+				S3Key:    ptr.String("__S3Key__"),
+			},
+			ExecutablePath:       ptr.String("__ExecutablePath__"),
+			ExecutableParameters: ptr.String("__ExecutableParameters__"),
+			TimeoutInSeconds:     ptr.Int32(1),
+		},
+		PackagingType: types.PackagingType("CUSTOM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +522,39 @@ func TestCheckResponseSnapshot_CreateAppBlockBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{})
+	got, err := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Platform:     types.AppBlockBuilderPlatformType("WINDOWS_SERVER_2019"),
+		InstanceType: ptr.String("__InstanceType__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		IamRoleArn:                  ptr.String("__IamRoleArn__"),
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +576,10 @@ func TestCheckResponseSnapshot_CreateAppBlockBuilderStreamingURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppBlockBuilderStreamingURL(context.Background(), &CreateAppBlockBuilderStreamingURLInput{})
+	got, err := svc.CreateAppBlockBuilderStreamingURL(context.Background(), &CreateAppBlockBuilderStreamingURLInput{
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+		Validity:            ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +627,30 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		IconS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		LaunchPath:       ptr.String("__LaunchPath__"),
+		WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		LaunchParameters: ptr.String("__LaunchParameters__"),
+		Platforms: []types.PlatformType{
+			types.PlatformType("WINDOWS"),
+			types.PlatformType("WINDOWS"),
+		},
+		InstanceFamilies: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AppBlockArn: ptr.String("__AppBlockArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +686,21 @@ func TestCheckResponseSnapshot_CreateDirectoryConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectoryConfig(context.Background(), &CreateDirectoryConfigInput{})
+	got, err := svc.CreateDirectoryConfig(context.Background(), &CreateDirectoryConfigInput{
+		DirectoryName: ptr.String("__DirectoryName__"),
+		OrganizationalUnitDistinguishedNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceAccountCredentials: &types.ServiceAccountCredentials{
+			AccountName:     ptr.String("__AccountName__"),
+			AccountPassword: ptr.String("__AccountPassword__"),
+		},
+		CertificateBasedAuthProperties: &types.CertificateBasedAuthProperties{
+			Status:                  types.CertificateBasedAuthStatus("DISABLED"),
+			CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +738,22 @@ func TestCheckResponseSnapshot_CreateEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{})
+	got, err := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{
+		Name:          ptr.String("__Name__"),
+		StackName:     ptr.String("__StackName__"),
+		Description:   ptr.String("__Description__"),
+		AppVisibility: types.AppVisibility("ALL"),
+		Attributes: []types.EntitlementAttribute{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +795,15 @@ func TestCheckResponseSnapshot_CreateExportImageTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExportImageTask(context.Background(), &CreateExportImageTaskInput{})
+	got, err := svc.CreateExportImageTask(context.Background(), &CreateExportImageTaskInput{
+		ImageName:  ptr.String("__ImageName__"),
+		AmiName:    ptr.String("__AmiName__"),
+		IamRoleArn: ptr.String("__IamRoleArn__"),
+		TagSpecifications: map[string]string{
+			"key0": "__Value__",
+		},
+		AmiDescription: ptr.String("__AmiDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +893,57 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		Name:         ptr.String("__Name__"),
+		ImageName:    ptr.String("__ImageName__"),
+		ImageArn:     ptr.String("__ImageArn__"),
+		InstanceType: ptr.String("__InstanceType__"),
+		FleetType:    types.FleetType("ALWAYS_ON"),
+		ComputeCapacity: &types.ComputeCapacity{
+			DesiredInstances: ptr.Int32(1),
+			DesiredSessions:  ptr.Int32(1),
+		},
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxUserDurationInSeconds:    ptr.Int32(1),
+		DisconnectTimeoutInSeconds:  ptr.Int32(1),
+		Description:                 ptr.String("__Description__"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		DomainJoinInfo: &types.DomainJoinInfo{
+			DirectoryName:                       ptr.String("__DirectoryName__"),
+			OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		IdleDisconnectTimeoutInSeconds: ptr.Int32(1),
+		IamRoleArn:                     ptr.String("__IamRoleArn__"),
+		StreamView:                     types.StreamView("APP"),
+		Platform:                       types.PlatformType("WINDOWS"),
+		MaxConcurrentSessions:          ptr.Int32(1),
+		UsbDeviceFilterStrings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionScriptS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		MaxSessionsPerInstance: ptr.Int32(1),
+		RootVolumeConfig: &types.VolumeConfig{
+			VolumeSizeInGb: ptr.Int32(1),
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1030,56 @@ func TestCheckResponseSnapshot_CreateImageBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImageBuilder(context.Background(), &CreateImageBuilderInput{})
+	got, err := svc.CreateImageBuilder(context.Background(), &CreateImageBuilderInput{
+		Name:         ptr.String("__Name__"),
+		ImageName:    ptr.String("__ImageName__"),
+		ImageArn:     ptr.String("__ImageArn__"),
+		InstanceType: ptr.String("__InstanceType__"),
+		Description:  ptr.String("__Description__"),
+		DisplayName:  ptr.String("__DisplayName__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IamRoleArn:                  ptr.String("__IamRoleArn__"),
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		DomainJoinInfo: &types.DomainJoinInfo{
+			DirectoryName:                       ptr.String("__DirectoryName__"),
+			OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+		},
+		AppstreamAgentVersion: ptr.String("__AppstreamAgentVersion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		RootVolumeConfig: &types.VolumeConfig{
+			VolumeSizeInGb: ptr.Int32(1),
+		},
+		SoftwaresToInstall: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SoftwaresToUninstall: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +1101,10 @@ func TestCheckResponseSnapshot_CreateImageBuilderStreamingURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImageBuilderStreamingURL(context.Background(), &CreateImageBuilderStreamingURLInput{})
+	got, err := svc.CreateImageBuilderStreamingURL(context.Background(), &CreateImageBuilderStreamingURLInput{
+		Name:     ptr.String("__Name__"),
+		Validity: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -945,7 +1226,42 @@ func TestCheckResponseSnapshot_CreateImportedImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImportedImage(context.Background(), &CreateImportedImageInput{})
+	got, err := svc.CreateImportedImage(context.Background(), &CreateImportedImageInput{
+		Name:             ptr.String("__Name__"),
+		SourceAmiId:      ptr.String("__SourceAmiId__"),
+		WorkspaceImageId: ptr.String("__WorkspaceImageId__"),
+		IamRoleArn:       ptr.String("__IamRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RuntimeValidationConfig: &types.RuntimeValidationConfig{
+			IntendedInstanceType: ptr.String("__IntendedInstanceType__"),
+		},
+		AgentSoftwareVersion: types.AgentSoftwareVersion("CURRENT_LATEST"),
+		AppCatalogConfig: []types.ApplicationConfig{
+			{
+				Name:                 ptr.String("__Name__"),
+				DisplayName:          ptr.String("__DisplayName__"),
+				AbsoluteAppPath:      ptr.String("__AbsoluteAppPath__"),
+				AbsoluteIconPath:     ptr.String("__AbsoluteIconPath__"),
+				AbsoluteManifestPath: ptr.String("__AbsoluteManifestPath__"),
+				WorkingDirectory:     ptr.String("__WorkingDirectory__"),
+				LaunchParameters:     ptr.String("__LaunchParameters__"),
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				DisplayName:          ptr.String("__DisplayName__"),
+				AbsoluteAppPath:      ptr.String("__AbsoluteAppPath__"),
+				AbsoluteIconPath:     ptr.String("__AbsoluteIconPath__"),
+				AbsoluteManifestPath: ptr.String("__AbsoluteManifestPath__"),
+				WorkingDirectory:     ptr.String("__WorkingDirectory__"),
+				LaunchParameters:     ptr.String("__LaunchParameters__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1074,7 +1390,105 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStack(context.Background(), &CreateStackInput{})
+	got, err := svc.CreateStack(context.Background(), &CreateStackInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		StorageConnectors: []types.StorageConnector{
+			{
+				ConnectorType:      types.StorageConnectorType("HOMEFOLDERS"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainsRequireAdminConsent: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConnectorType:      types.StorageConnectorType("HOMEFOLDERS"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainsRequireAdminConsent: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RedirectURL: ptr.String("__RedirectURL__"),
+		FeedbackURL: ptr.String("__FeedbackURL__"),
+		UserSettings: []types.UserSetting{
+			{
+				Action:        types.Action("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+				Permission:    types.Permission("ENABLED"),
+				MaximumLength: ptr.Int32(1),
+			},
+			{
+				Action:        types.Action("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+				Permission:    types.Permission("ENABLED"),
+				MaximumLength: ptr.Int32(1),
+			},
+		},
+		ApplicationSettings: &types.ApplicationSettings{
+			Enabled:       ptr.Bool(true),
+			SettingsGroup: ptr.String("__SettingsGroup__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		EmbedHostDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StreamingExperienceSettings: &types.StreamingExperienceSettings{
+			PreferredProtocol: types.PreferredProtocol("TCP"),
+		},
+		ContentRedirection: &types.ContentRedirection{
+			HostToClient: &types.UrlRedirectionConfig{
+				Enabled: ptr.Bool(true),
+				AllowedUrls: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeniedUrls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AgentAccessConfig: &types.AgentAccessConfig{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1510,14 @@ func TestCheckResponseSnapshot_CreateStreamingURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamingURL(context.Background(), &CreateStreamingURLInput{})
+	got, err := svc.CreateStreamingURL(context.Background(), &CreateStreamingURLInput{
+		StackName:      ptr.String("__StackName__"),
+		FleetName:      ptr.String("__FleetName__"),
+		UserId:         ptr.String("__UserId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		Validity:       ptr.Int64(1),
+		SessionContext: ptr.String("__SessionContext__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1135,7 +1556,29 @@ func TestCheckResponseSnapshot_CreateThemeForStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateThemeForStack(context.Background(), &CreateThemeForStackInput{})
+	got, err := svc.CreateThemeForStack(context.Background(), &CreateThemeForStackInput{
+		StackName: ptr.String("__StackName__"),
+		FooterLinks: []types.ThemeFooterLink{
+			{
+				DisplayName:   ptr.String("__DisplayName__"),
+				FooterLinkURL: ptr.String("__FooterLinkURL__"),
+			},
+			{
+				DisplayName:   ptr.String("__DisplayName__"),
+				FooterLinkURL: ptr.String("__FooterLinkURL__"),
+			},
+		},
+		TitleText:    ptr.String("__TitleText__"),
+		ThemeStyling: types.ThemeStyling("LIGHT_BLUE"),
+		OrganizationLogoS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		FaviconS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1701,16 @@ func TestCheckResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUpdatedImage(context.Background(), &CreateUpdatedImageInput{})
+	got, err := svc.CreateUpdatedImage(context.Background(), &CreateUpdatedImageInput{
+		ExistingImageName:   ptr.String("__ExistingImageName__"),
+		NewImageName:        ptr.String("__NewImageName__"),
+		NewImageDescription: ptr.String("__NewImageDescription__"),
+		NewImageDisplayName: ptr.String("__NewImageDisplayName__"),
+		NewImageTags: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1299,7 +1751,13 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		UserName:           ptr.String("__UserName__"),
+		MessageAction:      types.MessageAction("SUPPRESS"),
+		FirstName:          ptr.String("__FirstName__"),
+		LastName:           ptr.String("__LastName__"),
+		AuthenticationType: types.AuthenticationType("API"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1318,7 +1776,9 @@ func TestCheckResponseSnapshot_DeleteAppBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppBlock(context.Background(), &DeleteAppBlockInput{})
+	got, err := svc.DeleteAppBlock(context.Background(), &DeleteAppBlockInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1337,7 +1797,9 @@ func TestCheckResponseSnapshot_DeleteAppBlockBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppBlockBuilder(context.Background(), &DeleteAppBlockBuilderInput{})
+	got, err := svc.DeleteAppBlockBuilder(context.Background(), &DeleteAppBlockBuilderInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1356,7 +1818,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1839,9 @@ func TestCheckResponseSnapshot_DeleteDirectoryConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectoryConfig(context.Background(), &DeleteDirectoryConfigInput{})
+	got, err := svc.DeleteDirectoryConfig(context.Background(), &DeleteDirectoryConfigInput{
+		DirectoryName: ptr.String("__DirectoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1394,7 +1860,10 @@ func TestCheckResponseSnapshot_DeleteEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEntitlement(context.Background(), &DeleteEntitlementInput{})
+	got, err := svc.DeleteEntitlement(context.Background(), &DeleteEntitlementInput{
+		Name:      ptr.String("__Name__"),
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1413,7 +1882,9 @@ func TestCheckResponseSnapshot_DeleteFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{})
+	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1535,7 +2006,9 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImage(context.Background(), &DeleteImageInput{})
+	got, err := svc.DeleteImage(context.Background(), &DeleteImageInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1622,7 +2095,9 @@ func TestCheckResponseSnapshot_DeleteImageBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImageBuilder(context.Background(), &DeleteImageBuilderInput{})
+	got, err := svc.DeleteImageBuilder(context.Background(), &DeleteImageBuilderInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1641,7 +2116,10 @@ func TestCheckResponseSnapshot_DeleteImagePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImagePermissions(context.Background(), &DeleteImagePermissionsInput{})
+	got, err := svc.DeleteImagePermissions(context.Background(), &DeleteImagePermissionsInput{
+		Name:            ptr.String("__Name__"),
+		SharedAccountId: ptr.String("__SharedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1660,7 +2138,9 @@ func TestCheckResponseSnapshot_DeleteStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStack(context.Background(), &DeleteStackInput{})
+	got, err := svc.DeleteStack(context.Background(), &DeleteStackInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1679,7 +2159,9 @@ func TestCheckResponseSnapshot_DeleteThemeForStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteThemeForStack(context.Background(), &DeleteThemeForStackInput{})
+	got, err := svc.DeleteThemeForStack(context.Background(), &DeleteThemeForStackInput{
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1717,7 +2199,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		UserName:           ptr.String("__UserName__"),
+		AuthenticationType: types.AuthenticationType("API"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1748,7 +2233,12 @@ func TestCheckResponseSnapshot_DescribeAppBlockBuilderAppBlockAssociations(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppBlockBuilderAppBlockAssociations(context.Background(), &DescribeAppBlockBuilderAppBlockAssociationsInput{})
+	got, err := svc.DescribeAppBlockBuilderAppBlockAssociations(context.Background(), &DescribeAppBlockBuilderAppBlockAssociationsInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1869,7 +2359,14 @@ func TestCheckResponseSnapshot_DescribeAppBlockBuilders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppBlockBuilders(context.Background(), &DescribeAppBlockBuildersInput{})
+	got, err := svc.DescribeAppBlockBuilders(context.Background(), &DescribeAppBlockBuildersInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1974,7 +2471,14 @@ func TestCheckResponseSnapshot_DescribeAppBlocks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppBlocks(context.Background(), &DescribeAppBlocksInput{})
+	got, err := svc.DescribeAppBlocks(context.Background(), &DescribeAppBlocksInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2015,7 +2519,11 @@ func TestCheckResponseSnapshot_DescribeAppLicenseUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppLicenseUsage(context.Background(), &DescribeAppLicenseUsageInput{})
+	got, err := svc.DescribeAppLicenseUsage(context.Background(), &DescribeAppLicenseUsageInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2046,7 +2554,12 @@ func TestCheckResponseSnapshot_DescribeApplicationFleetAssociations(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationFleetAssociations(context.Background(), &DescribeApplicationFleetAssociationsInput{})
+	got, err := svc.DescribeApplicationFleetAssociations(context.Background(), &DescribeApplicationFleetAssociationsInput{
+		FleetName:      ptr.String("__FleetName__"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2125,7 +2638,14 @@ func TestCheckResponseSnapshot_DescribeApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{})
+	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2180,7 +2700,14 @@ func TestCheckResponseSnapshot_DescribeDirectoryConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDirectoryConfigs(context.Background(), &DescribeDirectoryConfigsInput{})
+	got, err := svc.DescribeDirectoryConfigs(context.Background(), &DescribeDirectoryConfigsInput{
+		DirectoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2239,7 +2766,12 @@ func TestCheckResponseSnapshot_DescribeEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntitlements(context.Background(), &DescribeEntitlementsInput{})
+	got, err := svc.DescribeEntitlements(context.Background(), &DescribeEntitlementsInput{
+		Name:       ptr.String("__Name__"),
+		StackName:  ptr.String("__StackName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2402,7 +2934,13 @@ func TestCheckResponseSnapshot_DescribeFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleets(context.Background(), &DescribeFleetsInput{})
+	got, err := svc.DescribeFleets(context.Background(), &DescribeFleetsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2559,7 +3097,14 @@ func TestCheckResponseSnapshot_DescribeImageBuilders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImageBuilders(context.Background(), &DescribeImageBuildersInput{})
+	got, err := svc.DescribeImageBuilders(context.Background(), &DescribeImageBuildersInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2597,7 +3142,15 @@ func TestCheckResponseSnapshot_DescribeImagePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImagePermissions(context.Background(), &DescribeImagePermissionsInput{})
+	got, err := svc.DescribeImagePermissions(context.Background(), &DescribeImagePermissionsInput{
+		Name:       ptr.String("__Name__"),
+		MaxResults: ptr.Int32(1),
+		SharedAwsAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2824,7 +3377,19 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImages(context.Background(), &DescribeImagesInput{})
+	got, err := svc.DescribeImages(context.Background(), &DescribeImagesInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Arns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Type:       types.VisibilityType("PUBLIC"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2889,7 +3454,15 @@ func TestCheckResponseSnapshot_DescribeSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSessions(context.Background(), &DescribeSessionsInput{})
+	got, err := svc.DescribeSessions(context.Background(), &DescribeSessionsInput{
+		StackName:          ptr.String("__StackName__"),
+		FleetName:          ptr.String("__FleetName__"),
+		UserId:             ptr.String("__UserId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		Limit:              ptr.Int32(1),
+		AuthenticationType: types.AuthenticationType("API"),
+		InstanceId:         ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2941,7 +3514,11 @@ func TestCheckResponseSnapshot_DescribeSoftwareAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSoftwareAssociations(context.Background(), &DescribeSoftwareAssociationsInput{})
+	got, err := svc.DescribeSoftwareAssociations(context.Background(), &DescribeSoftwareAssociationsInput{
+		AssociatedResource: ptr.String("__AssociatedResource__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3182,7 +3759,13 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStacks(context.Background(), &DescribeStacksInput{})
+	got, err := svc.DescribeStacks(context.Background(), &DescribeStacksInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3221,7 +3804,9 @@ func TestCheckResponseSnapshot_DescribeThemeForStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeThemeForStack(context.Background(), &DescribeThemeForStackInput{})
+	got, err := svc.DescribeThemeForStack(context.Background(), &DescribeThemeForStackInput{
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3274,7 +3859,10 @@ func TestCheckResponseSnapshot_DescribeUsageReportSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUsageReportSubscriptions(context.Background(), &DescribeUsageReportSubscriptionsInput{})
+	got, err := svc.DescribeUsageReportSubscriptions(context.Background(), &DescribeUsageReportSubscriptionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3309,7 +3897,13 @@ func TestCheckResponseSnapshot_DescribeUserStackAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUserStackAssociations(context.Background(), &DescribeUserStackAssociationsInput{})
+	got, err := svc.DescribeUserStackAssociations(context.Background(), &DescribeUserStackAssociationsInput{
+		StackName:          ptr.String("__StackName__"),
+		UserName:           ptr.String("__UserName__"),
+		AuthenticationType: types.AuthenticationType("API"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3352,7 +3946,11 @@ func TestCheckResponseSnapshot_DescribeUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{})
+	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{
+		AuthenticationType: types.AuthenticationType("API"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3371,7 +3969,10 @@ func TestCheckResponseSnapshot_DisableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableUser(context.Background(), &DisableUserInput{})
+	got, err := svc.DisableUser(context.Background(), &DisableUserInput{
+		UserName:           ptr.String("__UserName__"),
+		AuthenticationType: types.AuthenticationType("API"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3390,7 +3991,10 @@ func TestCheckResponseSnapshot_DisassociateAppBlockBuilderAppBlock(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAppBlockBuilderAppBlock(context.Background(), &DisassociateAppBlockBuilderAppBlockInput{})
+	got, err := svc.DisassociateAppBlockBuilderAppBlock(context.Background(), &DisassociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3409,7 +4013,10 @@ func TestCheckResponseSnapshot_DisassociateApplicationFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApplicationFleet(context.Background(), &DisassociateApplicationFleetInput{})
+	got, err := svc.DisassociateApplicationFleet(context.Background(), &DisassociateApplicationFleetInput{
+		FleetName:      ptr.String("__FleetName__"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3428,7 +4035,11 @@ func TestCheckResponseSnapshot_DisassociateApplicationFromEntitlement(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateApplicationFromEntitlement(context.Background(), &DisassociateApplicationFromEntitlementInput{})
+	got, err := svc.DisassociateApplicationFromEntitlement(context.Background(), &DisassociateApplicationFromEntitlementInput{
+		StackName:             ptr.String("__StackName__"),
+		EntitlementName:       ptr.String("__EntitlementName__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3447,7 +4058,10 @@ func TestCheckResponseSnapshot_DisassociateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFleet(context.Background(), &DisassociateFleetInput{})
+	got, err := svc.DisassociateFleet(context.Background(), &DisassociateFleetInput{
+		FleetName: ptr.String("__FleetName__"),
+		StackName: ptr.String("__StackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3466,7 +4080,13 @@ func TestCheckResponseSnapshot_DisassociateSoftwareFromImageBuilder(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSoftwareFromImageBuilder(context.Background(), &DisassociateSoftwareFromImageBuilderInput{})
+	got, err := svc.DisassociateSoftwareFromImageBuilder(context.Background(), &DisassociateSoftwareFromImageBuilderInput{
+		ImageBuilderName: ptr.String("__ImageBuilderName__"),
+		SoftwareNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3485,7 +4105,9 @@ func TestCheckResponseSnapshot_DrainSessionInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DrainSessionInstance(context.Background(), &DrainSessionInstanceInput{})
+	got, err := svc.DrainSessionInstance(context.Background(), &DrainSessionInstanceInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3504,7 +4126,10 @@ func TestCheckResponseSnapshot_EnableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableUser(context.Background(), &EnableUserInput{})
+	got, err := svc.EnableUser(context.Background(), &EnableUserInput{
+		UserName:           ptr.String("__UserName__"),
+		AuthenticationType: types.AuthenticationType("API"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3523,7 +4148,9 @@ func TestCheckResponseSnapshot_ExpireSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExpireSession(context.Background(), &ExpireSessionInput{})
+	got, err := svc.ExpireSession(context.Background(), &ExpireSessionInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3565,7 +4192,9 @@ func TestCheckResponseSnapshot_GetExportImageTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExportImageTask(context.Background(), &GetExportImageTaskInput{})
+	got, err := svc.GetExportImageTask(context.Background(), &GetExportImageTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3590,7 +4219,10 @@ func TestCheckResponseSnapshot_ListAssociatedFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedFleets(context.Background(), &ListAssociatedFleetsInput{})
+	got, err := svc.ListAssociatedFleets(context.Background(), &ListAssociatedFleetsInput{
+		StackName: ptr.String("__StackName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3615,7 +4247,10 @@ func TestCheckResponseSnapshot_ListAssociatedStacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedStacks(context.Background(), &ListAssociatedStacksInput{})
+	got, err := svc.ListAssociatedStacks(context.Background(), &ListAssociatedStacksInput{
+		FleetName: ptr.String("__FleetName__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3644,7 +4279,12 @@ func TestCheckResponseSnapshot_ListEntitledApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntitledApplications(context.Background(), &ListEntitledApplicationsInput{})
+	got, err := svc.ListEntitledApplications(context.Background(), &ListEntitledApplicationsInput{
+		StackName:       ptr.String("__StackName__"),
+		EntitlementName: ptr.String("__EntitlementName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3711,7 +4351,26 @@ func TestCheckResponseSnapshot_ListExportImageTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExportImageTasks(context.Background(), &ListExportImageTasksInput{})
+	got, err := svc.ListExportImageTasks(context.Background(), &ListExportImageTasksInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3734,7 +4393,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3803,7 +4464,9 @@ func TestCheckResponseSnapshot_StartAppBlockBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAppBlockBuilder(context.Background(), &StartAppBlockBuilderInput{})
+	got, err := svc.StartAppBlockBuilder(context.Background(), &StartAppBlockBuilderInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3822,7 +4485,9 @@ func TestCheckResponseSnapshot_StartFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFleet(context.Background(), &StartFleetInput{})
+	got, err := svc.StartFleet(context.Background(), &StartFleetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3909,7 +4574,10 @@ func TestCheckResponseSnapshot_StartImageBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImageBuilder(context.Background(), &StartImageBuilderInput{})
+	got, err := svc.StartImageBuilder(context.Background(), &StartImageBuilderInput{
+		Name:                  ptr.String("__Name__"),
+		AppstreamAgentVersion: ptr.String("__AppstreamAgentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3928,7 +4596,10 @@ func TestCheckResponseSnapshot_StartSoftwareDeploymentToImageBuilder(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSoftwareDeploymentToImageBuilder(context.Background(), &StartSoftwareDeploymentToImageBuilderInput{})
+	got, err := svc.StartSoftwareDeploymentToImageBuilder(context.Background(), &StartSoftwareDeploymentToImageBuilderInput{
+		ImageBuilderName:       ptr.String("__ImageBuilderName__"),
+		RetryFailedDeployments: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3997,7 +4668,9 @@ func TestCheckResponseSnapshot_StopAppBlockBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAppBlockBuilder(context.Background(), &StopAppBlockBuilderInput{})
+	got, err := svc.StopAppBlockBuilder(context.Background(), &StopAppBlockBuilderInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4016,7 +4689,9 @@ func TestCheckResponseSnapshot_StopFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopFleet(context.Background(), &StopFleetInput{})
+	got, err := svc.StopFleet(context.Background(), &StopFleetInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4103,7 +4778,9 @@ func TestCheckResponseSnapshot_StopImageBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopImageBuilder(context.Background(), &StopImageBuilderInput{})
+	got, err := svc.StopImageBuilder(context.Background(), &StopImageBuilderInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4122,7 +4799,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4141,7 +4823,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4210,7 +4898,40 @@ func TestCheckResponseSnapshot_UpdateAppBlockBuilder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppBlockBuilder(context.Background(), &UpdateAppBlockBuilderInput{})
+	got, err := svc.UpdateAppBlockBuilder(context.Background(), &UpdateAppBlockBuilderInput{
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		DisplayName:  ptr.String("__DisplayName__"),
+		Platform:     types.PlatformType("WINDOWS"),
+		InstanceType: ptr.String("__InstanceType__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		IamRoleArn:                  ptr.String("__IamRoleArn__"),
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		AttributesToDelete: []types.AppBlockBuilderAttribute{
+			types.AppBlockBuilderAttribute("IAM_ROLE_ARN"),
+			types.AppBlockBuilderAttribute("IAM_ROLE_ARN"),
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4258,7 +4979,23 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		IconS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		LaunchPath:       ptr.String("__LaunchPath__"),
+		WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		LaunchParameters: ptr.String("__LaunchParameters__"),
+		AppBlockArn:      ptr.String("__AppBlockArn__"),
+		AttributesToDelete: []types.ApplicationAttribute{
+			types.ApplicationAttribute("LAUNCH_PARAMETERS"),
+			types.ApplicationAttribute("LAUNCH_PARAMETERS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4294,7 +5031,21 @@ func TestCheckResponseSnapshot_UpdateDirectoryConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDirectoryConfig(context.Background(), &UpdateDirectoryConfigInput{})
+	got, err := svc.UpdateDirectoryConfig(context.Background(), &UpdateDirectoryConfigInput{
+		DirectoryName: ptr.String("__DirectoryName__"),
+		OrganizationalUnitDistinguishedNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServiceAccountCredentials: &types.ServiceAccountCredentials{
+			AccountName:     ptr.String("__AccountName__"),
+			AccountPassword: ptr.String("__AccountPassword__"),
+		},
+		CertificateBasedAuthProperties: &types.CertificateBasedAuthProperties{
+			Status:                  types.CertificateBasedAuthStatus("DISABLED"),
+			CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4332,7 +5083,22 @@ func TestCheckResponseSnapshot_UpdateEntitlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEntitlement(context.Background(), &UpdateEntitlementInput{})
+	got, err := svc.UpdateEntitlement(context.Background(), &UpdateEntitlementInput{
+		Name:          ptr.String("__Name__"),
+		StackName:     ptr.String("__StackName__"),
+		Description:   ptr.String("__Description__"),
+		AppVisibility: types.AppVisibility("ALL"),
+		Attributes: []types.EntitlementAttribute{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4422,7 +5188,58 @@ func TestCheckResponseSnapshot_UpdateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{})
+	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{
+		ImageName:    ptr.String("__ImageName__"),
+		ImageArn:     ptr.String("__ImageArn__"),
+		Name:         ptr.String("__Name__"),
+		InstanceType: ptr.String("__InstanceType__"),
+		ComputeCapacity: &types.ComputeCapacity{
+			DesiredInstances: ptr.Int32(1),
+			DesiredSessions:  ptr.Int32(1),
+		},
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxUserDurationInSeconds:    ptr.Int32(1),
+		DisconnectTimeoutInSeconds:  ptr.Int32(1),
+		DeleteVpcConfig:             ptr.Bool(true),
+		Description:                 ptr.String("__Description__"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		DomainJoinInfo: &types.DomainJoinInfo{
+			DirectoryName:                       ptr.String("__DirectoryName__"),
+			OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+		},
+		IdleDisconnectTimeoutInSeconds: ptr.Int32(1),
+		AttributesToDelete: []types.FleetAttribute{
+			types.FleetAttribute("VPC_CONFIGURATION"),
+			types.FleetAttribute("VPC_CONFIGURATION"),
+		},
+		IamRoleArn:            ptr.String("__IamRoleArn__"),
+		StreamView:            types.StreamView("APP"),
+		Platform:              types.PlatformType("WINDOWS"),
+		MaxConcurrentSessions: ptr.Int32(1),
+		UsbDeviceFilterStrings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionScriptS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		MaxSessionsPerInstance: ptr.Int32(1),
+		RootVolumeConfig: &types.VolumeConfig{
+			VolumeSizeInGb: ptr.Int32(1),
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4441,7 +5258,14 @@ func TestCheckResponseSnapshot_UpdateImagePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateImagePermissions(context.Background(), &UpdateImagePermissionsInput{})
+	got, err := svc.UpdateImagePermissions(context.Background(), &UpdateImagePermissionsInput{
+		Name:            ptr.String("__Name__"),
+		SharedAccountId: ptr.String("__SharedAccountId__"),
+		ImagePermissions: &types.ImagePermissions{
+			AllowFleet:        ptr.Bool(true),
+			AllowImageBuilder: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4570,7 +5394,107 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStack(context.Background(), &UpdateStackInput{})
+	got, err := svc.UpdateStack(context.Background(), &UpdateStackInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		StorageConnectors: []types.StorageConnector{
+			{
+				ConnectorType:      types.StorageConnectorType("HOMEFOLDERS"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainsRequireAdminConsent: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConnectorType:      types.StorageConnectorType("HOMEFOLDERS"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainsRequireAdminConsent: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DeleteStorageConnectors: ptr.Bool(true),
+		RedirectURL:             ptr.String("__RedirectURL__"),
+		FeedbackURL:             ptr.String("__FeedbackURL__"),
+		AttributesToDelete: []types.StackAttribute{
+			types.StackAttribute("STORAGE_CONNECTORS"),
+			types.StackAttribute("STORAGE_CONNECTORS"),
+		},
+		UserSettings: []types.UserSetting{
+			{
+				Action:        types.Action("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+				Permission:    types.Permission("ENABLED"),
+				MaximumLength: ptr.Int32(1),
+			},
+			{
+				Action:        types.Action("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+				Permission:    types.Permission("ENABLED"),
+				MaximumLength: ptr.Int32(1),
+			},
+		},
+		ApplicationSettings: &types.ApplicationSettings{
+			Enabled:       ptr.Bool(true),
+			SettingsGroup: ptr.String("__SettingsGroup__"),
+		},
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		EmbedHostDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StreamingExperienceSettings: &types.StreamingExperienceSettings{
+			PreferredProtocol: types.PreferredProtocol("TCP"),
+		},
+		ContentRedirection: &types.ContentRedirection{
+			HostToClient: &types.UrlRedirectionConfig{
+				Enabled: ptr.Bool(true),
+				AllowedUrls: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeniedUrls: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		AgentAccessConfig: &types.AgentAccessConfigForUpdate{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4609,7 +5533,34 @@ func TestCheckResponseSnapshot_UpdateThemeForStack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThemeForStack(context.Background(), &UpdateThemeForStackInput{})
+	got, err := svc.UpdateThemeForStack(context.Background(), &UpdateThemeForStackInput{
+		StackName: ptr.String("__StackName__"),
+		FooterLinks: []types.ThemeFooterLink{
+			{
+				DisplayName:   ptr.String("__DisplayName__"),
+				FooterLinkURL: ptr.String("__FooterLinkURL__"),
+			},
+			{
+				DisplayName:   ptr.String("__DisplayName__"),
+				FooterLinkURL: ptr.String("__FooterLinkURL__"),
+			},
+		},
+		TitleText:    ptr.String("__TitleText__"),
+		ThemeStyling: types.ThemeStyling("LIGHT_BLUE"),
+		OrganizationLogoS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		FaviconS3Location: &types.S3Location{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Key:    ptr.String("__S3Key__"),
+		},
+		State: types.ThemeState("ENABLED"),
+		AttributesToDelete: []types.ThemeAttribute{
+			types.ThemeAttribute("FOOTER_LINKS"),
+			types.ThemeAttribute("FOOTER_LINKS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4630,7 +5581,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4655,7 +5609,42 @@ func TestCheckResponseSnapshot_Error_DryRunOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateImportedImage(context.Background(), &CreateImportedImageInput{})
+	_, opErr := svc.CreateImportedImage(context.Background(), &CreateImportedImageInput{
+		Name:             ptr.String("__Name__"),
+		SourceAmiId:      ptr.String("__SourceAmiId__"),
+		WorkspaceImageId: ptr.String("__WorkspaceImageId__"),
+		IamRoleArn:       ptr.String("__IamRoleArn__"),
+		Description:      ptr.String("__Description__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RuntimeValidationConfig: &types.RuntimeValidationConfig{
+			IntendedInstanceType: ptr.String("__IntendedInstanceType__"),
+		},
+		AgentSoftwareVersion: types.AgentSoftwareVersion("CURRENT_LATEST"),
+		AppCatalogConfig: []types.ApplicationConfig{
+			{
+				Name:                 ptr.String("__Name__"),
+				DisplayName:          ptr.String("__DisplayName__"),
+				AbsoluteAppPath:      ptr.String("__AbsoluteAppPath__"),
+				AbsoluteIconPath:     ptr.String("__AbsoluteIconPath__"),
+				AbsoluteManifestPath: ptr.String("__AbsoluteManifestPath__"),
+				WorkingDirectory:     ptr.String("__WorkingDirectory__"),
+				LaunchParameters:     ptr.String("__LaunchParameters__"),
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				DisplayName:          ptr.String("__DisplayName__"),
+				AbsoluteAppPath:      ptr.String("__AbsoluteAppPath__"),
+				AbsoluteIconPath:     ptr.String("__AbsoluteIconPath__"),
+				AbsoluteManifestPath: ptr.String("__AbsoluteManifestPath__"),
+				WorkingDirectory:     ptr.String("__WorkingDirectory__"),
+				LaunchParameters:     ptr.String("__LaunchParameters__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4680,7 +5669,22 @@ func TestCheckResponseSnapshot_Error_EntitlementAlreadyExistsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{})
+	_, opErr := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{
+		Name:          ptr.String("__Name__"),
+		StackName:     ptr.String("__StackName__"),
+		Description:   ptr.String("__Description__"),
+		AppVisibility: types.AppVisibility("ALL"),
+		Attributes: []types.EntitlementAttribute{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4705,7 +5709,11 @@ func TestCheckResponseSnapshot_Error_EntitlementNotFoundException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateApplicationToEntitlement(context.Background(), &AssociateApplicationToEntitlementInput{})
+	_, opErr := svc.AssociateApplicationToEntitlement(context.Background(), &AssociateApplicationToEntitlementInput{
+		StackName:             ptr.String("__StackName__"),
+		EntitlementName:       ptr.String("__EntitlementName__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4730,7 +5738,10 @@ func TestCheckResponseSnapshot_Error_IncompatibleImageException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFleet(context.Background(), &AssociateFleetInput{})
+	_, opErr := svc.AssociateFleet(context.Background(), &AssociateFleetInput{
+		FleetName: ptr.String("__FleetName__"),
+		StackName: ptr.String("__StackName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4755,7 +5766,10 @@ func TestCheckResponseSnapshot_Error_InvalidAccountStatusException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFleet(context.Background(), &AssociateFleetInput{})
+	_, opErr := svc.AssociateFleet(context.Background(), &AssociateFleetInput{
+		FleetName: ptr.String("__FleetName__"),
+		StackName: ptr.String("__StackName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4780,7 +5794,10 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4805,7 +5822,39 @@ func TestCheckResponseSnapshot_Error_InvalidRoleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{})
+	_, opErr := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Platform:     types.AppBlockBuilderPlatformType("WINDOWS_SERVER_2019"),
+		InstanceType: ptr.String("__InstanceType__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		IamRoleArn:                  ptr.String("__IamRoleArn__"),
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4830,7 +5879,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4855,7 +5907,10 @@ func TestCheckResponseSnapshot_Error_OperationNotPermittedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4880,7 +5935,39 @@ func TestCheckResponseSnapshot_Error_RequestLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{})
+	_, opErr := svc.CreateAppBlockBuilder(context.Background(), &CreateAppBlockBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Platform:     types.AppBlockBuilderPlatformType("WINDOWS_SERVER_2019"),
+		InstanceType: ptr.String("__InstanceType__"),
+		VpcConfig: &types.VpcConfig{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EnableDefaultInternetAccess: ptr.Bool(true),
+		IamRoleArn:                  ptr.String("__IamRoleArn__"),
+		AccessEndpoints: []types.AccessEndpoint{
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+			{
+				EndpointType: types.AccessEndpointType("STREAMING"),
+				VpceId:       ptr.String("__VpceId__"),
+			},
+		},
+		DisableIMDSV1: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4905,7 +5992,12 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImage(context.Background(), &CopyImageInput{})
+	_, opErr := svc.CopyImage(context.Background(), &CopyImageInput{
+		SourceImageName:             ptr.String("__SourceImageName__"),
+		DestinationImageName:        ptr.String("__DestinationImageName__"),
+		DestinationRegion:           ptr.String("__DestinationRegion__"),
+		DestinationImageDescription: ptr.String("__DestinationImageDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4930,7 +6022,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAppBlock(context.Background(), &DeleteAppBlockInput{})
+	_, opErr := svc.DeleteAppBlock(context.Background(), &DeleteAppBlockInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4955,7 +6049,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotAvailableException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImage(context.Background(), &CopyImageInput{})
+	_, opErr := svc.CopyImage(context.Background(), &CopyImageInput{
+		SourceImageName:             ptr.String("__SourceImageName__"),
+		DestinationImageName:        ptr.String("__DestinationImageName__"),
+		DestinationRegion:           ptr.String("__DestinationRegion__"),
+		DestinationImageDescription: ptr.String("__DestinationImageDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4980,7 +6079,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{})
+	_, opErr := svc.AssociateAppBlockBuilderAppBlock(context.Background(), &AssociateAppBlockBuilderAppBlockInput{
+		AppBlockArn:         ptr.String("__AppBlockArn__"),
+		AppBlockBuilderName: ptr.String("__AppBlockBuilderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

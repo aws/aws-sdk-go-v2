@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Rules":[{"Description":"__Description__","Identifier":"__Identifier__","LockState":"locked","RetentionPeriod":{"RetentionPeriodUnit":"DAYS","RetentionPeriodValue":1},"RuleArn":"__RuleArn__"},{"Description":"__Description__","Identifier":"__Identifier__","LockState":"locked","RetentionPeriod":{"RetentionPeriodUnit":"DAYS","RetentionPeriodValue":1},"RuleArn":"__RuleArn__"}]}

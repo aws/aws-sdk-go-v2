@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_DeleteHumanLoop(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{})
+	got, err := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -147,7 +149,9 @@ func TestCheckResponseSnapshot_DescribeHumanLoop(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHumanLoop(context.Background(), &DescribeHumanLoopInput{})
+	got, err := svc.DescribeHumanLoop(context.Background(), &DescribeHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +188,14 @@ func TestCheckResponseSnapshot_ListHumanLoops(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHumanLoops(context.Background(), &ListHumanLoopsInput{})
+	got, err := svc.ListHumanLoops(context.Background(), &ListHumanLoopsInput{
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FlowDefinitionArn:  ptr.String("__FlowDefinitionArn__"),
+		SortOrder:          types.SortOrder("Ascending"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +216,19 @@ func TestCheckResponseSnapshot_StartHumanLoop(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{})
+	got, err := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{
+		HumanLoopName:     ptr.String("__HumanLoopName__"),
+		FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+		HumanLoopInput: &types.HumanLoopInput{
+			InputContent: ptr.String("__InputContent__"),
+		},
+		DataAttributes: &types.HumanLoopDataAttributes{
+			ContentClassifiers: []types.ContentClassifier{
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +247,9 @@ func TestCheckResponseSnapshot_StopHumanLoop(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopHumanLoop(context.Background(), &StopHumanLoopInput{})
+	got, err := svc.StopHumanLoop(context.Background(), &StopHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +270,19 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{})
+	_, opErr := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{
+		HumanLoopName:     ptr.String("__HumanLoopName__"),
+		FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+		HumanLoopInput: &types.HumanLoopInput{
+			InputContent: ptr.String("__InputContent__"),
+		},
+		DataAttributes: &types.HumanLoopDataAttributes{
+			ContentClassifiers: []types.ContentClassifier{
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -270,7 +307,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{})
+	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -295,7 +334,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{})
+	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -320,7 +361,19 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{})
+	_, opErr := svc.StartHumanLoop(context.Background(), &StartHumanLoopInput{
+		HumanLoopName:     ptr.String("__HumanLoopName__"),
+		FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+		HumanLoopInput: &types.HumanLoopInput{
+			InputContent: ptr.String("__InputContent__"),
+		},
+		DataAttributes: &types.HumanLoopDataAttributes{
+			ContentClassifiers: []types.ContentClassifier{
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -345,7 +398,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{})
+	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -370,7 +425,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{})
+	_, opErr := svc.DeleteHumanLoop(context.Background(), &DeleteHumanLoopInput{
+		HumanLoopName: ptr.String("__HumanLoopName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -149,7 +149,38 @@ func TestCheckResponseSnapshot_CreateIdentityPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	got, err := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +210,12 @@ func TestCheckResponseSnapshot_DeleteIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentities(context.Background(), &DeleteIdentitiesInput{})
+	got, err := svc.DeleteIdentities(context.Background(), &DeleteIdentitiesInput{
+		IdentityIdsToDelete: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +234,9 @@ func TestCheckResponseSnapshot_DeleteIdentityPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityPool(context.Background(), &DeleteIdentityPoolInput{})
+	got, err := svc.DeleteIdentityPool(context.Background(), &DeleteIdentityPoolInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +263,9 @@ func TestCheckResponseSnapshot_DescribeIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentity(context.Background(), &DescribeIdentityInput{})
+	got, err := svc.DescribeIdentity(context.Background(), &DescribeIdentityInput{
+		IdentityId: ptr.String("__IdentityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +316,9 @@ func TestCheckResponseSnapshot_DescribeIdentityPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityPool(context.Background(), &DescribeIdentityPoolInput{})
+	got, err := svc.DescribeIdentityPool(context.Background(), &DescribeIdentityPoolInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +345,13 @@ func TestCheckResponseSnapshot_GetCredentialsForIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{})
+	got, err := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{
+		IdentityId: ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		CustomRoleArn: ptr.String("__CustomRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +372,13 @@ func TestCheckResponseSnapshot_GetId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetId(context.Background(), &GetIdInput{})
+	got, err := svc.GetId(context.Background(), &GetIdInput{
+		AccountId:      ptr.String("__AccountId__"),
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +424,9 @@ func TestCheckResponseSnapshot_GetIdentityPoolRoles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityPoolRoles(context.Background(), &GetIdentityPoolRolesInput{})
+	got, err := svc.GetIdentityPoolRoles(context.Background(), &GetIdentityPoolRolesInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +448,12 @@ func TestCheckResponseSnapshot_GetOpenIdToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOpenIdToken(context.Background(), &GetOpenIdTokenInput{})
+	got, err := svc.GetOpenIdToken(context.Background(), &GetOpenIdTokenInput{
+		IdentityId: ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +475,17 @@ func TestCheckResponseSnapshot_GetOpenIdTokenForDeveloperIdentity(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOpenIdTokenForDeveloperIdentity(context.Background(), &GetOpenIdTokenForDeveloperIdentityInput{})
+	got, err := svc.GetOpenIdTokenForDeveloperIdentity(context.Background(), &GetOpenIdTokenForDeveloperIdentityInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		PrincipalTags: map[string]string{
+			"key0": "__Value__",
+		},
+		TokenDuration: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +511,10 @@ func TestCheckResponseSnapshot_GetPrincipalTagAttributeMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrincipalTagAttributeMap(context.Background(), &GetPrincipalTagAttributeMapInput{})
+	got, err := svc.GetPrincipalTagAttributeMap(context.Background(), &GetPrincipalTagAttributeMapInput{
+		IdentityPoolId:       ptr.String("__IdentityPoolId__"),
+		IdentityProviderName: ptr.String("__IdentityProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -482,7 +556,12 @@ func TestCheckResponseSnapshot_ListIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentities(context.Background(), &ListIdentitiesInput{})
+	got, err := svc.ListIdentities(context.Background(), &ListIdentitiesInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		HideDisabled:   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +592,10 @@ func TestCheckResponseSnapshot_ListIdentityPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityPools(context.Background(), &ListIdentityPoolsInput{})
+	got, err := svc.ListIdentityPools(context.Background(), &ListIdentityPoolsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -536,7 +618,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +646,13 @@ func TestCheckResponseSnapshot_LookupDeveloperIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LookupDeveloperIdentity(context.Background(), &LookupDeveloperIdentityInput{})
+	got, err := svc.LookupDeveloperIdentity(context.Background(), &LookupDeveloperIdentityInput{
+		IdentityPoolId:          ptr.String("__IdentityPoolId__"),
+		IdentityId:              ptr.String("__IdentityId__"),
+		DeveloperUserIdentifier: ptr.String("__DeveloperUserIdentifier__"),
+		MaxResults:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +673,12 @@ func TestCheckResponseSnapshot_MergeDeveloperIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeDeveloperIdentities(context.Background(), &MergeDeveloperIdentitiesInput{})
+	got, err := svc.MergeDeveloperIdentities(context.Background(), &MergeDeveloperIdentitiesInput{
+		SourceUserIdentifier:      ptr.String("__SourceUserIdentifier__"),
+		DestinationUserIdentifier: ptr.String("__DestinationUserIdentifier__"),
+		DeveloperProviderName:     ptr.String("__DeveloperProviderName__"),
+		IdentityPoolId:            ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +697,34 @@ func TestCheckResponseSnapshot_SetIdentityPoolRoles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityPoolRoles(context.Background(), &SetIdentityPoolRolesInput{})
+	got, err := svc.SetIdentityPoolRoles(context.Background(), &SetIdentityPoolRolesInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		Roles: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleMappings: map[string]types.RoleMapping{
+			"key0": {
+				Type:                    types.RoleMappingType("Token"),
+				AmbiguousRoleResolution: types.AmbiguousRoleResolutionType("AuthenticatedRole"),
+				RulesConfiguration: &types.RulesConfigurationType{
+					Rules: []types.MappingRule{
+						{
+							Claim:     ptr.String("__Claim__"),
+							MatchType: types.MappingRuleMatchType("Equals"),
+							Value:     ptr.String("__Value__"),
+							RoleARN:   ptr.String("__RoleARN__"),
+						},
+						{
+							Claim:     ptr.String("__Claim__"),
+							MatchType: types.MappingRuleMatchType("Equals"),
+							Value:     ptr.String("__Value__"),
+							RoleARN:   ptr.String("__RoleARN__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +750,14 @@ func TestCheckResponseSnapshot_SetPrincipalTagAttributeMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetPrincipalTagAttributeMap(context.Background(), &SetPrincipalTagAttributeMapInput{})
+	got, err := svc.SetPrincipalTagAttributeMap(context.Background(), &SetPrincipalTagAttributeMapInput{
+		IdentityPoolId:       ptr.String("__IdentityPoolId__"),
+		IdentityProviderName: ptr.String("__IdentityProviderName__"),
+		UseDefaults:          ptr.Bool(true),
+		PrincipalTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +776,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -666,7 +800,12 @@ func TestCheckResponseSnapshot_UnlinkDeveloperIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnlinkDeveloperIdentity(context.Background(), &UnlinkDeveloperIdentityInput{})
+	got, err := svc.UnlinkDeveloperIdentity(context.Background(), &UnlinkDeveloperIdentityInput{
+		IdentityId:              ptr.String("__IdentityId__"),
+		IdentityPoolId:          ptr.String("__IdentityPoolId__"),
+		DeveloperProviderName:   ptr.String("__DeveloperProviderName__"),
+		DeveloperUserIdentifier: ptr.String("__DeveloperUserIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +824,16 @@ func TestCheckResponseSnapshot_UnlinkIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnlinkIdentity(context.Background(), &UnlinkIdentityInput{})
+	got, err := svc.UnlinkIdentity(context.Background(), &UnlinkIdentityInput{
+		IdentityId: ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		LoginsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +852,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +909,39 @@ func TestCheckResponseSnapshot_UpdateIdentityPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdentityPool(context.Background(), &UpdateIdentityPoolInput{})
+	got, err := svc.UpdateIdentityPool(context.Background(), &UpdateIdentityPoolInput{
+		IdentityPoolId:                 ptr.String("__IdentityPoolId__"),
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -776,7 +962,34 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SetIdentityPoolRoles(context.Background(), &SetIdentityPoolRolesInput{})
+	_, opErr := svc.SetIdentityPoolRoles(context.Background(), &SetIdentityPoolRolesInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		Roles: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleMappings: map[string]types.RoleMapping{
+			"key0": {
+				Type:                    types.RoleMappingType("Token"),
+				AmbiguousRoleResolution: types.AmbiguousRoleResolutionType("AuthenticatedRole"),
+				RulesConfiguration: &types.RulesConfigurationType{
+					Rules: []types.MappingRule{
+						{
+							Claim:     ptr.String("__Claim__"),
+							MatchType: types.MappingRuleMatchType("Equals"),
+							Value:     ptr.String("__Value__"),
+							RoleARN:   ptr.String("__RoleARN__"),
+						},
+						{
+							Claim:     ptr.String("__Claim__"),
+							MatchType: types.MappingRuleMatchType("Equals"),
+							Value:     ptr.String("__Value__"),
+							RoleARN:   ptr.String("__RoleARN__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -801,7 +1014,17 @@ func TestCheckResponseSnapshot_Error_DeveloperUserAlreadyRegisteredException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetOpenIdTokenForDeveloperIdentity(context.Background(), &GetOpenIdTokenForDeveloperIdentityInput{})
+	_, opErr := svc.GetOpenIdTokenForDeveloperIdentity(context.Background(), &GetOpenIdTokenForDeveloperIdentityInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		PrincipalTags: map[string]string{
+			"key0": "__Value__",
+		},
+		TokenDuration: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -826,7 +1049,13 @@ func TestCheckResponseSnapshot_Error_ExternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{})
+	_, opErr := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{
+		IdentityId: ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		CustomRoleArn: ptr.String("__CustomRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -851,7 +1080,38 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -876,7 +1136,13 @@ func TestCheckResponseSnapshot_Error_InvalidIdentityPoolConfigurationException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{})
+	_, opErr := svc.GetCredentialsForIdentity(context.Background(), &GetCredentialsForIdentityInput{
+		IdentityId: ptr.String("__IdentityId__"),
+		Logins: map[string]string{
+			"key0": "__Value__",
+		},
+		CustomRoleArn: ptr.String("__CustomRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -901,7 +1167,38 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -926,7 +1223,38 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -951,7 +1279,38 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -976,7 +1335,38 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1001,7 +1391,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteIdentityPool(context.Background(), &DeleteIdentityPoolInput{})
+	_, opErr := svc.DeleteIdentityPool(context.Background(), &DeleteIdentityPoolInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1026,7 +1418,38 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{})
+	_, opErr := svc.CreateIdentityPool(context.Background(), &CreateIdentityPoolInput{
+		IdentityPoolName:               ptr.String("__IdentityPoolName__"),
+		AllowUnauthenticatedIdentities: true,
+		AllowClassicFlow:               ptr.Bool(true),
+		SupportedLoginProviders: map[string]string{
+			"key0": "__Value__",
+		},
+		DeveloperProviderName: ptr.String("__DeveloperProviderName__"),
+		OpenIdConnectProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CognitoIdentityProviders: []types.CognitoIdentityProvider{
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+			{
+				ProviderName:         ptr.String("__ProviderName__"),
+				ClientId:             ptr.String("__ClientId__"),
+				ServerSideTokenCheck: ptr.Bool(true),
+			},
+		},
+		SamlProviderARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdentityPoolTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

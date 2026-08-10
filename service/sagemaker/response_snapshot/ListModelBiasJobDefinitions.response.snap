@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelBiasJobDefinitions
+
+{"JobDefinitionSummaries":[{"CreationTime":946684800,"EndpointName":"__EndpointName__","MonitoringJobDefinitionArn":"__MonitoringJobDefinitionArn__","MonitoringJobDefinitionName":"__MonitoringJobDefinitionName__"},{"CreationTime":946684800,"EndpointName":"__EndpointName__","MonitoringJobDefinitionArn":"__MonitoringJobDefinitionArn__","MonitoringJobDefinitionName":"__MonitoringJobDefinitionName__"}],"NextToken":"__NextToken__"}

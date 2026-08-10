@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","name":"__Name__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","scopeTags":{"key0":"__Value__"},"sourceConfigurations":[{"sourceEnvironment":"NSX","sourceS3Configuration":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"}},{"sourceEnvironment":"NSX","sourceS3Configuration":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"}}],"tags":{"key0":"__Value__"},"targetDeployment":"SINGLE_ACCOUNT","targetNetwork":{"inboundCidr":"__InboundCidr__","inspectionCidr":"__InspectionCidr__","outboundCidr":"__OutboundCidr__","topology":"ISOLATED_VPC"},"targetS3Configuration":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__"},"updatedAt":946684800}

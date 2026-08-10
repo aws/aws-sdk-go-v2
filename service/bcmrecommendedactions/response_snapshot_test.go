@@ -150,7 +150,30 @@ func TestCheckResponseSnapshot_ListRecommendedActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	got, err := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filter: &types.RequestFilter{
+			Actions: []types.ActionFilter{
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +194,30 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filter: &types.RequestFilter{
+			Actions: []types.ActionFilter{
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -196,7 +242,30 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filter: &types.RequestFilter{
+			Actions: []types.ActionFilter{
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -221,7 +290,30 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filter: &types.RequestFilter{
+			Actions: []types.ActionFilter{
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -257,7 +349,30 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{})
+	_, opErr := svc.ListRecommendedActions(context.Background(), &ListRecommendedActionsInput{
+		Filter: &types.RequestFilter{
+			Actions: []types.ActionFilter{
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key:         types.FilterName("FEATURE"),
+					MatchOption: types.MatchOption("EQUALS"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

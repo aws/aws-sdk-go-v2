@@ -7,8 +7,10 @@ package entityresolution
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AddPolicyStatement(t *testing.T) {
 	input := &AddPolicyStatementInput{
@@ -303,7 +327,7 @@ func TestCheckRequestSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -386,7 +410,7 @@ func TestCheckRequestSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -420,7 +444,7 @@ func TestCheckRequestSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -549,7 +573,7 @@ func TestCheckRequestSnapshot_CreateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -1499,7 +1523,7 @@ func TestCheckRequestSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -1579,7 +1603,7 @@ func TestCheckRequestSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1613,7 +1637,7 @@ func TestCheckRequestSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1738,7 +1762,7 @@ func TestCheckRequestSnapshot_UpdateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -1938,7 +1962,7 @@ func TestUpdateRequestSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -2021,7 +2045,7 @@ func TestUpdateRequestSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -2055,7 +2079,7 @@ func TestUpdateRequestSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -2184,7 +2208,7 @@ func TestUpdateRequestSnapshot_CreateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -3134,7 +3158,7 @@ func TestUpdateRequestSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -3214,7 +3238,7 @@ func TestUpdateRequestSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -3248,7 +3272,7 @@ func TestUpdateRequestSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -3373,7 +3397,7 @@ func TestUpdateRequestSnapshot_UpdateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
