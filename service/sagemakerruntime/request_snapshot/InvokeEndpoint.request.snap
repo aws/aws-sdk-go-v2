@@ -6,6 +6,7 @@ X-Amzn-Sagemaker-Custom-Attributes: __CustomAttributes__
 X-Amzn-Sagemaker-Enable-Explanations: __EnableExplanations__
 X-Amzn-Sagemaker-Inference-Component: __InferenceComponentName__
 X-Amzn-Sagemaker-Inference-Id: __InferenceId__
+X-Amzn-Sagemaker-Prefix-Aware-Id: __PrefixAwareId__
 X-Amzn-Sagemaker-Session-Id: __SessionId__
 X-Amzn-Sagemaker-Target-Container-Hostname: __TargetContainerHostname__
 X-Amzn-Sagemaker-Target-Model: __TargetModel__

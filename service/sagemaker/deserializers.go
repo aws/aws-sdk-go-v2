@@ -89686,6 +89686,63 @@ func awsAwsjson11_deserializeDocumentPredefinedMetricSpecification(v **types.Pre
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPrefixAwareRoutingConfig(v **types.PrefixAwareRoutingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrefixAwareRoutingConfig
+	if *v == nil {
+		sv = &types.PrefixAwareRoutingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConcurrencyThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixAwareRoutingConcurrencyThreshold to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConcurrencyThreshold = ptr.Int32(int32(i64))
+			}
+
+		case "PrefixLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixAwareRoutingPrefixLength to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixLength = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPriorityClass(v **types.PriorityClass, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -91395,6 +91452,11 @@ func awsAwsjson11_deserializeDocumentProductionVariantRoutingConfig(v **types.Pr
 
 	for key, value := range shape {
 		switch key {
+		case "PrefixAwareRoutingConfig":
+			if err := awsAwsjson11_deserializeDocumentPrefixAwareRoutingConfig(&sv.PrefixAwareRoutingConfig, value); err != nil {
+				return err
+			}
+
 		case "RoutingStrategy":
 			if value != nil {
 				jtv, ok := value.(string)

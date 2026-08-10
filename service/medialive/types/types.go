@@ -6737,6 +6737,9 @@ type OutputDestinationSettings struct {
 	// username for destination
 	Username *string
 
+	// Specifies the source IP address for outbound multicast packets.
+	VirtualSourceAddress *string
+
 	noSmithyDocumentSerde
 }
 

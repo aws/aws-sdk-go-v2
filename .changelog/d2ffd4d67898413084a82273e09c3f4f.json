@@ -1,0 +1,8 @@
+{
+    "id": "d2ffd4d6-7898-4130-84a8-2273e09c3f4f",
+    "type": "feature",
+    "description": "Added the PrefixAwareId header to InvokeEndpoint and InvokeEndpointWithResponseStream. This optional parameter serves as a routing hint for endpoints configured with prefix-aware routing, differentiating routing decisions for requests that share the same prompt prefix.",
+    "modules": [
+        "service/sagemakerruntime"
+    ]
+}

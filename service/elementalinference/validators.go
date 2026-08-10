@@ -210,6 +210,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchFixtures struct {
+}
+
+func (*validateOpSearchFixtures) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchFixtures) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchFixturesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchFixturesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -330,6 +350,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpSearchFixturesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchFixtures{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -356,6 +380,23 @@ func validateAspectRatio(v *types.AspectRatio) error {
 	}
 	if v.Height == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Height"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClippingConfig(v *types.ClippingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClippingConfig"}
+	if v.DataSourceConfiguration != nil {
+		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
+			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -423,12 +464,32 @@ func validateCroppingConfig(v *types.CroppingConfig) error {
 	}
 }
 
+func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfiguration"}
+	if v.FixtureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputConfig(v types.OutputConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
 	switch uv := v.(type) {
+	case *types.OutputConfigMemberClipping:
+		if err := validateClippingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[clipping]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.OutputConfigMemberCropping:
 		if err := validateCroppingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[cropping]", err.(smithy.InvalidParamsError))
@@ -439,6 +500,41 @@ func validateOutputConfig(v types.OutputConfig) error {
 			invalidParams.AddNested("[subtitling]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilter(v *types.SearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilterList(v []types.SearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilterList"}
+	for i := range v {
+		if err := validateSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -709,6 +805,29 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchFixturesInput(v *SearchFixturesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFixturesInput"}
+	if len(v.Sport) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Sport"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.Filters != nil {
+		if err := validateSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

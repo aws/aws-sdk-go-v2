@@ -1291,6 +1291,7 @@ const (
 	EvaluationFormLanguageCodeJaJp EvaluationFormLanguageCode = "ja-JP"
 	EvaluationFormLanguageCodeKoKr EvaluationFormLanguageCode = "ko-KR"
 	EvaluationFormLanguageCodeZhCn EvaluationFormLanguageCode = "zh-CN"
+	EvaluationFormLanguageCodeMsMy EvaluationFormLanguageCode = "ms-MY"
 )
 
 // Values returns all known values for EvaluationFormLanguageCode. Note that this
@@ -1308,6 +1309,7 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
+		"ms-MY",
 	}
 }
 

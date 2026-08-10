@@ -109,6 +109,15 @@ type InvokeEndpointInput struct {
 	// [Capture Data]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
 	InferenceId *string
 
+	// An optional, stable identifier that serves as a routing hint for prefix-aware
+	// routing. The service routes requests with the same prefix and the same
+	// identifier to the same instance. If requests from different applications might
+	// have the same prompt prefix, set a different identifier for each application to
+	// differentiate their routing decisions.
+	//
+	// Applies only to endpoints configured with a RoutingStrategy of PREFIX_AWARE .
+	PrefixAwareId *string
+
 	// Creates a stateful session or identifies an existing one. You can do one of the
 	// following:
 	//

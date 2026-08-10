@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // The width and height of the output video. Used in SubtitlingConfig to determine
@@ -30,6 +31,29 @@ type ClippingConfig struct {
 	// clipping metadata for this output. The string might identify the sports event in
 	// the source media, for example.
 	CallbackMetadata *string
+
+	// The data source to map onto this clipping output. This parameter is optional.
+	// When you include this parameter, Elemental Inference reads the event data for
+	// the fixture that you specify, and includes that data in the event clipping
+	// metadata for this output.
+	//
+	// If you omit this parameter, Elemental Inference doesn't map a data source onto
+	// this output.
+	DataSourceConfiguration *DataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about one competitor in a fixture. It is used in the
+// FixtureSummary that is in the SearchFixtures response.
+type Competitor struct {
+
+	// Specifies whether this competitor is the home side in the fixture. If true,
+	// this competitor is the home side. If false, this competitor is the away side.
+	IsHome *bool
+
+	// The name of the competitor, as provided by the data source.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -69,6 +93,24 @@ type CroppingConfig struct {
 	// the graphics-compositing templates that Elemental Inference applies to the
 	// cropped video. You can specify from 1 to 4 template groups.
 	TemplateGroups []TemplateGroup
+
+	noSmithyDocumentSerde
+}
+
+// Contains the data source configuration for a clipping output. It identifies the
+// fixture whose event data Elemental Inference maps onto the clipping metadata. It
+// is used in the dataSourceConfiguration property of a ClippingConfig.
+type DataSourceConfiguration struct {
+
+	// The ID of the fixture whose event data you want Elemental Inference to map onto
+	// this clipping output. The fixture should be the sports event in the source media
+	// that the feed is processing.
+	//
+	// To obtain this ID, use the SearchFixtures operation to find the fixture, then
+	// use the fixtureId from the matching FixtureSummary.
+	//
+	// This member is required.
+	FixtureId *string
 
 	noSmithyDocumentSerde
 }
@@ -147,6 +189,48 @@ type FeedSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about one fixture. It is used in the SearchFixtures
+// response.
+//
+// Elemental Inference relays the information in this structure from the data
+// source, so that you can identify the fixture that matches your source media.
+type FixtureSummary struct {
+
+	// An array of the competitors (the teams or individuals) in the fixture.
+	//
+	// This member is required.
+	Competitors []Competitor
+
+	// The ID of the fixture. Specify this ID in the clipping output of a feed, to
+	// identify the fixture whose event data you want Elemental Inference to map onto
+	// the clipping metadata.
+	//
+	// This member is required.
+	FixtureId *string
+
+	// The name of the fixture, as provided by the data source. For example, the names
+	// of the two competing teams.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the fixture in its lifecycle, as provided by the data source. For
+	// example, Scheduled or Completed.
+	//
+	// This member is required.
+	Status *string
+
+	// The group that the fixture belongs to, such as the competition, league, or
+	// tournament. The data source doesn't provide this information for every fixture.
+	FixtureGroup *string
+
+	// The scheduled start time of the fixture, as provided by the data source. The
+	// actual start time might differ.
+	ScheduledStart *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the GetFeed response.
 type GetOutput struct {
@@ -220,6 +304,25 @@ type OutputConfigMemberSubtitling struct {
 }
 
 func (*OutputConfigMemberSubtitling) isOutputConfig() {}
+
+// A filter for a fixture search. It is used in the filters array of a
+// SearchFixtures request.
+type SearchFilter struct {
+
+	// The dimension of the fixture to filter on. Valid values: COMPETITOR.
+	//
+	// This member is required.
+	Name FilterName
+
+	// An array of values to match in the dimension that you specified in name. You
+	// can specify up to 10 values. A fixture appears in the results if it matches at
+	// least one of these values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
 
 // A type of OutputConfig, used when the output in a feed is for the smart
 // subtitling feature. smart subtitling uses automatic speech recognition (ASR) to

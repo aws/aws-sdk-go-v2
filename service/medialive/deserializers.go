@@ -46441,6 +46441,15 @@ func awsRestjson1_deserializeDocumentOutputDestinationSettings(v **types.OutputD
 				sv.Username = ptr.String(jtv)
 			}
 
+		case "virtualSourceAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.VirtualSourceAddress = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

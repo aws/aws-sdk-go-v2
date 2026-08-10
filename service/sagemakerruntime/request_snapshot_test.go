@@ -218,6 +218,7 @@ func TestCheckRequestSnapshot_InvokeEndpoint(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -292,6 +293,7 @@ func TestUpdateRequestSnapshot_InvokeEndpoint(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -59,6 +59,34 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request timed out before the service returned a response. This is a
+// temporary condition. Retry the request. If the problem persists, contact AWS
+// Support.
+type GatewayTimedOutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *GatewayTimedOutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GatewayTimedOutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GatewayTimedOutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "GatewayTimedOutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *GatewayTimedOutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // An internal server error occurred. This is a temporary condition and the
 // request can be retried. If the problem persists, contact AWS Support.
 type InternalServerErrorException struct {
@@ -139,6 +167,33 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The service is temporarily unable to handle the request. Retry the request. If
+// the problem persists, contact AWS Support.
+type ServiceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was denied due to request throttling. Too many requests have been
 // made within a given time period. Reduce the frequency of requests and use

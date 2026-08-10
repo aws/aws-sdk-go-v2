@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -701,6 +702,85 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SearchFixtures(t *testing.T) {
+	want := &SearchFixturesOutput{
+		Fixtures: []types.FixtureSummary{
+			{
+				FixtureId:      ptr.String("__FixtureId__"),
+				Name:           ptr.String("__Name__"),
+				FixtureGroup:   ptr.String("__FixtureGroup__"),
+				ScheduledStart: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         ptr.String("__Status__"),
+				Competitors: []types.Competitor{
+					{
+						Name:   ptr.String("__Name__"),
+						IsHome: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						IsHome: ptr.Bool(true),
+					},
+				},
+			},
+			{
+				FixtureId:      ptr.String("__FixtureId__"),
+				Name:           ptr.String("__Name__"),
+				FixtureGroup:   ptr.String("__FixtureGroup__"),
+				ScheduledStart: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         ptr.String("__Status__"),
+				Competitors: []types.Competitor{
+					{
+						Name:   ptr.String("__Name__"),
+						IsHome: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						IsHome: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchFixtures.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchFixtures(context.Background(), &SearchFixturesInput{
+		Sport:     types.DataSourceSport("basketball"),
+		StartDate: ptr.String("__StartDate__"),
+		EndDate:   ptr.String("__EndDate__"),
+		Filters: []types.SearchFilter{
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchFixtures.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1095,6 +1175,53 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_GatewayTimedOutException(t *testing.T) {
+	want := &types.GatewayTimedOutException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GatewayTimedOutException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.SearchFixtures(context.Background(), &SearchFixturesInput{
+		Sport:     types.DataSourceSport("basketball"),
+		StartDate: ptr.String("__StartDate__"),
+		EndDate:   ptr.String("__EndDate__"),
+		Filters: []types.SearchFilter{
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.GatewayTimedOutException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.GatewayTimedOutException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "GatewayTimedOutException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) {
 	want := &types.InternalServerErrorException{
 		Message: ptr.String("__Message__"),
@@ -1335,6 +1462,53 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.SearchFixtures(context.Background(), &SearchFixturesInput{
+		Sport:     types.DataSourceSport("basketball"),
+		StartDate: ptr.String("__StartDate__"),
+		EndDate:   ptr.String("__EndDate__"),
+		Filters: []types.SearchFilter{
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceUnavailableException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceUnavailableException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceUnavailableException.error", err)
 	}
 }
 

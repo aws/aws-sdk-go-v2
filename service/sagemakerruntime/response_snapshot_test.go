@@ -136,6 +136,7 @@ func TestCheckResponseSnapshot_InvokeEndpoint(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -209,6 +210,7 @@ func TestCheckResponseSnapshot_Error_InternalDependencyException(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -247,6 +249,7 @@ func TestCheckResponseSnapshot_Error_InternalFailure(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -288,6 +291,7 @@ func TestCheckResponseSnapshot_Error_ModelError(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -326,6 +330,7 @@ func TestCheckResponseSnapshot_Error_ModelNotReadyException(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -364,6 +369,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailable(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -402,6 +408,7 @@ func TestCheckResponseSnapshot_Error_ValidationError(t *testing.T) {
 		EnableExplanations:      ptr.String("__EnableExplanations__"),
 		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
 		SessionId:               ptr.String("__SessionId__"),
+		PrefixAwareId:           ptr.String("__PrefixAwareId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

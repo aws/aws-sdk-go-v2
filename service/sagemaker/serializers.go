@@ -34889,6 +34889,23 @@ func awsAwsjson11_serializeDocumentPlacementSpecifications(v []types.PlacementSp
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPrefixAwareRoutingConfig(v *types.PrefixAwareRoutingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConcurrencyThreshold != nil {
+		ok := object.Key("ConcurrencyThreshold")
+		ok.Integer(*v.ConcurrencyThreshold)
+	}
+
+	if v.PrefixLength != nil {
+		ok := object.Key("PrefixLength")
+		ok.Integer(*v.PrefixLength)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPresignedUrlAccessConfig(v *types.PresignedUrlAccessConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -35401,6 +35418,13 @@ func awsAwsjson11_serializeDocumentProductionVariantManagedInstanceScalingScaleI
 func awsAwsjson11_serializeDocumentProductionVariantRoutingConfig(v *types.ProductionVariantRoutingConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.PrefixAwareRoutingConfig != nil {
+		ok := object.Key("PrefixAwareRoutingConfig")
+		if err := awsAwsjson11_serializeDocumentPrefixAwareRoutingConfig(v.PrefixAwareRoutingConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.RoutingStrategy) > 0 {
 		ok := object.Key("RoutingStrategy")

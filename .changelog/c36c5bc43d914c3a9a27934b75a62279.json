@@ -1,0 +1,8 @@
+{
+    "id": "c36c5bc4-3d91-4c3a-9a27-934b75a62279",
+    "type": "feature",
+    "description": "Added support for the SearchFixtures API and DataSourceConfiguration, enabling customers to map fixture event data onto clipping outputs for improved feature accuracy.",
+    "modules": [
+        "service/elementalinference"
+    ]
+}

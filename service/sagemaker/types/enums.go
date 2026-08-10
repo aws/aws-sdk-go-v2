@@ -8615,6 +8615,7 @@ type RoutingStrategy string
 const (
 	RoutingStrategyLeastOutstandingRequests RoutingStrategy = "LEAST_OUTSTANDING_REQUESTS"
 	RoutingStrategyRandom                   RoutingStrategy = "RANDOM"
+	RoutingStrategyPrefixAware              RoutingStrategy = "PREFIX_AWARE"
 )
 
 // Values returns all known values for RoutingStrategy. Note that this can be
@@ -8625,6 +8626,7 @@ func (RoutingStrategy) Values() []RoutingStrategy {
 	return []RoutingStrategy{
 		"LEAST_OUTSTANDING_REQUESTS",
 		"RANDOM",
+		"PREFIX_AWARE",
 	}
 }
 

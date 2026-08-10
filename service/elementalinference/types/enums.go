@@ -2,6 +2,25 @@
 
 package types
 
+type DataSourceSport string
+
+// Enum values for DataSourceSport
+const (
+	DataSourceSportBasketball       DataSourceSport = "basketball"
+	DataSourceSportAmericanFootball DataSourceSport = "american-football"
+)
+
+// Values returns all known values for DataSourceSport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceSport) Values() []DataSourceSport {
+	return []DataSourceSport{
+		"basketball",
+		"american-football",
+	}
+}
+
 type DictionaryLanguage string
 
 // Enum values for DictionaryLanguage
@@ -80,6 +99,23 @@ func (FeedStatus) Values() []FeedStatus {
 		"DELETING",
 		"DELETED",
 		"ARCHIVED",
+	}
+}
+
+type FilterName string
+
+// Enum values for FilterName
+const (
+	FilterNameCompetitor FilterName = "COMPETITOR"
+)
+
+// Values returns all known values for FilterName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterName) Values() []FilterName {
+	return []FilterName{
+		"COMPETITOR",
 	}
 }
 

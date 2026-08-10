@@ -3859,6 +3859,10 @@ func TestCheckResponseSnapshot_CreateEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -3911,6 +3915,10 @@ func TestCheckResponseSnapshot_CreateEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -4059,6 +4067,10 @@ func TestCheckResponseSnapshot_CreateEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -4111,6 +4123,10 @@ func TestCheckResponseSnapshot_CreateEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -15141,6 +15157,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -15226,6 +15246,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -15386,6 +15410,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 					},
 					RoutingConfig: &types.ProductionVariantRoutingConfig{
 						RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+							PrefixLength:         ptr.Int32(1),
+							ConcurrencyThreshold: ptr.Int32(1),
+						},
 					},
 				},
 				{
@@ -15452,6 +15480,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 					},
 					RoutingConfig: &types.ProductionVariantRoutingConfig{
 						RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+							PrefixLength:         ptr.Int32(1),
+							ConcurrencyThreshold: ptr.Int32(1),
+						},
 					},
 				},
 			},
@@ -15521,6 +15553,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 					},
 					RoutingConfig: &types.ProductionVariantRoutingConfig{
 						RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+							PrefixLength:         ptr.Int32(1),
+							ConcurrencyThreshold: ptr.Int32(1),
+						},
 					},
 				},
 				{
@@ -15587,6 +15623,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 					},
 					RoutingConfig: &types.ProductionVariantRoutingConfig{
 						RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+							PrefixLength:         ptr.Int32(1),
+							ConcurrencyThreshold: ptr.Int32(1),
+						},
 					},
 				},
 			},
@@ -15695,6 +15735,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -15780,6 +15824,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -15879,6 +15927,10 @@ func TestCheckResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -15931,6 +15983,10 @@ func TestCheckResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -16070,6 +16126,10 @@ func TestCheckResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -16122,6 +16182,10 @@ func TestCheckResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				},
 				RoutingConfig: &types.ProductionVariantRoutingConfig{
 					RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+					PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+						PrefixLength:         ptr.Int32(1),
+						ConcurrencyThreshold: ptr.Int32(1),
+					},
 				},
 				InferenceAmiVersion: types.ProductionVariantInferenceAmiVersion("al2-ami-sagemaker-inference-gpu-2"),
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
@@ -30306,6 +30370,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -30391,6 +30459,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -30879,6 +30951,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -30964,6 +31040,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -35332,6 +35412,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -35417,6 +35501,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -35905,6 +35993,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),
@@ -35990,6 +36082,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 							},
 							RoutingConfig: &types.ProductionVariantRoutingConfig{
 								RoutingStrategy: types.RoutingStrategy("LEAST_OUTSTANDING_REQUESTS"),
+								PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
+									PrefixLength:         ptr.Int32(1),
+									ConcurrencyThreshold: ptr.Int32(1),
+								},
 							},
 							CapacityReservationConfig: &types.ProductionVariantCapacityReservationSummary{
 								MlReservationArn:              ptr.String("__MlReservationArn__"),

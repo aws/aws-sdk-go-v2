@@ -648,6 +648,53 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SearchFixtures(t *testing.T) {
+	input := &SearchFixturesInput{
+		Sport:     types.DataSourceSport("basketball"),
+		StartDate: ptr.String("__StartDate__"),
+		EndDate:   ptr.String("__EndDate__"),
+		Filters: []types.SearchFilter{
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchFixtures(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchFixtures"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1260,6 +1307,53 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchFixtures(t *testing.T) {
+	input := &SearchFixturesInput{
+		Sport:     types.DataSourceSport("basketball"),
+		StartDate: ptr.String("__StartDate__"),
+		EndDate:   ptr.String("__EndDate__"),
+		Filters: []types.SearchFilter{
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("COMPETITOR"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchFixtures(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchFixtures"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -107,6 +107,15 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// An identifier that you assign to your request.
 	InferenceId *string
 
+	// An optional, stable identifier that serves as a routing hint for prefix-aware
+	// routing. The service routes requests with the same prefix and the same
+	// identifier to the same instance. If requests from different applications might
+	// have the same prompt prefix, set a different identifier for each application to
+	// differentiate their routing decisions.
+	//
+	// Applies only to endpoints configured with a RoutingStrategy of PREFIX_AWARE .
+	PrefixAwareId *string
+
 	// The ID of a stateful session to handle your request.
 	//
 	// You can't create a stateful session by using the

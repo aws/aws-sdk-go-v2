@@ -18237,6 +18237,11 @@ func awsRestjson1_serializeDocumentOutputDestinationSettings(v *types.OutputDest
 		ok.String(*v.Username)
 	}
 
+	if v.VirtualSourceAddress != nil {
+		ok := object.Key("virtualSourceAddress")
+		ok.String(*v.VirtualSourceAddress)
+	}
+
 	return nil
 }
 
