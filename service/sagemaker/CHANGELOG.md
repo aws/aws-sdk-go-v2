@@ -1,3 +1,9 @@
+# v1.266.0 (2026-08-10)
+
+* **Feature**: Added PREFIX AWARE routing strategy and PrefixAwareRoutingConfig to CreateEndpointConfig. Configure PrefixLength and ConcurrencyThreshold to route requests that share the same prompt prefix to the same instance.
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.265.0 (2026-08-07)
 
 * **Feature**: Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances

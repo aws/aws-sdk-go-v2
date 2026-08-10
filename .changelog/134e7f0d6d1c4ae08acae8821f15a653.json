@@ -1,8 +1,0 @@
-{
-    "id": "134e7f0d-6d1c-4ae0-8aca-e8821f15a653",
-    "type": "feature",
-    "description": "Added PREFIX AWARE routing strategy and PrefixAwareRoutingConfig to CreateEndpointConfig. Configure PrefixLength and ConcurrencyThreshold to route requests that share the same prompt prefix to the same instance.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

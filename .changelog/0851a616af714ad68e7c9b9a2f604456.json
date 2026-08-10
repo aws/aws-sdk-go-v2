@@ -1,8 +1,0 @@
-{
-    "id": "0851a616-af71-4ad6-8e7c-9b9a2f604456",
-    "type": "feature",
-    "description": "Added Malay language option to use AI to automatically fill evaluation forms in Malay",
-    "modules": [
-        "service/connect"
-    ]
-}

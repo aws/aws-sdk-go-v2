@@ -1,3 +1,9 @@
+# v1.6.0 (2026-08-10)
+
+* **Feature**: Added support for the SearchFixtures API and DataSourceConfiguration, enabling customers to map fixture event data onto clipping outputs for improved feature accuracy.
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.1 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

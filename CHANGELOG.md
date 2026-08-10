@@ -1,3 +1,21 @@
+# Release (2026-08-10)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.186.0](service/connect/CHANGELOG.md#v11860-2026-08-10)
+  * **Feature**: Added Malay language option to use AI to automatically fill evaluation forms in Malay
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.6.0](service/elementalinference/CHANGELOG.md#v160-2026-08-10)
+  * **Feature**: Added support for the SearchFixtures API and DataSourceConfiguration, enabling customers to map fixture event data onto clipping outputs for improved feature accuracy.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.102.0](service/medialive/CHANGELOG.md#v11020-2026-08-10)
+  * **Feature**: Added VirtualSourceAddress to multicast output destinations for MediaLive Anywhere channels. Specifies the source IP address for outbound multicast packets when downstream networks enforce source-IP filtering.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.266.0](service/sagemaker/CHANGELOG.md#v12660-2026-08-10)
+  * **Feature**: Added PREFIX AWARE routing strategy and PrefixAwareRoutingConfig to CreateEndpointConfig. Configure PrefixLength and ConcurrencyThreshold to route requests that share the same prompt prefix to the same instance.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.44.0](service/sagemakerruntime/CHANGELOG.md#v1440-2026-08-10)
+  * **Feature**: Added the PrefixAwareId header to InvokeEndpoint and InvokeEndpointWithResponseStream. This optional parameter serves as a routing hint for endpoints configured with prefix-aware routing, differentiating routing decisions for requests that share the same prompt prefix.
+
 # Release (2026-08-07)
 
 ## Module Highlights

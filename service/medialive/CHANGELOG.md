@@ -1,3 +1,9 @@
+# v1.102.0 (2026-08-10)
+
+* **Feature**: Added VirtualSourceAddress to multicast output destinations for MediaLive Anywhere channels. Specifies the source IP address for outbound multicast packets when downstream networks enforce source-IP filtering.
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.101.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

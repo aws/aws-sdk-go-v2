@@ -1,3 +1,9 @@
+# v1.44.0 (2026-08-10)
+
+* **Feature**: Added the PrefixAwareId header to InvokeEndpoint and InvokeEndpointWithResponseStream. This optional parameter serves as a routing hint for endpoints configured with prefix-aware routing, differentiating routing decisions for requests that share the same prompt prefix.
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

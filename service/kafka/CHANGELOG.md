@@ -1,3 +1,8 @@
+# v1.58.1 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-08-06)
 
 * **Feature**: MSK Clusters can now deliver authorizer logs alongside broker logs to the destinations defined by you
