@@ -1,8 +1,0 @@
-{
-    "id": "cd537521-c06e-4cab-8452-581e07b6501e",
-    "type": "feature",
-    "description": "Adding online eval arn as input for recommendation API",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

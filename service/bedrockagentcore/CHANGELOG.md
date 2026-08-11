@@ -1,3 +1,7 @@
+# v1.38.0 (2026-08-11)
+
+* **Feature**: Adding online eval arn as input for recommendation API
+
 # v1.37.1 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

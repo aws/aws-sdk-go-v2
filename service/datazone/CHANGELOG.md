@@ -1,3 +1,7 @@
+# v1.69.0 (2026-08-11)
+
+* **Feature**: GetSubscriptionGrant now returns materialized asset scope name for mapping Lake Formation data cell filters or Redshift views to subscription grants.
+
 # v1.68.2 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

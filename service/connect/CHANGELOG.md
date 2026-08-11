@@ -1,3 +1,7 @@
+# v1.187.0 (2026-08-11)
+
+* **Feature**: Seven new APIs for managing custom metrics, including create, describe, update, and delete. Using Custom Metrics, customers of Amazon Connect Customer can tailor analytics dashboards to their needs by applying custom thresholds, filters, and calculations to one or more out of the box measurements.
+
 # v1.186.0 (2026-08-10)
 
 * **Feature**: Added Malay language option to use AI to automatically fill evaluation forms in Malay

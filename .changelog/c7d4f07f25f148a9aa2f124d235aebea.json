@@ -1,8 +1,0 @@
-{
-    "id": "c7d4f07f-25f1-48a9-aa2f-124d235aebea",
-    "type": "feature",
-    "description": "Adds support for exporting redacted query execution logs in AWS Clean Rooms",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

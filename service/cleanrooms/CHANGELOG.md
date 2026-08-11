@@ -1,3 +1,7 @@
+# v1.50.0 (2026-08-11)
+
+* **Feature**: Adds support for exporting redacted query execution logs in AWS Clean Rooms
+
 # v1.49.5 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

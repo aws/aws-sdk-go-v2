@@ -1,8 +1,0 @@
-{
-    "id": "e720ac55-e1d6-42fe-8ffe-e0e27e706697",
-    "type": "feature",
-    "description": "Adds SDK support for AWS IAM account access manager, a feature that enables mapping of IAM roles to the users and groups in AWS IAM Identity Center.",
-    "modules": [
-        "service/accountaccess"
-    ]
-}

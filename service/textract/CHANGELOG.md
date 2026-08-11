@@ -1,3 +1,8 @@
+# v1.44.0 (2026-08-11)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Documentation**: Amazon A2I entered maintenance mode in July 2026 and now rejects StartHumanLoop requests from accounts that it does not recognize as existing customers. This update adds a corresponding note to the HumanLoopConfig parameter documentation so that the API Reference and SDK docs explain this behavior.
+
 # v1.43.5 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

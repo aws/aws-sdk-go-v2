@@ -1,8 +1,0 @@
-{
-    "id": "74a329c4-7da7-48c3-80a0-1a42ad78ab53",
-    "type": "feature",
-    "description": "GetSubscriptionGrant now returns materialized asset scope name for mapping Lake Formation data cell filters or Redshift views to subscription grants.",
-    "modules": [
-        "service/datazone"
-    ]
-}
