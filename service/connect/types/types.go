@@ -1012,6 +1012,20 @@ type AutomaticFailConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that is available for use with the metric. Part of an
+// AvailableFilterList that describes the filters that are available for use with
+// the metric.
+type AvailableFilter struct {
+
+	// The identifier of the filter.
+	Id *string
+
+	// The type of the filter. Valid values: METRIC_LEVEL | RESOURCE_LEVEL .
+	Type AvailableFilterType
+
+	noSmithyDocumentSerde
+}
+
 // Information about available phone numbers.
 type AvailableNumberSummary struct {
 
@@ -1228,6 +1242,28 @@ type BooleanCondition struct {
 
 	// A name of the property to be searched.
 	FieldName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a component metric referenced in a custom metric calculation formula.
+type CalculationComponent struct {
+
+	// The alias used to reference this component in the calculation expression.
+	//
+	// This member is required.
+	Alias *string
+
+	// The filters applied to the calculation component.
+	MetricFilters []MetricFilter
+
+	// The ARN of an AWS-managed metric used in this calculation component. Mutually
+	// exclusive with MetricName .
+	MetricId *string
+
+	// The name of an AWS-managed metric used in this calculation component (for
+	// example, CONTACTS_HANDLED ). Mutually exclusive with MetricId .
+	MetricName *string
 
 	noSmithyDocumentSerde
 }
@@ -6780,6 +6816,25 @@ type MeetingFeaturesConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the formula and component metrics that define a custom metric
+// calculation.
+type MetricCalculation struct {
+
+	// The formula expression that defines how the metric is calculated. Uses
+	// component aliases (for example, 100 * SUM(M1) / SUM(M2) ).
+	//
+	// This member is required.
+	Calculation *string
+
+	// The list of component metrics referenced in the calculation formula. Each
+	// component has an alias used in the formula expression.
+	//
+	// This member is required.
+	CalculationComponents []CalculationComponent
+
+	noSmithyDocumentSerde
+}
+
 // Contains the name, thresholds, and metric filters.
 type MetricDataV2 struct {
 
@@ -6789,6 +6844,194 @@ type MetricDataV2 struct {
 
 	// The corresponding value of the metric returned in the response.
 	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the full definition of a metric, including its calculation, unit,
+// status, and trend indicator.
+type MetricDefinition struct {
+
+	// The Amazon Resource Name (ARN) of the metric. May be qualified with $SAVED or
+	// $LATEST .
+	//
+	// This member is required.
+	Arn *string
+
+	// The category of the metric.
+	//
+	// This member is required.
+	Category *string
+
+	// The filters applied to the metric.
+	//
+	// This member is required.
+	Filters []AvailableFilter
+
+	// The groupings available for this metric.
+	//
+	// This member is required.
+	Groupings []string
+
+	// The identifier of the metric.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the metric.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies whether the metric can be used as a component of custom metrics.
+	//
+	// This member is required.
+	SupportsCustomCalculation bool
+
+	// Specifies whether the metric can be used inside aggregating statistical
+	// functions (SUM, AVG, etc.) in custom metric calculations.
+	//
+	// This member is required.
+	SupportsPreaggregateCalculation bool
+
+	// The type of the metric. Valid values: AWS_MANAGED | CUSTOMER_MANAGED .
+	//
+	// This member is required.
+	Type MetricType
+
+	// The display unit for the metric's data.
+	//
+	// This member is required.
+	Unit MetricUnit
+
+	// The timestamp of when the metric was created.
+	CreatedTime *time.Time
+
+	// The user that created the metric. The creator for metrics created through the
+	// CreateMetric API will be Amazon Connect API .
+	CreatedUser CreatedByInfo
+
+	// The method used to create the metric. Valid values: SERVICE_LEVEL_BUILDER
+	// (created with the guided service-level experience) | METRIC_BUILDER (created
+	// with the free-form metric builder).
+	CreationMethod MetricCreationMethod
+
+	// The default stat aggregation for the metric.
+	DefaultStat *string
+
+	// The description of the metric.
+	Description *string
+
+	// The earliest time that can be queried for this metric.
+	EffectiveTime *time.Time
+
+	// The region where the metric was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp of when the metric was last modified.
+	LastModifiedTime *time.Time
+
+	// The user that last modified the metric. For modifications made through the API,
+	// this will be Amazon Connect API .
+	LastModifiedUser CreatedByInfo
+
+	// The calculation definition for the metric.
+	MetricCalculation *MetricCalculation
+
+	// How an increase in the metric value should be interpreted. Valid values:
+	// POSITIVE , NEUTRAL , NEGATIVE .
+	PositiveTrendIndicator TrendIndicator
+
+	// The primary event source for the metric data.
+	PrimaryEventSource *string
+
+	// The timestamp type that determines where the metric appears on a time series.
+	PrimaryEventSourceEffectiveTimestampType *string
+
+	// The minimum interval, in seconds, between data refreshes for this metric.
+	RefreshRate int64
+
+	// The publish status of the metric. Valid values: PUBLISHED | SAVED .
+	Status MetricStatus
+
+	// The stat aggregations available for this metric.
+	SupportedStats []string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A filter condition applied to a metric component in a calculation. Filters
+// restrict the data included in the metric computation.
+type MetricFilter struct {
+
+	// The key identifying the field to filter on.
+	//
+	// This member is required.
+	MetricFilterKey *string
+
+	// A boolean comparison condition.
+	BooleanCondition *MetricFilterBooleanCondition
+
+	// Specifies whether the filter condition is negated. When set to true , the filter
+	// excludes matching data instead of including it.
+	Negate bool
+
+	// A numeric comparison condition.
+	NumberCondition *MetricFilterNumberCondition
+
+	// A string comparison condition.
+	StringCondition *MetricFilterStringCondition
+
+	noSmithyDocumentSerde
+}
+
+// A boolean comparison condition for metric filters.
+type MetricFilterBooleanCondition struct {
+
+	// The comparison operator. Valid values: IS_TRUE (matches when the field is true)
+	// | IS_FALSE (matches when the field is false).
+	//
+	// This member is required.
+	Comparison MetricFilterBooleanConditionComparison
+
+	noSmithyDocumentSerde
+}
+
+// A numeric comparison condition for metric filters.
+type MetricFilterNumberCondition struct {
+
+	// The comparison operator. Valid values: LESSER (less than) | LESSER_OR_EQUAL
+	// (less than or equal to) | GREATER (greater than) | GREATER_OR_EQUAL (greater
+	// than or equal to).
+	//
+	// This member is required.
+	Comparison MetricFilterNumberConditionComparison
+
+	// The numeric values to compare against.
+	//
+	// This member is required.
+	Values []float64
+
+	noSmithyDocumentSerde
+}
+
+// A string comparison condition for metric filters.
+type MetricFilterStringCondition struct {
+
+	// The comparison operator. Valid values: MATCHES_ANY (matches any of the
+	// specified values) | MATCHES_NONE (matches none of the specified values).
+	//
+	// This member is required.
+	Comparison MetricFilterStringConditionComparison
+
+	// The string values to compare against.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -6880,6 +7123,77 @@ type MetricResultV2 struct {
 
 	// The interval period with the start and end time for the metrics.
 	MetricInterval *MetricInterval
+
+	noSmithyDocumentSerde
+}
+
+// Defines the search criteria for filtering metrics.
+type MetricSearchCriteria struct {
+
+	// A list of conditions that must all be satisfied.
+	AndConditions []MetricSearchCriteria
+
+	// A boolean search condition for Search APIs.
+	BooleanCondition *BooleanCondition
+
+	// A list of conditions to be met, where at least one condition must be satisfied.
+	OrConditions []MetricSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to apply when searching for metrics.
+type MetricSearchFilter struct {
+
+	// An object that can be used to specify tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a metric.
+type MetricSummary struct {
+
+	// The Amazon Resource Name (ARN) of the metric.
+	//
+	// This member is required.
+	Arn *string
+
+	// The identifier of the metric.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the metric.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish status of the metric.
+	//
+	// This member is required.
+	Status MetricStatus
+
+	// The type of the metric.
+	//
+	// This member is required.
+	Type MetricType
+
+	// The region where the metric was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp of when the metric was last modified.
+	LastModifiedTime *time.Time
 
 	noSmithyDocumentSerde
 }

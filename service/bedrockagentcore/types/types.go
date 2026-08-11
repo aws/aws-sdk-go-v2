@@ -189,6 +189,7 @@ type AgentSkillsDescriptor struct {
 //
 //	AgentTracesConfigMemberBatchEvaluation
 //	AgentTracesConfigMemberCloudwatchLogs
+//	AgentTracesConfigMemberOnlineEvaluation
 //	AgentTracesConfigMemberSessionSpans
 type AgentTracesConfig interface {
 	isAgentTracesConfig()
@@ -211,6 +212,16 @@ type AgentTracesConfigMemberCloudwatchLogs struct {
 }
 
 func (*AgentTracesConfigMemberCloudwatchLogs) isAgentTracesConfig() {}
+
+// Agent traces from an online evaluation configuration over a specified time
+// range.
+type AgentTracesConfigMemberOnlineEvaluation struct {
+	Value OnlineEvaluationTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberOnlineEvaluation) isAgentTracesConfig() {}
 
 // Agent traces provided as inline session spans in OpenTelemetry format.
 type AgentTracesConfigMemberSessionSpans struct {
@@ -4003,6 +4014,32 @@ type OnlineEvaluationConfigSource struct {
 	// Optional session filter configuration to narrow down which sessions from the
 	// online evaluation configuration to include.
 	TimeRange *SessionFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration for reusing agent traces from an online evaluation
+// configuration for recommendation analysis. Because online evaluation is a
+// continuous stream, a time range specifies which evaluated sessions the
+// recommendation includes.
+type OnlineEvaluationTraceConfig struct {
+
+	// The end time of the time range. Only sessions evaluated before this timestamp
+	// are included.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The ARN of the online evaluation configuration to reuse sessions from.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	// The start time of the time range. Only sessions evaluated at or after this
+	// timestamp are included.
+	//
+	// This member is required.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

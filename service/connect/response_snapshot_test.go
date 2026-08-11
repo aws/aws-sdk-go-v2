@@ -2878,6 +2878,142 @@ func TestCheckResponseSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateMetric(t *testing.T) {
+	want := &CreateMetricOutput{
+		MetricArn: ptr.String("__MetricArn__"),
+		MetricId:  ptr.String("__MetricId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateMetric.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateMetric(context.Background(), &CreateMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		Status:                 types.MetricStatus("PUBLISHED"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Description:            ptr.String("__Description__"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateMetric.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateNotification(t *testing.T) {
 	want := &CreateNotificationOutput{
 		NotificationId:  ptr.String("__NotificationId__"),
@@ -4647,6 +4783,28 @@ func TestCheckResponseSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteIntegrationAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteMetric(t *testing.T) {
+	want := &DeleteMetricOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteMetric.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteMetric(context.Background(), &DeleteMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteMetric.response", err)
 	}
 }
 
@@ -7582,6 +7740,181 @@ func TestCheckResponseSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeInstanceStorageConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeMetric(t *testing.T) {
+	want := &DescribeMetricOutput{
+		Metric: &types.MetricDefinition{
+			Arn:         ptr.String("__Arn__"),
+			Id:          ptr.String("__Id__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			MetricCalculation: &types.MetricCalculation{
+				CalculationComponents: []types.CalculationComponent{
+					{
+						Alias:      ptr.String("__Alias__"),
+						MetricName: ptr.String("__MetricName__"),
+						MetricId:   ptr.String("__MetricId__"),
+						MetricFilters: []types.MetricFilter{
+							{
+								MetricFilterKey: ptr.String("__MetricFilterKey__"),
+								Negate:          true,
+								NumberCondition: &types.MetricFilterNumberCondition{
+									Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+									Values: []float64{
+										1.0,
+										1.0,
+									},
+								},
+								StringCondition: &types.MetricFilterStringCondition{
+									Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BooleanCondition: &types.MetricFilterBooleanCondition{
+									Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+								},
+							},
+							{
+								MetricFilterKey: ptr.String("__MetricFilterKey__"),
+								Negate:          true,
+								NumberCondition: &types.MetricFilterNumberCondition{
+									Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+									Values: []float64{
+										1.0,
+										1.0,
+									},
+								},
+								StringCondition: &types.MetricFilterStringCondition{
+									Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BooleanCondition: &types.MetricFilterBooleanCondition{
+									Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+								},
+							},
+						},
+					},
+					{
+						Alias:      ptr.String("__Alias__"),
+						MetricName: ptr.String("__MetricName__"),
+						MetricId:   ptr.String("__MetricId__"),
+						MetricFilters: []types.MetricFilter{
+							{
+								MetricFilterKey: ptr.String("__MetricFilterKey__"),
+								Negate:          true,
+								NumberCondition: &types.MetricFilterNumberCondition{
+									Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+									Values: []float64{
+										1.0,
+										1.0,
+									},
+								},
+								StringCondition: &types.MetricFilterStringCondition{
+									Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BooleanCondition: &types.MetricFilterBooleanCondition{
+									Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+								},
+							},
+							{
+								MetricFilterKey: ptr.String("__MetricFilterKey__"),
+								Negate:          true,
+								NumberCondition: &types.MetricFilterNumberCondition{
+									Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+									Values: []float64{
+										1.0,
+										1.0,
+									},
+								},
+								StringCondition: &types.MetricFilterStringCondition{
+									Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								BooleanCondition: &types.MetricFilterBooleanCondition{
+									Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+								},
+							},
+						},
+					},
+				},
+				Calculation: ptr.String("__Calculation__"),
+			},
+			CreationMethod:         types.MetricCreationMethod("SERVICE_LEVEL_BUILDER"),
+			Status:                 types.MetricStatus("PUBLISHED"),
+			Type:                   types.MetricType("AWS_MANAGED"),
+			Unit:                   types.MetricUnit("INTEGER"),
+			PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+			Groupings: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Filters: []types.AvailableFilter{
+				{
+					Id:   ptr.String("__Id__"),
+					Type: types.AvailableFilterType("METRIC_LEVEL"),
+				},
+				{
+					Id:   ptr.String("__Id__"),
+					Type: types.AvailableFilterType("METRIC_LEVEL"),
+				},
+			},
+			EffectiveTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RefreshRate:   1,
+			Category:      ptr.String("__Category__"),
+			SupportedStats: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DefaultStat:                              ptr.String("__DefaultStat__"),
+			SupportsPreaggregateCalculation:          true,
+			SupportsCustomCalculation:                true,
+			PrimaryEventSource:                       ptr.String("__PrimaryEventSource__"),
+			PrimaryEventSourceEffectiveTimestampType: ptr.String("__PrimaryEventSourceEffectiveTimestampType__"),
+			CreatedTime:                              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedUser: &types.CreatedByInfoMemberConnectUserArn{
+				Value: "__CreatedByInfoMemberConnectUserArn__",
+			},
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedUser: &types.CreatedByInfoMemberConnectUserArn{
+				Value: "__CreatedByInfoMemberConnectUserArn__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeMetric.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeMetric(context.Background(), &DescribeMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeMetric.response", err)
 	}
 }
 
@@ -12619,6 +12952,52 @@ func TestCheckResponseSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListMetrics(t *testing.T) {
+	want := &ListMetricsOutput{
+		MetricSummaryList: []types.MetricSummary{
+			{
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.MetricStatus("PUBLISHED"),
+				Type:               types.MetricType("AWS_MANAGED"),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.MetricStatus("PUBLISHED"),
+				Type:               types.MetricType("AWS_MANAGED"),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListMetrics.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListMetrics(context.Background(), &ListMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Type:       types.MetricType("AWS_MANAGED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListMetrics.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListNotifications(t *testing.T) {
 	want := &ListNotificationsOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -16503,6 +16882,397 @@ func TestCheckResponseSnapshot_SearchHoursOfOperations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "SearchHoursOfOperations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SearchMetrics(t *testing.T) {
+	want := &SearchMetricsOutput{
+		Metrics: []types.MetricDefinition{
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				MetricCalculation: &types.MetricCalculation{
+					CalculationComponents: []types.CalculationComponent{
+						{
+							Alias:      ptr.String("__Alias__"),
+							MetricName: ptr.String("__MetricName__"),
+							MetricId:   ptr.String("__MetricId__"),
+							MetricFilters: []types.MetricFilter{
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+							},
+						},
+						{
+							Alias:      ptr.String("__Alias__"),
+							MetricName: ptr.String("__MetricName__"),
+							MetricId:   ptr.String("__MetricId__"),
+							MetricFilters: []types.MetricFilter{
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+							},
+						},
+					},
+					Calculation: ptr.String("__Calculation__"),
+				},
+				CreationMethod:         types.MetricCreationMethod("SERVICE_LEVEL_BUILDER"),
+				Status:                 types.MetricStatus("PUBLISHED"),
+				Type:                   types.MetricType("AWS_MANAGED"),
+				Unit:                   types.MetricUnit("INTEGER"),
+				PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+				Groupings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Filters: []types.AvailableFilter{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.AvailableFilterType("METRIC_LEVEL"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.AvailableFilterType("METRIC_LEVEL"),
+					},
+				},
+				EffectiveTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RefreshRate:   1,
+				Category:      ptr.String("__Category__"),
+				SupportedStats: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DefaultStat:                              ptr.String("__DefaultStat__"),
+				SupportsPreaggregateCalculation:          true,
+				SupportsCustomCalculation:                true,
+				PrimaryEventSource:                       ptr.String("__PrimaryEventSource__"),
+				PrimaryEventSourceEffectiveTimestampType: ptr.String("__PrimaryEventSourceEffectiveTimestampType__"),
+				CreatedTime:                              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedUser: &types.CreatedByInfoMemberConnectUserArn{
+					Value: "__CreatedByInfoMemberConnectUserArn__",
+				},
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedUser: &types.CreatedByInfoMemberConnectUserArn{
+					Value: "__CreatedByInfoMemberConnectUserArn__",
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				MetricCalculation: &types.MetricCalculation{
+					CalculationComponents: []types.CalculationComponent{
+						{
+							Alias:      ptr.String("__Alias__"),
+							MetricName: ptr.String("__MetricName__"),
+							MetricId:   ptr.String("__MetricId__"),
+							MetricFilters: []types.MetricFilter{
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+							},
+						},
+						{
+							Alias:      ptr.String("__Alias__"),
+							MetricName: ptr.String("__MetricName__"),
+							MetricId:   ptr.String("__MetricId__"),
+							MetricFilters: []types.MetricFilter{
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+								{
+									MetricFilterKey: ptr.String("__MetricFilterKey__"),
+									Negate:          true,
+									NumberCondition: &types.MetricFilterNumberCondition{
+										Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+										Values: []float64{
+											1.0,
+											1.0,
+										},
+									},
+									StringCondition: &types.MetricFilterStringCondition{
+										Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									BooleanCondition: &types.MetricFilterBooleanCondition{
+										Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+									},
+								},
+							},
+						},
+					},
+					Calculation: ptr.String("__Calculation__"),
+				},
+				CreationMethod:         types.MetricCreationMethod("SERVICE_LEVEL_BUILDER"),
+				Status:                 types.MetricStatus("PUBLISHED"),
+				Type:                   types.MetricType("AWS_MANAGED"),
+				Unit:                   types.MetricUnit("INTEGER"),
+				PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+				Groupings: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Filters: []types.AvailableFilter{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.AvailableFilterType("METRIC_LEVEL"),
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.AvailableFilterType("METRIC_LEVEL"),
+					},
+				},
+				EffectiveTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RefreshRate:   1,
+				Category:      ptr.String("__Category__"),
+				SupportedStats: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DefaultStat:                              ptr.String("__DefaultStat__"),
+				SupportsPreaggregateCalculation:          true,
+				SupportsCustomCalculation:                true,
+				PrimaryEventSource:                       ptr.String("__PrimaryEventSource__"),
+				PrimaryEventSourceEffectiveTimestampType: ptr.String("__PrimaryEventSourceEffectiveTimestampType__"),
+				CreatedTime:                              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedUser: &types.CreatedByInfoMemberConnectUserArn{
+					Value: "__CreatedByInfoMemberConnectUserArn__",
+				},
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedUser: &types.CreatedByInfoMemberConnectUserArn{
+					Value: "__CreatedByInfoMemberConnectUserArn__",
+				},
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken:             ptr.String("__NextToken__"),
+		ApproximateTotalCount: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchMetrics.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchMetrics(context.Background(), &SearchMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.MetricSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.MetricSearchCriteria{
+			OrConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			BooleanCondition: &types.BooleanCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				ComparisonType: types.BooleanComparisonType("IS_TRUE"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchMetrics.response", err)
 	}
 }
 
@@ -21420,6 +22190,157 @@ func TestCheckResponseSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateInstanceStorageConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateMetricContent(t *testing.T) {
+	want := &UpdateMetricContentOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateMetricContent.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateMetricContent(context.Background(), &UpdateMetricContentInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateMetricContent.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateMetricMetadata(t *testing.T) {
+	want := &UpdateMetricMetadataOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateMetricMetadata.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateMetricMetadata(context.Background(), &UpdateMetricMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		MetricId:    ptr.String("__MetricId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateMetricMetadata.response", err)
 	}
 }
 

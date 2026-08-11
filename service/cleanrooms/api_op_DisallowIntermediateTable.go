@@ -7,10 +7,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Invalidates a specific intermediate table that references the caller's base
+// Marks an intermediate table as invalid when it references the caller's base
 // table. The data provider (base table owner) calls this operation, not the
-// intermediate table owner. By default, invalidation cascades to descendant
-// intermediate tables.
+// intermediate table owner. By default, the operation also marks all descendant
+// intermediate tables as invalid.
 func (c *Client) DisallowIntermediateTable(ctx context.Context, params *DisallowIntermediateTableInput, optFns ...func(*Options)) (*DisallowIntermediateTableOutput, error) {
 	if params == nil {
 		params = &DisallowIntermediateTableInput{}

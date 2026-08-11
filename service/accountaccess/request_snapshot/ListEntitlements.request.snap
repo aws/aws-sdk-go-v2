@@ -1,0 +1,5 @@
+POST /entitlements-list
+
+Content-Type: application/json
+
+{"applicationArn":"__ApplicationArn__","filter":{"principalRole":{"account":"__Account__","principal":{"identityCenter":{"userId":"__IdentityCenterPrincipalFilterMemberUserId__"}},"roleArn":"__RoleArn__"}},"maxResults":1,"nextToken":"__NextToken__"}

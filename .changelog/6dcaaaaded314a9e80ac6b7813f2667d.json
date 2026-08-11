@@ -1,0 +1,8 @@
+{
+    "id": "6dcaaaad-ed31-4a9e-80ac-6b7813f2667d",
+    "type": "documentation",
+    "description": "Added an end-of-support notice to Amazon Cloud Directory public CLI reference documentation.",
+    "modules": [
+        "service/clouddirectory"
+    ]
+}

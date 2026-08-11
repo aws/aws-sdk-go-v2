@@ -1,0 +1,5 @@
+POST /entitlements
+
+Content-Type: application/json
+
+{"applicationArn":"__ApplicationArn__","entitlement":{"principalRole":{"principal":{"identityCenter":{"userId":"__IdentityCenterPrincipalMemberUserId__"}},"roleArn":"__RoleArn__"}}}

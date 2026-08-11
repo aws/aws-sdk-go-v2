@@ -446,6 +446,18 @@ func TestCheckSnapshot_DisallowIntermediateTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAnalysisLogExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAnalysisTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAnalysisTemplate(context.Background(), nil, func(o *Options) {
@@ -703,6 +715,18 @@ func TestCheckSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 	_, err := svc.GetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSchemaAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAnalysisLogExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisLogExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnalysisLogExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1015,6 +1039,18 @@ func TestCheckSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +1681,18 @@ func TestUpdateSnapshot_DisallowIntermediateTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAnalysisLogExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAnalysisTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAnalysisTemplate(context.Background(), nil, func(o *Options) {
@@ -1902,6 +1950,18 @@ func TestUpdateSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 	_, err := svc.GetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSchemaAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAnalysisLogExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisLogExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnalysisLogExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2214,6 +2274,18 @@ func TestUpdateSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

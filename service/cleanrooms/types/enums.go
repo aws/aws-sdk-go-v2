@@ -124,6 +124,27 @@ func (AnalysisFormat) Values() []AnalysisFormat {
 	}
 }
 
+type AnalysisLogExportStatus string
+
+// Enum values for AnalysisLogExportStatus
+const (
+	AnalysisLogExportStatusInProgress AnalysisLogExportStatus = "IN_PROGRESS"
+	AnalysisLogExportStatusSuccess    AnalysisLogExportStatus = "SUCCESS"
+	AnalysisLogExportStatusFailed     AnalysisLogExportStatus = "FAILED"
+)
+
+// Values returns all known values for AnalysisLogExportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisLogExportStatus) Values() []AnalysisLogExportStatus {
+	return []AnalysisLogExportStatus{
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
+	}
+}
+
 type AnalysisMethod string
 
 // Enum values for AnalysisMethod
@@ -271,9 +292,11 @@ type AutoApprovedChangeType string
 
 // Enum values for AutoApprovedChangeType
 const (
-	AutoApprovedChangeTypeAddMember                   AutoApprovedChangeType = "ADD_MEMBER"
-	AutoApprovedChangeTypeGrantReceiveResultsAbility  AutoApprovedChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
-	AutoApprovedChangeTypeRevokeReceiveResultsAbility AutoApprovedChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeAddMember                           AutoApprovedChangeType = "ADD_MEMBER"
+	AutoApprovedChangeTypeGrantReceiveResultsAbility          AutoApprovedChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeRevokeReceiveResultsAbility         AutoApprovedChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeGrantExportQueryAnalysisLogAbility  AutoApprovedChangeType = "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+	AutoApprovedChangeTypeRevokeExportQueryAnalysisLogAbility AutoApprovedChangeType = "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
 )
 
 // Values returns all known values for AutoApprovedChangeType. Note that this can
@@ -285,6 +308,8 @@ func (AutoApprovedChangeType) Values() []AutoApprovedChangeType {
 		"ADD_MEMBER",
 		"GRANT_RECEIVE_RESULTS_ABILITY",
 		"REVOKE_RECEIVE_RESULTS_ABILITY",
+		"GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
+		"REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
 	}
 }
 
@@ -418,16 +443,18 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeAddMember                       ChangeType = "ADD_MEMBER"
-	ChangeTypeGrantReceiveResultsAbility      ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeRevokeReceiveResultsAbility     ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeEditAutoApprovedChangeTypes     ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
-	ChangeTypeAddPayerCandidate               ChangeType = "ADD_PAYER_CANDIDATE"
-	ChangeTypeRemovePayerCandidate            ChangeType = "REMOVE_PAYER_CANDIDATE"
-	ChangeTypeGrantCanReceiveModelOutput      ChangeType = "GRANT_CAN_RECEIVE_MODEL_OUTPUT"
-	ChangeTypeGrantCanReceiveInferenceOutput  ChangeType = "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"
-	ChangeTypeRevokeCanReceiveModelOutput     ChangeType = "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"
-	ChangeTypeRevokeCanReceiveInferenceOutput ChangeType = "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeAddMember                           ChangeType = "ADD_MEMBER"
+	ChangeTypeGrantReceiveResultsAbility          ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeRevokeReceiveResultsAbility         ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeEditAutoApprovedChangeTypes         ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+	ChangeTypeAddPayerCandidate                   ChangeType = "ADD_PAYER_CANDIDATE"
+	ChangeTypeRemovePayerCandidate                ChangeType = "REMOVE_PAYER_CANDIDATE"
+	ChangeTypeGrantCanReceiveModelOutput          ChangeType = "GRANT_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeGrantCanReceiveInferenceOutput      ChangeType = "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeRevokeCanReceiveModelOutput         ChangeType = "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeRevokeCanReceiveInferenceOutput     ChangeType = "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeGrantExportQueryAnalysisLogAbility  ChangeType = "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+	ChangeTypeRevokeExportQueryAnalysisLogAbility ChangeType = "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -446,6 +473,8 @@ func (ChangeType) Values() []ChangeType {
 		"GRANT_CAN_RECEIVE_INFERENCE_OUTPUT",
 		"REVOKE_CAN_RECEIVE_MODEL_OUTPUT",
 		"REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT",
+		"GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
+		"REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
 	}
 }
 
@@ -878,13 +907,31 @@ func (JoinRequiredOption) Values() []JoinRequiredOption {
 	}
 }
 
+type LogExportAnalysisType string
+
+// Enum values for LogExportAnalysisType
+const (
+	LogExportAnalysisTypeProtectedQuery LogExportAnalysisType = "PROTECTED_QUERY"
+)
+
+// Values returns all known values for LogExportAnalysisType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogExportAnalysisType) Values() []LogExportAnalysisType {
+	return []LogExportAnalysisType{
+		"PROTECTED_QUERY",
+	}
+}
+
 type MemberAbility string
 
 // Enum values for MemberAbility
 const (
-	MemberAbilityCanQuery          MemberAbility = "CAN_QUERY"
-	MemberAbilityCanReceiveResults MemberAbility = "CAN_RECEIVE_RESULTS"
-	MemberAbilityCanRunJob         MemberAbility = "CAN_RUN_JOB"
+	MemberAbilityCanQuery                  MemberAbility = "CAN_QUERY"
+	MemberAbilityCanReceiveResults         MemberAbility = "CAN_RECEIVE_RESULTS"
+	MemberAbilityCanRunJob                 MemberAbility = "CAN_RUN_JOB"
+	MemberAbilityCanExportQueryAnalysisLog MemberAbility = "CAN_EXPORT_QUERY_ANALYSIS_LOG"
 )
 
 // Values returns all known values for MemberAbility. Note that this can be
@@ -896,6 +943,7 @@ func (MemberAbility) Values() []MemberAbility {
 		"CAN_QUERY",
 		"CAN_RECEIVE_RESULTS",
 		"CAN_RUN_JOB",
+		"CAN_EXPORT_QUERY_ANALYSIS_LOG",
 	}
 }
 

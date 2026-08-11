@@ -650,6 +650,18 @@ func TestCheckSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMetric")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateNotification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNotification(context.Background(), nil, func(o *Options) {
@@ -1118,6 +1130,18 @@ func TestCheckSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMetric")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteNotification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteNotification(context.Background(), nil, func(o *Options) {
@@ -1579,6 +1603,18 @@ func TestCheckSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 	_, err := svc.DescribeInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetric")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2630,6 +2666,18 @@ func TestCheckSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -3271,6 +3319,18 @@ func TestCheckSnapshot_SearchHoursOfOperations(t *testing.T) {
 	_, err := svc.SearchHoursOfOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4123,6 +4183,30 @@ func TestCheckSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	_, err := svc.UpdateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateMetricContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMetricContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateMetricMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMetricMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5209,6 +5293,18 @@ func TestUpdateSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMetric")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateNotification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNotification(context.Background(), nil, func(o *Options) {
@@ -5677,6 +5773,18 @@ func TestUpdateSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMetric")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteNotification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteNotification(context.Background(), nil, func(o *Options) {
@@ -6138,6 +6246,18 @@ func TestUpdateSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 	_, err := svc.DescribeInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMetric(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetric(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetric")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7189,6 +7309,18 @@ func TestUpdateSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -7830,6 +7962,18 @@ func TestUpdateSnapshot_SearchHoursOfOperations(t *testing.T) {
 	_, err := svc.SearchHoursOfOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchHoursOfOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8682,6 +8826,30 @@ func TestUpdateSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 	_, err := svc.UpdateInstanceStorageConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateInstanceStorageConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMetricContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMetricContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMetricMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMetricMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

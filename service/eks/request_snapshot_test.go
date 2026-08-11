@@ -670,6 +670,35 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
 			Tier: types.ProvisionedControlPlaneTier("standard"),
 		},
+		KubeApiServerConfig: &types.KubeApiServerConfigRequest{
+			EventTtl: ptr.String("__EventTtl__"),
+			ServiceNodePortRange: &types.ServiceNodePortRange{
+				MinPort: 1,
+				MaxPort: 1,
+			},
+		},
+		KubeSchedulerConfig: &types.KubeSchedulerConfigRequest{
+			NodeResourcesFit: &types.NodeResourcesFitConfig{
+				ScoringStrategy: &types.ScoringStrategy{
+					Type: types.ScoringStrategyType("LeastAllocated"),
+					Resources: []types.ResourceWeight{
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
+				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2519,6 +2548,35 @@ func TestCheckRequestSnapshot_UpdateClusterConfig(t *testing.T) {
 		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
 			Tier: types.ProvisionedControlPlaneTier("standard"),
 		},
+		KubeApiServerConfig: &types.KubeApiServerConfigRequest{
+			EventTtl: ptr.String("__EventTtl__"),
+			ServiceNodePortRange: &types.ServiceNodePortRange{
+				MinPort: 1,
+				MaxPort: 1,
+			},
+		},
+		KubeSchedulerConfig: &types.KubeSchedulerConfigRequest{
+			NodeResourcesFit: &types.NodeResourcesFitConfig{
+				ScoringStrategy: &types.ScoringStrategy{
+					Type: types.ScoringStrategyType("LeastAllocated"),
+					Resources: []types.ResourceWeight{
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
+				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3240,6 +3298,35 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 		DeletionProtection: ptr.Bool(true),
 		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
 			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+		KubeApiServerConfig: &types.KubeApiServerConfigRequest{
+			EventTtl: ptr.String("__EventTtl__"),
+			ServiceNodePortRange: &types.ServiceNodePortRange{
+				MinPort: 1,
+				MaxPort: 1,
+			},
+		},
+		KubeSchedulerConfig: &types.KubeSchedulerConfigRequest{
+			NodeResourcesFit: &types.NodeResourcesFitConfig{
+				ScoringStrategy: &types.ScoringStrategy{
+					Type: types.ScoringStrategyType("LeastAllocated"),
+					Resources: []types.ResourceWeight{
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
+				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5089,6 +5176,35 @@ func TestUpdateRequestSnapshot_UpdateClusterConfig(t *testing.T) {
 		DeletionProtection: ptr.Bool(true),
 		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
 			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+		KubeApiServerConfig: &types.KubeApiServerConfigRequest{
+			EventTtl: ptr.String("__EventTtl__"),
+			ServiceNodePortRange: &types.ServiceNodePortRange{
+				MinPort: 1,
+				MaxPort: 1,
+			},
+		},
+		KubeSchedulerConfig: &types.KubeSchedulerConfigRequest{
+			NodeResourcesFit: &types.NodeResourcesFitConfig{
+				ScoringStrategy: &types.ScoringStrategy{
+					Type: types.ScoringStrategyType("LeastAllocated"),
+					Resources: []types.ResourceWeight{
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Weight: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
+				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

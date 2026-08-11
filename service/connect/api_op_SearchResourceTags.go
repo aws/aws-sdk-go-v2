@@ -66,6 +66,8 @@ type SearchResourceTagsInput struct {
 	//   - flow- module
 	//
 	//   - transfer-destination (also known as quick connect)
+	//
+	//   - metric
 	ResourceTypes []string
 
 	// The search criteria to be used to return tags.

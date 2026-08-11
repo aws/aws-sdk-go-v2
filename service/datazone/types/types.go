@@ -624,6 +624,9 @@ type AssetScope struct {
 	// The error message of the asset scope.
 	ErrorMessage *string
 
+	// The name of the materialized asset scope.
+	ScopeName *string
+
 	noSmithyDocumentSerde
 }
 

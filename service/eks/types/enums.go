@@ -967,6 +967,25 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	}
 }
 
+type ScoringStrategyType string
+
+// Enum values for ScoringStrategyType
+const (
+	ScoringStrategyTypeLeastAllocated ScoringStrategyType = "LeastAllocated"
+	ScoringStrategyTypeMostAllocated  ScoringStrategyType = "MostAllocated"
+)
+
+// Values returns all known values for ScoringStrategyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScoringStrategyType) Values() []ScoringStrategyType {
+	return []ScoringStrategyType{
+		"LeastAllocated",
+		"MostAllocated",
+	}
+}
+
 type SpreadLevel string
 
 // Enum values for SpreadLevel
@@ -1100,6 +1119,9 @@ const (
 	UpdateParamTypeWarmPoolState                    UpdateParamType = "WarmPoolState"
 	UpdateParamTypeWarmPoolReuseOnScaleIn           UpdateParamType = "WarmPoolReuseOnScaleIn"
 	UpdateParamTypeControlPlaneEgressMode           UpdateParamType = "ControlPlaneEgressMode"
+	UpdateParamTypeKubeApiServerConfig              UpdateParamType = "KubeApiServerConfig"
+	UpdateParamTypeKubeSchedulerConfig              UpdateParamType = "KubeSchedulerConfig"
+	UpdateParamTypeKubeControllerManagerConfig      UpdateParamType = "KubeControllerManagerConfig"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -1159,6 +1181,9 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"WarmPoolState",
 		"WarmPoolReuseOnScaleIn",
 		"ControlPlaneEgressMode",
+		"KubeApiServerConfig",
+		"KubeSchedulerConfig",
+		"KubeControllerManagerConfig",
 	}
 }
 
@@ -1209,6 +1234,7 @@ const (
 	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
 	UpdateTypeControlPlaneEgressUpdate           UpdateType = "ControlPlaneEgressUpdate"
 	UpdateTypeVersionRollback                    UpdateType = "VersionRollback"
+	UpdateTypeControlPlaneComponentConfigUpdate  UpdateType = "ControlPlaneComponentConfigUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1237,6 +1263,7 @@ func (UpdateType) Values() []UpdateType {
 		"VendedLogsUpdate",
 		"ControlPlaneEgressUpdate",
 		"VersionRollback",
+		"ControlPlaneComponentConfigUpdate",
 	}
 }
 

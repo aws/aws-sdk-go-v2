@@ -2742,6 +2742,145 @@ func TestCheckRequestSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateMetric(t *testing.T) {
+	input := &CreateMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		Status:                 types.MetricStatus("PUBLISHED"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Description:            ptr.String("__Description__"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMetric"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateNotification(t *testing.T) {
 	input := &CreateNotificationInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -4631,6 +4770,34 @@ func TestCheckRequestSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteMetric(t *testing.T) {
+	input := &DeleteMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetric"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteNotification(t *testing.T) {
 	input := &DeleteNotificationInput{
 		InstanceId:     ptr.String("__InstanceId__"),
@@ -5727,6 +5894,34 @@ func TestCheckRequestSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInstanceStorageConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeMetric(t *testing.T) {
+	input := &DescribeMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeMetric"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8647,6 +8842,36 @@ func TestCheckRequestSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListMetrics(t *testing.T) {
+	input := &ListMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Type:       types.MetricType("AWS_MANAGED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListMetrics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMetrics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListNotifications(t *testing.T) {
 	input := &ListNotificationsInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -11219,6 +11444,94 @@ func TestCheckRequestSnapshot_SearchHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchHoursOfOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SearchMetrics(t *testing.T) {
+	input := &SearchMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.MetricSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.MetricSearchCriteria{
+			OrConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			BooleanCondition: &types.BooleanCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				ComparisonType: types.BooleanComparisonType("IS_TRUE"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchMetrics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchMetrics"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15554,6 +15867,169 @@ func TestCheckRequestSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInstanceStorageConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateMetricContent(t *testing.T) {
+	input := &UpdateMetricContentInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetricContent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetricContent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateMetricMetadata(t *testing.T) {
+	input := &UpdateMetricMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		MetricId:    ptr.String("__MetricId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetricMetadata(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetricMetadata"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -20018,6 +20494,145 @@ func TestUpdateRequestSnapshot_CreateIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateMetric(t *testing.T) {
+	input := &CreateMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		Status:                 types.MetricStatus("PUBLISHED"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Description:            ptr.String("__Description__"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMetric"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateNotification(t *testing.T) {
 	input := &CreateNotificationInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -21907,6 +22522,34 @@ func TestUpdateRequestSnapshot_DeleteIntegrationAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteMetric(t *testing.T) {
+	input := &DeleteMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetric"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteNotification(t *testing.T) {
 	input := &DeleteNotificationInput{
 		InstanceId:     ptr.String("__InstanceId__"),
@@ -23003,6 +23646,34 @@ func TestUpdateRequestSnapshot_DescribeInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInstanceStorageConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeMetric(t *testing.T) {
+	input := &DescribeMetricInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeMetric(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeMetric"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25923,6 +26594,36 @@ func TestUpdateRequestSnapshot_ListLexBots(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListMetrics(t *testing.T) {
+	input := &ListMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Type:       types.MetricType("AWS_MANAGED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListMetrics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListMetrics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListNotifications(t *testing.T) {
 	input := &ListNotificationsInput{
 		InstanceId: ptr.String("__InstanceId__"),
@@ -28495,6 +29196,94 @@ func TestUpdateRequestSnapshot_SearchHoursOfOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchHoursOfOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchMetrics(t *testing.T) {
+	input := &SearchMetricsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SearchFilter: &types.MetricSearchFilter{
+			TagFilter: &types.ControlPlaneTagFilter{
+				OrConditions: [][]types.TagCondition{
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+					{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				AndConditions: []types.TagCondition{
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+					{
+						TagKey:   ptr.String("__TagKey__"),
+						TagValue: ptr.String("__TagValue__"),
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
+		SearchCriteria: &types.MetricSearchCriteria{
+			OrConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			AndConditions: []types.MetricSearchCriteria{
+				{},
+				{},
+			},
+			StringCondition: &types.StringCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				Value:          ptr.String("__Value__"),
+				ComparisonType: types.StringComparisonType("STARTS_WITH"),
+			},
+			BooleanCondition: &types.BooleanCondition{
+				FieldName:      ptr.String("__FieldName__"),
+				ComparisonType: types.BooleanComparisonType("IS_TRUE"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchMetrics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchMetrics"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -32830,6 +33619,169 @@ func TestUpdateRequestSnapshot_UpdateInstanceStorageConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInstanceStorageConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateMetricContent(t *testing.T) {
+	input := &UpdateMetricContentInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MetricId:   ptr.String("__MetricId__"),
+		MetricCalculation: &types.MetricCalculation{
+			CalculationComponents: []types.CalculationComponent{
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+				{
+					Alias:      ptr.String("__Alias__"),
+					MetricName: ptr.String("__MetricName__"),
+					MetricId:   ptr.String("__MetricId__"),
+					MetricFilters: []types.MetricFilter{
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+						{
+							MetricFilterKey: ptr.String("__MetricFilterKey__"),
+							Negate:          true,
+							NumberCondition: &types.MetricFilterNumberCondition{
+								Comparison: types.MetricFilterNumberConditionComparison("LESSER"),
+								Values: []float64{
+									1.0,
+									1.0,
+								},
+							},
+							StringCondition: &types.MetricFilterStringCondition{
+								Comparison: types.MetricFilterStringConditionComparison("MATCHES_ANY"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							BooleanCondition: &types.MetricFilterBooleanCondition{
+								Comparison: types.MetricFilterBooleanConditionComparison("IS_TRUE"),
+							},
+						},
+					},
+				},
+			},
+			Calculation: ptr.String("__Calculation__"),
+		},
+		Unit:                   types.MetricUnit("INTEGER"),
+		PositiveTrendIndicator: types.TrendIndicator("POSITIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetricContent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetricContent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateMetricMetadata(t *testing.T) {
+	input := &UpdateMetricMetadataInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		MetricId:    ptr.String("__MetricId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetricMetadata(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetricMetadata"); err != nil {
 		t.Fatal(err)
 	}
 }

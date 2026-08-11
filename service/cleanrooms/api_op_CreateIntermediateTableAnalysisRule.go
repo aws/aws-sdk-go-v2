@@ -9,9 +9,7 @@ import (
 )
 
 // Creates an analysis rule for an intermediate table. Only the CUSTOM analysis
-// rule type is supported. The service automatically determines whether the rule is
-// first-party or multi-party restricted based on the intermediate table's
-// inherited constraints. Only the intermediate table owner can call this
+// rule type is supported. Only the intermediate table owner can call this
 // operation.
 func (c *Client) CreateIntermediateTableAnalysisRule(ctx context.Context, params *CreateIntermediateTableAnalysisRuleInput, optFns ...func(*Options)) (*CreateIntermediateTableAnalysisRuleOutput, error) {
 	if params == nil {

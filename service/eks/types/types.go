@@ -318,6 +318,15 @@ type AddonVersionInfo struct {
 	noSmithyDocumentSerde
 }
 
+// A constraint specifying the allowed values for a parameter.
+type AllowedValuesConstraint struct {
+
+	// The list of allowed values.
+	AllowedValues []string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for integrating Argo CD with IAM Identity CenterIAM; Identity
 // Center. This allows you to use your organization's identity provider for
 // authentication to Argo CD.
@@ -771,6 +780,15 @@ type Cluster struct {
 	// The identity provider information for the cluster.
 	Identity *Identity
 
+	// The Kubernetes API server configuration for the cluster.
+	KubeApiServerConfig *KubeApiServerConfigResponse
+
+	// The Kubernetes controller manager configuration for the cluster.
+	KubeControllerManagerConfig *KubeControllerManagerConfigResponse
+
+	// The Kubernetes scheduler configuration for the cluster.
+	KubeSchedulerConfig *KubeSchedulerConfigResponse
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *KubernetesNetworkConfigResponse
 
@@ -874,6 +892,14 @@ type ClusterVersionInformation struct {
 
 	// The Kubernetes version for the cluster.
 	ClusterVersion *string
+
+	// The default control plane component configuration and constraints for this
+	// Kubernetes version.
+	ControlPlaneComponentConfig *ControlPlaneConfigInfo
+
+	// The available provisioned control plane scaling tiers and their capabilities
+	// for this Kubernetes version.
+	ControlPlaneScalingTiers []ControlPlaneScalingTierInfo
 
 	// Default platform version for this Kubernetes version.
 	DefaultPlatformVersion *string
@@ -1005,6 +1031,21 @@ type ConnectorConfigResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The control plane component configuration defaults and constraints.
+type ControlPlaneConfigInfo struct {
+
+	// The Kubernetes API server configuration defaults and constraints.
+	KubeApiServerConfig *KubeApiServerVersionConfig
+
+	// The Kubernetes controller manager configuration defaults and constraints.
+	KubeControllerManagerConfig *KubeControllerManagerVersionConfig
+
+	// The Kubernetes scheduler configuration defaults and constraints.
+	KubeSchedulerConfig *KubeSchedulerVersionConfig
+
+	noSmithyDocumentSerde
+}
+
 // The placement configuration for all the control plane instances of your local
 // Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see [Capacity considerations]
 // in the Amazon EKS User Guide.
@@ -1053,6 +1094,28 @@ type ControlPlaneScalingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a provisioned control plane scaling tier.
+type ControlPlaneScalingTierInfo struct {
+
+	// The maximum API request concurrency supported by this tier.
+	ApiRequestConcurrency *int32
+
+	// The maximum cluster database size in GB supported by this tier.
+	ClusterDatabaseSizeGb *int32
+
+	// The control plane component configuration overrides specific to this scaling
+	// tier.
+	ControlPlaneComponentConfigOverrides *ControlPlaneConfigInfo
+
+	// The maximum pod scheduling rate per second supported by this tier.
+	PodSchedulingRatePerSecond *int32
+
+	// The name of the scaling tier.
+	TierName *string
+
+	noSmithyDocumentSerde
+}
+
 // The access configuration information for the cluster.
 type CreateAccessConfigRequest struct {
 
@@ -1089,6 +1152,30 @@ type DeprecationDetail struct {
 
 	// The deprecated version of the resource.
 	Usage *string
+
+	noSmithyDocumentSerde
+}
+
+// Constraints for a duration parameter.
+type DurationConstraints struct {
+
+	// The maximum allowed duration value.
+	Max *string
+
+	// The minimum allowed duration value.
+	Min *string
+
+	noSmithyDocumentSerde
+}
+
+// A duration parameter configuration with default value and constraints.
+type DurationParameterConfig struct {
+
+	// The constraints for the duration parameter.
+	Constraints *DurationConstraints
+
+	// The default value for the duration parameter.
+	DefaultValue *string
 
 	noSmithyDocumentSerde
 }
@@ -1333,6 +1420,36 @@ type FargateProfileSelector struct {
 	noSmithyDocumentSerde
 }
 
+// The horizontal pod autoscaler controller configuration for the Kubernetes
+// controller manager.
+type HorizontalPodAutoscalerControllerConfigRequest struct {
+
+	// The interval between each sync of the horizontal pod autoscaler. Valid values
+	// are single-unit durations such as 15s or 1m .
+	HorizontalPodAutoscalerSyncPeriod *string
+
+	noSmithyDocumentSerde
+}
+
+// The horizontal pod autoscaler controller configuration for the Kubernetes
+// controller manager.
+type HorizontalPodAutoscalerControllerConfigResponse struct {
+
+	// The interval between each sync of the horizontal pod autoscaler.
+	HorizontalPodAutoscalerSyncPeriod *string
+
+	noSmithyDocumentSerde
+}
+
+// The horizontal pod autoscaler controller version configuration.
+type HorizontalPodAutoscalerControllerVersionConfig struct {
+
+	// The HPA sync period configuration with default value and constraints.
+	HorizontalPodAutoscalerSyncPeriod *DurationParameterConfig
+
+	noSmithyDocumentSerde
+}
+
 // An object representing an identity provider.
 type Identity struct {
 
@@ -1513,6 +1630,18 @@ type InsightSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An integer range constraint specifying minimum and maximum allowed values.
+type IntegerRangeConstraint struct {
+
+	// The maximum allowed value.
+	Max *int32
+
+	// The minimum allowed value.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
 // An object representing an issue with an Amazon EKS resource.
 type Issue struct {
 
@@ -1593,6 +1722,74 @@ type Issue struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the Kubernetes API server on an Amazon EKS cluster.
+type KubeApiServerConfigRequest struct {
+
+	// The duration that Kubernetes events are retained. Valid values are single-unit
+	// durations such as 30m or 1h .
+	EventTtl *string
+
+	// The port range for NodePort services.
+	ServiceNodePortRange *ServiceNodePortRange
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes API server configuration for an Amazon EKS cluster.
+type KubeApiServerConfigResponse struct {
+
+	// The duration that Kubernetes events are retained.
+	EventTtl *string
+
+	// The port range for NodePort services.
+	ServiceNodePortRange *ServiceNodePortRange
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes API server version-specific configuration defaults and
+// constraints.
+type KubeApiServerVersionConfig struct {
+
+	// The event TTL configuration with default value and constraints.
+	EventTtl *DurationParameterConfig
+
+	// The service node port range configuration with default value and constraints.
+	ServiceNodePortRange *PortRangeParameterConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the Kubernetes controller manager on an Amazon EKS
+// cluster.
+type KubeControllerManagerConfigRequest struct {
+
+	// The horizontal pod autoscaler controller configuration.
+	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerConfigRequest
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes controller manager configuration for an Amazon EKS cluster.
+type KubeControllerManagerConfigResponse struct {
+
+	// The horizontal pod autoscaler controller configuration.
+	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerConfigResponse
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes controller manager version-specific configuration defaults and
+// constraints.
+type KubeControllerManagerVersionConfig struct {
+
+	// The horizontal pod autoscaler controller configuration with default value and
+	// constraints.
+	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerVersionConfig
+
+	noSmithyDocumentSerde
+}
+
 // The Kubernetes network configuration for the cluster.
 type KubernetesNetworkConfigRequest struct {
 
@@ -1669,6 +1866,34 @@ type KubernetesNetworkConfigResponse struct {
 	// range ( fc00::/7 ) because you can't specify a custom IPv6 CIDR block when you
 	// create the cluster.
 	ServiceIpv6Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the Kubernetes scheduler on an Amazon EKS cluster.
+type KubeSchedulerConfigRequest struct {
+
+	// The node resource fit scoring configuration for the scheduler.
+	NodeResourcesFit *NodeResourcesFitConfig
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes scheduler configuration for an Amazon EKS cluster.
+type KubeSchedulerConfigResponse struct {
+
+	// The node resource fit scoring configuration for the scheduler.
+	NodeResourcesFit *NodeResourcesFitConfig
+
+	noSmithyDocumentSerde
+}
+
+// The Kubernetes scheduler version-specific configuration defaults and
+// constraints.
+type KubeSchedulerVersionConfig struct {
+
+	// The NodeResourcesFit configuration with default value and constraints.
+	NodeResourcesFit *NodeResourcesFitVersionConfig
 
 	noSmithyDocumentSerde
 }
@@ -2039,6 +2264,24 @@ type NodeRepairConfigOverrides struct {
 	noSmithyDocumentSerde
 }
 
+// The NodeResourcesFit plugin configuration for the Kubernetes scheduler.
+type NodeResourcesFitConfig struct {
+
+	// The scoring strategy used to rank nodes during scheduling.
+	ScoringStrategy *ScoringStrategy
+
+	noSmithyDocumentSerde
+}
+
+// The NodeResourcesFit version configuration with default value and constraints.
+type NodeResourcesFitVersionConfig struct {
+
+	// The scoring strategy configuration with default value and constraints.
+	ScoringStrategy *ScoringStrategyConfig
+
+	noSmithyDocumentSerde
+}
+
 // An object representing the [OpenID Connect] (OIDC) identity provider information for the
 // cluster.
 //
@@ -2398,6 +2641,30 @@ type PodIdentityAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Constraints for a port range parameter.
+type PortRangeConstraints struct {
+
+	// The constraints for the maximum port value.
+	MaxPort *IntegerRangeConstraint
+
+	// The constraints for the minimum port value.
+	MinPort *IntegerRangeConstraint
+
+	noSmithyDocumentSerde
+}
+
+// A port range parameter configuration with default value and constraints.
+type PortRangeParameterConfig struct {
+
+	// The constraints for the port range parameter.
+	Constraints *PortRangeConstraints
+
+	// The default port range value.
+	DefaultValue *ServiceNodePortRange
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the Key Management Service (KMS) key used to encrypt the secrets.
 type Provider struct {
 
@@ -2625,6 +2892,30 @@ type RemotePodNetwork struct {
 	noSmithyDocumentSerde
 }
 
+// Constraints for resource weight entries.
+type ResourceConstraints struct {
+
+	// The allowed values for resource names.
+	Name *AllowedValuesConstraint
+
+	// The allowed range for resource weight values.
+	Weight *IntegerRangeConstraint
+
+	noSmithyDocumentSerde
+}
+
+// A resource weight entry for the scheduler scoring strategy.
+type ResourceWeight struct {
+
+	// The name of the resource (for example, cpu or memory ).
+	Name *string
+
+	// The weight assigned to the resource for scoring. Must be between 1 and 100.
+	Weight *int32
+
+	noSmithyDocumentSerde
+}
+
 // The rollback configuration for the cluster version rollback.
 type RollbackConfig struct {
 
@@ -2633,6 +2924,54 @@ type RollbackConfig struct {
 	// specify, but can occur shortly thereafter. This value can be between 120 (2
 	// hours) and 10080 (7 days). Default: 720 (12 hours) if not specified.
 	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// The scoring strategy configuration for the NodeResourcesFit scheduler plugin.
+type ScoringStrategy struct {
+
+	// The resource weights used for scoring nodes.
+	Resources []ResourceWeight
+
+	// The scoring strategy type. Valid values are LeastAllocated or MostAllocated .
+	Type ScoringStrategyType
+
+	noSmithyDocumentSerde
+}
+
+// The scoring strategy configuration with default value and constraints.
+type ScoringStrategyConfig struct {
+
+	// The constraints for the scoring strategy.
+	Constraints *ScoringStrategyConstraints
+
+	// The default scoring strategy.
+	DefaultValue *ScoringStrategy
+
+	noSmithyDocumentSerde
+}
+
+// Constraints for the scoring strategy configuration.
+type ScoringStrategyConstraints struct {
+
+	// The constraints for resource weights.
+	Resources *ResourceConstraints
+
+	// The allowed values for the scoring strategy type.
+	ScoringStrategy *AllowedValuesConstraint
+
+	noSmithyDocumentSerde
+}
+
+// The port range for Kubernetes NodePort services.
+type ServiceNodePortRange struct {
+
+	// The maximum port number in the range.
+	MaxPort int32
+
+	// The minimum port number in the range.
+	MinPort int32
 
 	noSmithyDocumentSerde
 }

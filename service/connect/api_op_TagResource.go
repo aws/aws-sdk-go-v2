@@ -11,7 +11,8 @@ import (
 //
 // Some of the supported resource types are agents, routing profiles, queues,
 // quick connects, flows, agent statuses, hours of operation, phone numbers,
-// security profiles, and task templates. For a complete list, see [Tagging resources in Connect Customer].
+// security profiles, task templates, and custom metrics. For a complete list, see [Tagging resources in Connect Customer]
+// .
 //
 // For sample policies that use tags, see [Connect Customer Identity-Based Policy Examples] in the Connect Customer Administrator
 // Guide.

@@ -16396,6 +16396,16 @@ loop:
 			uv = &types.AgentTracesConfigMemberCloudwatchLogs{Value: mv}
 			break loop
 
+		case "onlineEvaluation":
+			var mv types.OnlineEvaluationTraceConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOnlineEvaluationTraceConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AgentTracesConfigMemberOnlineEvaluation{Value: mv}
+			break loop
+
 		case "sessionSpans":
 			var mv []document.Interface
 			if err := awsRestjson1_deserializeDocumentSpans(&mv, value); err != nil {
@@ -22392,6 +22402,72 @@ func awsRestjson1_deserializeDocumentOnlineEvaluationConfigSource(v **types.Onli
 		case "timeRange":
 			if err := awsRestjson1_deserializeDocumentSessionFilterConfig(&sv.TimeRange, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOnlineEvaluationTraceConfig(v **types.OnlineEvaluationTraceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OnlineEvaluationTraceConfig
+	if *v == nil {
+		sv = &types.OnlineEvaluationTraceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
+			}
+
+		case "onlineEvaluationConfigArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OnlineEvaluationConfigArn to be of type string, got %T instead", value)
+				}
+				sv.OnlineEvaluationConfigArn = ptr.String(jtv)
+			}
+
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartTime = ptr.Time(t)
 			}
 
 		default:

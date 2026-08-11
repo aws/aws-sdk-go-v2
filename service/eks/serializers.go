@@ -944,9 +944,30 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.KubeApiServerConfig != nil {
+		ok := object.Key("kubeApiServerConfig")
+		if err := awsRestjson1_serializeDocumentKubeApiServerConfigRequest(v.KubeApiServerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KubeControllerManagerConfig != nil {
+		ok := object.Key("kubeControllerManagerConfig")
+		if err := awsRestjson1_serializeDocumentKubeControllerManagerConfigRequest(v.KubeControllerManagerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KubernetesNetworkConfig != nil {
 		ok := object.Key("kubernetesNetworkConfig")
 		if err := awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v.KubernetesNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KubeSchedulerConfig != nil {
+		ok := object.Key("kubeSchedulerConfig")
+		if err := awsRestjson1_serializeDocumentKubeSchedulerConfigRequest(v.KubeSchedulerConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -5681,9 +5702,30 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		ok.Boolean(*v.DeletionProtection)
 	}
 
+	if v.KubeApiServerConfig != nil {
+		ok := object.Key("kubeApiServerConfig")
+		if err := awsRestjson1_serializeDocumentKubeApiServerConfigRequest(v.KubeApiServerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KubeControllerManagerConfig != nil {
+		ok := object.Key("kubeControllerManagerConfig")
+		if err := awsRestjson1_serializeDocumentKubeControllerManagerConfigRequest(v.KubeControllerManagerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KubernetesNetworkConfig != nil {
 		ok := object.Key("kubernetesNetworkConfig")
 		if err := awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v.KubernetesNetworkConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KubeSchedulerConfig != nil {
+		ok := object.Key("kubeSchedulerConfig")
+		if err := awsRestjson1_serializeDocumentKubeSchedulerConfigRequest(v.KubeSchedulerConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -6735,6 +6777,18 @@ func awsRestjson1_serializeDocumentFargateProfileSelectors(v []types.FargateProf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHorizontalPodAutoscalerControllerConfigRequest(v *types.HorizontalPodAutoscalerControllerConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HorizontalPodAutoscalerSyncPeriod != nil {
+		ok := object.Key("horizontalPodAutoscalerSyncPeriod")
+		ok.String(*v.HorizontalPodAutoscalerSyncPeriod)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdentityProviderConfig(v *types.IdentityProviderConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6791,6 +6845,39 @@ func awsRestjson1_serializeDocumentInsightStatusValueList(v []types.InsightStatu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKubeApiServerConfigRequest(v *types.KubeApiServerConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventTtl != nil {
+		ok := object.Key("eventTtl")
+		ok.String(*v.EventTtl)
+	}
+
+	if v.ServiceNodePortRange != nil {
+		ok := object.Key("serviceNodePortRange")
+		if err := awsRestjson1_serializeDocumentServiceNodePortRange(v.ServiceNodePortRange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKubeControllerManagerConfigRequest(v *types.KubeControllerManagerConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HorizontalPodAutoscalerControllerConfig != nil {
+		ok := object.Key("horizontalPodAutoscalerControllerConfig")
+		if err := awsRestjson1_serializeDocumentHorizontalPodAutoscalerControllerConfigRequest(v.HorizontalPodAutoscalerControllerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v *types.KubernetesNetworkConfigRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6810,6 +6897,20 @@ func awsRestjson1_serializeDocumentKubernetesNetworkConfigRequest(v *types.Kuber
 	if v.ServiceIpv4Cidr != nil {
 		ok := object.Key("serviceIpv4Cidr")
 		ok.String(*v.ServiceIpv4Cidr)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKubeSchedulerConfigRequest(v *types.KubeSchedulerConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NodeResourcesFit != nil {
+		ok := object.Key("nodeResourcesFit")
+		if err := awsRestjson1_serializeDocumentNodeResourcesFitConfig(v.NodeResourcesFit, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7039,6 +7140,20 @@ func awsRestjson1_serializeDocumentNodeRepairConfigOverridesList(v []types.NodeR
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNodeResourcesFitConfig(v *types.NodeResourcesFitConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScoringStrategy != nil {
+		ok := object.Key("scoringStrategy")
+		if err := awsRestjson1_serializeDocumentScoringStrategy(v.ScoringStrategy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOidcIdentityProviderConfigRequest(v *types.OidcIdentityProviderConfigRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7243,6 +7358,36 @@ func awsRestjson1_serializeDocumentRequiredClaimsMap(v map[string]string, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentResourceWeight(v *types.ResourceWeight, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Weight != nil {
+		ok := object.Key("weight")
+		ok.Integer(*v.Weight)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceWeightList(v []types.ResourceWeight, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourceWeight(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRollbackConfig(v *types.RollbackConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7250,6 +7395,42 @@ func awsRestjson1_serializeDocumentRollbackConfig(v *types.RollbackConfig, value
 	if v.TimeoutMinutes != nil {
 		ok := object.Key("timeoutMinutes")
 		ok.Integer(*v.TimeoutMinutes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScoringStrategy(v *types.ScoringStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Resources != nil {
+		ok := object.Key("resources")
+		if err := awsRestjson1_serializeDocumentResourceWeightList(v.Resources, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceNodePortRange(v *types.ServiceNodePortRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxPort != 0 {
+		ok := object.Key("maxPort")
+		ok.Integer(v.MaxPort)
+	}
+
+	if v.MinPort != 0 {
+		ok := object.Key("minPort")
+		ok.Integer(v.MinPort)
 	}
 
 	return nil

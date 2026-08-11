@@ -6838,6 +6838,12 @@ func awsRestjson1_serializeDocumentAgentTracesConfig(v types.AgentTracesConfig, 
 			return err
 		}
 
+	case *types.AgentTracesConfigMemberOnlineEvaluation:
+		av := object.Key("onlineEvaluation")
+		if err := awsRestjson1_serializeDocumentOnlineEvaluationTraceConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AgentTracesConfigMemberSessionSpans:
 		av := object.Key("sessionSpans")
 		if err := awsRestjson1_serializeDocumentSpans(uv.Value, av); err != nil {
@@ -9747,6 +9753,28 @@ func awsRestjson1_serializeDocumentOnlineEvaluationConfigSource(v *types.OnlineE
 		if err := awsRestjson1_serializeDocumentSessionFilterConfig(v.TimeRange, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOnlineEvaluationTraceConfig(v *types.OnlineEvaluationTraceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.OnlineEvaluationConfigArn != nil {
+		ok := object.Key("onlineEvaluationConfigArn")
+		ok.String(*v.OnlineEvaluationConfigArn)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
 	}
 
 	return nil

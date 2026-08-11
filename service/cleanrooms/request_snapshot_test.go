@@ -1550,6 +1550,34 @@ func TestCheckRequestSnapshot_DisallowIntermediateTable(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAnalysisLogExport(t *testing.T) {
+	input := &GetAnalysisLogExportInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		AnalysisLogExportIdentifier: ptr.String("__AnalysisLogExportIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAnalysisLogExport(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAnalysisLogExport"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAnalysisTemplate(t *testing.T) {
 	input := &GetAnalysisTemplateInput{
 		MembershipIdentifier:       ptr.String("__MembershipIdentifier__"),
@@ -2162,6 +2190,37 @@ func TestCheckRequestSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSchemaAnalysisRule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAnalysisLogExports(t *testing.T) {
+	input := &ListAnalysisLogExportsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisIdentifier:   ptr.String("__AnalysisIdentifier__"),
+		Status:               types.AnalysisLogExportStatus("IN_PROGRESS"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAnalysisLogExports(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAnalysisLogExports"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2940,6 +2999,43 @@ func TestCheckRequestSnapshot_PreviewPrivacyImpact(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PreviewPrivacyImpact"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartAnalysisLogExport(t *testing.T) {
+	input := &StartAnalysisLogExportInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisId:           ptr.String("__AnalysisId__"),
+		AnalysisType:         types.LogExportAnalysisType("PROTECTED_QUERY"),
+		ResultConfiguration: &types.AnalysisLogExportResultConfiguration{
+			OutputConfiguration: &types.AnalysisLogExportOutputConfiguration{
+				S3: &types.AnalysisLogExportS3OutputConfiguration{
+					Bucket:    ptr.String("__Bucket__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAnalysisLogExport(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAnalysisLogExport"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5072,6 +5168,34 @@ func TestUpdateRequestSnapshot_DisallowIntermediateTable(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAnalysisLogExport(t *testing.T) {
+	input := &GetAnalysisLogExportInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		AnalysisLogExportIdentifier: ptr.String("__AnalysisLogExportIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAnalysisLogExport(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAnalysisLogExport"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAnalysisTemplate(t *testing.T) {
 	input := &GetAnalysisTemplateInput{
 		MembershipIdentifier:       ptr.String("__MembershipIdentifier__"),
@@ -5684,6 +5808,37 @@ func TestUpdateRequestSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSchemaAnalysisRule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAnalysisLogExports(t *testing.T) {
+	input := &ListAnalysisLogExportsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisIdentifier:   ptr.String("__AnalysisIdentifier__"),
+		Status:               types.AnalysisLogExportStatus("IN_PROGRESS"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAnalysisLogExports(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAnalysisLogExports"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6462,6 +6617,43 @@ func TestUpdateRequestSnapshot_PreviewPrivacyImpact(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PreviewPrivacyImpact"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartAnalysisLogExport(t *testing.T) {
+	input := &StartAnalysisLogExportInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisId:           ptr.String("__AnalysisId__"),
+		AnalysisType:         types.LogExportAnalysisType("PROTECTED_QUERY"),
+		ResultConfiguration: &types.AnalysisLogExportResultConfiguration{
+			OutputConfiguration: &types.AnalysisLogExportOutputConfiguration{
+				S3: &types.AnalysisLogExportS3OutputConfiguration{
+					Bucket:    ptr.String("__Bucket__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAnalysisLogExport(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAnalysisLogExport"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -1,0 +1,3 @@
+GET /entitlements/__EntitlementId__?applicationArn=__ApplicationArn__
+
+

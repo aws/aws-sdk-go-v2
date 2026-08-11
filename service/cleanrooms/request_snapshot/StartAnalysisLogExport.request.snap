@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/analysislogexports
+
+Content-Type: application/json
+
+{"analysisId":"__AnalysisId__","analysisType":"PROTECTED_QUERY","resultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__"}}}}

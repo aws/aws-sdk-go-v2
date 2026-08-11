@@ -99,6 +99,15 @@ type UpdateClusterConfigInput struct {
 	// normally.
 	DeletionProtection *bool
 
+	// The Kubernetes API server configuration for the updated cluster.
+	KubeApiServerConfig *types.KubeApiServerConfigRequest
+
+	// The Kubernetes controller manager configuration for the updated cluster.
+	KubeControllerManagerConfig *types.KubeControllerManagerConfigRequest
+
+	// The Kubernetes scheduler configuration for the updated cluster.
+	KubeSchedulerConfig *types.KubeSchedulerConfigRequest
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 

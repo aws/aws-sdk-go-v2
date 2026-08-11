@@ -2569,6 +2569,50 @@ func TestCheckResponseSnapshot_DisallowIntermediateTable(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAnalysisLogExport(t *testing.T) {
+	want := &GetAnalysisLogExportOutput{
+		AnalysisLogExport: &types.AnalysisLogExport{
+			AnalysisLogExportId: ptr.String("__AnalysisLogExportId__"),
+			AnalysisId:          ptr.String("__AnalysisId__"),
+			AnalysisType:        types.LogExportAnalysisType("PROTECTED_QUERY"),
+			MembershipId:        ptr.String("__MembershipId__"),
+			Status:              types.AnalysisLogExportStatus("IN_PROGRESS"),
+			ResultConfiguration: &types.AnalysisLogExportResultConfiguration{
+				OutputConfiguration: &types.AnalysisLogExportOutputConfiguration{
+					S3: &types.AnalysisLogExportS3OutputConfiguration{
+						Bucket:    ptr.String("__Bucket__"),
+						KeyPrefix: ptr.String("__KeyPrefix__"),
+					},
+				},
+			},
+			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Error: &types.AnalysisLogExportError{
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAnalysisLogExport.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAnalysisLogExport(context.Background(), &GetAnalysisLogExportInput{
+		MembershipIdentifier:        ptr.String("__MembershipIdentifier__"),
+		AnalysisLogExportIdentifier: ptr.String("__AnalysisLogExportIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAnalysisLogExport.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAnalysisTemplate(t *testing.T) {
 	want := &GetAnalysisTemplateOutput{
 		AnalysisTemplate: &types.AnalysisTemplate{
@@ -4235,6 +4279,49 @@ func TestCheckResponseSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSchemaAnalysisRule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAnalysisLogExports(t *testing.T) {
+	want := &ListAnalysisLogExportsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		AnalysisLogExports: []types.AnalysisLogExportSummary{
+			{
+				AnalysisLogExportId: ptr.String("__AnalysisLogExportId__"),
+				AnalysisId:          ptr.String("__AnalysisId__"),
+				AnalysisType:        types.LogExportAnalysisType("PROTECTED_QUERY"),
+				Status:              types.AnalysisLogExportStatus("IN_PROGRESS"),
+				CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AnalysisLogExportId: ptr.String("__AnalysisLogExportId__"),
+				AnalysisId:          ptr.String("__AnalysisId__"),
+				AnalysisType:        types.LogExportAnalysisType("PROTECTED_QUERY"),
+				Status:              types.AnalysisLogExportStatus("IN_PROGRESS"),
+				CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAnalysisLogExports.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAnalysisLogExports(context.Background(), &ListAnalysisLogExportsInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisIdentifier:   ptr.String("__AnalysisIdentifier__"),
+		Status:               types.AnalysisLogExportStatus("IN_PROGRESS"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAnalysisLogExports.response", err)
 	}
 }
 
@@ -6004,6 +6091,59 @@ func TestCheckResponseSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PreviewPrivacyImpact.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartAnalysisLogExport(t *testing.T) {
+	want := &StartAnalysisLogExportOutput{
+		AnalysisLogExport: &types.AnalysisLogExport{
+			AnalysisLogExportId: ptr.String("__AnalysisLogExportId__"),
+			AnalysisId:          ptr.String("__AnalysisId__"),
+			AnalysisType:        types.LogExportAnalysisType("PROTECTED_QUERY"),
+			MembershipId:        ptr.String("__MembershipId__"),
+			Status:              types.AnalysisLogExportStatus("IN_PROGRESS"),
+			ResultConfiguration: &types.AnalysisLogExportResultConfiguration{
+				OutputConfiguration: &types.AnalysisLogExportOutputConfiguration{
+					S3: &types.AnalysisLogExportS3OutputConfiguration{
+						Bucket:    ptr.String("__Bucket__"),
+						KeyPrefix: ptr.String("__KeyPrefix__"),
+					},
+				},
+			},
+			CreateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Error: &types.AnalysisLogExportError{
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartAnalysisLogExport.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartAnalysisLogExport(context.Background(), &StartAnalysisLogExportInput{
+		MembershipIdentifier: ptr.String("__MembershipIdentifier__"),
+		AnalysisId:           ptr.String("__AnalysisId__"),
+		AnalysisType:         types.LogExportAnalysisType("PROTECTED_QUERY"),
+		ResultConfiguration: &types.AnalysisLogExportResultConfiguration{
+			OutputConfiguration: &types.AnalysisLogExportOutputConfiguration{
+				S3: &types.AnalysisLogExportS3OutputConfiguration{
+					Bucket:    ptr.String("__Bucket__"),
+					KeyPrefix: ptr.String("__KeyPrefix__"),
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartAnalysisLogExport.response", err)
 	}
 }
 

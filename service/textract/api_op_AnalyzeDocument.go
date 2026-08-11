@@ -96,6 +96,15 @@ type AnalyzeDocumentInput struct {
 
 	// Sets the configuration for the human in the loop workflow for analyzing
 	// documents.
+	//
+	// Amazon Textract uses Amazon Augmented AI (A2I) to run the human review
+	// workflows that you specify in HumanLoopConfig . A2I entered maintenance mode in
+	// July 2026 and no longer accepts new customers. If your account is not an
+	// existing A2I customer, requests fail with an InvalidParameterException . For
+	// more information, see [AWS service availability]. If you're an existing A2I customer but receive this
+	// error, contact AWS Support and request assistance from the A2I team.
+	//
+	// [AWS service availability]: https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/
 	HumanLoopConfig *types.HumanLoopConfig
 
 	// Contains Queries and the alias for those Queries, as determined by the input.

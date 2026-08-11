@@ -1436,7 +1436,8 @@ type Geometry struct {
 	// Within the bounding box, a fine-grained polygon around the recognized item.
 	Polygon []Point
 
-	// Provides a numerical value corresponding to the rotation of the text.
+	// Provides a numerical value corresponding to the rotation of the WORD block.
+	// Possible values are 0, 90, 180, and 270.
 	RotationAngle *float32
 
 	noSmithyDocumentSerde
@@ -1528,6 +1529,15 @@ func (v *HumanLoopActivationOutput) Deserialize(d smithy.ShapeDeserializer) erro
 // Sets up the human review workflow the document will be sent to if one of the
 // conditions is met. You can also set certain attributes of the image before
 // review.
+//
+// Amazon Textract uses Amazon Augmented AI (A2I) to run the human review
+// workflows that you specify in HumanLoopConfig . A2I entered maintenance mode in
+// July 2026 and no longer accepts new customers. If your account is not an
+// existing A2I customer, requests fail with an InvalidParameterException . For
+// more information, see [AWS service availability]. If you're an existing A2I customer but receive this
+// error, contact AWS Support and request assistance from the A2I team.
+//
+// [AWS service availability]: https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/
 type HumanLoopConfig struct {
 
 	// The Amazon Resource Name (ARN) of the flow definition.

@@ -650,6 +650,26 @@ func (m *validateOpDisallowIntermediateTable) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAnalysisLogExport struct {
+}
+
+func (*validateOpGetAnalysisLogExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnalysisLogExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnalysisLogExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnalysisLogExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAnalysisTemplate struct {
 }
 
@@ -1085,6 +1105,26 @@ func (m *validateOpGetSchema) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAnalysisLogExports struct {
+}
+
+func (*validateOpListAnalysisLogExports) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnalysisLogExports) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnalysisLogExportsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnalysisLogExportsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1545,6 +1585,26 @@ func (m *validateOpPreviewPrivacyImpact) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPreviewPrivacyImpactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAnalysisLogExport struct {
+}
+
+func (*validateOpStartAnalysisLogExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAnalysisLogExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAnalysisLogExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAnalysisLogExportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2078,6 +2138,10 @@ func addOpDisallowIntermediateTableValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDisallowIntermediateTable{}, middleware.After)
 }
 
+func addOpGetAnalysisLogExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnalysisLogExport{}, middleware.After)
+}
+
 func addOpGetAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnalysisTemplate{}, middleware.After)
 }
@@ -2164,6 +2228,10 @@ func addOpGetSchemaAnalysisRuleValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSchema{}, middleware.After)
+}
+
+func addOpListAnalysisLogExportsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnalysisLogExports{}, middleware.After)
 }
 
 func addOpListAnalysisTemplatesValidationMiddleware(stack *middleware.Stack) error {
@@ -2256,6 +2324,10 @@ func addOpPopulateIntermediateTableValidationMiddleware(stack *middleware.Stack)
 
 func addOpPreviewPrivacyImpactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPreviewPrivacyImpact{}, middleware.After)
+}
+
+func addOpStartAnalysisLogExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAnalysisLogExport{}, middleware.After)
 }
 
 func addOpStartProtectedJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2444,6 +2516,59 @@ func validateAggregationConstraints(v []types.AggregationConstraint) error {
 		if err := validateAggregationConstraint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalysisLogExportOutputConfiguration(v *types.AnalysisLogExportOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisLogExportOutputConfiguration"}
+	if v.S3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3"))
+	} else if v.S3 != nil {
+		if err := validateAnalysisLogExportS3OutputConfiguration(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalysisLogExportResultConfiguration(v *types.AnalysisLogExportResultConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisLogExportResultConfiguration"}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateAnalysisLogExportOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalysisLogExportS3OutputConfiguration(v *types.AnalysisLogExportS3OutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisLogExportS3OutputConfiguration"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4888,6 +5013,24 @@ func validateOpDisallowIntermediateTableInput(v *DisallowIntermediateTableInput)
 	}
 }
 
+func validateOpGetAnalysisLogExportInput(v *GetAnalysisLogExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnalysisLogExportInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.AnalysisLogExportIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisLogExportIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAnalysisTemplateInput(v *GetAnalysisTemplateInput) error {
 	if v == nil {
 		return nil
@@ -5284,6 +5427,21 @@ func validateOpGetSchemaInput(v *GetSchemaInput) error {
 	}
 }
 
+func validateOpListAnalysisLogExportsInput(v *ListAnalysisLogExportsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnalysisLogExportsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAnalysisTemplatesInput(v *ListAnalysisTemplatesInput) error {
 	if v == nil {
 		return nil
@@ -5642,6 +5800,34 @@ func validateOpPreviewPrivacyImpactInput(v *PreviewPrivacyImpactInput) error {
 	} else if v.Parameters != nil {
 		if err := validatePreviewPrivacyImpactParametersInput(v.Parameters); err != nil {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAnalysisLogExportInput(v *StartAnalysisLogExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAnalysisLogExportInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
+	}
+	if len(v.AnalysisType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisType"))
+	}
+	if v.ResultConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultConfiguration"))
+	} else if v.ResultConfiguration != nil {
+		if err := validateAnalysisLogExportResultConfiguration(v.ResultConfiguration); err != nil {
+			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

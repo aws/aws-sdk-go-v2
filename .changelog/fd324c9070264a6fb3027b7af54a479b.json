@@ -1,0 +1,8 @@
+{
+    "id": "fd324c90-7026-4a6f-b302-7b7af54a479b",
+    "type": "feature",
+    "description": "This feature would give customers the ability to selectively tune certain configurations of Kubernetes control plane components in an Amazon EKS cluster.",
+    "modules": [
+        "service/eks"
+    ]
+}

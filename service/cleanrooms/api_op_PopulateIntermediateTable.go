@@ -8,10 +8,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Executes the stored query of an intermediate table to materialize data into
-// managed storage. With this operation, you can perform initial population and
-// subsequent refreshes. Each call creates a new version. The returned analysis ID
-// can be tracked using GetProtectedQuery . Only the intermediate table owner can
+// Runs the stored query of an intermediate table and makes the results available
+// for querying. Each call creates a new version. Use GetProtectedQuery with the
+// returned analysis ID to track progress. Only the intermediate table owner can
 // call this operation.
 func (c *Client) PopulateIntermediateTable(ctx context.Context, params *PopulateIntermediateTableInput, optFns ...func(*Options)) (*PopulateIntermediateTableOutput, error) {
 	if params == nil {
@@ -54,8 +53,8 @@ type PopulateIntermediateTableInput struct {
 
 type PopulateIntermediateTableOutput struct {
 
-	// The identifier for the protected query execution. Use this value with
-	// GetProtectedQuery to track the population progress.
+	// The identifier for the protected query execution that populated the
+	// intermediate table.
 	//
 	// This member is required.
 	AnalysisId *string

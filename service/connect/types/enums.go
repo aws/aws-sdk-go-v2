@@ -359,6 +359,25 @@ func (AutoEvaluationStatus) Values() []AutoEvaluationStatus {
 	}
 }
 
+type AvailableFilterType string
+
+// Enum values for AvailableFilterType
+const (
+	AvailableFilterTypeMetricLevel   AvailableFilterType = "METRIC_LEVEL"
+	AvailableFilterTypeResourceLevel AvailableFilterType = "RESOURCE_LEVEL"
+)
+
+// Values returns all known values for AvailableFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailableFilterType) Values() []AvailableFilterType {
+	return []AvailableFilterType{
+		"METRIC_LEVEL",
+		"RESOURCE_LEVEL",
+	}
+}
+
 type Behavior string
 
 // Enum values for Behavior
@@ -2397,6 +2416,150 @@ func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
 	return []MeetingFeatureStatus{
 		"AVAILABLE",
 		"UNAVAILABLE",
+	}
+}
+
+type MetricCreationMethod string
+
+// Enum values for MetricCreationMethod
+const (
+	MetricCreationMethodServiceLevelBuilder MetricCreationMethod = "SERVICE_LEVEL_BUILDER"
+	MetricCreationMethodMetricBuilder       MetricCreationMethod = "METRIC_BUILDER"
+)
+
+// Values returns all known values for MetricCreationMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricCreationMethod) Values() []MetricCreationMethod {
+	return []MetricCreationMethod{
+		"SERVICE_LEVEL_BUILDER",
+		"METRIC_BUILDER",
+	}
+}
+
+type MetricFilterBooleanConditionComparison string
+
+// Enum values for MetricFilterBooleanConditionComparison
+const (
+	MetricFilterBooleanConditionComparisonIsTrue  MetricFilterBooleanConditionComparison = "IS_TRUE"
+	MetricFilterBooleanConditionComparisonIsFalse MetricFilterBooleanConditionComparison = "IS_FALSE"
+)
+
+// Values returns all known values for MetricFilterBooleanConditionComparison.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterBooleanConditionComparison) Values() []MetricFilterBooleanConditionComparison {
+	return []MetricFilterBooleanConditionComparison{
+		"IS_TRUE",
+		"IS_FALSE",
+	}
+}
+
+type MetricFilterNumberConditionComparison string
+
+// Enum values for MetricFilterNumberConditionComparison
+const (
+	MetricFilterNumberConditionComparisonLesser         MetricFilterNumberConditionComparison = "LESSER"
+	MetricFilterNumberConditionComparisonLesserOrEqual  MetricFilterNumberConditionComparison = "LESSER_OR_EQUAL"
+	MetricFilterNumberConditionComparisonGreater        MetricFilterNumberConditionComparison = "GREATER"
+	MetricFilterNumberConditionComparisonGreaterOrEqual MetricFilterNumberConditionComparison = "GREATER_OR_EQUAL"
+)
+
+// Values returns all known values for MetricFilterNumberConditionComparison. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterNumberConditionComparison) Values() []MetricFilterNumberConditionComparison {
+	return []MetricFilterNumberConditionComparison{
+		"LESSER",
+		"LESSER_OR_EQUAL",
+		"GREATER",
+		"GREATER_OR_EQUAL",
+	}
+}
+
+type MetricFilterStringConditionComparison string
+
+// Enum values for MetricFilterStringConditionComparison
+const (
+	MetricFilterStringConditionComparisonMatchesAny  MetricFilterStringConditionComparison = "MATCHES_ANY"
+	MetricFilterStringConditionComparisonMatchesNone MetricFilterStringConditionComparison = "MATCHES_NONE"
+)
+
+// Values returns all known values for MetricFilterStringConditionComparison. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterStringConditionComparison) Values() []MetricFilterStringConditionComparison {
+	return []MetricFilterStringConditionComparison{
+		"MATCHES_ANY",
+		"MATCHES_NONE",
+	}
+}
+
+type MetricStatus string
+
+// Enum values for MetricStatus
+const (
+	MetricStatusPublished MetricStatus = "PUBLISHED"
+	MetricStatusSaved     MetricStatus = "SAVED"
+)
+
+// Values returns all known values for MetricStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatus) Values() []MetricStatus {
+	return []MetricStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeAwsManaged      MetricType = "AWS_MANAGED"
+	MetricTypeCustomerManaged MetricType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
+type MetricUnit string
+
+// Enum values for MetricUnit
+const (
+	MetricUnitInteger MetricUnit = "INTEGER"
+	MetricUnitDouble  MetricUnit = "DOUBLE"
+	MetricUnitPercent MetricUnit = "PERCENT"
+	MetricUnitSeconds MetricUnit = "SECONDS"
+)
+
+// Values returns all known values for MetricUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricUnit) Values() []MetricUnit {
+	return []MetricUnit{
+		"INTEGER",
+		"DOUBLE",
+		"PERCENT",
+		"SECONDS",
 	}
 }
 
@@ -4492,6 +4655,27 @@ func (TrafficType) Values() []TrafficType {
 	return []TrafficType{
 		"GENERAL",
 		"CAMPAIGN",
+	}
+}
+
+type TrendIndicator string
+
+// Enum values for TrendIndicator
+const (
+	TrendIndicatorPositive TrendIndicator = "POSITIVE"
+	TrendIndicatorNegative TrendIndicator = "NEGATIVE"
+	TrendIndicatorNeutral  TrendIndicator = "NEUTRAL"
+)
+
+// Values returns all known values for TrendIndicator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrendIndicator) Values() []TrendIndicator {
+	return []TrendIndicator{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
 	}
 }
 

@@ -204,6 +204,7 @@ func TestCheckResponseSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -245,6 +246,7 @@ func TestCheckResponseSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -673,6 +675,7 @@ func TestCheckResponseSnapshot_CancelSubscription(t *testing.T) {
 							"__Member__",
 						},
 						Status:       ptr.String("__Status__"),
+						ScopeName:    ptr.String("__ScopeName__"),
 						ErrorMessage: ptr.String("__ErrorMessage__"),
 					},
 					Permissions: &types.PermissionsMemberS3{
@@ -3121,6 +3124,7 @@ func TestCheckResponseSnapshot_CreateSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -3147,6 +3151,7 @@ func TestCheckResponseSnapshot_CreateSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -3250,6 +3255,7 @@ func TestCheckResponseSnapshot_CreateSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -3291,6 +3297,7 @@ func TestCheckResponseSnapshot_CreateSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -4231,6 +4238,7 @@ func TestCheckResponseSnapshot_DeleteSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -4257,6 +4265,7 @@ func TestCheckResponseSnapshot_DeleteSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -6655,6 +6664,7 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 							"__Member__",
 						},
 						Status:       ptr.String("__Status__"),
+						ScopeName:    ptr.String("__ScopeName__"),
 						ErrorMessage: ptr.String("__ErrorMessage__"),
 					},
 					Permissions: &types.PermissionsMemberS3{
@@ -6726,6 +6736,7 @@ func TestCheckResponseSnapshot_GetSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -6752,6 +6763,7 @@ func TestCheckResponseSnapshot_GetSubscriptionGrant(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -6837,6 +6849,7 @@ func TestCheckResponseSnapshot_GetSubscriptionRequestDetails(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -6878,6 +6891,7 @@ func TestCheckResponseSnapshot_GetSubscriptionRequestDetails(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -9347,6 +9361,7 @@ func TestCheckResponseSnapshot_ListSubscriptionGrants(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -9373,6 +9388,7 @@ func TestCheckResponseSnapshot_ListSubscriptionGrants(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -9419,6 +9435,7 @@ func TestCheckResponseSnapshot_ListSubscriptionGrants(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -9445,6 +9462,7 @@ func TestCheckResponseSnapshot_ListSubscriptionGrants(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -9546,6 +9564,7 @@ func TestCheckResponseSnapshot_ListSubscriptionRequests(t *testing.T) {
 										"__Member__",
 									},
 									Status:       ptr.String("__Status__"),
+									ScopeName:    ptr.String("__ScopeName__"),
 									ErrorMessage: ptr.String("__ErrorMessage__"),
 								},
 								Permissions: &types.PermissionsMemberS3{
@@ -9587,6 +9606,7 @@ func TestCheckResponseSnapshot_ListSubscriptionRequests(t *testing.T) {
 										"__Member__",
 									},
 									Status:       ptr.String("__Status__"),
+									ScopeName:    ptr.String("__ScopeName__"),
 									ErrorMessage: ptr.String("__ErrorMessage__"),
 								},
 								Permissions: &types.PermissionsMemberS3{
@@ -9669,6 +9689,7 @@ func TestCheckResponseSnapshot_ListSubscriptionRequests(t *testing.T) {
 										"__Member__",
 									},
 									Status:       ptr.String("__Status__"),
+									ScopeName:    ptr.String("__ScopeName__"),
 									ErrorMessage: ptr.String("__ErrorMessage__"),
 								},
 								Permissions: &types.PermissionsMemberS3{
@@ -9710,6 +9731,7 @@ func TestCheckResponseSnapshot_ListSubscriptionRequests(t *testing.T) {
 										"__Member__",
 									},
 									Status:       ptr.String("__Status__"),
+									ScopeName:    ptr.String("__ScopeName__"),
 									ErrorMessage: ptr.String("__ErrorMessage__"),
 								},
 								Permissions: &types.PermissionsMemberS3{
@@ -9914,6 +9936,7 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 									"__Member__",
 								},
 								Status:       ptr.String("__Status__"),
+								ScopeName:    ptr.String("__ScopeName__"),
 								ErrorMessage: ptr.String("__ErrorMessage__"),
 							},
 							Permissions: &types.PermissionsMemberS3{
@@ -9972,6 +9995,7 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 									"__Member__",
 								},
 								Status:       ptr.String("__Status__"),
+								ScopeName:    ptr.String("__ScopeName__"),
 								ErrorMessage: ptr.String("__ErrorMessage__"),
 							},
 							Permissions: &types.PermissionsMemberS3{
@@ -10570,6 +10594,7 @@ func TestCheckResponseSnapshot_RejectSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -10611,6 +10636,7 @@ func TestCheckResponseSnapshot_RejectSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -10767,6 +10793,7 @@ func TestCheckResponseSnapshot_RevokeSubscription(t *testing.T) {
 							"__Member__",
 						},
 						Status:       ptr.String("__Status__"),
+						ScopeName:    ptr.String("__ScopeName__"),
 						ErrorMessage: ptr.String("__ErrorMessage__"),
 					},
 					Permissions: &types.PermissionsMemberS3{
@@ -13796,6 +13823,7 @@ func TestCheckResponseSnapshot_UpdateSubscriptionGrantStatus(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -13822,6 +13850,7 @@ func TestCheckResponseSnapshot_UpdateSubscriptionGrantStatus(t *testing.T) {
 						"__Member__",
 					},
 					Status:       ptr.String("__Status__"),
+					ScopeName:    ptr.String("__ScopeName__"),
 					ErrorMessage: ptr.String("__ErrorMessage__"),
 				},
 				Permissions: &types.PermissionsMemberS3{
@@ -13913,6 +13942,7 @@ func TestCheckResponseSnapshot_UpdateSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{
@@ -13954,6 +13984,7 @@ func TestCheckResponseSnapshot_UpdateSubscriptionRequest(t *testing.T) {
 								"__Member__",
 							},
 							Status:       ptr.String("__Status__"),
+							ScopeName:    ptr.String("__ScopeName__"),
 							ErrorMessage: ptr.String("__ErrorMessage__"),
 						},
 						Permissions: &types.PermissionsMemberS3{

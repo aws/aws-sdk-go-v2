@@ -65,7 +65,9 @@ func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // Amazon Textract isn't able to read the document. For more information on the
-// document limits in Amazon Textract, see limits.
+// document limits in Amazon Textract, see [Hard limits].
+//
+// [Hard limits]: https://docs.aws.amazon.com/textract/latest/dg/limits.html
 type BadDocumentException struct {
 	Message *string
 

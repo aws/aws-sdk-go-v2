@@ -41,6 +41,9 @@ func ExampleAgentTracesConfig_outputUsage() {
 	case *types.AgentTracesConfigMemberCloudwatchLogs:
 		_ = v.Value // Value is types.CloudWatchLogsTraceConfig
 
+	case *types.AgentTracesConfigMemberOnlineEvaluation:
+		_ = v.Value // Value is types.OnlineEvaluationTraceConfig
+
 	case *types.AgentTracesConfigMemberSessionSpans:
 		_ = v.Value // Value is []document.Interface
 
@@ -55,6 +58,7 @@ func ExampleAgentTracesConfig_outputUsage() {
 
 var _ *types.CloudWatchLogsTraceConfig
 var _ *types.BatchEvaluationTraceConfig
+var _ *types.OnlineEvaluationTraceConfig
 var _ []document.Interface
 
 func ExampleBrowserAction_outputUsage() {

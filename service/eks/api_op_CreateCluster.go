@@ -132,6 +132,15 @@ type CreateClusterInput struct {
 	// The encryption configuration for the cluster.
 	EncryptionConfig []types.EncryptionConfig
 
+	// The Kubernetes API server configuration for the new cluster.
+	KubeApiServerConfig *types.KubeApiServerConfigRequest
+
+	// The Kubernetes controller manager configuration for the new cluster.
+	KubeControllerManagerConfig *types.KubeControllerManagerConfigRequest
+
+	// The Kubernetes scheduler configuration for the new cluster.
+	KubeSchedulerConfig *types.KubeSchedulerConfigRequest
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 

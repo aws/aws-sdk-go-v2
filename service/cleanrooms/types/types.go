@@ -179,6 +179,171 @@ type AggregationConstraint struct {
 	noSmithyDocumentSerde
 }
 
+// An export of the redacted Apache Spark logs for a protected query.
+type AnalysisLogExport struct {
+
+	// The unique identifier of the protected query that the analysis logs were
+	// exported for.
+	//
+	// This member is required.
+	AnalysisId *string
+
+	// The unique identifier of the analysis log export.
+	//
+	// This member is required.
+	AnalysisLogExportId *string
+
+	// The type of analysis that the logs were exported for. Currently, only
+	// PROTECTED_QUERY is supported.
+	//
+	// This member is required.
+	AnalysisType LogExportAnalysisType
+
+	// The time the analysis log export was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the membership that the analysis log export belongs to.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// Contains the details needed to write the exported analysis logs.
+	//
+	// This member is required.
+	ResultConfiguration *AnalysisLogExportResultConfiguration
+
+	// The status of the analysis log export. Possible values are:
+	//
+	//   - IN_PROGRESS – The export is currently running.
+	//
+	//   - SUCCESS – The export completed successfully.
+	//
+	//   - FAILED – The export failed. See the error field for details.
+	//
+	// This member is required.
+	Status AnalysisLogExportStatus
+
+	// The time the analysis log export was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The analysis log export error. This is present only when the export status is
+	// FAILED .
+	Error *AnalysisLogExportError
+
+	noSmithyDocumentSerde
+}
+
+// The analysis log export error.
+type AnalysisLogExportError struct {
+
+	// The error code for the analysis log export.
+	//
+	// This member is required.
+	Code *string
+
+	// The message for the analysis log export error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details for analysis log export output.
+type AnalysisLogExportOutputConfiguration struct {
+
+	// Required configuration for an analysis log export with an s3 output type.
+	//
+	// This member is required.
+	S3 *AnalysisLogExportS3OutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for analysis log export results.
+type AnalysisLogExportResultConfiguration struct {
+
+	// The configuration for analysis log export results.
+	//
+	// This member is required.
+	OutputConfiguration *AnalysisLogExportOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains output information for an analysis log export with an S3 output type.
+//
+// The exported logs are written under the bucket and key prefix that you specify.
+// The path includes the collaboration ID, the protected query ID, and the analysis
+// log export ID. Because the path includes the export ID, exporting the same query
+// more than once doesn't overwrite the logs from an earlier export.
+//
+// The exported logs are encrypted using the default encryption configuration of
+// the destination bucket. Clean Rooms doesn't accept a KMS key for log export. To
+// encrypt the exported logs with a customer managed key, configure the bucket's
+// default encryption to use that key before you export.
+type AnalysisLogExportS3OutputConfiguration struct {
+
+	// The S3 bucket that the exported analysis logs are written to. The bucket must
+	// be in the same Amazon Web Services Region as the collaboration.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The S3 key prefix under which the exported analysis logs are written.
+	//
+	// Only one export can be in progress at a time for a given query and destination.
+	// To export the same query twice at once, use a different key prefix for the
+	// second export.
+	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an analysis log export, including its identifier, status, analysis
+// type, and creation time. Returned by ListAnalysisLogExports .
+type AnalysisLogExportSummary struct {
+
+	// The unique identifier of the protected query that the analysis logs were
+	// exported for.
+	//
+	// This member is required.
+	AnalysisId *string
+
+	// The unique identifier of the analysis log export.
+	//
+	// This member is required.
+	AnalysisLogExportId *string
+
+	// The type of analysis that the logs were exported for. Currently, only
+	// PROTECTED_QUERY is supported.
+	//
+	// This member is required.
+	AnalysisType LogExportAnalysisType
+
+	// The time the analysis log export was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The status of the analysis log export. Possible values are:
+	//
+	//   - IN_PROGRESS – The export is currently running.
+	//
+	//   - SUCCESS – The export completed successfully.
+	//
+	//   - FAILED – The export failed.
+	//
+	// This member is required.
+	Status AnalysisLogExportStatus
+
+	noSmithyDocumentSerde
+}
+
 // Optional. The member who can query can provide this placeholder for a literal
 // data value in an analysis template.
 type AnalysisParameter struct {
@@ -3831,7 +3996,8 @@ type IntermediateTableColumn struct {
 	noSmithyDocumentSerde
 }
 
-// The compute configuration for an intermediate table population operation.
+// Contains the compute configuration for an intermediate table population
+// operation.
 //
 // The following types satisfy this interface:
 //
@@ -3870,9 +4036,9 @@ type IntermediateTableDependency struct {
 	// This member is required.
 	Name *string
 
-	// Whether the dependency is direct or indirect. A direct dependency is a table
-	// explicitly referenced in the stored query, while an indirect dependency is
-	// referenced through another intermediate table.
+	// The type of dependency, either direct or indirect. A direct dependency is a
+	// table explicitly referenced in the stored query. An indirect dependency is a
+	// table referenced through another intermediate table.
 	//
 	// This member is required.
 	ParentType BaseTableParentType
@@ -4096,6 +4262,11 @@ type MemberChangeSpecification struct {
 	//
 	// Set the value of memberAbilities to [CAN_RECEIVE_RESULTS] to allow a member to
 	// contribute data and receive results.
+	//
+	// Set the value of memberAbilities to [CAN_EXPORT_QUERY_ANALYSIS_LOG] so that the
+	// member can export the analysis logs for a protected query. Having this ability
+	// isn't sufficient on its own: You can export logs only for queries that you ran
+	// or paid for.
 	//
 	// This member is required.
 	MemberAbilities []MemberAbility
@@ -4731,8 +4902,7 @@ type PopulationAnalysisSqlParameters struct {
 	// the intermediate table.
 	AnalysisTemplateArn *string
 
-	// The SQL query string used to populate the intermediate table. Maximum length of
-	// 500,000 characters.
+	// The SQL query string used to populate the intermediate table.
 	QueryString *string
 
 	noSmithyDocumentSerde

@@ -416,6 +416,10 @@ type HandshakeParty struct {
 
 	// The type of ID for the participant.
 	//
+	// ORGANIZATION is valid only in the response context (identifying the inviting
+	// organization). Valid input values for the Target parameter are ACCOUNT and EMAIL
+	// only.
+	//
 	// This member is required.
 	Type HandshakePartyType
 

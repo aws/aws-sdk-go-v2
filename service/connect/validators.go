@@ -990,6 +990,26 @@ func (m *validateOpCreateIntegrationAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMetric struct {
+}
+
+func (*validateOpCreateMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateNotification struct {
 }
 
@@ -1770,6 +1790,26 @@ func (m *validateOpDeleteIntegrationAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMetric struct {
+}
+
+func (*validateOpDeleteMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteNotification struct {
 }
 
@@ -2545,6 +2585,26 @@ func (m *validateOpDescribeInstanceStorageConfig) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeMetric struct {
+}
+
+func (*validateOpDescribeMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetricInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4270,6 +4330,26 @@ func (m *validateOpListLexBots) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMetrics struct {
+}
+
+func (*validateOpListMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListNotifications struct {
 }
 
@@ -5305,6 +5385,26 @@ func (m *validateOpSearchHoursOfOperations) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchHoursOfOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchMetrics struct {
+}
+
+func (*validateOpSearchMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6690,6 +6790,46 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMetricContent struct {
+}
+
+func (*validateOpUpdateMetricContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMetricContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMetricContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMetricContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateMetricMetadata struct {
+}
+
+func (*validateOpUpdateMetricMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMetricMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMetricMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMetricMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNotificationContent struct {
 }
 
@@ -7706,6 +7846,10 @@ func addOpCreateIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateIntegrationAssociation{}, middleware.After)
 }
 
+func addOpCreateMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMetric{}, middleware.After)
+}
+
 func addOpCreateNotificationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNotification{}, middleware.After)
 }
@@ -7862,6 +8006,10 @@ func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDeleteIntegrationAssociation{}, middleware.After)
 }
 
+func addOpDeleteMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMetric{}, middleware.After)
+}
+
 func addOpDeleteNotificationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNotification{}, middleware.After)
 }
@@ -8016,6 +8164,10 @@ func addOpDescribeInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpDescribeMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetric{}, middleware.After)
 }
 
 func addOpDescribeNotificationValidationMiddleware(stack *middleware.Stack) error {
@@ -8362,6 +8514,10 @@ func addOpListLexBotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLexBots{}, middleware.After)
 }
 
+func addOpListMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetrics{}, middleware.After)
+}
+
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNotifications{}, middleware.After)
 }
@@ -8568,6 +8724,10 @@ func addOpSearchHoursOfOperationOverridesValidationMiddleware(stack *middleware.
 
 func addOpSearchHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchHoursOfOperations{}, middleware.After)
+}
+
+func addOpSearchMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchMetrics{}, middleware.After)
 }
 
 func addOpSearchNotificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -8844,6 +9004,14 @@ func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpUpdateMetricContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMetricContent{}, middleware.After)
+}
+
+func addOpUpdateMetricMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMetricMetadata{}, middleware.After)
 }
 
 func addOpUpdateNotificationContentValidationMiddleware(stack *middleware.Stack) error {
@@ -9239,6 +9407,43 @@ func validateAutoEvaluationConfiguration(v *types.AutoEvaluationConfiguration) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutoEvaluationConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCalculationComponent(v *types.CalculationComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculationComponent"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.MetricFilters != nil {
+		if err := validateMetricFilterList(v.MetricFilters); err != nil {
+			invalidParams.AddNested("MetricFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCalculationComponentList(v []types.CalculationComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculationComponentList"}
+	for i := range v {
+		if err := validateCalculationComponent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11071,6 +11276,126 @@ func validateMediaConcurrency(v *types.MediaConcurrency) error {
 		if err := validateCrossChannelBehavior(v.CrossChannelBehavior); err != nil {
 			invalidParams.AddNested("CrossChannelBehavior", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricCalculation(v *types.MetricCalculation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricCalculation"}
+	if v.CalculationComponents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculationComponents"))
+	} else if v.CalculationComponents != nil {
+		if err := validateCalculationComponentList(v.CalculationComponents); err != nil {
+			invalidParams.AddNested("CalculationComponents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Calculation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Calculation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricFilter(v *types.MetricFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricFilter"}
+	if v.MetricFilterKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricFilterKey"))
+	}
+	if v.NumberCondition != nil {
+		if err := validateMetricFilterNumberCondition(v.NumberCondition); err != nil {
+			invalidParams.AddNested("NumberCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StringCondition != nil {
+		if err := validateMetricFilterStringCondition(v.StringCondition); err != nil {
+			invalidParams.AddNested("StringCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BooleanCondition != nil {
+		if err := validateMetricFilterBooleanCondition(v.BooleanCondition); err != nil {
+			invalidParams.AddNested("BooleanCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricFilterBooleanCondition(v *types.MetricFilterBooleanCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricFilterBooleanCondition"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricFilterList(v []types.MetricFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricFilterList"}
+	for i := range v {
+		if err := validateMetricFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricFilterNumberCondition(v *types.MetricFilterNumberCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricFilterNumberCondition"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricFilterStringCondition(v *types.MetricFilterStringCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricFilterStringCondition"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13803,6 +14128,34 @@ func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociation
 	}
 }
 
+func validateOpCreateMetricInput(v *CreateMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMetricInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.MetricCalculation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricCalculation"))
+	} else if v.MetricCalculation != nil {
+		if err := validateMetricCalculation(v.MetricCalculation); err != nil {
+			invalidParams.AddNested("MetricCalculation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateNotificationInput(v *CreateNotificationInput) error {
 	if v == nil {
 		return nil
@@ -14671,6 +15024,24 @@ func validateOpDeleteIntegrationAssociationInput(v *DeleteIntegrationAssociation
 	}
 }
 
+func validateOpDeleteMetricInput(v *DeleteMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.MetricId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteNotificationInput(v *DeleteNotificationInput) error {
 	if v == nil {
 		return nil
@@ -15386,6 +15757,24 @@ func validateOpDescribeInstanceStorageConfigInput(v *DescribeInstanceStorageConf
 	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMetricInput(v *DescribeMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetricInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.MetricId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17007,6 +17396,21 @@ func validateOpListLexBotsInput(v *ListLexBotsInput) error {
 	}
 }
 
+func validateOpListMetricsInput(v *ListMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetricsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListNotificationsInput(v *ListNotificationsInput) error {
 	if v == nil {
 		return nil
@@ -17881,6 +18285,21 @@ func validateOpSearchHoursOfOperationsInput(v *SearchHoursOfOperationsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchHoursOfOperationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchMetricsInput(v *SearchMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchMetricsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -19451,6 +19870,47 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMetricContentInput(v *UpdateMetricContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMetricContentInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.MetricId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricId"))
+	}
+	if v.MetricCalculation != nil {
+		if err := validateMetricCalculation(v.MetricCalculation); err != nil {
+			invalidParams.AddNested("MetricCalculation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMetricMetadataInput(v *UpdateMetricMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMetricMetadataInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.MetricId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

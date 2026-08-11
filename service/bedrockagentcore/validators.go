@@ -1557,6 +1557,11 @@ func validateAgentTracesConfig(v types.AgentTracesConfig) error {
 			invalidParams.AddNested("[cloudwatchLogs]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AgentTracesConfigMemberOnlineEvaluation:
+		if err := validateOnlineEvaluationTraceConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[onlineEvaluation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3321,6 +3326,27 @@ func validateOnlineEvaluationConfigSource(v *types.OnlineEvaluationConfigSource)
 	invalidParams := smithy.InvalidParamsError{Context: "OnlineEvaluationConfigSource"}
 	if v.OnlineEvaluationConfigArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OnlineEvaluationConfigArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOnlineEvaluationTraceConfig(v *types.OnlineEvaluationTraceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnlineEvaluationTraceConfig"}
+	if v.OnlineEvaluationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OnlineEvaluationConfigArn"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

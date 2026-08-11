@@ -43533,6 +43533,15 @@ func awsRestjson1_deserializeDocumentAssetScope(v **types.AssetScope, value inte
 				return err
 			}
 
+		case "scopeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScopeName = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)

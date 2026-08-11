@@ -8,10 +8,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates an intermediate table in a membership. An intermediate table stores a
-// query definition that you can execute later using PopulateIntermediateTable to
-// materialize cached results. The intermediate table is owned by the member with
-// the CAN_QUERY ability. This operation does not execute the stored query.
+// Creates an intermediate table in a membership. The intermediate table is owned
+// by the member with the CAN_QUERY ability. To populate the table with results,
+// use PopulateIntermediateTable .
 func (c *Client) CreateIntermediateTable(ctx context.Context, params *CreateIntermediateTableInput, optFns ...func(*Options)) (*CreateIntermediateTableOutput, error) {
 	if params == nil {
 		params = &CreateIntermediateTableInput{}
@@ -40,7 +39,7 @@ type CreateIntermediateTableInput struct {
 	Name *string
 
 	// The configuration that defines the analysis used to populate the intermediate
-	// table. This configuration contains the SQL query or analysis template reference.
+	// table.
 	//
 	// This member is required.
 	PopulationAnalysisConfiguration types.PopulationAnalysisConfiguration
@@ -52,8 +51,7 @@ type CreateIntermediateTableInput struct {
 	// the intermediate table data.
 	KmsKeyArn *string
 
-	// The number of days to retain populated data versions. Minimum value of 1,
-	// maximum value of 365.
+	// The number of days to retain populated data versions.
 	RetentionInDays *int32
 
 	// An optional label that you can assign to a resource when you create it. Each
