@@ -1341,6 +1341,237 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.cleanrooms#AnalysisLogExport": {
+            "type": "structure",
+            "members": {
+                "analysisLogExportId": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis log export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisId": {
+                    "target": "com.amazonaws.cleanrooms#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the protected query that the analysis logs were exported for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisType": {
+                    "target": "com.amazonaws.cleanrooms#LogExportAnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis that the logs were exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "membershipId": {
+                    "target": "com.amazonaws.cleanrooms#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the membership that the analysis log export belongs to.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "MembershipId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis log export. Possible values are:</p> <ul> <li> <p> <code>IN_PROGRESS</code> – The export is currently running.</p> </li> <li> <p> <code>SUCCESS</code> – The export completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The export failed. See the <code>error</code> field for details.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportResultConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the details needed to write the exported analysis logs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the analysis log export was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the analysis log export was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis log export error. This is present only when the export <code>status</code> is <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An export of the redacted Apache Spark logs for a protected query.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportError": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the analysis log export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the analysis log export error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The analysis log export error.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportS3OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required configuration for an analysis log export with an <code>s3</code> output type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration details for analysis log export output.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportResultConfiguration": {
+            "type": "structure",
+            "members": {
+                "outputConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for analysis log export results.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for analysis log export results.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportS3OutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that the exported analysis logs are written to. The bucket must be in the same Amazon Web Services Region as the collaboration.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyPrefix": {
+                    "target": "com.amazonaws.cleanrooms#KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 key prefix under which the exported analysis logs are written.</p> <p>Only one export can be in progress at a time for a given query and destination. To export the same query twice at once, use a different key prefix for the second export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains output information for an analysis log export with an S3 output type.</p> <p>The exported logs are written under the bucket and key prefix that you specify. The path includes the collaboration ID, the protected query ID, and the analysis log export ID. Because the path includes the export ID, exporting the same query more than once doesn't overwrite the logs from an earlier export.</p> <note> <p>The exported logs are encrypted using the default encryption configuration of the destination bucket. Clean Rooms doesn't accept a KMS key for log export. To encrypt the exported logs with a customer managed key, configure the bucket's default encryption to use that key before you export.</p> </note>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportSummary": {
+            "type": "structure",
+            "members": {
+                "analysisLogExportId": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis log export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisId": {
+                    "target": "com.amazonaws.cleanrooms#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the protected query that the analysis logs were exported for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisType": {
+                    "target": "com.amazonaws.cleanrooms#LogExportAnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis that the logs were exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis log export. Possible values are:</p> <ul> <li> <p> <code>IN_PROGRESS</code> – The export is currently running.</p> </li> <li> <p> <code>SUCCESS</code> – The export completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The export failed.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the analysis log export was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an analysis log export, including its identifier, status, analysis type, and creation time. Returned by <code>ListAnalysisLogExports</code>.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisLogExportSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisLogExportSummary"
+            }
+        },
         "com.amazonaws.cleanrooms#AnalysisMethod": {
             "type": "enum",
             "members": {
@@ -2477,6 +2708,18 @@
                     "traits": {
                         "smithy.api#enumValue": "REVOKE_RECEIVE_RESULTS_ABILITY"
                     }
+                },
+                "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+                    }
+                },
+                "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+                    }
                 }
             }
         },
@@ -3234,6 +3477,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+                    }
+                },
+                "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+                    }
+                },
+                "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
                     }
                 }
             }
@@ -7399,7 +7654,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to create a new intermediate table in a membership",
-                "smithy.api#documentation": "<p>Creates an intermediate table in a membership. An intermediate table stores a query definition that you can execute later using <code>PopulateIntermediateTable</code> to materialize cached results. The intermediate table is owned by the member with the CAN_QUERY ability. This operation does not execute the stored query.</p>",
+                "smithy.api#documentation": "<p>Creates an intermediate table in a membership. The intermediate table is owned by the member with the CAN_QUERY ability. To populate the table with results, use <code>PopulateIntermediateTable</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -7440,7 +7695,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to create analysis rules for intermediate tables",
-                "smithy.api#documentation": "<p>Creates an analysis rule for an intermediate table. Only the CUSTOM analysis rule type is supported. The service automatically determines whether the rule is first-party or multi-party restricted based on the intermediate table's inherited constraints. Only the intermediate table owner can call this operation.</p>",
+                "smithy.api#documentation": "<p>Creates an analysis rule for an intermediate table. Only the CUSTOM analysis rule type is supported. Only the intermediate table owner can call this operation.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -7532,7 +7787,7 @@
                 "populationAnalysisConfiguration": {
                     "target": "com.amazonaws.cleanrooms#PopulationAnalysisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration that defines the analysis used to populate the intermediate table. This configuration contains the SQL query or analysis template reference.</p>",
+                        "smithy.api#documentation": "<p>The configuration that defines the analysis used to populate the intermediate table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7545,7 +7800,7 @@
                 "retentionInDays": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain populated data versions. Minimum value of 1, maximum value of 365.</p>",
+                        "smithy.api#documentation": "<p>The number of days to retain populated data versions.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 365
@@ -8474,7 +8729,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to remove an intermediate table from a collaboration",
-                "smithy.api#documentation": "<p>Deletes an intermediate table. When you delete the table, the service marks it as DELETED, removes its analysis rule and schema, and triggers storage cleanup. This operation is idempotent. Only the intermediate table owner can call this operation.</p>",
+                "smithy.api#documentation": "<p>Deletes an intermediate table. The delete is idempotent. Only the intermediate table owner can call this operation.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -9182,7 +9437,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to invalidate an intermediate table",
-                "smithy.api#documentation": "<p>Invalidates a specific intermediate table that references the caller's base table. The data provider (base table owner) calls this operation, not the intermediate table owner. By default, invalidation cascades to descendant intermediate tables.</p>",
+                "smithy.api#documentation": "<p>Marks an intermediate table as invalid when it references the caller's base table. The data provider (base table owner) calls this operation, not the intermediate table owner. By default, the operation also marks all descendant intermediate tables as invalid.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -9297,6 +9552,82 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.cleanrooms#GetAnalysisLogExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanrooms#GetAnalysisLogExportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanrooms#GetAnalysisLogExportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanrooms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to get an analysis log export",
+                "smithy.api#documentation": "<p>Returns information about an analysis log export, including its current status and, if the export failed, the reason for the failure.</p> <p>Poll this operation until the <code>status</code> is <code>SUCCESS</code> or <code>FAILED</code>. An export can't be canceled after it starts.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/memberships/{membershipIdentifier}/analysislogexports/{analysisLogExportIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#GetAnalysisLogExportInput": {
+            "type": "structure",
+            "members": {
+                "membershipIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#MembershipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the membership that the analysis log export belongs to. Currently accepts the membership ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "MembershipId"
+                    }
+                },
+                "analysisLogExportIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis log export to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#GetAnalysisLogExportOutput": {
+            "type": "structure",
+            "members": {
+                "analysisLogExport": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis log export processing metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cleanrooms#GetAnalysisTemplate": {
@@ -12326,7 +12657,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The compute configuration for an intermediate table population operation.</p>"
+                "smithy.api#documentation": "<p>Contains the compute configuration for an intermediate table population operation.</p>"
             }
         },
         "com.amazonaws.cleanrooms#IntermediateTableDependency": {
@@ -12356,7 +12687,7 @@
                 "parentType": {
                     "target": "com.amazonaws.cleanrooms#BaseTableParentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the dependency is direct or indirect. A direct dependency is a table explicitly referenced in the stored query, while an indirect dependency is referenced through another intermediate table.</p>",
+                        "smithy.api#documentation": "<p>The type of dependency, either direct or indirect. A direct dependency is a table explicitly referenced in the stored query. An indirect dependency is a table referenced through another intermediate table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12913,6 +13244,114 @@
                     "max": 512
                 },
                 "smithy.api#pattern": "^[\\w!.=*/-]*$"
+            }
+        },
+        "com.amazonaws.cleanrooms#ListAnalysisLogExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanrooms#ListAnalysisLogExportsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanrooms#ListAnalysisLogExportsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanrooms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list analysis log exports",
+                "smithy.api#documentation": "<p>Lists analysis log exports, sorted by the most recent export. Results are paginated. Use the <code>nextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/memberships/{membershipIdentifier}/analysislogexports"
+                },
+                "smithy.api#paginated": {
+                    "items": "analysisLogExports",
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#ListAnalysisLogExportsInput": {
+            "type": "structure",
+            "members": {
+                "membershipIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#MembershipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the membership to list analysis log exports for. Currently accepts the membership ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "MembershipId"
+                    }
+                },
+                "analysisIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter on the unique identifier of the protected query that the analysis logs were exported for.</p>",
+                        "smithy.api#httpQuery": "analysisIdentifier"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter on the status of the analysis log export.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cleanrooms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.cleanrooms#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#ListAnalysisLogExportsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.cleanrooms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                },
+                "analysisLogExports": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of analysis log exports.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cleanrooms#ListAnalysisTemplates": {
@@ -14999,6 +15438,17 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cleanrooms#LogExportAnalysisType": {
+            "type": "enum",
+            "members": {
+                "PROTECTED_QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROTECTED_QUERY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#MLMemberAbilities": {
             "type": "structure",
             "members": {
@@ -15120,6 +15570,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CAN_RUN_JOB"
                     }
+                },
+                "CAN_EXPORT_QUERY_ANALYSIS_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_EXPORT_QUERY_ANALYSIS_LOG"
+                    }
                 }
             }
         },
@@ -15136,7 +15592,7 @@
                 "memberAbilities": {
                     "target": "com.amazonaws.cleanrooms#MemberAbilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_RECEIVE_RESULTS]</code> to allow a member to contribute data and receive results.</p> </note>",
+                        "smithy.api#documentation": "<p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_RECEIVE_RESULTS]</code> to allow a member to contribute data and receive results.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_EXPORT_QUERY_ANALYSIS_LOG]</code> so that the member can export the analysis logs for a protected query. Having this ability isn't sufficient on its own: You can export logs only for queries that you ran or paid for.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15705,10 +16161,16 @@
                     "target": "com.amazonaws.cleanrooms#DisallowIntermediateTable"
                 },
                 {
+                    "target": "com.amazonaws.cleanrooms#GetAnalysisLogExport"
+                },
+                {
                     "target": "com.amazonaws.cleanrooms#GetProtectedJob"
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#GetProtectedQuery"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ListAnalysisLogExports"
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#ListPrivacyBudgets"
@@ -15721,6 +16183,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#PreviewPrivacyImpact"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#StartAnalysisLogExport"
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#StartProtectedJob"
@@ -16275,7 +16740,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to populate an intermediate table by executing its stored query",
-                "smithy.api#documentation": "<p>Executes the stored query of an intermediate table to materialize data into managed storage. With this operation, you can perform initial population and subsequent refreshes. Each call creates a new version. The returned analysis ID can be tracked using <code>GetProtectedQuery</code>. Only the intermediate table owner can call this operation.</p>",
+                "smithy.api#documentation": "<p>Runs the stored query of an intermediate table and makes the results available for querying. Each call creates a new version. Use <code>GetProtectedQuery</code> with the returned analysis ID to track progress. Only the intermediate table owner can call this operation.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -16344,7 +16809,7 @@
                 "analysisId": {
                     "target": "com.amazonaws.cleanrooms#AnalysisIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the protected query execution. Use this value with <code>GetProtectedQuery</code> to track the population progress.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the protected query execution that populated the intermediate table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16387,7 +16852,7 @@
                 "queryString": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SQL query string used to populate the intermediate table. Maximum length of 500,000 characters.</p>",
+                        "smithy.api#documentation": "<p>The SQL query string used to populate the intermediate table.</p>",
                         "smithy.api#length": {
                             "max": 500000
                         }
@@ -19238,6 +19703,97 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#StartAnalysisLogExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanrooms#StartAnalysisLogExportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanrooms#StartAnalysisLogExportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanrooms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to start an analysis log export",
+                "smithy.api#documentation": "<p>Starts an export of the Apache Spark logs for a protected query to an Amazon S3 bucket that you own. Use the exported logs to diagnose a query that failed or that ran more slowly than you expected.</p> <p>Clean Rooms exports a redacted copy of the Spark logs instead of the raw logs. Analyze the exported logs with the tooling of your choice, such as Spark History Server. For details about what the exported logs contain, see <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html\">https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html</a>.</p> <p>The export runs asynchronously and returns with a <code>status</code> of <code>IN_PROGRESS</code>. Call <code>GetAnalysisLogExport</code> to poll for the final status.</p> <important> <p>To use this operation, you must have the <code>CAN_EXPORT_QUERY_ANALYSIS_LOG</code> ability for your membership. You must also be the query runner or the query payer. Having the ability alone is not sufficient.</p> <p>The query must have reached a terminal state, and it must have reached the execution stage. A query that failed validation or that was canceled before it started produces no Spark logs.</p> <p>Log export isn't supported for queries that use differential privacy, and isn't supported for PySpark jobs.</p> <p>The destination bucket must be in the same Amazon Web Services Region as the collaboration. Cross-Region export isn't supported.</p> </important> <p>For more information, see <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html\">https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/memberships/{membershipIdentifier}/analysislogexports"
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#StartAnalysisLogExportInput": {
+            "type": "structure",
+            "members": {
+                "membershipIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#MembershipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the membership to export the analysis logs for. Currently accepts a membership ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "MembershipId"
+                    }
+                },
+                "analysisId": {
+                    "target": "com.amazonaws.cleanrooms#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the protected query that you want to export the analysis logs for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisType": {
+                    "target": "com.amazonaws.cleanrooms#LogExportAnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis that the logs are exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExportResultConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details needed to write the exported analysis logs.</p> <p>You don't need to create an IAM role for log export. Clean Rooms writes the exported logs using your own identity, so Clean Rooms writes the exported logs only where your existing permissions allow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#StartAnalysisLogExportOutput": {
+            "type": "structure",
+            "members": {
+                "analysisLogExport": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisLogExport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis log export that was started. The <code>status</code> is <code>IN_PROGRESS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cleanrooms#StartProtectedJob": {
             "type": "operation",
             "input": {
@@ -20369,6 +20925,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#ThrottlingException"

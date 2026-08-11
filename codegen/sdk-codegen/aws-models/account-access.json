@@ -1,0 +1,2115 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.accountaccess#AWSAccountAccess": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.accountaccess#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.accountaccess#Application"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Account Access",
+                    "arnNamespace": "account-access"
+                },
+                "aws.api#tagEnabled": {},
+                "aws.auth#sigv4": {
+                    "name": "account-access"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
+                "aws.iam#defineConditionKeys": {
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Tag Keys",
+                        "externalDocumentation": "http://example.com"
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "Content-Length"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Account access manager enables you to manage applications and entitlements that grant IAM Identity Center principals access to IAM roles across accounts.</p>",
+                "smithy.api#title": "Account Access",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account-access-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account-access.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://account-access-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://account-access.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://account-access.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.accountaccess#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.accountaccess#Account": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.accountaccess#AlreadyCreatedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource you are trying to create already exists. To retrieve the existing resource, use the corresponding Get operation.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.accountaccess#Application": {
+            "type": "resource",
+            "identifiers": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.accountaccess#CreateApplication"
+            },
+            "read": {
+                "target": "com.amazonaws.accountaccess#GetApplication"
+            },
+            "delete": {
+                "target": "com.amazonaws.accountaccess#DeleteApplication"
+            },
+            "list": {
+                "target": "com.amazonaws.accountaccess#ListApplications"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.accountaccess#CreateEntitlement"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#DeleteEntitlement"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#GetEntitlement"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ListEntitlements"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "application/{applicationArn}"
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
+                "aws.iam#iamResource": {
+                    "name": "application"
+                },
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Service::Resource"
+                },
+                "smithy.api#length": {
+                    "min": 49,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-]+:account-access:[a-z0-9]+(-[a-z0-9]+)*:[0-9]{12}:application/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.accountaccess#ApplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accountaccess#ApplicationSummary"
+            }
+        },
+        "com.amazonaws.accountaccess#ApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tenantId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant identifier associated with the application.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the application was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the application was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about an account access manager application.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.accountaccess#CreateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#CreateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#CreateApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#AlreadyCreatedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an account access manager instance and its Amazon Web Services account access application in the associated IAM Identity Center instance. This operation is idempotent; calling it multiple times with the same parameters returns the existing application.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accountaccess#CreateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "identitySource": {
+                    "target": "com.amazonaws.accountaccess#IdentitySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the identity source for the application. The identity source defines the IAM Identity Center instance that provides principals for entitlements.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.accountaccess#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tags to assign to the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#CreateApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#CreateEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#CreateEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#CreateEntitlementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an entitlement (assignment) in account access manager. An entitlement (assignment) grants a principal (IAM Identity Center user or group) permission to assume a specified IAM role in an Amazon Web Services account. This operation is idempotent.</p>",
+                "smithy.api#http": {
+                    "uri": "/entitlements",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accountaccess#CreateEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application to create the entitlement for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlement": {
+                    "target": "com.amazonaws.accountaccess#Entitlement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the entitlement configuration, including the principal and the IAM role to grant access to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#CreateEntitlementResponse": {
+            "type": "structure",
+            "members": {
+                "entitlementId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#DeleteApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#DeleteApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an account access manager application. This operation is idempotent; deleting an application that has already been deleted does not return an error.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications/{applicationArn}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteApplicationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#DeleteEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#DeleteEntitlementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an entitlement from an account access manager application. This operation is idempotent; deleting an entitlement that has already been deleted does not return an error.</p>",
+                "smithy.api#http": {
+                    "uri": "/entitlements/{entitlementId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application that the entitlement belongs to.</p>",
+                        "smithy.api#httpQuery": "applicationArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique identifier of the entitlement to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#DeleteEntitlementResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#Entitlement": {
+            "type": "union",
+            "members": {
+                "principalRole": {
+                    "target": "com.amazonaws.accountaccess#PrincipalRoleEntitlement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal-to-role mapping for the entitlement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the entitlement configuration for an account access manager application, defining which principal can assume which IAM role.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#EntitlementDetails": {
+            "type": "union",
+            "members": {
+                "principalRole": {
+                    "target": "com.amazonaws.accountaccess#PrincipalRoleEntitlementDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal-to-role mapping details for the entitlement, including the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about an entitlement, including the principal, IAM role, and target account.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#EntitlementFilter": {
+            "type": "structure",
+            "members": {
+                "principalRole": {
+                    "target": "com.amazonaws.accountaccess#PrincipalRoleEntitlementFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal-to-role filter criteria for narrowing entitlement results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies filter criteria for listing entitlements.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#EntitlementSummary": {
+            "type": "union",
+            "members": {
+                "principalRole": {
+                    "target": "com.amazonaws.accountaccess#PrincipalRoleEntitlementSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal-to-role mapping summary for the entitlement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about an entitlement.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#EntitlementsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accountaccess#EntitlementsListMember"
+            }
+        },
+        "com.amazonaws.accountaccess#EntitlementsListMember": {
+            "type": "structure",
+            "members": {
+                "entitlementId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlement": {
+                    "target": "com.amazonaws.accountaccess#EntitlementSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information for the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the entitlement was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an entitlement in a list result.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#ErrorCode": {
+            "type": "enum",
+            "members": {
+                "AUTHORIZATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZATION_ERROR"
+                    }
+                },
+                "RESOURCE_NOT_FOUND_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND_ERROR"
+                    }
+                },
+                "SERVICE_QUOTA_EXCEEDED_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_QUOTA_EXCEEDED_ERROR"
+                    }
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.accountaccess#ErrorDetails": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.accountaccess#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that identifies the type of error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message that describes the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an error that occurred during application processing.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#GetApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#GetApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#GetApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about an account access manager application, including its status, identity source, and tags.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications/{applicationArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetApplicationUnauthorized",
+                        "params": {
+                            "applicationArn": "arn:aws:account-access:us-east-1:123456789012:application/unauthorized-app-0123"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.accountaccess#AccessDeniedException"
+                            }
+                        }
+                    }
+                ],
+                "smithy.waiters#waitable": {
+                    "ApplicationActive": {
+                        "minDelay": 5,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.accountaccess#GetApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#GetApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "identitySource": {
+                    "target": "com.amazonaws.accountaccess#IdentitySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity source details for the application, including the IAM Identity Center instance configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.accountaccess#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tenantId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant identifier associated with the application.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the application was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the application was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.accountaccess#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the application.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.accountaccess#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error details if the application is in a failed state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#GetEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#GetEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#GetEntitlementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details about a specific entitlement for an account access manager application, including the principal, IAM role, and target account.</p>",
+                "smithy.api#http": {
+                    "uri": "/entitlements/{entitlementId}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetEntitlementUnauthorized",
+                        "params": {
+                            "applicationArn": "arn:aws:account-access:us-east-1:123456789012:application/test-app-1234567890abcdef",
+                            "entitlementId": "entitlement-smoke-test-id"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.accountaccess#AccessDeniedException"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#GetEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application that the entitlement belongs to.</p>",
+                        "smithy.api#httpQuery": "applicationArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique identifier of the entitlement to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#GetEntitlementResponse": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application that the entitlement belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlement": {
+                    "target": "com.amazonaws.accountaccess#EntitlementDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entitlement details, including the principal, IAM role, and target account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.accountaccess#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the entitlement was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#GroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenter": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the IAM Identity Center instance to use as the identity source for an application.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::SSO::Application"
+                },
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-]+:sso::[0-9]{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenterDetails": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application created for this account access manager application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about the IAM Identity Center configuration for an application.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::SSO::Instance"
+                },
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-]+:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenterPrincipal": {
+            "type": "union",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.accountaccess#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a user in IAM Identity Center.</p>"
+                    }
+                },
+                "groupId": {
+                    "target": "com.amazonaws.accountaccess#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a group in IAM Identity Center.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a user or group from IAM Identity Center.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentityCenterPrincipalFilter": {
+            "type": "union",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.accountaccess#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a user in IAM Identity Center to filter by.</p>"
+                    }
+                },
+                "groupId": {
+                    "target": "com.amazonaws.accountaccess#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a group in IAM Identity Center to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies filter criteria for an IAM Identity Center principal.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentitySource": {
+            "type": "union",
+            "members": {
+                "identityCenter": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center instance to use as the identity source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the identity source for an account access manager application.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#IdentitySourceDetails": {
+            "type": "union",
+            "members": {
+                "identityCenter": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center configuration details for the identity source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about the identity source for an application.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred. Try your request again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.accountaccess#ListApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#ListApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#ListApplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the account access manager applications in your account. Use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "uri": "/applications-list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "applications"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListApplicationsSuccess",
+                        "params": {
+                            "maxResults": 1
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#ListApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results to return in a single call.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the pagination token from a previous call to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#ListApplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "applications": {
+                    "target": "com.amazonaws.accountaccess#ApplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of applications.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent request to retrieve the next set of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#ListEntitlements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#ListEntitlementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#ListEntitlementsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the entitlements for a specified account access manager application. You can filter results by principal, IAM role, or account. Use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "uri": "/entitlements-list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entitlements"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListEntitlementsWithFilters",
+                        "params": {
+                            "applicationArn": "arn:aws:account-access:us-east-1:123456789012:application/test-app-1234567890abcdef",
+                            "filter": {
+                                "principalRole": {
+                                    "account": "123456789012",
+                                    "principal": {
+                                        "identityCenter": {
+                                            "userId": "12345678-1234-1234-1234-123456789012"
+                                        }
+                                    }
+                                }
+                            },
+                            "maxResults": 10
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.accountaccess#AccessDeniedException"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#ListEntitlementsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the application to list entitlements for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.accountaccess#EntitlementFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies filter criteria to narrow the entitlements returned. You can filter by principal, IAM role, or account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the pagination token from a previous call to retrieve the next set of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results to return in a single call.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accountaccess#ListEntitlementsResponse": {
+            "type": "structure",
+            "members": {
+                "entitlements": {
+                    "target": "com.amazonaws.accountaccess#EntitlementsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of entitlements for the specified application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent request to retrieve the next set of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Lists the tags associated with an account access manager resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.accountaccess#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the resource to list tags for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.accountaccess#Application",
+                        "ids": {
+                            "applicationArn": "resourceArn"
+                        }
+                    }
+                ],
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.accountaccess#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#Principal": {
+            "type": "union",
+            "members": {
+                "identityCenter": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center principal (user or group).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a principal (user or group) that can be granted entitlements.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#PrincipalFilter": {
+            "type": "union",
+            "members": {
+                "identityCenter": {
+                    "target": "com.amazonaws.accountaccess#IdentityCenterPrincipalFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM Identity Center principal filter criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies filter criteria for a principal.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#PrincipalRoleEntitlement": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.accountaccess#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal (user or group) that is granted access to assume the IAM role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.accountaccess#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that the principal can assume.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a principal-to-role entitlement that grants an IAM Identity Center principal permission to assume an IAM role.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#PrincipalRoleEntitlementDetails": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.accountaccess#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal (user or group) that is granted access to assume the IAM role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.accountaccess#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that the principal can assume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "account": {
+                    "target": "com.amazonaws.accountaccess#Account",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID where the IAM role resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Amazon Web Services account where the IAM role resides.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a principal-to-role entitlement, including the target account.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#PrincipalRoleEntitlementFilter": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.accountaccess#PrincipalFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal to filter entitlements by.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.accountaccess#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role ARN to filter entitlements by.</p>"
+                    }
+                },
+                "account": {
+                    "target": "com.amazonaws.accountaccess#Account",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID to filter entitlements by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies filter criteria for principal-to-role entitlements. All specified criteria must match for an entitlement to be returned.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#PrincipalRoleEntitlementSummary": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.accountaccess#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal (user or group) that is granted access to assume the IAM role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.accountaccess#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that the principal can assume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "account": {
+                    "target": "com.amazonaws.accountaccess#Account",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID where the IAM role resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Amazon Web Services account where the IAM role resides.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a principal-to-role entitlement.</p>"
+            }
+        },
+        "com.amazonaws.accountaccess#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist. Verify that the resource identifier is correct and that the resource exists in the current Region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.accountaccess#RoleArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-]+:iam::[0-9]{12}:role/([a-zA-Z0-9+=,.@_-]+/)*[a-zA-Z0-9+=,.@_-]+$"
+            }
+        },
+        "com.amazonaws.accountaccess#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds a service quota for your account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.accountaccess#Status": {
+            "type": "enum",
+            "members": {
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.accountaccess#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.accountaccess#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Adds tags to an account access manager resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.accountaccess#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the resource to add tags to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.accountaccess#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tags to add to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.accountaccess#Application",
+                        "ids": {
+                            "applicationArn": "resourceArn"
+                        }
+                    }
+                ],
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.accountaccess#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. Try your request again later.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.accountaccess#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accountaccess#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accountaccess#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accountaccess#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accountaccess#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes tags from an account access manager resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accountaccess#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.accountaccess#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the resource to remove tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.accountaccess#TagKeys",
+                    "traits": {
+                        "aws.iam#conditionKeyValue": "aws:TagKeys",
+                        "smithy.api#documentation": "<p>Specifies the tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.accountaccess#Application",
+                        "ids": {
+                            "applicationArn": "resourceArn"
+                        }
+                    }
+                ],
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.accountaccess#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.accountaccess#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.accountaccess#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by the service. Check your request parameters and retry the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

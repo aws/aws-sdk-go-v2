@@ -5858,7 +5858,7 @@
                 "Type": {
                     "target": "com.amazonaws.organizations#HandshakePartyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of ID for the participant.</p>",
+                        "smithy.api#documentation": "<p>The type of ID for the participant.</p>\n         <note>\n            <p>ORGANIZATION is valid only in the response context (identifying the inviting\n                organization). Valid input values for the Target parameter are ACCOUNT and EMAIL\n                only.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }

@@ -416,6 +416,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use a completed batch evaluation as the source of agent traces.</p>"
                     }
+                },
+                "onlineEvaluation": {
+                    "target": "com.amazonaws.bedrockagentcore#OnlineEvaluationTraceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Agent traces from an online evaluation configuration over a specified time range.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14015,6 +14021,37 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A reference to an existing online evaluation configuration to use as the data source for batch evaluation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#OnlineEvaluationTraceConfig": {
+            "type": "structure",
+            "members": {
+                "onlineEvaluationConfigArn": {
+                    "target": "com.amazonaws.bedrockagentcore#OnlineEvaluationConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the online evaluation configuration to reuse sessions from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the time range. Only sessions evaluated at or after this timestamp are included.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the time range. Only sessions evaluated before this timestamp are included.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration for reusing agent traces from an online evaluation configuration for recommendation analysis. Because online evaluation is a continuous stream, a time range specifies which evaluated sessions the recommendation includes.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#OperatorType": {

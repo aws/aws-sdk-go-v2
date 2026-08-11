@@ -1757,6 +1757,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "scopeName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the materialized asset scope.</p>"
+                    }
+                },
                 "errorMessage": {
                     "target": "smithy.api#String",
                     "traits": {
